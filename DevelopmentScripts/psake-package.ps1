@@ -48,7 +48,7 @@ task package -depends package_initalize {
         Copy-Item -Path ([System.IO.Path]::Combine($doc_directory, '*')) -Destination $package_doc_directory -Include '**' -Recurse
     }
     
-	New-Item $package_directory\BuildType_$buildType -Type file
+	New-Item $package_directory\BuildType_$build_type -Type file
 	
 }
 
