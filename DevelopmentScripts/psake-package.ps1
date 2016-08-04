@@ -48,6 +48,8 @@ task package -depends package_initalize {
         Copy-Item -Path ([System.IO.Path]::Combine($doc_directory, '*')) -Destination $package_doc_directory -Include '**' -Recurse
     }
     
+	New-Item $package_directory\BuildType_$buildType -Type file
+	
 }
 
 task sign -precondition { ($build_type -ne 'DEV') -and ($server_type -ne 'local') } {
