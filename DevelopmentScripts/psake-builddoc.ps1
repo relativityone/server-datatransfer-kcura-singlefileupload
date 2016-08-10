@@ -3,7 +3,14 @@
 
 task default -depends build_doc
                                                                                 
-task build_doc  -precondition { $build_type -ne 'DEV' }{  
+task build_doc  -precondition { $build_type -ne 'DEV' }{
+    $buildLogDirectoryExists = Test-Path $buildlogs_directory
+
+    if(-not $buildLogDirectoryExists)
+    {
+        New-Item $buildlogs_directory -type directory
+    }
+
     exec {   		
         &  $msbuild_exe @(($targetsfile),   
                          ('/property:SourceRoot=' + $root),
