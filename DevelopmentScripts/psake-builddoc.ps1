@@ -3,7 +3,10 @@
 
 task default -depends build_doc
                                                                                 
-task build_doc  -precondition { $build_type -ne 'DEV' }{  
+task build_doc  -precondition { $build_type -ne 'DEV' }{
+
+    New-Item $buildlogs_directory -type directory -force #Generate the buildLogs directory if it doesn't exist
+
     exec {   		
         &  $msbuild_exe @(($targetsfile),   
                          ('/property:SourceRoot=' + $root),
