@@ -4,12 +4,8 @@
 task default -depends build_doc
                                                                                 
 task build_doc  -precondition { $build_type -ne 'DEV' }{
-    $buildLogDirectoryExists = Test-Path $buildlogs_directory
 
-    if(-not $buildLogDirectoryExists)
-    {
-        New-Item $buildlogs_directory -type directory
-    }
+    New-Item $buildlogs_directory -type directory -force #Generate the buildLogs directory if it doesn't exist
 
     exec {   		
         &  $msbuild_exe @(($targetsfile),   
