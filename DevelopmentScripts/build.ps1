@@ -148,7 +148,7 @@ if($PACKAGE -and $STATUS){
 
 if($VERSION -ne "1.0.0.0") {
 
-    git revert -- $root\Version
+    git checkout -- $root\Version
 }
 
 $endTime = Get-Date
