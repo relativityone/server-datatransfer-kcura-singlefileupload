@@ -45,7 +45,7 @@ task package -depends package_initalize {
 	}
 
 	if (-not (Get-Module -ListAvailable -Name 7Zip4PowerShell)) {
-		Install-Module -Name 7Zip4PowerShell -Force
+		PowerShellGet\Install-Module -Name 7Zip4PowerShell -Force
 	}
 
 	# Copy TestLibraries folder (non-C# keywords) to the package

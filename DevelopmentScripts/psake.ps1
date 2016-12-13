@@ -1,3 +1,4 @@
+#requires -version 5
 Import-Module ..\Vendor\psake\tools\psake.psm1
 
 properties {
