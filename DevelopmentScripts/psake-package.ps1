@@ -40,6 +40,22 @@ task package -depends package_initalize {
         }    
     }
 
+	if (-not (Get-Package -Name NuGet -MinimumVersion 2.8.5.201)) {
+		Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+	}
+
+	if (-not (Get-Module -ListAvailable -Name 7Zip4PowerShell)) {
+		PowerShellGet\Install-Module -Name 7Zip4PowerShell -Force
+	}
+
+	# Copy TestLibraries folder (non-C# keywords) to the package
+	New-Item -ItemType Directory -Force -Path "$package_directory\$build_type $version Tests - INTERNAL USE ONLY"
+	Compress-7Zip -Path "$root\FunctionalTests\" -ArchiveFileName "$package_directory\$build_type $version Tests - INTERNAL USE ONLY\$build_type $version FunctionalTests.7z" -Format SevenZip
+
+	# Copy FunctionalTests folder to the package
+	New-Item -ItemType Directory -Force -Path "$package_directory\$build_type $version Keywords - INTERNAL USE ONLY"
+	Compress-7Zip -Path "$root\TestLibraries\" -ArchiveFileName "$package_directory\$build_type $version Keywords - INTERNAL USE ONLY\$build_type $version TestLibraries.7z" -Format SevenZip
+
     if ([System.IO.Directory]::Exists($pdb_directory)) {
         Copy-Item -Path ([System.IO.Path]::Combine($pdb_directory, '*')) -Destination $package_pdb_directory -Include '**' -Recurse
     }
