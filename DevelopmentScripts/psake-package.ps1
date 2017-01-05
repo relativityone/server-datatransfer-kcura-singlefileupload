@@ -40,12 +40,12 @@ task package -depends package_initalize {
         }    
     }
 
-	if (-not (Get-Package -Name NuGet -MinimumVersion 2.8.5.201)) {
-		Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+	if (-not (Get-PackageProvider | Where {$_.Name -eq 'NuGet'})) {
+		Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -confirm:$false
 	}
 
 	if (-not (Get-Module -ListAvailable -Name 7Zip4PowerShell)) {
-		PowerShellGet\Install-Module -Name 7Zip4PowerShell -Force
+		PowerShellGet\Install-Module -Name 7Zip4PowerShell -Force -confirm:$false
 	}
 
 	# Copy TestLibraries folder (non-C# keywords) to the package
