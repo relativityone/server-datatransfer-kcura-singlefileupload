@@ -1,4 +1,4 @@
-#requires -version 5
+#requires -version 5.1
 $root = git rev-parse --show-toplevel
 Import-Module $root\Vendor\psake\tools\psake.psm1
 
