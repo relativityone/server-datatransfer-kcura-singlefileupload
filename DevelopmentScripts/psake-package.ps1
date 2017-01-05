@@ -24,7 +24,7 @@ task package -depends package_initalize {
 
     Copy-Item -Path ([System.IO.Path]::Combine($nuspec_directory, '*')) -Destination $package_nuget_directory -Include '*.nupkg'
     
-    if ([System.IO.Directory]::GetFiles($application_directory, "*.rap", [System.IO.SearchOption]::TopDirectoryOnly).Count -gt 0) {
+    if ((Test-Path $application_directory) -and ([System.IO.Directory]::GetFiles($application_directory, "*.rap", [System.IO.SearchOption]::TopDirectoryOnly).Count -gt 0)) {
         [System.IO.Directory]::CreateDirectory($package_rap_directory)
         Copy-Item -Path ([System.IO.Path]::Combine($application_directory, '*')) -Destination $package_rap_directory -Include '*.rap'
     }
