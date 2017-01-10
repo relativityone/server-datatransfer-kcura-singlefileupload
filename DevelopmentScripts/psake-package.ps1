@@ -13,6 +13,10 @@ task package_initalize {
     $script:package_pdb_directory = [System.IO.Path]::Combine($package_directory, 'PDBs')
     $script:package_doc_directory = [System.IO.Path]::Combine($package_directory, 'Documentation')
 
+    if (Test-Path $package_directory) {
+        Remove-Item $package_directory -Force -Recurse
+    }
+
     [System.IO.Directory]::CreateDirectory($package_directory)
     [System.IO.Directory]::CreateDirectory($package_nuget_directory)
     [System.IO.Directory]::CreateDirectory($package_bin_directory) 
