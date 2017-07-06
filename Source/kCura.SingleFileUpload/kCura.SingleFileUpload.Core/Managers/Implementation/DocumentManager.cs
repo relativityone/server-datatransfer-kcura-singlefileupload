@@ -292,15 +292,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
-        public int SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID)
+        public int SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
             ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
             File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
-
-            return GetDocByName(Path.GetFileNameWithoutExtension(documentInfo.FileName));
+            var documentID = GetDocByName(Path.GetFileNameWithoutExtension(documentInfo.FileName));
+            UpdateDocumentLastModificationFields(documentID, userID, true);
+            return documentID;
         }
-        public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int folderID = 0)
+        public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0)
         {
             if (!avoidControlNumber || !fromDocumentViewer)
             {
@@ -318,6 +319,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
             File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
+            UpdateDocumentLastModificationFields(docID, userID, false);
         }
         public int SaveTempDocument(ExportedMetadata documentInfo, int folderID)
         {
@@ -356,6 +358,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                  new[] {
                     SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
                  }) > 0;
+        }
+
+        public void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew)
+        {
+            _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateDocumentLastModificationFields,
+                 new[] {
+                    SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
+                    SqlHelper.CreateSqlParameter("@UserID", userID),
+                    SqlHelper.CreateSqlParameter("@New", isNew),
+                 });
         }
 
         public void DeleteRedactions(int docArtifactId, int tArtifactId)

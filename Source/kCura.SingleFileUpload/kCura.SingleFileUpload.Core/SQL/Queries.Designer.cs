@@ -69,7 +69,11 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///			 ON D.ArtifactID = F.DocumentArtifactID
         ///			 INNER JOIN [EDDSDBO].[Redaction] AS R WITH(NOLOCK)
         ///			 ON R.FileGuid = F.[Guid]
-        ///			 WHERE D.ArtifactID = @DocumentID).
+        ///			 WHERE D.ArtifactID = @DocumentID)
+        ///
+        ///UPDATE [EDDSDBO].[ProductionInformation]
+        ///SET HasRedactions = 0
+        ///WHERE Document = @DocumentID OR Document = @DocumentTempID.
         /// </summary>
         internal static string DeleteDocumentRedactions {
             get {
@@ -323,11 +327,17 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	AND
         ///	[Type] = 1
         ///
-        ///DECLARE @HasImagesCodeType INT = ( SELECT TOP 1 F.CodeTypeID
-        ///								   FROM EDDSDBO.Field AS F WITH (NOLOCK)
-        ///								   INNER JOIN EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
-        ///								   ON AG.ArtifactID = F.ArtifactID
-        ///								   WHERE AG.ArtifactGuid = @HasImagesField [rest of string was truncated]&quot;;.
+        ///UPDATE
+        ///	[EDDSDBO].[Document]
+        ///SET
+        ///	[RelativityImageCount] = (SELECT TOP 1 [RelativityImageCount]
+        ///							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
+        ///							  WHERE ArtifactID = @tdocartifactID)
+        ///WHERE
+        ///	ArtifactID = @odocartifactID
+        ///
+        ///
+        ///DECLARE @HasImagesCodeType INT = [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ReplaceDocumentImages {
             get {
@@ -348,6 +358,28 @@ namespace kCura.SingleFileUpload.Core.SQL {
         internal static string ReplaceNativeFile {
             get {
                 return ResourceManager.GetString("ReplaceNativeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///IF @Type = 0
+        ///BEGIn
+        ///	UPDATE EDDSDBO.[Artifact]
+        ///	SET [CreatedBy] = @UserID,
+        ///		[LastModifiedBy] = @UserID
+        ///	WHERE ARTIFACTID = @AID
+        ///END
+        ///ELSE
+        ///BEGIN
+        ///	UPDATE EDDSDBO.[Artifact]
+        ///	SET [LastModifiedBy] = @UserID
+        ///	WHERE ARTIFACTID = @AID
+        ///END.
+        /// </summary>
+        internal static string UpdateDocumentLastModificationFields {
+            get {
+                return ResourceManager.GetString("UpdateDocumentLastModificationFields", resourceCulture);
             }
         }
     }

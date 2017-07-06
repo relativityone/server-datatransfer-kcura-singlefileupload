@@ -915,6 +915,7 @@
     <Content Include="SQL\Queries\GetArtifactTypeByArtifactGuid.sql" />
     <Content Include="SQL\Queries\ReplaceDocumentImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
+    <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />
     <Content Include="SQL\Queries\ReplaceNativeFile.sql" />
     <Content Include="SQL\Queries\GetRepoLocationByCaseID.sql" />
     <Content Include="SQL\Queries\GetFileInfoByDocumentArtifactID.sql" />

@@ -9,8 +9,8 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
     public interface IDocumentManager : IManager
     {
-        int SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID);
-        Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int folderID = 0);
+        int SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
+        Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0);
         int GetDocByName(string docName);
         bool SetDocumentCreateHref();
         Task<bool> ValidateFileTypes(string extension);
@@ -24,5 +24,6 @@ namespace kCura.SingleFileUpload.Core.Managers
         bool IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);
         void DeleteRedactions(int docArtifactId, int tArtifactId);
+        void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew);
     }
 }
