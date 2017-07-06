@@ -1,0 +1,21 @@
+MIME-Version: 1.0
+From: PasswordReset@kcura.com
+To: javiers@nserio.com
+Date: 17 Aug 2016 11:57:07 -0500
+Subject: Password reset request
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><BODY>=0D=0A		<P>We received a request to reset the passwor=
+d associated with this email address. Click the link below to res=
+et your password. This link will expire after 15 minutes.<BR/><BR=
+/>=0D=0A		<a href=3D"https://192.168.0.172/Relativity/Identity/Re=
+setPassword?token=3Dbc776adb-9ff5-05db-a45e-eaedbebe6f05">Reset P=
+assword</a><BR/><BR/>		=0D=0A		We recommend opening this link in =
+Internet Explorer.<BR/><BR/>=0D=0A		You can also copy and paste t=
+he following text into your address bar:<BR/><BR/>=0D=0A		https:/=
+/192.168.0.172/Relativity/Identity/ResetPassword?token=3Dbc776adb=
+-9ff5-05db-a45e-eaedbebe6f05<BR/><BR/>=0D=0A		If you did not requ=
+est this change, contact your system administrator.<BR/><BR/>=0D=0A=
+		Please do not reply to this email.<BR/><BR/></P></BODY></HTML>
+></HTML>

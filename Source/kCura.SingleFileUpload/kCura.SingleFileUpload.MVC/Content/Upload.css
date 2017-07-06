@@ -1,0 +1,215 @@
+﻿* {
+    font-family: "Arial";
+    font-weight: 400;
+}
+
+html,
+body,
+.dropZone {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+.form,
+.dropZone {
+    background-color: transparent;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.form {
+    text-align: center;
+    display: none;
+}
+
+.phantomFrame {
+    width: 0px;
+    height: 0px;
+    display: none;
+}
+
+.message,
+.messageWithEvents,
+.buttonsZone {
+    display: block;
+    padding-top: 5px;
+}
+
+.buttonsZone {
+    text-align: right;
+    padding-right: 5px;
+    margin-top: 5px;
+}
+
+.msgDetails {
+    text-align: center;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+    /*.msgDetails > .error {
+        color: #d53d3d;
+        font-weight: bold;
+    }*/
+
+    .msgDetails > .error {
+        font-weight: normal;
+        color: #ffffff;
+        background-color: #d53d3d;
+        border-radius: 5px 5px 5px 5px;
+        width: 85%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        font-size: 12px;
+        max-height: 30px;
+        text-align: left;
+    }
+
+        .msgDetails > .error > div {
+            margin-left: auto;
+            margin-right: auto;
+            display: inline-flex;
+            overflow: hidden;
+            max-height: 30px;
+        }
+
+            .msgDetails > .error > div > span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .msgDetails > .error > div > img {
+                float: left;
+                margin-right: 10px;
+                margin-left: 10px;
+                height: 16px;
+            }
+
+
+.title {
+    padding-bottom: 13px;
+    font-weight: bold;
+    color: #4182c3;
+}
+
+.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.header {
+    height: 15px;
+}
+
+.message,
+.fa {
+    pointer-events: none;
+}
+
+.fa-cloud-upload {
+    color: #86a5d5;
+}
+
+.fa-check-circle {
+    color: #5dca77;
+}
+
+.fa-exclamation-triangle {
+    color: #f0ad4e;
+}
+
+
+button {
+    font-size: 11px;
+    padding: 1px 5px 2px 5px;
+    margin-left: 2px;
+    margin-right: 4px;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    font-weight: 400;
+    margin-bottom: 1px;
+    border-color: #ccc;
+    height: 22px;
+    min-width: 60px;
+    outline: none;
+}
+
+.btnPrimary {
+    border-color: #194b87;
+    background: linear-gradient(#0063af, #1b54ab);
+    color: #ffffff;
+    box-shadow: 0px 1px 1px #397eb8 inset;
+}
+
+    .btnPrimary:hover {
+        background: linear-gradient(#007FC6, #0063ae);
+        color: #ffffff;
+    }
+
+.header {
+    background-color: rgb(28, 84, 171);
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.message {
+    pointer-events: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+    .message > span {
+        color: rgb(27, 84, 149);
+        font-weight: bold;
+    }
+
+.status_img {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    pointer-events: none;
+}
+
+    .status_img > img {
+        -moz-user-select: none;
+    }
+
+#dropHere {
+    cursor: pointer;
+}
+
+
+.button_actions {
+    border-top: 1px solid #c1c1c1;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.secondary-button {
+    background: linear-gradient(#f6f6f6, #d5d7d8);
+    border: 1px solid #939598;
+    color: #333333;
+}
+
+#redactions_confirmation div:nth-child(2) {
+    color: #2f2f2f;
+    margin-top: 20px;
+    text-align: left;
+    padding: 18px;
+    font-size: 14px;
+}

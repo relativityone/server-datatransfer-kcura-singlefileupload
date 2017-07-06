@@ -1,0 +1,5 @@
+﻿SELECT ARTIFACTID
+FROM EDDSDBO.FIELD AS F WITH (NOLOCK)
+WHERE F.FieldArtifactTypeID = 10
+AND F.FieldTypeID = @Type
+AND F.DisplayName IN ({0})

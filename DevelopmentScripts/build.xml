@@ -1,84 +1,89 @@
-﻿<BuildTools>
-  <BuildHelper>
-    <Projects>
-      <Build />
-      <Ignore />
-    </Projects>
-    <References>
-      <Maps />
-      <Adds />
-    </References>
-    <Rules>
-      <Rule name="CommonAssemblyInfo">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-          <Extension>.csproj</Extension>
-        </Extensions>
-        <XPath>Compile[contains(@Include, '..\Version\AssemblyInfo.')]</XPath>
-        <RuleType>Exists</RuleType>
-        <ErrorMessage>Not using the Common AssemblyInfo file. Please include it in the project.</ErrorMessage>
-      </Rule>
-      <Rule name="OptionExplicitOn">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-        </Extensions>
-        <XPath>OptionExplicit</XPath>
-        <RuleType>Equals</RuleType>
-        <Value>On</Value>
-        <ErrorMessage>Project has Option explicit turned off. Please turn this option on.</ErrorMessage>
-      </Rule>
-      <Rule name="OptionStrictOn">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-        </Extensions>
-        <XPath>OptionStrict</XPath>
-        <RuleType>Equals</RuleType>
-        <Value>On</Value>
-        <ErrorMessage>Project has Option strict turned off. Please turn this option on.</ErrorMessage>
-      </Rule>
-      <Rule name="OptionInfertOff">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-        </Extensions>
-        <XPath>OptionInfer</XPath>
-        <RuleType>Equals</RuleType>
-        <Value>Off</Value>
-        <ErrorMessage>Project has Option infer turned on. Please turn this option off.</ErrorMessage>
-      </Rule>
-      <Rule name="WarningLevel4">
-        <Extensions>
-          <Extension>.csproj</Extension>
-        </Extensions>
-        <XPath>WarningLevel</XPath>
-        <RuleType>Equals</RuleType>
-        <Value>4</Value>
-        <ErrorMessage>Project warning level is not set to 4. Please set warning level to 4.</ErrorMessage>
-      </Rule>
-      <Rule name="TreatWarningsAsErrors">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-          <Extension>.csproj</Extension>
-        </Extensions>
-        <XPath>TreatWarningsAsErrors</XPath>
-        <RuleType>Equals</RuleType>
-        <Value>true</Value>
-        <ErrorMessage>Project does not treat all warnings as errors. Please turn this option on.</ErrorMessage>
-      </Rule>
-      <Rule name="NugetRestore">
-        <Extensions>
-          <Extension>.vbproj</Extension>
-          <Extension>.csproj</Extension>
-        </Extensions>
-        <XPath>Target[contains(@Name, 'EnsureNuGetPackageBuildImports')]</XPath>
-        <RuleType>NotExists</RuleType>
-        <ErrorMessage>Do NOT restore nuget packages at project level, do this in the solution!</ErrorMessage>
-      </Rule>
-    </Rules>
-  </BuildHelper>
-  <TestRunner>
-    <DLLs />
-  </TestRunner>
-  <RAPBuilder>
-    <Applications />
-  </RAPBuilder>
-</BuildTools>
+<BuildTools> 
+  <BuildHelper> 
+    <Projects> 
+      <Build> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.MVC\kCura.SingleFileUpload.MVC.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+      </Build> 
+      <Ignore /> 
+    </Projects> 
+    <References> 
+      <Maps /> 
+      <Adds /> 
+    </References> 
+    <Rules> 
+      <Rule name="CommonAssemblyInfo"> 
+        <Extensions> 
+          <Extension>.vbproj</Extension> 
+          <Extension>.csproj</Extension> 
+        </Extensions> 
+        <XPath>Compile[contains(@Include, '..\Version\AssemblyInfo.')]</XPath> 
+        <RuleType>Exists</RuleType> 
+        <ErrorMessage>Not using the Common AssemblyInfo file. Please include it in the project.</ErrorMessage> 
+      </Rule> 
+      <Rule name="OptionExplicitOn"> 
+        <Extensions> 
+          <Extension>.vbproj</Extension> 
+        </Extensions> 
+        <XPath>OptionExplicit</XPath> 
+        <RuleType>Equals</RuleType> 
+        <Value>On</Value> 
+        <ErrorMessage>Project has Option explicit turned off. Please turn this option on.</ErrorMessage> 
+      </Rule> 
+      <Rule name="OptionStrictOn"> 
+        <Extensions> 
+          <Extension>.vbproj</Extension> 
+        </Extensions> 
+        <XPath>OptionStrict</XPath> 
+        <RuleType>Equals</RuleType> 
+        <Value>On</Value> 
+        <ErrorMessage>Project has Option strict turned off. Please turn this option on.</ErrorMessage> 
+      </Rule> 
+      <Rule name="OptionInfertOff"> 
+        <Extensions> 
+          <Extension>.vbproj</Extension> 
+        </Extensions> 
+        <XPath>OptionInfer</XPath> 
+        <RuleType>Equals</RuleType> 
+        <Value>Off</Value> 
+        <ErrorMessage>Project has Option infer turned on. Please turn this option off.</ErrorMessage> 
+      </Rule> 
+      <Rule name="WarningLevel4"> 
+        <Extensions> 
+          <Extension>.csproj</Extension> 
+        </Extensions> 
+        <XPath>WarningLevel</XPath> 
+        <RuleType>Equals</RuleType> 
+        <Value>4</Value> 
+        <ErrorMessage>Project warning level is not set to 4. Please set warning level to 4.</ErrorMessage> 
+      </Rule> 
+      <Rule name="TreatWarningsAsErrors"> 
+        <Extensions> 
+          <Extension>.vbproj</Extension> 
+          <Extension>.csproj</Extension> 
+        </Extensions> 
+        <XPath>TreatWarningsAsErrors</XPath> 
+        <RuleType>Equals</RuleType> 
+        <Value>true</Value> 
+        <ErrorMessage>Project does not treat all warnings as errors. Please turn this option on.</ErrorMessage> 
+      </Rule> 
+    </Rules> 
+  </BuildHelper>  
+  <RAPBuilder> 
+    <Applications> 
+      <Application name="Single File Upload" generatenuspec="false"> 
+        <Destination>Application\kCura.SingleFileUpload.rap</Destination> 
+        <ApplicationSchema>Application\application.xml</ApplicationSchema> 
+        <Assemblies> 
+			<Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.dll</Assembly>
+        </Assemblies> 
+        <ResourceFiles /> 
+        <CustomPages> 
+          <CustomPage guid="f864d687-5782-4f4f-82d4-e4327e10e3cf">temporary publish</CustomPage> 
+        </CustomPages> 
+      </Application>
+    </Applications> 
+  </RAPBuilder> 
+</BuildTools> 

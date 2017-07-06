@@ -1,11 +1,9 @@
 
-# Template - Repository template used for creating (most) new repositories.
+# Single File Upload
  
 ## Overview
  
-This repository serves as a template for quite a few extant, and all future, 
-repositories. It contains build scripts and follows certain conventions
-to allow easy consumption and integration into Team City.
+This repository is related to the Single File Upload application.
  
 ## How to Build
  
@@ -21,11 +19,9 @@ N/A
  
 ## Maintainers
  
-Gadgets
-- Adam Kadzban
-- Dina Muscanell
-- Butt Sharks
-- David Kirk
+- Marlon Sanguino msanguino@kcura.com marlons@nserio.com
+- Cristhian Caro ccaro@kcura.com cristhianc@nserio.com
+
  
 ## Miscellaneous
  

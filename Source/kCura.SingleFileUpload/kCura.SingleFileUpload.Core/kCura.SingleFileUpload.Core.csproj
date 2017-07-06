@@ -1,0 +1,936 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{35649484-671A-407E-924E-1C1FBD850393}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>kCura.SingleFileUpload.Core</RootNamespace>
+    <AssemblyName>kCura.SingleFileUpload.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="kCura.Config, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Config.9.5.142.26\lib\net462\kCura.Config.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Crypto, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Crypto.9.5.142.26\lib\net462\kCura.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Data.RowDataGateway, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Data.RowDataGateway.9.5.142.26\lib\net462\kCura.Data.RowDataGateway.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Relativity.Client, Version=9.3.389.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SDK.Core.Relativity.9.3.389.9\lib\net45\kCura.Relativity.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Vendor.Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.333\lib\net462\kCura.Vendor.Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Vendor.Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.333\lib\net462\kCura.Vendor.Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
+    </Reference>
+    <Reference Include="outsidein">
+      <HintPath>..\..\SolutionResources\oracle-searcg-export-8.5.3\outsidein.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.API, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.5.142.26\lib\net462\Relativity.API.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Authentication.Interfaces, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.5.142.26\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Core, Version=9.5.168.23, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\Relativity.Core.9.5.168.23\lib\net462\Relativity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.CustomPages, Version=9.5.142.26, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\Relativity.CustomPages.9.5.142.26\lib\net462\Relativity.CustomPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.ImportAPI.Wrapper, Version=9.5.136.1, Culture=neutral, PublicKeyToken=15fe5e0f8dc0bf95, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ImportAPI.Wrapper.9.5.136.1\lib\net45\Relativity.ImportAPI.Wrapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.333, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.333\lib\net462\Relativity.Kepler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Logging.Interfaces, Version=9.4.308.17, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.Interfaces.9.4.308\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.SecretCatalog, Version=1.0.19.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.19\lib\Relativity.SecretCatalog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Services.DataContracts, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Services.DataContracts.9.5.142.26\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Services.Interfaces, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Services.Interfaces.9.5.142.26\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Services.Interfaces.Private, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Services.Interfaces.Private.9.5.142.26\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Services.ServiceProxy">
+      <HintPath>..\..\..\..\kCura.ChoiceEditor\Source\References\Relativity.Services.ServiceProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=9.4.139.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.9.4.139\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Relativity.Telemetry.Services.Interface, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.9.5.142.26\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\DocumentIdentifierField.cs" />
+    <Compile Include="Entities\Enumerations\AuditAction.cs" />
+    <Compile Include="Entities\FileType.cs" />
+    <Compile Include="Entities\FileInformation.cs" />
+    <Compile Include="Entities\ProcessingDocument.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Entities\ExportedMetadata.cs" />
+    <Compile Include="Helpers\PermissionHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Managers\IAuditManager.cs" />
+    <Compile Include="Managers\Implementation\AuditManager.cs" />
+    <Compile Include="Managers\Implementation\TelemetryManager.cs" />
+    <Compile Include="Managers\IProcessingManager.cs" />
+    <Compile Include="Managers\IManager.cs" />
+    <Compile Include="Managers\Implementation\BaseManager.cs" />
+    <Compile Include="Managers\Implementation\ProcessingManager.cs" />
+    <Compile Include="Managers\Implementation\DocumentManager.cs" />
+    <Compile Include="Managers\Implementation\SearchExportManager.cs" />
+    <Compile Include="Managers\IDocumentManager.cs" />
+    <Compile Include="Managers\ISearchExportManager.cs" />
+    <Compile Include="Managers\ITelemetryManager.cs" />
+    <Compile Include="SQL\Queries.Designer.cs">
+      <DependentUpon>Queries.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\adinit.dat">
+      <Link>adinit.dat</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ccbf.dll">
+      <Link>ccbf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\cmmap000.bin">
+      <Link>cmmap000.bin</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\dewp.dll">
+      <Link>dewp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\exbf.dll">
+      <Link>exbf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\exihtml.dll">
+      <Link>exihtml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\exitext.dll">
+      <Link>exitext.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\exixml.dll">
+      <Link>exixml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\expage.dll">
+      <Link>expage.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\Google.ProtocolBuffers.dll">
+      <Link>Google.ProtocolBuffers.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibfpx2.dll">
+      <Link>ibfpx2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibgp42.dll">
+      <Link>ibgp42.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibjpg2.dll">
+      <Link>ibjpg2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibpcd2.dll">
+      <Link>ibpcd2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibpsd2.dll">
+      <Link>ibpsd2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibxbm2.dll">
+      <Link>ibxbm2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibxpm2.dll">
+      <Link>ibxpm2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ibxwd2.dll">
+      <Link>ibxwd2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd32.dll">
+      <Link>imcd32.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd42.dll">
+      <Link>imcd42.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd52.dll">
+      <Link>imcd52.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd62.dll">
+      <Link>imcd62.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd72.dll">
+      <Link>imcd72.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcd82.dll">
+      <Link>imcd82.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcdr2.dll">
+      <Link>imcdr2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcm52.dll">
+      <Link>imcm52.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcm72.dll">
+      <Link>imcm72.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imcmx2.dll">
+      <Link>imcmx2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imdsf2.dll">
+      <Link>imdsf2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imfmv2.dll">
+      <Link>imfmv2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imgdf2.dll">
+      <Link>imgdf2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imgem2.dll">
+      <Link>imgem2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imigs2.dll">
+      <Link>imigs2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\immet2.dll">
+      <Link>immet2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\impif2.dll">
+      <Link>impif2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\impsi2.dll">
+      <Link>impsi2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\impsz2.dll">
+      <Link>impsz2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imps_2.dll">
+      <Link>imps_2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\imrnd2.dll">
+      <Link>imrnd2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\iphgw2.dll">
+      <Link>iphgw2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\isgdi32.dll">
+      <Link>isgdi32.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\ocemul.dll">
+      <Link>ocemul.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.dll">
+      <Link>oilink.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.exe">
+      <Link>oilink.exe</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oitnsf.id">
+      <Link>oitnsf.id</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oswin64.dll">
+      <Link>oswin64.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\outsidein.dll">
+      <Link>outsidein.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\pageml.dtd">
+      <Link>pageml.dtd</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\pageml.xsd">
+      <Link>pageml.xsd</Link>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccca.dll">
+      <Link>sccca.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccch.dll">
+      <Link>sccch.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccda.dll">
+      <Link>sccda.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccdu.dll">
+      <Link>sccdu.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccex.dll">
+      <Link>sccex.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccexind.dll">
+      <Link>sccexind.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfa.dll">
+      <Link>sccfa.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfi.dll">
+      <Link>sccfi.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfmt.dll">
+      <Link>sccfmt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfnt.dll">
+      <Link>sccfnt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfut.dll">
+      <Link>sccfut.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccind.dll">
+      <Link>sccind.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\scclo.dll">
+      <Link>scclo.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccole2.dll">
+      <Link>sccole2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccsd.dll">
+      <Link>sccsd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccut.dll">
+      <Link>sccut.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccxt.dll">
+      <Link>sccxt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\searchml3.dtd">
+      <Link>searchml3.dtd</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\SearchML3.xsd">
+      <Link>SearchML3.xsd</Link>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsacad.dll">
+      <Link>vsacad.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsacs.dll">
+      <Link>vsacs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsami.dll">
+      <Link>vsami.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsarc.dll">
+      <Link>vsarc.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsasf.dll">
+      <Link>vsasf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsbdr.dll">
+      <Link>vsbdr.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsbmp.dll">
+      <Link>vsbmp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vscdrx.dll">
+      <Link>vscdrx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vscgm.dll">
+      <Link>vscgm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdbs.dll">
+      <Link>vsdbs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdez.dll">
+      <Link>vsdez.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdif.dll">
+      <Link>vsdif.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdrw.dll">
+      <Link>vsdrw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdx.dll">
+      <Link>vsdx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdxla.dll">
+      <Link>vsdxla.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsdxlm.dll">
+      <Link>vsdxlm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsemf.dll">
+      <Link>vsemf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsen4.dll">
+      <Link>vsen4.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsens.dll">
+      <Link>vsens.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsenw.dll">
+      <Link>vsenw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vseps.dll">
+      <Link>vseps.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vseshr.dll">
+      <Link>vseshr.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsexe2.dll">
+      <Link>vsexe2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsfax.dll">
+      <Link>vsfax.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsfcd.dll">
+      <Link>vsfcd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsfcs.dll">
+      <Link>vsfcs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsfft.dll">
+      <Link>vsfft.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsflw.dll">
+      <Link>vsflw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsfwk.dll">
+      <Link>vsfwk.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsgdsf.dll">
+      <Link>vsgdsf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsgif.dll">
+      <Link>vsgif.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsgzip.dll">
+      <Link>vsgzip.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vshgs.dll">
+      <Link>vshgs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vshtml.dll">
+      <Link>vshtml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vshwp.dll">
+      <Link>vshwp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vshwp2.dll">
+      <Link>vshwp2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsich.dll">
+      <Link>vsich.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsich6.dll">
+      <Link>vsich6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsid3.dll">
+      <Link>vsid3.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsimg.dll">
+      <Link>vsimg.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsindd.dll">
+      <Link>vsindd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsinx.dll">
+      <Link>vsinx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsiwok.dll">
+      <Link>vsiwok.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsiwok13.dll">
+      <Link>vsiwok13.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsiwon.dll">
+      <Link>vsiwon.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsiwop.dll">
+      <Link>vsiwop.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsiwp.dll">
+      <Link>vsiwp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsjbg2.dll">
+      <Link>vsjbg2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsjp2.dll">
+      <Link>vsjp2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsjw.dll">
+      <Link>vsjw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsleg.dll">
+      <Link>vsleg.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vslwp7.dll">
+      <Link>vslwp7.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vslzh.dll">
+      <Link>vslzh.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsm11.dll">
+      <Link>vsm11.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmanu.dll">
+      <Link>vsmanu.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmbox.dll">
+      <Link>vsmbox.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmcw.dll">
+      <Link>vsmcw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmdb.dll">
+      <Link>vsmdb.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmif.dll">
+      <Link>vsmif.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmime.dll">
+      <Link>vsmime.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmm.dll">
+      <Link>vsmm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmm4.dll">
+      <Link>vsmm4.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmmfn.dll">
+      <Link>vsmmfn.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmp.dll">
+      <Link>vsmp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmpp.dll">
+      <Link>vsmpp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmsg.dll">
+      <Link>vsmsg.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmsw.dll">
+      <Link>vsmsw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmwkd.dll">
+      <Link>vsmwkd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmwks.dll">
+      <Link>vsmwks.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmwp2.dll">
+      <Link>vsmwp2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmwpf.dll">
+      <Link>vsmwpf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsmwrk.dll">
+      <Link>vsmwrk.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsnsf.dll">
+      <Link>vsnsf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsolm.dll">
+      <Link>vsolm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsone.dll">
+      <Link>vsone.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsow.dll">
+      <Link>vsow.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspbm.dll">
+      <Link>vspbm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspcl.dll">
+      <Link>vspcl.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspcx.dll">
+      <Link>vspcx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspdf.dll">
+      <Link>vspdf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspdfi.dll">
+      <Link>vspdfi.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspdx.dll">
+      <Link>vspdx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspfs.dll">
+      <Link>vspfs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspgl.dll">
+      <Link>vspgl.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspic.dll">
+      <Link>vspic.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspict.dll">
+      <Link>vspict.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspng.dll">
+      <Link>vspng.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspntg.dll">
+      <Link>vspntg.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspp12.dll">
+      <Link>vspp12.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspp2.dll">
+      <Link>vspp2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspp7.dll">
+      <Link>vspp7.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspp97.dll">
+      <Link>vspp97.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsppl.dll">
+      <Link>vsppl.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspsd.dll">
+      <Link>vspsd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspsp6.dll">
+      <Link>vspsp6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspst.dll">
+      <Link>vspst.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vspstf.dll">
+      <Link>vspstf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsqa.dll">
+      <Link>vsqa.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsqad.dll">
+      <Link>vsqad.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsqp6.dll">
+      <Link>vsqp6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsqp9.dll">
+      <Link>vsqp9.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsqt.dll">
+      <Link>vsqt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsrar.dll">
+      <Link>vsrar.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsras.dll">
+      <Link>vsras.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsrbs.dll">
+      <Link>vsrbs.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsrft.dll">
+      <Link>vsrft.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsrfx.dll">
+      <Link>vsrfx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsriff.dll">
+      <Link>vsriff.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsrtf.dll">
+      <Link>vsrtf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssam.dll">
+      <Link>vssam.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssc5.dll">
+      <Link>vssc5.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssdw.dll">
+      <Link>vssdw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsshw3.dll">
+      <Link>vsshw3.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssmd.dll">
+      <Link>vssmd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssms.dll">
+      <Link>vssms.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssmt.dll">
+      <Link>vssmt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssnap.dll">
+      <Link>vssnap.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsso6.dll">
+      <Link>vsso6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssoc.dll">
+      <Link>vssoc.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssoc6.dll">
+      <Link>vssoc6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssoi.dll">
+      <Link>vssoi.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssoi6.dll">
+      <Link>vssoi6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vssow.dll">
+      <Link>vssow.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsspt.dll">
+      <Link>vsspt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsssml.dll">
+      <Link>vsssml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsswf.dll">
+      <Link>vsswf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstaz.dll">
+      <Link>vstaz.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstext.dll">
+      <Link>vstext.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstga.dll">
+      <Link>vstga.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstif6.dll">
+      <Link>vstif6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstw.dll">
+      <Link>vstw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vstxt.dll">
+      <Link>vstxt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsvcrd.dll">
+      <Link>vsvcrd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsviso.dll">
+      <Link>vsviso.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsvsdx.dll">
+      <Link>vsvsdx.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsvw3.dll">
+      <Link>vsvw3.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsw12.dll">
+      <Link>vsw12.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsw6.dll">
+      <Link>vsw6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsw97.dll">
+      <Link>vsw97.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswbmp.dll">
+      <Link>vswbmp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswg2.dll">
+      <Link>vswg2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswk4.dll">
+      <Link>vswk4.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswk6.dll">
+      <Link>vswk6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswks.dll">
+      <Link>vswks.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswm.dll">
+      <Link>vswm.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswmf.dll">
+      <Link>vswmf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswml.dll">
+      <Link>vswml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsword.dll">
+      <Link>vsword.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswork.dll">
+      <Link>vswork.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswp5.dll">
+      <Link>vswp5.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswp6.dll">
+      <Link>vswp6.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpf.dll">
+      <Link>vswpf.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpg.dll">
+      <Link>vswpg.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpg2.dll">
+      <Link>vswpg2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpl.dll">
+      <Link>vswpl.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpml.dll">
+      <Link>vswpml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vswpw.dll">
+      <Link>vswpw.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsws.dll">
+      <Link>vsws.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsws2.dll">
+      <Link>vsws2.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxl12.dll">
+      <Link>vsxl12.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxl5.dll">
+      <Link>vsxl5.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxlsb.dll">
+      <Link>vsxlsb.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxml.dll">
+      <Link>vsxml.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxmp.dll">
+      <Link>vsxmp.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxps.dll">
+      <Link>vsxps.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsxy.dll">
+      <Link>vsxy.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vsyim.dll">
+      <Link>vsyim.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vszip.dll">
+      <Link>vszip.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\wvcore.dll">
+      <Link>wvcore.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.jar">
+      <Link>oilink.jar</Link>
+    </Content>
+    <Content Include="FreeImage.dll" />
+    <Content Include="SQL\Queries\DeleteDocumentRedactions.sql" />
+    <Content Include="SQL\Queries\GetClientCredentials.sql" />
+    <Content Include="SQL\Queries\GetIsSystemAdminUser.sql" />
+    <Content Include="SQL\Queries\GetObjectTypeByGuid.sql" />
+    <Content Include="SQL\Queries\GetWorkspaceGuidByArtifactID.sql" />
+    <Content Include="SQL\Queries\GetFieldInfoByGuid.sql" />
+    <Content Include="SQL\Queries\GetFieldIDByNameAndType.sql" />
+    <Content Include="SQL\Queries\GetMatchedFields.sql" />
+    <Content Include="SQL\Queries\GetArtifactTypeByArtifactGuid.sql" />
+    <Content Include="SQL\Queries\ReplaceDocumentImages.sql" />
+    <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
+    <Content Include="SQL\Queries\ReplaceNativeFile.sql" />
+    <Content Include="SQL\Queries\GetRepoLocationByCaseID.sql" />
+    <Content Include="SQL\Queries\GetFileInfoByDocumentArtifactID.sql" />
+    <Content Include="SQL\Queries\InsertInstanceSettings.sql" />
+    <Content Include="SQL\Queries\GetDroppedFolder.sql" />
+    <Content Include="SQL\Queries\GetDocumentIdentifierField.sql" />
+    <Content Include="SQL\Queries\GetWorkspaceNames.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\Queries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Queries.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

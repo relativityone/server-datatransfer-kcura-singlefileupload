@@ -1,0 +1,327 @@
+<!-- SearchML XML DTD v3.6 -->
+<!-- 
+
+		Copyright (c) 2016, Oracle. All rights reserved.  
+
+		This work is protected by United States and international copyright
+		laws and contains certain trade secret information. All use of this
+		work is governed by the terms of agreements between Oracle
+		and its licensees or potential licensees. Disclosure of the contents
+		is prohibited.
+
+ -->
+<!-- Predefined entities from the XML specification -->
+<!ENTITY lt "&#38;#60;">
+<!ENTITY gt "&#62;">
+<!ENTITY amp "&#38;#38;">
+<!ENTITY apos "&#39;">
+<!ENTITY quot "&#34;">
+
+<!ENTITY % hexBinary "CDATA">
+<!ENTITY % integer "CDATA">
+<!ENTITY % nonNegativeInteger "CDATA">
+<!ENTITY % string "CDATA">
+<!-- EDocContentType Enumeration -->
+<!ENTITY % EDocContentType "(body | sub_doc | frame | text_box  | header | footer | slide_note | slide)">
+<!-- EOnOff Enumeration -->
+<!ENTITY % EOnOff "(on | off )">
+<!-- begin_tag Element -->
+<!ELEMENT begin_tag EMPTY>
+<!ATTLIST begin_tag
+	type %string; #REQUIRED
+	url %string; #IMPLIED
+	name %string; #IMPLIED
+	bookmark IDREF #IMPLIED
+>
+<!-- doc_content Element -->
+<!--
+	If the 'id' attribute is present, it may be referred to by a 'note' 
+	element indicating the type of annotation associated with the doc_content.  
+	The 'name' attribute is applicable only to doc_content whose type is 'slide'.  It is
+	only present if the slide has an associated name.
+  The 'hidden' attribute is applicable only to doc_content whose type is 'slide'.  It is
+	only present if the slide isn't shown in the slide show mode.
+-->
+<!ELEMENT doc_content (p | document | doc_content | sheet | cell | note | ocr)*>
+<!ATTLIST doc_content
+	type %EDocContentType; #REQUIRED
+	id ID #IMPLIED
+	name %string; #IMPLIED
+	first_page %EOnOff; #IMPLIED
+	even_pages %EOnOff; #IMPLIED
+	odd_pages %EOnOff; #IMPLIED
+	exclude_first_page %EOnOff; #IMPLIED
+  hidden %EOnOff; #IMPLIED
+>
+
+<!-- cell Element -->
+<!--
+	A cell represents row and column data in a SS.  The 'start' attribute denotes either
+        the location of the cell or the starting location of a merged range of cells.  The
+        'end' element if present denotes the end of a merged range of cells.  Letters are
+        used for column designations, and numbers are used for rows i.e. A1 represents
+        row 1 column 1, and ABC731 represents row 731, column 731.  4,294,967,294 rows and
+        4,294,967,294 columns can be tracked.
+-->
+<!ELEMENT cell (p | document | doc_content | generated | note | bookmark | ocr)*>
+<!ATTLIST cell
+	start %string; #REQUIRED
+	end %string; #IMPLIED
+	hidden %EOnOff; #IMPLIED
+  sheet %string; #IMPLIED
+>
+
+<!--  object element.  -->
+<!--
+	Sub-document object information.  This element provides a type and paramter data
+	to be used in addressing sub-documents.
+-->
+<!ELEMENT object EMPTY>
+<!ATTLIST object
+	type %hexBinary; #REQUIRED
+	param1 %hexBinary; #REQUIRED
+	param2 %hexBinary; #REQUIRED
+	param3 %hexBinary; #REQUIRED
+	param4 %hexBinary; #REQUIRED
+>
+
+<!--  tree_node_locator element.  -->
+<!--
+	Archive tree node information.  This element provides a flags and paramter data
+	to be used in randomly accessing archive sub-documents.
+-->
+<!ELEMENT tree_node_locator EMPTY>
+<!ATTLIST tree_node_locator
+	flags %hexBinary; #REQUIRED
+	param1 %hexBinary; #REQUIRED
+	param2 %hexBinary; #REQUIRED
+>
+
+<!--  error element.  -->
+<!--
+	Error code and description.
+-->
+<!ELEMENT error (#PCDATA)>
+<!ATTLIST error
+	code %hexBinary; #REQUIRED
+>
+
+<!-- doc_properties Element -->
+<!ELEMENT doc_properties (doc_property)*>
+<!ATTLIST doc_properties
+>
+<!-- doc_property Element -->
+<!--
+	The doc_property element specifies "ANY" for its content to indicate that XMP metadata can
+	appear within doc_property elements.  This does not make the document valid, but is simply
+         meant to demonstrate where XMP metadata will appear.  The production of XMP metadata is
+         controlled by the SCCOPT_EXTRACTXMPMETADATA option.  XMP metadata should only appear
+         when the type attribute is "xmp_metadata"
+-->
+<!ELEMENT doc_property ANY>
+<!ATTLIST doc_property
+	type %string; #IMPLIED
+>
+<!-- 
+	Common values for the doc_property types:<br><br>
+
+	comment, keyword, last_saved_by,<br>
+	primary_author, subject, title, abstract,<br>
+	account, address, attachments,<br>
+	authorization, backup_date,<br>
+	bill_to, blind_copy, carbon_copy,<br>
+	category, checked_by, client,<br>
+	completed_date, character_count,<br>
+	page_count, word_count, creation_date,<br>
+	department, destination, disposition,<br>
+	division, edit_minutes, editor, forward_to,<br>
+	group, language, last_print_date,<br>
+	mail_stop, matter, office, operator,<br>
+	owner, project, publisher, purpose,<br>
+	received_from, recorded_by,<br>
+	recorded_date, reference, revision_date,<br>
+	revision_notes, revision_number,<br>
+	secondary_author, section, security,<br>
+	source, status, doc_type, typist,<br>
+	version_date, version_notes, version_number,<br>
+	base_file_location, manager, company
+-->
+
+<!-- document Element -->
+<!ELEMENT document (object | error | doc_properties | doc_content)*>
+<!ATTLIST document
+	type %string; #IMPLIED
+	name %string; #IMPLIED
+	alt_string %string; #IMPLIED
+>
+<!-- end_tag Element -->
+<!ELEMENT end_tag EMPTY>
+<!ATTLIST end_tag
+	type %string; #REQUIRED
+>
+<!-- offset Element -->
+<!ELEMENT offset EMPTY>
+<!ATTLIST offset
+	value %nonNegativeInteger; #REQUIRED
+>
+<!-- generated Element -->
+<!ELEMENT generated (#PCDATA | r | record)*>
+<!-- optical character recognition Element -->
+<!ELEMENT ocr (#PCDATA)>
+<!-- record Element -->
+<!ELEMENT record (p | ocr)*>
+<!-- p Element -->
+<!ELEMENT p (#PCDATA | begin_tag | end_tag | document | doc_content | doc_property | r | offset | generated | record | unmapped | bookmark | tree_node_locator | target | ss_revision)*>
+<!ATTLIST p
+	fli %integer; #IMPLIED
+	h %string; #IMPLIED
+	li %integer; #IMPLIED
+	oce %hexBinary; #IMPLIED
+	offset %nonNegativeInteger; #IMPLIED
+	ri %integer; #IMPLIED
+	s %string; #IMPLIED
+	spacing %string; #IMPLIED
+>
+<!-- r Element -->
+<!--
+	Optionally, SearchML can be prevented from producing hidden or deleted text.  If content has been both hidden and
+	deleted and SearchML related options indicate that either deleted or hidden text but not both should be displayed,
+	then the text is NOT displayed.  This behavior was designed to emulate common word processing programs such
+	as Microsoft Word.
+-->
+<!ELEMENT r (#PCDATA | begin_tag | end_tag | generated | unmapped | offset | target | bookmark)*>
+<!ATTLIST r
+	allcaps %EOnOff; #IMPLIED
+	b %EOnOff; #IMPLIED
+	du %EOnOff; #IMPLIED
+	hidden %EOnOff; #IMPLIED
+	i %EOnOff; #IMPLIED
+	oce %hexBinary; #IMPLIED
+	outline %EOnOff; #IMPLIED
+	smallcaps %EOnOff; #IMPLIED
+	so %EOnOff; #IMPLIED
+	u %EOnOff; #IMPLIED
+	unknown_mapping %EOnOff; #IMPLIED
+	del %EOnOff; #IMPLIED
+	add %EOnOff; #IMPLIED
+>
+<!-- searchml Element -->
+<!ELEMENT searchml (document)>
+<!ATTLIST searchml
+	xmlns CDATA #FIXED "http://www.outsideinsdk.com/xmlns/searchml/3.6"
+>
+
+<!--
+	Sheet Element.  This element represents information related to sheets.  The name of a
+	worksheet in a spreadsheet, for example.  If the name attribute is missing, this
+	indicates that a sheet is present, but no name information was available.  For revision
+  information, the prior sheet name may also be present in oldname
+-->
+<!ELEMENT sheet EMPTY>
+<!ATTLIST sheet
+	name %string; #IMPLIED
+  number %string; #IMPLIED
+  oldname %string; #IMPLIED
+>
+
+
+<!--
+	Note Element.  Conceptually, a note represents an annotation to a document's primary
+	text.  In practice, a note element provides the type of annotation and an identifier
+	which will match an id attribute on a doc_content element which will actually contain
+	the content of the annotation.  For example:
+
+	<note type="footnote" id="x40000001"/>
+	<doc_content type="sub_doc" id="x40000001">
+		<p>This is a footnote.</p>
+	</doc_content>
+-->
+<!ENTITY % ENoteType "(footnote | endnote | annotation | note | comment | slide_note | unknown)">
+<!ELEMENT note EMPTY>
+<!ATTLIST note
+	type %ENoteType; #REQUIRED
+	id IDREF #REQUIRED
+>
+
+
+<!--
+	Unmapped Element.  This element contains base64 encoded textual data, but with no character mapping
+	applied.  Runs representing interesting character attributes can appear in the unmapped element.  Text
+	appearing inside runs that are, in turn, inside unmapped elements will be base64 encoded.  The unmapped
+	element has two required attributes used to help interpret the data: the original character set, and the font
+	name applied to the the text.
+-->
+<!ELEMENT unmapped (#PCDATA | r)*>
+<!ATTLIST unmapped
+	oce %hexBinary; #REQUIRED
+	font %string; #REQUIRED
+>
+
+
+<!-- EBookmarkType Enumeration -->
+<!ENTITY % EBookmarkType "(comment_paragraph | comment_cell | comment_slide | comment_vector_page)">
+<!--
+	Bookmark Element.  This element is used as a target and a grouping mechanism for internal linking
+	similarly to a bookmark in a word processing document or an internal link in a spreadsheet.  The bookmark
+	element can also have a type element describing the type of referenced content.
+-->
+<!ELEMENT bookmark (target)*>
+<!ATTLIST bookmark
+	name ID #IMPLIED
+	type %EBookmarkType; #IMPLIED
+	id IDREF #IMPLIED
+>
+
+
+<!--
+	This element is used to describe an internal hyperlink or bookmark.  It will contain 
+	the name of the hyperlink/bookmark, if one exists.  The name will not be countable text.  
+	When describing an internal hyperlink in a spreadsheet, the target element will have a 
+	sheet attribute describing the sheet of the link destination.  In this case, the start_cell
+	and/or end_cell attribute may also be present.  The start_cell attribute indicates the start
+	of targeted group of cells.  If the target range has more than a single cell, an end_cell 
+	attribute will indicate the end of the target area.  More than one target may be present 
+	in a single bookmark as an internal link can be made to a set of discontinuous cells.
+-->
+<!ELEMENT target (#PCDATA)>
+<!ATTLIST target
+	sheet %hexBinary; #IMPLIED
+	start_cell %string; #IMPLIED
+	end_cell %string; #IMPLIED
+>
+<!-- row Element
+	Identifies one or more rows in a spread sheet.
+-->
+<!ELEMENT row EMPTY>
+<!ATTLIST row
+	start %string; #REQUIRED
+	end %string; #IMPLIED 
+  sheet %string; #IMPLIED
+>
+
+<!-- column Element
+	Identifies one or more columns in a spread sheet.
+-->
+<!ELEMENT column EMPTY>
+<!ATTLIST column
+	start %string; #REQUIRED
+	end %string; #IMPLIED 
+  sheet %string; #IMPLIED
+>
+
+<!-- RevisionType Enumeration -->
+<!ENTITY % RevisionType "(user | create | save | addrow | deleterow | insertcolumn | deletecolumn
+     | newcell | clearcell | modifycell | movecell | addsheet | renamesheet | revisions | oldcellcontent
+     | newcellcontent | oldcelllocation | newcelllocation | usernames | format | sheetnames | sheetname)">
+
+<!-- ss_revision Element 
+     This element is used for XLS track changes when SCCOPT_GENERATEEXCELREVISIONS is enabled.
+-->
+<!ELEMENT ss_revision (#PCDATA | ss_revision | p | generated | sheet | cell | row | column | offset)*>
+<!ATTLIST ss_revision
+	type %RevisionType; #REQUIRED
+	seqid %string; #IMPLIED
+  id %string; #IMPLIED
+	date %string; #IMPLIED
+  name %string; #IMPLIED	
+>
