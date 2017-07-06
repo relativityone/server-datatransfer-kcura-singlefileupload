@@ -9,13 +9,6 @@ This repository is related to the Single File Upload application.
  
 Point PowerShell to the root of this repository, then run the command "build"
  
-## How to Test
- 
-N/A
- 
-## Build artifacts
- 
-N/A
  
 ## Maintainers
  
