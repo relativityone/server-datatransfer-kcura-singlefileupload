@@ -130,8 +130,9 @@
       <HintPath>..\..\packages\Relativity.Services.Interfaces.Private.9.5.142.26\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy">
-      <HintPath>..\..\..\..\kCura.ChoiceEditor\Source\References\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.333, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.333\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=9.4.139.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.9.4.139\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
