@@ -146,6 +146,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
-ILMerge.exe /out:kCura.SingleFileUpload.Resources.dll bin\$(ConfigurationName)\kCura.SingleFileUpload.Resources.dll bin\$(ConfigurationName)\kCura.SingleFileUpload.Core.dll bin\$(ConfigurationName)\NSerio.Relativity.dll /lib:bin\$(ConfigurationName) /targetPlatform:v4</PostBuildEvent>
+ILMerge.exe /out:kCura.SingleFileUpload.Resources.dll bin\$(ConfigurationName)\kCura.SingleFileUpload.Resources.dll bin\$(ConfigurationName)\kCura.SingleFileUpload.Core.dll ..\..\SolutionResources\NSerio.Relativity.dll /lib:bin\$(ConfigurationName) /targetPlatform:v4</PostBuildEvent>
   </PropertyGroup>
 </Project>
