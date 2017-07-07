@@ -85,7 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NSerio.Relativity">
-      <HintPath>..\..\..\..\..\kcura.singlefileupload\Source\SolutionResources\NSerio.Relativity.dll</HintPath>
+      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="outsidein">
       <HintPath>..\..\SolutionResources\oracle-searcg-export-8.5.3\outsidein.dll</HintPath>
