@@ -65,7 +65,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (!res)
                 {
                     response.Success = false;
-                    response.Message = "This file type is not supported.";
+                    response.Message = img ? "Loaded file is not a supported format. Please select PDF, TIFF, or JPEG." : "This file type is not supported.";
                 }
                 else
                 {
