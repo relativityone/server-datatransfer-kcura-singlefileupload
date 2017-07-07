@@ -70,7 +70,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NSerio.Relativity">
-      <HintPath>...\..\SolutionResources\kcura.singlefileupload\Source\SolutionResources\NSerio.Relativity.dll</HintPath>
+      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.API, Version=9.5.79.83, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.API.9.5.79.83\lib\net45\Relativity.API.dll</HintPath>
