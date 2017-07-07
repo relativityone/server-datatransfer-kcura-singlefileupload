@@ -78,8 +78,8 @@
   <RAPBuilder> 
     <Applications> 
       <Application name="Single File Upload" generatenuspec="false"> 
-        <Destination>Application\kCura.SingleFileUpload.rap</Destination> 
-        <ApplicationSchema>Application\application.xml</ApplicationSchema> 
+        <Destination>..\Applications\kCura.SingleFileUpload.rap</Destination> 
+        <ApplicationSchema>..\ApplicationsXML\SingleFileUpload.xml</ApplicationSchema> 
         <Assemblies> 
 			<Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.dll</Assembly>
         </Assemblies> 
