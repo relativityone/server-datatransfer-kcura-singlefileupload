@@ -53,28 +53,8 @@
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="kCura.Agent, Version=9.0.155.17, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SDK.Agents.Relativity90.1.0.0.0\lib\net45\kCura.Agent.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Config, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Config.9.5.142.26\lib\net462\kCura.Config.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Crypto, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Crypto.9.5.142.26\lib\net462\kCura.Crypto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Data.RowDataGateway, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Data.RowDataGateway.9.5.142.26\lib\net462\kCura.Data.RowDataGateway.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.EventHandler, Version=9.0.155.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SDK.EventHandlers.Relativity90.1.0.0.0\lib\net45\kCura.EventHandler.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Relativity.Client, Version=9.3.389.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SDK.Core.Relativity.9.3.389.9\lib\net45\kCura.Relativity.Client.dll</HintPath>
+    <Reference Include="kCura.EventHandler, Version=9.5.79.83, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\kCura.EventHandler.9.5.79.83\lib\net45\kCura.EventHandler.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="kCura.Utility, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
@@ -89,12 +69,11 @@
       <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.333\lib\net462\kCura.Vendor.Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
+    <Reference Include="NSerio.Relativity">
+      <HintPath>..\..\..\..\..\kcura.singlefileupload\Source\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.9.5.142.26\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=9.5.79.83, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.5.79.83\lib\net45\Relativity.API.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">

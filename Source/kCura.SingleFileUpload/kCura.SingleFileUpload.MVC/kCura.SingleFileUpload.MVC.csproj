@@ -49,20 +49,8 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.Config, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Config.9.5.142.26\lib\net462\kCura.Config.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Crypto, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Crypto.9.5.142.26\lib\net462\kCura.Crypto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Data.RowDataGateway, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Data.RowDataGateway.9.5.142.26\lib\net462\kCura.Data.RowDataGateway.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="kCura.Relativity.Client, Version=9.3.389.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SDK.Core.Relativity.9.3.389.9\lib\net45\kCura.Relativity.Client.dll</HintPath>
+    <Reference Include="kCura.Relativity.Client, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Relativity.Client.9.5.142.26\lib\net462\kCura.Relativity.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="kCura.Utility, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
@@ -74,9 +62,8 @@
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
+    <Reference Include="NSerio.Relativity">
+      <HintPath>..\..\..\..\..\kcura.singlefileupload\Source\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
