@@ -3,7 +3,6 @@
     <Projects> 
       <Build> 
 <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
-<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
 <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.MVC\kCura.SingleFileUpload.MVC.csproj">
 	<Platforms>
 		<Platform>AnyCPU</Platform>
