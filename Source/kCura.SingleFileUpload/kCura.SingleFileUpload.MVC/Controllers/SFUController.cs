@@ -81,8 +81,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 var transientMetadata = getTransient(file, fileName);
                                 if (did == -1)
                                 {
-                                    did = docManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    resultStr = docManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+
                                 }
                                 else
                                 {
@@ -129,10 +130,11 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 }
                             }
                         }
-                        if (response.Success && !img)
-                            resultStr = $"AppID={WorkspaceID}&ArtifactID={did}";
-                        else
-                            resultStr = did.ToString();
+                        if (string.IsNullOrEmpty(resultStr))
+                            if (response.Success && !img)
+                                resultStr = $"AppID={WorkspaceID}&ArtifactID={did}";
+                            else
+                                resultStr = did.ToString();
                     }
                     else
                     {
@@ -146,6 +148,15 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             Response.ClearContent();
             Response.Write($"<script>sessionStorage['____pushNo'] = '{Newtonsoft.Json.JsonConvert.SerializeObject(result)}'</script>");
             Response.End();
+        }
+
+        [HttpPost]
+        public int checkUploadStatus(string documentName)
+        {
+            int documentID = docManager.GetDocByName(Path.GetFileNameWithoutExtension(documentName));
+            if (documentID != -1)
+                docManager.UpdateDocumentLastModificationFields(documentID, RelativityUserInfo.WorkspaceUserArtifactID, true);
+            return documentID;
         }
 
         [HttpPost]

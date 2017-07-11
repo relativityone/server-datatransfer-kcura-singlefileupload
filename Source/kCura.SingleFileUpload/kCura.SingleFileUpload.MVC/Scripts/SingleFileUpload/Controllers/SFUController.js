@@ -136,16 +136,40 @@
             var resultString = sessionStorage['____pushNo'] || '';
             if (resultString) {
                 sessionStorage['____pushNo'] = '';
-                manageResult(JSON.parse(resultString));
+                var result = JSON.parse(resultString);
+                if (GetDID() != -1 || !result.Success || (result.Message != '' && result.Message != null) || (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
+
+                    manageResult(result);
+                }
+                else
+                    checkUploadStatus(JSON.parse(resultString));
             }
             else
                 idCheckTimeout = setTimeout(checkUpload, 500);
         }
-        function manageResult(result) {
+
+        function checkUploadStatus(resultString) {
+            setTimeout(function () {
+                AngularPostOfData($http, "/checkUploadStatus", {
+                    documentName: resultString.Data
+                })
+                .done(function (result) {
+                    if (result.data != "-1")
+                        manageResult(resultString, true);
+                    else
+                        checkUploadStatus(resultString);
+                })
+            }, 500);
+        }
+
+        function manageResult(result, removeDigest) {
             if (result.Success && (result.Message == '' || result.Message == null)) {
-                $scope.$apply(function () {
+                if (removeDigest)
                     vm.status = 3;
-                });
+                else
+                    $scope.$apply(function () {
+                        vm.status = 3;
+                    });
 
                 //if (!fromDocumentViewer)
                 //  footerHtml += '<a href="/Relativity/Case/Document/Review.aspx?' + result.Data + '&profilerMode=View&ArtifactTypeID=10&useNewSource=true" target="_top">Open Document<a>';
@@ -166,9 +190,12 @@
                 }
             }
             else if (result.Message == 'R') {
-                $scope.$apply(function () {
+                if (removeDigest)
                     vm.status = 5;
-                });
+                else
+                    $scope.$apply(function () {
+                        vm.status = 5;
+                    });
                 getdH().children[0].innerHTML = "Replace Document";
                 getdH().children[2].className = "msgDetails";
                 var elem = $("<div class=\"content\">A document with the same name already exists. <br/> Do you want to replace it?</div>");
@@ -194,9 +221,12 @@
                 checkForImages();
             }
             else {
-                $scope.$apply(function () {
+                if (removeDigest)
                     vm.status = 2;
-                });
+                else
+                    $scope.$apply(function () {
+                        vm.status = 2;
+                    });
                 var message = /*result.Message.length > 32 ? "Unable to upload file." :*/ result.Message;
                 console.error("SFU: " + result.Message);
                 getdH().children[2].className = "msgDetails";

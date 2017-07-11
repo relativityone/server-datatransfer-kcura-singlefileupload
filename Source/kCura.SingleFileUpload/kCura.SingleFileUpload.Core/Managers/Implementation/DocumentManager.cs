@@ -292,14 +292,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
-        public int SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
+        public string SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
             ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
             File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
-            var documentID = GetDocByName(Path.GetFileNameWithoutExtension(documentInfo.FileName));
-            UpdateDocumentLastModificationFields(documentID, userID, true);
-            return documentID;
+            return Path.GetFileNameWithoutExtension(documentInfo.FileName);
         }
         public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0)
         {
@@ -731,6 +729,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         private void ImportJob_OnComplete(JobReport jobReport)
         {
+
             Repository.Instance.GetLogFactory().GetLogger().LogInformation($"SFU: Document upload succes: {jobReport.TotalRows} row(s) created.");
         }
         private void ImportJob_OnFatalException(JobReport jobReport)

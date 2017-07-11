@@ -16,7 +16,7 @@ function AngularPostOfData($http, url, dataToSend) {
     var result = new promiseResult();
     $http.post(location.pathname + url, dataToSend, { headers: { 'AppID': AppID } })
         .then(function (data) {
-            if (!data.data.Success)
+            if (!data.data.Success && !(typeof data.data === 'string'))
                 console.error(data.data.Message);
             else
                 result.doneCallback(data);

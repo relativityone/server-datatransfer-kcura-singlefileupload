@@ -25,6 +25,19 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
         }
 
+        private int _userID;
+        public int UserID
+        {
+            get
+            {
+                return _userID;
+            }
+            set
+            {
+                _userID = value;
+            }
+        }
+
         public int GetArtifactTypeByArtifactGuid(string guid)
         {
             return (int)_Repository.CaseDBContext.ExecuteSqlStatementAsScalar(SQL.Queries.GetArtifactTypeByArtifactGuid, new SqlParameter[] {
