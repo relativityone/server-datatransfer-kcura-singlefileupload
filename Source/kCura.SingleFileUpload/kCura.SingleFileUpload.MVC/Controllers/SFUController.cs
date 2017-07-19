@@ -159,7 +159,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     else
                     {
                         response.Success = false;
-                        response.Message = "This file type is not supported.";
+                        response.Message = img ? "Loaded file is not valid. Please select TIFF or JPEG file." : "This file type is not supported.";
                     }
                 }
                 return resultStr;
