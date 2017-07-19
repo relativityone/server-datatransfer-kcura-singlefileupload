@@ -27,5 +27,6 @@ namespace kCura.SingleFileUpload.Core.Managers
         void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew);
         void DeleteExistingImages(int dArtifactId);
         void InsertImage(FileInformation image);
+        void WriteFile(byte[] file, FileInformation document);
     }
 }

@@ -262,9 +262,7 @@
             if (vm.changeImage) {
                 dialog_overlay.off("click")
                 dialog.dialog("option", "closeOnEscape", false);
-                window.parent.parent.onbeforeunload = function (event) {
-                    return confirm("Changes may not be saved");
-                };
+            
             }
             setTimeout(function () {
                 if ($("#file")[0].files.length == 0)

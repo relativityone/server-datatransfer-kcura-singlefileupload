@@ -393,6 +393,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@DocIdentifier", image.DocumentIdentifier),
                     SqlHelper.CreateSqlParameter("@Location", image.FileLocation),
                     SqlHelper.CreateSqlParameter("@Size", image.FileSize),
+                    SqlHelper.CreateSqlParameter("@Type", image.FileType)
                 });
         }
 
@@ -428,6 +429,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return fInformation;
         }
+
         public int GetDocByName(string docName)
         {
             DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>();
@@ -544,6 +546,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             DocumentsDataTable.Columns.Add("Native File", typeof(string));
 
             return DocumentsDataTable;
+        }
+
+        public void WriteFile(byte[] file, FileInformation document)
+        {
+            File.WriteAllBytes(document.FileLocation, file);
         }
         private async Task ChangeFolder(int folderID, int docID)
         {

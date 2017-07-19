@@ -34,31 +34,43 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
         public async Task LogCountAsync(string bucket, long count)
         {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
+            using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
             {
                 try
                 {
-                    //await metricManger.LogCountAsync(bucket, workSpaceGuid,MetricTargets.SUM, count);
                     await metricManger.LogCountAsync(bucket, workSpaceGuid, count);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    LogResults(ex.Message);
+                    try
+                    {
+                        await metricManger.LogCountAsync(bucket, workSpaceGuid, MetricTargets.SUM, count);
+                    }
+                    catch (Exception ex)
+                    {
+                        LogResults(ex.Message);
+                    }
                 }
             }
         }
         public async Task LogGaugeAsync(string bucket, long count)
         {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
+            using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
             {
                 try
                 {
-                    //await metricManger.LogGaugeAsync(bucket, workSpaceGuid, MetricTargets.SUM, count);
                     await metricManger.LogGaugeAsync(bucket, workSpaceGuid, count);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    LogResults(ex.Message);
+                    try
+                    {
+                        await metricManger.LogGaugeAsync(bucket, workSpaceGuid, MetricTargets.SUM, count);
+                    }
+                    catch (Exception ex)
+                    {
+                        LogResults(ex.Message);
+                    }
                 }
             }
         }

@@ -2,9 +2,7 @@
 UPDATE
 	[EDDSDBO].[Document]
 SET
-	[RelativityImageCount] = (SELECT TOP 1 [RelativityImageCount]
-							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
-							  WHERE ArtifactID = @tdocartifactID)
+	[RelativityImageCount] = 1
 WHERE
 	ArtifactID = @DocumentID
 
