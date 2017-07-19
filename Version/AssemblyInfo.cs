@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 //------------------------------------------------------------------------------ 
 [assembly: ComVisibleAttribute(false)] 
 [assembly: CLSCompliantAttribute(false)] 
-[assembly: AssemblyVersionAttribute("1.0.0.0")] 
-[assembly: AssemblyFileVersionAttribute("1.0.0.0")] 
-[assembly: AssemblyInformationalVersionAttribute("1.0.0.0")] 
+[assembly: AssemblyVersionAttribute("1.2.0.68")] 
+[assembly: AssemblyFileVersionAttribute("1.2.0.68")] 
+[assembly: AssemblyInformationalVersionAttribute("1.2.0.68")] 
 [assembly: AssemblyCopyrightAttribute("Copyright ©")] 
 [assembly: AssemblyCompanyAttribute("kCura LLC")] 
 [assembly: AssemblyTitleAttribute("kCura.SingleFileUpload")] 
