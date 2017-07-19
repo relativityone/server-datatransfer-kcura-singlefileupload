@@ -16,14 +16,16 @@ namespace kCura.SingleFileUpload.Core.Managers
         Task<bool> ValidateFileTypes(string extension);
         Task<bool> IsDataGridEnabled(int workspaceID);
         bool ValidateDocImages(int docArtifactId);
-        int SaveTempDocument(ExportedMetadata documentInfo, int folderID);
-        bool ReplaceDocumentImages(int oArtifactId, int tArtifactId);
+        //  int SaveTempDocument(ExportedMetadata documentInfo, int folderID);
+        void UpdateHasImages(int dArtifactId);
         void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
         void ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
         bool IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);
-        void DeleteRedactions(int docArtifactId, int tArtifactId);
+        void DeleteRedactions(int docArtifactId);
         void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew);
+        void DeleteExistingImages(int dArtifactId);
+        void InsertImage(FileInformation image);
     }
 }

@@ -31,19 +31,7 @@
         vm.hasRedactions = HasRedactions;
         vm.title = errorID == 0 ? (ChangeImage ? (NewImage ? "Upload Image" : "Replace Image") : (FDV ? "Replace Document" : "New Document")) : "Processing Document";
         vm.tempDocId = 0;
-        //window.parent.parent.$.connection.hub.start()
-        //              .done(function () {
-
-        //              })
-        //              .fail(function () {
-
-        //              });
-
-        //var hub = window.parent.parent.$.connection.imaging;
-
-        //hub.client.imagingComplete = function (clientRequestKey, documentId, errorMessage) {
-        //    replaceImages();
-        //};
+       
 
         sessionStorage['____pushNo'] = '';
         var files;
@@ -137,7 +125,7 @@
             if (resultString) {
                 sessionStorage['____pushNo'] = '';
                 var result = JSON.parse(resultString);
-                if (GetDID() != -1 || !result.Success || (result.Message != '' && result.Message != null) || (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
+                if (vm.errorID != 0 || GetDID() != -1 || !result.Success || (result.Message != '' && result.Message != null) || (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
 
                     manageResult(result);
                 }
@@ -202,24 +190,24 @@
                 $(getdH().children[2]).html(elem);
 
             }
-            else if (result.Success && result.Message == 'I') {
-                vm.tempDocId = result.Data;
-                var profileArtifact = $("#_fileTypeSelector_ImagingProfileSelector", window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents()).attr("defaultvalue");
+            //else if (result.Success && result.Message == 'I') {
+            //    vm.tempDocId = result.Data;
+            //    var profileArtifact = $("#_fileTypeSelector_ImagingProfileSelector", window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents()).attr("defaultvalue");
 
-                $.ajax({
-                    url: "/Relativity/CustomPages/c9e4322e-6bd8-4a37-ae9e-c3c9be31776b/api/Imaging/ImageDocuments?workspaceArtifactId=" + AppID + "&profileArtifactId=" + profileArtifact + "&connectionId=" + window.parent.parent.$.connection.hub.id,
-                    data: JSON.stringify("{documentArtifactIds: [ " + vm.tempDocId + " ]}"),
-                    type: "POST",
-                    headers: { "X-CSRF-Header": window.parent.GetCsrfTokenFromPage() },
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8"
-                }).fail(function (data) {
-                    alert("An error occurred attempting to image this document, please see the error log for more details. ");
-                });
-                window.parent.parent.onbeforeunload = null;
+            //    $.ajax({
+            //        url: "/Relativity/CustomPages/c9e4322e-6bd8-4a37-ae9e-c3c9be31776b/api/Imaging/ImageDocuments?workspaceArtifactId=" + AppID + "&profileArtifactId=" + profileArtifact + "&connectionId=" + window.parent.parent.$.connection.hub.id,
+            //        data: JSON.stringify("{documentArtifactIds: [ " + vm.tempDocId + " ]}"),
+            //        type: "POST",
+            //        headers: { "X-CSRF-Header": window.parent.GetCsrfTokenFromPage() },
+            //        dataType: 'json',
+            //        contentType: "application/json; charset=utf-8"
+            //    }).fail(function (data) {
+            //        alert("An error occurred attempting to image this document, please see the error log for more details. ");
+            //    });
+            //    window.parent.parent.onbeforeunload = null;
 
-                checkForImages();
-            }
+            //    checkForImages();
+            //}
             else {
                 if (removeDigest)
                     vm.status = 2;
@@ -238,37 +226,37 @@
 
         }
 
-        function checkForImages() {
-            setTimeout(function () {
-                AngularPostOfData($http, "/CheckForImages", {
-                    tArtifactId: vm.tempDocId
-                })
-                .done(function (result) {
-                    if (result.data.Data == "True")
-                        replaceImages();
-                    else
-                        checkForImages();
-                })
-            }, 500);
-        }
+        //function checkForImages() {
+        //    setTimeout(function () {
+        //        AngularPostOfData($http, "/CheckForImages", {
+        //            tArtifactId: vm.tempDocId
+        //        })
+        //        .done(function (result) {
+        //            if (result.data.Data == "True")
+        //                replaceImages();
+        //            else
+        //                checkForImages();
+        //        })
+        //    }, 500);
+        //}
 
-        function replaceImages() {
-            AngularPostOfData($http, "/ReplaceImages",
-                {
-                    oArtifactId: docID,
-                    tArtifactId: vm.tempDocId,
-                    newImage: NewImage
-                })
-            .done(function (result) {
-                if (result.data.Data == "True") {
-                    updateStatus(3, "Document images replaced succesfully!");
-                    window.parent.parent.onbeforeunload = null;
-                    setTimeout(function () {
-                        window.parent.location.reload();
-                    }, 2000);
-                }
-            });
-        }
+        //function replaceImages() {
+        //    AngularPostOfData($http, "/ReplaceImages",
+        //        {
+        //            oArtifactId: docID,
+        //            tArtifactId: vm.tempDocId,
+        //            newImage: NewImage
+        //        })
+        //    .done(function (result) {
+        //        if (result.data.Data == "True") {
+        //            updateStatus(3, "Document images replaced succesfully!");
+        //            window.parent.parent.onbeforeunload = null;
+        //            setTimeout(function () {
+        //                window.parent.location.reload();
+        //            }, 2000);
+        //        }
+        //    });
+        //}
 
         function notifyUploadStarted() {
             if (vm.changeImage) {
@@ -347,7 +335,7 @@
         }
         function GetDID() {
             var did = -1;
-            if (document.getElementById('fdv').getAttribute('value') == 'true')
+            if (document.getElementById('fdv') != null && document.getElementById('fdv').getAttribute('value') == 'true')
                 did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
             return did;
         }

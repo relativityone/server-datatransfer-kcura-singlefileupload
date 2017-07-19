@@ -319,21 +319,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
-        public int SaveTempDocument(ExportedMetadata documentInfo, int folderID)
-        {
-            DTOs.Document newDocument = new Relativity.Client.DTOs.Document();
+        //public int SaveTempDocument(ExportedMetadata documentInfo, int folderID)
+        //{
+        //    DTOs.Document newDocument = new Relativity.Client.DTOs.Document();
 
-            var fileName = instanceFile(documentInfo.FileName, documentInfo.Native, true);
-            newDocument.TextIdentifier = Path.GetFileNameWithoutExtension(fileName);
-            newDocument.RelativityNativeFileLocation = fileName;
-            newDocument.ParentArtifact = new DTOs.Artifact(defineFolder(folderID));
+        //    var fileName = instanceFile(documentInfo.FileName, documentInfo.Native, true);
+        //    newDocument.TextIdentifier = Path.GetFileNameWithoutExtension(fileName);
+        //    newDocument.RelativityNativeFileLocation = fileName;
+        //    newDocument.ParentArtifact = new DTOs.Artifact(defineFolder(folderID));
 
-            //  manage fields
-            int newArtifactID = _Repository.RSAPIClient.Repositories.Document.CreateSingle(newDocument);
-            File.Delete(newDocument.RelativityNativeFileLocation);
+        //    int newArtifactID = _Repository.RSAPIClient.Repositories.Document.CreateSingle(newDocument);
+        //    File.Delete(newDocument.RelativityNativeFileLocation);
 
-            return newArtifactID;
-        }
+        //    return newArtifactID;
+        //}
         public bool ValidateDocImages(int docArtifactId)
         {
             bool result = false;
@@ -368,38 +367,43 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                  });
         }
 
-        public void DeleteRedactions(int docArtifactId, int tArtifactId)
+        public void DeleteRedactions(int docArtifactId)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentRedactions,
                  new[] {
                     SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
-                    SqlHelper.CreateSqlParameter("@DocumentTempID", tArtifactId),
                  });
         }
 
-        public bool ReplaceDocumentImages(int oArtifactId, int tArtifactId)
+        public void DeleteExistingImages(int dArtifactId)
         {
-            bool result = false;
-            var sqlResult = _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.ReplaceDocumentImages,
+            _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentImages,
                 new[] {
-                    SqlHelper.CreateSqlParameter("odocartifactID", oArtifactId),
-                    SqlHelper.CreateSqlParameter("@tdocartifactID", tArtifactId),
+                    SqlHelper.CreateSqlParameter("@DocumentID", dArtifactId),
+                });
+        }
+
+        public void InsertImage(FileInformation image)
+        {
+            _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.InsertImageInFileTable,
+                new[] {
+                    SqlHelper.CreateSqlParameter("@DocumentID", image.DocumentArtifactID),
+                    SqlHelper.CreateSqlParameter("@FileName", image.FileName),
+                    SqlHelper.CreateSqlParameter("@Order", image.Order),
+                    SqlHelper.CreateSqlParameter("@DocIdentifier", image.DocumentIdentifier),
+                    SqlHelper.CreateSqlParameter("@Location", image.FileLocation),
+                    SqlHelper.CreateSqlParameter("@Size", image.FileSize),
+                });
+        }
+
+        public void UpdateHasImages(int dArtifactId)
+        {
+            _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateHasImages,
+                new[] {
+                    SqlHelper.CreateSqlParameter("@DocumentID", dArtifactId),
                     SqlHelper.CreateSqlParameter("@HasImagesFieldGuid", Helpers.Constants.DOCUMENT_HAS_IMAGES_FIELD),
                     SqlHelper.CreateSqlParameter("@HasImagesCodeYesGuid", Helpers.Constants.DOCUMENT_HAS_IMAGES_YES_CHOICE)
                 });
-
-            if (sqlResult > 0)
-            {
-                // Delete temp document;
-                DTOs.Document document = new DTOs.Document(tArtifactId);
-                var docResults = _Repository.RSAPIClient.Repositories.Document.Delete(document);
-                result = docResults.Success;
-
-                //AuditHelper.CreateAuditRecord()
-
-            }
-
-            return result;
         }
 
         public FileInformation getFileByArtifactId(int docArtifactId)

@@ -895,6 +895,7 @@
       <Link>oilink.jar</Link>
     </Content>
     <Content Include="FreeImage.dll" />
+    <Content Include="SQL\Queries\InsertImageInFileTable.sql" />
     <Content Include="SQL\Queries\DeleteDocumentRedactions.sql" />
     <Content Include="SQL\Queries\GetClientCredentials.sql" />
     <Content Include="SQL\Queries\GetIsSystemAdminUser.sql" />
@@ -904,7 +905,8 @@
     <Content Include="SQL\Queries\GetFieldIDByNameAndType.sql" />
     <Content Include="SQL\Queries\GetMatchedFields.sql" />
     <Content Include="SQL\Queries\GetArtifactTypeByArtifactGuid.sql" />
-    <Content Include="SQL\Queries\ReplaceDocumentImages.sql" />
+    <Content Include="SQL\Queries\DeleteDocumentImages.sql" />
+    <Content Include="SQL\Queries\UpdateHasImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
     <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />
     <Content Include="SQL\Queries\ReplaceNativeFile.sql" />

@@ -1,21 +1,4 @@
-﻿DELETE 
-FROM 
-	[EDDSDBO].[File]
-WHERE
-	DocumentArtifactID = @odocartifactID
-	AND
-	[Type] = 1
-
-
-UPDATE
-	[EDDSDBO].[File]
-SET
-	DocumentArtifactID = @odocartifactID
-WHERE
-	DocumentArtifactID = @tdocartifactID
-	AND
-	[Type] = 1
-
+﻿
 UPDATE
 	[EDDSDBO].[Document]
 SET
@@ -23,7 +6,7 @@ SET
 							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
 							  WHERE ArtifactID = @tdocartifactID)
 WHERE
-	ArtifactID = @odocartifactID
+	ArtifactID = @DocumentID
 
 
 DECLARE @HasImagesCodeType INT = ( SELECT TOP 1 F.CodeTypeID
@@ -42,17 +25,17 @@ SET @SQL = '
 
 IF((SELECT COUNT(1) 
    FROM [EDDSDBO].[ZCodeArtifact_' + CONVERT(NVARCHAR, @HasImagesCodeType) + '] WITH (NOLOCK)
-   WHERE [AssociatedArtifactID] = ' + CONVERT(NVARCHAR, @odocartifactID) + ') > 0)
+   WHERE [AssociatedArtifactID] = ' + CONVERT(NVARCHAR, @DocumentID) + ') > 0)
 
 BEGIN
 		    UPDATE [EDDSDBO].[ZCodeArtifact_' + CONVERT(NVARCHAR, @HasImagesCodeType) + '] 
 			SET [CodeArtifactID] = ' +  CONVERT(NVARCHAR, @HasImagesCodeYes) +
-     	   'WHERE [AssociatedArtifactID] = ' + CONVERT(NVARCHAR, @odocartifactID) + '
+     	   'WHERE [AssociatedArtifactID] = ' + CONVERT(NVARCHAR, @DocumentID) + '
 END
 ELSE
 BEGIN
 	 INSERT INTO [EDDSDBO].[ZCodeArtifact_' + CONVERT(NVARCHAR, @HasImagesCodeType) + '] 
-			VALUES(' + CONVERT(NVARCHAR, @HasImagesCodeYes) + ',' + CONVERT(NVARCHAR, @odocartifactID) + ')
+			VALUES(' + CONVERT(NVARCHAR, @HasImagesCodeYes) + ',' + CONVERT(NVARCHAR, @DocumentID) + ')
 END'
 
 

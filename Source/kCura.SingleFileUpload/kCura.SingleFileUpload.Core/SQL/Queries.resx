@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DeleteDocumentImages" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\deletedocumentimages.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="DeleteDocumentRedactions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\deletedocumentredactions.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -163,16 +166,19 @@
   <data name="GetWorkspaceNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getworkspacenames.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="InsertImageInFileTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\insertimageinfiletable.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="InsertInstanceSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\insertinstancesettings.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="ReplaceDocumentImages" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>queries\replacedocumentimages.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="ReplaceNativeFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\replacenativefile.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="UpdateDocumentLastModificationFields" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\updatedocumentlastmodificationfields.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="UpdateHasImages" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\updatehasimages.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

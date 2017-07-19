@@ -10,4 +10,4 @@
 
 UPDATE [EDDSDBO].[ProductionInformation]
 SET HasRedactions = 0
-WHERE Document = @DocumentID OR Document = @DocumentTempID
+WHERE Document = @DocumentID

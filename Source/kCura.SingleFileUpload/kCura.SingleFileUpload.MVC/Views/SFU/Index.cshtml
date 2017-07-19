@@ -83,6 +83,7 @@
         <input type="hidden" id="fdv" name="fdv" value="@ViewBag.FDV" />
         <input type="hidden" id="did" name="did" value="" />
         <input type="hidden" id="force" name="force" value="false" />
+        <input type="hidden" id="newImage" name="newImage" ng-model="newImage" />
     </form>
     <form id="btiForm"
           ng-if="errorID != 0" action="sfu/UploadProcessingError?AppID=@ViewBag.AppID&errorID=@ViewBag.ErrorID"

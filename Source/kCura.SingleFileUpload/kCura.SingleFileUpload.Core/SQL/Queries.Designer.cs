@@ -61,6 +61,19 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///DELETE FROM [EDDSDBO].[File] 
+        ///WHERE [DocumentArtifactID] = @DocumentID
+        ///
+        ///.
+        /// </summary>
+        internal static string DeleteDocumentImages {
+            get {
+                return ResourceManager.GetString("DeleteDocumentImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  DELETE FROM [EDDSDBO].[Redaction]
         /// WHERE ID IN (
         ///			 SELECT R.ID
@@ -73,7 +86,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///UPDATE [EDDSDBO].[ProductionInformation]
         ///SET HasRedactions = 0
-        ///WHERE Document = @DocumentID OR Document = @DocumentTempID.
+        ///WHERE Document = @DocumentID.
         /// </summary>
         internal static string DeleteDocumentRedactions {
             get {
@@ -286,6 +299,19 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///DELETE FROM [EDDSDBO].[File] 
+        ///WHERE [DocumentArtifactID] = @DocumentID
+        ///
+        ///.
+        /// </summary>
+        internal static string InsertImageInFileTable {
+            get {
+                return ResourceManager.GetString("InsertImageInFileTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{
         ///                &quot;url&quot;:  &quot;%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%&quot;,
         ///                &quot;id&quot;: &quot;documentCreateModal&quot;,        
@@ -309,43 +335,6 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DELETE 
-        ///FROM 
-        ///	[EDDSDBO].[File]
-        ///WHERE
-        ///	DocumentArtifactID = @odocartifactID
-        ///	AND
-        ///	[Type] = 1
-        ///
-        ///
-        ///UPDATE
-        ///	[EDDSDBO].[File]
-        ///SET
-        ///	DocumentArtifactID = @odocartifactID
-        ///WHERE
-        ///	DocumentArtifactID = @tdocartifactID
-        ///	AND
-        ///	[Type] = 1
-        ///
-        ///UPDATE
-        ///	[EDDSDBO].[Document]
-        ///SET
-        ///	[RelativityImageCount] = (SELECT TOP 1 [RelativityImageCount]
-        ///							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
-        ///							  WHERE ArtifactID = @tdocartifactID)
-        ///WHERE
-        ///	ArtifactID = @odocartifactID
-        ///
-        ///
-        ///DECLARE @HasImagesCodeType INT = [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string ReplaceDocumentImages {
-            get {
-                return ResourceManager.GetString("ReplaceDocumentImages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to DELETE FROM EDDSDBO.[FILE] WHERE FILEID = @FID
         ///INSERT INTO EDDSDBO.[FILE] ([GUID],[DOCUMENTARTIFACTID],[FILENAME],[ORDER],[TYPE],[ROTATION],[IDENTIFIER],[LOCATION],[INREPOSITORY],[SIZE]) 
         ///	VALUES (@RG, @AID, @FN, 0,0,-1,&apos;DOC&apos; + CAST(@AID AS VARCHAR(10)) + &apos;_NATIVE&apos;, @LOC, 1, @SZ)
@@ -363,23 +352,47 @@ namespace kCura.SingleFileUpload.Core.SQL {
         
         /// <summary>
         ///   Looks up a localized string similar to 
-        ///IF @Type = 0
+        ///IF @New = 1
         ///BEGIn
         ///	UPDATE EDDSDBO.[Artifact]
         ///	SET [CreatedBy] = @UserID,
         ///		[LastModifiedBy] = @UserID
-        ///	WHERE ARTIFACTID = @AID
+        ///	WHERE ARTIFACTID = @DocumentID
         ///END
         ///ELSE
         ///BEGIN
         ///	UPDATE EDDSDBO.[Artifact]
         ///	SET [LastModifiedBy] = @UserID
-        ///	WHERE ARTIFACTID = @AID
+        ///	WHERE ARTIFACTID = @DocumentID
         ///END.
         /// </summary>
         internal static string UpdateDocumentLastModificationFields {
             get {
                 return ResourceManager.GetString("UpdateDocumentLastModificationFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///UPDATE
+        ///	[EDDSDBO].[Document]
+        ///SET
+        ///	[RelativityImageCount] = (SELECT TOP 1 [RelativityImageCount]
+        ///							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
+        ///							  WHERE ArtifactID = @tdocartifactID)
+        ///WHERE
+        ///	ArtifactID = @DocumentID
+        ///
+        ///
+        ///DECLARE @HasImagesCodeType INT = ( SELECT TOP 1 F.CodeTypeID
+        ///								   FROM EDDSDBO.Field AS F WITH (NOLOCK)
+        ///								   INNER JOIN EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
+        ///								   ON AG.ArtifactID = F.ArtifactID
+        ///								   WHERE AG.ArtifactGuid = @HasImagesFieldGuid)        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string UpdateHasImages {
+            get {
+                return ResourceManager.GetString("UpdateHasImages", resourceCulture);
             }
         }
     }

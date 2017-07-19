@@ -39,7 +39,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task Upload(int fid = 0, int did = 0, bool fdv = false, bool force = false, bool img = false)
+        public async Task Upload(int fid = 0, int did = 0, bool fdv = false, bool force = false, bool img = false, bool newImage = false)
         {
             var result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
             {
@@ -65,7 +65,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (!res)
                 {
                     response.Success = false;
-                    response.Message = img ? "Loaded file is not a supported format. Please select PDF, TIFF, or JPEG." : "This file type is not supported.";
+                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
                 }
                 else
                 {
@@ -101,17 +101,26 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                         {
                             if (img)
                             {
-                                if (!fileExt.Equals(".pdf") && !fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg"))
+                                if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg"))
                                 {
                                     response.Success = false;
-                                    response.Message = "Loaded file is not a supported format. Please select PDF, TIFF, or JPEG.";
+                                    response.Message = "Loaded file is not a supported format. Please select TIFF or JPEG.";
                                 }
                                 else
                                 {
+                                    FileInformation fileInfo = docManager.getFileByArtifactId(did);
+                                    docManager.DeleteRedactions(did);
+                                    string details = string.Empty;
+                                    if (!newImage)
+                                    {
+                                        docManager.DeleteExistingImages(did);
+                                        details = auditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
+                                        auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    }
+                                    details = auditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Replaced");
+                                    auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    docManager.UpdateHasImages(did);
                                     response.Success = true;
-                                    response.Message = "I";
-                                    var transientMetadata = getTransient(file, fileName);
-                                    did = docManager.SaveTempDocument(transientMetadata, fid);
                                 }
 
                             }
@@ -199,29 +208,29 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             Response.End();
         }
 
-        [HttpPost]
-        public JsonResult ReplaceImages(int oArtifactId, int tArtifactId, bool newImage)
-        {
-            var result = HandleResponse<string>((response) =>
-            {
-                string resultStr = string.Empty;
-                response.Success = true;
-                FileInformation file = docManager.getFileByArtifactId(oArtifactId);
-                docManager.DeleteRedactions(oArtifactId, tArtifactId);
-                resultStr = docManager.ReplaceDocumentImages(oArtifactId, tArtifactId).ToString();
-                string details = string.Empty;
-                if (!newImage)
-                {
-                    details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Deleted");
-                    auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                }
-                details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Replaced");
-                auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                return resultStr;
-            });
+        //[HttpPost]
+        //public JsonResult ReplaceImages(int oArtifactId, int tArtifactId, bool newImage)
+        //{
+        //    var result = HandleResponse<string>((response) =>
+        //    {
+        //        string resultStr = string.Empty;
+        //        response.Success = true;
+        //        FileInformation file = docManager.getFileByArtifactId(oArtifactId);
+        //        docManager.DeleteRedactions(oArtifactId, tArtifactId);
+        //        resultStr = docManager.ReplaceDocumentImages(oArtifactId, tArtifactId).ToString();
+        //        string details = string.Empty;
+        //        if (!newImage)
+        //        {
+        //            details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Deleted");
+        //            auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+        //        }
+        //        details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Replaced");
+        //        auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+        //        return resultStr;
+        //    });
 
-            return Json(result);
-        }
+        //    return Json(result);
+        //}
 
         [HttpPost]
         public JsonResult CheckForImages(int tArtifactId)
