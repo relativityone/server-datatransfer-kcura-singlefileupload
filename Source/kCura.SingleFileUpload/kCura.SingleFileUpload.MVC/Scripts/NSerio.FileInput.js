@@ -15,7 +15,7 @@ function manageResult(result) {
     if (result.Success) {   
         var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
         getdH().children[1].className = "fa fa-check-circle fa-5x";
-        var footerHtml = "<div>Document uploaded succesfully!</div>";
+        var footerHtml = "<div>Document uploaded successfully!</div>";
         if (!fromDocumentViewer)
             footerHtml += '<a href="/Relativity/Case/Document/Review.aspx?' + result.Data + '&profilerMode=View&ArtifactTypeID=10&useNewSource=true" target="_top">Open Document<a>';
         getdH().children[2].className = "messageWithEvents";
