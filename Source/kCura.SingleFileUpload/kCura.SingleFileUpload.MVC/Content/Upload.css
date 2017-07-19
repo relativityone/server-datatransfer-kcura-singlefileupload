@@ -211,5 +211,6 @@ button {
     margin-top: 20px;
     text-align: left;
     padding: 18px;
+    font-weight: bold;
     font-size: 14px;
 }

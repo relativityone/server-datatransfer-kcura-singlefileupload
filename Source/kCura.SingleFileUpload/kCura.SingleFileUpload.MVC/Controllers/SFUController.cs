@@ -65,7 +65,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (!res)
                 {
                     response.Success = false;
-                    response.Message = img ? "Loaded file is not valid. Please select TIFF or JPEG file." : "This file type is not supported.";
+                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
                 }
                 else
                 {
@@ -104,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg"))
                                 {
                                     response.Success = false;
-                                    response.Message = "Loaded file is not valid. Please select TIFF or JPEG file.";
+                                    response.Message = "Loaded file is not a supported format. Please select TIFF or JPEG.";
                                 }
                                 else
                                 {
@@ -159,7 +159,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     else
                     {
                         response.Success = false;
-                        response.Message = img ? "Loaded file is not valid. Please select TIFF or JPEG file." : "This file type is not supported.";
+                        response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
                     }
                 }
                 return resultStr;
