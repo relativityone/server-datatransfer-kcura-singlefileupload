@@ -2,29 +2,9 @@
 //V 0.1
 //======================================================
 var iframe = window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents();
-var hasImages = {{HasImages}};
-$('.reviewActionBarTop > .reviewActionBarGroup:first > .reviewActionBarActionButton:first').before('<a class="reviewActionBarActionButton" style="cursor: pointer;" onclick="openSFUModal(false)">Replace Document</a>');
+$('.reviewActionBarTop > .reviewActionBarGroup:first > .reviewActionBarActionButton:first').before('<a class="reviewActionBarActionButton" style="cursor: pointer;" onclick="openSFUModal()">Replace Document</a>');
 
-if({{hasPermissionsToReplaceImage}})
-{
-    addReplaceButton();
-}
-
-$('#replace_image_btn', iframe).click(function () {
-    openSFUModal(true);
-});
-
-$('#_fileTypeSelector_DeleteImages_anchor', iframe).click(function (event) {
-    $('#replace_image_btn', iframe).text('Upload Image');    
-    hasImages = false;
-});
-
-$('#_fileTypeSelector_Convert_anchor', iframe).click(function (event) {
-    
-    checkForImages();
-});
-
-function openSFUModal(changeImage) {
+function openSFUModal() {
     var $myWin = window.parent.parent.window;
     var $out = $myWin.$;
     $myWin = $out($myWin);
@@ -32,7 +12,7 @@ function openSFUModal(changeImage) {
     var h = 335;
     if ($out('#uploadInfoDiv').length == 0) {
         $out(
-            '<div id="uploadInfoDiv" style="height: 335px"><iframe style="border:none;width:100%; height: 335px;" src="/relativity/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?AppID={{APPID}}&fdv=true&image=' + changeImage + '&newImage=' + !hasImages + '&docID={{DocID}}"></iframe></div>')
+            '<div id="uploadInfoDiv" style="height: 335px"><iframe style="border:none;width:100%; height: 335px;" src="/relativity/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?AppID={{APPID}}&fdv=true&image=false&newImage=false&docID={{DocID}}"></iframe></div>')
             .dialog({
                 autoOpen: false,
                 modal: true,
@@ -73,32 +53,3 @@ function openSFUModal(changeImage) {
     }
 }
 
-function addReplaceButton() {
-    var button_text = {{HasImages}} ? "Replace Image" : "Upload Image";
-    var repButton = $('#replace_image_btn', iframe);
-    if (repButton.length > 0) {
-        repButton.show();
-        repButton.text(button_text);
-    }
-    else {
-        $('.viewer-selector > div > .button-container:last', iframe).before('<span class="button-container"><a class="reviewActionBarActionButton" style="cursor: pointer;" id="replace_image_btn" >' + button_text + '</a></span>');
-        $('#replace_image_btn', iframe).click(function () {
-            openSFUModal(true);
-        });
-
-    }
-}
-
-function checkForImages() {
-    setTimeout(function () {
-        $.post( "/Relativity/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu/CheckForImages?AppID={{APPID}}", {tArtifactId : {{DocID}}})
-        .done(function (result) {
-            if (result.Data == "True") {
-                addReplaceButton();
-            }
-            else {
-                checkForImages();
-            }
-        });
-    }, 500)
-}

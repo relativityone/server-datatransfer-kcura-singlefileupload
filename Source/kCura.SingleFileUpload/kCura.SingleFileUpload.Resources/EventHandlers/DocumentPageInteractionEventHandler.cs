@@ -4,7 +4,6 @@ using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
-using System;
 using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
@@ -38,14 +37,12 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 {
                     PermissionHelper permissionHelper = new PermissionHelper(this.Helper);
                     var taskPermissions = Task.Run(async () => await permissionHelper.CurrentUserHasPermissionToObjectType(this.Helper.GetActiveCaseID(), Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload));
-                    var hasPermission = true; //taskPermissions.Result;
                     
                     ScriptBlock sb = new ScriptBlock();
                     sb.Key = "sfuSource";
                     sb.Script = string.Concat("<script type=\"text/javascript\">", Javascript.SingleFileUploadScript.Replace("{{APPID}}", this.Application.ArtifactID.ToString()).
                                                                                                                      Replace("{{HasImages}}", hasImages.ToString().ToLower()).
-                                                                                                                     Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()).
-                                                                                                                     Replace("{{hasPermissionsToReplaceImage}}", hasPermission.ToString().ToLower()), "</script>");
+                                                                                                                     Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()), "</script>");
                     this.RegisterStartupScriptBlock(sb);
                 }
             }

@@ -12,9 +12,7 @@ using System.Collections.Generic;
 using Relativity.Services.ObjectQuery;
 using kCura.Relativity.ImportAPI;
 using kCura.Relativity.DataReaderClient;
-using System.Security.Claims;
 using Relativity.API;
-using Relativity.Services.DataContracts.DTOs.MetricsCollection;
 using NSerio.Relativity;
 using System.Net;
 using System.Text;
@@ -702,11 +700,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 var header64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientCredentials.Item1}:{clientCredentials.Item2}"));
                 webClient.Headers["Authorization"] = $"Basic {header64}";
                 string result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
-                var jObject = JObject.Parse(result);
-                string accesstoken = jObject["access_token"].ToString();
-                if (string.IsNullOrEmpty(accesstoken))
-                    throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
-                token = accesstoken;
+                try
+                {
+                    var jObject = JObject.Parse(result);
+                    string accesstoken = jObject["access_token"].ToString();
+                    if (string.IsNullOrEmpty(accesstoken))
+                        throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+                    token = accesstoken;
+                }
+                catch (Exception)
+                {
+                    throw new Exception($"Something happened getting the access token. {result}");
+                }
+
+
             }
             return token;
         }

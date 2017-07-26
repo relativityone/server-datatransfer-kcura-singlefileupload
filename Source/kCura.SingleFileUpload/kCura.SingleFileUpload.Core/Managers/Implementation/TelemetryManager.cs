@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Relativity.API;
 using System.Threading.Tasks;
 using Relativity.Services.DataContracts.DTOs.MetricsCollection;

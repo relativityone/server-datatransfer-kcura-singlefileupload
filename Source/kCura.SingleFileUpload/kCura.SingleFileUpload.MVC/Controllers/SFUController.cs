@@ -1,18 +1,12 @@
 ﻿using System.Web.Mvc;
 using System.Web;
-using System.Linq;
-using System.Collections.Generic;
-using Relativity.SingleFileUpload.MVC;
 using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using System;
 using System.IO;
 using kCura.SingleFileUpload.Core.Entities;
 using System.Threading.Tasks;
-using kCura.SingleFileUpload.MVC.Models;
 using Relativity.CustomPages;
-using Relativity.Services.DataContracts.DTOs.MetricsCollection;
-using Relativity.Telemetry.Services.Metrics;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Helpers;
 

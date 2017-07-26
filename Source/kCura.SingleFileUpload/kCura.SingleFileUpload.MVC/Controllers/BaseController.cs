@@ -1,9 +1,6 @@
-﻿using Core = kCura.SingleFileUpload.Core;
-using Relativity.CustomPages;
+﻿using Relativity.CustomPages;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NSerio.Relativity.Infrastructure;
 using Relativity.API;

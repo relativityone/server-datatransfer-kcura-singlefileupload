@@ -2,9 +2,7 @@
 using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity.Infrastructure;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {

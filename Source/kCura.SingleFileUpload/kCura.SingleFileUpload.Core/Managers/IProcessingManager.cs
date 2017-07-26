@@ -1,6 +1,4 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
-using Relativity.Services.ObjectQuery;
-using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
