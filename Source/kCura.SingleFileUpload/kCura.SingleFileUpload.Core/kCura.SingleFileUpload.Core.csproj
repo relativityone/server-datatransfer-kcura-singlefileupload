@@ -157,6 +157,7 @@
     <Compile Include="Entities\ProcessingDocument.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Entities\ExportedMetadata.cs" />
+    <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">

@@ -8,6 +8,7 @@ using Relativity.Telemetry.Services.Metrics;
 using Relativity.Services.InternalMetricsCollection;
 using System.Data.SqlClient;
 using kCura.SingleFileUpload.Core.SQL;
+using kCura.SingleFileUpload.Core.Helpers;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -47,7 +48,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
                     catch (Exception ex)
                     {
-                        LogResults(ex.Message);
+                        LogError(ex, ex.Message);
                     }
                 }
             }
@@ -68,7 +69,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
                     catch (Exception ex)
                     {
-                        LogResults(ex.Message);
+                        LogError(ex, ex.Message);
                     }
                 }
             }
@@ -84,7 +85,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogResults(ex.Message);
+                    LogError(ex, ex.Message);
                     return null;
                 }
             }
@@ -99,7 +100,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogResults(ex.Message);
+                    LogError(ex, ex.Message);
                 }
             }
         }
@@ -113,7 +114,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogResults(ex.Message);
+                    LogError(ex, ex.Message);
                 }
             }
         }
@@ -128,7 +129,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogResults(ex.Message);
+                    LogError(ex, ex.Message);
                 }
             }
         }
@@ -143,7 +144,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogResults(ex.Message);
+                    LogError(ex, ex.Message);
                 }
             }
         }
@@ -191,7 +192,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch (Exception ex)
             {
-                LogResults(ex.Message);
+                LogError(ex, ex.Message);
                 throw ex;
             }
         }
@@ -216,15 +217,25 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch (Exception ex)
             {
-                LogResults(ex.Message);
+                LogError(ex, ex.Message);
             }
         }
-        private void LogResults(string message)
+        private void LogError(Exception e, string msg)
         {
-            IAPILog logger;
-            logger = _Repository.GetLogFactory().GetLogger().ForContext<TelemetryManager>();
-
-            logger.LogError($"SFU: {message}");
+            var error = new Relativity.Client.DTOs.Error
+            {
+                FullError = e.ToString(),
+                Message = EventLogHelper.GetRecursiveExceptionMsg(e),
+                Server = Environment.MachineName,
+                Source = "WEB - Single File Upload",
+                SendNotification = false,
+                Workspace = new Relativity.Client.DTOs.Workspace(-1),
+                URL = string.Empty
+            };
+            _Repository.RSAPISystem.Repositories.Error.CreateSingle(error);
+            _Repository.GetLogFactory().GetLogger().ForContext<TelemetryManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
         }
+
+      
     }
 }

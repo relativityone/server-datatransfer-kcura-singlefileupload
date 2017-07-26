@@ -17,6 +17,7 @@ using NSerio.Relativity;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using kCura.SingleFileUpload.Core.Helpers;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -712,8 +713,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 {
                     throw new Exception($"Something happened getting the access token. {result}");
                 }
-
-
             }
             return token;
         }
@@ -755,19 +754,21 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             LogError(jobReport.FatalException, jobReport.FatalException.Message);
             throw jobReport.FatalException;
         }
+
         private void LogError(Exception e, string msg)
         {
-            var error = new Relativity.Client.DTOs.Error
+            var error = new DTOs.Error
             {
                 FullError = e.ToString(),
-                Message = msg,
+                Message = EventLogHelper.GetRecursiveExceptionMsg(e),
                 Server = Environment.MachineName,
                 Source = "WEB - Single File Upload",
                 SendNotification = false,
-                Workspace = new Relativity.Client.DTOs.Workspace(-1),
+                Workspace = new DTOs.Workspace(-1),
                 URL = string.Empty
             };
             Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
+            Repository.Instance.GetLogFactory().GetLogger().ForContext<DocumentManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
         }
     }
 }

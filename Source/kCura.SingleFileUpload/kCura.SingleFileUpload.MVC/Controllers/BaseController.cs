@@ -166,6 +166,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             };
             Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
             var errorMessage = e.Message;
+            Repository.Instance.GetLogFactory().GetLogger().ForContext<Core.Managers.Implementation.BaseManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
             return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
         }
     }
