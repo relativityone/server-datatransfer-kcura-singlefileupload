@@ -209,11 +209,12 @@
                 //    checkForImages();
                 //}
             else {
+                var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
                 if (removeDigest)
-                    vm.status = 2;
+                    vm.status = status;
                 else
                     $scope.$apply(function () {
-                        vm.status = 2;
+                        vm.status = status;
                     });
                 var message = /*result.Message.length > 32 ? "Unable to upload file." :*/ result.Message;
                 console.error("SFU: " + result.Message);

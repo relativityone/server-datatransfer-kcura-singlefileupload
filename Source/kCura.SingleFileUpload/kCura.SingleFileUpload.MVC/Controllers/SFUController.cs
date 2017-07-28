@@ -40,7 +40,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string resultStr = string.Empty;
                 if (img)
                 {
-                    var hasPermission = true; // await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload);
+                    var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload);
                     if (!hasPermission)
                     {
                         response.Success = false;
@@ -66,7 +66,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     if (suported)
                     {
                         var isDataGrid = await docManager.IsDataGridEnabled(WorkspaceID);
-                        var docIDByName = docManager.GetDocByName(fileName);
+                        var docIDByName = docManager.GetDocByName(Path.GetFileNameWithoutExtension(fileName));
                         if (!fdv)
                         {
                             did = docIDByName;
@@ -167,7 +167,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         [HttpPost]
         public int checkUploadStatus(string documentName)
         {
-            int documentID = docManager.GetDocByName(Path.GetFileNameWithoutExtension(documentName));
+            int documentID = docManager.GetDocByName(documentName);
             if (documentID != -1)
                 docManager.UpdateDocumentLastModificationFields(documentID, RelativityUserInfo.WorkspaceUserArtifactID, true);
             return documentID;

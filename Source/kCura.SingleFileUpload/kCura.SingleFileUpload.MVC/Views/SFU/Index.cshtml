@@ -29,7 +29,7 @@
         <div class="status_img">
             <img ng-if="status == 0" src="~/Content/Images/Upload.png" />
             <img ng-if="status == 1" src="~/Content/Images/Uploading.gif" />
-            <img ng-if="status == 2" src="~/Content/Images/Fail.gif" />
+            <img ng-if="status == 2 || status == 6" src="~/Content/Images/Fail.gif" />
             <img ng-if="status == 3" src="~/Content/Images/Success.gif" />
             <img ng-if="status == 4" src="~/Content/Images/Upload_Hover.png" />
             <img ng-if="status == 5" src="~/Content/Images/Alert.png" />
@@ -41,7 +41,7 @@
         </span>
         <br />
         <div class="button_actions"
-             ng-if="status == 5 || status == 2">
+             ng-if="status == 5 || status == 2 || status == 6">
             <div class="buttonsZone">
                 <button ng-show="status == 5" class="btnPrimary" ng-click="forceUpload()">Replace Document</button>
                 <button ng-show="status == 2" class="btnPrimary" ng-click="simulateFileClick(true)">{{changeImage ? 'Upload New Image' : 'Upload New Document'}} </button>

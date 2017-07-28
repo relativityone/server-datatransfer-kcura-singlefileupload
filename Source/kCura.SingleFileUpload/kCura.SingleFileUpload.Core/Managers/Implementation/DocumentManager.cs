@@ -432,7 +432,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public int GetDocByName(string docName)
         {
             DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>();
-            qDocs.Condition = new Client.TextCondition(DTOs.DocumentFieldNames.TextIdentifier, Relativity.Client.TextConditionEnum.EqualTo, Path.GetFileNameWithoutExtension(docName));
+            qDocs.Condition = new Client.TextCondition(DTOs.DocumentFieldNames.TextIdentifier, Relativity.Client.TextConditionEnum.EqualTo, docName);
             qDocs.Fields = DTOs.FieldValue.NoFields;
             return _Repository.RSAPIClient.Repositories.Document.Query(qDocs, 1).Results.FirstOrDefault()?.Artifact?.ArtifactID ?? -1;
         }
@@ -711,7 +711,21 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception)
                 {
-                    throw new Exception($"Something happened getting the access token. {result}");
+                    try
+                    {
+                        instanceUrl = instanceUrl.Replace("http://", "https://");
+                        result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
+                        var jObject = JObject.Parse(result);
+                        string accesstoken = jObject["access_token"].ToString();
+                        if (string.IsNullOrEmpty(accesstoken))
+                            throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+                        token = accesstoken;
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception($"Something happened getting the access token. {result}");
+                    }
+                   
                 }
             }
             return token;

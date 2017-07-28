@@ -21,6 +21,6 @@ namespace kCura.SingleFileUpload.Core.Helpers
         public const string BUCKET_FileType = "Required.SingleFileUpload.Main.Upload.FileType";
         /*Permission Constants*/
         public const string ProcessingErrorUploadDownload = "Download and Upload files with processing errors";
-        public const string ReplaceImageUploadDownload = "Replace Image";
+        public const string ReplaceImageUploadDownload = "Upload Image";
     }
 }
