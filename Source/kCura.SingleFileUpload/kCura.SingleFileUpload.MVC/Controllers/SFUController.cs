@@ -75,8 +75,18 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 var transientMetadata = getTransient(file, fileName);
                                 if (did == -1)
                                 {
-                                    resultStr = docManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-                                    auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    var resultUpload = await docManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    if (resultUpload.Success)
+                                    {
+                                        resultStr = resultUpload.Result;
+                                        auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    }
+                                    else
+                                    {
+                                        response.Success = false;
+                                        response.Message = resultUpload.Result;
+                                        return resultStr;
+                                    }
 
                                 }
                                 else

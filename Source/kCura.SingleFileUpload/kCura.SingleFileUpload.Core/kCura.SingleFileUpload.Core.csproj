@@ -155,6 +155,7 @@
     <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
     <Compile Include="Entities\ProcessingDocument.cs" />
+    <Compile Include="Entities\Response.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Entities\ExportedMetadata.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />

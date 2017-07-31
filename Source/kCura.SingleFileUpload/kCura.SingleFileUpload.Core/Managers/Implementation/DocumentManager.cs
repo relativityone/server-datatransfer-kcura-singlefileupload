@@ -291,12 +291,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
-        public string SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
+        public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
-            ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
-            CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
-            File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
-            return Path.GetFileNameWithoutExtension(documentInfo.FileName);
+            string error = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
+            if (string.IsNullOrEmpty(error))
+            {
+                CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
+                File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
+                return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
+            }
+            return new Response() { Result = error, Success = false };
         }
         public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0)
         {
@@ -313,7 +317,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
 
             updateNative(documentInfo, docID);
-            ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
+            await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
             File.Delete(instanceFile(documentInfo.FileName, documentInfo.Native, false));
             UpdateDocumentLastModificationFields(docID, userID, false);
@@ -465,8 +469,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             return isDataGrid;
 
         }
-        public async void ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, string bucket = null)
+        private async Task<string> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, string bucket = null)
         {
+            string returnValues = string.Empty;
             try
             {
                 string value = getBearerToken(webApiUrl);
@@ -515,11 +520,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             catch (Exception ex)
             {
                 LogError(ex, $"{ex.Message} URL: {webApiUrl}");
+                return ex.Message;
             }
+            return returnValues;
         }
         private void ImportJob_OnError(System.Collections.IDictionary row)
         {
             LogError(new Exception(row["Message"].ToString()), row["Message"].ToString());
+            throw new Exception(row["Message"].ToString().Split('.')[1].Trim());
         }
         public void CreateMetrics(ExportedMetadata documentInfo, string bucket)
         {
