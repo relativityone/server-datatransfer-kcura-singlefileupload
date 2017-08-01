@@ -53,7 +53,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string fileName = file.FileName;
                 if (fileName.Contains("\\"))
                     fileName = Path.GetFileName(fileName);
-                var fileExt = Path.GetExtension(fileName);
+                var fileExt = Path.GetExtension(fileName).ToLower();
                 var res = await docManager.ValidateFileTypes(fileExt);
                 var suported = docManager.IsFileTypeSupported(fileExt);
                 if (!res)
