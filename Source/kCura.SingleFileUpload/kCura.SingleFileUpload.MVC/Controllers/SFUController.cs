@@ -115,15 +115,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     FileInformation fileInfo = docManager.getFileByArtifactId(did);
                                     docManager.DeleteRedactions(did);
                                     string details = string.Empty;
-                                
-                                    if (!newImage)
-                                    {
-                                        docManager.DeleteExistingImages(did);
-                                        details = auditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
-                                        auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                    }
                                     var transientMetadata = getTransient(file, fileName);
-
                                     FileInformation imageInfo = fileInfo;
                                     imageInfo.FileName = $"{Guid.NewGuid().ToString().ToLower()}{Path.GetExtension(transientMetadata.FileName)}";
                                     imageInfo.FileSize = transientMetadata.Native.Length;
@@ -131,6 +123,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     imageInfo.Order = 0;
                                     imageInfo.FileLocation = $@"{Path.GetDirectoryName(imageInfo.FileLocation)}\{imageInfo.FileName}";
                                     docManager.WriteFile(transientMetadata.Native, fileInfo);
+                                    if (!newImage)
+                                    {
+                                        docManager.DeleteExistingImages(did);
+                                        details = auditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
+                                        auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    }
                                     docManager.InsertImage(imageInfo);
                                     details = auditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Replaced");
                                     auditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
