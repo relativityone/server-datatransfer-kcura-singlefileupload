@@ -2,7 +2,9 @@
 //V 0.1
 //======================================================
 var iframe = window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents();
-$('.reviewActionBarTop > .reviewActionBarGroup:first > .reviewActionBarActionButton:first').before('<a class="reviewActionBarActionButton" style="cursor: pointer;" onclick="openSFUModal()">Replace Document</a>');
+
+if({{CanEdit}})
+    $('.reviewActionBarTop > .reviewActionBarGroup:first > .reviewActionBarActionButton:first').before('<a class="reviewActionBarActionButton" style="cursor: pointer;" onclick="openSFUModal()">Replace Document</a>');
 
 function openSFUModal() {
     var $myWin = window.parent.parent.window;

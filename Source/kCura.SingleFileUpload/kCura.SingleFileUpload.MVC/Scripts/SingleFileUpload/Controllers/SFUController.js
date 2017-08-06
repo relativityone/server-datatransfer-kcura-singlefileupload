@@ -174,6 +174,7 @@
                         documentViewer.SetViewer("Long Text");
                         var fnc = function () { window.parent.parent.location.replace(window.parent.parent.location) };
                     }
+
                     setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
                 }
             }
@@ -261,8 +262,12 @@
 
         function notifyUploadStarted() {
             if (vm.changeImage) {
-                dialog_overlay.off("click")
+                dialog_overlay.off("click");
+                var documentViewer = $(window.parent.parent.window)[0].documentViewer;
+                documentViewer.SetViewer("Image");
                 dialog.dialog("option", "closeOnEscape", false);
+              //  var frame = $("#_documentViewer__documentIdentifierFrame", window.parent.parent.document);
+              //  $("#_fileTypeSelector_FileTypeList_2", frame.contents()).prop("checked", true);
 
             }
             setTimeout(function () {

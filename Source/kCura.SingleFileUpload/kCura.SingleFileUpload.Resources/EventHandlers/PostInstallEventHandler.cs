@@ -17,7 +17,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             get
             {
                 if (_repository == null)
+                {
                     _repository = new DocumentManager();
+                }
                 return _repository;
             }
         }
@@ -28,7 +30,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             get
             {
                 if (_telemetryRepository == null)
+                {
                     _telemetryRepository = new TelemetryManager();
+                }
                 return _telemetryRepository;
             }
         }

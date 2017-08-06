@@ -5,6 +5,7 @@ using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -18,7 +19,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             get
             {
                 if (_repository == null)
+                {
                     _repository = new DocumentManager();
+                }
                 return _repository;
             }
         }
@@ -31,18 +34,19 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             RepositoryHelper.ConfigureRepository(this.Helper);
             using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
             {
-                var hasImages = Repository.ValidateDocImages(this.ActiveArtifact.ArtifactID);
+            //    var hasImages = Repository.ValidateDocImages(this.ActiveArtifact.ArtifactID);
 
                 if (this.PageMode == kCura.EventHandler.Helper.PageMode.View)
                 {
                     PermissionHelper permissionHelper = new PermissionHelper(this.Helper);
                     var taskPermissions = Task.Run(async () => await permissionHelper.CurrentUserHasPermissionToObjectType(this.Helper.GetActiveCaseID(), Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload));
-                    
+                    var permissions = permissionHelper.GetDocumentPermissions(this.Helper.GetActiveCaseID(), this.Helper.GetAuthenticationManager().UserInfo.WorkspaceUserArtifactID);
+
                     ScriptBlock sb = new ScriptBlock();
                     sb.Key = "sfuSource";
-                    sb.Script = string.Concat("<script type=\"text/javascript\">", Javascript.SingleFileUploadScript.Replace("{{APPID}}", this.Application.ArtifactID.ToString()).
-                                                                                                                     Replace("{{HasImages}}", hasImages.ToString().ToLower()).
-                                                                                                                     Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()), "</script>");
+                    sb.Script = string.Concat("<script type=\"text/javascript\">", Javascript.SingleFileUploadScript.Replace("{{APPID}}", this.Application.ArtifactID.ToString())
+                                                                                                                    .Replace("{{CanEdit}}", permissions.Any(x => x.ArtifactID == 45).ToString().ToLower())
+                                                                                                                    .Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()), "</script>");
                     this.RegisterStartupScriptBlock(sb);
                 }
             }

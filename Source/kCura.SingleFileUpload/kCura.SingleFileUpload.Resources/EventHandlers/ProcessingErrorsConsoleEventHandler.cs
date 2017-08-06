@@ -15,7 +15,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             get
             {
                 if (_repository == null)
+                {
                     _repository = new ProcessingManager();
+                }
                 return _repository;
             }
         }

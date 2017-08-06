@@ -193,7 +193,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             catch (Exception ex)
             {
                 LogError(ex, ex.Message);
-                throw ex;
+                throw;
             }
         }
         public async Task CreateMetricAsync(string bucket, string description)

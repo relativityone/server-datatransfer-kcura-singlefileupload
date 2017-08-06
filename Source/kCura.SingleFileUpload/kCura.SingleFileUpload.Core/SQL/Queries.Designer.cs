@@ -64,6 +64,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   Looks up a localized string similar to 
         ///DELETE FROM [EDDSDBO].[File] 
         ///WHERE [DocumentArtifactID] = @DocumentID
+        ///AND [Type] = 1
         ///
         ///.
         /// </summary>
@@ -145,6 +146,29 @@ namespace kCura.SingleFileUpload.Core.SQL {
         internal static string GetDocumentIdentifierField {
             get {
                 return ResourceManager.GetString("GetDocumentIdentifierField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DECLARE @WsID INT 
+        ///
+        ///SET @WsID = (SELECT TOP 1 ArtifactID
+        /// 					  FROM [EDDSDBO].[Artifact] WITH(NOLOCK)
+        ///					  WHERE ArtifactTypeID = 8)
+        ///
+        ///
+        ///
+        ///  SELECT ArtifactID, Name
+        ///  FROM (
+        ///	  SELECT DISTINCT(AC.[PermissionID]) AS ArtifactID, P.Name, [EDDSDBO].HasPermission(@UserID, @WsID, AC.[PermissionID]) AS HasPermission
+        ///	  FROM [EDDSDBO].[AccessControlListPermission] AS AC WITH(NOLOCK)
+        ///	  INNER JOIN [EDDSDBO].[Permission] AS P WITH(NOLOCK)
+        ///	  ON P.[PermissionID] = AC.[PermissionID]
+        ///	  AND AC.[Permission [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetDocumentPermissions {
+            get {
+                return ResourceManager.GetString("GetDocumentPermissions", resourceCulture);
             }
         }
         
@@ -299,11 +323,18 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///DELETE FROM [EDDSDBO].[File] 
-        ///WHERE [DocumentArtifactID] = @DocumentID
-        ///
-        ///.
+        ///   Looks up a localized string similar to INSERT INTO [EDDSDBO].[File] ([Guid]
+        ///      ,[DocumentArtifactID]
+        ///      ,[Filename]
+        ///      ,[Order]
+        ///      ,[Type]
+        ///      ,[Rotation]
+        ///      ,[Identifier]
+        ///      ,[Location]
+        ///      ,[InRepository]
+        ///      ,[Size]
+        ///      ,[Details])
+        ///VALUES (NEWID(), @DocumentID, @FileName, @Order, @Type, -1, @DocIdentifier, @Location, 1, @Size, &apos;&apos;).
         /// </summary>
         internal static string InsertImageInFileTable {
             get {
@@ -377,9 +408,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///UPDATE
         ///	[EDDSDBO].[Document]
         ///SET
-        ///	[RelativityImageCount] = (SELECT TOP 1 [RelativityImageCount]
-        ///							  FROM [EDDSDBO].[Document] WITH (NOLOCK)
-        ///							  WHERE ArtifactID = @tdocartifactID)
+        ///	[RelativityImageCount] = 1
         ///WHERE
         ///	ArtifactID = @DocumentID
         ///
@@ -388,7 +417,11 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///								   FROM EDDSDBO.Field AS F WITH (NOLOCK)
         ///								   INNER JOIN EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
         ///								   ON AG.ArtifactID = F.ArtifactID
-        ///								   WHERE AG.ArtifactGuid = @HasImagesFieldGuid)        /// [rest of string was truncated]&quot;;.
+        ///								   WHERE AG.ArtifactGuid = @HasImagesFieldGuid)
+        ///
+        ///DECLARE @HasImagesCodeYes INT = ( SELECT TOP 1 AG.ArtifactID
+        ///								       FROM EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
+        ///				 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string UpdateHasImages {
             get {

@@ -9,6 +9,8 @@ using Relativity.Services;
 using System.Data.SqlClient;
 using kCura.SingleFileUpload.Core.SQL;
 using System.Threading;
+using NSerio.Relativity;
+using NSerio.Relativity.Entities;
 
 namespace kCura.SingleFileUpload.Core.Helpers
 {
@@ -147,5 +149,13 @@ namespace kCura.SingleFileUpload.Core.Helpers
             return fieldData;
         }
 
+        public NSerio.Relativity.Entities.Artifact[] GetDocumentPermissions(int workspaceId, int userID)
+        {
+            return _helper.GetDBContext(workspaceId).ExecuteSqlStatementAsDataTable(Queries.GetDocumentPermissions, 300,
+                 new SqlParameter[]
+                {
+                    new SqlParameter("@UserID", userID)
+                }).ToInstanceArray<NSerio.Relativity.Entities.Artifact>();
+        }
     }
 }

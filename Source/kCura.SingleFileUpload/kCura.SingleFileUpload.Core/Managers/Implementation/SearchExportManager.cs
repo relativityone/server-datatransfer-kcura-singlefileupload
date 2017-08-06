@@ -64,15 +64,21 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                             break;
                         default:
                             if (reader.HasAttributes)
+                            {
                                 fieldName = reader.GetAttribute("type");
+                            }
                             break;
                     }
                     if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
+                    {
                         fieldName = string.Empty;
+                    }
                     break;
                 case XmlNodeType.Text:
                     if (string.IsNullOrEmpty(fieldName))
+                    {
                         etBuilder.AppendLine(reader.Value);
+                    }
                     else
                     {
                         object value = null;
@@ -88,10 +94,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                                 {
                                     string preValue = reader.Value.Substring(2, reader.Value.Length - 9);
                                     if (!DateTime.TryParseExact(preValue, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endValue))
+                                    {
                                         DateTime.TryParse(reader.Value, out endValue);
+                                    }
                                 }
                                 if (endValue > DateTime.MinValue)
+                                {
                                     value = endValue;
+                                }
                                 break;
                             default:
                                 value = reader.Value;
@@ -108,9 +118,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         private void addToDictionary(IDictionary<string, object> dictionary, string key, object value)
         {
             if (dictionary.ContainsKey(key))
+            {
                 dictionary[key] = value;
+            }
             else
+            {
                 dictionary.Add(key, value);
+            }
         }
     }
 }

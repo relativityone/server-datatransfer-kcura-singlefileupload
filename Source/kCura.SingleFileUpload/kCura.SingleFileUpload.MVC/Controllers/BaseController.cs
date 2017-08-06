@@ -26,13 +26,28 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (_workspaceID == 0)
                 {
                     if (Request.Params.AllKeys.Any(p => string.Compare(p, APP_ID, true) == 0))
+                    {
                         _workspaceID = int.Parse(Request.Params[APP_ID]);
-                    else if (Request.Headers.AllKeys.Any(p => string.Compare(p, APP_ID, true) == 0))
-                        _workspaceID = int.Parse(Request.Headers[APP_ID]);
-                    else if (RefererAppId.HasValue)
-                        _workspaceID = RefererAppId.Value;
+                    }
                     else
-                        throw new ApplicationException("AppID is required.");
+                    {
+                        if (Request.Headers.AllKeys.Any(p => string.Compare(p, APP_ID, true) == 0))
+                        {
+                            _workspaceID = int.Parse(Request.Headers[APP_ID]);
+                        }
+                        else
+                        {
+                            if (RefererAppId.HasValue)
+                            {
+                                _workspaceID = RefererAppId.Value;
+                            }
+                            else
+                            {
+                                throw new ApplicationException("AppID is required.");
+                            }
+
+                        }
+                    }
                 }
                 return _workspaceID;
             }
@@ -65,7 +80,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             get
             {
                 if (_relativityUserInfo == null)
+                {
                     _relativityUserInfo = ConnectionHelper.Helper().GetAuthenticationManager().UserInfo;
+                }
                 return _relativityUserInfo;
             }
         }
@@ -164,9 +181,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 Workspace = new Relativity.Client.DTOs.Workspace(-1),
                 URL = Request.RawUrl ?? string.Empty
             };
-            Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
             var errorMessage = e.Message;
+            int wsID = Repository.Instance.WorkspaceID;
+            Repository.Instance.WorkspaceID = -1;
+            Repository.Instance.RSAPISystem.Repositories.Error.Create(error);
             Repository.Instance.GetLogFactory().GetLogger().ForContext<Core.Managers.Implementation.BaseManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
+            Repository.Instance.WorkspaceID = wsID;
             return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
         }
     }

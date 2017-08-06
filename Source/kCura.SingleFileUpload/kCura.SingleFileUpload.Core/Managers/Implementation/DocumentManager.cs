@@ -308,12 +308,18 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 DTOs.Document replacedDocument = new DTOs.Document(docID);
                 if (!avoidControlNumber)
+                {
                     replacedDocument.TextIdentifier = Path.GetFileNameWithoutExtension(documentInfo.FileName);
+                }
                 if (!fromDocumentViewer)
+                {
                     replacedDocument.ParentArtifact = new DTOs.Artifact(defineFolder(folderID));
+                }
                 _Repository.RSAPIClient.Repositories.Document.UpdateSingle(replacedDocument);
                 if (!fromDocumentViewer)
+                {
                     await ChangeFolder(folderID, docID);
+                }
             }
 
             updateNative(documentInfo, docID);
@@ -573,7 +579,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             int id = 0;
             if (fNames.Length > 0)
+            {
                 id = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(string.Format(Queries.GetFieldIDByNameAndType, string.Join(",", fNames.Select(p => $"'{p}'"))), SqlHelper.CreateSqlParameter("Type", (int)type));
+            }
             return id;
         }
         private void addFieldToNewDocument(ExportedMetadata documentInfo, DTOs.Document newDocument, string fieldName, Client.FieldType type, params string[] possibleMatch)
@@ -582,7 +590,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 int fid = getFieldIDByNameAndType(type, possibleMatch);
                 if (fid > 0)
+                {
                     newDocument.Fields.Add(new DTOs.FieldValue(fid, documentInfo.Fields[fieldName], false));
+                }
             }
         }
         private int getDocumentFieldByCategory(Client.FieldCategory category)
@@ -714,7 +724,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     var jObject = JObject.Parse(result);
                     string accesstoken = jObject["access_token"].ToString();
                     if (string.IsNullOrEmpty(accesstoken))
+                    {
                         throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+                    }
                     token = accesstoken;
                 }
                 catch (Exception)
@@ -726,7 +738,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         var jObject = JObject.Parse(result);
                         string accesstoken = jObject["access_token"].ToString();
                         if (string.IsNullOrEmpty(accesstoken))
+                        {
                             throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+                        }
                         token = accesstoken;
                     }
                     catch (Exception)

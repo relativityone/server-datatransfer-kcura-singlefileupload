@@ -23,8 +23,9 @@ namespace kCura.SingleFileUpload.Core.Helpers
             sLog = "Application";
 
             if (!EventLog.SourceExists(sSource))
+            {
                 EventLog.CreateEventSource(sSource, sLog);
-
+            }
             EventLog.WriteEntry(sSource, message, EventLogEntryType.Error);
         }
 
@@ -39,7 +40,9 @@ namespace kCura.SingleFileUpload.Core.Helpers
             sb.AppendLine(ex.Message);
             sb.AppendLine(ex.StackTrace);
             if (ex.InnerException != null)
+            {
                 sb.AppendLine(GetRecursiveExceptionMsg(ex.InnerException));
+            }
             return sb.ToString();
         }
     }
