@@ -10,7 +10,6 @@ using System.Data.SqlClient;
 using kCura.SingleFileUpload.Core.SQL;
 using System.Threading;
 using NSerio.Relativity;
-using NSerio.Relativity.Entities;
 
 namespace kCura.SingleFileUpload.Core.Helpers
 {

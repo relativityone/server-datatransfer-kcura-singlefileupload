@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using DTOs = kCura.Relativity.Client.DTOs;
 using Client = kCura.Relativity.Client;
 using kCura.SingleFileUpload.Core.SQL;
 using System.Data;
@@ -14,17 +13,13 @@ using kCura.Relativity.ImportAPI;
 using kCura.Relativity.DataReaderClient;
 using Relativity.API;
 using NSerio.Relativity;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using kCura.SingleFileUpload.Core.Helpers;
+using DTOs = kCura.Relativity.Client.DTOs;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
     public class DocumentManager : BaseManager, IDocumentManager
     {
         private FileType[] _viewerSupportedFileType;
-
         public FileType[] ViewerSupportedFileTypes
         {
             get
@@ -289,7 +284,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 return _viewerSupportedFileType;
             }
         }
-
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
         public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
@@ -357,7 +351,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return result;
         }
-
         public bool ValidateHasRedactions(int docArtifactId)
         {
             return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.DocumentHasRedactions,
@@ -365,7 +358,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
                  }) > 0;
         }
-
         public void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateDocumentLastModificationFields,
@@ -375,7 +367,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@New", isNew),
                  });
         }
-
         public void DeleteRedactions(int docArtifactId)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentRedactions,
@@ -383,7 +374,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
                  });
         }
-
         public void DeleteExistingImages(int dArtifactId)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentImages,
@@ -391,7 +381,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@DocumentID", dArtifactId),
                 });
         }
-
         public void InsertImage(FileInformation image)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.InsertImageInFileTable,
@@ -405,7 +394,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@Type", image.FileType)
                 });
         }
-
         public void UpdateHasImages(int dArtifactId)
         {
             _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateHasImages,
@@ -415,7 +403,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@HasImagesCodeYesGuid", Helpers.Constants.DOCUMENT_HAS_IMAGES_YES_CHOICE)
                 });
         }
-
         public FileInformation getFileByArtifactId(int docArtifactId)
         {
             FileInformation fInformation = null;
@@ -438,7 +425,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return fInformation;
         }
-
         public int GetDocByName(string docName)
         {
             DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>();
@@ -560,7 +546,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return DocumentsDataTable;
         }
-
         public void WriteFile(byte[] file, FileInformation document)
         {
             File.WriteAllBytes(document.FileLocation, file);
@@ -712,44 +697,44 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         private string getBearerToken(string instanceUrl)
         {
-            string token = string.Empty;
-            using (var webClient = new WebClient())
-            {
-                Tuple<string, string> clientCredentials = GetClientCredentials();
-                var header64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientCredentials.Item1}:{clientCredentials.Item2}"));
-                webClient.Headers["Authorization"] = $"Basic {header64}";
-                string result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
-                try
-                {
-                    var jObject = JObject.Parse(result);
-                    string accesstoken = jObject["access_token"].ToString();
-                    if (string.IsNullOrEmpty(accesstoken))
-                    {
-                        throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
-                    }
-                    token = accesstoken;
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        instanceUrl = instanceUrl.Replace("http://", "https://");
-                        result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
-                        var jObject = JObject.Parse(result);
-                        string accesstoken = jObject["access_token"].ToString();
-                        if (string.IsNullOrEmpty(accesstoken))
-                        {
-                            throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
-                        }
-                        token = accesstoken;
-                    }
-                    catch (Exception)
-                    {
-                        throw new Exception($"Something happened getting the access token. {result}");
-                    }
-                   
-                }
-            }
+            string token = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
+            //using (var webClient = new WebClient())
+            //{
+            //    Tuple<string, string> clientCredentials = GetClientCredentials();
+            //    var header64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientCredentials.Item1}:{clientCredentials.Item2}"));
+            //    webClient.Headers["Authorization"] = $"Basic {header64}";
+            //    string result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
+            //    try
+            //    {
+            //        var jObject = JObject.Parse(result);
+            //        string accesstoken = jObject["access_token"].ToString();
+            //        if (string.IsNullOrEmpty(accesstoken))
+            //        {
+            //            throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+            //        }
+            //        token = accesstoken;
+            //    }
+            //    catch (Exception)
+            //    {
+            //        try
+            //        {
+            //            instanceUrl = instanceUrl.Replace("http://", "https://");
+            //            result = webClient.UploadString($"{instanceUrl}/Identity/connect/token", "POST", "grant_type=client_credentials&scope=UserInfoAccess");
+            //            var jObject = JObject.Parse(result);
+            //            string accesstoken = jObject["access_token"].ToString();
+            //            if (string.IsNullOrEmpty(accesstoken))
+            //            {
+            //                throw new UnauthorizedAccessException($"Something happened getting the access token.{ jObject["error"].ToString() }");
+            //            }
+            //            token = accesstoken;
+            //        }
+            //        catch (Exception)
+            //        {
+            //            throw new Exception($"Something happened getting the access token. {result}");
+            //        }
+
+            //    }
+            //}
             return token;
         }
         private KeyValuePair<int, string> GetFieldinfo(string artifactGuid)
@@ -790,21 +775,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             LogError(jobReport.FatalException, jobReport.FatalException.Message);
             throw jobReport.FatalException;
         }
-
-        private void LogError(Exception e, string msg)
-        {
-            var error = new DTOs.Error
-            {
-                FullError = e.ToString(),
-                Message = EventLogHelper.GetRecursiveExceptionMsg(e),
-                Server = Environment.MachineName,
-                Source = "WEB - Single File Upload",
-                SendNotification = false,
-                Workspace = new DTOs.Workspace(-1),
-                URL = string.Empty
-            };
-            Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
-            Repository.Instance.GetLogFactory().GetLogger().ForContext<DocumentManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
-        }
+       
     }
 }

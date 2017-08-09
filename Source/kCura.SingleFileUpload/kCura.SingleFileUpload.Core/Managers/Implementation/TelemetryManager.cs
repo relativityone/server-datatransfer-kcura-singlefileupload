@@ -12,7 +12,7 @@ using kCura.SingleFileUpload.Core.Helpers;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
-    public class TelemetryManager:BaseManager , ITelemetryManager
+    public class TelemetryManager: BaseManager , ITelemetryManager
     {
         public TelemetryManager()
         {
@@ -220,22 +220,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 LogError(ex, ex.Message);
             }
         }
-        private void LogError(Exception e, string msg)
-        {
-            var error = new Relativity.Client.DTOs.Error
-            {
-                FullError = e.ToString(),
-                Message = EventLogHelper.GetRecursiveExceptionMsg(e),
-                Server = Environment.MachineName,
-                Source = "WEB - Single File Upload",
-                SendNotification = false,
-                Workspace = new Relativity.Client.DTOs.Workspace(-1),
-                URL = string.Empty
-            };
-            _Repository.RSAPISystem.Repositories.Error.CreateSingle(error);
-            _Repository.GetLogFactory().GetLogger().ForContext<TelemetryManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
-        }
-
+      
       
     }
 }

@@ -45,7 +45,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                     ScriptBlock sb = new ScriptBlock();
                     sb.Key = "sfuSource";
                     sb.Script = string.Concat("<script type=\"text/javascript\">", Javascript.SingleFileUploadScript.Replace("{{APPID}}", this.Application.ArtifactID.ToString())
-                                                                                                                    .Replace("{{CanEdit}}", permissions.Any(x => x.ArtifactID == 45).ToString().ToLower())
+                                                                                                                    .Replace("{{CanEdit}}", permissions.Any(x => x.ArtifactID == 43 && x.ArtifactID == 46).ToString().ToLower())
                                                                                                                     .Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()), "</script>");
                     this.RegisterStartupScriptBlock(sb);
                 }

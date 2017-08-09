@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersionAttribute("1.2.0.68")] 
 [assembly: AssemblyInformationalVersionAttribute("1.2.0.68")] 
 [assembly: AssemblyCopyrightAttribute("Copyright ©")] 
-[assembly: AssemblyCompanyAttribute("Relativity LLC")] 
+[assembly: AssemblyCompanyAttribute("Relativity Tech LLC")] 
 [assembly: AssemblyTitleAttribute("Relativity.SingleFileUpload")] 
 [assembly: AssemblyDescriptionAttribute("Relativity.SingleFileUpload")] 
 [assembly: AssemblyProductAttribute("Relativity.SingleFileUpload")] 

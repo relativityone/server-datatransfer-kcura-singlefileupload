@@ -171,7 +171,7 @@
                         var $parentWinViewerSecurity = window.parent.window;
                         $parentWinViewerSecurity = $parentWinViewerSecurity.$($parentWinViewerSecurity);
                         var documentViewer = $parentWinViewerSecurity[0].documentViewer;
-                        documentViewer.SetViewer("Long Text");
+                        documentViewer.SetViewer("Image");
                         var fnc = function () { window.parent.parent.location.replace(window.parent.parent.location) };
                     }
 
