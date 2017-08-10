@@ -48,7 +48,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
                     catch (Exception ex)
                     {
-                        LogError(ex, ex.Message);
+                        LogError(ex);
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
                     catch (Exception ex)
                     {
-                        LogError(ex, ex.Message);
+                        LogError(ex);
                     }
                 }
             }
@@ -85,7 +85,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex, ex.Message);
+                    LogError(ex);
                     return null;
                 }
             }
@@ -100,7 +100,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex, ex.Message);
+                    LogError(ex);
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex, ex.Message);
+                    LogError(ex);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex, ex.Message);
+                    LogError(ex);
                 }
             }
         }
@@ -144,7 +144,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex, ex.Message);
+                    LogError(ex);
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch (Exception ex)
             {
-                LogError(ex, ex.Message);
+                LogError(ex);
                 throw;
             }
         }
@@ -217,7 +217,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch (Exception ex)
             {
-                LogError(ex, ex.Message);
+                LogError(ex);
             }
         }
       

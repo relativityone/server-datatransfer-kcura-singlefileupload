@@ -511,14 +511,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch (Exception ex)
             {
-                LogError(ex, $"{ex.Message} URL: {webApiUrl}");
+                LogError(ex);
                 return ex.Message;
             }
             return returnValues;
         }
         private void ImportJob_OnError(System.Collections.IDictionary row)
         {
-            LogError(new Exception(row["Message"].ToString()), row["Message"].ToString());
+            LogError(new Exception(row["Message"].ToString()));
             throw new Exception(row["Message"].ToString().Split('.')[1].Trim());
         }
         public void CreateMetrics(ExportedMetadata documentInfo, string bucket)
@@ -772,7 +772,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         private void ImportJob_OnFatalException(JobReport jobReport)
         {
-            LogError(jobReport.FatalException, jobReport.FatalException.Message);
+            LogError(jobReport.FatalException);
             throw jobReport.FatalException;
         }
        

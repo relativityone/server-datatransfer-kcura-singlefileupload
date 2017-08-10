@@ -48,7 +48,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             });
         }
 
-        public void LogError(Exception e, string msg)
+        public void LogError(Exception e)
         {
             var error = new DTOs.Error
             {

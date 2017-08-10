@@ -7,6 +7,8 @@ using Relativity.API;
 using kCura.SingleFileUpload.MVC.Models;
 using NSerio.Relativity;
 using System.Threading.Tasks;
+using kCura.SingleFileUpload.Core.Managers;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
@@ -53,6 +55,17 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             }
         }
         private int _workspaceID;
+
+        protected IDocumentManager _RepositoryDocumentManager
+        {
+            get
+            {
+                if (__repositoryDocumentManager == null)
+                    __repositoryDocumentManager = new DocumentManager();
+                return __repositoryDocumentManager;
+            }
+        }
+        private IDocumentManager __repositoryDocumentManager;
 
         private int? RefererAppId
         {
@@ -171,22 +184,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         }
         private string logException(Exception e)
         {
-            var error = new Relativity.Client.DTOs.Error
-            {
-                FullError = e.ToString(),
-                Message = $"{e.Message} - {e.StackTrace}",
-                Server = Server.MachineName,
-                Source = "WEB - Single File Upload",
-                SendNotification = false,
-                Workspace = new Relativity.Client.DTOs.Workspace(-1),
-                URL = Request.RawUrl ?? string.Empty
-            };
             var errorMessage = e.Message;
-            int wsID = Repository.Instance.WorkspaceID;
-            Repository.Instance.WorkspaceID = -1;
-            Repository.Instance.RSAPISystem.Repositories.Error.Create(error);
-            Repository.Instance.GetLogFactory().GetLogger().ForContext<Core.Managers.Implementation.BaseManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
-            Repository.Instance.WorkspaceID = wsID;
+            _RepositoryDocumentManager.LogError(e);
             return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
         }
     }
