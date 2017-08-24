@@ -34,12 +34,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             RepositoryHelper.ConfigureRepository(this.Helper);
             using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
             {
-            //    var hasImages = Repository.ValidateDocImages(this.ActiveArtifact.ArtifactID);
-
                 if (this.PageMode == kCura.EventHandler.Helper.PageMode.View)
                 {
                     PermissionHelper permissionHelper = new PermissionHelper(this.Helper);
-                    var taskPermissions = Task.Run(async () => await permissionHelper.CurrentUserHasPermissionToObjectType(this.Helper.GetActiveCaseID(), Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload));
                     var permissions = permissionHelper.GetDocumentPermissions(this.Helper.GetActiveCaseID(), this.Helper.GetAuthenticationManager().UserInfo.WorkspaceUserArtifactID);
 
                     ScriptBlock sb = new ScriptBlock();

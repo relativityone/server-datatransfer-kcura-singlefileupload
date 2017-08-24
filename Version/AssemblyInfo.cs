@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 //------------------------------------------------------------------------------ 
 [assembly: ComVisibleAttribute(false)] 
 [assembly: CLSCompliantAttribute(false)] 
-[assembly: AssemblyVersionAttribute("1.2.0.68")] 
-[assembly: AssemblyFileVersionAttribute("1.2.0.68")] 
-[assembly: AssemblyInformationalVersionAttribute("1.2.0.68")] 
+[assembly: AssemblyVersionAttribute("1.2.0.76")] 
+[assembly: AssemblyFileVersionAttribute("1.2.0.76")] 
+[assembly: AssemblyInformationalVersionAttribute("1.2.0.76")] 
 [assembly: AssemblyCopyrightAttribute("© Relativity")] 
 [assembly: AssemblyCompanyAttribute("Relativity ODA LLC")] 
 [assembly: AssemblyTitleAttribute("Relativity.SingleFileUpload")] 
