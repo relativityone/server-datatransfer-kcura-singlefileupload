@@ -541,7 +541,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             DocumentsDataTable.Columns.Add("Extracted Text", typeof(string));
             DocumentsDataTable.Columns.Add("Document Extension", typeof(string));
             DocumentsDataTable.Columns.Add("File Name", typeof(string));
-            DocumentsDataTable.Columns.Add("File Size", typeof(decimal));
+            DocumentsDataTable.Columns.Add("File Size");
             DocumentsDataTable.Columns.Add("Native File", typeof(string));
 
             return DocumentsDataTable;
