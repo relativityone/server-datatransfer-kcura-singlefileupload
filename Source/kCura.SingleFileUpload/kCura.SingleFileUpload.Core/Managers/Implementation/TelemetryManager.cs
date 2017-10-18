@@ -90,64 +90,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
             }
         }
-        public async Task LogPointInTimeLongAsync(string bucket, string WorkFlowId, long value)
-        {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    await metricManger.LogPointInTimeLongAsync(bucket, workSpaceGuid, WorkFlowId, value);
-                }
-                catch (Exception ex)
-                {
-                    LogError(ex);
-                }
-            }
-        }
-        public async Task LogPointInTimeStringAsync(string bucket, string WorkFlowId, string value)
-        {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    await metricManger.LogPointInTimeStringAsync(bucket, workSpaceGuid, WorkFlowId, value);
-                }
-                catch (Exception ex)
-                {
-                    LogError(ex);
-                }
-            }
-        }
-        public async Task LogPointInTimeStringAsync(string bucket, double value)
-        {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    //await metricManger.LogTimerAsDoubleAsync(bucket, workSpaceGuid, MetricTargets.SUM, value);
-                    await metricManger.LogTimerAsDoubleAsync(bucket, workSpaceGuid, value);
-                }
-                catch (Exception ex)
-                {
-                    LogError(ex);
-                }
-            }
-        }
-        public async Task LogTimerAsLongAsync(string bucket, long value)
-        {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    //await metricManger.LogTimerAsLongAsync(bucket, workSpaceGuid, MetricTargets.SUM, value);
-                    await metricManger.LogTimerAsLongAsync(bucket, workSpaceGuid, value);
-                }
-                catch (Exception ex)
-                {
-                    LogError(ex);
-                }
-            }
-        }
+      
         public async Task CreateMetricsAsync()
         {
             try

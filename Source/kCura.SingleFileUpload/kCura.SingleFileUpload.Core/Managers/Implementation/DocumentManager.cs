@@ -496,13 +496,21 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                 DataTable dtDocument = GetDocumentDataTable(IdentityField.Name);
 
+                var extension = Path.GetExtension(documentInfo.FileName);
+                var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
+                var fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
+
                 // Add file to load
                 dtDocument.Rows.Add(
                     Path.GetFileNameWithoutExtension(documentInfo.FileName),
                     documentInfo.ExtractedText,
-                    Path.GetExtension(documentInfo.FileName),
-                    Path.GetFileNameWithoutExtension(documentInfo.FileName),
-                    decimal.Parse(documentInfo.Native.LongLength.ToString()),
+                    extension,
+                    extension,
+                    extension,
+                    fileName,
+                    fileName,
+                    fileSize,
+                    fileSize,
                     instanceFile(documentInfo.FileName, documentInfo.Native, false));
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();
@@ -540,8 +548,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             DocumentsDataTable.Columns.Add(identifierName, typeof(string));
             DocumentsDataTable.Columns.Add("Extracted Text", typeof(string));
             DocumentsDataTable.Columns.Add("Document Extension", typeof(string));
+            DocumentsDataTable.Columns.Add("File Extension", typeof(string));
+            DocumentsDataTable.Columns.Add("FileExtension", typeof(string));
             DocumentsDataTable.Columns.Add("File Name", typeof(string));
+            DocumentsDataTable.Columns.Add("FileName", typeof(string));
             DocumentsDataTable.Columns.Add("File Size");
+            DocumentsDataTable.Columns.Add("FileSize");
             DocumentsDataTable.Columns.Add("Native File", typeof(string));
 
             return DocumentsDataTable;

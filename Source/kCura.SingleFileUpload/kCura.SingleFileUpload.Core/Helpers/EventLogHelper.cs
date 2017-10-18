@@ -19,7 +19,7 @@ namespace kCura.SingleFileUpload.Core.Helpers
             string sSource;
             string sLog;
 
-            sSource = "Iconic";
+            sSource = "Single FIle Upload";
             sLog = "Application";
 
             if (!EventLog.SourceExists(sSource))
