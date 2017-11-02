@@ -353,7 +353,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         public bool ValidateHasRedactions(int docArtifactId)
         {
-            return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.DocumentHasRedactions,
+            var query = Queries.DocumentHasRedactions;
+            return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(query,
                  new[] {
                     SqlHelper.CreateSqlParameter("@DocumentID", docArtifactId),
                  }) > 0;

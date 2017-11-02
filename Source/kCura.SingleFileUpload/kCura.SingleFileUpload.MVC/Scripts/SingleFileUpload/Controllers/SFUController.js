@@ -13,7 +13,7 @@
         var dialog_overlay = window.parent.parent.$(".ui-widget-overlay");
         var vm = $scope;
         vm.simulateFileClick = function (force) {
-            SimulateFileClick(force);
+            simulateFileClick(force);
         };
         vm.handleDragOver = HandleDragOver;
         vm.handleDragLeave = HandleDragLeave;
@@ -57,13 +57,19 @@
 
 
         function SubmitFrm() {
-
             if (vm.errorID == 0) {
                 document.getElementById('fid').setAttribute('value', getFolder());
                 document.getElementById('did').setAttribute('value', GetDID());
             }
-            document.getElementById('btiForm').submit();
-            notifyUploadStarted();
+
+            if (vm.changeImage) {
+                deleteImagesAndRedactions();
+            }
+            else {
+                document.getElementById('btiForm').submit();
+                notifyUploadStarted();
+            }
+
         }
 
         function HandleDragOver(event) {
@@ -114,12 +120,85 @@
             xhr.send(data);
         }
 
-        function SimulateFileClick(force) {
+        function simulateFileClick(force) {
             if (vm.status == 0 || force) {
                 document.getElementById('file').click();
             }
         }
 
+        function deleteImagesAndRedactions() {
+            var result = undefined;
+
+            $http.post("/Relativity.Rest/api/Relativity.Services.Document.IDocumentModule/Document Manager/DeleteImageFiles",
+                {
+                    "workspaceArtifactId": AppID,
+                    "document": {
+                        "ArtifactID": GetDID(),
+                        "Identifier": ""
+                    },
+                    "forceDelete": true
+                },
+                {
+                    headers: {
+                        "X-CSRF-Header": '-'
+                    }
+                })
+                .then(function (data) {
+                    
+                    if (!!data) {
+                        document.getElementById('btiForm').submit();
+                        notifyUploadStarted();
+                    }
+                }, function (error) {
+                    result = false;
+                    console.error(error);
+                });
+        }
+
+        function updateImageDocument(fileLocation) {
+            var profileArtifact = $("#_fileTypeSelector_ImagingProfileSelector", window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents()).attr("defaultvalue");
+
+            $http.post("/Relativity.Rest/api/Relativity.Imaging.Services.Interfaces.IImagingModule/Imaging Job Service/ImageDocumentAsync",
+                {
+                    "imageDocumentJob": {
+                        "WorkspaceId": AppID,
+                        "DocumentId": GetDID(),
+                        "ProfileId": profileArtifact,
+                        "AlternateNativeLocation": fileLocation,
+                        "RemoveAlternateNativeAfterImaging": false
+                    }
+                },
+                {
+                    headers: {
+                        "X-CSRF-Header": '-'
+                    }
+                })
+                .then(function (data) {
+                    
+                    var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
+                    if (data) {
+                        setTimeout(function () {
+                            window.parent.location.reload();
+                        }, fromDocumentViewer ? 2000 : 3000);
+                    }
+                }, function (error) {
+                    result = false;
+                    console.error(error);
+                });
+
+        }
+
+        function getFileLocation() {
+            AngularPostOfData($http, "/GetFileLocation", {
+                did: GetDID()
+            }).done(function (result) {
+                if (!!result.data.Data) {
+                    var fileLocation = result.data.Data;
+                    
+                    updateImageDocument(fileLocation);
+                }
+            });
+        }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (resultString) {
@@ -158,9 +237,6 @@
                     $scope.$apply(function () {
                         vm.status = 3;
                     });
-
-                //if (!fromDocumentViewer)
-                //  footerHtml += '<a href="/Relativity/Case/Document/Review.aspx?' + result.Data + '&profilerMode=View&ArtifactTypeID=10&useNewSource=true" target="_top">Open Document<a>';
                 var footerHtml = !vm.changeImage ? "Document uploaded successfully!" : (vm.newImage ? "Document image uploaded succesfully!" : "Document image replaced succesfully!");
                 getdH().children[2].className = "message";
                 getdH().children[2].innerHTML = footerHtml;
@@ -175,7 +251,12 @@
                         var fnc = function () { window.parent.parent.location.replace(window.parent.parent.location) };
                     }
 
-                    setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
+                    if (vm.changeImage) {
+                        getFileLocation();
+                    }
+                    else {
+                        setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
+                    }
                 }
             }
             else if (result.Message == 'R') {
@@ -191,24 +272,7 @@
                 $(getdH().children[2]).html(elem);
 
             }
-                //else if (result.Success && result.Message == 'I') {
-                //    vm.tempDocId = result.Data;
-                //    var profileArtifact = $("#_fileTypeSelector_ImagingProfileSelector", window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents()).attr("defaultvalue");
 
-                //    $.ajax({
-                //        url: "/Relativity/CustomPages/c9e4322e-6bd8-4a37-ae9e-c3c9be31776b/api/Imaging/ImageDocuments?workspaceArtifactId=" + AppID + "&profileArtifactId=" + profileArtifact + "&connectionId=" + window.parent.parent.$.connection.hub.id,
-                //        data: JSON.stringify("{documentArtifactIds: [ " + vm.tempDocId + " ]}"),
-                //        type: "POST",
-                //        headers: { "X-CSRF-Header": window.parent.GetCsrfTokenFromPage() },
-                //        dataType: 'json',
-                //        contentType: "application/json; charset=utf-8"
-                //    }).fail(function (data) {
-                //        alert("An error occurred attempting to image this document, please see the error log for more details. ");
-                //    });
-                //    window.parent.parent.onbeforeunload = null;
-
-                //    checkForImages();
-                //}
             else {
                 var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
                 if (removeDigest)
@@ -217,48 +281,13 @@
                     $scope.$apply(function () {
                         vm.status = status;
                     });
-                var message = /*result.Message.length > 32 ? "Unable to upload file." :*/ result.Message;
+                var message = result.Message;
                 console.error("SFU: " + result.Message);
                 getdH().children[2].className = "msgDetails";
                 getdH().children[2].innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
-                //getdH().children[2].innerHTML = "Error: <span class='error'>" + result.Message + "</span>";
-
-                //setTimeout(function () { location.reload() }, 200);
             }
 
         }
-
-        //function checkForImages() {
-        //    setTimeout(function () {
-        //        AngularPostOfData($http, "/CheckForImages", {
-        //            tArtifactId: vm.tempDocId
-        //        })
-        //        .done(function (result) {
-        //            if (result.data.Data == "True")
-        //                replaceImages();
-        //            else
-        //                checkForImages();
-        //        })
-        //    }, 500);
-        //}
-
-        //function replaceImages() {
-        //    AngularPostOfData($http, "/ReplaceImages",
-        //        {
-        //            oArtifactId: docID,
-        //            tArtifactId: vm.tempDocId,
-        //            newImage: NewImage
-        //        })
-        //    .done(function (result) {
-        //        if (result.data.Data == "True") {
-        //            updateStatus(3, "Document images replaced succesfully!");
-        //            window.parent.parent.onbeforeunload = null;
-        //            setTimeout(function () {
-        //                window.parent.location.reload();
-        //            }, 2000);
-        //        }
-        //    });
-        //}
 
         function notifyUploadStarted() {
             if (vm.changeImage) {
@@ -266,9 +295,6 @@
                 var documentViewer = $(window.parent.parent.window)[0].documentViewer;
                 documentViewer.SetViewer("Image");
                 dialog.dialog("option", "closeOnEscape", false);
-              //  var frame = $("#_documentViewer__documentIdentifierFrame", window.parent.parent.document);
-              //  $("#_fileTypeSelector_FileTypeList_2", frame.contents()).prop("checked", true);
-
             }
             setTimeout(function () {
                 if ($("#file")[0].files.length == 0)
@@ -353,10 +379,6 @@
                 submitSimulatedForm();
             else
                 SubmitFrm();
-
         }
-
-
-
     }
 })();

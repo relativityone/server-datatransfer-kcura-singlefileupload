@@ -70,7 +70,20 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string resultStr = string.Empty;
                 if (img)
                 {
-                    var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload);
+                    var hasUploadPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
+                    var hasAddPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
+                    var hasdeletePermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
+
+                    if (!hasUploadPermission || !hasAddPermission || !hasdeletePermission)
+                    {
+                        response.Success = false;
+                        response.Message = "You do not have enough permissions to perform the current action.";
+                        return resultStr;
+                    }
+                }
+                if (fdv & !img)
+                {
+                    var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceDocument);
                     if (!hasPermission)
                     {
                         response.Success = false;
@@ -145,7 +158,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 else
                                 {
                                     FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
-                                    _RepositoryDocumentManager.DeleteRedactions(did);
+                                    //_RepositoryDocumentManager.DeleteRedactions(did);
                                     string details = string.Empty;
                                     var transientMetadata = getTransient(file, fileName);
                                     FileInformation imageInfo = fileInfo;
@@ -157,7 +170,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, fileInfo);
                                     if (!newImage)
                                     {
-                                        _RepositoryDocumentManager.DeleteExistingImages(did);
+                                        //_RepositoryDocumentManager.DeleteExistingImages(did);
                                         details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
@@ -228,7 +241,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             {
                 string resultStr = string.Empty;
                 var isAdmin = permissionHelper.IsSytemAdminUser(RelativityUserInfo.ArtifactID);
-                var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.ProcessingErrorUploadDownload) : true;
+                var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
 
                 if (hasPermission)
                 {
@@ -261,30 +274,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             Response.End();
         }
 
-        //[HttpPost]
-        //public JsonResult ReplaceImages(int oArtifactId, int tArtifactId, bool newImage)
-        //{
-        //    var result = HandleResponse<string>((response) =>
-        //    {
-        //        string resultStr = string.Empty;
-        //        response.Success = true;
-        //        FileInformation file = docManager.getFileByArtifactId(oArtifactId);
-        //        docManager.DeleteRedactions(oArtifactId, tArtifactId);
-        //        resultStr = docManager.ReplaceDocumentImages(oArtifactId, tArtifactId).ToString();
-        //        string details = string.Empty;
-        //        if (!newImage)
-        //        {
-        //            details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Deleted");
-        //            auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-        //        }
-        //        details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Replaced");
-        //        auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-        //        return resultStr;
-        //    });
-
-        //    return Json(result);
-        //}
-
         [HttpPost]
         public JsonResult CheckForImages(int tArtifactId)
         {
@@ -297,7 +286,23 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             });
 
             return Json(result);
+        }
 
+
+        [HttpPost]
+        public JsonResult GetFileLocation(int did)
+        {
+            var result = HandleResponse<string>((response) =>
+            {
+                string resultStr = string.Empty;
+                response.Success = true;
+
+                FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
+                resultStr = $@"{Path.GetDirectoryName(fileInfo.FileLocation)}\{fileInfo.FileName}";
+                return resultStr;
+            });
+
+            return Json(result);
         }
 
         private ExportedMetadata getTransient(HttpPostedFileBase file, string fileName)
