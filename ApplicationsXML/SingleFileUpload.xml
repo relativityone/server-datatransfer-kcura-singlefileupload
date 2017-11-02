@@ -1176,12 +1176,12 @@
       </SystemLayouts>
       <SystemViews />
       <Views />
-      <ApplicationVersion>1.2.0.79</ApplicationVersion>
+      <ApplicationVersion>1.2.0.15</ApplicationVersion>
     </Object>
   </Objects>
   <ParentTabs />
   <RelativityVersion>9.5.321.74</RelativityVersion>
-  <Version>1.2.0.79</Version>
+  <Version>1.2.0.15</Version>
   <TabDisplay>false</TabDisplay>
   <OriginSignature>c38bc2b4-751e-4d46-843e-787f34d3f85d</OriginSignature>
   <MasterScripts />
@@ -1211,7 +1211,7 @@
       <ExecutionType>8</ExecutionType>
       <Order>10</Order>
       <AssemblyName>kCura.SingleFileUpload.Resources.dll</AssemblyName>
-      <ApplicationVersion>1.2.0.79</ApplicationVersion>
+      <ApplicationVersion>1.2.0.15</ApplicationVersion>
       <RunTarget>0</RunTarget>
     </InstallEventHandler>
   </InstallEventHandlers>
