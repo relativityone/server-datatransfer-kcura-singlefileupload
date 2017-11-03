@@ -651,13 +651,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         private void updateNative(ExportedMetadata documentInfo, int docID)
         {
-            var fileID = getFileByArtifactId(docID).FileID;
-            var workspaceRepo = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
-            var replaceGuid = Guid.NewGuid().ToString();
-            var newFileLocation = instanceFile(replaceGuid, documentInfo.Native, false, workspaceRepo);
-            _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.ReplaceNativeFile, new[]
+            var file = getFileByArtifactId(docID);
+            if (file != null)
             {
-                SqlHelper.CreateSqlParameter("FID", fileID),
+                var workspaceRepo = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+                var replaceGuid = Guid.NewGuid().ToString();
+                var newFileLocation = instanceFile(replaceGuid, documentInfo.Native, false, workspaceRepo);
+                _Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.ReplaceNativeFile, new[]
+                {
+                SqlHelper.CreateSqlParameter("FID", file.FileID),
                 SqlHelper.CreateSqlParameter("AID", docID),
                 SqlHelper.CreateSqlParameter("RG", replaceGuid),
                 SqlHelper.CreateSqlParameter("FN", Path.GetFileName(documentInfo.FileName)),
@@ -665,6 +667,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 SqlHelper.CreateSqlParameter("SZ", documentInfo.Native.LongLength),
                 SqlHelper.CreateSqlParameter("RNT", getNativeTypeByFilename(documentInfo.FileName))
             }, 300);
+            }
         }
         private void updateMatchedField(ExportedMetadata documentInfo, int docID)
         {

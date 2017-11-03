@@ -29,7 +29,7 @@
         vm.changeImage = ChangeImage;
         vm.newImage = NewImage;
         vm.hasRedactions = HasRedactions;
-        vm.title = errorID == 0 ? (ChangeImage ? (NewImage ? "Upload Image" : "Replace Image") : (FDV ? "Replace Document" : "New Document")) : "Processing Document";
+        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : (FDV ? "Replace Document" : "New Document")) : "Processing Document";
         vm.tempDocId = 0;
 
 
@@ -150,7 +150,6 @@
                         notifyUploadStarted();
                     }
                 }, function (error) {
-                    result = false;
                     console.error(error);
                 });
         }
@@ -182,7 +181,6 @@
                         }, fromDocumentViewer ? 2000 : 3000);
                     }
                 }, function (error) {
-                    result = false;
                     console.error(error);
                 });
 

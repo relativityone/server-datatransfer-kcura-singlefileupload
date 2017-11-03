@@ -59,6 +59,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.ChangeImage = image.ToString().ToLower();
             ViewBag.NewImage = newImage.ToString().ToLower();
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
+            ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
             return View();
         }
 
@@ -158,7 +159,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 else
                                 {
                                     FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
-                                    //_RepositoryDocumentManager.DeleteRedactions(did);
                                     string details = string.Empty;
                                     var transientMetadata = getTransient(file, fileName);
                                     FileInformation imageInfo = fileInfo;
@@ -170,7 +170,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, fileInfo);
                                     if (!newImage)
                                     {
-                                        //_RepositoryDocumentManager.DeleteExistingImages(did);
                                         details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
@@ -194,6 +193,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     var transientMetadata = getTransient(file, fileName);
                                     await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, did == docIDByName, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                 }
                             }
                         }

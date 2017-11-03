@@ -25,7 +25,7 @@
         <div class="header">
             {{title}}
         </div>
-        <div ng-if="changeImage && hasRedactions" class="redaction-warning">
+        <div ng-if="changeImage || hasRedactions" class="redaction-warning">
                 <div class="redaction-warning-icon">
                     <img src="~/Content/Images/warning-6-24.png" />
                 </div>
@@ -35,7 +35,7 @@
                     and remove any highlights or redactions.
                 </div>
             </div>
-        <div class="status_img" ng-style="{'margin-top' : (changeImage && hasRedactions) ? '18px' : '30px' }">
+        <div class="status_img" ng-style="{'margin-top' : (changeImage || hasRedactions) ? '18px' : '30px' }">
             <img ng-if="status == 0" src="~/Content/Images/Upload.png" />
             <img ng-if="status == 1" src="~/Content/Images/Uploading.gif" />
             <img ng-if="status == 2 || status == 6" src="~/Content/Images/Fail.gif" />
@@ -109,6 +109,7 @@
         var ChangeImage = "@ViewBag.ChangeImage" == "true";
         var NewImage = "@ViewBag.NewImage" == "true";
         var HasRedactions = "@ViewBag.HasRedactions" == "true";
+        var HasImages = "@ViewBag.HasImages" == "true";
     </script>
 
 </body>
