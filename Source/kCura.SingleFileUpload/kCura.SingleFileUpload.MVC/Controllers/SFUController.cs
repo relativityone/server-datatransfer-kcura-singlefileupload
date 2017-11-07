@@ -162,21 +162,30 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     string details = string.Empty;
                                     var transientMetadata = getTransient(file, fileName);
                                     FileInformation imageInfo = fileInfo;
+                                    var filePath = string.Empty;
+
+                                    if (fileInfo == null)
+                                    {
+                                        filePath = _RepositoryDocumentManager.instanceFile(fileName, transientMetadata.Native, true, null);
+                                        imageInfo = new FileInformation();
+                                    }
+
                                     imageInfo.FileName = $"{Guid.NewGuid().ToString().ToLower()}{Path.GetExtension(transientMetadata.FileName)}";
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = $@"{Path.GetDirectoryName(imageInfo.FileLocation)}\{imageInfo.FileName}";
-                                    _RepositoryDocumentManager.WriteFile(transientMetadata.Native, fileInfo);
+                                    imageInfo.FileLocation = fileInfo == null ? filePath : $@"{Path.GetDirectoryName(imageInfo.FileLocation)}\{imageInfo.FileName}";
+                                    _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
+
                                     if (!newImage)
                                     {
                                         details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
-                                    _RepositoryDocumentManager.InsertImage(imageInfo);
+                                    //_RepositoryDocumentManager.InsertImage(imageInfo);
                                     details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Replaced");
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                    _RepositoryDocumentManager.UpdateHasImages(did);
+                                    //_RepositoryDocumentManager.UpdateHasImages(did);
                                     response.Success = true;
                                 }
 
@@ -191,7 +200,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 else
                                 {
                                     var transientMetadata = getTransient(file, fileName);
-                                    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, did == docIDByName, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName != 0, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                 }

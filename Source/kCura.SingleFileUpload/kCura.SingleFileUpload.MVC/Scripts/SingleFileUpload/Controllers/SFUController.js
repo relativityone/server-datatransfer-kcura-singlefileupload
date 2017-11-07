@@ -182,6 +182,9 @@
                     }
                 }, function (error) {
                     console.error(error);
+                    setTimeout(function () {
+                        window.parent.location.reload();
+                    }, 2000);
                 });
 
         }

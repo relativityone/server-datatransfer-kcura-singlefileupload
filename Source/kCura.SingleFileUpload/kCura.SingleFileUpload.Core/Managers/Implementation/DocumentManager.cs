@@ -597,7 +597,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDocumentIdentifierField, SqlHelper.CreateSqlParameter("CATEGORYID", (int)category));
         }
-        private string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
+        public string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
         {
             string folder = Path.Combine(baseRepo ?? Path.GetTempPath(), $"RV_{Guid.NewGuid()}");
             Directory.CreateDirectory(folder);

@@ -13,6 +13,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         Task<bool> IsDataGridEnabled(int workspaceID);
         bool ValidateDocImages(int docArtifactId);
         //  int SaveTempDocument(ExportedMetadata documentInfo, int folderID);
+        string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
         void UpdateHasImages(int dArtifactId);
         void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
