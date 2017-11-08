@@ -164,7 +164,7 @@
                         "DocumentId": GetDID(),
                         "ProfileId": profileArtifact,
                         "AlternateNativeLocation": fileLocation,
-                        "RemoveAlternateNativeAfterImaging": false
+                        "RemoveAlternateNativeAfterImaging": true
                     }
                 },
                 {
@@ -189,13 +189,14 @@
 
         }
 
-        function getFileLocation() {
-            AngularPostOfData($http, "/GetFileLocation", {
+        function GetRepLocation() {
+            AngularPostOfData($http, "/GetRepLocation", {
                 did: GetDID()
             }).done(function (result) {
                 if (!!result.data.Data) {
                     var fileLocation = result.data.Data;
-                    
+                    var fileName = angular.element("#file").val();
+                    fileLocation += fileName.substr(fileName.lastIndexOf('\\'), fileName.length);
                     updateImageDocument(fileLocation);
                 }
             });
@@ -253,7 +254,7 @@
                     }
 
                     if (vm.changeImage) {
-                        getFileLocation();
+                        GetRepLocation();
                     }
                     else {
                         setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
