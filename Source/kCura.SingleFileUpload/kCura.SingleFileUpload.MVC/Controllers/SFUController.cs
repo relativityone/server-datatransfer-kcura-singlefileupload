@@ -151,10 +151,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                         {
                             if (img)
                             {
-                                if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg"))
+                                if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg") && !fileExt.Equals(".pdf"))
                                 {
                                     response.Success = false;
-                                    response.Message = "Loaded file is not a supported format. Please select TIFF or JPEG.";
+                                    response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG OR PDF File.";
                                 }
                                 else
                                 {
@@ -220,7 +220,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     else
                     {
                         response.Success = false;
-                        response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
+                        response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG OR PDF File." : "This file type is not supported.";
                     }
                 }
                 return resultStr;

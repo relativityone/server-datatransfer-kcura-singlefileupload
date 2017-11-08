@@ -380,7 +380,7 @@
         }
 
         function getUpdatedHasImagesValue(artifactID) {
-            return RelativitySjax("/Controls/DocumentReview/TIFConvert.aspx/GetUpdatedHasImagesValue", { artifactID: artifactID });
+            return window.top.RelativityAjax("/Controls/DocumentReview/TIFConvert.aspx/GetUpdatedHasImagesValue", { artifactID: artifactID });
         }
 
         function GetDID() {
