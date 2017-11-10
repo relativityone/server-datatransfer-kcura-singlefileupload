@@ -176,7 +176,8 @@
                     
                     var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
                     if (data) {
-                        checkForImages();
+                        window.top.documentViewer.WaitForImaging();
+                        Close();
                     }
                 }, function (error) {
                     console.error(error);
@@ -219,21 +220,6 @@
                         checkUploadStatus(resultString);
                 })
             }, 500);
-        }
-        
-        function checkForImages() {
-            var hasImagesValue = getUpdatedHasImagesValue(GetDID());
-
-            if (hasImagesValue != 'Yes' && hasImagesValue != 'Error') {
-                setTimeout(function () {
-                    checkForImages();
-                }, 2000);
-            }
-            else {
-                setTimeout(function () {
-                    window.parent.location.reload();
-                }, fromDocumentViewer ? 2000 : 3000);
-            }
         }
 
         function manageResult(result, removeDigest) {
@@ -369,10 +355,6 @@
 
         function GetQueryStringValueByName(search, key) {
             return decodeURIComponent(search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-        }
-
-        function getUpdatedHasImagesValue(artifactID) {
-            return window.top.RelativityAjax("/Controls/DocumentReview/TIFConvert.aspx/GetUpdatedHasImagesValue", { artifactID: artifactID });
         }
 
         function GetDID() {
