@@ -62,14 +62,8 @@
                 document.getElementById('did').setAttribute('value', GetDID());
             }
 
-            if (vm.changeImage) {
-                deleteImagesAndRedactions();
-            }
-            else {
-                document.getElementById('btiForm').submit();
-                notifyUploadStarted();
-            }
-
+            document.getElementById('btiForm').submit();
+            notifyUploadStarted();
         }
 
         function HandleDragOver(event) {
@@ -110,24 +104,15 @@
                 data.append('force', document.getElementById('force').getAttribute('value'));
             }
 
-            var submitYoRedCap = function () {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4)
-                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                };
-                notifyUploadStarted();
-                checkUpload();
-                xhr.open('POST', form.action);
-                xhr.send(data);
-            }
-
-            if (vm.changeImage) {
-                deleteImagesAndRedactions(submitYoRedCap);
-            }
-            else {
-                submitYoRedCap();
-            }
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4)
+                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+            };
+            notifyUploadStarted();
+            checkUpload();
+            xhr.open('POST', form.action);
+            xhr.send(data);
         }
 
         function simulateFileClick(force) {
@@ -136,7 +121,7 @@
             }
         }
 
-        function deleteImagesAndRedactions(simulatedRedCap) {
+        function deleteImagesAndRedactions(resultToManage) {
             var result = undefined;
 
             $http.post("/Relativity.Rest/api/Relativity.Services.Document.IDocumentModule/Document Manager/DeleteImageFiles",
@@ -156,27 +141,21 @@
                 .then(function (data) {
                     
                     if (!!data) {
-                        if (typeof simulatedRedCap === "function") {
-                            simulatedRedCap();
-                        } else {
-                            document.getElementById('btiForm').submit();
-                            notifyUploadStarted();
-                        }
+                        manageResult(resultToManage);
                     }
                 }, function (error) {
                     console.error(error);
                 });
         }
 
-        function updateImageDocument(fileLocation) {
-            var profileArtifact = $("#_fileTypeSelector_ImagingProfileSelector", window.parent.parent.$("#_documentViewer__documentIdentifierFrame").contents()).attr("defaultvalue");
+        function updateImageDocument(fileLocation) {            
 
             $http.post("/Relativity.Rest/api/Relativity.Imaging.Services.Interfaces.IImagingModule/Imaging Job Service/ImageDocumentAsync",
                 {
                     "imageDocumentJob": {
                         "WorkspaceId": AppID,
                         "DocumentId": GetDID(),
-                        "ProfileId": profileArtifact,
+                        "ProfileId": ProfileArtifact,
                         "AlternateNativeLocation": fileLocation,
                         "RemoveAlternateNativeAfterImaging": true
                     }
@@ -211,8 +190,12 @@
                     !result.Success ||
                     (!!result.Message && result.Message.indexOf("\\\\") > 0) ||
                     (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
-
-                    manageResult(result);
+                    if (vm.changeImage) {
+                        deleteImagesAndRedactions(result);
+                    }
+                    else {
+                        manageResult(result);
+                    }                    
                 }
                 else {
                     checkUploadStatus(result);

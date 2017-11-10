@@ -50,7 +50,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
         PermissionHelper permissionHelper = new PermissionHelper(ConnectionHelper.Helper());
 
-        public ActionResult Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false)
+        public ActionResult Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
         {
             ViewBag.AppID = WorkspaceID;
             ViewBag.FDV = fdv.ToString().ToLower();
@@ -60,6 +60,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.NewImage = newImage.ToString().ToLower();
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
             ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
+            ViewBag.ProfileID = profileID;
             return View();
         }
 
