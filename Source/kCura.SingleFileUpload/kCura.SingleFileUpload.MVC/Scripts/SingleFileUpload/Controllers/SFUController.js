@@ -141,7 +141,7 @@
                 .then(function (data) {
                     
                     if (!!data) {
-                        manageResult(resultToManage);
+                        manageResult(resultToManage, true);
                     }
                 }, function (error) {
                     console.error(error);
@@ -221,8 +221,9 @@
 
         function manageResult(result, removeDigest) {
             if (result.Success && (!result.Message || result.Message.indexOf("\\\\") === 0)) {
-                if (removeDigest)
+                if (removeDigest) {
                     vm.status = 3;
+                }
                 else
                     $scope.$apply(function () {
                         vm.status = 3;
