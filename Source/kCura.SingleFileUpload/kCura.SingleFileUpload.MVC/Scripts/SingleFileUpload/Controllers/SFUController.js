@@ -191,7 +191,11 @@
             if (resultString) {
                 sessionStorage['____pushNo'] = '';
                 var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
-                if (vm.errorID != 0 || GetDID() != -1 || !result.Success || (result.Message != '' && result.Message != null) || (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
+                if (vm.errorID != 0 ||
+                    GetDID() != -1 ||
+                    !result.Success ||
+                    (!!result.Message && result.Message.indexOf("\\\\") > 0) ||
+                    (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
 
                     manageResult(result);
                 }
@@ -233,7 +237,7 @@
         }
 
         function manageResult(result, removeDigest) {
-            if (result.Success && (result.Message == '' || result.Message == null)) {
+            if (result.Success && (!result.Message || result.Message.indexOf("\\\\") === 0)) {
                 if (removeDigest)
                     vm.status = 3;
                 else
