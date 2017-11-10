@@ -105,7 +105,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (!res)
                 {
                     response.Success = false;
-                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
+                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG or PDF." : "This file type is not supported.";
                 }
                 else
                 {
@@ -154,7 +154,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg") && !fileExt.Equals(".pdf"))
                                 {
                                     response.Success = false;
-                                    response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG OR PDF File.";
+                                    response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.";
                                 }
                                 else
                                 {
@@ -169,11 +169,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                         imageInfo = new FileInformation();
                                     }
 
-                                    imageInfo.FileName = $"{Guid.NewGuid().ToString().ToLower()}{Path.GetExtension(transientMetadata.FileName)}";
+                                    var guidFileName = Guid.NewGuid().ToString().ToLower();
+                                    imageInfo.FileName = $"{guidFileName}";
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\{fileName}";
+                                    imageInfo.FileLocation = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\{guidFileName}";
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
                                     if (!newImage)
@@ -186,6 +187,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     //_RepositoryDocumentManager.UpdateHasImages(did);
                                     response.Success = true;
+                                    response.Message = imageInfo.FileLocation;
                                 }
 
                             }

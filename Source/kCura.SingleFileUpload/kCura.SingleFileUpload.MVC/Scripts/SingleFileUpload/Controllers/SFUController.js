@@ -186,19 +186,6 @@
                 });
 
         }
-
-        function GetRepLocation() {
-            AngularPostOfData($http, "/GetRepLocation", {
-                did: GetDID()
-            }).done(function (result) {
-                if (!!result.data.Data) {
-                    var fileLocation = result.data.Data;
-                    var fileName = angular.element("#file").val();
-                    fileLocation += fileName.substr(fileName.lastIndexOf('\\'), fileName.length);
-                    updateImageDocument(fileLocation);
-                }
-            });
-        }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (resultString) {
@@ -267,7 +254,7 @@
                     }
 
                     if (vm.changeImage) {
-                        GetRepLocation();
+                        updateImageDocument(result.Message);
                     }
                     else {
                         setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
