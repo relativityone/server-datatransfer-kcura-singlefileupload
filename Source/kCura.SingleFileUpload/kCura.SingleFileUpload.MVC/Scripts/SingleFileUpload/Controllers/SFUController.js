@@ -190,13 +190,14 @@
             var resultString = sessionStorage['____pushNo'] || '';
             if (resultString) {
                 sessionStorage['____pushNo'] = '';
-                var result = JSON.parse(resultString);
+                var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
                 if (vm.errorID != 0 || GetDID() != -1 || !result.Success || (result.Message != '' && result.Message != null) || (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
 
                     manageResult(result);
                 }
-                else
-                    checkUploadStatus(JSON.parse(resultString));
+                else {
+                    checkUploadStatus(result);
+                }
             }
             else
                 idCheckTimeout = setTimeout(checkUpload, 500);
