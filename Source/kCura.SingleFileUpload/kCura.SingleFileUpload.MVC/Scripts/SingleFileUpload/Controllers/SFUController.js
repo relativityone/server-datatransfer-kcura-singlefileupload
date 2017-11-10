@@ -109,15 +109,25 @@
                 data.append('did', GetDID());
                 data.append('force', document.getElementById('force').getAttribute('value'));
             }
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4)
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-            };
-            notifyUploadStarted();
-            checkUpload();
-            xhr.open('POST', form.action);
-            xhr.send(data);
+
+            var submitYoRedCap = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4)
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                };
+                notifyUploadStarted();
+                checkUpload();
+                xhr.open('POST', form.action);
+                xhr.send(data);
+            }
+
+            if (vm.changeImage) {
+                deleteImagesAndRedactions(submitYoRedCap);
+            }
+            else {
+                submitYoRedCap();
+            }
         }
 
         function simulateFileClick(force) {
@@ -126,7 +136,7 @@
             }
         }
 
-        function deleteImagesAndRedactions() {
+        function deleteImagesAndRedactions(simulatedRedCap) {
             var result = undefined;
 
             $http.post("/Relativity.Rest/api/Relativity.Services.Document.IDocumentModule/Document Manager/DeleteImageFiles",
@@ -146,8 +156,12 @@
                 .then(function (data) {
                     
                     if (!!data) {
-                        document.getElementById('btiForm').submit();
-                        notifyUploadStarted();
+                        if (typeof simulatedRedCap === "function") {
+                            simulatedRedCap();
+                        } else {
+                            document.getElementById('btiForm').submit();
+                            notifyUploadStarted();
+                        }
                     }
                 }, function (error) {
                     console.error(error);
