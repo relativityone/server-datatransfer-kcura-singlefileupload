@@ -146,7 +146,7 @@
                         "ArtifactID": GetDID(),
                         "Identifier": ""
                     },
-                    "forceDelete": "true"
+                    "forceDelete": true
                 },
                 {
                     headers: {
