@@ -190,6 +190,69 @@ button {
     cursor: pointer;
 }
 
+.cantDrop {
+    cursor: not-allowed !important;
+}
+
+#dropHere hr {
+    width: 200px;
+}
+
+#dropHere input[type=text] {
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+    color: #102d4f;
+    padding: 2px 2px 2px 4px;
+    line-height: 1rem;
+    font-family: "Arial";
+    font-weight: 400;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: 0px 0px 0px -10px;
+    min-height: 20px;
+}
+
+#dropHere input[type="radio"] {
+    display: none;
+}
+
+#dropHere .radio label {
+    padding: 0px 0px 5px 30px;
+    display: inline-block;
+    position: relative;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#dropHere .radio label::before {
+	content: "";
+	width: 17px;
+	height: 17px;
+	background: none;
+	display: inline-block;
+	border-radius: 50%;
+	border: 1px solid #c1c1c1;
+	position: absolute;
+	left: 5px;
+}
+
+#dropHere .radio label::after {
+	content: "";
+	width: 5px;
+	height: 5px;
+	background: none;
+	display: inline-block;
+	border-radius: 50%;
+	border: 1px solid white;
+	position: absolute;
+	background-color: white;
+	left: 11px;
+	top: 6px;
+}
+
+#dropHere input[type="radio"]:checked + label:before {
+	background: rgb(28, 84, 171);
+}
 
 .button_actions {
     border-top: 1px solid #c1c1c1;

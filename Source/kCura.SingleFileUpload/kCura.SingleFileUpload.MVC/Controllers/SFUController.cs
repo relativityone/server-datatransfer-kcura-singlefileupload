@@ -63,7 +63,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task Upload(int fid = 0, int did = 0, bool fdv = false, bool force = false, bool img = false, bool newImage = false)
+        public async Task Upload(int fid = 0, int did = 0, bool fdv = false, bool force = false, bool img = false, bool newImage = false, string controlNumberText = null)
         {
             var result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
             {
@@ -98,19 +98,21 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     if (suported)
                     {
                         var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
-                        var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(fileName));
+                        var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
                         if (!fdv)
                         {
                             did = docIDByName;
                             if (did == -1 || force)
                             {
                                 var transientMetadata = getTransient(file, fileName);
+                                if (!string.IsNullOrEmpty(controlNumberText))
+                                    transientMetadata.ControlNumber = controlNumberText;
                                 if (did == -1)
                                 {
                                     var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     if (resultUpload.Success)
                                     {
-                                        resultStr = resultUpload.Result;
+                                        resultStr = string.IsNullOrEmpty(controlNumberText)? resultUpload.Result: controlNumberText;
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
                                     else
@@ -121,16 +123,18 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     }
 
                                 }
-                                else
-                                {
-                                    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, false, true, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID, fid);
-                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                }
+                                //else
+                                //{
+                                //    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, false, true, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID, fid);
+                                //    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                //}
                             }
                             else
                             {
                                 response.Success = false;
-                                response.Message = "R";
+                                response.Message = "The Control Number is repeated, please enter one manually.";
+                                //response.Success = false;
+                                //response.Message = "R";
                             }
                         }
                         else

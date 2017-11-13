@@ -16,6 +16,7 @@
             name="frmDnd"
             class="phantomFrame"></iframe>
     <div id="dropHere"
+         ng-class="{cantDrop: choiceType.type == 'text' && optionalControlNumber.text == ''}"
          class="dropZone"
          ng-if="(changeImage && !hasRedactions) || !changeImage"
          ng-click="simulateFileClick()"
@@ -39,7 +40,26 @@
               class="message">
             Drop your file here or <span> click to select a file.</span>
         </span>
+
         <br />
+
+        <div ng-show="@ViewBag.ChangeImage === false && @ViewBag.DocID <= 0">
+            <hr />
+            <br />
+            <div style="width: 40%; float: left; text-align: right;">
+                <label>Control Number: </label>
+            </div>
+            <div style="width: 60%; float: right; text-align: left;" class="radio">
+                <input id="fileName" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="fileName">
+                <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
+                <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
+                <label for="controlNumber" ng-click="$event.stopPropagation();">&nbsp;</label>
+                <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'"/>
+            </div>
+        </div>
+
+        <br />
+
         <div class="button_actions"
              ng-if="status == 5 || status == 2 || status == 6">
             <div class="buttonsZone">
@@ -88,6 +108,7 @@
         <input type="hidden" id="did" name="did" value="" />
         <input type="hidden" id="force" name="force" value="false" />
         <input type="hidden" id="newImage" name="newImage" ng-model="newImage" />
+        <input type="hidden" id="controlNumberText" name="controlNumberText" ng-model="optionalControlNumber.text" />
     </form>
     <form id="btiForm"
           ng-if="errorID != 0" action="sfu/UploadProcessingError?AppID=@ViewBag.AppID&errorID=@ViewBag.ErrorID"
