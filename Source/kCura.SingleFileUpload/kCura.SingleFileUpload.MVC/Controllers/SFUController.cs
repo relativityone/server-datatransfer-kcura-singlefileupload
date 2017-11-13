@@ -107,13 +107,15 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                             {
                                 var transientMetadata = getTransient(file, fileName);
                                 if (!string.IsNullOrEmpty(controlNumberText))
+                                {
                                     transientMetadata.ControlNumber = controlNumberText;
+                                }
                                 if (did == -1)
                                 {
                                     var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     if (resultUpload.Success)
                                     {
-                                        resultStr = string.IsNullOrEmpty(controlNumberText)? resultUpload.Result: controlNumberText;
+                                        resultStr = resultUpload.Result;
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
                                     else

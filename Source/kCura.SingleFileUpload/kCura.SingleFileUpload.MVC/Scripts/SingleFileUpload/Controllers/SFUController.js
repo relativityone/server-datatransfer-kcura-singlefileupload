@@ -163,10 +163,12 @@
                     documentName: resultString.Data
                 })
                 .done(function (result) {
-                    if (result.data != "-1")
+                    if (result.data != "-1") {
                         manageResult(resultString, true);
-                    else
+                    }
+                    else {
                         checkUploadStatus(resultString);
+                    }
                 })
             }, 500);
         }
@@ -232,12 +234,14 @@
                 //}
             else {
                 var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
-                if (removeDigest)
+                if (removeDigest) {
                     vm.status = status;
-                else
+                }
+                else {
                     $scope.$apply(function () {
                         vm.status = status;
                     });
+                }
                 var message = /*result.Message.length > 32 ? "Unable to upload file." :*/ result.Message;
                 console.error("SFU: " + result.Message);
                 getdH().children[2].className = "msgDetails";
