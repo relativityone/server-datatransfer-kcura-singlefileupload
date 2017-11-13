@@ -43,7 +43,7 @@
 
         <br />
 
-        @if (ViewBag.ToggleEnableFileName && !ViewBag.ChangeImage && ViewBag.DocID <= 0)
+        @if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
         {
         <div>
             <hr />
