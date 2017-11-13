@@ -31,6 +31,12 @@
         vm.hasRedactions = HasRedactions;
         vm.title = errorID == 0 ? (ChangeImage ? (NewImage ? "Upload Image" : "Replace Image") : (FDV ? "Replace Document" : "New Document")) : "Processing Document";
         vm.tempDocId = 0;
+        vm.choiceType = { type: 'fileName' };
+        vm.optionalControlNumber = { text: '' };
+        vm.focusControlNumberValue = false;
+        vm.focusControlNumber = function (value) {
+            vm.focusControlNumberValue = value;
+        }
 
 
         sessionStorage['____pushNo'] = '';
@@ -61,6 +67,7 @@
             if (vm.errorID == 0) {
                 document.getElementById('fid').setAttribute('value', getFolder());
                 document.getElementById('did').setAttribute('value', GetDID());
+                document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
             }
             document.getElementById('btiForm').submit();
             notifyUploadStarted();
@@ -69,9 +76,11 @@
         function HandleDragOver(event) {
             stopPropagation(event);
             $scope.$apply(function () {
-                vm.status = 4;
-                getdH().children[2].className = "message";
-                getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
+                if (vm.choiceType.type == 'fileName') {
+                    vm.status = 4;
+                    getdH().children[2].className = "message";
+                    getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
+                }
             });
         }
         function HandleDragLeave(event) {
@@ -85,11 +94,13 @@
             stopPropagation(event);
 
             $scope.$apply(function () {
-                vm.status = 1;
-                files = event.dataTransfer.files;
+                if (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != '')) {
+                    vm.status = 1;
+                    files = event.dataTransfer.files;
 
-                bkpFile = files[0];
-                submitSimulatedForm();
+                    bkpFile = files[0];
+                    submitSimulatedForm();
+                }
             });
         }
 
@@ -97,11 +108,13 @@
             var form = document.getElementById('btiFormDD');
             var data = new FormData(form);
             data.append('file', bkpFile);
+
             if (vm.errorID == 0) {
                 data.append('fid', getFolder());
                 data.append('fdv', document.getElementById('fdv').getAttribute('value'));
                 data.append('did', GetDID());
                 data.append('force', document.getElementById('force').getAttribute('value'));
+                data.append('controlNumberText', document.getElementById('controlNumberText').value);
             }
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -114,8 +127,17 @@
             xhr.send(data);
         }
 
-        function SimulateFileClick(force) {
-            if (vm.status == 0 || force) {
+        function SimulateFileClick(force, event) {
+            getdH().children[2].className = "message";
+            if (vm.choiceType.type == 'fileName') {
+                getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
+            } else {
+                getdH().children[2].innerHTML = "Please type a Control Number before droping or selecting your file.</span>";
+            }
+
+            if ((vm.status == 0 || force)
+                && (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != ''))
+                && !vm.focusControlNumberValue) {
                 document.getElementById('file').click();
             }
         }
@@ -142,10 +164,12 @@
                     documentName: resultString.Data
                 })
                 .done(function (result) {
-                    if (result.data != "-1")
+                    if (result.data != "-1") {
                         manageResult(resultString, true);
-                    else
+                    }
+                    else {
                         checkUploadStatus(resultString);
+                    }
                 })
             }, 500);
         }
@@ -211,18 +235,20 @@
                 //}
             else {
                 var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
-                if (removeDigest)
+                if (removeDigest) {
                     vm.status = status;
-                else
+                }
+                else {
                     $scope.$apply(function () {
                         vm.status = status;
                     });
+                }
                 var message = /*result.Message.length > 32 ? "Unable to upload file." :*/ result.Message;
                 console.error("SFU: " + result.Message);
                 getdH().children[2].className = "msgDetails";
                 getdH().children[2].innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 //getdH().children[2].innerHTML = "Error: <span class='error'>" + result.Message + "</span>";
-
+                document.getElementById("file").value = "";
                 //setTimeout(function () { location.reload() }, 200);
             }
 
