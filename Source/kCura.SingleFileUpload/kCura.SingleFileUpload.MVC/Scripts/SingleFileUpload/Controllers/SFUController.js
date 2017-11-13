@@ -94,7 +94,7 @@
             stopPropagation(event);
 
             $scope.$apply(function () {
-                if (vm.choiceType.type == 'fileName') {
+                if (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != '')) {
                     vm.status = 1;
                     files = event.dataTransfer.files;
 
@@ -108,12 +108,13 @@
             var form = document.getElementById('btiFormDD');
             var data = new FormData(form);
             data.append('file', bkpFile);
+
             if (vm.errorID == 0) {
                 data.append('fid', getFolder());
                 data.append('fdv', document.getElementById('fdv').getAttribute('value'));
                 data.append('did', GetDID());
                 data.append('force', document.getElementById('force').getAttribute('value'));
-                data.append('controlNumberText', document.getElementById('controlNumberText').getAttribute('value'));
+                data.append('controlNumberText', document.getElementById('controlNumberText').value);
             }
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {

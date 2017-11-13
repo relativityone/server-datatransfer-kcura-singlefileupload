@@ -43,7 +43,7 @@
 
         <br />
 
-        @if (ViewBag.ToggleEnableFileName && !ViewBag.ChangeImage && ViewBag.DocID <= 0)
+        @if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
         {
         <div>
             <hr />
@@ -117,7 +117,7 @@
         <input type="hidden" id="did" name="did" value="" />
         <input type="hidden" id="force" name="force" value="false" />
         <input type="hidden" id="newImage" name="newImage" ng-model="newImage" />
-        <input type="hidden" id="controlNumberText" name="controlNumberText" ng-model="optionalControlNumber.text" />
+        <input type="hidden" id="controlNumberText" name="controlNumberText" ng-value="optionalControlNumber.text" />
     </form>
     <form id="btiForm"
           ng-if="errorID != 0" action="sfu/UploadProcessingError?AppID=@ViewBag.AppID&errorID=@ViewBag.ErrorID"
