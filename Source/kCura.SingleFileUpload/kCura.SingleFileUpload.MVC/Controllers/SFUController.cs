@@ -115,7 +115,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
                                     if (resultUpload.Success)
                                     {
-                                        resultStr = resultUpload.Result;
+                                        resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
                                         _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
                                     else
@@ -126,18 +126,11 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     }
 
                                 }
-                                //else
-                                //{
-                                //    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, false, true, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID, fid);
-                                //    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                //}
                             }
                             else
                             {
                                 response.Success = false;
-                                response.Message = "The Control Number is repeated, please enter one manually.";
-                                //response.Success = false;
-                                //response.Message = "R";
+                                response.Message = "The Control Number you selected is being used in another document, please select a different one.";
                             }
                         }
                         else

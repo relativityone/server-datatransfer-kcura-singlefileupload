@@ -132,7 +132,7 @@
             if (vm.choiceType.type == 'fileName') {
                 getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
             } else {
-                getdH().children[2].innerHTML = "Please type your Control Number and after select your file <span> click to select a file.</span>";
+                getdH().children[2].innerHTML = "Please type a Control Number before droping or selecting your file.</span>";
             }
 
             if ((vm.status == 0 || force)
