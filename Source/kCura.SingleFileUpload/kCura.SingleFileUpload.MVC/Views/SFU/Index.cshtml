@@ -27,7 +27,7 @@
         <div class="header">
             {{title}}
         </div>
-        <div class="status_img">
+        <div class="status_img" >
             <img ng-if="status == 0" src="~/Content/Images/Upload.png" />
             <img ng-if="status == 1" src="~/Content/Images/Uploading.gif" />
             <img ng-if="status == 2 || status == 6" src="~/Content/Images/Fail.gif" />
@@ -43,7 +43,9 @@
 
         <br />
 
-        <div ng-show="@ViewBag.ChangeImage === false && @ViewBag.DocID <= 0">
+        @if (ViewBag.ToggleEnableFileName && !ViewBag.ChangeImage && ViewBag.DocID <= 0)
+        {
+        <div>
             <hr />
             <br />
             <div style="width: 40%; float: left; text-align: right;">
@@ -57,7 +59,14 @@
                 <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'"/>
             </div>
         </div>
-
+        }
+        else
+        {
+            <script>
+                if(window.frameElement != null)
+                    window.frameElement.parentElement.style.height = "320px";
+            </script>
+        }
         <br />
 
         <div class="button_actions"

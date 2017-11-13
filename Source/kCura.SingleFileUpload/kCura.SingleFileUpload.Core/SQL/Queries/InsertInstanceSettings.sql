@@ -1,7 +1,7 @@
 ﻿DECLARE @Value VARCHAR(MAX)= '{
                 "url":  "%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%",
                 "id": "documentCreateModal",        
-                "height": 335,
+                "height": 440,
                 "width": 400,
 				"hideClose": true
 }';

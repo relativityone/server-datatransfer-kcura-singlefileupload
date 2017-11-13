@@ -186,6 +186,10 @@ button {
         -moz-user-select: none;
     }
 
+.topCenterVertical {
+    margin-top: 80px;
+}
+
 #dropHere {
     cursor: pointer;
 }

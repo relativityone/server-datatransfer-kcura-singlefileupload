@@ -50,7 +50,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
         PermissionHelper permissionHelper = new PermissionHelper(ConnectionHelper.Helper());
 
-        public ActionResult Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false)
+        public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false)
         {
             ViewBag.AppID = WorkspaceID;
             ViewBag.FDV = fdv.ToString().ToLower();
@@ -59,6 +59,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.ChangeImage = image.ToString().ToLower();
             ViewBag.NewImage = newImage.ToString().ToLower();
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
+            ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
             return View();
         }
 
