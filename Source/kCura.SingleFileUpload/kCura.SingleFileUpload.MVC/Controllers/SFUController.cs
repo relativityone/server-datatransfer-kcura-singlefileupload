@@ -146,6 +146,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                             {
                                 response.Success = false;
                                 response.Message = "The Control Number you selected is being used in another document, please select a different one.";
+                                return resultStr;
                             }
                         }
                         else

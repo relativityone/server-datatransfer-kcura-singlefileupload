@@ -138,6 +138,7 @@
             if ((vm.status == 0 || force)
                 && (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != ''))
                 && !vm.focusControlNumberValue) {
+                document.getElementById('file').value = "";
                 document.getElementById('file').click();
             }
         }
@@ -203,13 +204,13 @@
         }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
-            if (resultString) {
+            if (!!resultString) {
                 sessionStorage['____pushNo'] = '';
                 var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
                 if (vm.errorID != 0 ||
                     GetDID() != -1 ||
                     !result.Success ||
-                    (!!result.Message && result.Message.indexOf("\\\\") > 0) ||
+                    !!result.Message ||
                     (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
                     if (vm.changeImage) {
                         deleteImagesAndRedactions(result);
