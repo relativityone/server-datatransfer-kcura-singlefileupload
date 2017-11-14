@@ -530,7 +530,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                 // Add file to load
                 dtDocument.Rows.Add(
-                    documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : (string.IsNullOrEmpty(documentInfo.ControlNumber) ? Path.GetFileNameWithoutExtension(documentInfo.FileName) : documentInfo.ControlNumber),
+                    !string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber : (documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
                     documentInfo.ExtractedText,
                     extension,
                     extension,
