@@ -1,5 +1,4 @@
-﻿
-(function () {
+﻿(function () {
     'use strict';
 
     angular
@@ -18,6 +17,7 @@
         vm.handleDragOver = HandleDragOver;
         vm.handleDragLeave = HandleDragLeave;
         vm.handleDnDFileSelect = HandleDnDFileSelect;
+        vm.continueRedactions = ContinueRedactions;
         vm.forceUpload = ForceUpload;
         vm.submitFrm = SubmitFrm;
         vm.cancel = Cancel;
@@ -303,94 +303,100 @@
                 }
 
             }
-
-            function notifyUploadStarted() {
-                if (vm.changeImage) {
-                    dialog_overlay.off("click");
-                    var documentViewer = $(window.parent.parent.window)[0].documentViewer;
-                    documentViewer.SetViewer("Image");
-                    dialog.dialog("option", "closeOnEscape", false);
-                }
-                setTimeout(function () {
-                    if ($("#file")[0].files.length == 0)
-                        return;
-
-                    $scope.$apply(function () {
-                        vm.status = 1;
-                    });
-                    getdH().onclick = function () { };
-                    getdH().ondrop = function () { };
-                    getdH().children[2].innerHTML = "Uploading";
-                    checkUpload();
-                })
+        }
+        function notifyUploadStarted() {
+            if (vm.changeImage) {
+                dialog_overlay.off("click");
+                var documentViewer = $(window.parent.parent.window)[0].documentViewer;
+                documentViewer.SetViewer("Image");
+                dialog.dialog("option", "closeOnEscape", false);
             }
+            setTimeout(function () {
+                if ($("#file")[0].files.length == 0)
+                    return;
 
-            function updateStatus(status, message) {
-
-                vm.status = status;
-
-                getdH().children[2].className = "message";
-                getdH().children[2].innerHTML = message;
-            }
-
-            function stopPropagation(event) {
-                event.stopPropagation();
-                event.preventDefault();
-            }
-            function setDropStyle(color) {
-                getdH().style['color'] = color;
-            }
-
-            function Cancel() {
-                location.replace(location.href.replace('sfu', 'sfu.html'));
-            }
-
-            function Close() {
-
-                var modalCls = $('.modal-container', window.parent.document).find(".dynamic-content-modal-close")[0];
-
-                if (modalCls != null) {
-                    $(modalCls).click();
-                }
-                else {
-                    window.parent.$('#uploadInfoDiv').dialog('close');
-                }
-            }
-
-            function getFolder() {
-                var id = '-1';
-                var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'];
-                if (wN) {
-                    var $out = wN.window.$;
-                    if ($out('.browser-folder.browser-icon-active', wN.document).length)
-                        id = $out('.jstree-node[aria-selected=true]', wN.document).attr('id');
-                }
-                id = id || '-1';
-                if (id.indexOf('_') > -1)
-                    id = id.split('_')[1];
-                return id;
-            }
-
-            function GetQueryStringValueByName(search, key) {
-                return decodeURIComponent(search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-            }
-            function GetDID() {
-                var did = -1;
-                if (document.getElementById('fdv') != null && document.getElementById('fdv').getAttribute('value') == 'true')
-                    did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
-                return did;
-            }
-            function ForceUpload() {
-
-                vm.status = 1;
-
+                $scope.$apply(function () {
+                    vm.status = 1;
+                });
+                getdH().onclick = function () { };
+                getdH().ondrop = function () { };
                 getdH().children[2].innerHTML = "Uploading";
-                document.getElementById('force').setAttribute('value', 'true');
-                if (bkpFile)
-                    submitSimulatedForm();
-                else
-                    SubmitFrm();
+                checkUpload();
+            })
+        }
+
+        function updateStatus(status, message) {
+
+            vm.status = status;
+
+            getdH().children[2].className = "message";
+            getdH().children[2].innerHTML = message;
+        }
+
+        function stopPropagation(event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        function setDropStyle(color) {
+            getdH().style['color'] = color;
+        }
+
+        function Cancel() {
+            location.replace(location.href.replace('sfu', 'sfu.html'));
+        }
+
+        function Close() {
+
+            var modalCls = $('.modal-container', window.parent.document).find(".dynamic-content-modal-close")[0];
+
+            if (modalCls != null) {
+                $(modalCls).click();
+            }
+            else {
+                window.parent.$('#uploadInfoDiv').dialog('close');
             }
         }
+
+        function ContinueRedactions() {
+            vm.hasRedactions = false;
+        }
+
+        function getFolder() {
+            var id = '-1';
+            var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'];
+            if (wN) {
+                var $out = wN.window.$;
+                if ($out('.browser-folder.browser-icon-active', wN.document).length)
+                    id = $out('.jstree-node[aria-selected=true]', wN.document).attr('id');
+            }
+            id = id || '-1';
+            if (id.indexOf('_') > -1)
+                id = id.split('_')[1];
+            return id;
+        }
+
+        function GetQueryStringValueByName(search, key) {
+            return decodeURIComponent(search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        }
+        function GetDID() {
+            var did = -1;
+            if (document.getElementById('fdv') != null && document.getElementById('fdv').getAttribute('value') == 'true')
+                did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
+            return did;
+        }
+        function ForceUpload() {
+
+            vm.status = 1;
+
+            getdH().children[2].innerHTML = "Uploading";
+            document.getElementById('force').setAttribute('value', 'true');
+            if (bkpFile) {
+                submitSimulatedForm();
+            }
+            else {
+                SubmitFrm();
+            }
+        }
+
     }
 })();
