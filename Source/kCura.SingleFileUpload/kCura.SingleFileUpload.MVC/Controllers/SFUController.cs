@@ -50,7 +50,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
         PermissionHelper permissionHelper = new PermissionHelper(ConnectionHelper.Helper());
 
-        public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false)
+        public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
         {
             ViewBag.AppID = WorkspaceID;
             ViewBag.FDV = fdv.ToString().ToLower();
@@ -60,6 +60,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.NewImage = newImage.ToString().ToLower();
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
             ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
+            ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
+            ViewBag.ProfileID = profileID;
             return View();
         }
 
@@ -71,7 +73,20 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string resultStr = string.Empty;
                 if (img)
                 {
-                    var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ReplaceImageUploadDownload);
+                    var hasUploadPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
+                    var hasAddPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
+                    var hasdeletePermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
+
+                    if (!hasUploadPermission || !hasAddPermission || !hasdeletePermission)
+                    {
+                        response.Success = false;
+                        response.Message = "You do not have enough permissions to perform the current action.";
+                        return resultStr;
+                    }
+                }
+                if (fdv & !img)
+                {
+                    var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceDocument);
                     if (!hasPermission)
                     {
                         response.Success = false;
@@ -92,7 +107,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 if (!res)
                 {
                     response.Success = false;
-                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
+                    response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG or PDF." : "This file type is not supported.";
                 }
                 else
                 {
@@ -137,35 +152,43 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                         {
                             if (img)
                             {
-                                if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg"))
+                                if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg") && !fileExt.Equals(".pdf"))
                                 {
                                     response.Success = false;
-                                    response.Message = "Loaded file is not a supported format. Please select TIFF or JPEG.";
+                                    response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.";
                                 }
                                 else
                                 {
                                     FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
-                                    _RepositoryDocumentManager.DeleteRedactions(did);
                                     string details = string.Empty;
                                     var transientMetadata = getTransient(file, fileName);
                                     FileInformation imageInfo = fileInfo;
-                                    imageInfo.FileName = $"{Guid.NewGuid().ToString().ToLower()}{Path.GetExtension(transientMetadata.FileName)}";
+                                    var filePath = string.Empty;
+
+                                    if (fileInfo == null)
+                                    {
+                                        imageInfo = new FileInformation();
+                                    }
+
+                                    var guidFileName = Guid.NewGuid().ToString().ToLower();
+                                    imageInfo.FileName = $"{guidFileName}";
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = $@"{Path.GetDirectoryName(imageInfo.FileLocation)}\{imageInfo.FileName}";
-                                    _RepositoryDocumentManager.WriteFile(transientMetadata.Native, fileInfo);
+                                    imageInfo.FileLocation = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\{guidFileName}";
+                                    _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
+
                                     if (!newImage)
                                     {
-                                        _RepositoryDocumentManager.DeleteExistingImages(did);
-                                        details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Deleted");
-                                        _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                        details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID , "Images Deleted");
+                                        _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                     }
-                                    _RepositoryDocumentManager.InsertImage(imageInfo);
-                                    details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(fileInfo.FileLocation, fileInfo.FileID, "Images Replaced");
-                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                    _RepositoryDocumentManager.UpdateHasImages(did);
+                                    //_RepositoryDocumentManager.InsertImage(imageInfo);
+                                    details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
+                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    //_RepositoryDocumentManager.UpdateHasImages(did);
                                     response.Success = true;
+                                    response.Message = imageInfo.FileLocation;
                                 }
 
                             }
@@ -179,8 +202,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                 else
                                 {
                                     var transientMetadata = getTransient(file, fileName);
-                                    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, did == docIDByName, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+                                    _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
                                 }
                             }
                         }
@@ -199,7 +223,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     else
                     {
                         response.Success = false;
-                        response.Message = img ? "Loaded file is not a supported format. Please select TIFF or JPEG." : "This file type is not supported.";
+                        response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG OR PDF File." : "This file type is not supported.";
                     }
                 }
                 return resultStr;
@@ -228,7 +252,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             {
                 string resultStr = string.Empty;
                 var isAdmin = permissionHelper.IsSytemAdminUser(RelativityUserInfo.ArtifactID);
-                var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.ProcessingErrorUploadDownload) : true;
+                var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
 
                 if (hasPermission)
                 {
@@ -261,30 +285,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             Response.End();
         }
 
-        //[HttpPost]
-        //public JsonResult ReplaceImages(int oArtifactId, int tArtifactId, bool newImage)
-        //{
-        //    var result = HandleResponse<string>((response) =>
-        //    {
-        //        string resultStr = string.Empty;
-        //        response.Success = true;
-        //        FileInformation file = docManager.getFileByArtifactId(oArtifactId);
-        //        docManager.DeleteRedactions(oArtifactId, tArtifactId);
-        //        resultStr = docManager.ReplaceDocumentImages(oArtifactId, tArtifactId).ToString();
-        //        string details = string.Empty;
-        //        if (!newImage)
-        //        {
-        //            details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Deleted");
-        //            auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.Images_Deleted, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-        //        }
-        //        details = auditManager.GenerateAuditDetailsForFileUpload(file.FileLocation, file.FileID, "Images Replaced");
-        //        auditManager.CreateAuditRecord(WorkspaceID, oArtifactId, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-        //        return resultStr;
-        //    });
-
-        //    return Json(result);
-        //}
-
         [HttpPost]
         public JsonResult CheckForImages(int tArtifactId)
         {
@@ -297,7 +297,19 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             });
 
             return Json(result);
+        }
 
+
+        [HttpPost]
+        public JsonResult GetRepLocation()
+        {
+            var result = HandleResponse<string>((response) =>
+            {
+                response.Success = true;
+                return $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp";
+            });
+
+            return Json(result);
         }
 
         private ExportedMetadata getTransient(HttpPostedFileBase file, string fileName)
@@ -315,6 +327,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 transientMetadata.Native = native;
                 transientMetadata.FileName = fileName;
                 transientMetadata.ExtractedText = string.Empty;
+                transientMetadata.FileType = MimeMapping.GetMimeMapping(fileName);
             }
             return transientMetadata;
         }

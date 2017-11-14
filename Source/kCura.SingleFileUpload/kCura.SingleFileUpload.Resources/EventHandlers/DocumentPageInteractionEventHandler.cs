@@ -31,22 +31,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         public override Response PopulateScriptBlocks()
         {
-            RepositoryHelper.ConfigureRepository(this.Helper);
-            using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
-            {
-                if (this.PageMode == kCura.EventHandler.Helper.PageMode.View)
-                {
-                    PermissionHelper permissionHelper = new PermissionHelper(this.Helper);
-                    var permissions = permissionHelper.GetDocumentPermissions(this.Helper.GetActiveCaseID(), this.Helper.GetAuthenticationManager().UserInfo.WorkspaceUserArtifactID);
-
-                    ScriptBlock sb = new ScriptBlock();
-                    sb.Key = "sfuSource";
-                    sb.Script = string.Concat("<script type=\"text/javascript\">", Javascript.SingleFileUploadScript.Replace("{{APPID}}", this.Application.ArtifactID.ToString())
-                                                                                                                    .Replace("{{CanEdit}}", (permissions.Count(x => x.ArtifactID == 43 || x.ArtifactID == 46) == 2).ToString().ToLower())
-                                                                                                                    .Replace("{{DocID}}", this.ActiveArtifact.ArtifactID.ToString()), "</script>");
-                    this.RegisterStartupScriptBlock(sb);
-                }
-            }
             return new Response { Success = true };
         }
     }

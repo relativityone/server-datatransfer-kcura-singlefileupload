@@ -897,6 +897,7 @@
     <Content Include="Content\Images\Upload.png" />
     <Content Include="Content\Images\Uploading.gif" />
     <Content Include="Content\Images\Upload_Hover.png" />
+    <Content Include="Content\Images\warning-6-24.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -992,6 +993,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\192.168.0.231.pubxml" />
     <None Include="Properties\PublishProfiles\Edison.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalMachine.pubxml" />
     <None Include="Properties\PublishProfiles\NSerio.pubxml" />
     <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
     <Content Include="Scripts\angular\angular-animate.js" />

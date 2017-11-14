@@ -177,7 +177,6 @@ button {
     }
 
 .status_img {
-    margin-top: 30px;
     margin-bottom: 10px;
     pointer-events: none;
 }
@@ -281,3 +280,23 @@ button {
     font-weight: bold;
     font-size: 14px;
 }
+
+.redaction-warning {
+    background-color:#fdde8a; 
+    height:55px; 
+    font-size:smaller; 
+    display:flex;
+}
+
+    .redaction-warning div:nth-child(1) {
+        width:150px; 
+        float:left; 
+        display:inline-grid; 
+        align-content:center; 
+        padding-left:5px;
+    }
+
+    .redaction-warning div:nth-child(2) {
+        text-align:start; 
+        padding-top:5px
+    }
