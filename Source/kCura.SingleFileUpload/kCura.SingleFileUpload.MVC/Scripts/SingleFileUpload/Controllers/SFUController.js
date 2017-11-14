@@ -12,7 +12,7 @@
         var dialog_overlay = window.parent.parent.$(".ui-widget-overlay");
         var vm = $scope;
         vm.simulateFileClick = function (force) {
-            simulateFileClick(force);
+            SimulateFileClick(force);
         };
         vm.handleDragOver = HandleDragOver;
         vm.handleDragLeave = HandleDragLeave;
