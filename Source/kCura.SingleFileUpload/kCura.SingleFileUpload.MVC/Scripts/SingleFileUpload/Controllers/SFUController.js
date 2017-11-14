@@ -212,7 +212,7 @@
                     !result.Success ||
                     !!result.Message ||
                     (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
-                    if (vm.changeImage) {
+                    if (vm.changeImage && result.Message.indexOf("\\\\") > 0) {
                         deleteImagesAndRedactions(result);
                     }
                     else {
