@@ -4,6 +4,7 @@ using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
 using System;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -46,8 +47,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 try
                 {
-                    Repository.SetDocumentCreateHref();
-                    TelemetryRepository.CreateMetricsAsync();
+                    executeAsync().Wait();
                     response.Success = true;
                 }
                 catch (Exception e)
@@ -59,6 +59,13 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
 
             return response;
+        }
+
+        private async Task executeAsync()
+        {
+            Repository.SetDocumentCreateHref();
+            await TelemetryRepository.CreateMetricsAsync();
+            await ToggleManager.Instance.SetChangeFileNameAsync(true);
         }
     }
 }

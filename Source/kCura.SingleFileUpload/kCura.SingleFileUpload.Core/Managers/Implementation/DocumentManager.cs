@@ -525,16 +525,17 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                 var extension = Path.GetExtension(documentInfo.FileName);
                 var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
+                var fullFileName = documentInfo.FileName;
                 var fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
 
                 // Add file to load
                 dtDocument.Rows.Add(
-                    documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName),
+                    documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : (string.IsNullOrEmpty(documentInfo.ControlNumber) ? Path.GetFileNameWithoutExtension(documentInfo.FileName) : documentInfo.ControlNumber),
                     documentInfo.ExtractedText,
                     extension,
                     extension,
                     extension,
-                    fileName,
+                    fullFileName,
                     fileName,
                     fileSize,
                     fileSize,
