@@ -18,7 +18,6 @@
         vm.handleDragOver = HandleDragOver;
         vm.handleDragLeave = HandleDragLeave;
         vm.handleDnDFileSelect = HandleDnDFileSelect;
-        vm.continueRedactions = ContinueRedactions;
         vm.forceUpload = ForceUpload;
         vm.submitFrm = SubmitFrm;
         vm.cancel = Cancel;
@@ -356,10 +355,6 @@
                 else {
                     window.parent.$('#uploadInfoDiv').dialog('close');
                 }
-            }
-
-            function ContinueRedactions() {
-                vm.hasRedactions = false;
             }
 
             function getFolder() {
