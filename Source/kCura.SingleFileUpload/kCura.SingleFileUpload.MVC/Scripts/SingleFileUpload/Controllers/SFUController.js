@@ -10,6 +10,7 @@
     function SFUController($scope, $http, $compile) {
         var dialog = window.parent.parent.$("#uploadInfoDiv");
         var dialog_overlay = window.parent.parent.$(".ui-widget-overlay");
+        var browser = checkBrowser();
         var vm = $scope;
         vm.simulateFileClick = function (force) {
             SimulateFileClick(force);
@@ -28,7 +29,8 @@
         vm.changeImage = ChangeImage;
         vm.newImage = NewImage;
         vm.hasRedactions = HasRedactions;
-        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : (FDV ? "Replace Document" : "New Document")) : "Processing Document";
+        vm.hasNative = HasNative;
+        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ?(HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
         vm.tempDocId = 0;
         vm.choiceType = { type: 'fileName' };
         vm.optionalControlNumber = { text: '' };
@@ -68,8 +70,11 @@
                 document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
             }
 
+            var filesCount = document.getElementById("file").files.length;
+
             document.getElementById('btiForm').submit();
             notifyUploadStarted();
+
         }
 
         function HandleDragOver(event) {
@@ -93,12 +98,22 @@
             stopPropagation(event);
 
             $scope.$apply(function () {
+
                 if (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != '')) {
                     vm.status = 1;
                     files = event.dataTransfer.files;
+                    var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
 
-                    bkpFile = files[0];
-                    submitSimulatedForm();
+                    if (files.length == 1 && !item.isDirectory) {
+                        bkpFile = files[0];
+                        submitSimulatedForm();
+                    }
+                    else {
+                        vm.status = 2;
+                        var message = "Multiple file upload is not supported.";
+                        getdH().children[2].className = "msgDetails";
+                        getdH().children[2].innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                    }
                 }
             });
         }
@@ -202,6 +217,7 @@
                 });
 
         }
+
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (!!resultString) {
@@ -397,6 +413,30 @@
             else {
                 SubmitFrm();
             }
+        }
+
+        function checkBrowser() {
+            // Opera 8.0+
+            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
+                return "opera";
+                // Firefox 1.0+
+            else if (typeof InstallTrigger !== 'undefined')
+                return "firefox";
+                // Safari 3.0+ "[object HTMLElementConstructor]" 
+            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
+                return "safari";
+                // Internet Explorer 6-11
+            else if (/*@cc_on!@*/false || !!document.documentMode)
+                return "msie";
+                // Edge 20+
+            else if (!(/*@cc_on!@*/false || !!document.documentMode) && !!window.StyleMedia)
+                return "edge";
+                // Chrome 1+
+            else if (!!window.chrome && !!window.chrome.webstore)
+                return "chrome";
+
+            /*// Blink engine detection
+            var isBlink = (isChrome || isOpera) && !!window.CSS;*/
         }
 
     }

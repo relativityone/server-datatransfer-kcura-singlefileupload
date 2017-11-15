@@ -61,6 +61,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
             ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
             ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
+            ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
             ViewBag.ProfileID = profileID;
             return View();
         }
@@ -179,15 +180,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     imageInfo.FileLocation = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\{guidFileName}";
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
-                                    if (!newImage)
-                                    {
-                                        details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID , "Images Deleted");
-                                        _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Images_Deleted, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                    }
-                                    //_RepositoryDocumentManager.InsertImage(imageInfo);
                                     details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
                                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-                                    //_RepositoryDocumentManager.UpdateHasImages(did);
                                     response.Success = true;
                                     response.Message = imageInfo.FileLocation;
                                 }
@@ -300,7 +294,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             return Json(result);
         }
 
-
         [HttpPost]
         public JsonResult GetRepLocation()
         {
@@ -337,7 +330,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         {
             var url = ConnectionHelper.Helper().GetServicesManager().GetRESTServiceUrl().ToString();
             return url.ToString().ToLower().Replace("relativity.rest/api", "Relativity");
-            //return ConnectionHelper.Helper().GetServicesManager().GetRESTServiceUrl().ToString().ToLower().Replace("relativity.rest/api", "RelativityWebAPI");
         }
     }
 }

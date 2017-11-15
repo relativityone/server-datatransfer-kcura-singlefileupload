@@ -27,16 +27,16 @@
             {{title}}
         </div>
         <div ng-if="changeImage && hasRedactions" class="redaction-warning">
-                <div class="redaction-warning-icon">
-                    <img src="~/Content/Images/warning-6-24.png" />
-                </div>
-                <div class="redaction-text">
-                    Please note that this image contains
-                    redactions and proceeding will replace the entire image
-                    and remove any highlights or redactions.
-                </div>
+            <div class="redaction-warning-icon">
+                <img src="~/Content/Images/warning-6-24.png" />
             </div>
-        <div class="status_img" ng-style="{'margin-top' : (changeImage && hasRedactions) ? '18px' : '30px' }">
+            <div class="redaction-text">
+                Please note that this image contains
+                redactions and proceeding will replace the entire image
+                and remove any highlights or redactions.
+            </div>
+        </div>
+        <div class="status_img" ng-style="{'margin-top' : (changeImage && hasRedactions) ? '16px' : '30px' }">
             <img ng-if="status == 0" src="~/Content/Images/Upload.png" />
             <img ng-if="status == 1" src="~/Content/Images/Uploading.gif" />
             <img ng-if="status == 2 || status == 6" src="~/Content/Images/Fail.gif" />
@@ -44,39 +44,35 @@
             <img ng-if="status == 4" src="~/Content/Images/Upload_Hover.png" />
             <img ng-if="status == 5" src="~/Content/Images/Alert.png" />
         </div>
-        <span id="msg"
-              ng-show="showMessage"
-              class="message">
-            Drop your file here or <span> click to select a file.</span>
+        <span id="msg" ng-show="showMessage" class="message">
+            Drop your file here or
+            <span> click to select a file.</span>
         </span>
-        <br />
 
         @if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
         {
-        <div>
-            <hr />
-            <br />
-            <div style="width: 40%; float: left; text-align: right;">
-                <label>Control Number: </label>
+            <div>
+                <hr />
+                <div class="controlNumber controlNumber-label">
+                    <label>Control Number: </label>
+                </div>
+                <div class="radio controlNumber controlNumber-selector">
+                    <input id="fileName" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="fileName">
+                    <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
+                    <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
+                    <label for="controlNumber" ng-click="$event.stopPropagation();">&nbsp;</label>
+                    <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" />
+                </div>
             </div>
-            <div style="width: 60%; float: right; text-align: left;" class="radio">
-                <input id="fileName" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="fileName">
-                <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
-                <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
-                <label for="controlNumber" ng-click="$event.stopPropagation();">&nbsp;</label>
-                <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'"/>
-            </div>
-        </div>
         }
         else
         {
             <script>
                 if(window.frameElement != null){
-                    window.frameElement.parentElement.style.height = "320px";
+                    window.frameElement.parentElement.style.height = "335px";
                 }
             </script>
         }
-        <br />
 
         <div class="button_actions"
              ng-if="status == 5 || status == 2 || status == 6">
@@ -140,6 +136,7 @@
         var NewImage = "@ViewBag.NewImage" == "true";
         var HasRedactions = "@ViewBag.HasRedactions" == "true";
         var HasImages = "@ViewBag.HasImages" == "true";
+        var HasNative = "@ViewBag.HasNative" == "true";
         var ProfileArtifact = @ViewBag.ProfileID;
     </script>
 

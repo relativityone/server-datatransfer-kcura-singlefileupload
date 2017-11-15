@@ -337,6 +337,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return result;
         }
+
+        public bool ValidateDocNative(int docArtifactId)
+        {
+            bool result = false;
+
+            DTOs.Document document = new DTOs.Document(docArtifactId);
+            document.Fields.Add(new DTOs.FieldValue(DTOs.DocumentFieldNames.HasNative));
+            var docResults = _Repository.RSAPIClient.Repositories.Document.Read(document);
+            if (docResults.Success)
+            {
+                DTOs.Document documentArtifact = docResults.Results.FirstOrDefault().Artifact;
+                result = documentArtifact.HasNative.Value;
+            }
+
+            return result;
+        }
         public string GetDocumentControlNumber(int docArtifactId)
         {
             string result = null;
