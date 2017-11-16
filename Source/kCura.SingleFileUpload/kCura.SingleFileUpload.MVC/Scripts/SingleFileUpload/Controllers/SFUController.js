@@ -11,6 +11,7 @@
         var dialog = window.parent.parent.$("#uploadInfoDiv");
         var dialog_overlay = window.parent.parent.$(".ui-widget-overlay");
         var browser = checkBrowser();
+        var msgLabel = document.getElementById("msg");
         var vm = $scope;
         vm.simulateFileClick = function (force) {
             SimulateFileClick(force);
@@ -28,7 +29,7 @@
         vm.errorID = errorID;
         vm.changeImage = ChangeImage;
         vm.newImage = NewImage;
-        vm.hasRedactions = HasRedactions;
+        vm.hasRedactions = true;//HasRedactions;
         vm.hasNative = HasNative;
         vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ?(HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
         vm.tempDocId = 0;
@@ -82,8 +83,8 @@
             $scope.$apply(function () {
                 if (vm.choiceType.type == 'fileName') {
                     vm.status = 4;
-                    getdH().children[2].className = "message";
-                    getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
+                    msgLabel.className = "message";
+                    msgLabel.innerHTML = "Drop your file here or <span> click to select a file.</span>";
                 }
             });
         }
@@ -111,8 +112,8 @@
                     else {
                         vm.status = 2;
                         var message = "Multiple file upload is not supported.";
-                        getdH().children[2].className = "msgDetails";
-                        getdH().children[2].innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                        msgLabel.className = "msgDetails";
+                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                     }
                 }
             });
@@ -143,11 +144,13 @@
         }
 
         function SimulateFileClick(force, event) {
-            getdH().children[2].className = "message";
+            
+            msgLabel.className = "message";
+            msgLabel.innerHTML = "";
             if (vm.choiceType.type == 'fileName') {
-                getdH().children[2].innerHTML = "Drop your file here or <span> click to select a file.</span>";
+                msgLabel.innerHTML = "Drop your file here or <span> click to select a file.</span>";
             } else {
-                getdH().children[2].innerHTML = "Please type a Control Number before droping or selecting your file.</span>";
+                msgLabel.innerHTML = "Please type a Control Number before droping or selecting your file.</span>";
             }
 
             if ((vm.status == 0 || force)
@@ -269,18 +272,11 @@
                         vm.status = 3;
                     });
                 var footerHtml = !vm.changeImage ? "Document uploaded successfully!" : (vm.newImage ? "Document image uploaded succesfully!" : "Document image replaced succesfully!");
-                getdH().children[2].className = "message";
-                getdH().children[2].innerHTML = footerHtml;
+                msgLabel.className = "message";
+                msgLabel.innerHTML = footerHtml;
                 var fnc = function () { window.parent.location.reload() };
                 if (vm.errorID == 0) {
                     var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
-                    if (window.parent.parent.location.pathname.toLowerCase().indexOf("external.aspx") == -1) {
-                        var $parentWinViewerSecurity = window.parent.window;
-                        $parentWinViewerSecurity = $parentWinViewerSecurity.$($parentWinViewerSecurity);
-                        var documentViewer = $parentWinViewerSecurity[0].documentViewer;
-                        documentViewer.SetViewer("Image");
-                        var fnc = function () { window.parent.parent.location.replace(window.parent.parent.location) };
-                    }
 
                     if (vm.changeImage) {
                         updateImageDocument(result.Message);
@@ -298,9 +294,9 @@
                         vm.status = 5;
                     });
                 getdH().children[0].innerHTML = "Replace Document";
-                getdH().children[2].className = "msgDetails";
+                msgLabel.className = "msgDetails";
                 var elem = $("<div class=\"content\">A document with the same name already exists. <br/> Do you want to replace it?</div>");
-                $(getdH().children[2]).html(elem);
+                $(msgLabel).html(elem);
 
             }
 
@@ -315,8 +311,8 @@
                     });
                     var message = result.Message;
                     console.error("SFU: " + result.Message);
-                    getdH().children[2].className = "msgDetails";
-                    getdH().children[2].innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                    msgLabel.className = "msgDetails";
+                    msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 }
 
             }
@@ -337,7 +333,7 @@
                 });
                 getdH().onclick = function () { };
                 getdH().ondrop = function () { };
-                getdH().children[2].innerHTML = "Uploading";
+                msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
         }
@@ -346,8 +342,8 @@
 
             vm.status = status;
 
-            getdH().children[2].className = "message";
-            getdH().children[2].innerHTML = message;
+            msgLabel.className = "message";
+            msgLabel.innerHTML = message;
         }
 
         function stopPropagation(event) {
@@ -405,7 +401,7 @@
 
             vm.status = 1;
 
-            getdH().children[2].innerHTML = "Uploading";
+            msgLabel.innerHTML = "Uploading";
             document.getElementById('force').setAttribute('value', 'true');
             if (bkpFile) {
                 submitSimulatedForm();

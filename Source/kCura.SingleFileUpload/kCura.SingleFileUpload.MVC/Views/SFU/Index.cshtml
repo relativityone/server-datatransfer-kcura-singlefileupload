@@ -26,7 +26,7 @@
         <div class="header">
             {{title}}
         </div>
-        <div ng-if="changeImage && hasRedactions" class="redaction-warning">
+        <div ng-if="changeImage && hasRedactions && status != 2" class="redaction-warning">
             <div class="redaction-warning-icon">
                 <img src="~/Content/Images/warning-6-24.png" />
             </div>
