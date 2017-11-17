@@ -29,7 +29,7 @@
         vm.errorID = errorID;
         vm.changeImage = ChangeImage;
         vm.newImage = NewImage;
-        vm.hasRedactions = true;//HasRedactions;
+        vm.hasRedactions = HasRedactions;
         vm.hasNative = HasNative;
         vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ?(HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
         vm.tempDocId = 0;
