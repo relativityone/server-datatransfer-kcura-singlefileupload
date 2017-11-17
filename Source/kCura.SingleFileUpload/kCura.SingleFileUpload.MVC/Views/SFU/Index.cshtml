@@ -51,7 +51,7 @@
 
         @if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
         {
-            <div>
+            <div ng-if="errorID == 0">
                 <hr />
                 <div class="controlNumber controlNumber-label">
                     <label>Control Number: </label>
