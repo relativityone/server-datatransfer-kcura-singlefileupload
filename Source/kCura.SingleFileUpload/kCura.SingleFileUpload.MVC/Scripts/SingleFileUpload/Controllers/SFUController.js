@@ -422,10 +422,10 @@
             else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
                 return "safari";
                 // Internet Explorer 6-11
-            else if (/*@cc_on!@*/false || !!document.documentMode)
+            else if (false || !!document.documentMode)
                 return "msie";
                 // Edge 20+
-            else if (!(/*@cc_on!@*/false || !!document.documentMode) && !!window.StyleMedia)
+            else if (!(false || !!document.documentMode) && !!window.StyleMedia)
                 return "edge";
                 // Chrome 1+
             else if (!!window.chrome && !!window.chrome.webstore)
