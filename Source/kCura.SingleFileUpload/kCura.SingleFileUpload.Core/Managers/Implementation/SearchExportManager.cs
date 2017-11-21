@@ -11,6 +11,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
     public class SearchExportManager : BaseManager, ISearchExportManager
     {
+
+        private string fieldName { get; set; }
+        private bool checkToRemove { get; set; }
+
         public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
@@ -48,10 +52,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             return result;
         }
 
-        string fieldName;
-
-       
-
         private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {
             switch (reader.NodeType)
@@ -61,6 +61,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     {
                         case "document":
                             addToDictionary(fields, "Native Type", reader.GetAttribute("type"));
+                            break;
+                        case "target":
+                            checkToRemove = true;
                             break;
                         default:
                             if (reader.HasAttributes)
@@ -77,7 +80,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 case XmlNodeType.Text:
                     if (string.IsNullOrEmpty(fieldName))
                     {
-                        etBuilder.AppendLine(reader.Value);
+                        if (checkToRemove)
+                        {
+                            checkToRemove = false;
+                        }
+                        else
+                        {
+                            etBuilder.AppendLine(reader.Value);
+                        }
                     }
                     else
                     {

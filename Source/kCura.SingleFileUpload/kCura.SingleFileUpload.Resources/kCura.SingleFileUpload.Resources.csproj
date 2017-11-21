@@ -115,11 +115,6 @@
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Javascript.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Javascript.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
@@ -130,18 +125,6 @@
   <ItemGroup>
     <None Include="ILMerge.exe" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Javascript.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Javascript.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Javascript\SingleFileUploadScript.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Javascript\SingleFileUploadErrorsScript.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
