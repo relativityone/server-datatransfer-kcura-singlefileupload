@@ -285,6 +285,9 @@
                         setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
                     }
                 }
+                else {
+                    setTimeout(fnc, 3000);
+                }
             }
             else if (result.Message == 'R') {
                 if (removeDigest)
