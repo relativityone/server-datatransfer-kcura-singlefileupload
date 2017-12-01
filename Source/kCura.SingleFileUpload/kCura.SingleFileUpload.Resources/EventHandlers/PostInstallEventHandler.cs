@@ -63,9 +63,10 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         private async Task executeAsync()
         {
-            Repository.SetDocumentCreateHref();
+            Repository.SetCreateInstanceSettings();
             await TelemetryRepository.CreateMetricsAsync();
             await ToggleManager.Instance.SetChangeFileNameAsync(true);
+            await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
         }
     }
 }

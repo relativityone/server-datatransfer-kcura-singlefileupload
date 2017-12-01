@@ -12,7 +12,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>())
             {
-                Query query = new Query { Fields = new[] { "Document file location", "Source location" }, IncludeIdWindow = false, TruncateTextFields = true, Condition = $"'ArtifactID' IN [{errorID}]" };
+                Query query = new Query { Fields = new[] { "Document file location", "Source location", "Relativity Document Identifier" }, IncludeIdWindow = false, TruncateTextFields = true, Condition = $"'ArtifactID' IN [{errorID}]" };
                 results = Task.Run(() => _objectQueryManager.QueryAsync(WorkspaceID, processingErrorObjectType, query, 1, int.MaxValue, new int[] { 1, 2, 3, 4, 5, 6 }, string.Empty)).Result;
             }
             return new ProcessingDocument()

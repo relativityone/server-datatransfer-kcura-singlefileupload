@@ -24,5 +24,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             await ToggleProvider.Current.SetAsync<ChangeFileName>(enabled);
         }
+
+        public async Task<bool> GetCheckSFUFieldsAsync()
+        {
+            bool result = await ToggleProvider.Current.IsEnabledAsync<CheckSFUFields>();
+            return result;
+        }
+
+        public async Task SetCheckSFUFieldsAsync(bool enabled)
+        {
+            await ToggleProvider.Current.SetAsync<CheckSFUFields>(enabled);
+        }
     }
 }

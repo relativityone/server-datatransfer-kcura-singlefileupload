@@ -7,5 +7,8 @@ namespace kCura.SingleFileUpload.Core.Managers
     {
         Task<bool> GetChangeFileNameAsync();
         Task SetChangeFileNameAsync(bool enabled);
+
+        Task<bool> GetCheckSFUFieldsAsync();
+        Task SetCheckSFUFieldsAsync(bool enabled);
     }
 }

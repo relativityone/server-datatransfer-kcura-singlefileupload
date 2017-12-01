@@ -228,6 +228,52 @@ namespace kCura.SingleFileUpload.Core.SQL {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT TOP 1
+        ///	{0} AS [Key],
+        ///	DisplayName AS [Value]
+        ///FROM 
+        ///	EDDSDBO.Field 
+        ///WHERE 
+        ///	FieldArtifactTypeID=10
+        ///	AND
+        ///	DisplayName LIKE {1}.
+        /// </summary>
+        internal static string GetFieldItem {
+            get {
+                return ResourceManager.GetString("GetFieldItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT
+        ///	Name,
+        ///	[Value]
+        ///FROM
+        ///	EDDSDBO.InstanceSetting
+        ///WHERE
+        ///	NAME = &apos;SFUDefaultFieldNames&apos;.
+        /// </summary>
+        internal static string GetFieldsInstanceSetting {
+            get {
+                return ResourceManager.GetString("GetFieldsInstanceSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT 
+        ///	[Value] 
+        ///FROM 
+        ///	EDDSDBO.Settings 
+        ///WHERE 
+        ///	[Name] = &apos;SFUFieldValues&apos;.
+        /// </summary>
+        internal static string GetFieldsWorspaceSetting {
+            get {
+                return ResourceManager.GetString("GetFieldsWorspaceSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT TOP 1
         ///	   FileID
         ///      ,DocumentArtifactID
         ///      ,[Filename]
@@ -323,6 +369,60 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{
+        ///   &quot;documentExtension&quot;:&quot;Document%Extension&quot;,
+        ///   &quot;fileExtension&quot;:&quot;File%Extension&quot;,
+        ///   &quot;fileName&quot;:&quot;File%Name&quot;,
+        ///   &quot;fileSize&quot;:&quot;File%Size&quot;
+        ///}&apos;;
+        ///DECLARE @Name VARCHAR(100)= &apos;SFUDefaultFieldNames&apos;;
+        ///DECLARE @Section VARCHAR(100)= &apos;kCura.EDDS.Web&apos;;
+        ///DECLARE @ArtifactID INT;
+        ///
+        ///IF EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND Section = @Section)
+        ///    BEGIN
+        ///        UPDATE eddsdbo.InstanceSetting
+        ///          SET
+        ///              Value = @V [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string InsertFieldsInstanceSetting {
+            get {
+                return ResourceManager.GetString("InsertFieldsInstanceSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IF EXISTS(SELECT TOP 1 1 FROM EDDSDBO.Settings WHERE [Name] = &apos;SFUFieldValues&apos;)
+        ///BEGIN
+        ///	UPDATE 
+        ///		EDDSDBO.Settings 
+        ///	SET 
+        ///		[Value] = {0}
+        ///	WHERE
+        ///		[Name] = &apos;SFUFieldValues&apos;
+        ///
+        ///END
+        ///ELSE
+        ///BEGIN
+        ///	INSERT INTO
+        ///		EDDSDBO.Settings
+        ///		(
+        ///		[Name],
+        ///		[Value]
+        ///		)
+        ///		VALUES(
+        ///		&apos;SFUFieldValues&apos;,
+        ///		{0}
+        ///	)
+        ///END	.
+        /// </summary>
+        internal static string InsertFieldsWorspaceSetting {
+            get {
+                return ResourceManager.GetString("InsertFieldsWorspaceSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [EDDSDBO].[File] ([Guid]
         ///      ,[DocumentArtifactID]
         ///      ,[Filename]
@@ -346,7 +446,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{
         ///                &quot;url&quot;:  &quot;%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%&quot;,
         ///                &quot;id&quot;: &quot;documentCreateModal&quot;,        
-        ///                &quot;height&quot;: 335,
+        ///                &quot;height&quot;: 440,
         ///                &quot;width&quot;: 400,
         ///				&quot;hideClose&quot;: true
         ///}&apos;;
@@ -357,7 +457,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///    SELECT TOP 1 1
         ///    FROM eddsdbo.InstanceSetting WITH (nolock)
         ///    WHERE name = @Name
-        ///          AND Section = [rest of string was truncated]&quot;;.
+        ///          AND S [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InsertInstanceSettings {
             get {
@@ -366,14 +466,22 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DELETE FROM EDDSDBO.[FILE] WHERE FILEID = @FID
+        ///   Looks up a localized string similar to IF @FID &gt; -1
+        ///BEGIN
+        ///	DELETE 
+        ///	FROM EDDSDBO.[FILE] 
+        ///	WHERE FILEID = @FID
+        ///END
+        ///
         ///INSERT INTO EDDSDBO.[FILE] ([GUID],[DOCUMENTARTIFACTID],[FILENAME],[ORDER],[TYPE],[ROTATION],[IDENTIFIER],[LOCATION],[INREPOSITORY],[SIZE]) 
         ///	VALUES (@RG, @AID, @FN, 0,0,-1,&apos;DOC&apos; + CAST(@AID AS VARCHAR(10)) + &apos;_NATIVE&apos;, @LOC, 1, @SZ)
         ///
         ///UPDATE EDDSDBO.[DOCUMENT]
         ///SET [FILEICON] = @FN,
-        ///	[RELATIVITYNATIVETYPE] = @RNT
-        ///WHERE ARTIFACTID = @AID.
+        ///	[RELATIVITYNATIVETYPE] = @RNT,
+        ///	[HASNATIVE] = 1
+        ///WHERE 
+        ///	ARTIFACTID = @AID.
         /// </summary>
         internal static string ReplaceNativeFile {
             get {
