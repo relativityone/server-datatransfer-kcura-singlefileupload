@@ -53,7 +53,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 catch (Exception e)
                 {
                     response.Success = false;
-                    response.Message = e.Message;
+                    response.Message = e.ToString();
                 }
             }
 
@@ -63,10 +63,11 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         private async Task executeAsync()
         {
-            Repository.SetCreateInstanceSettings();
             await TelemetryRepository.CreateMetricsAsync();
             await ToggleManager.Instance.SetChangeFileNameAsync(true);
             await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+
+            Repository.SetCreateInstanceSettings();
         }
     }
 }
