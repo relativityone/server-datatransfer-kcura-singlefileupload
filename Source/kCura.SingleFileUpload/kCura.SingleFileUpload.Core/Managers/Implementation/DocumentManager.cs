@@ -485,7 +485,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
                     else
                     {
-                        throw new Exception("No rows in query");
+                        throw new Exception("No rows in query\n"+ wsValue);
                     }
                 }
                 else
