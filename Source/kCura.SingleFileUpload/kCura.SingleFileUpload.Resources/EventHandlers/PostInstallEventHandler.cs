@@ -53,7 +53,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 catch (Exception e)
                 {
                     response.Success = false;
-                    response.Message = e.Message;
+                    response.Message = e.ToString();
                     response.Exception = e;
                 }
             }
