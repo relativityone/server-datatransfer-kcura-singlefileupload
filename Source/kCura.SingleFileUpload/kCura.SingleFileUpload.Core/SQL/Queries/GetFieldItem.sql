@@ -2,7 +2,7 @@
 	'{0}' AS [Key],
 	DisplayName AS [Value]
 FROM 
-	EDDSDBO.Field 
+	EDDSDBO.Field WITH (NOLOCK)
 WHERE 
 	FieldArtifactTypeID=10
 	AND

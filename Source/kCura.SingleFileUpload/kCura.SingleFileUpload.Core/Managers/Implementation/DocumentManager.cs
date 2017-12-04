@@ -450,37 +450,52 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public void SetCreateInstanceSettings()
         {
             Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertInstanceSettings);
-            Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertFieldsInstanceSetting);
+            var isResult = Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertFieldsInstanceSetting);
 
             // Read Default fields configuration from instance setting
-            var fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
-
-            if (!string.IsNullOrEmpty(fieldNames))
+            if (isResult > 0)
             {
-                JObject fields = JObject.Parse(fieldNames);
-                JObject wsFields = new JObject();
-                StringBuilder builder = new StringBuilder();
+                var fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
 
-                foreach (var fItem in fields)
+                if (!string.IsNullOrEmpty(fieldNames))
                 {
-                    builder.Append(string.Format(Queries.GetFieldItem, fItem.Key, fItem.Value["value"].ToString()));
-                    builder.Append("\nUNION\n");
-                    wsFields.Add(fItem.Key, fItem.Value["default"].ToString());
-                }
+                    JObject fields = JObject.Parse(fieldNames);
+                    JObject wsFields = new JObject();
+                    StringBuilder builder = new StringBuilder();
 
-                var wsValue = builder.ToString();
-                wsValue = wsValue.Substring(0, wsValue.LastIndexOf("UNION"));
-                DataTable tblFields = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsDataTable(wsValue);
-
-                if (tblFields != null && tblFields.Rows.Count > 0)
-                {
-                    foreach (DataRow row in tblFields.Rows)
+                    foreach (var fItem in fields)
                     {
-                        wsFields[row[0].ToString()] = row[1].ToString();
+                        builder.Append(string.Format(Queries.GetFieldItem, fItem.Key, fItem.Value["value"].ToString()));
+                        builder.Append("\nUNION\n");
+                        wsFields.Add(fItem.Key, fItem.Value["default"].ToString());
                     }
 
-                    Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
+                    var wsValue = builder.ToString();
+                    wsValue = wsValue.Substring(0, wsValue.LastIndexOf("UNION"));
+                    DataTable tblFields = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsDataTable(wsValue);
+
+                    if (tblFields != null && tblFields.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in tblFields.Rows)
+                        {
+                            wsFields[row[0].ToString()] = row[1].ToString();
+                        }
+
+                        Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
+                    }
+                    else
+                    {
+                        throw new Exception("No rows in query");
+                    }
                 }
+                else
+                {
+                    throw new Exception("No Instance Setting");
+                }
+            }
+            else
+            {
+                throw new Exception("Instance Setting Not Created");
             }
 
         }

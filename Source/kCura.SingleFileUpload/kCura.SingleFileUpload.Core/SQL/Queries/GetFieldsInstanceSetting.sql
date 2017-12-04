@@ -1,6 +1,6 @@
 ﻿SELECT
 	[Value]
 FROM
-	EDDSDBO.InstanceSetting
+	EDDSDBO.InstanceSetting WITH (NOLOCK)
 WHERE
 	NAME = 'SFUDefaultFieldNames'

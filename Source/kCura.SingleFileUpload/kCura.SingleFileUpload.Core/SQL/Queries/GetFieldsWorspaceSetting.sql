@@ -1,6 +1,6 @@
 ﻿SELECT 
 	[Value] 
 FROM 
-	EDDSDBO.Settings 
+	EDDSDBO.Settings WITH (NOLOCK)
 WHERE 
 	[Name] = 'SFUFieldValues'
