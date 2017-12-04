@@ -481,6 +481,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                     Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
                 }
+
+                JObject testFields = JObject.Parse(Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting).ToString());
             }
 
         }
