@@ -483,21 +483,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                         Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
                     }
-                    else
-                    {
-                        throw new Exception("No rows in query\n"+ wsValue);
-                    }
-                }
-                else
-                {
-                    throw new Exception("No Instance Setting");
                 }
             }
-            else
-            {
-                throw new Exception("Instance Setting Not Created");
-            }
-
         }
         public async Task<bool> ValidateFileTypes(string extension)
         {
