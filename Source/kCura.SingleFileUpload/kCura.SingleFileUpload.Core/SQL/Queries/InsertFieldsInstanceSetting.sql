@@ -4,7 +4,7 @@
       "default":"File Extension"
    },
    "fileName":{  
-      "value":"File%Extension",
+      "value":"File%Name",
       "default":"File Name"
    },
    "fileSize":{  

@@ -63,7 +63,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
             ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
             ViewBag.ProfileID = profileID;
-            _RepositoryDocumentManager.SetCreateInstanceSettings();
 
             return View();
         }

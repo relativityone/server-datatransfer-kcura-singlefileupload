@@ -310,10 +310,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 if (!fromDocumentViewer)
                 {
                     replacedDocument.ParentArtifact = new DTOs.Artifact(defineFolder(folderID));
-                }
-                //_Repository.RSAPIClient.Repositories.Document.UpdateSingle(replacedDocument);
-                if (!fromDocumentViewer)
-                {
                     await ChangeFolder(folderID, docID);
                 }
             }
