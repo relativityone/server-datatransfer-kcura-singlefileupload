@@ -43,7 +43,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
         {
             Response response = new Response();
             RepositoryHelper.ConfigureRepository(this.Helper);
-            using (CacheContextScope d = RepositoryHelper.InitializeRepository(-1))
+            using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
             {
                 try
                 {
@@ -54,6 +54,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 {
                     response.Success = false;
                     response.Message = e.Message;
+                    response.Exception = e;
                 }
             }
 
@@ -63,9 +64,10 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         private async Task executeAsync()
         {
-            Repository.SetDocumentCreateHref();
             await TelemetryRepository.CreateMetricsAsync();
             await ToggleManager.Instance.SetChangeFileNameAsync(true);
+            await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+            Repository.SetCreateInstanceSettings();
         }
     }
 }

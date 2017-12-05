@@ -187,7 +187,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Toggles\ChangeFileName.cs" />
+    <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\adinit.dat">
@@ -905,6 +905,9 @@
     </Content>
     <Content Include="FreeImage.dll" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
+    <Content Include="SQL\Queries\GetFieldItem.sql" />
+    <Content Include="SQL\Queries\GetFieldsWorspaceSetting.sql" />
+    <Content Include="SQL\Queries\InsertFieldsWorspaceSetting.sql" />
     <Content Include="SQL\Queries\InsertImageInFileTable.sql" />
     <Content Include="SQL\Queries\DeleteDocumentRedactions.sql" />
     <Content Include="SQL\Queries\GetClientCredentials.sql" />
@@ -916,6 +919,8 @@
     <Content Include="SQL\Queries\GetMatchedFields.sql" />
     <Content Include="SQL\Queries\GetArtifactTypeByArtifactGuid.sql" />
     <Content Include="SQL\Queries\DeleteDocumentImages.sql" />
+    <Content Include="SQL\Queries\GetFieldsInstanceSetting.sql" />
+    <Content Include="SQL\Queries\InsertFieldsInstanceSetting.sql" />
     <Content Include="SQL\Queries\UpdateHasImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
     <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />
