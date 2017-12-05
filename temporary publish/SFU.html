@@ -1,0 +1,36 @@
+﻿﻿<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Single File upload</title>
+    <script src="Scripts/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+        function go() {
+            setTimeout(redirectToController);
+        }
+        function redirectToController() {
+            location.replace(location.href.replace('.html', ''));
+        }
+
+        function dialogChanges() {
+            var externalFrame = $($(window.parent.parent.document).find('#_externalPage'));
+            if (externalFrame.length > 0)
+                $(externalFrame[0].contentDocument).find('.dynamic-content-modal-close').hide();
+            go();
+        }
+
+        try {
+            dialogChanges();
+        } catch (e) {
+            go();
+        }
+
+    </script>
+</head>
+<body onload="dialogChanges()">
+    <div style="width:240px;margin-left:auto;margin-right:auto;margin-top:40%;margin-top:25%;text-align:center">
+        <img src="/relativity/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/loading.gif?v=3" alt="loading" />
+    </div>
+</body>
+
+</html>
