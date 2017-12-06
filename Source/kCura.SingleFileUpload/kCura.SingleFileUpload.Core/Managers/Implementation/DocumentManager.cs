@@ -455,35 +455,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             // Read Default fields configuration from instance setting
             if (isResult > 0)
             {
-                var fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
-
-                if (!string.IsNullOrEmpty(fieldNames))
-                {
-                    JObject fields = JObject.Parse(fieldNames);
-                    JObject wsFields = new JObject();
-                    StringBuilder builder = new StringBuilder();
-
-                    foreach (var fItem in fields)
-                    {
-                        builder.Append(string.Format(Queries.GetFieldItem, fItem.Key, fItem.Value["value"].ToString()));
-                        builder.Append("\nUNION\n");
-                        wsFields.Add(fItem.Key, fItem.Value["default"].ToString());
-                    }
-
-                    var wsValue = builder.ToString();
-                    wsValue = wsValue.Substring(0, wsValue.LastIndexOf("UNION"));
-                    DataTable tblFields = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsDataTable(wsValue);
-
-                    if (tblFields != null && tblFields.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in tblFields.Rows)
-                        {
-                            wsFields[row[0].ToString()] = row[1].ToString();
-                        }
-
-                        Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
-                    }
-                }
+                CreateWorkspaceFieldSettings();
             }
         }
         public async Task<bool> ValidateFileTypes(string extension)
@@ -520,7 +492,26 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
             {
-                JObject wsFields = JObject.Parse(Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting).ToString());
+                var wsResult = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting);
+                JObject wsFields = null;
+                if (wsResult != null)
+                {
+                    wsFields = JObject.Parse(wsResult.ToString());
+                }
+                else
+                {
+                    CreateWorkspaceFieldSettings();
+                    wsResult = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting);
+
+                    if (wsResult != null)
+                    {
+                        wsFields = JObject.Parse(wsResult.ToString());
+                    }
+                    else
+                    {
+                        throw new Exception("Fields Settings does not exist.");
+                    }
+                }
 
                 foreach (var wsItem in wsFields)
                 {
@@ -548,6 +539,40 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public string GetRepositoryLocation()
         {
             return _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+        }
+
+        private void CreateWorkspaceFieldSettings()
+        {
+
+            var fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
+
+            if (!string.IsNullOrEmpty(fieldNames))
+            {
+                JObject fields = JObject.Parse(fieldNames);
+                JObject wsFields = new JObject();
+                StringBuilder builder = new StringBuilder();
+
+                foreach (var fItem in fields)
+                {
+                    builder.Append(string.Format(Queries.GetFieldItem, fItem.Key, fItem.Value["value"].ToString()));
+                    builder.Append("\nUNION\n");
+                    wsFields.Add(fItem.Key, fItem.Value["default"].ToString());
+                }
+
+                var wsValue = builder.ToString();
+                wsValue = wsValue.Substring(0, wsValue.LastIndexOf("UNION"));
+                DataTable tblFields = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsDataTable(wsValue);
+
+                if (tblFields != null && tblFields.Rows.Count > 0)
+                {
+                    foreach (DataRow row in tblFields.Rows)
+                    {
+                        wsFields[row[0].ToString()] = row[1].ToString();
+                    }
+                }
+
+                Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
+            }
         }
         private async Task<string> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
         {
