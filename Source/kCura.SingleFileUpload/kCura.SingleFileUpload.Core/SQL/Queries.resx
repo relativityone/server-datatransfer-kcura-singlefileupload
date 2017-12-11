@@ -133,6 +133,9 @@
   <data name="GetClientCredentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getclientcredentials.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="GetDocumentArtifactIdByControlNumber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\getdocumentartifactidbycontrolnumber.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="GetDocumentIdentifierField" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getdocumentidentifierfield.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

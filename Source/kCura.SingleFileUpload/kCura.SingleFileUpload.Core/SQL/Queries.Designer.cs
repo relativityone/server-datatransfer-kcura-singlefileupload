@@ -138,6 +138,26 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  DECLARE 
+        ///	     @CNField VARCHAR(200)
+        /// SELECT 
+        ///	@CNField = REPLACE(DisplayName, &apos; &apos;, &apos;&apos;) 
+        /// FROM 
+        ///	EDDSDBO.Field 
+        /// WHERE 
+        ///	FieldArtifactTypeID = 10 
+        ///	AND 
+        ///	FieldCategoryID = 2
+        ///
+        ///EXEC(&apos;SELECT ArtifactID FROM EDDSDBO.Document WHERE &apos;+@CNField+&apos;=&apos;&apos;&apos;+@ControlNumber+&apos;&apos;&apos;&apos;).
+        /// </summary>
+        internal static string GetDocumentArtifactIdByControlNumber {
+            get {
+                return ResourceManager.GetString("GetDocumentArtifactIdByControlNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT ARTIFACTID
         ///FROM EDDSDBO.FIELD AS F WITH (NOLOCK)
         ///WHERE F.FieldArtifactTypeID = 10
@@ -228,14 +248,14 @@ namespace kCura.SingleFileUpload.Core.SQL {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT TOP 1
-        ///	{0} AS [Key],
+        ///	&apos;{0}&apos; AS [Key],
         ///	DisplayName AS [Value]
         ///FROM 
-        ///	EDDSDBO.Field 
+        ///	EDDSDBO.Field WITH (NOLOCK)
         ///WHERE 
         ///	FieldArtifactTypeID=10
         ///	AND
-        ///	DisplayName LIKE {1}.
+        ///	DisplayName LIKE &apos;{1}&apos;.
         /// </summary>
         internal static string GetFieldItem {
             get {
@@ -245,10 +265,9 @@ namespace kCura.SingleFileUpload.Core.SQL {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT
-        ///	Name,
         ///	[Value]
         ///FROM
-        ///	EDDSDBO.InstanceSetting
+        ///	EDDSDBO.InstanceSetting WITH (NOLOCK)
         ///WHERE
         ///	NAME = &apos;SFUDefaultFieldNames&apos;.
         /// </summary>
@@ -262,7 +281,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   Looks up a localized string similar to SELECT 
         ///	[Value] 
         ///FROM 
-        ///	EDDSDBO.Settings 
+        ///	EDDSDBO.Settings WITH (NOLOCK)
         ///WHERE 
         ///	[Name] = &apos;SFUFieldValues&apos;.
         /// </summary>
@@ -369,21 +388,25 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{
-        ///   &quot;documentExtension&quot;:&quot;Document%Extension&quot;,
-        ///   &quot;fileExtension&quot;:&quot;File%Extension&quot;,
-        ///   &quot;fileName&quot;:&quot;File%Name&quot;,
-        ///   &quot;fileSize&quot;:&quot;File%Size&quot;
+        ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{  
+        ///   &quot;fileExtension&quot;:{  
+        ///      &quot;value&quot;:&quot;File%Extension&quot;,
+        ///      &quot;default&quot;:&quot;File Extension&quot;
+        ///   },
+        ///   &quot;fileName&quot;:{  
+        ///      &quot;value&quot;:&quot;File%Name&quot;,
+        ///      &quot;default&quot;:&quot;File Name&quot;
+        ///   },
+        ///   &quot;fileSize&quot;:{  
+        ///      &quot;value&quot;:&quot;File%Size&quot;,
+        ///      &quot;default&quot;:&quot;File Size&quot;
+        ///   }
         ///}&apos;;
         ///DECLARE @Name VARCHAR(100)= &apos;SFUDefaultFieldNames&apos;;
         ///DECLARE @Section VARCHAR(100)= &apos;kCura.EDDS.Web&apos;;
         ///DECLARE @ArtifactID INT;
         ///
-        ///IF EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND Section = @Section)
-        ///    BEGIN
-        ///        UPDATE eddsdbo.InstanceSetting
-        ///          SET
-        ///              Value = @V [rest of string was truncated]&quot;;.
+        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHER [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InsertFieldsInstanceSetting {
             get {
@@ -397,7 +420,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	UPDATE 
         ///		EDDSDBO.Settings 
         ///	SET 
-        ///		[Value] = {0}
+        ///		[Value] = &apos;{0}&apos;
         ///	WHERE
         ///		[Name] = &apos;SFUFieldValues&apos;
         ///
@@ -412,7 +435,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///		)
         ///		VALUES(
         ///		&apos;SFUFieldValues&apos;,
-        ///		{0}
+        ///		&apos;{0}&apos;
         ///	)
         ///END	.
         /// </summary>

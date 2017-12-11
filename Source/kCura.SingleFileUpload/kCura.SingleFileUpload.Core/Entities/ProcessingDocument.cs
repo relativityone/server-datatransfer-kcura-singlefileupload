@@ -4,7 +4,7 @@
     {
         public int ErrorID { get; set; }
 
-        public int DocumentArtifactID { get; set; }
+        public string DocumentIdentifier { get; set; }
 
         public string DocumentFileLocation { get; set; }
 

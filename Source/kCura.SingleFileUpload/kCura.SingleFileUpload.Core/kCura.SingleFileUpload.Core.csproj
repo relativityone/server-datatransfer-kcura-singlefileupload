@@ -904,6 +904,7 @@
       <Link>oilink.jar</Link>
     </Content>
     <Content Include="FreeImage.dll" />
+    <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
     <Content Include="SQL\Queries\GetFieldItem.sql" />
     <Content Include="SQL\Queries\GetFieldsWorspaceSetting.sql" />

@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using Relativity.CustomPages;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Helpers;
+using Newtonsoft.Json.Linq;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
     public class SFUController : BaseController
     {
-        
+
         protected ISearchExportManager _RepositorySearchManager
         {
             get
@@ -60,7 +61,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             ViewBag.NewImage = newImage.ToString().ToLower();
             ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
             ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
-            ViewBag.HasImages = docId == 0  ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
+            ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
             ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
             ViewBag.ProfileID = profileID;
             return View();
@@ -103,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     fileName = Path.GetFileName(fileName);
                 }
                 var fileExt = Path.GetExtension(fileName).ToLower();
-                var res =  await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+                var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
                 var suported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
                 if (!res)
                 {
@@ -248,7 +249,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string resultStr = string.Empty;
                 var isAdmin = permissionHelper.IsSytemAdminUser(RelativityUserInfo.ArtifactID);
                 var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
-
+                var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                 if (hasPermission)
                 {
                     var error = _RepositoryProcessingManager.GetErrorInfo(errorID);
@@ -263,7 +264,17 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                     }
                     var transientMetadata = getTransient(file, fileName);
                     //_RepositoryProcessingManager.ReplaceFile(transientMetadata.Native, error);
-                    resultStr = (await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, 0, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID)).ToString();
+
+                    if (error.DocumentIdentifier == null)
+                    {
+                        resultStr = (await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, 0, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID)).ToString();
+                    }
+                    else
+                    {
+                        var docId = int.Parse(JArray.Parse(error.DocumentIdentifier)[0]["ArtifactID"].ToString());
+                        await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, docId, true, true, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+                    }
+
                     var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(error.DocumentFileLocation, 0, "Processing Error File Replacement");
                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, error.ErrorID, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
                     return resultStr;
