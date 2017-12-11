@@ -365,6 +365,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return result;
         }
+
+        public int GetDocumentArtifactIdByControlNumber(string controlNumber)
+        {
+            var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber, 
+                new[] {
+                    SqlHelper.CreateSqlParameter("@ControlNumber", controlNumber)
+                });
+            return int.Parse(result.ToString());
+        }
+
         public bool ValidateHasRedactions(int docArtifactId)
         {
             var query = Queries.DocumentHasRedactions;
