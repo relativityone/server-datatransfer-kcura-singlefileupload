@@ -263,17 +263,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                         return resultStr;
                     }
                     var transientMetadata = getTransient(file, fileName);
-                    //_RepositoryProcessingManager.ReplaceFile(transientMetadata.Native, error);
-
-                    if (error.DocumentIdentifier == null)
-                    {
-                        resultStr = (await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, 0, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID)).ToString();
-                    }
-                    else
-                    {
-                        var docId = int.Parse(JArray.Parse(error.DocumentIdentifier)[0]["ArtifactID"].ToString());
-                        await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, docId, true, true, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-                    }
+                    _RepositoryProcessingManager.ReplaceFile(transientMetadata.Native, error);
 
                     var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(error.DocumentFileLocation, 0, "Processing Error File Replacement");
                     _RepositoryAuditManager.CreateAuditRecord(WorkspaceID, error.ErrorID, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
