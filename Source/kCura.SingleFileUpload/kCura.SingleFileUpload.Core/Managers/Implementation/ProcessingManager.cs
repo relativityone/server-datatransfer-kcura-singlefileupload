@@ -19,6 +19,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 DocumentFileLocation = results.Data.DataResults[0].Fields[0].Value.ToString(),
                 SourceLocation = results.Data.DataResults[0].Fields[1].Value?.ToString(),
+                DocumentIdentifier = results.Data.DataResults[0].Fields[2].Value?.ToString(),
                 ErrorID = errorID
             };
         }

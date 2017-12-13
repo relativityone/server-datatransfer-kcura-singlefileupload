@@ -16,15 +16,7 @@ DECLARE @Name VARCHAR(100)= 'SFUDefaultFieldNames';
 DECLARE @Section VARCHAR(100)= 'kCura.EDDS.Web';
 DECLARE @ArtifactID INT;
 
-IF EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND Section = @Section)
-    BEGIN
-        UPDATE eddsdbo.InstanceSetting
-          SET
-              Value = @Value
-        WHERE name = @Name
-              AND Section = @Section;
-    END;
-ELSE
+IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND Section = @Section)
     BEGIN
         INSERT INTO eddsdbo.Artifact
         (ArtifactTypeID,
