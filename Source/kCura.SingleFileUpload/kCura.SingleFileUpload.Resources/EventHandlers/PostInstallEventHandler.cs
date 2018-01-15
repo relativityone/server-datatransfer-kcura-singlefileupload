@@ -4,6 +4,7 @@ using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
 using System;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -42,23 +43,31 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
         {
             Response response = new Response();
             RepositoryHelper.ConfigureRepository(this.Helper);
-            using (CacheContextScope d = RepositoryHelper.InitializeRepository(-1))
+            using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
             {
                 try
                 {
-                    Repository.SetDocumentCreateHref();
-                    TelemetryRepository.CreateMetricsAsync();
+                    executeAsync().Wait();
                     response.Success = true;
                 }
                 catch (Exception e)
                 {
                     response.Success = false;
                     response.Message = e.Message;
+                    response.Exception = e;
                 }
             }
 
 
             return response;
+        }
+
+        private async Task executeAsync()
+        {
+            await TelemetryRepository.CreateMetricsAsync();
+            await ToggleManager.Instance.SetChangeFileNameAsync(true);
+            await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+            Repository.SetCreateInstanceSettings();
         }
     }
 }

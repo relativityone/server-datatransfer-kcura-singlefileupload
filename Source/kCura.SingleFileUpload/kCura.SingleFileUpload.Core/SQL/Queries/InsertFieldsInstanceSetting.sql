@@ -1,27 +1,22 @@
-﻿DECLARE @Value VARCHAR(MAX)= '{
-                "url":  "%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%",
-                "id": "documentCreateModal",        
-                "height": 440,
-                "width": 400,
-				"hideClose": true
+﻿DECLARE @Value VARCHAR(MAX)= '{  
+   "fileExtension":{  
+      "value":"File%Extension",
+      "default":"File Extension"
+   },
+   "fileName":{  
+      "value":"File%Name",
+      "default":"File Name"
+   },
+   "fileSize":{  
+      "value":"File%Size",
+      "default":"File Size"
+   }
 }';
-DECLARE @Name VARCHAR(100)= 'DocumentCreateHref';
+DECLARE @Name VARCHAR(100)= 'SFUDefaultFieldNames';
 DECLARE @Section VARCHAR(100)= 'kCura.EDDS.Web';
-IF EXISTS
-(
-    SELECT TOP 1 1
-    FROM eddsdbo.InstanceSetting WITH (nolock)
-    WHERE name = @Name
-          AND Section = @Section
-)
-    BEGIN
-        UPDATE eddsdbo.InstanceSetting
-          SET
-              Value = @Value
-        WHERE name = @Name
-              AND Section = @Section;
-    END;
-ELSE
+DECLARE @ArtifactID INT;
+
+IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND Section = @Section)
     BEGIN
         INSERT INTO eddsdbo.Artifact
         (ArtifactTypeID,
@@ -53,8 +48,10 @@ ELSE
          '',
          0
         );
-        DECLARE @ArtifactID INT= @@identity;
-        INSERT INTO eddsdbo.InstanceSetting
+
+         SET @ArtifactID= @@identity;
+        
+		INSERT INTO eddsdbo.InstanceSetting
         (Section,
          Name,
          MachineName,

@@ -133,6 +133,9 @@
   <data name="GetClientCredentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getclientcredentials.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="GetDocumentArtifactIdByControlNumber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\getdocumentartifactidbycontrolnumber.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="GetDocumentIdentifierField" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getdocumentidentifierfield.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -147,6 +150,15 @@
   </data>
   <data name="GetFieldInfoByGuid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getfieldinfobyguid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetFieldItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\getfielditem.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetFieldsInstanceSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\getfieldsinstancesetting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetFieldsWorspaceSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\getfieldsworspacesetting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="GetFileInfoByDocumentArtifactID" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getfileinfobydocumentartifactid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -168,6 +180,12 @@
   </data>
   <data name="GetWorkspaceNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getworkspacenames.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InsertFieldsInstanceSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\insertfieldsinstancesetting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InsertFieldsWorspaceSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\insertfieldsworspacesetting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="InsertImageInFileTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\insertimageinfiletable.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

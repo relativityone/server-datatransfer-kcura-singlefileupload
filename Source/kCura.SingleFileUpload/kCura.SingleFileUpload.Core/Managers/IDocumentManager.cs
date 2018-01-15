@@ -8,11 +8,15 @@ namespace kCura.SingleFileUpload.Core.Managers
         Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
         Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0);
         int GetDocByName(string docName);
-        bool SetDocumentCreateHref();
+        void SetCreateInstanceSettings();
         Task<bool> ValidateFileTypes(string extension);
         Task<bool> IsDataGridEnabled(int workspaceID);
         bool ValidateDocImages(int docArtifactId);
+        bool ValidateDocNative(int docArtifactId);
+        string GetDocumentControlNumber(int docArtifactId);
+        int GetDocumentArtifactIdByControlNumber(string controlNumber);
         //  int SaveTempDocument(ExportedMetadata documentInfo, int folderID);
+        string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
         void UpdateHasImages(int dArtifactId);
         void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
@@ -23,5 +27,6 @@ namespace kCura.SingleFileUpload.Core.Managers
         void DeleteExistingImages(int dArtifactId);
         void InsertImage(FileInformation image);
         void WriteFile(byte[] file, FileInformation document);
+        string GetRepositoryLocation();
     }
 }

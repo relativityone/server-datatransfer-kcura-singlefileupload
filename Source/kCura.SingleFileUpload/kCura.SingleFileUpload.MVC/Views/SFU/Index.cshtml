@@ -16,8 +16,8 @@
             name="frmDnd"
             class="phantomFrame"></iframe>
     <div id="dropHere"
+         ng-class="{cantDrop: choiceType.type == 'text' && optionalControlNumber.text == ''}"
          class="dropZone"
-         ng-if="(changeImage && !hasRedactions) || !changeImage"
          ng-click="simulateFileClick()"
          ondragover="angular.element(this).scope().handleDragOver(event)"
          ondragleave="angular.element(this).scope().handleDragLeave(event)"
@@ -26,7 +26,17 @@
         <div class="header">
             {{title}}
         </div>
-        <div class="status_img">
+        <div ng-if="changeImage && hasRedactions && status != 2" class="redaction-warning">
+            <div class="redaction-warning-icon">
+                <img src="~/Content/Images/warning-6-24.png" />
+            </div>
+            <div class="redaction-text">
+                Please note that this image contains
+                redactions and proceeding will replace the entire image
+                and remove any highlights or redactions.
+            </div>
+        </div>
+        <div class="status_img" ng-style="{'margin-top' : (changeImage && hasRedactions) ? '16px' : '30px' }">
             <img ng-if="status == 0" src="~/Content/Images/Upload.png" />
             <img ng-if="status == 1" src="~/Content/Images/Uploading.gif" />
             <img ng-if="status == 2 || status == 6" src="~/Content/Images/Fail.gif" />
@@ -34,12 +44,36 @@
             <img ng-if="status == 4" src="~/Content/Images/Upload_Hover.png" />
             <img ng-if="status == 5" src="~/Content/Images/Alert.png" />
         </div>
-        <span id="msg"
-              ng-show="showMessage"
-              class="message">
-            Drop your file here or <span> click to select a file.</span>
+        <span id="msg" ng-show="showMessage" class="message">
+            Drop your file here or
+            <span> click to select a file.</span>
         </span>
-        <br />
+
+        @if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
+        {
+            <div ng-if="errorID == 0">
+                <hr />
+                <div class="controlNumber controlNumber-label">
+                    <label>Control Number: </label>
+                </div>
+                <div class="radio controlNumber controlNumber-selector">
+                    <input id="fileName" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="fileName">
+                    <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
+                    <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
+                    <label for="controlNumber" ng-click="$event.stopPropagation();">&nbsp;</label>
+                    <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <script>
+                if(window.frameElement != null){
+                    window.frameElement.parentElement.style.height = "335px";
+                }
+            </script>
+        }
+
         <div class="button_actions"
              ng-if="status == 5 || status == 2 || status == 6">
             <div class="buttonsZone">
@@ -48,28 +82,6 @@
                 @*<button ng-click="cancel()">Cancel</button>*@
                 <button id="closeBtn" class="secondary-button" ng-click="close()">Close</button>
                 @*<button id="closeBtn" class="secondary-button">Close</button>*@
-            </div>
-        </div>
-    </div>
-    <div id="redactions_confirmation"
-         ng-if="changeImage && hasRedactions">
-        <div class="header">
-            {{title}}
-        </div>
-        <div>
-            This image contains redactions or highlights and replacing the image will remove the redactions or highlights.
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            Continue?
-        </div>
-        <div class="button_actions">
-            <div class="buttonsZone">
-                <button class="btnPrimary" ng-click="continueRedactions()">Yes</button>
-                <button class="btnPrimary" ng-click="close()">No</button>
             </div>
         </div>
     </div>
@@ -88,6 +100,7 @@
         <input type="hidden" id="did" name="did" value="" />
         <input type="hidden" id="force" name="force" value="false" />
         <input type="hidden" id="newImage" name="newImage" ng-model="newImage" />
+        <input type="hidden" id="controlNumberText" name="controlNumberText" ng-value="optionalControlNumber.text" />
     </form>
     <form id="btiForm"
           ng-if="errorID != 0" action="sfu/UploadProcessingError?AppID=@ViewBag.AppID&errorID=@ViewBag.ErrorID"
@@ -122,6 +135,9 @@
         var ChangeImage = "@ViewBag.ChangeImage" == "true";
         var NewImage = "@ViewBag.NewImage" == "true";
         var HasRedactions = "@ViewBag.HasRedactions" == "true";
+        var HasImages = "@ViewBag.HasImages" == "true";
+        var HasNative = "@ViewBag.HasNative" == "true";
+        var ProfileArtifact = @ViewBag.ProfileID;
     </script>
 
 </body>

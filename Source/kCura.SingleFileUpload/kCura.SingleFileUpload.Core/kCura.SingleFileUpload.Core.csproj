@@ -140,6 +140,10 @@
       <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.9.5.142.26\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Relativity.Toggles, Version=1.0.0.84, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Toggles.1.0.0.84\lib\net462\Relativity.Toggles.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -166,6 +170,7 @@
     </Compile>
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
+    <Compile Include="Managers\Implementation\ToggleManager.cs" />
     <Compile Include="Managers\Implementation\TelemetryManager.cs" />
     <Compile Include="Managers\IProcessingManager.cs" />
     <Compile Include="Managers\IManager.cs" />
@@ -175,12 +180,14 @@
     <Compile Include="Managers\Implementation\SearchExportManager.cs" />
     <Compile Include="Managers\IDocumentManager.cs" />
     <Compile Include="Managers\ISearchExportManager.cs" />
+    <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
     <Compile Include="SQL\Queries.Designer.cs">
       <DependentUpon>Queries.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\adinit.dat">
@@ -897,7 +904,11 @@
       <Link>oilink.jar</Link>
     </Content>
     <Content Include="FreeImage.dll" />
+    <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
+    <Content Include="SQL\Queries\GetFieldItem.sql" />
+    <Content Include="SQL\Queries\GetFieldsWorspaceSetting.sql" />
+    <Content Include="SQL\Queries\InsertFieldsWorspaceSetting.sql" />
     <Content Include="SQL\Queries\InsertImageInFileTable.sql" />
     <Content Include="SQL\Queries\DeleteDocumentRedactions.sql" />
     <Content Include="SQL\Queries\GetClientCredentials.sql" />
@@ -909,6 +920,8 @@
     <Content Include="SQL\Queries\GetMatchedFields.sql" />
     <Content Include="SQL\Queries\GetArtifactTypeByArtifactGuid.sql" />
     <Content Include="SQL\Queries\DeleteDocumentImages.sql" />
+    <Content Include="SQL\Queries\GetFieldsInstanceSetting.sql" />
+    <Content Include="SQL\Queries\InsertFieldsInstanceSetting.sql" />
     <Content Include="SQL\Queries\UpdateHasImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
     <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />
