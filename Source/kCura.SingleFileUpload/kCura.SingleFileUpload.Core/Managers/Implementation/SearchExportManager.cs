@@ -16,16 +16,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
             using (Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
-            using (MemoryStream msMLS = new MemoryStream(sourceFile))
-            using (MemoryStream msML = new MemoryStream())
             {
-                exporter.SetPerformExtendedFI(true);
-                int timeZoneOffset = exporter.GetTimeZoneOffset();
-                exporter.SetSourceFile(msMLS);
-                exporter.SetDestinationFile(msML);
-                exporter.SetDestinationFormat(FileFormat.FI_SEARCHML_LATEST);
-                exporter.Export();
-                ProcessSearchMLString(msML.ToArray(), result);
+                using (MemoryStream msMLS = new MemoryStream(sourceFile))
+                {
+                    using (MemoryStream msML = new MemoryStream())
+                    {
+                        exporter.SetPerformExtendedFI(true);
+                        int timeZoneOffset = exporter.GetTimeZoneOffset();
+                        exporter.SetSourceFile(msMLS);
+                        exporter.SetDestinationFile(msML);
+                        exporter.SetDestinationFormat(FileFormat.FI_SEARCHML_LATEST);
+                        exporter.Export();
+                        ProcessSearchMLString(msML.ToArray(), result);
+                    }
+                }
             }
             result.Native = sourceFile;
             return result;
@@ -38,7 +42,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             using (MemoryStream ms = new MemoryStream(searchML))
             using (XmlReader reader = XmlReader.Create(ms))
             {
-                while(reader.Read())
+                while (reader.Read())
                 {
                     processReader(reader, extractedTextBuilder, result.Fields);
                 }
@@ -50,7 +54,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
         string fieldName;
 
-       
+
 
         private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {
@@ -68,6 +72,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                                 fieldName = reader.GetAttribute("type");
                             }
                             break;
+                        
                     }
                     if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
                     {
