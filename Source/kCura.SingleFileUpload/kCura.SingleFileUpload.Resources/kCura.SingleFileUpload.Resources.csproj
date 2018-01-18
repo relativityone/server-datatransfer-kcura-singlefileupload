@@ -110,7 +110,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
     <Compile Include="EventHandlers\PostInstallEventHandler.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
@@ -123,6 +122,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ILMerge.exe" />
     <None Include="packages.config" />
   </ItemGroup>
