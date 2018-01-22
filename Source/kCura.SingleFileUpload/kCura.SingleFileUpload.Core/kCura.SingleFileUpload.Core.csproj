@@ -426,6 +426,9 @@
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.dll">
       <Link>oilink.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.exe">
+      <Link>oilink.exe</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oitnsf.id">
       <Link>oitnsf.id</Link>
     </Content>
@@ -442,11 +445,20 @@
       <Link>pageml.xsd</Link>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccca-R1.dll">
+      <Link>sccca-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccca.dll">
       <Link>sccca.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccch-R1.dll">
+      <Link>sccch-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccch.dll">
       <Link>sccch.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccda-R1.dll">
+      <Link>sccda-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccda.dll">
       <Link>sccda.dll</Link>
@@ -454,29 +466,53 @@
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccdu.dll">
       <Link>sccdu.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccex-R1.dll">
+      <Link>sccex-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccex.dll">
       <Link>sccex.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccexind.dll">
       <Link>sccexind.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfa-R1.dll">
+      <Link>sccfa-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfa.dll">
       <Link>sccfa.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfi-R1.dll">
+      <Link>sccfi-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfi.dll">
       <Link>sccfi.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfmt-R1.dll">
+      <Link>sccfmt-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfmt.dll">
       <Link>sccfmt.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfnt-R1.dll">
+      <Link>sccfnt-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfnt.dll">
       <Link>sccfnt.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfut-R1.dll">
+      <Link>sccfut-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccfut.dll">
       <Link>sccfut.dll</Link>
     </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccind-R1.dll">
+      <Link>sccind-R1.dll</Link>
+    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccind.dll">
       <Link>sccind.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\scclo-R1.dll">
+      <Link>scclo-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\scclo.dll">
       <Link>scclo.dll</Link>
@@ -486,6 +522,9 @@
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccsd.dll">
       <Link>sccsd.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccut-R1.dll">
+      <Link>sccut-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\sccut.dll">
       <Link>sccut.dll</Link>
@@ -1003,6 +1042,9 @@
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\vszip.dll">
       <Link>vszip.dll</Link>
+    </Content>
+    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\wvcore-R1.dll">
+      <Link>wvcore-R1.dll</Link>
     </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\wvcore.dll">
       <Link>wvcore.dll</Link>
