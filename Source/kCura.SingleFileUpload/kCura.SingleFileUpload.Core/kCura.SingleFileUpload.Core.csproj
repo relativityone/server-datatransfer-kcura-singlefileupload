@@ -426,9 +426,6 @@
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.dll">
       <Link>oilink.dll</Link>
     </Content>
-    <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oilink.exe">
-      <Link>oilink.exe</Link>
-    </Content>
     <Content Include="..\..\SolutionResources\oracle-searcg-export-8.5.3\oitnsf.id">
       <Link>oitnsf.id</Link>
     </Content>
