@@ -1111,12 +1111,5 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\kCura.9.6.11.1\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.11.1\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2017.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2017.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2017.7.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2017.7.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.ImportExport.9.6.13.96\build\Relativity.ImportExport.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.ImportExport.9.6.13.96\build\Relativity.ImportExport.targets'))" />
-  </Target>
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.13.96\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.13.96\build\Relativity.ImportExport.targets')" />
 </Project>
