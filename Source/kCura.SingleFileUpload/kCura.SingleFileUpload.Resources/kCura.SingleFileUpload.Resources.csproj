@@ -123,6 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ILMerge.exe" />
     <None Include="packages.config" />
   </ItemGroup>
