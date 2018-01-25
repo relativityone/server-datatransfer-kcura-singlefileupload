@@ -1,6 +1,5 @@
 ﻿extern alias outsidein;
 using kCura.SingleFileUpload.Core.Entities;
-using OutsideIn;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
