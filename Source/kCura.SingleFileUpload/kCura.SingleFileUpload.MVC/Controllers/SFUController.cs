@@ -318,8 +318,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             {
                 transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native);
             }
-            catch
+            catch (Exception ex)
             {
+                _RepositoryDocumentManager.LogError(ex);
                 transientMetadata.Native = native;
                 transientMetadata.FileName = fileName;
                 transientMetadata.ExtractedText = string.Empty;

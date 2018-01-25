@@ -155,9 +155,13 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
+    <Reference Include="oi, Version=2017.7.0.277, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2017.7.0\lib\net40\oi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="outsidein, Version=1.0.0.0, Culture=neutral, PublicKeyToken=040cb68c7390ff6f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SolutionResources\oracle-searcg-export-8.5.3\outsidein.dll</HintPath>
+      <Aliases>outsidein</Aliases>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
