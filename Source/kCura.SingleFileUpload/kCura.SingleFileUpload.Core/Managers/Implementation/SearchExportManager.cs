@@ -1,4 +1,5 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
+﻿extern alias outsidein;
+using kCura.SingleFileUpload.Core.Entities;
 using OutsideIn;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            using (Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
+            using (outsidein::OutsideIn.Exporter exporter = outsidein::OutsideIn.OutsideIn.NewLocalExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {
@@ -25,7 +26,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         int timeZoneOffset = exporter.GetTimeZoneOffset();
                         exporter.SetSourceFile(msMLS);
                         exporter.SetDestinationFile(msML);
-                        exporter.SetDestinationFormat(FileFormat.FI_SEARCHML_LATEST);
+                        exporter.SetDestinationFormat(outsidein::OutsideIn.FileFormat.FI_SEARCHML_LATEST);
                         exporter.Export();
                         ProcessSearchMLString(msML.ToArray(), result);
                     }
