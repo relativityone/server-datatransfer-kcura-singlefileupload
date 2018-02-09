@@ -548,7 +548,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         public string GetRepositoryLocation()
         {
-            return _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+            var location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+            return !location.Last().Equals('\\') ? location+"\\" : location;
         }
 
         private void CreateWorkspaceFieldSettings()
