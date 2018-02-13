@@ -150,7 +150,7 @@
             if (vm.choiceType.type == 'fileName') {
                 msgLabel.innerHTML = "Drop your file here or <span> click to select a file.</span>";
             } else {
-                msgLabel.innerHTML = "Please type a Control Number before droping or selecting your file.</span>";
+                msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
             }
 
             if ((vm.status == 0 || force)
