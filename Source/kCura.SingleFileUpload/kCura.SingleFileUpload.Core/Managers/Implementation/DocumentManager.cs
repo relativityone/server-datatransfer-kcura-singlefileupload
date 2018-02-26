@@ -622,6 +622,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                 DataTable dtDocument = await GetDocumentDataTable(IdentityField.Name);
 
+                // upper case extension and remove period
                 var extension = Path.GetExtension(documentInfo.FileName).ToUpper().Remove(0, 1);
                 var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
                 var fullFileName = documentInfo.FileName;
