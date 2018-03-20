@@ -165,7 +165,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
                                     var transientMetadata = getTransient(file, fileName);
                                     FileInformation imageInfo = fileInfo;
-                                    var filePath = string.Empty;
 
                                     if (fileInfo == null)
                                     {
@@ -173,11 +172,17 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     }
 
                                     var guidFileName = Guid.NewGuid().ToString().ToLower();
+                                    var location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
+                                    if (!Directory.Exists(location))
+                                    {
+                                        Directory.CreateDirectory(location);
+                                    }
+
                                     imageInfo.FileName = $"{guidFileName}";
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\{guidFileName}";
+                                    imageInfo.FileLocation = string.Concat(location,guidFileName);
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
                                     var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
