@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using kCura.Relativity.Client;
+using kCura.SingleFileUpload.Core.SQL;
+using NSerio.Relativity;
 using Relativity.API;
+using Relativity.Services;
 using Relativity.Services.Exceptions;
 using Relativity.Services.Permission;
-using kCura.Relativity.Client;
-using Relativity.Services;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using kCura.SingleFileUpload.Core.SQL;
 using System.Threading;
-using NSerio.Relativity;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Helpers
 {

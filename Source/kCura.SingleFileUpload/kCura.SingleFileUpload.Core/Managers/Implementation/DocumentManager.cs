@@ -1,21 +1,21 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.Relativity.DataReaderClient;
+using kCura.Relativity.ImportAPI;
+using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.SQL;
+using Newtonsoft.Json.Linq;
+using NSerio.Relativity;
+using Relativity.API;
+using Relativity.Services.ObjectQuery;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
-using Client = kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.SQL;
-using System.Data;
-using Services = Relativity.Services;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Relativity.Services.ObjectQuery;
-using kCura.Relativity.ImportAPI;
-using kCura.Relativity.DataReaderClient;
-using Relativity.API;
-using NSerio.Relativity;
-using DTOs = kCura.Relativity.Client.DTOs;
-using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Client = kCura.Relativity.Client;
+using DTOs = kCura.Relativity.Client.DTOs;
+using Services = Relativity.Services;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {

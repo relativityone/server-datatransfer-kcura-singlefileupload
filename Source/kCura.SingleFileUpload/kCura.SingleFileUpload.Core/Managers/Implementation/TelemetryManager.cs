@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using kCura.SingleFileUpload.Core.SQL;
 using Relativity.API;
-using System.Threading.Tasks;
 using Relativity.Services.DataContracts.DTOs.MetricsCollection;
-using Relativity.Telemetry.Services.Metrics;
 using Relativity.Services.InternalMetricsCollection;
+using Relativity.Telemetry.Services.Metrics;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using kCura.SingleFileUpload.Core.SQL;
-using kCura.SingleFileUpload.Core.Helpers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {

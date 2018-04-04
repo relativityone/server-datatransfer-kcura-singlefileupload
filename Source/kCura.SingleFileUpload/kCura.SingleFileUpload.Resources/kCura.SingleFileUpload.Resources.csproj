@@ -54,9 +54,18 @@
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="kCura, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.9.6.88.52\lib\net462\kCura.dll</HintPath>
+    </Reference>
     <Reference Include="kCura.EventHandler, Version=9.5.79.83, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\..\packages\kCura.EventHandler.9.5.79.83\lib\net45\kCura.EventHandler.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Injection.9.6.88.52\lib\net462\kCura.Injection.dll</HintPath>
     </Reference>
     <Reference Include="kCura.Utility, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.Utility.9.5.142.26\lib\net462\kCura.Utility.dll</HintPath>
@@ -73,13 +82,11 @@
     <Reference Include="NSerio.Relativity">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.5.79.83, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.9.5.79.83\lib\net45\Relativity.API.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Relativity.API, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.6.88.52\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Authentication.Interfaces, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.5.142.26\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.6.88.52\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.CustomPages, Version=9.5.142.26, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\..\packages\Relativity.CustomPages.9.5.142.26\lib\net462\Relativity.CustomPages.dll</HintPath>
@@ -127,9 +134,13 @@
     <None Include="ILMerge.exe" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
 ILMerge.exe /out:kCura.SingleFileUpload.Resources.dll bin\\kCura.SingleFileUpload.Resources.dll bin\kCura.SingleFileUpload.Core.dll ..\..\SolutionResources\NSerio.Relativity.dll /lib:bin\ /targetPlatform:v4</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\packages\kCura.9.6.88.52\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.88.52\build\kCura.targets')" />
 </Project>
