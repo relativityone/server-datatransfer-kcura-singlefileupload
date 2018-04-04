@@ -1,10 +1,10 @@
-﻿using System;
-using System.Management;
+﻿using kCura.SingleFileUpload.Core.Entities.Enumerations;
+using Relativity.API;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using Relativity.API;
-using kCura.SingleFileUpload.Core.Entities.Enumerations;
+using System.Management;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {

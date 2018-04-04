@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Relativity.Telemetry.Services.Metrics;
+﻿using Relativity.Telemetry.Services.Metrics;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
