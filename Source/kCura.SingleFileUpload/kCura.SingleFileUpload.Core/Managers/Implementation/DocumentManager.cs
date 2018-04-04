@@ -548,7 +548,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         public string GetRepositoryLocation()
         {
-            return _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+            var location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+            return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
         }
 
         private void CreateWorkspaceFieldSettings()
@@ -621,7 +622,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                 DataTable dtDocument = await GetDocumentDataTable(IdentityField.Name);
 
-                var extension = Path.GetExtension(documentInfo.FileName);
+                // upper case extension and remove period
+                var extension = Path.GetExtension(documentInfo.FileName).ToUpper().Remove(0, 1);
                 var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
                 var fullFileName = documentInfo.FileName;
                 var fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
