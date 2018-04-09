@@ -414,9 +414,7 @@
     <Content Include="oi\unmanaged\oicomponents-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\oilink.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\oilink.exe" />
     <Content Include="oi\unmanaged\oilink.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1124,12 +1122,8 @@
     <None Include="oi\unmanaged\compreg.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="oi\unmanaged\oitnsf.id">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\oit_font_metrics.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="oi\unmanaged\oitnsf.id" />
+    <None Include="oi\unmanaged\oit_font_metrics.db" />
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
@@ -1142,6 +1136,5 @@
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.1.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.1.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win32.2018.3.0\build\kCura.OutsideIn.Full.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win32.2018.3.0\build\kCura.OutsideIn.Full.Win32.targets')" />
   <Import Project="..\..\packages\kCura.9.6.95.20\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.95.20\build\kCura.targets')" />
-  
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.95.20\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.95.20\build\Relativity.ImportExport.targets')" />
 </Project>
