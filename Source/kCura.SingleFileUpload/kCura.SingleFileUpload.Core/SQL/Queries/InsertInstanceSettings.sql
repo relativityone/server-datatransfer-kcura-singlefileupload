@@ -1,4 +1,6 @@
-﻿DECLARE @Value VARCHAR(MAX)= '{
+﻿BEGIN TRAN
+
+DECLARE @Value VARCHAR(MAX)= '{
                 "url":  "%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%",
                 "id": "documentCreateModal",        
                 "height": 440,
@@ -12,14 +14,12 @@ IF EXISTS
     SELECT TOP 1 1
     FROM eddsdbo.InstanceSetting WITH (nolock)
     WHERE name = @Name
-          AND Section = @Section
 )
     BEGIN
         UPDATE eddsdbo.InstanceSetting
           SET
               Value = @Value
         WHERE name = @Name
-              AND Section = @Section;
     END;
 ELSE
     BEGIN
@@ -75,3 +75,5 @@ ELSE
 		INSERT INTO EDDSDBO.ZCODEARTIFACT_9 (CODEARTIFACTID, ASSOCIATEDARTIFACTID)
 		SELECT TOP 1 ARTIFACTID, @ARTIFACTID FROM EDDSDBO.CODE WITH (NOLOCK) WHERE CODETYPEID = 9 AND NAME = 'Text'
     END;
+
+COMMIT TRAN
