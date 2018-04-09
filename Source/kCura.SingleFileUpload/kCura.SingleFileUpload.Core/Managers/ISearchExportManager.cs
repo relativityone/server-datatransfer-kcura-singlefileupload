@@ -6,5 +6,6 @@ namespace kCura.SingleFileUpload.Core.Managers
     {
         ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile);
         ExportedMetadata ProcessSearchMLString(byte[] searchML, ExportedMetadata result = null);
+        void ConfigureOutsideIn();
     }
 }

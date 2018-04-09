@@ -1,4 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -51,6 +52,26 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             return result;
         }
 
+        public void ConfigureOutsideIn()
+        {
+            string directoryPath, filePath;
+            directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "oi", "unmanaged");
+            filePath = Path.Combine(directoryPath, "oilink.exe");
+
+            if (!File.Exists(filePath))
+            {
+                using (var outStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
+                }
+            }
+            if (OutsideIn.OutsideIn.InstallLocation == null)
+            {
+                OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+            }
+        }
+
+
         string fieldName;
 
 
@@ -71,7 +92,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                                 fieldName = reader.GetAttribute("type");
                             }
                             break;
-                        
+
                     }
                     if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
                     {

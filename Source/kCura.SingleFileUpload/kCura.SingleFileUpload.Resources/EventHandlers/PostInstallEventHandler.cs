@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
     [kCura.EventHandler.CustomAttributes.RunTarget(kCura.EventHandler.Helper.RunTargets.Instance)]
-    [kCura.EventHandler.CustomAttributes.RunOnce(false)]
+    [kCura.EventHandler.CustomAttributes.RunOnce(true)]
     [kCura.EventHandler.CustomAttributes.Description("Single File Upload Post Install Event Handler")]
     [System.Runtime.InteropServices.Guid("DD7D97E1-8FF7-4E47-A3EF-FB78BC473A9D")]
     public class SingleFileUploadPostInstallEventHandler : PostInstallEventHandler
