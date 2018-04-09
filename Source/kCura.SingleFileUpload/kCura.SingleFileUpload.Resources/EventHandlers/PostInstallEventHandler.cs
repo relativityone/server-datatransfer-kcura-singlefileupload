@@ -48,6 +48,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 try
                 {
+                    Repository.SetCreateInstanceSettings();
                     executeAsync().Wait();
                     response.Success = true;
                 }
@@ -68,7 +69,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             await TelemetryRepository.CreateMetricsAsync();
             await ToggleManager.Instance.SetChangeFileNameAsync(true);
             await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
-            Repository.SetCreateInstanceSettings();
         }
     }
 }
