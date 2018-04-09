@@ -51,6 +51,15 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="kCura, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.9.6.88.52\lib\net462\kCura.dll</HintPath>
+    </Reference>
+    <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Injection.9.6.88.52\lib\net462\kCura.Injection.dll</HintPath>
+    </Reference>
     <Reference Include="kCura.Relativity.Client, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.Relativity.Client.9.5.142.26\lib\net462\kCura.Relativity.Client.dll</HintPath>
       <Private>True</Private>
@@ -71,13 +80,11 @@
       <HintPath>..\..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.9.5.142.26\lib\net462\Relativity.API.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Relativity.API, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.6.88.52\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Authentication.Interfaces, Version=9.5.142.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.5.142.26\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.6.88.52\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.CustomPages, Version=9.5.142.26, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\..\packages\Relativity.CustomPages.9.5.142.26\lib\net462\Relativity.CustomPages.dll</HintPath>
@@ -276,6 +283,7 @@
     <None Include="Properties\PublishProfiles\LocalMachine.pubxml" />
     <None Include="Properties\PublishProfiles\NSerio.pubxml" />
     <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.js" />
@@ -1130,7 +1138,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2182</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -1144,4 +1152,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\..\packages\kCura.9.6.88.52\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.88.52\build\kCura.targets')" />
 </Project>

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace kCura.SingleFileUpload.Core.SQL {
-    using System;
-    
-    
+namespace kCura.SingleFileUpload.Core.SQL
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

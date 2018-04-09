@@ -1,15 +1,14 @@
-﻿using System.Web.Mvc;
-using System.Web;
-using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
-using System;
-using System.IO;
-using kCura.SingleFileUpload.Core.Entities;
-using System.Threading.Tasks;
-using Relativity.CustomPages;
+﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Helpers;
-using Newtonsoft.Json.Linq;
+using kCura.SingleFileUpload.Core.Managers;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
+using Relativity.CustomPages;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
