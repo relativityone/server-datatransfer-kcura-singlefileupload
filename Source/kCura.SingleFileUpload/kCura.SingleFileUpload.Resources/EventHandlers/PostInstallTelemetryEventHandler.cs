@@ -49,7 +49,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 try
                 {
                     Repository.SetCreateInstanceSettings();
-                    executeAsync().Wait();
+                    executeAsync().RunSynchronously();
                     response.Success = true;
                 }
                 catch (Exception e)
