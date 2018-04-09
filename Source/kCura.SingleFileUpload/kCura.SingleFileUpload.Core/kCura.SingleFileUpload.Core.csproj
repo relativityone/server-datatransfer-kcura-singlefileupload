@@ -144,8 +144,8 @@
     <Reference Include="Relativity, Version=9.6.95.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.ImportExport.9.6.95.20\lib\net462\Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.6.95.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.9.6.95.20\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=9.6.88.52, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.6.88.52\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.95.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.6.95.20\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
