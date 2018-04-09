@@ -49,7 +49,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 try
                 {
                     Repository.SetCreateInstanceSettings();
-                    executeAsync().RunSynchronously();
                     response.Success = true;
                 }
                 catch (Exception e)
@@ -59,17 +58,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                     response.Exception = e;
                 }
             }
-
-
             return response;
         }
 
-        private async Task executeAsync()
-        {
-            await TelemetryRepository.CreateMetricsAsync();
-            await ToggleManager.Instance.SetChangeFileNameAsync(true);
-            await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
-            
-        }
+      
     }
 }

@@ -14,19 +14,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
     [System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
     public class SingleFileUploadPostInstallTelemetryEventHandler : PostInstallEventHandler
     {
-        IDocumentManager Repository
-        {
-            get
-            {
-                if (_repository == null)
-                {
-                    _repository = new DocumentManager();
-                }
-                return _repository;
-            }
-        }
-        IDocumentManager _repository;
-
         ITelemetryManager TelemetryRepository
         {
             get
@@ -48,8 +35,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 try
                 {
-                    Repository.SetCreateInstanceSettings();
-                    executeAsync().RunSynchronously();
+                    TelemetryRepository.CreateMetricsAsync().Wait();
+                    ToggleManager.Instance.SetChangeFileNameAsync(true).Wait();
+                    ToggleManager.Instance.SetCheckSFUFieldsAsync(true).Wait();
                     response.Success = true;
                 }
                 catch (Exception e)
@@ -59,16 +47,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                     response.Exception = e;
                 }
             }
-
-
             return response;
-        }
-
-        private async Task executeAsync()
-        {
-            await TelemetryRepository.CreateMetricsAsync();
-            await ToggleManager.Instance.SetChangeFileNameAsync(true);
-            await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
         }
     }
 }
