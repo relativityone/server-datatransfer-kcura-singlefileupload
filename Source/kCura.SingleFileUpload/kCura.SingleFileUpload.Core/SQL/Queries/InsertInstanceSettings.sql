@@ -13,13 +13,20 @@ IF EXISTS
 (
     SELECT TOP 1 1
     FROM eddsdbo.InstanceSetting WITH (nolock)
-    WHERE name = @Name
+    WHERE name = @Name AND Section = @Section
 )
     BEGIN
-        UPDATE eddsdbo.InstanceSetting
-          SET
-              Value = @Value
-        WHERE name = @Name
+		IF EXISTS
+		(
+			SELECT TOP 1 1
+			FROM eddsdbo.InstanceSetting WITH (nolock)
+			WHERE name = @Name AND [Value] <> @Value AND Section = @Section 
+		)
+    			BEGIN
+					UPDATE eddsdbo.InstanceSetting
+					SET [Value] = @Value
+					WHERE name = @Name AND Section = @Section 
+				END;
     END;
 ELSE
     BEGIN
