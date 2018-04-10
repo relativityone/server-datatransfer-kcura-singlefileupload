@@ -78,7 +78,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             var values = new System.Collections.Hashtable();
             values.Add("Agent", "");
             values.Add("ProcessorID", "");
-            return Utility.XmlHelper.GenerateAuditElement("RequestOrigination", values);
+            return kCura.Utility.XmlHelper.GenerateAuditElement("RequestOrigination", values);
         }
 
         private string GetRecordOrigination()

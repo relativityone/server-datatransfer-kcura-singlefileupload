@@ -109,7 +109,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         new FileType() { TypeName = "Microsoft PowerPoint for Macintosh",TypeExtension= ".ppt"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows",TypeExtension= ".ppt"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows Slideshow",TypeExtension= ".ppt"},
-                        //new FileType() { TypeName = "Microsoft PowerPoint 2007/2008",TypeExtension= ".pptx"},
+                        new FileType() { TypeName = "Microsoft PowerPoint 2007/2008",TypeExtension= ".pptx"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows Template",TypeExtension= ".pot"},
                         new FileType() { TypeName = "Novell Presentations",TypeExtension= ".shw"},
                         new FileType() { TypeName = "OpenOffice Impress",TypeExtension= ".sdd"},

@@ -66,4 +66,5 @@ DevelopmentScripts/NUnit*
 BuildLogs
 PDBs
 Applications/*.nuspec
-.vs/
+/Source/.vs/kCura.SingleFileUpload/v15/Server/sqlite3
+/.vs
