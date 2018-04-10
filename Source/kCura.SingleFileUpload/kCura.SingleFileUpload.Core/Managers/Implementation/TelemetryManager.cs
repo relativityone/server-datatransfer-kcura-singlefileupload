@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
-    public class TelemetryManager: BaseManager , ITelemetryManager
+    public class TelemetryManager : BaseManager, ITelemetryManager
     {
         public TelemetryManager()
         {
@@ -80,7 +80,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 try
                 {
                     //return metricManger.LogDuration(bucket, workSpaceGuid, MetricTargets.SUM);
-                    return metricManger.LogDuration(bucket, workSpaceGuid,workflowId);
+                    return metricManger.LogDuration(bucket, workSpaceGuid, workflowId);
                 }
                 catch (Exception ex)
                 {
@@ -89,47 +89,62 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
             }
         }
-      
+
         public async Task CreateMetricsAsync()
         {
             try
             {
                 using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
                 {
-                    Category category = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
-                    category.ID = await metricCollectionManager.CreateCategoryAsync(category, false);
-
-                    List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>
+                    var categories = await metricCollectionManager.GetCategoryTargetsAsync();
+                    var categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
+                    var sfuCategory = categoryTarget.Category;
+                    if (sfuCategory == null)
                     {
-                        new MetricIdentifier
+                        sfuCategory = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
+                        sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false);
+                    }
+                    var metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY);
+                    var numberOfDocsUploadedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DocumentsUploaded);
+                    var numberOfDocsReplacedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DocumentsReplaced);
+                    var numberOfDocsUploadedBytesMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_TotalSizeDocumentUploaded);
+                    List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>();
+
+                    if(numberOfDocsUploadedMetric == null)
+                    {
+                        metricIdentifiers.Add(new MetricIdentifier
                         {
-                            Categories = new List<CategoryRef> { category},
+                            Categories = new List<CategoryRef> { sfuCategory },
                             Name = Helpers.Constants.BUCKET_DocumentsUploaded,
                             Description = "Number of documents uploaded"
-                        },
-
-                        new MetricIdentifier
+                        });
+                    }
+                    if (numberOfDocsReplacedMetric == null)
+                    {
+                        metricIdentifiers.Add(new MetricIdentifier
                         {
-                            Categories = new List<CategoryRef> { category},
+                            Categories = new List<CategoryRef> { sfuCategory },
                             Name = Helpers.Constants.BUCKET_DocumentsReplaced,
                             Description = "Number of documents replaced"
-                        },
-
-                        new MetricIdentifier
+                        });
+                    }
+                    if (numberOfDocsUploadedBytesMetric == null)
+                    {
+                        metricIdentifiers.Add(new MetricIdentifier
                         {
-                            Categories = new List<CategoryRef> { category},
+                            Categories = new List<CategoryRef> { sfuCategory },
                             Name = Helpers.Constants.BUCKET_TotalSizeDocumentUploaded,
                             Description = "Total size of documents uploaded in bytes"
-                        }
-                    };
+                        });
+                    }
 
                     foreach (var metricIdentifier in metricIdentifiers)
                         await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false);
-
-                    List<CategoryTarget> targets = await metricCollectionManager.GetCategoryTargetsAsync();
-                    CategoryTarget categoryTarget = targets.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
-                    categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;
-                    await metricCollectionManager.UpdateCategoryTargetsAsync(targets);
+                    if (!categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM])
+                    {
+                        categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;
+                        await metricCollectionManager.UpdateCategoryTargetSingleAsync(categoryTarget);
+                    }
                 }
             }
             catch (Exception ex)
@@ -162,7 +177,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 LogError(ex);
             }
         }
-      
-      
+
+
     }
 }

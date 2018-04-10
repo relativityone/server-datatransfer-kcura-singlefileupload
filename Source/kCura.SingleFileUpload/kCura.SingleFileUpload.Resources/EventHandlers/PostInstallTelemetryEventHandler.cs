@@ -36,8 +36,14 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 try
                 {
                     TelemetryRepository.CreateMetricsAsync().Wait();
-                    ToggleManager.Instance.SetChangeFileNameAsync(true).Wait();
-                    ToggleManager.Instance.SetCheckSFUFieldsAsync(true).Wait();
+                    if (!ToggleManager.Instance.GetChangeFileNameAsync().Result)
+                    {
+                        ToggleManager.Instance.SetChangeFileNameAsync(true).Wait();
+                    }
+                    if (!ToggleManager.Instance.GetCheckSFUFieldsAsync().Result)
+                    {
+                        ToggleManager.Instance.SetCheckSFUFieldsAsync(true).Wait();
+                    }
                     response.Success = true;
                 }
                 catch (Exception e)
