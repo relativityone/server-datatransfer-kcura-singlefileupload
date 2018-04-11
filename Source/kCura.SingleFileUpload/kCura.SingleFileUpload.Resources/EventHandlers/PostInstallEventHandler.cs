@@ -4,7 +4,6 @@ using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
 using System;
-using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -27,19 +26,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
         }
         IDocumentManager _repository;
 
-        ITelemetryManager TelemetryRepository
-        {
-            get
-            {
-                if (_telemetryRepository == null)
-                {
-                    _telemetryRepository = new TelemetryManager();
-                }
-                return _telemetryRepository;
-            }
-        }
-        ITelemetryManager _telemetryRepository;
-
         public override Response Execute()
         {
             Response response = new Response();
@@ -61,6 +47,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             return response;
         }
 
-      
+
     }
 }

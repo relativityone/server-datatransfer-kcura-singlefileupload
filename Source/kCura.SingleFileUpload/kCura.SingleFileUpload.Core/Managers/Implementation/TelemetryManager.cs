@@ -98,11 +98,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 {
                     var categories = await metricCollectionManager.GetCategoryTargetsAsync();
                     var categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
-                    var sfuCategory = categoryTarget.Category;
-                    if (sfuCategory == null)
+                    var sfuCategory = categoryTarget?.Category;
+                    if (string.IsNullOrEmpty(sfuCategory?.Name))
                     {
                         sfuCategory = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
                         sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false);
+                        /// if no category target... re-set it
+                        categories = await metricCollectionManager.GetCategoryTargetsAsync();
+                        categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
+
                     }
                     var metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY);
                     var numberOfDocsUploadedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DocumentsUploaded);
@@ -110,7 +114,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     var numberOfDocsUploadedBytesMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_TotalSizeDocumentUploaded);
                     List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>();
 
-                    if(numberOfDocsUploadedMetric == null)
+                    if (string.IsNullOrEmpty(numberOfDocsUploadedMetric?.Name))
                     {
                         metricIdentifiers.Add(new MetricIdentifier
                         {
@@ -119,7 +123,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                             Description = "Number of documents uploaded"
                         });
                     }
-                    if (numberOfDocsReplacedMetric == null)
+                    if (string.IsNullOrEmpty(numberOfDocsReplacedMetric?.Name))
                     {
                         metricIdentifiers.Add(new MetricIdentifier
                         {
@@ -128,7 +132,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                             Description = "Number of documents replaced"
                         });
                     }
-                    if (numberOfDocsUploadedBytesMetric == null)
+                    if (string.IsNullOrEmpty(numberOfDocsUploadedBytesMetric?.Name))
                     {
                         metricIdentifiers.Add(new MetricIdentifier
                         {
@@ -139,7 +143,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     }
 
                     foreach (var metricIdentifier in metricIdentifiers)
+                    {
                         await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false);
+                    }
+
                     if (!categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM])
                     {
                         categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;

@@ -29,31 +29,39 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         public override Response Execute()
         {
-            Response response = new Response();
-            RepositoryHelper.ConfigureRepository(this.Helper);
-            using (CacheContextScope d = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID()))
+            var response = new Response();
+            CacheContextScope disposableContext = null;
+            try
             {
-                try
-                {
-                    TelemetryRepository.CreateMetricsAsync().Wait();
-                    if (!ToggleManager.Instance.GetChangeFileNameAsync().Result)
-                    {
-                        ToggleManager.Instance.SetChangeFileNameAsync(true).Wait();
-                    }
-                    if (!ToggleManager.Instance.GetCheckSFUFieldsAsync().Result)
-                    {
-                        ToggleManager.Instance.SetCheckSFUFieldsAsync(true).Wait();
-                    }
-                    response.Success = true;
-                }
-                catch (Exception e)
-                {
-                    response.Success = false;
-                    response.Message = e.Message;
-                    response.Exception = e;
-                }
+                RepositoryHelper.ConfigureRepository(Helper);
+                disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
+                executeAsync().Wait();
+                response.Success = true;
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = e.Message;
+                response.Exception = e;
+            }
+            finally
+            {
+                disposableContext?.Dispose();
             }
             return response;
+        }
+
+        private async Task executeAsync()
+        {
+            await TelemetryRepository.CreateMetricsAsync();
+            if (!await ToggleManager.Instance.GetChangeFileNameAsync())
+            {
+                await ToggleManager.Instance.SetChangeFileNameAsync(true);
+            }
+            if (!await ToggleManager.Instance.GetCheckSFUFieldsAsync())
+            {
+                await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+            }
         }
     }
 }
