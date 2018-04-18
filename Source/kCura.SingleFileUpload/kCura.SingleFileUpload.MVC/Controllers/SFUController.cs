@@ -104,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 var fileExt = Path.GetExtension(fileName).ToLower();
                 var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-                var suported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
+                var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
                 if (!res)
                 {
                     response.Success = false;
@@ -112,7 +112,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 else
                 {
-                    if (suported)
+                    if (supported)
                     {
                         var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                         var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));

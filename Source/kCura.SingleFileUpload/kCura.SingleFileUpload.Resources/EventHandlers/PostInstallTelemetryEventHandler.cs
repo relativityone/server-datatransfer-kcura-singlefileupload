@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
-    [kCura.EventHandler.CustomAttributes.RunTarget(kCura.EventHandler.Helper.RunTargets.Workspace)]
+    [kCura.EventHandler.CustomAttributes.RunTarget(kCura.EventHandler.Helper.RunTargets.Instance)]
     [kCura.EventHandler.CustomAttributes.RunOnce(false)]
     [kCura.EventHandler.CustomAttributes.Description("Single File Upload Post Install Event Handler")]
     [System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
@@ -53,14 +53,13 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         private async Task executeAsync()
         {
-            await TelemetryRepository.CreateMetricsAsync();
             if (!await ToggleManager.Instance.GetChangeFileNameAsync())
             {
                 await ToggleManager.Instance.SetChangeFileNameAsync(true);
             }
-            if (!await ToggleManager.Instance.GetCheckSFUFieldsAsync())
+            if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
             {
-                await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+                await ToggleManager.Instance.SetCheckSFUFieldsAsync(false);
             }
         }
     }
