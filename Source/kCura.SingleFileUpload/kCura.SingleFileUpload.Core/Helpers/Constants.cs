@@ -25,5 +25,9 @@ namespace kCura.SingleFileUpload.Core.Helpers
         public const string PermissionAddImage = "Add Image";
         public const string PermissionDeleteImage = "Delete Image";
         public const string PermissionReplaceDocument = "Replace Document";
+        /*WinEDDS settings to avoid distribution issue*/
+        public const string TAPI_FORCE_HTTP_CLIENT = "TapiForceHttpClient";
+        public const string TAPI_FORCE_WEB_UPLOAD = "ForceWebUpload";
+        public const string TAPI_FORCE_BCP_HTTP_CLIENT = "TapiForceBcpHttpClient";
     }
 }

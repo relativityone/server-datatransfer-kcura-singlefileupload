@@ -1,6 +1,7 @@
 ﻿using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Helpers;
 using kCura.SingleFileUpload.Core.SQL;
 using Newtonsoft.Json.Linq;
 using NSerio.Relativity;
@@ -368,7 +369,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
         public int GetDocumentArtifactIdByControlNumber(string controlNumber)
         {
-            var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber, 
+            var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber,
                 new[] {
                     SqlHelper.CreateSqlParameter("@ControlNumber", controlNumber)
                 });
@@ -498,7 +499,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             DocumentsDataTable.Columns.Add(identifierName, typeof(string));
             DocumentsDataTable.Columns.Add("Extracted Text", typeof(string));
-            
+
 
             if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
             {
@@ -585,6 +586,26 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
             }
         }
+
+
+        private void forceTapiSettings()
+        {
+            setWinEDDSSetting(Constants.TAPI_FORCE_WEB_UPLOAD);
+            setWinEDDSSetting(Constants.TAPI_FORCE_HTTP_CLIENT);
+            setWinEDDSSetting(Constants.TAPI_FORCE_BCP_HTTP_CLIENT);
+        }
+        private void setWinEDDSSetting(string key, string value = "True")
+        {
+            if (WinEDDS.Config.ConfigSettings.Contains(key))
+            {
+                WinEDDS.Config.ConfigSettings[key] = value;
+            }
+            else
+            {
+                WinEDDS.Config.ConfigSettings.Add(key, value);
+            }
+        }
+
         private async Task<string> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
         {
             string returnValues = string.Empty;
@@ -870,6 +891,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             LogError(jobReport.FatalException);
             throw jobReport.FatalException;
         }
-       
+
     }
 }
