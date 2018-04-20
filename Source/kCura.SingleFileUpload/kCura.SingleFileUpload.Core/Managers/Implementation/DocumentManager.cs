@@ -611,6 +611,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             string returnValues = string.Empty;
             try
             {
+                forceTapiSettings();
                 string value = getBearerToken(webApiUrl);
                 webApiUrl = webApiUrl.Replace("/Relativity/", "/RelativityWebAPI/");
                 ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
