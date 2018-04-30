@@ -1,5 +1,5 @@
-﻿using System;
-using kCura.SingleFileUpload.Core.Entities.Enumerations;
+﻿using kCura.SingleFileUpload.Core.Entities.Enumerations;
+using System;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {

@@ -22,19 +22,8 @@ namespace kCura.SingleFileUpload.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
-            CopyFiles();
+         
         }
-        private void CopyFiles()
-        {
-            var path = Path.Combine(Server.MapPath("~"), "oilink.exe");
-            if (!File.Exists(path))
-            {
-                using (var outStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    outStream.Write(DeployFiles.oilink, 0, DeployFiles.oilink.Length);
-                }
-            }
-            
-        }
+      
     }
 }

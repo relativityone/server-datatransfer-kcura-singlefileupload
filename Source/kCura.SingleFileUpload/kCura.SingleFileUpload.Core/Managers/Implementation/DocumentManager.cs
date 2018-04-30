@@ -1,21 +1,22 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.Relativity.DataReaderClient;
+using kCura.Relativity.ImportAPI;
+using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Helpers;
+using kCura.SingleFileUpload.Core.SQL;
+using Newtonsoft.Json.Linq;
+using NSerio.Relativity;
+using Relativity.API;
+using Relativity.Services.ObjectQuery;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
-using Client = kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.SQL;
-using System.Data;
-using Services = Relativity.Services;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Relativity.Services.ObjectQuery;
-using kCura.Relativity.ImportAPI;
-using kCura.Relativity.DataReaderClient;
-using Relativity.API;
-using NSerio.Relativity;
-using DTOs = kCura.Relativity.Client.DTOs;
-using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Client = kCura.Relativity.Client;
+using DTOs = kCura.Relativity.Client.DTOs;
+using Services = Relativity.Services;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -109,7 +110,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         new FileType() { TypeName = "Microsoft PowerPoint for Macintosh",TypeExtension= ".ppt"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows",TypeExtension= ".ppt"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows Slideshow",TypeExtension= ".ppt"},
-                        //new FileType() { TypeName = "Microsoft PowerPoint 2007/2008",TypeExtension= ".pptx"},
+                        new FileType() { TypeName = "Microsoft PowerPoint 2007/2008",TypeExtension= ".pptx"},
                         new FileType() { TypeName = "Microsoft PowerPoint for Windows Template",TypeExtension= ".pot"},
                         new FileType() { TypeName = "Novell Presentations",TypeExtension= ".shw"},
                         new FileType() { TypeName = "OpenOffice Impress",TypeExtension= ".sdd"},
@@ -368,7 +369,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
         public int GetDocumentArtifactIdByControlNumber(string controlNumber)
         {
-            var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber, 
+            var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber,
                 new[] {
                     SqlHelper.CreateSqlParameter("@ControlNumber", controlNumber)
                 });
@@ -498,7 +499,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             DocumentsDataTable.Columns.Add(identifierName, typeof(string));
             DocumentsDataTable.Columns.Add("Extracted Text", typeof(string));
-            
+
 
             if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
             {
@@ -585,11 +586,32 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
             }
         }
+
+
+        private void forceTapiSettings()
+        {
+            setWinEDDSSetting(Constants.TAPI_FORCE_WEB_UPLOAD);
+            setWinEDDSSetting(Constants.TAPI_FORCE_HTTP_CLIENT);
+            setWinEDDSSetting(Constants.TAPI_FORCE_BCP_HTTP_CLIENT);
+        }
+        private void setWinEDDSSetting(string key, string value = "True")
+        {
+            if (WinEDDS.Config.ConfigSettings.Contains(key))
+            {
+                WinEDDS.Config.ConfigSettings[key] = value;
+            }
+            else
+            {
+                WinEDDS.Config.ConfigSettings.Add(key, value);
+            }
+        }
+
         private async Task<string> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
         {
             string returnValues = string.Empty;
             try
             {
+                forceTapiSettings();
                 string value = getBearerToken(webApiUrl);
                 webApiUrl = webApiUrl.Replace("/Relativity/", "/RelativityWebAPI/");
                 ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
@@ -870,6 +892,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             LogError(jobReport.FatalException);
             throw jobReport.FatalException;
         }
-       
+
     }
 }

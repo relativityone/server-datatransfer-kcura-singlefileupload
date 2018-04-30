@@ -1,14 +1,14 @@
-﻿using Relativity.CustomPages;
-using System;
-using System.Linq;
-using System.Web.Mvc;
-using NSerio.Relativity.Infrastructure;
-using Relativity.API;
+﻿using kCura.SingleFileUpload.Core.Managers;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
 using NSerio.Relativity;
+using NSerio.Relativity.Infrastructure;
+using Relativity.API;
+using Relativity.CustomPages;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
-using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
+using System.Web.Mvc;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {

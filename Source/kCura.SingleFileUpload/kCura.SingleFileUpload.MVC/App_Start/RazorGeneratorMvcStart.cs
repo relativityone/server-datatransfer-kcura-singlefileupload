@@ -1,7 +1,7 @@
+using RazorGenerator.Mvc;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
-using RazorGenerator.Mvc;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(typeof(kCura.SingleFileUpload.MVC.App_Start.RazorGeneratorMvcStart), "Start")]
 

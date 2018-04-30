@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Relativity.SingleFileUpload.Core.Toggles;
 using Relativity.Toggles;
-using Relativity.SingleFileUpload.Core.Toggles;
+using System;
+using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {

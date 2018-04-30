@@ -1,15 +1,14 @@
-﻿using System.Web.Mvc;
-using System.Web;
-using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
-using System;
-using System.IO;
-using kCura.SingleFileUpload.Core.Entities;
-using System.Threading.Tasks;
-using Relativity.CustomPages;
+﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Helpers;
-using Newtonsoft.Json.Linq;
+using kCura.SingleFileUpload.Core.Managers;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
+using Relativity.CustomPages;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
@@ -105,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 var fileExt = Path.GetExtension(fileName).ToLower();
                 var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-                var suported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
+                var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
                 if (!res)
                 {
                     response.Success = false;
@@ -113,7 +112,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 else
                 {
-                    if (suported)
+                    if (supported)
                     {
                         var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                         var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
@@ -321,6 +320,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             stream.Read(native, 0, checked((int)stream.Length));
             try
             {
+                _RepositorySearchManager.ConfigureOutsideIn();
                 transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native);
             }
             catch (Exception ex)
