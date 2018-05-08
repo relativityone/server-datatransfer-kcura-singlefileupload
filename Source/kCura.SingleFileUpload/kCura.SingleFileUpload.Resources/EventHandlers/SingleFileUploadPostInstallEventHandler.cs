@@ -12,7 +12,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
     [kCura.EventHandler.CustomAttributes.RunOnce(false)]
     [kCura.EventHandler.CustomAttributes.Description("Single File Upload Post Install Event Handler")]
     [System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
-    public class SingleFileUploadPostInstallTelemetryEventHandler : PostInstallEventHandler
+    public class SingleFileUploadPostInstallEventHandler : PostInstallEventHandler
     {
         ITelemetryManager TelemetryRepository
         {
@@ -26,6 +26,18 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             }
         }
         ITelemetryManager _telemetryRepository;
+        IDocumentManager DocumentRepository
+        {
+            get
+            {
+                if (_repository == null)
+                {
+                    _repository = new DocumentManager();
+                }
+                return _repository;
+            }
+        }
+        IDocumentManager _repository;
 
         public override Response Execute()
         {
@@ -35,7 +47,8 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 RepositoryHelper.ConfigureRepository(Helper);
                 disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
-                executeAsync().Wait();
+                DocumentRepository.SetCreateInstanceSettings();
+                executeTelemetryAsync().Wait();
                 response.Success = true;
             }
             catch (Exception e)
@@ -51,7 +64,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             return response;
         }
 
-        private async Task executeAsync()
+        private async Task executeTelemetryAsync()
         {
             if (!await ToggleManager.Instance.GetChangeFileNameAsync())
             {

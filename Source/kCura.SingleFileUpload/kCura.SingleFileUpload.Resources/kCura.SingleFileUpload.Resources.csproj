@@ -115,11 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
-    <Compile Include="EventHandlers\PostInstallEventHandler.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="EventHandlers\PostInstallTelemetryEventHandler.cs" />
+    <Compile Include="EventHandlers\SingleFileUploadPostInstallEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
