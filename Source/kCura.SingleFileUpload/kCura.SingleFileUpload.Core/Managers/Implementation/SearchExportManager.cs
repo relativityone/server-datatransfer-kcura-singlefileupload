@@ -1,5 +1,6 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
+using Relativity.API;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,12 +16,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
+            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter(new OutsideIn.Authentication("XxX_BearerTokenCredentials_XxX", ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken())))
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {
                     using (MemoryStream msML = new MemoryStream())
                     {
+
                         exporter.SetPerformExtendedFI(true);
                         int timeZoneOffset = exporter.GetTimeZoneOffset();
                         exporter.SetSourceFile(msMLS);

@@ -13,9 +13,7 @@
         var browser = checkBrowser();
         var msgLabel = document.getElementById("msg");
         var vm = $scope;
-        vm.simulateFileClick = function (force) {
-            SimulateFileClick(force);
-        };
+        vm.simulateFileClick = SimulateFileClick;
         vm.handleDragOver = HandleDragOver;
         vm.handleDragLeave = HandleDragLeave;
         vm.handleDnDFileSelect = HandleDnDFileSelect;
@@ -144,18 +142,19 @@
         }
 
         function SimulateFileClick(force, event) {
-            
-            msgLabel.className = "message";
-            msgLabel.innerHTML = "";
-            if (vm.choiceType.type == 'fileName') {
-                msgLabel.innerHTML = "Drop your file here or <span> click to select a file.</span>";
-            } else {
-                msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
-            }
 
             if ((vm.status == 0 || force)
                 && (vm.choiceType.type == 'fileName' || (vm.choiceType.type != 'fileName' && vm.optionalControlNumber.text != ''))
                 && !vm.focusControlNumberValue) {
+                vm.status = 0;
+                msgLabel.className = "message";
+                msgLabel.innerHTML = "";
+                if (vm.choiceType.type == 'fileName') {
+                    msgLabel.innerHTML = "Drop your file here or <span> click to select a file.</span>";
+                } else {
+                    msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
+                }
+
                 document.getElementById('file').value = "";
                 document.getElementById('file').click();
             }
