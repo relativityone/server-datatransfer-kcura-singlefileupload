@@ -315,9 +315,7 @@
     <Content Include="oi\unmanaged\imrnd2-R1.dll" />
     <Content Include="oi\unmanaged\iphgw2-R1.dll" />
     <Content Include="oi\unmanaged\isgdi32-R1.dll" />
-    <Content Include="oi\unmanaged\ocemul-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\ocemul-R1.dll" />
     <Content Include="oi\unmanaged\oicomponents-R1.dll" />
     <Content Include="oi\unmanaged\oilink.exe" />
     <Content Include="oi\unmanaged\oilink.jar" />
@@ -636,4 +634,5 @@
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+
 </Project>
