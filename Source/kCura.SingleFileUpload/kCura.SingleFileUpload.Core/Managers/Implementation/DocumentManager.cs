@@ -658,8 +658,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
                 var fullFileName = documentInfo.FileName;
                 var fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
-
-                this.LogError(new Exception(documentInfo.ExtractedText));
+                              
 
                 // Add file to load
                 if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
