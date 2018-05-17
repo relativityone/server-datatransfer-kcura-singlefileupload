@@ -28,7 +28,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         exporter.SetSourceFile(msMLS);
                         exporter.SetDestinationFile(msML);
                         exporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
-                        exporter.SetUnicodeByteOrder(OutsideIn.Options.Options.UnicodeByteOrderValue.BigEndian);
                         exporter.Export();
                         ProcessSearchMLString(msML.ToArray(), result);
                     }
