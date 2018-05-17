@@ -294,7 +294,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             if (string.IsNullOrEmpty(importResult.Item1))
             {
                 CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
-                Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
+                var directory = Path.GetDirectoryName(importResult.Item2);
+                if (Directory.Exists(directory))
+                {
+                    Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
+                }
                 return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
             }
             return new Response() { Result = importResult.Item1, Success = false };
@@ -318,7 +322,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             updateNative(documentInfo, docID);
             Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID, docID);
             CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
-            Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
+            var directory = Path.GetDirectoryName(importResult.Item2);
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
+            }
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
         public bool ValidateDocImages(int docArtifactId)
