@@ -630,8 +630,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 importJob.Settings.ExtractedTextFieldContainsFilePath = false;
                 importJob.Settings.DisableExtractedTextEncodingCheck = true;
                 importJob.Settings.DisableExtractedTextFileLocationValidation = true;
-                importJob.Settings.DisableNativeLocationValidation = true;
-                importJob.Settings.DisableNativeValidation = true;
                 importJob.Settings.OverwriteMode = OverwriteModeEnum.AppendOverlay;
                 importJob.OnComplete += ImportJob_OnComplete;
                 importJob.OnError += ImportJob_OnError;
@@ -662,16 +660,18 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 // Add file to load
                 if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
                 {
+                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false);
                     dtDocument.Rows.Add(
                     !string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber : (documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
                     documentInfo.ExtractedText,
                     extension,
                     fullFileName,
                     fileSize,
-                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
+                    tempFilePath);
                 }
                 else
                 {
+                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false);
                     dtDocument.Rows.Add(
                     !string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber : (documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
                     documentInfo.ExtractedText,
@@ -682,7 +682,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     fileName,
                     fileSize,
                     fileSize,
-                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
+                    tempFilePath);
                 }
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();
