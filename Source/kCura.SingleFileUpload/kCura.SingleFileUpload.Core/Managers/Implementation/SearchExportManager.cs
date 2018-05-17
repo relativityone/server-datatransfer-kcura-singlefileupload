@@ -12,6 +12,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
     public class SearchExportManager : BaseManager, ISearchExportManager
     {
+        private static readonly Lazy<ISearchExportManager> instance = new Lazy<ISearchExportManager>(() => new SearchExportManager());
+        public static ISearchExportManager Instance
+        {
+            get
+            {
+                return instance.Value;
+            }
+        }
         public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
@@ -57,6 +65,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public void ConfigureOutsideIn()
         {
             string directoryPath, filePath;
+
             directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "oi", "unmanaged");
             filePath = Path.Combine(directoryPath, "oilink.exe");
 
@@ -67,11 +76,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
                 }
             }
-            if (OutsideIn.OutsideIn.InstallLocation == null)
-            {
-                OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
-            }
+            OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
         }
+
 
 
         string fieldName;

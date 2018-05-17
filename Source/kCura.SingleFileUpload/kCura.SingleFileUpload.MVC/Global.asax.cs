@@ -1,4 +1,5 @@
-﻿using NSerio.Relativity;
+﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
+using NSerio.Relativity;
 using Relativity.CustomPages;
 using System.IO;
 using System.Web.Http;
@@ -22,8 +23,10 @@ namespace kCura.SingleFileUpload.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
-         
+            SearchExportManager.Instance.ConfigureOutsideIn();
         }
+
+
       
     }
 }
