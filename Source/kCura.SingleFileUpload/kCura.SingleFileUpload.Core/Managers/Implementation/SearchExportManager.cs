@@ -16,7 +16,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter(new OutsideIn.Authentication("XxX_BearerTokenCredentials_XxX", ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken())))
+            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {
@@ -28,7 +28,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         exporter.SetSourceFile(msMLS);
                         exporter.SetDestinationFile(msML);
                         exporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
-                        exporter.SetUnicodeByteOrder(OutsideIn.Options.Options.UnicodeByteOrderValue.BigEndian);
                         exporter.Export();
                         ProcessSearchMLString(msML.ToArray(), result);
                     }
