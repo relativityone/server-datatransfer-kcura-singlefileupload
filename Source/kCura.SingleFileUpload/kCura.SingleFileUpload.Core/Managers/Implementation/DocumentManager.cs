@@ -290,7 +290,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
         public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
-           Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
+            Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
             {
                 CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
@@ -668,8 +668,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     extension,
                     fullFileName,
                     fileSize,
-                      tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
-                    importJob.Settings.ExtractedTextEncoding = EncodingHelper.GetEncoding(tempFilePath);
+                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
                 }
                 else
                 {
@@ -683,8 +682,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     fileName,
                     fileSize,
                     fileSize,
-                                      tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
-                    importJob.Settings.ExtractedTextEncoding = EncodingHelper.GetEncoding(tempFilePath);
+                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false));
                 }
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();

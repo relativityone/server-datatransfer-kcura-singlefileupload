@@ -634,5 +634,4 @@
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets')" />
-  
 </Project>
