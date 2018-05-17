@@ -38,22 +38,10 @@
   <AgentTypes />
   <IsRelativityApplication>true</IsRelativityApplication>
   <InstallEventHandlers>
-    <InstallEventHandler>
-      <ArtifactId>1087174</ArtifactId>
-      <AssemblyArtifactId>1070263</AssemblyArtifactId>
-      <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPostInstallEventHandler</Name>
-      <Guid>dd7d97e1-8ff7-4e47-a3ef-fb78bc473a9d</Guid>
-      <Guids>cbb3d246-1371-49f2-a461-0b6a305757be</Guids>
-      <ExecutionType>8</ExecutionType>
-      <Order>10</Order>
-      <AssemblyName>kCura.SingleFileUpload.Resources.dll</AssemblyName>
-      <ApplicationVersion>0.0.0.3</ApplicationVersion>
-      <RunTarget>0</RunTarget>
-    </InstallEventHandler>
-    <InstallEventHandler>
+   <InstallEventHandler>
       <ArtifactId>1081040</ArtifactId>
       <AssemblyArtifactId>1022220</AssemblyArtifactId>
-      <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPostInstallTelemetryEventHandler</Name>
+      <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPostInstallEventHandler</Name>
       <Guid>d94a421d-e7c8-433d-b325-e98998c846ba</Guid>
       <Guids>25a2ecc3-6e2b-4188-9914-4e3a769f6f4c</Guids>
       <ExecutionType>8</ExecutionType>
