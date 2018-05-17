@@ -24,7 +24,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            //using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter(new OutsideIn.Authentication("XxX_BearerTokenCredentials_XxX", ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken())))
             using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
