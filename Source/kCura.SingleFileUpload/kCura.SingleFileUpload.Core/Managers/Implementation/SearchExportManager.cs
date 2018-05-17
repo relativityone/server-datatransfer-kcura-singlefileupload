@@ -12,10 +12,19 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
     public class SearchExportManager : BaseManager, ISearchExportManager
     {
+        private static readonly Lazy<ISearchExportManager> instance = new Lazy<ISearchExportManager>(() => new SearchExportManager());
+        public static ISearchExportManager Instance
+        {
+            get
+            {
+                return instance.Value;
+            }
+        }
         public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
+            //using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter(new OutsideIn.Authentication("XxX_BearerTokenCredentials_XxX", ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken())))
             using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
@@ -57,6 +66,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public void ConfigureOutsideIn()
         {
             string directoryPath, filePath;
+
             directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "oi", "unmanaged");
             filePath = Path.Combine(directoryPath, "oilink.exe");
 
@@ -67,11 +77,17 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
                 }
             }
-            if (OutsideIn.OutsideIn.InstallLocation == null)
+            try
             {
                 OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
             }
+            catch
+            {
+
+            }
+
         }
+
 
 
         string fieldName;
