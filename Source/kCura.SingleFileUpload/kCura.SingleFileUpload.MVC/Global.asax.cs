@@ -23,7 +23,16 @@ namespace kCura.SingleFileUpload.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
-            SearchExportManager.Instance.ConfigureOutsideIn();
+            try
+            {
+                SearchExportManager.Instance.ConfigureOutsideIn();
+            }
+            catch (System.Exception ex)
+            {
+
+                SearchExportManager.Instance.LogError(ex);
+            }
+            
         }
 
 
