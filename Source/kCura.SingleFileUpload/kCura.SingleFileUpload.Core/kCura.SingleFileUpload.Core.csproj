@@ -135,7 +135,7 @@
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="oi, Version=2018.4.0.389, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win32.2018.4.0\lib\net40\oi.dll</HintPath>
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -209,6 +209,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -233,6 +236,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DeployableFiles.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EncodingHelper.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
@@ -313,57 +317,31 @@
     <Content Include="oi\unmanaged\ocemul-R1.dll" />
     <Content Include="oi\unmanaged\oicomponents-R1.dll" />
     <Content Include="oi\unmanaged\oilink.exe" />
-    <Content Include="oi\unmanaged\oilink.jar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\oilink.jar" />
     <Content Include="oi\unmanaged\osgd-R1.dll" />
     <Content Include="oi\unmanaged\ospdf-R1.dll" />
     <Content Include="oi\unmanaged\oswebview-R1.dll" />
-    <Content Include="oi\unmanaged\oswin32-R1.dll" />
+    <Content Include="oi\unmanaged\oswin64-R1.dll" />
     <Content Include="oi\unmanaged\outsidex-R1.ocx" />
     <Content Include="oi\unmanaged\sccanno-R1.dll" />
-    <Content Include="oi\unmanaged\sccca-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccch-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccda-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\sccca-R1.dll" />
+    <Content Include="oi\unmanaged\sccch-R1.dll" />
+    <Content Include="oi\unmanaged\sccda-R1.dll" />
     <Content Include="oi\unmanaged\sccdu-R1.dll" />
-    <Content Include="oi\unmanaged\sccex-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\sccex-R1.dll" />
     <Content Include="oi\unmanaged\sccexind-R1.dll" />
-    <Content Include="oi\unmanaged\sccfa-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccfi-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccfmt-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccfnt-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sccfut-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\sccfa-R1.dll" />
+    <Content Include="oi\unmanaged\sccfi-R1.dll" />
+    <Content Include="oi\unmanaged\sccfmt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfnt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfut-R1.dll" />
     <Content Include="oi\unmanaged\sccimg-R1.dll" />
-    <Content Include="oi\unmanaged\sccind-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\scclo-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\sccind-R1.dll" />
+    <Content Include="oi\unmanaged\scclo-R1.dll" />
     <Content Include="oi\unmanaged\sccole-R1.dll" />
     <Content Include="oi\unmanaged\sccole2-R1.dll" />
     <Content Include="oi\unmanaged\sccta-R1.dll" />
-    <Content Include="oi\unmanaged\sccut-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\sccvw-R1.dll" />
     <Content Include="oi\unmanaged\vsacad-R1.dll" />
     <Content Include="oi\unmanaged\vsacs-R1.dll" />
@@ -541,9 +519,7 @@
     <Content Include="oi\unmanaged\vsxy-R1.dll" />
     <Content Include="oi\unmanaged\vsyim-R1.dll" />
     <Content Include="oi\unmanaged\vszip-R1.dll" />
-    <Content Include="oi\unmanaged\wvcore-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\wvcore-R1.dll" />
     <Content Include="oi\webview\collapseB.png" />
     <Content Include="oi\webview\collapseB_hover.png" />
     <Content Include="oi\webview\Collapse_Viewer.png" />
@@ -656,11 +632,11 @@
   <Import Project="..\..\packages\kCura.9.6.104.144\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.104.144\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.3.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.104.144\build\Relativity.ImportExport.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win32.2018.4.0\build\kCura.OutsideIn.Full.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win32.2018.4.0\build\kCura.OutsideIn.Full.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win32.2018.4.0\build\kCura.OutsideIn.Full.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win32.2018.4.0\build\kCura.OutsideIn.Full.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
 </Project>
