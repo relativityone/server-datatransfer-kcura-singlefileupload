@@ -181,7 +181,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = string.Concat(location,guidFileName);
+                                    imageInfo.FileLocation = string.Concat(location, guidFileName);
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
                                     var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
@@ -329,7 +329,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 transientMetadata.Native = native;
                 transientMetadata.FileName = fileName;
                 transientMetadata.ExtractedText = string.Empty;
-                transientMetadata.FileType = MimeMapping.GetMimeMapping(fileName);
             }
             return transientMetadata;
         }

@@ -42,6 +42,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
             }
             result.Native = sourceFile;
+            
             return result;
         }
 
@@ -86,12 +87,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
 
         }
-
-
-
         string fieldName;
-
-
 
         private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {
