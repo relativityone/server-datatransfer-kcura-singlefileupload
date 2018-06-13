@@ -20,7 +20,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         void UpdateHasImages(int dArtifactId);
         void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
-        bool IsFileTypeSupported(string fileExtension);
+        FileType IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);
         void DeleteRedactions(int docArtifactId);
         void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew);

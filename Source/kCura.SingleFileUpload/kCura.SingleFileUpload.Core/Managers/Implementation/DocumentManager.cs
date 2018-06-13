@@ -287,7 +287,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 return _viewerSupportedFileType;
             }
         }
-        public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
+        public FileType IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.FirstOrDefault(x => x.TypeExtension.Equals(fileExtension.ToLower()));
         public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
             Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
@@ -549,6 +549,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
 
             DocumentsDataTable.Columns.Add("Native File", typeof(string));
+            DocumentsDataTable.Columns.Add("Relativity Native Type", typeof(string));
             return DocumentsDataTable;
         }
         public void WriteFile(byte[] file, FileInformation document)
@@ -622,7 +623,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 forceTapiSettings();
                 string value = getBearerToken(webApiUrl);
-                webApiUrl = webApiUrl.Replace("/Relativity/", "/RelativityWebAPI/");
+                if (webApiUrl.Contains("/Relativity/"))
+                {
+                    webApiUrl = webApiUrl.Replace("/Relativity/", "/RelativityWebAPI/");
+                }
+                else
+                {
+                    webApiUrl = webApiUrl.Replace("/Relativity", "/RelativityWebAPI");
+                }
                 ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
                 var importJob = iapi.NewNativeDocumentImportJob();
 
@@ -670,7 +678,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     extension,
                     fullFileName,
                     fileSize,
-                    tempFilePath);
+                    tempFilePath,
+                    documentInfo.FileType);
                 }
                 else
                 {
@@ -685,7 +694,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     fileName,
                     fileSize,
                     fileSize,
-                    tempFilePath);
+                    tempFilePath,
+                    documentInfo.FileType);
                 }
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();

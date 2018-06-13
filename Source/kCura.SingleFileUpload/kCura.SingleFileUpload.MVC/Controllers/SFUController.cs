@@ -104,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 var fileExt = Path.GetExtension(fileName).ToLower();
                 var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-                var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
+                var fileType = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
                 if (!res)
                 {
                     response.Success = false;
@@ -112,7 +112,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 else
                 {
-                    if (supported)
+                    if (fileType != null)
                     {
                         var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                         var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
@@ -122,6 +122,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                             if (did == -1 || force)
                             {
                                 var transientMetadata = getTransient(file, fileName);
+                                transientMetadata.FileType = fileType.TypeName;
                                 if (!string.IsNullOrEmpty(controlNumberText))
                                 {
                                     transientMetadata.ControlNumber = controlNumberText;
@@ -329,7 +330,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 transientMetadata.Native = native;
                 transientMetadata.FileName = fileName;
                 transientMetadata.ExtractedText = string.Empty;
-                transientMetadata.FileType = MimeMapping.GetMimeMapping(fileName);
             }
             return transientMetadata;
         }
