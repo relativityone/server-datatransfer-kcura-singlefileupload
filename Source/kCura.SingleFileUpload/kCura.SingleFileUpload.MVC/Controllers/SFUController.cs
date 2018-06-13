@@ -104,7 +104,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 var fileExt = Path.GetExtension(fileName).ToLower();
                 var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-                var fileType = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
+                var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
                 if (!res)
                 {
                     response.Success = false;
@@ -112,7 +112,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 }
                 else
                 {
-                    if (fileType != null)
+                    if (supported)
                     {
                         var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                         var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
@@ -122,7 +122,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                             if (did == -1 || force)
                             {
                                 var transientMetadata = getTransient(file, fileName);
-                                transientMetadata.FileType = fileType.TypeName;
                                 if (!string.IsNullOrEmpty(controlNumberText))
                                 {
                                     transientMetadata.ControlNumber = controlNumberText;
@@ -182,7 +181,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                     imageInfo.FileSize = transientMetadata.Native.Length;
                                     imageInfo.FileType = 1;
                                     imageInfo.Order = 0;
-                                    imageInfo.FileLocation = string.Concat(location,guidFileName);
+                                    imageInfo.FileLocation = string.Concat(location, guidFileName);
                                     _RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
                                     var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");

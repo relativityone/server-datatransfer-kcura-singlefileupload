@@ -15,12 +15,11 @@ namespace kCura.SingleFileUpload.Core.Managers
         bool ValidateDocNative(int docArtifactId);
         string GetDocumentControlNumber(int docArtifactId);
         int GetDocumentArtifactIdByControlNumber(string controlNumber);
-        //  int SaveTempDocument(ExportedMetadata documentInfo, int folderID);
         string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
         void UpdateHasImages(int dArtifactId);
         void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
-        FileType IsFileTypeSupported(string fileExtension);
+        bool IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);
         void DeleteRedactions(int docArtifactId);
         void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew);

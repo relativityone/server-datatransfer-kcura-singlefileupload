@@ -9,6 +9,7 @@ namespace kCura.SingleFileUpload.Core.Entities
             Fields = new Dictionary<string, object>();
         }
         public string FileName { get; set; }
+        public string TempFileLocation { get; set; }
         public string ControlNumber { get; set; }
         public string FileType { get; set; }
         public byte[] Native { get; set; }

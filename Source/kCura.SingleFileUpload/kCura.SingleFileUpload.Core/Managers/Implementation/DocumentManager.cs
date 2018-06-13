@@ -1,4 +1,5 @@
-﻿using kCura.Relativity.DataReaderClient;
+﻿using kCura.OI.FileID;
+using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
@@ -287,7 +288,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 return _viewerSupportedFileType;
             }
         }
-        public FileType IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.FirstOrDefault(x => x.TypeExtension.Equals(fileExtension.ToLower()));
+        public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
         public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
             Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
@@ -549,7 +550,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
 
             DocumentsDataTable.Columns.Add("Native File", typeof(string));
-            DocumentsDataTable.Columns.Add("Relativity Native Type", typeof(string));
             return DocumentsDataTable;
         }
         public void WriteFile(byte[] file, FileInformation document)
@@ -639,7 +639,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 importJob.Settings.DisableExtractedTextEncodingCheck = true;
                 importJob.Settings.DisableExtractedTextFileLocationValidation = true;
                 importJob.Settings.DisableNativeLocationValidation = true;
-                importJob.Settings.DisableNativeValidation = true;
+                importJob.Settings.DisableNativeValidation = false;
                 importJob.Settings.OverwriteMode = OverwriteModeEnum.AppendOverlay;
                 importJob.OnComplete += ImportJob_OnComplete;
                 importJob.OnError += ImportJob_OnError;
@@ -678,8 +678,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     extension,
                     fullFileName,
                     fileSize,
-                    tempFilePath,
-                    documentInfo.FileType);
+                    tempFilePath);
                 }
                 else
                 {
@@ -694,8 +693,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     fileName,
                     fileSize,
                     fileSize,
-                    tempFilePath,
-                    documentInfo.FileType);
+                    tempFilePath);
                 }
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();
@@ -767,45 +765,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDroppedFolder, SqlHelper.CreateSqlParameter("SupID", id));
         }
-        private string getNativeTypeByFilename(string fileName)
+        private FileIDData getNativeTypeByFilename(string fileName)
         {
-            string extension = Path.GetExtension(fileName).ToString();
-            string relativityNativeType = string.Empty;
-
-            switch (extension)
-            {
-                case ".xml":
-                    relativityNativeType = "Extensible Markup Language (XML)";
-                    break;
-                case ".pdf":
-                    relativityNativeType = "Adobe Acrobat (PDF)";
-                    break;
-                case ".doc":
-                    relativityNativeType = "Microsoft Word 2003/2004";
-                    break;
-                case ".docx":
-                    relativityNativeType = "Microsoft Word 2010";
-                    break;
-                case ".xls":
-                    relativityNativeType = "Microsoft Excel 2003";
-                    break;
-                case ".xlsx":
-                    relativityNativeType = "Microsoft Excel 2010 Workbook";
-                    break;
-                case ".html":
-                case ".htm":
-                    relativityNativeType = "Internet HTML";
-                    break;
-                case ".ppt":
-                    relativityNativeType = "Microsoft PowerPoint 2000/2002";
-                    break;
-                case ".pptx":
-                    relativityNativeType = "Microsoft PowerPoint 2007/2008";
-                    break;
-                default:
-                    break;
-            }
-            return relativityNativeType;
+            return Manager.Instance.GetFileIDDataByFilePath(fileName);
         }
         private void updateNative(ExportedMetadata documentInfo, int docID)
         {
@@ -822,7 +784,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 SqlHelper.CreateSqlParameter("FN", Path.GetFileName(documentInfo.FileName)),
                 SqlHelper.CreateSqlParameter("LOC", newFileLocation),
                 SqlHelper.CreateSqlParameter("SZ", documentInfo.Native.LongLength),
-                SqlHelper.CreateSqlParameter("RNT", getNativeTypeByFilename(documentInfo.FileName))
+                SqlHelper.CreateSqlParameter("RNT", getNativeTypeByFilename(newFileLocation).FileType)
             }, 300);
         }
         private void updateMatchedField(ExportedMetadata documentInfo, int docID)
