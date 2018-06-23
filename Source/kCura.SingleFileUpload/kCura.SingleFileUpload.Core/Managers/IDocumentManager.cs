@@ -1,4 +1,5 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.OI.FileID;
+using kCura.SingleFileUpload.Core.Entities;
 using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers
@@ -27,5 +28,6 @@ namespace kCura.SingleFileUpload.Core.Managers
         void InsertImage(FileInformation image);
         void WriteFile(byte[] file, FileInformation document);
         string GetRepositoryLocation();
+        FileIDData GetNativeTypeByFilename(string fileName);
     }
 }

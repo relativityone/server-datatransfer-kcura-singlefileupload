@@ -111,7 +111,7 @@
                         vm.status = 2;
                         var message = "Multiple file upload is not supported.";
                         msgLabel.className = "msgDetails";
-                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
                     }
                 }
             });
@@ -212,19 +212,31 @@
                         Close();
                     }
                 }, function (error) {
-                    console.error(error);
-                    setTimeout(function () {
-                        window.parent.location.reload();
-                    }, 2000);
+                    console.error("SFU: " + error);
+                    msgLabel.className = "msgDetails";
+                    msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 });
 
         }
-
+        function isJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (!!resultString) {
                 sessionStorage['____pushNo'] = '';
-                var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
+                var result;
+                if (isJson(resultString)) {
+                    result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
+                }
+                else {
+                    result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
+                }
                 if (vm.errorID != 0 ||
                     GetDID() != -1 ||
                     !result.Success ||

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
-    [kCura.EventHandler.CustomAttributes.RunTarget(kCura.EventHandler.Helper.RunTargets.Instance)]
-    [kCura.EventHandler.CustomAttributes.RunOnce(true)]
-    [kCura.EventHandler.CustomAttributes.Description("Single File Upload Post Install Event Handler")]
+    [EventHandler.CustomAttributes.RunTarget(kCura.EventHandler.Helper.RunTargets.Instance)]
+    [EventHandler.CustomAttributes.RunOnce(true)]
+    [EventHandler.CustomAttributes.Description("Single File Upload Post Install Event Handler")]
     [System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
     public class SingleFileUploadPostInstallEventHandler : PostInstallEventHandler
     {
@@ -74,6 +74,8 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 await ToggleManager.Instance.SetCheckSFUFieldsAsync(false);
             }
+            await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false);
         }
     }
+
 }

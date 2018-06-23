@@ -1,6 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
-using Relativity.API;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -83,9 +82,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch
             {
-
             }
-
         }
         string fieldName;
 

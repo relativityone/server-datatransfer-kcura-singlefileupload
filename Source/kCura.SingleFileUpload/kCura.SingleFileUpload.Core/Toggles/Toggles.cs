@@ -8,4 +8,7 @@ namespace Relativity.SingleFileUpload.Core.Toggles
     class CheckSFUFields : IToggle
     {
     }
+    class ValidateSFUCustomPermissions : IToggle
+    {
+    }
 }

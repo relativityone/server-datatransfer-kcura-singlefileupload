@@ -9,5 +9,7 @@ namespace kCura.SingleFileUpload.Core.Managers
 
         Task<bool> GetCheckSFUFieldsAsync();
         Task SetCheckSFUFieldsAsync(bool enabled);
+        Task<bool> GetValidateSFUCustomPermissionsAsync();
+        Task SetValidateSFUCustomPermissionsAsync(bool enabled);
     }
 }

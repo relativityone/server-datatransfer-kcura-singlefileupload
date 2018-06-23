@@ -294,12 +294,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
             {
-                CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
-                var directory = Path.GetDirectoryName(importResult.Item2);
-                if (Directory.Exists(directory))
-                {
-                    Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
-                }
+                CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
                 return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
             }
             return new Response() { Result = importResult.Item1, Success = false };
@@ -322,12 +317,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             updateNative(documentInfo, docID);
             Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID, docID);
-            CreateMetrics(documentInfo, Helpers.Constants.BUCKET_DocumentsUploaded);
-            var directory = Path.GetDirectoryName(importResult.Item2);
-            if (Directory.Exists(directory))
-            {
-                Directory.Delete(Path.GetDirectoryName(importResult.Item2), true);
-            }
+            CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
         public bool ValidateDocImages(int docArtifactId)
@@ -375,7 +365,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             return result;
         }
-
         public int GetDocumentArtifactIdByControlNumber(string controlNumber)
         {
             var result = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetDocumentArtifactIdByControlNumber,
@@ -384,7 +373,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 });
             return int.Parse(result.ToString());
         }
-
         public bool ValidateHasRedactions(int docArtifactId)
         {
             var query = Queries.DocumentHasRedactions;
@@ -561,7 +549,30 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             var location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
             return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
         }
-
+        public void CreateMetrics(ExportedMetadata documentInfo, string bucket)
+        {
+            if (!string.IsNullOrEmpty(bucket))
+            {
+                ITelemetryManager telManager = new TelemetryManager();
+                telManager.LogCountAsync(bucket, 1L);
+                telManager.LogCountAsync(Helpers.Constants.BUCKET_TotalSizeDocumentUploaded, documentInfo.Native.LongLength);
+                //Create File tipe metric
+                telManager.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), $"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
+                telManager.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), 1L);
+            }
+        }
+        public string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
+        {
+            string folder = Path.Combine(baseRepo ?? Path.GetTempPath(), $"RV_{Guid.NewGuid()}");
+            Directory.CreateDirectory(folder);
+            string tmpFileName = Path.Combine(folder, isTemp ? $"{Guid.NewGuid()}" + fileName : fileName);
+            File.WriteAllBytes(tmpFileName, fileBytes);
+            return tmpFileName;
+        }
+        public FileIDData GetNativeTypeByFilename(string fileName)
+        {
+            return Manager.Instance.GetFileIDDataByFilePath(fileName);
+        }
         private void CreateWorkspaceFieldSettings()
         {
 
@@ -595,8 +606,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
             }
         }
-
-
         private void forceTapiSettings()
         {
             setWinEDDSSetting(Constants.TAPI_FORCE_WEB_UPLOAD);
@@ -614,11 +623,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 WinEDDS.Config.ConfigSettings.Add(key, value);
             }
         }
-
         private async Task<Tuple<string, string>> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
         {
-            string returnValues = string.Empty;
-            string tempFilePath = string.Empty;
             try
             {
                 forceTapiSettings();
@@ -666,23 +672,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 var fileName = Path.GetFileNameWithoutExtension(documentInfo.FileName);
                 var fullFileName = documentInfo.FileName;
                 var fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
-                              
 
                 // Add file to load
                 if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
                 {
-                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false);
+
+
                     dtDocument.Rows.Add(
                     !string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber : (documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
                     documentInfo.ExtractedText,
                     extension,
                     fullFileName,
                     fileSize,
-                    tempFilePath);
+                    documentInfo.TempFileLocation);
                 }
                 else
                 {
-                    tempFilePath = instanceFile(documentInfo.FileName, documentInfo.Native, false);
                     dtDocument.Rows.Add(
                     !string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber : (documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
                     documentInfo.ExtractedText,
@@ -693,7 +698,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     fileName,
                     fileSize,
                     fileSize,
-                    tempFilePath);
+                    documentInfo.TempFileLocation);
                 }
 
                 importJob.SourceData.SourceData = dtDocument.CreateDataReader();
@@ -705,27 +710,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 LogError(ex);
                 return new Tuple<string, string>(ex.Message, string.Empty);
             }
-            return new Tuple<string, string>(returnValues, tempFilePath);
-        }
-        public void CreateMetrics(ExportedMetadata documentInfo, string bucket)
-        {
-            if (!string.IsNullOrEmpty(bucket))
+            finally
             {
-                ITelemetryManager telManager = new TelemetryManager();
-                telManager.LogCountAsync(bucket, 1L);
-                telManager.LogCountAsync(Helpers.Constants.BUCKET_TotalSizeDocumentUploaded, documentInfo.Native.LongLength);
-                //Create File tipe metric
-                telManager.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), $"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
-                telManager.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), 1L);
+                DeleteTempFile(documentInfo.TempFileLocation);
             }
-        }
-        public string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
-        {
-            string folder = Path.Combine(baseRepo ?? Path.GetTempPath(), $"RV_{Guid.NewGuid()}");
-            Directory.CreateDirectory(folder);
-            string tmpFileName = Path.Combine(folder, isTemp ? $"{Guid.NewGuid()}" + fileName : fileName);
-            File.WriteAllBytes(tmpFileName, fileBytes);
-            return tmpFileName;
+            return new Tuple<string, string>(string.Empty, documentInfo.TempFileLocation);
         }
         private async Task ChangeFolder(int folderID, int docID)
         {
@@ -765,10 +754,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDroppedFolder, SqlHelper.CreateSqlParameter("SupID", id));
         }
-        private FileIDData getNativeTypeByFilename(string fileName)
-        {
-            return Manager.Instance.GetFileIDDataByFilePath(fileName);
-        }
         private void updateNative(ExportedMetadata documentInfo, int docID)
         {
             var file = getFileByArtifactId(docID);
@@ -784,7 +769,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 SqlHelper.CreateSqlParameter("FN", Path.GetFileName(documentInfo.FileName)),
                 SqlHelper.CreateSqlParameter("LOC", newFileLocation),
                 SqlHelper.CreateSqlParameter("SZ", documentInfo.Native.LongLength),
-                SqlHelper.CreateSqlParameter("RNT", getNativeTypeByFilename(newFileLocation).FileType)
+                SqlHelper.CreateSqlParameter("RNT", GetNativeTypeByFilename(newFileLocation).FileType)
             }, 300);
         }
         private void updateMatchedField(ExportedMetadata documentInfo, int docID)
@@ -875,6 +860,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             LogError(jobReport.FatalException);
             throw jobReport.FatalException;
+        }
+
+        private void DeleteTempFile(string tempLocation)
+        {
+            try
+            {
+                var directory = Path.GetDirectoryName(tempLocation);
+                if (Directory.Exists(directory))
+                {
+                    Directory.Delete(directory, true);
+                }
+            }
+            catch (Exception ex) {
+                LogError(ex);
+            }
+
         }
 
     }
