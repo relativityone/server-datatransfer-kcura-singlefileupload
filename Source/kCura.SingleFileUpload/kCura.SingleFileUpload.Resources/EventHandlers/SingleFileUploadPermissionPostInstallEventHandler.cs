@@ -8,7 +8,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
     [EventHandler.CustomAttributes.Description("Single File Upload Permission Post Install Event Handler")]
     [System.Runtime.InteropServices.Guid("C4C61DB8-4151-45A8-9885-C0A4A8A5C69C")]
-    [EventHandler.CustomAttributes.RunOnce(true)]
+    [EventHandler.CustomAttributes.RunOnce(false)]
     public class SingleFileUploadPermissionPostInstallEventHandler : PostInstallEventHandler
     {
         public override Response Execute()
