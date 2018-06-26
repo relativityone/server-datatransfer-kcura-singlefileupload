@@ -126,8 +126,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.4.2.57, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.2\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2018.5.0.424, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.5.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -659,6 +659,9 @@
     <Content Include="oi\unmanaged\vsjw-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="oi\unmanaged\vslef-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\vsleg-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -905,6 +908,9 @@
     <Content Include="oi\unmanaged\vstif6-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="oi\unmanaged\vstrn-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\vstw-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1147,7 +1153,7 @@
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.7.8.101\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.7.8.101\build\Relativity.ImportExport.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.4.2\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\kCura.9.7.1.1\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.7.1.1\build\kCura.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.5.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.5.0\build\kCura.OutsideIn.Full.Win64.targets')" />
  
 </Project>

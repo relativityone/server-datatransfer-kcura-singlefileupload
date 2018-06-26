@@ -93,11 +93,17 @@ export interface OITViewInfo
 	manifest: OITDocumentManifest;
 	}
 
+export interface OIDocumentConfig
+	{
+	headers?: { [key: string]: string }
+	withCredentials?: boolean;
+	}
+
 export interface OITView
 	{
 	attach( containerElem: HTMLElement ): void;
 	detach(): void;
-	load( url: string ): void;
+	load( url: string, config?: OIDocumentConfig ): void;
 	unload(): void;
 	fitToContainer(): void;
 	width( val?: number ): number;
