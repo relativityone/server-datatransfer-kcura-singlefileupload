@@ -181,14 +181,14 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                                             imageInfo = new FileInformation();
                                         }
 
-                                        var guidFileName = Guid.NewGuid().ToString().ToLower();
+                                        var guidFileName = $"{Guid.NewGuid().ToString().ToLower()}.{fileExt}";
                                         var location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
                                         if (!Directory.Exists(location))
                                         {
                                             Directory.CreateDirectory(location);
                                         }
 
-                                        imageInfo.FileName = $"{guidFileName}{fileExt}";
+                                        imageInfo.FileName = $"{guidFileName}";
                                         imageInfo.FileSize = transientMetadata.Native.Length;
                                         imageInfo.FileType = 1;
                                         imageInfo.Order = 0;

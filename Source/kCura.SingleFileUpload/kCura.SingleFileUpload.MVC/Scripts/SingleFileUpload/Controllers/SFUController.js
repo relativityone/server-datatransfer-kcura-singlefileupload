@@ -231,8 +231,9 @@
             if (!!resultString) {
                 sessionStorage['____pushNo'] = '';
                 var result;
+                resultString = resultString.replace(/\\/g, "\\\\");
                 if (isJson(resultString)) {
-                    result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
+                    result = JSON.parse(resultString);
                 }
                 else {
                     result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
