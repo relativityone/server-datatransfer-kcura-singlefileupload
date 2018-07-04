@@ -48,7 +48,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         }
         private IAuditManager __repositoryAuditManager;
 
-        PermissionHelper permissionHelper = new PermissionHelper(ConnectionHelper.Helper());
+		
 
         public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
         {
@@ -74,29 +74,37 @@ namespace kCura.SingleFileUpload.MVC.Controllers
                 string resultStr = string.Empty;
                 try
                 {
-                    if (img)
-                    {
-                        var hasUploadPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
-                        var hasAddPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
-                        var hasdeletePermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
+					if (img)
+					{
+						var hasUploadPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
+						var hasAddPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
+						var hasdeletePermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
 
-                        if (!hasUploadPermission || !hasAddPermission || !hasdeletePermission)
-                        {
-                            response.Success = false;
-                            response.Message = "You do not have enough permissions to perform the current action.";
-                            return resultStr;
-                        }
-                    }
-                    if (fdv & !img)
-                    {
-                        var hasPermission = await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceDocument);
-                        if (!hasPermission)
-                        {
-                            response.Success = false;
-                            response.Message = "You do not have enough permissions to perform the current action.";
-                            return resultStr;
-                        }
-                    }
+						if (!hasUploadPermission || !hasAddPermission || !hasdeletePermission)
+						{
+							response.Success = false;
+							response.Message = "You do not have enough permissions to perform the current action.";
+							return resultStr;
+						}
+					}
+					else
+					{
+						bool hasPermission = false;
+						if (fdv)
+						{
+							hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceDocument);
+						}
+						else
+						{
+							hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION);
+						}
+						if (!hasPermission)
+						{
+							response.Success = false;
+							response.Message = "You do not have enough permissions to perform the current action.";
+							return resultStr;
+						}
+					}
 
                     var file = Request.Files[0];
                     string fileName = file.FileName;
@@ -276,8 +284,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             var result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
             {
                 string resultStr = string.Empty;
-                var isAdmin = permissionHelper.IsSytemAdminUser(RelativityUserInfo.ArtifactID);
-                var hasPermission = !isAdmin ? await permissionHelper.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
+                var isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
+                var hasPermission = !isAdmin ? await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
                 var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
                 if (hasPermission)
                 {

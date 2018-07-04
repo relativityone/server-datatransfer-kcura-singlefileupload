@@ -20,7 +20,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
         }
 
-        public async Task<bool> Permission_CreateSingleAsync(string permissionName, int artifactTypeId)
+		public async Task<bool> CurrentUserHasPermissionToObjectType(int workspaceId, string objectTypeGuid, string permissionName)
+		{
+			var artifactTypeId = this.GetArtifactTypeFromObjectGuid(workspaceId, objectTypeGuid);
+			bool task = await Permission_ReadSelectedSingleAsync(workspaceId, artifactTypeId.Key, permissionName);
+			return task;
+		}
+
+		public async Task<bool> Permission_CreateSingleAsync(string permissionName, int artifactTypeId)
         {
             bool success = false;
 
@@ -45,7 +52,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             return success;
         }
-        public async Task<bool> Permission_ReadSelectedSingleAsync(string permissionName)
+        public async Task<bool> Permission_ReadSelectedSingleAsync(int workspaceId, int artifactTypeId, string permissionName)
         {
             bool selected = false;
             using (IPermissionManager proxy = _Repository.CreateProxy<IPermissionManager>(ExecutionIdentity.CurrentUser))
@@ -54,11 +61,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 {
                     List<PermissionRef> _permmision = new List<PermissionRef>();
                     PermissionRef pref = new PermissionRef();
-                    pref.Name = Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION;
-                    pref.ArtifactType.ID = (int)ArtifactType.Document;
+                    pref.Name = permissionName;
+                    pref.ArtifactType.ID = artifactTypeId;
                     _permmision.Add(pref);
 
-                    List<PermissionValue> permissionValues = await proxy.GetPermissionSelectedAsync(WorkspaceID, _permmision);
+                    List<PermissionValue> permissionValues = await proxy.GetPermissionSelectedAsync(workspaceId, _permmision);
 
                     foreach (var permission in permissionValues)
                     {
@@ -111,5 +118,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     SqlHelper.CreateSqlParameter("@userArtifactID", userID)
             });
         }
-    }
+
+		private KeyValuePair<int, string> GetArtifactTypeFromObjectGuid(int workspaceId, string objectGuid)
+		{
+			KeyValuePair<int, string> fieldData = default(KeyValuePair<int, string>);
+			System.Data.Common.DbDataReader reader = _Repository.CaseDBContext.ExecuteSqlStatementAsDbDataReader(Queries.GetObjectTypeByGuid, new[] { SqlHelper.CreateSqlParameter("@artifactGuid", objectGuid) });
+
+			if (reader.HasRows)
+			{
+				reader.Read();
+				fieldData = new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1));
+			}
+
+			reader.Close();
+			return fieldData;
+		}
+	}
 }

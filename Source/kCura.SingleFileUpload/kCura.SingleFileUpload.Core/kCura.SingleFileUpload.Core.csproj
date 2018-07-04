@@ -233,7 +233,6 @@
     </Compile>
     <Compile Include="Helpers\EncodingHelper.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />
-    <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
@@ -1155,5 +1154,4 @@
   <Import Project="..\..\packages\Relativity.ImportExport.9.7.8.101\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.7.8.101\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.9.7.1.1\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.7.1.1\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.5.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.5.0\build\kCura.OutsideIn.Full.Win64.targets')" />
- 
 </Project>
