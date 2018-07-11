@@ -37,6 +37,9 @@
         vm.focusControlNumber = function (value) {
             vm.focusControlNumberValue = value;
         }
+        vm.controlNumberSelected = function () {
+            msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
+        }
 
 
         sessionStorage['____pushNo'] = '';
@@ -135,6 +138,7 @@
                 if (xhr.readyState == 4)
                     eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
             };
+            msgLabel.innerHTML = "Uploading";
             notifyUploadStarted();
             checkUpload();
             xhr.open('POST', form.action);
