@@ -50,7 +50,20 @@
       <ApplicationVersion>9.6.6.14</ApplicationVersion>
       <RunTarget>1</RunTarget>
     </InstallEventHandler>
+	<InstallEventHandler>
+      <ArtifactId>1082033</ArtifactId>
+      <AssemblyArtifactId>1022220</AssemblyArtifactId>
+      <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPermissionPostInstallEventHandler</Name>
+      <Guid>c4c61db8-4151-45a8-9885-c0a4a8a5c69c</Guid>
+      <Guids>ea6266fe-9859-4afa-bf6f-cb1cca2650b0</Guids>
+      <ExecutionType>8</ExecutionType>
+      <Order>30</Order>
+      <AssemblyName>kCura.SingleFileUpload.Resources.dll</AssemblyName>
+      <ApplicationVersion>9.6.20.58</ApplicationVersion>
+      <RunTarget>0</RunTarget>
+    </InstallEventHandler>
   </InstallEventHandlers>
+  
   <SavedSearches />
   <SearchContainers />
   <SearchProviders />

@@ -35,5 +35,17 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         {
             await ToggleProvider.Current.SetAsync<CheckSFUFields>(enabled);
         }
+
+        public async Task<bool> GetValidateSFUCustomPermissionsAsync()
+        {
+            bool result = await ToggleProvider.Current.IsEnabledAsync<ValidateSFUCustomPermissions>();
+            return result;
+        }
+
+        public async Task SetValidateSFUCustomPermissionsAsync(bool enabled)
+        {
+            await ToggleProvider.Current.SetAsync<ValidateSFUCustomPermissions>(enabled);
+        }
+
     }
 }

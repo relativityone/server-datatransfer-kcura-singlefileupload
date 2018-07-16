@@ -1,6 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
-using Relativity.API;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -42,6 +41,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
             }
             result.Native = sourceFile;
+            
             return result;
         }
 
@@ -82,16 +82,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch
             {
-
             }
-
         }
-
-
-
         string fieldName;
-
-
 
         private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {

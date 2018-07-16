@@ -24,6 +24,8 @@
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,26 +59,15 @@
     <Reference Include="FaspManager, Version=3.7.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\relativity.faspmanager.3.7.2.0\lib\net40\FaspManager.dll</HintPath>
     </Reference>
-    <Reference Include="kCura, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.9.6.104.144\lib\net462\kCura.dll</HintPath>
-    </Reference>
-    <Reference Include="kCura.Config, Version=9.5.464.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Config.9.5.464.1\lib\net462\kCura.Config.dll</HintPath>
-    </Reference>
-    <Reference Include="kCura.Crypto, Version=9.5.464.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Crypto.9.5.464.1\lib\net462\kCura.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="kCura.Data.RowDataGateway, Version=9.5.464.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Data.RowDataGateway.9.5.464.1\lib\net462\kCura.Data.RowDataGateway.dll</HintPath>
-    </Reference>
     <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Injection.9.6.104.144\lib\net462\kCura.Injection.dll</HintPath>
+      <HintPath>..\..\packages\kCura.Injection.9.7.1.1\lib\net462\kCura.Injection.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.Relativity.Client, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Relativity.Client.9.6.104.144\lib\net462\kCura.Relativity.Client.dll</HintPath>
+    <Reference Include="kCura.OI.FileID">
+      <HintPath>..\..\packages\Relativity.ImportExport.9.7.8.101\lib\net462\kCura.OI.FileID.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.Utility, Version=9.5.464.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Utility.9.5.464.1\lib\net462\kCura.Utility.dll</HintPath>
+    <Reference Include="kCura.OI.FileID, Version=9.6.104.144, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="kCura.Relativity.Client, Version=9.7.8.101, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Relativity.Client.9.7.8.101\lib\net462\kCura.Relativity.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -86,6 +77,9 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
+    <Reference Include="oi, Version=2018.4.1.56, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\lib\net40\oi.dll</HintPath>
+    </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
     </Reference>
@@ -93,47 +87,50 @@
       <HintPath>..\..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.9.6.104.144\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=9.7.8.101, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.9.7.8.101\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.6.104.144\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Authentication.Interfaces, Version=9.7.8.101, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.7.8.101\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.CustomPages, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.CustomPages.9.6.104.144\lib\net462\Relativity.CustomPages.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Kepler, Version=1.0.1.445, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.445\lib\net462\Relativity.Kepler.dll</HintPath>
+    <Reference Include="Relativity.DataTransfer.MessageService, Version=1.0.7.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataTransfer.MessageService.1.0.7\lib\Relativity.DataTransfer.MessageService.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Logging, Version=9.4.311.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.9.4.311\lib\net462\Relativity.Logging.dll</HintPath>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.473, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.473\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Logging.Interfaces, Version=9.4.311.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.Interfaces.9.4.311\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Logging, Version=9.4.315.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.9.4.315\lib\net462\Relativity.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.445, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.445\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Logging.Interfaces, Version=9.4.315.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.Interfaces.9.4.315\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=9.4.159.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.9.4.159\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.473, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.473\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Telemetry.Services.Interface, Version=9.6.104.144, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.9.6.104.144\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
+    <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=9.4.162.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.9.4.162\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client, Version=3.0.18109.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.3.0.4-beta000004\lib\net462\Relativity.Transfer.Client.dll</HintPath>
+    <Reference Include="Relativity.Telemetry.Services.Interface, Version=9.7.8.101, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.9.7.8.101\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Aspera, Version=3.0.18109.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.3.0.4-beta000004\lib\net462\Relativity.Transfer.Client.Aspera.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client, Version=4.0.18164.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\relativity.transfer.client.4.1.14\lib\net462\Relativity.Transfer.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Core, Version=3.0.18109.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.3.0.4-beta000004\lib\net462\Relativity.Transfer.Client.Core.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.Aspera, Version=4.0.18164.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\relativity.transfer.client.4.1.14\lib\net462\Relativity.Transfer.Client.Aspera.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.FileShare, Version=3.0.18109.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.3.0.4-beta000004\lib\net462\Relativity.Transfer.Client.FileShare.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.Core, Version=4.0.18164.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\relativity.transfer.client.4.1.14\lib\net462\Relativity.Transfer.Client.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Http, Version=3.0.18109.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.3.0.4-beta000004\lib\net462\Relativity.Transfer.Client.Http.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.FileShare, Version=4.0.18164.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\relativity.transfer.client.4.1.14\lib\net462\Relativity.Transfer.Client.FileShare.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Transfer.Client.Http, Version=4.0.18164.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\relativity.transfer.client.4.1.14\lib\net462\Relativity.Transfer.Client.Http.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -204,6 +201,9 @@
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="ZetaLongPaths, Version=1.0.0.16, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZetaLongPaths.1.0.0.16\lib\net40-full\ZetaLongPaths.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1180,5 +1180,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\..\packages\kCura.9.6.104.144\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.104.144\build\kCura.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.9.7.1.1\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.7.1.1\build\kCura.targets')" />
 </Project>
