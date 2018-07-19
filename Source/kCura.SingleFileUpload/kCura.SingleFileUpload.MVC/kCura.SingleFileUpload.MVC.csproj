@@ -309,6 +309,7 @@
     <None Include="Properties\PublishProfiles\192.168.0.231.pubxml" />
     <None Include="Properties\PublishProfiles\Edison.pubxml" />
     <None Include="Properties\PublishProfiles\LocalMachine.pubxml" />
+    <None Include="Properties\PublishProfiles\Luis.pubxml" />
     <None Include="Properties\PublishProfiles\NSerio.pubxml" />
     <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
     <Content Include="LICENSE.txt" />
