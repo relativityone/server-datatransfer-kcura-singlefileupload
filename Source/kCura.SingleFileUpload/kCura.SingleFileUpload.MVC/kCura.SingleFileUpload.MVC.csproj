@@ -353,6 +353,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Edison.pubxml" />
     <None Include="Properties\PublishProfiles\LocalMachine.pubxml" />
+    <None Include="Properties\PublishProfiles\Luis.pubxml" />
     <None Include="Properties\PublishProfiles\NSerio.pubxml" />
     <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
     <Content Include="LICENSE.txt" />
