@@ -287,6 +287,13 @@
                 msgLabel.className = "message";
                 msgLabel.innerHTML = footerHtml;
                 var fnc = function () { window.parent.location.reload() };
+                var fncFluid = function () {
+                    if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
+                        window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
+                    } else {
+                        window.parent.location.reload()
+                    }
+                }
                 if (vm.errorID == 0) {
                     var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
 
@@ -294,7 +301,7 @@
                         updateImageDocument(result.Message);
                     }
                     else {
-                        setTimeout(fnc, fromDocumentViewer ? 2000 : 3000);
+                        setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
                     }
                 }
                 else {
