@@ -131,7 +131,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								if (did == -1 || force)
 								{
 									var transientMetadata = getTransient(file, fileName);
-									
+									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									if (validateFile(transientMetadata.TempFileLocation))
+									{
+										response.Success = false;
+										response.Message = "This file is not supported.";
+										return resultStr;
+									}
 									if (!string.IsNullOrEmpty(controlNumberText))
 									{
 										transientMetadata.ControlNumber = controlNumberText;
@@ -173,7 +179,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
 										var transientMetadata = getTransient(file, fileName);
-
+										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+										if (validateFile(transientMetadata.TempFileLocation))
+										{
+											response.Success = false;
+											response.Message = "This file is not supported.";
+											return resultStr;
+										}
 										FileInformation imageInfo = fileInfo;
 
 										if (fileInfo == null)
@@ -212,7 +224,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									else
 									{
 										var transientMetadata = getTransient(file, fileName);
-										
+										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+										if (validateFile(transientMetadata.TempFileLocation))
+										{
+											response.Success = false;
+											response.Message = "This file is not supported.";
+											return resultStr;
+										}
 										await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
 										var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
 										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
