@@ -47,5 +47,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             await ToggleProvider.Current.SetAsync<ValidateSFUCustomPermissions>(enabled);
         }
 
+        public async Task<bool> GetCheckUploadMassivesync()
+        {
+            bool result = await ToggleProvider.Current.IsEnabledAsync<UploadMassiveDocuments>();
+            return result;
+        }
+        public async Task SetCheckUploadMassivesync(bool enabled)
+        {
+            await ToggleProvider.Current.SetAsync<UploadMassiveDocuments>(enabled);
+        }
     }
 }
