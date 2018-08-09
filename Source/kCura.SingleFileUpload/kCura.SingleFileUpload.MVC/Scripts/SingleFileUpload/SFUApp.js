@@ -1,2 +1,9 @@
 ﻿/// <reference path="../angular.js" />
-var SFUAPP = angular.module('sfuapp', []);
+
+(function () {
+    
+    var SFUAPP = angular.module('sfuapp', []);
+    SFUAPP.controller("sfuctrl", SFUController)
+    SFUAPP.controller('mfuctrl', MFUController)
+
+}());

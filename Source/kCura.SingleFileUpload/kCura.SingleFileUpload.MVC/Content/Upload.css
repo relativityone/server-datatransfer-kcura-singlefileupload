@@ -322,3 +322,8 @@ button {
         float: right; 
         text-align: left;
     }
+
+.multiple-drop {
+	margin: 18px;
+	border: 1px dashed #c3d2e7;
+}
