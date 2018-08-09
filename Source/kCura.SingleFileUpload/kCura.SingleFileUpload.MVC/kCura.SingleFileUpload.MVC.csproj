@@ -1142,6 +1142,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\NSerio.FileInput.js" />
+    <Content Include="Scripts\SingleFileUpload\Controllers\MFUController.js" />
     <Content Include="Scripts\SingleFileUpload\Controllers\SFUController.js" />
     <Content Include="Scripts\SingleFileUpload\SFUApp.js" />
     <Content Include="SFU.html" />
@@ -1159,10 +1160,13 @@
     <Content Include="Scripts\angular\version.json" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SFU\Index - bk.cshtml" />
+    <Content Include="Views\SFU\SinlgeUpload.cshtml" />
+    <Content Include="Views\SFU\MultipleUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
