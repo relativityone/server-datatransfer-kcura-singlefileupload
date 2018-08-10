@@ -3,7 +3,7 @@
 (function () {
     
     var SFUAPP = angular.module('sfuapp', []);
-    SFUAPP.controller("sfuctrl", SFUController)
-    SFUAPP.controller('mfuctrl', MFUController)
+    SFUAPP.controller("sfuctrl", SFUController);
+    SFUAPP.controller('mfuctrl', MFUController);
 
 }());
