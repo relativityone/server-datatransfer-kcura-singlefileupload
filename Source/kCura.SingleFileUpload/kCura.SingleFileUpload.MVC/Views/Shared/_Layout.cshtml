@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Upload File</title>
+	<script src="~/Scripts/SingleFileUpload/Controllers/MFUController.js"></script>
+	<script src="~/Scripts/SingleFileUpload/Controllers/SFUController.js"></script>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/js/resx")
+	@Scripts.Render("~/js/sfuapp")
+
+
+</head>
+<body ng-app="sfuapp"
+	 ng-cloak>
+	@RenderBody()
+
+	<script>
+		var errorID = @ViewBag.ErrorID;
+		var AppID = @ViewBag.AppID;
+		var docID = @ViewBag.DocID;
+		var FDV = "@ViewBag.FDV" == "true";
+		var ChangeImage = "@ViewBag.ChangeImage" == "true";
+		var NewImage = "@ViewBag.NewImage" == "true";
+		var HasRedactions = "@ViewBag.HasRedactions" == "true";
+		var HasImages = "@ViewBag.HasImages" == "true";
+		var HasNative = "@ViewBag.HasNative" == "true";
+		var ProfileArtifact = @ViewBag.ProfileID;
+		var UploadMassiveDocuments = "@ViewBag.UploadMassiveDocuments"=="True";
+	</script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
-using kCura.SingleFileUpload.Core.Helpers;
 using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using Relativity.CustomPages;
@@ -49,7 +48,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		private IAuditManager __repositoryAuditManager;
 
 
-
 		public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
 		{
 			ViewBag.AppID = WorkspaceID;
@@ -63,6 +61,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
 			ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
 			ViewBag.ProfileID = profileID;
+			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassivesync().ToString().ToLower();
 			return View();
 		}
 
