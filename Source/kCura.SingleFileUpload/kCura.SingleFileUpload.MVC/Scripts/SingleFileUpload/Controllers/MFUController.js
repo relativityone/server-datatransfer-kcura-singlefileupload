@@ -199,6 +199,13 @@ var MFUController = function ($scope, $http, $compile) {
             did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
         return did;
     }
-
+    function ChangeFile(file) {
+        if (file.file.name != file.controlNumberText) {
+            file.status = 1;
+        }
+        else {
+            file.status = 0;
+        }
+    }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];
