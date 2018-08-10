@@ -28,7 +28,7 @@ var MFUController = function ($scope, $http, $compile) {
         vm.focusControlNumberValue = value;
     }
     vm.files = [];
-
+    vm.changeFile = ChangeFile;
     sessionStorage['____pushNo'] = '';
     var files;
 
@@ -57,7 +57,10 @@ var MFUController = function ($scope, $http, $compile) {
         else {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-                if (!vm.files.includes(file)) {
+                var found = vm.files.find(function (element) {
+                    return element.file.name == file.name;
+                });
+                if (!found) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0 });
                 }
             }
@@ -219,6 +222,15 @@ var MFUController = function ($scope, $http, $compile) {
 
         /*// Blink engine detection
         var isBlink = (isChrome || isOpera) && !!window.CSS;*/
+    }
+    function ChangeFile(file) {
+        if (file.file.name != file.controlNumberText) {
+            file.status = 1;
+        }
+        else {
+            file.status = 0;
+        }
+
     }
 
 }
