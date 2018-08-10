@@ -11,7 +11,7 @@ function showLoading() {
             }
         });
     });
-}   
+}
 function AngularPostOfData($http, url, dataToSend) {
     var result = new promiseResult();
     $http.post(location.pathname + url, dataToSend, { headers: { 'AppID': AppID } })
@@ -41,4 +41,32 @@ function promiseResult() {
             self.alwaysCallback = callback;
         return self;
     }
+}
+function checkBrowser() {
+    // Opera 8.0+
+    if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+        return "opera";
+    }
+    // Firefox 1.0+
+    else if (typeof InstallTrigger !== 'undefined') {
+        return "firefox";
+    }
+    // Safari 3.0+ "[object HTMLElementConstructor]" 
+    else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+        return "safari";
+    }
+    // Internet Explorer 6-11
+    else if (false || !!document.documentMode) {
+        return "msie";
+    }
+    // Edge 20+
+    else if (!(false || !!document.documentMode) && !!window.StyleMedia) {
+        return "edge";
+    }
+    // Chrome 1+
+    else if (!!window.chrome && !!window.chrome.webstore) {
+        return "chrome";
+    }
+    /*// Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;*/
 }
