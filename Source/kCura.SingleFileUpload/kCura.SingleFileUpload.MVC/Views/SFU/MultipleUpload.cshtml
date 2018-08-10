@@ -33,7 +33,7 @@
 							Control Number:
 						</div>
 						<div class="input">
-							<input type="text" ng-model="file.controlNumberText" ng-change="changeFile(file)"/>
+							<input type="text" ng-model="file.controlNumberText" ng-change="changeFile(file)" />
 							<div ng-if="file.status==1" class="fileName">
 								{{file.file.name}}
 							</div>
@@ -46,32 +46,20 @@
 				<div class="button_actions"
 					 ng-if="files.length>0">
 					<div class="buttonsZone">
-						<button class="btnPrimary" ng-click="simulateFileClick(true); $event.stopPropagation(); $event.preventDefault();">Upload</button>
+						<button class="btnPrimary" ng-click="uploadFile(); $event.stopPropagation(); $event.preventDefault();">Upload</button>
 						<button id="closeBtn" class="secondary-button" ng-click="close()">Cancel</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<form id="btiForm"
-		  ng-if="errorID == 0" action="sfu/Upload?AppID=@ViewBag.AppID&img=@ViewBag.ChangeImage"
-		  enctype="multipart/form-data"
-		  method="post"
-		  class="form"
-		  target="frmDnd">
-		<input type="file"
-			   id="file"
-			   name="file"
-			   onchange="angular.element(this).scope().submitFrm();"
-			   multiple />
-		<input type="hidden" id="fid" name="fid" value="" />
-		<input type="hidden" id="fdv" name="fdv" value="@ViewBag.FDV" />
-		<input type="hidden" id="did" name="did" value="" />
-		<input type="hidden" id="force" name="force" value="false" />
-		<input type="hidden" id="newImage" name="newImage" ng-model="newImage" />
-		<input type="hidden" id="controlNumberText" name="controlNumberText" ng-value="optionalControlNumber.text" />
-	</form>
-	<form id="btiFormDD" ng-if="errorID == 0"
+	<input type="file"
+		   id="file"
+		   name="file"
+		   class="form"
+		   onchange="angular.element(this).scope().submitFrm();"
+		   multiple />
+	<form id="btiFormDD"
 		  action="sfu/Upload?AppID=@ViewBag.AppID&fdv=@ViewBag.FDV&img=@ViewBag.ChangeImage"
 		  enctype="multipart/form-data"
 		  method="post"

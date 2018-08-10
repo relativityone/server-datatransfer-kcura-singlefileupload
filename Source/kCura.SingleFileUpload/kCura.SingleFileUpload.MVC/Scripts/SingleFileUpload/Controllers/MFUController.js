@@ -29,6 +29,7 @@ var MFUController = function ($scope, $http, $compile) {
     }
     vm.files = [];
     vm.changeFile = ChangeFile;
+    vm.uploadFile = UploadFile;
     sessionStorage['____pushNo'] = '';
     var files;
 
@@ -68,13 +69,7 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function SubmitFrm() {
-        if (vm.errorID == 0) {
-            document.getElementById('fid').setAttribute('value', getFolder());
-            document.getElementById('did').setAttribute('value', GetDID());
-            document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
-        }
         files = document.getElementById("file").files;
-
         $scope.$apply(function () {
             Addfiles(files);
         });
@@ -133,17 +128,17 @@ var MFUController = function ($scope, $http, $compile) {
         }
         return true;
     }
-    function submitSimulatedForm() {
+    function UploadFile() {
         var form = document.getElementById('btiFormDD');
         var data = new FormData(form);
-        data.append('file', bkpFile);
 
         if (vm.errorID == 0) {
+            data.append('file', vm.files[0].file);
             data.append('fid', getFolder());
-            data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+            data.append('fdv', FDV);
             data.append('did', GetDID());
-            data.append('force', document.getElementById('force').getAttribute('value'));
-            data.append('controlNumberText', document.getElementById('controlNumberText').value);
+            data.append('force', false);
+            data.append('controlNumberText', vm.files[0].controlNumberText);
         }
 
         var xhr = new XMLHttpRequest();
@@ -152,8 +147,124 @@ var MFUController = function ($scope, $http, $compile) {
                 eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
         };
         msgLabel.innerHTML = "Uploading";
+        dialog.dialog("option", "closeOnEscape", false);
+        checkUpload();
         xhr.open('POST', form.action);
         xhr.send(data);
+    }
+
+    function checkUpload() {
+        var resultString = sessionStorage['____pushNo'] || '';
+        if (!!resultString) {
+            sessionStorage['____pushNo'] = '';
+            var result;
+            resultString = resultString.replace(/\\/g, "\\\\");
+            if (isJson(resultString)) {
+                result = JSON.parse(resultString);
+            }
+            else {
+                result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
+            }
+            if (vm.errorID != 0 ||
+                GetDID() != -1 ||
+                !result.Success ||
+                !!result.Message ||
+                (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
+                if (vm.changeImage && result.Message.indexOf("\\\\") > -1) {
+                    deleteImagesAndRedactions(result);
+                }
+                else {
+                    manageResult(result);
+                }
+            }
+            else {
+                checkUploadStatus(result);
+            }
+        }
+        else
+            idCheckTimeout = setTimeout(checkUpload, 500);
+    }
+
+    function checkUploadStatus(resultString) {
+        setTimeout(function () {
+            AngularPostOfData($http, "/checkUploadStatus", {
+                documentName: resultString.Data
+            })
+                .done(function (result) {
+                    if (result.data != "-1") {
+                        manageResult(resultString, true);
+                    }
+                    else {
+                        checkUploadStatus(resultString);
+                    }
+                })
+        }, 500);
+    }
+
+    function manageResult(result, removeDigest) {
+        if (result.Success && (!result.Message || result.Message.indexOf("\\\\") === 0)) {
+            if (removeDigest) {
+                vm.status = 3;
+            }
+            else
+                $scope.$apply(function () {
+                    vm.status = 3;
+                });
+            var footerHtml = !vm.changeImage ? "Document uploaded successfully!" : (vm.newImage ? "Document image uploaded succesfully!" : "Document image replaced succesfully!");
+            msgLabel.className = "message";
+            msgLabel.innerHTML = footerHtml;
+            var fnc = function () { window.parent.location.reload() };
+            var fncFluid = function () {
+                if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
+                    window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
+                } else {
+                    window.parent.location.reload()
+                }
+            }
+            if (vm.errorID == 0) {
+                var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
+
+                if (vm.changeImage) {
+                    updateImageDocument(result.Message);
+                }
+                else {
+                    setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
+                }
+            }
+            else {
+                setTimeout(fnc, 3000);
+            }
+        }
+        else if (result.Message == 'R') {
+            if (removeDigest)
+                vm.status = 5;
+            else
+                $scope.$apply(function () {
+                    vm.status = 5;
+                });
+            getdH().children[0].innerHTML = "Replace Document";
+            msgLabel.className = "msgDetails";
+            var elem = $("<div class=\"content\">A document with the same name already exists. <br/> Do you want to replace it?</div>");
+            $(msgLabel).html(elem);
+
+        }
+
+        else {
+            var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
+            if (removeDigest) {
+                vm.status = status;
+            }
+            else {
+                $scope.$apply(function () {
+                    vm.status = status;
+                });
+                var message = result.Message;
+                console.error("SFU: " + result.Message);
+                msgLabel.className = "msgDetails";
+                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+            }
+
+        }
     }
 
     function stopPropagation(event) {
