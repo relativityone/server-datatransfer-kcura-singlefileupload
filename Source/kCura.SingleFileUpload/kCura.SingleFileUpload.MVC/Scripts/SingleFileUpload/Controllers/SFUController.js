@@ -358,7 +358,7 @@
                     vm.status = 1;
                 });
                 getdH().onclick = function () { };
-                getdH().ondrop = function () { };
+               // getdH().ondrop = function () { };
                 msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
