@@ -12,7 +12,7 @@
 		<div id="dropHere"
 			 class="dropZone multiple-drop"
 			 ng-click="simulateFileClick()"
-			 ng-show="status==0"
+			 ng-show="status==0||status == 4||status == 2 || status == 6|| status == 3"
 			 ondragover="angular.element(this).scope().handleDragOver(event)"
 			 ondragleave="angular.element(this).scope().handleDragLeave(event)"
 			 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
@@ -29,10 +29,13 @@
 		</div>
 		<div ng-show="status==1" class="uploading">
 			<div>
-			Uploading ({{fileIndex}} of {{files.length}})
+				Uploading ({{fileIndex}} of {{totalFiles}})
 			</div>
 			<div class="progressBar">
 				<div id="progressBar"></div>
+			</div>
+			<div class="time">
+				{{timelapse}}
 			</div>
 		</div>
 		<div ng-if="files.length>0">
@@ -55,7 +58,9 @@
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" class="remove" />
+							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
+							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>
 					</div>
 				</div>
@@ -63,7 +68,8 @@
 					 ng-if="files.length>0">
 					<div class="buttonsZone">
 						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();">Upload</button>
-						<button id="closeBtn" class="secondary-button" ng-click="close()">Cancel</button>
+						<button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
+						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
 					</div>
 				</div>
 			</div>
