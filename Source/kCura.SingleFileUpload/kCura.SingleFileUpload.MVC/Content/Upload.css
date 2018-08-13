@@ -369,22 +369,43 @@ button {
 				width: 97%;
 			}
 
-			.fileList .contentFile .input .fileName {
-				font-size: 10px;
+			.fileList .contentFile .input .inputMessage {
+				display: flex;
+				justify-content: center;
 				text-align: left;
-				color: #9e9e9e;
 			}
+
+				.fileList .contentFile .input .inputMessage .fileName {
+					order: 1;
+					width: 100%;
+					font-size: 10px;
+					color: #9e9e9e;
+				}
+
+				.fileList .contentFile .input .inputMessage .fileError {
+					order: 1;
+					width: 87%;
+					color: red;
+				}
+
+				.fileList .contentFile .input .inputMessage .retry {
+					order: 2;
+					width: 13%;
+					cursor: pointer;
+					color: -webkit-link;
+				}
 
 		.fileList .contentFile .fileIcon {
 			order: 3;
 			width: 30px;
 			margin-left: 10px;
-			padding-top:4px;
-			text-align:left;
+			padding-top: 4px;
+			text-align: left;
 		}
-		.fileList .contentFile .fileIcon img{
-			cursor:pointer;
-		}
+
+			.fileList .contentFile .fileIcon img {
+				cursor: pointer;
+			}
 
 	.fileList::-webkit-scrollbar-track {
 		border-radius: 6px;
@@ -402,3 +423,30 @@ button {
 		border-radius: 3px;
 		background-color: #ebebeb;
 	}
+
+.uploading {
+	text-align: left;
+	font-size: 14px;
+	margin-left: 35px;
+	margin-top: 15px;
+	padding-bottom: 26px;
+	border-bottom: 1px solid #ddd;
+	margin-right: 35px;
+	margin-bottom: 14px;
+}
+
+	.uploading .progressBar {
+		width: 80%;
+		height: 14px;
+		background-color: #ddd;
+		border-radius: 4px;
+		padding: 4px;
+	}
+
+		.uploading .progressBar #progressBar {
+			width: 1%;
+			height: 14px;
+			background-color: #1c54ab;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+		}

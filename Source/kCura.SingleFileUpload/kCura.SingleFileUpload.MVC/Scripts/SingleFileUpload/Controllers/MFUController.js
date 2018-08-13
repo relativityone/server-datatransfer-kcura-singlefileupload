@@ -16,7 +16,6 @@ var MFUController = function ($scope, $http, $compile) {
     vm.status = 0;
     vm.showMessage = true;
     vm.errorID = errorID;
-    vm.changeImage = ChangeImage;
     vm.newImage = NewImage;
     vm.hasRedactions = HasRedactions;
     vm.hasNative = HasNative;
@@ -28,7 +27,7 @@ var MFUController = function ($scope, $http, $compile) {
         vm.focusControlNumberValue = value;
     }
     vm.files = [];
-    vm.changeFile = ChangeFile;
+    vm.uploadFiles = UploadFiles;
     vm.uploadFile = UploadFile;
     sessionStorage['____pushNo'] = '';
     var files;
@@ -53,7 +52,7 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         if ((vm.files.length + files.length) > 20) {
-            msgLabel.innerHTML = "You can upload up to 20 files.";
+            msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
         }
         else {
             for (var i = 0; i < files.length; i++) {
@@ -62,12 +61,11 @@ var MFUController = function ($scope, $http, $compile) {
                     return element.file.name == file.name;
                 });
                 if (!found) {
-                    vm.files.push({ controlNumberText: file.name, file: file, status: 0 });
+                    vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 }
             }
         }
     }
-
     function SubmitFrm() {
         files = document.getElementById("file").files;
         $scope.$apply(function () {
@@ -111,14 +109,11 @@ var MFUController = function ($scope, $http, $compile) {
         });
     }
     function SimulateFileClick(force) {
-
-        if ((vm.status == 0 || force)) {
-            vm.status = 0;
-            msgLabel.className = "message";
-            msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
-            document.getElementById('file').value = "";
-            document.getElementById('file').click();
-        }
+        vm.status = 0;
+        msgLabel.className = "message";
+        msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
+        document.getElementById('file').value = "";
+        document.getElementById('file').click();
     }
     function isJson(str) {
         try {
@@ -128,35 +123,50 @@ var MFUController = function ($scope, $http, $compile) {
         }
         return true;
     }
-    function UploadFile() {
+
+    function UploadFiles() {
+        vm.status = 1;
+        vm.fileIndex = 0;
+        UploadFile(0)
+    }
+
+    function UploadFile(fileIndex, retry) {
         var form = document.getElementById('btiFormDD');
         var data = new FormData(form);
-
-        if (vm.errorID == 0) {
-            data.append('file', vm.files[0].file);
-            data.append('fid', getFolder());
-            data.append('fdv', FDV);
-            data.append('did', GetDID());
-            data.append('force', false);
-            data.append('controlNumberText', vm.files[0].controlNumberText);
+        var file = vm.files[fileIndex];
+        if (retry) {
+            vm.status = 0;
         }
-
+        file.status = 1;
+        if (vm.errorID == 0) {
+            data.append('file', file.file);
+            data.append('fid', getFolder());
+            if (file.controlNumberText != file.file.name) {
+                data.append('controlNumberText', file.controlNumberText);
+            }
+        }
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4)
+            if (xhr.readyState == 4) {
                 eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                var resultString = sessionStorage['____pushNo'] || '';
+                sessionStorage['____pushNo'] = '';
+                checkUpload(file, resultString);
+                if ((fileIndex < vm.files.length - 1) && !retry) {
+                    fileIndex++;
+                    UploadFile(fileIndex);
+                }
+                vm.fileIndex++;
+                Uploading();
+            }
         };
-        msgLabel.innerHTML = "Uploading";
         dialog.dialog("option", "closeOnEscape", false);
-        checkUpload();
         xhr.open('POST', form.action);
         xhr.send(data);
     }
 
-    function checkUpload() {
-        var resultString = sessionStorage['____pushNo'] || '';
+    function checkUpload(file, resultString) {
         if (!!resultString) {
-            sessionStorage['____pushNo'] = '';
             var result;
             resultString = resultString.replace(/\\/g, "\\\\");
             if (isJson(resultString)) {
@@ -165,106 +175,71 @@ var MFUController = function ($scope, $http, $compile) {
             else {
                 result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
             }
-            if (vm.errorID != 0 ||
-                GetDID() != -1 ||
-                !result.Success ||
-                !!result.Message ||
-                (document.getElementById('force') != null && document.getElementById('force').getAttribute('value') == 'true')) {
-                if (vm.changeImage && result.Message.indexOf("\\\\") > -1) {
-                    deleteImagesAndRedactions(result);
-                }
-                else {
-                    manageResult(result);
-                }
+            if (vm.errorID != 0 || GetDID() != -1 || !result.Success || !!result.Message) {
+                manageResult(file, result);
             }
             else {
-                checkUploadStatus(result);
+                checkUploadStatus(file, result);
             }
         }
         else
-            idCheckTimeout = setTimeout(checkUpload, 500);
+            idCheckTimeout = setTimeout(
+                function () { checkUpload(file, resultString) }, 500);
     }
 
-    function checkUploadStatus(resultString) {
+    function checkUploadStatus(file, resultString) {
         setTimeout(function () {
             AngularPostOfData($http, "/checkUploadStatus", {
                 documentName: resultString.Data
             })
                 .done(function (result) {
                     if (result.data != "-1") {
-                        manageResult(resultString, true);
+                        manageResult(file, resultString, true);
                     }
                     else {
-                        checkUploadStatus(resultString);
+                        checkUploadStatus(file, resultString);
                     }
                 })
         }, 500);
     }
 
-    function manageResult(result, removeDigest) {
+    function manageResult(file, result, removeDigest) {
         if (result.Success && (!result.Message || result.Message.indexOf("\\\\") === 0)) {
             if (removeDigest) {
-                vm.status = 3;
-            }
-            else
-                $scope.$apply(function () {
-                    vm.status = 3;
-                });
-            var footerHtml = !vm.changeImage ? "Document uploaded successfully!" : (vm.newImage ? "Document image uploaded succesfully!" : "Document image replaced succesfully!");
-            msgLabel.className = "message";
-            msgLabel.innerHTML = footerHtml;
-            var fnc = function () { window.parent.location.reload() };
-            var fncFluid = function () {
-                if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
-                    window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
-                } else {
-                    window.parent.location.reload()
-                }
-            }
-            if (vm.errorID == 0) {
-                var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
-
-                if (vm.changeImage) {
-                    updateImageDocument(result.Message);
-                }
-                else {
-                    setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
-                }
+                file.status = 3;
             }
             else {
-                setTimeout(fnc, 3000);
+                $scope.$apply(function () {
+                    file.status = 3;
+                });
             }
         }
-        else if (result.Message == 'R') {
-            if (removeDigest)
-                vm.status = 5;
-            else
-                $scope.$apply(function () {
-                    vm.status = 5;
-                });
-            getdH().children[0].innerHTML = "Replace Document";
-            msgLabel.className = "msgDetails";
-            var elem = $("<div class=\"content\">A document with the same name already exists. <br/> Do you want to replace it?</div>");
-            $(msgLabel).html(elem);
-
-        }
-
         else {
             var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
             if (removeDigest) {
-                vm.status = status;
+                file.status = status;
             }
             else {
                 $scope.$apply(function () {
-                    vm.status = status;
+                    file.status = status;
+                    file.errorMessage = result.Message;
                 });
-                var message = result.Message;
-                console.error("SFU: " + result.Message);
-                msgLabel.className = "msgDetails";
-                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
             }
-
         }
+    }
+    function Uploading() {
+        var elem = document.getElementById("progressBar");
+        var porcent = 100 / vm.files.length;
+        var width = porcent * vm.fileIndex;
+        setTimeout(function () {
+            elem.style.width = width + '%';
+            if ((width) >= 100) {
+                $scope.$apply(function () {
+                    vm.status = 0;
+                });
+                elem.style.width = '1%';
+            }
+        }, 500);
     }
 
     function stopPropagation(event) {
@@ -309,14 +284,6 @@ var MFUController = function ($scope, $http, $compile) {
         if (document.getElementById('fdv') != null && document.getElementById('fdv').getAttribute('value') == 'true')
             did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
         return did;
-    }
-    function ChangeFile(file) {
-        if (file.file.name != file.controlNumberText) {
-            file.status = 1;
-        }
-        else {
-            file.status = 0;
-        }
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];

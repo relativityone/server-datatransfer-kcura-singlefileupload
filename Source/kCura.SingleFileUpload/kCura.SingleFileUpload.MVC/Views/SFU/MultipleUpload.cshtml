@@ -12,12 +12,14 @@
 		<div id="dropHere"
 			 class="dropZone multiple-drop"
 			 ng-click="simulateFileClick()"
+			 ng-show="status==0"
 			 ondragover="angular.element(this).scope().handleDragOver(event)"
 			 ondragleave="angular.element(this).scope().handleDragLeave(event)"
 			 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
 			 dropzone="">
 			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '30px' : '15px' }">
 				<img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
+				<img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
 				<img ng-if="status == 4 && files.length==0" src="~/Content/Images/Upload_Hover.png" />
 			</div>
 			<span id="msg" ng-show="showMessage" class="message">
@@ -25,28 +27,42 @@
 				<span> browse for files.</span>
 			</span>
 		</div>
+		<div ng-show="status==1" class="uploading">
+			<div>
+			Uploading ({{fileIndex}} of {{files.length}})
+			</div>
+			<div class="progressBar">
+				<div id="progressBar"></div>
+			</div>
+		</div>
 		<div ng-if="files.length>0">
 			<div class="fileList">
 				<div ng-repeat="file in files track by $index">
 					<div class="contentFile">
-						<div class="label">
+						<div class="label" ng-style="{'color' : (file.status == 2 || file.status == 6) ? 'red' : 'black' }">
 							Control Number:
 						</div>
 						<div class="input">
-							<input type="text" ng-model="file.controlNumberText" ng-change="changeFile(file)" />
-							<div ng-if="file.status==1" class="fileName">
-								{{file.file.name}}
+							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.errorMessage=''" />
+							<div class="inputMessage">
+								<div ng-if="(file.file.name != file.controlNumberText)&&!file.errorMessage" class="fileName">
+									{{file.file.name}}
+								</div>
+								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
+									Error: {{file.errorMessage}}
+								</div>
+								<div ng-if="(file.status == 2 || file.status == 6)" ng-click="uploadFile($index,true)" class="retry">Retry</div>
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0" />
 						</div>
 					</div>
 				</div>
 				<div class="button_actions"
 					 ng-if="files.length>0">
 					<div class="buttonsZone">
-						<button class="btnPrimary" ng-click="uploadFile(); $event.stopPropagation(); $event.preventDefault();">Upload</button>
+						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();">Upload</button>
 						<button id="closeBtn" class="secondary-button" ng-click="close()">Cancel</button>
 					</div>
 				</div>
@@ -64,8 +80,7 @@
 		  enctype="multipart/form-data"
 		  method="post"
 		  class="form"
-		  target="frmDnd">
-	</form>
+		  target="frmDnd"></form>
 </div>
 <script>
 	if (window.frameElement != null) {
