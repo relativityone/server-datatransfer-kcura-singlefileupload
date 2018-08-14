@@ -11,4 +11,6 @@ namespace Relativity.SingleFileUpload.Core.Toggles
     class ValidateSFUCustomPermissions : IToggle
     {
     }
+    class UploadMassiveDocuments : IToggle {
+    }
 }
