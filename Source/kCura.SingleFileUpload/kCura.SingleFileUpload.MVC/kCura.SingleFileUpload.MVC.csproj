@@ -268,8 +268,10 @@
     <Content Include="Content\Images\Error_Icon.png" />
     <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Images\Alert.png" />
+    <Content Include="Content\Images\delete.png" />
     <Content Include="Content\Images\Fail.gif" />
     <Content Include="Content\Images\Success.gif" />
+    <Content Include="Content\Images\Success.png" />
     <Content Include="Content\Images\Upload.png" />
     <Content Include="Content\Images\Uploading.gif" />
     <Content Include="Content\Images\Upload_Hover.png" />
