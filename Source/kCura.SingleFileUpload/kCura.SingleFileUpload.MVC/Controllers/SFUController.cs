@@ -61,7 +61,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
 			ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
 			ViewBag.ProfileID = profileID;
-			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassivesync().ToString().ToLower();
+			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassivesync();
 			return View();
 		}
 
