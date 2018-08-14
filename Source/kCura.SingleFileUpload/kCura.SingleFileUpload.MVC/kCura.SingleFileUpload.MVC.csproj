@@ -1161,7 +1161,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\SFU\Index - bk.cshtml" />
     <Content Include="Views\SFU\SinlgeUpload.cshtml" />
     <Content Include="Views\SFU\MultipleUpload.cshtml" />
   </ItemGroup>
