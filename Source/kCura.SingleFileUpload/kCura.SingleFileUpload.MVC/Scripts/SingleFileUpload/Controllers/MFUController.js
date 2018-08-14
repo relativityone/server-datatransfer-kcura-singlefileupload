@@ -29,6 +29,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.files = [];
     vm.uploadFiles = UploadFiles;
     vm.uploadFile = UploadFile;
+    vm.cancelFile = CancelFile;
     sessionStorage['____pushNo'] = '';
     var files;
     vm.timelapse;
@@ -270,7 +271,12 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function Cancel() {
-        location.replace(location.href.replace('sfu', 'sfu.html'));
+        if (vm.status == 0) {
+            Close();
+        }
+        else {
+            window.parent.location.reload();
+        }
     }
 
     function Close() {
@@ -336,6 +342,10 @@ var MFUController = function ($scope, $http, $compile) {
     function checkTime(i) {
         if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
         return i;
+    }
+    function CancelFile(index) {
+        vm.files.splice(index, 1);
+        vm.totalFiles = vm.files.length;
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];

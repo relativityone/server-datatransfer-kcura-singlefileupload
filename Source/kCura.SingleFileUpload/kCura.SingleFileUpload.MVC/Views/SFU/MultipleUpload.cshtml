@@ -37,6 +37,7 @@
 			<div class="time">
 				{{timelapse}}
 			</div>
+			<div class="border"></div>
 		</div>
 		<div ng-if="files.length>0">
 			<div class="fileList">
@@ -54,11 +55,11 @@
 								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
 								</div>
-								<div ng-if="(file.status == 2 || file.status == 6)" ng-click="uploadFile($index,true)" class="retry">Retry</div>
+								<div ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry">Retry</div>
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" class="remove" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="cancelFile($index)" class="remove" />
 							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
 							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>
@@ -67,8 +68,9 @@
 				<div class="button_actions"
 					 ng-if="files.length>0">
 					<div class="buttonsZone">
-						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();">Upload</button>
-						<button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
+						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();"ng-if="status != 1">Upload</button>
+						<button class="btnPrimary" disabled ng-if="status == 1">Uploading</button>
+						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status == 3">Close</button>
 						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
 					</div>
 				</div>

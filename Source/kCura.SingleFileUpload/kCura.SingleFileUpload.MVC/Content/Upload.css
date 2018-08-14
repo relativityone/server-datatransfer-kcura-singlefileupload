@@ -385,7 +385,7 @@ button {
 
 				.fileList .contentFile .input .inputMessage .fileError {
 					order: 1;
-					width: 87%;
+					width: 100%;
 					color: red;
 				}
 
@@ -431,11 +431,10 @@ button {
 	font-size: 14px;
 	margin-left: 35px;
 	margin-top: 15px;
-	padding-bottom: 26px;
-	border-bottom: 1px solid #ddd;
 	margin-right: 35px;
 	margin-bottom: 14px;
 }
+
 	.uploading .time {
 		display: inline-block;
 		padding: 3px;
@@ -459,3 +458,10 @@ button {
 			border-top-left-radius: 2px;
 			border-bottom-left-radius: 2px;
 		}
+
+	.uploading .border {
+		padding-bottom: 27px;
+		border-bottom: 2px solid #ddd;
+		width: 46%;
+		margin-left: 27%;
+	}
