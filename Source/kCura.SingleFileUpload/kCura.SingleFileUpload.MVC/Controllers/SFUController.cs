@@ -138,7 +138,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										response.Message = "This file is not supported.";
 										return resultStr;
 									}
-
 									if (!string.IsNullOrEmpty(controlNumberText))
 									{
 										transientMetadata.ControlNumber = controlNumberText;
@@ -180,7 +179,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
 										var transientMetadata = getTransient(file, fileName);
-
+										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+										if (validateFile(transientMetadata.TempFileLocation))
+										{
+											response.Success = false;
+											response.Message = "This file is not supported.";
+											return resultStr;
+										}
 										FileInformation imageInfo = fileInfo;
 
 										if (fileInfo == null)
