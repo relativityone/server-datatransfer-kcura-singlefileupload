@@ -216,6 +216,8 @@
                         Close();
                     }
                 }, function (error) {
+                    vm.status = 2;
+                    var message = result.Message;
                     msgLabel.className = "msgDetails";
                     msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 });
