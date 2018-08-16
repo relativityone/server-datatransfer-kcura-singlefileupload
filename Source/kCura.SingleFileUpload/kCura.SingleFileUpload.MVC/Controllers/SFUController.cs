@@ -124,7 +124,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						if (supported)
 						{
 							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
-							var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
+							var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
+							var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 							if (!fdv)
 							{
 								did = docIDByName;
