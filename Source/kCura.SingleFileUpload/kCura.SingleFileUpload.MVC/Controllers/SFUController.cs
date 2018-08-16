@@ -61,7 +61,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
 			ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
 			ViewBag.ProfileID = profileID;
-			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassivesync().ToString().ToLower();
+			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassivesync();
 			return View();
 		}
 
@@ -123,7 +123,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						if (supported)
 						{
 							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
-							var docIDByName = _RepositoryDocumentManager.GetDocByName(Path.GetFileNameWithoutExtension(string.IsNullOrEmpty(controlNumberText) ? fileName : controlNumberText));
+							var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
+							var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 							if (!fdv)
 							{
 								did = docIDByName;
@@ -252,7 +253,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						else
 						{
 							response.Success = false;
-							response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG OR PDF File." : "This file type is not supported.";
+							response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File." : "This file type is not supported.";
 						}
 					}
 				}
