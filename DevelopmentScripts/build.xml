@@ -89,8 +89,8 @@
   </TestRunner>  
   <RAPBuilder> 
     <Applications> 
-      <Application name="SimplifiedFileUpload" generatenuspec="true"> 
-        <Destination>Applications\kCura.SimplifiedFileUpload.rap</Destination> 
+      <Application name="SimpleFileUpload" generatenuspec="true"> 
+        <Destination>Applications\kCura.SimpleFileUpload.rap</Destination> 
         <ApplicationSchema>ApplicationsXML\SingleFileUpload.xml</ApplicationSchema> 
         <Assemblies> 
 			<Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.dll</Assembly>
