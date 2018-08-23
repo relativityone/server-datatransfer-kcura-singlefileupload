@@ -44,7 +44,7 @@
 				<div ng-repeat="file in files track by $index">
 					<div class="contentFile">
 						<div class="label" ng-style="{'color' : (file.status == 2 || file.status == 6) ? 'red' : 'black' }">
-							Control Number:
+							{{$index+1}}. Control Number:
 						</div>
 						<div class="input">
 							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.errorMessage=''" />

@@ -135,6 +135,8 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function UploadFiles() {
+        msgLabel.className = "message";
+        msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
         cleanFiles();
         vm.totalFiles = vm.files.length;
         if (vm.totalFiles > 0) {
