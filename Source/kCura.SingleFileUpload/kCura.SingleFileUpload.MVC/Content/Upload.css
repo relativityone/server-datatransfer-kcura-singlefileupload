@@ -386,14 +386,14 @@ button {
 				.fileList .contentFile .input .inputMessage .fileError {
 					order: 1;
 					width: 100%;
-					color: red;
+					color: #d74343;
 				}
 
 				.fileList .contentFile .input .inputMessage .retry {
 					order: 2;
 					width: 13%;
 					cursor: pointer;
-					color: -webkit-link;
+					color: #2a5d9c;
 				}
 
 		.fileList .contentFile .fileIcon {
