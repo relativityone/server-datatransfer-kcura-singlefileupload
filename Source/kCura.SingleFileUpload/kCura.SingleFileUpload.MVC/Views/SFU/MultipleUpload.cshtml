@@ -5,18 +5,18 @@
 	<iframe id="frmDnd"
 			name="frmDnd"
 			class="phantomFrame"></iframe>
-	<div>
+	<div class="dropZone"
+		 ondragover="angular.element(this).scope().handleDragOver(event)"
+		 ondragleave="angular.element(this).scope().handleDragLeave(event)"
+		 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
+		 dropzone="">
 		<div class="header">
 			{{title}}
 		</div>
 		<div id="dropHere"
-			 class="dropZone multiple-drop"
+			 class="multiple-drop"
 			 ng-click="simulateFileClick()"
-			 ng-show="status==0||status == 4||status == 2 || status == 6|| status == 3"
-			 ondragover="angular.element(this).scope().handleDragOver(event)"
-			 ondragleave="angular.element(this).scope().handleDragLeave(event)"
-			 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
-			 dropzone="">
+			 ng-show="status==0||status == 4||status == 2 || status == 6|| status == 3">
 			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '30px' : '15px' }">
 				<img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
 				<img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
@@ -75,8 +75,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="button_actions"
-					 ng-if="files.length>0">
+				<div class="button_actions" ng-if="files.length>0">
 					<div class="buttonsZone">
 						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
 						<button class="btnPrimary" disabled ng-if="status == 1">Uploading</button>

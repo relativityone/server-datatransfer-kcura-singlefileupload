@@ -91,19 +91,21 @@ var MFUController = function ($scope, $http, $compile) {
             vm.status = 4;
             msgLabel.className = "message";
             msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
+            getdH().style.borderColor = "rgb(28, 84, 171)";
         });
     }
     function HandleDragLeave(event) {
         stopPropagation(event);
         $scope.$apply(function () {
             vm.status = 0;
+            getdH().style.borderColor = "#c3d2e7";
         });
 
     }
 
     function HandleDnDFileSelect(event) {
         stopPropagation(event);
-
+        getdH().style.borderColor = "#c3d2e7";
         $scope.$apply(function () {
             files = event.dataTransfer.files;
             var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
