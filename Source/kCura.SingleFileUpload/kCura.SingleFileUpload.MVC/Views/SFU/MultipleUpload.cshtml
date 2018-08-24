@@ -53,15 +53,8 @@
 									{{file.file.name}}
 								</div>
 								<div ng-if="file.status == 4" class="fileError">
-									Remove file?
-									<span class="confirm" ng-click="process(file,$index)">
-										Yes
-									</span>
-									<span class="confirm" ng-click="process(file,-1)">
-										No
-									</span>
+									Warning: Duplicate file.
 								</div>
-
 								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
 								</div>
@@ -69,7 +62,7 @@
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="removeFile(file)" class="remove" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="cancelFile($index)" class="remove" />
 							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
 							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>
@@ -79,7 +72,7 @@
 					<div class="buttonsZone">
 						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
 						<button class="btnPrimary" disabled ng-if="status == 1">Uploading</button>
-						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status == 3">Close</button>
+						<button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
 						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
 					</div>
 				</div>

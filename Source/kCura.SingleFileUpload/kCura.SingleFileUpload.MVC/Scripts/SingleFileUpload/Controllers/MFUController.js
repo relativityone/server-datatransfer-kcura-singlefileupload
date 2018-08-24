@@ -30,8 +30,6 @@ var MFUController = function ($scope, $http, $compile) {
     vm.uploadFiles = UploadFiles;
     vm.uploadFile = UploadFile;
     vm.cancelFile = CancelFile;
-    vm.removeFile = RemoveFile;
-    vm.process = Process;
     sessionStorage['____pushNo'] = '';
     var files;
     vm.timelapse;
@@ -57,34 +55,26 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
-        if ((vm.files.length + files.length) > 20) {
-            vm.status = 2;
-            msgLabel.className = "msgDetails";
-            msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
-        }
-        else {
-            var duplicateCount = 0;
-            for (var i = 0; i < files.length; i++) {
+        var duplicateCount = 0;
+        for (var i = 0; i < files.length; i++) {
+            if (vm.files.length < 20) {
                 var file = files[i];
                 var found = vm.files.find(function (element) {
-                    return element.file.name == file.name;
+                    if (element.file.name == file.name) {
+                        element.status = 4;
+                        return true;
+                    }
+                    return false;
                 });
                 if (!found) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 }
-                else {
-                    duplicateCount++;
-                }
-            }
-            if (duplicateCount) {
-                var message = "This file has already been selected";
-                if (files.length > 1) {
-                    message = "One or More files have already been selected"
-                }
+            } else {
+                vm.status = 2;
                 msgLabel.className = "msgDetails";
-                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
+                msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
+                break;
             }
-
         }
         vm.totalFiles = vm.files.length;
     }
@@ -290,24 +280,19 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function Cancel() {
-        if (vm.status == 0) {
-            Close();
+        var filesDontRemove = [];
+        for (var i = 0; i < vm.files.length; i++) {
+            var file = vm.files[i];
+            if (file.status != 0) {
+                filesDontRemove.push(file)
+            }
         }
-        else {
-            window.parent.location.reload();
-        }
+        vm.files = filesDontRemove;
+        vm.totalFiles = vm.files.length;
     }
 
     function Close() {
-
-        var modalCls = $('.modal-container', window.parent.document).find(".dynamic-content-modal-close")[0];
-
-        if (modalCls != null) {
-            $(modalCls).click();
-        }
-        else {
-            window.parent.$('#uploadInfoDiv').dialog('close');
-        }
+        window.parent.location.reload();
     }
     function getFolder() {
         var id = '-1';
@@ -365,18 +350,6 @@ var MFUController = function ($scope, $http, $compile) {
     function CancelFile(index) {
         vm.files.splice(index, 1);
         vm.totalFiles = vm.files.length;
-    }
-    function RemoveFile(file) {
-        file.lastStatus = file.status;
-        file.status = 4;
-    }
-    function Process(file, index) {
-        if (index > -1) {
-            CancelFile(index);
-        }
-        else {
-            file.status = file.lastStatus;
-        }
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];
