@@ -329,6 +329,7 @@ button {
 	margin: 15px;
 	border: 2px dashed #c3d2e7;
 	border-radius: 3px;
+	user-select: none;
 }
 
 .fileList {
@@ -389,11 +390,21 @@ button {
 					color: #d74343;
 				}
 
+					.fileList .contentFile .input .inputMessage .fileError .confirm {
+						float: right;
+						cursor: pointer;
+						color: #2a5d9c;
+						margin-left: 3px;
+						margin-right: 3px;
+						user-select:none;
+					}
+
 				.fileList .contentFile .input .inputMessage .retry {
 					order: 2;
 					width: 13%;
 					cursor: pointer;
 					color: #2a5d9c;
+					user-select: none;
 				}
 
 		.fileList .contentFile .fileIcon {

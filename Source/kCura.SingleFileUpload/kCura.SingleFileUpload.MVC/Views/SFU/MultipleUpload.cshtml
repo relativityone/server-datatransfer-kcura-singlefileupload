@@ -47,11 +47,21 @@
 							{{$index+1}}. Control Number:
 						</div>
 						<div class="input">
-							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.errorMessage=''" />
+							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.status=0" />
 							<div class="inputMessage">
-								<div ng-if="(file.file.name != file.controlNumberText)&&!file.errorMessage" class="fileName">
+								<div ng-if="(file.file.name != file.controlNumberText)&&(file.status==1||file.status==0)" class="fileName">
 									{{file.file.name}}
 								</div>
+								<div ng-if="file.status == 4" class="fileError">
+									Remove file?
+									<span class="confirm" ng-click="process(file,$index)">
+										Yes
+									</span>
+									<span class="confirm" ng-click="process(file,-1)">
+										No
+									</span>
+								</div>
+
 								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
 								</div>
@@ -59,7 +69,7 @@
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="cancelFile($index)" class="remove" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="removeFile(file)" class="remove" />
 							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
 							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>
@@ -68,7 +78,7 @@
 				<div class="button_actions"
 					 ng-if="files.length>0">
 					<div class="buttonsZone">
-						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();"ng-if="status != 1">Upload</button>
+						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
 						<button class="btnPrimary" disabled ng-if="status == 1">Uploading</button>
 						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status == 3">Close</button>
 						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>

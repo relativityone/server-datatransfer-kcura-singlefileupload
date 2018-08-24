@@ -30,6 +30,8 @@ var MFUController = function ($scope, $http, $compile) {
     vm.uploadFiles = UploadFiles;
     vm.uploadFile = UploadFile;
     vm.cancelFile = CancelFile;
+    vm.removeFile = RemoveFile;
+    vm.process = Process;
     sessionStorage['____pushNo'] = '';
     var files;
     vm.timelapse;
@@ -348,6 +350,18 @@ var MFUController = function ($scope, $http, $compile) {
     function CancelFile(index) {
         vm.files.splice(index, 1);
         vm.totalFiles = vm.files.length;
+    }
+    function RemoveFile(file) {
+        file.lastStatus = file.status;
+        file.status = 4;
+    }
+    function Process(file, index) {
+        if (index > -1) {
+            CancelFile(index);
+        }
+        else {
+            file.status = file.lastStatus;
+        }
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];
