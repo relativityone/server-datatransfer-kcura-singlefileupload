@@ -63,6 +63,7 @@ var MFUController = function ($scope, $http, $compile) {
             msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
         }
         else {
+            var duplicateCount = 0;
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 var found = vm.files.find(function (element) {
@@ -71,7 +72,19 @@ var MFUController = function ($scope, $http, $compile) {
                 if (!found) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 }
+                else {
+                    duplicateCount++;
+                }
             }
+            if (duplicateCount) {
+                var message = "This file has already been selected";
+                if (files.length > 1) {
+                    message = "One or More files have already been selected"
+                }
+                msgLabel.className = "msgDetails";
+                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
+            }
+
         }
         vm.totalFiles = vm.files.length;
     }
