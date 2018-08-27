@@ -1147,6 +1147,7 @@
     <Content Include="Scripts\NSerio.FileInput.js" />
     <Content Include="Scripts\SingleFileUpload\Controllers\MFUController.js" />
     <Content Include="Scripts\SingleFileUpload\Controllers\SFUController.js" />
+    <Content Include="Scripts\SingleFileUpload\Directives\DropDirective.js" />
     <Content Include="Scripts\SingleFileUpload\SFUApp.js" />
     <Content Include="SFU.html" />
     <Content Include="Web.config">
