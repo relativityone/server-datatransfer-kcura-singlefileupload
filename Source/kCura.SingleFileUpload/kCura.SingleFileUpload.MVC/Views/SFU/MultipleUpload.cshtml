@@ -6,9 +6,7 @@
 			name="frmDnd"
 			class="phantomFrame"></iframe>
 	<div class="dropZone"
-		 ondragover="angular.element(this).scope().handleDragOver(event)"
-		 ondragleave="angular.element(this).scope().handleDragLeave(event)"
-		 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
+		 drop-on-me
 		 dropzone="">
 		<div class="header">
 			{{title}}
@@ -16,7 +14,7 @@
 		<div id="dropHere"
 			 class="multiple-drop"
 			 ng-click="simulateFileClick()"
-			 ng-show="(status==0||status == 4||status == 2 || status == 6|| status == 3)&&files.length<20">
+			 ng-show="( status == 0 || status == 4 || status == 2 || status == 6|| status == 3 )&& files.length < 20 ">
 			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '30px' : '15px' }">
 				<img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
 				<img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
@@ -39,7 +37,7 @@
 			</div>
 			<div class="border"></div>
 		</div>
-		<div ng-show="status!=1&&files.length>=20" class="warning-message">
+		<div ng-show="status != 1 && files.length >= 20" class="warning-message">
 			<div class="warning-icon">
 				<img src="~/Content/Images/warning-6-24.png" width="25" />
 			</div>

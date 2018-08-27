@@ -9,9 +9,7 @@
 		 ng-class="{cantDrop: choiceType.type == 'text' && optionalControlNumber.text == ''}"
 		 class="dropZone"
 		 ng-click="simulateFileClick()"
-		 ondragover="angular.element(this).scope().handleDragOver(event)"
-		 ondragleave="angular.element(this).scope().handleDragLeave(event)"
-		 ondrop="angular.element(this).scope().handleDnDFileSelect(event)"
+		 drop-on-me
 		 dropzone="">
 		<div class="header">
 			{{title}}

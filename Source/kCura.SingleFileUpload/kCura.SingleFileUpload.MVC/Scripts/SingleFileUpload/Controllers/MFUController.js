@@ -55,15 +55,15 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
-        var duplicateCount = 0;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var found = vm.files.find(function (element) {
+                var result = false;
                 if (element.file.name == file.name) {
                     element.status = 4;
-                    return true;
+                    result = true;
                 }
-                return false;
+                return result;
             });
             if (!found) {
                 if (vm.files.length < 20) {
@@ -278,7 +278,7 @@ var MFUController = function ($scope, $http, $compile) {
         var filesDontRemove = [];
         for (var i = 0; i < vm.files.length; i++) {
             var file = vm.files[i];
-            if ((!((file.status == 0) || (file.status == 4))) && (vm.status == 1)) {
+            if (vm.status == 1 && !(file.status == 0 || file.status == 4)) {
                 filesDontRemove.push(file)
             }
         }
