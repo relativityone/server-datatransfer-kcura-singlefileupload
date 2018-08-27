@@ -57,23 +57,21 @@ var MFUController = function ($scope, $http, $compile) {
         cleanFiles();
         var duplicateCount = 0;
         for (var i = 0; i < files.length; i++) {
-            if (vm.files.length < 20) {
-                var file = files[i];
-                var found = vm.files.find(function (element) {
-                    if (element.file.name == file.name) {
-                        element.status = 4;
-                        return true;
-                    }
-                    return false;
-                });
-                if (!found) {
-                    vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
+            var file = files[i];
+            var found = vm.files.find(function (element) {
+                if (element.file.name == file.name) {
+                    element.status = 4;
+                    return true;
                 }
-            } else {
-                vm.status = 2;
-                msgLabel.className = "msgDetails";
-                msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
-                break;
+                return false;
+            });
+            if (!found) {
+                if (vm.files.length < 20) {
+                    vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
+                } else {
+                    vm.status = 5;
+                    break;
+                }
             }
         }
         vm.totalFiles = vm.files.length;
@@ -91,7 +89,9 @@ var MFUController = function ($scope, $http, $compile) {
     function HandleDragOver(event) {
         stopPropagation(event);
         $scope.$apply(function () {
-            vm.status = 4;
+            if (vm.files.length === 0) {
+                vm.status = 4;
+            }
             msgLabel.className = "message";
             msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
             getdH().style.borderColor = "rgb(28, 84, 171)";
@@ -100,7 +100,9 @@ var MFUController = function ($scope, $http, $compile) {
     function HandleDragLeave(event) {
         stopPropagation(event);
         $scope.$apply(function () {
-            vm.status = 0;
+            if (vm.files.length === 0) {
+                vm.status = 0;
+            }
             getdH().style.borderColor = "#c3d2e7";
         });
 
@@ -115,13 +117,9 @@ var MFUController = function ($scope, $http, $compile) {
 
             if (!item.isDirectory) {
                 Addfiles(files);
-                vm.status = 0;
-            }
-            else {
-                vm.status = 2;
-                var message = "Multiple file upload is not supported.";
-                msgLabel.className = "msgDetails";
-                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
+                if (vm.status != 5) {
+                    vm.status = 0;
+                }
             }
         });
     }
@@ -283,12 +281,13 @@ var MFUController = function ($scope, $http, $compile) {
         var filesDontRemove = [];
         for (var i = 0; i < vm.files.length; i++) {
             var file = vm.files[i];
-            if (file.status != 0) {
+            if ((!((file.status == 0) || (file.status == 4))) && (vm.status == 1)) {
                 filesDontRemove.push(file)
             }
         }
         vm.files = filesDontRemove;
         vm.totalFiles = vm.files.length;
+        vm.status = 0;
     }
 
     function Close() {

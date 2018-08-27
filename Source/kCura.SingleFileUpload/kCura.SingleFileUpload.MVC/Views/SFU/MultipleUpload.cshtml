@@ -39,6 +39,17 @@
 			</div>
 			<div class="border"></div>
 		</div>
+		<div ng-show="status==5" class="warning-message">
+			<div class="warning-icon">
+				<img src="~/Content/Images/warning-6-24.png" width="25" />
+			</div>
+			<div class="warning-div">
+				<div>
+					<span  class="warning-bold">Warning:</span> You can only upload up to 20 files.
+				</div>
+				<div>Anything after 20 will not be uploaded.</div>
+			</div>
+		</div>
 		<div ng-if="files.length>0">
 			<div class="fileList">
 				<div ng-repeat="file in files track by $index">
@@ -53,7 +64,8 @@
 									{{file.file.name}}
 								</div>
 								<div ng-if="file.status == 4" class="fileError">
-									Warning: Duplicate file.
+									Warning:
+									<span class="confirm"> Duplicate file.</span>
 								</div>
 								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
@@ -62,7 +74,7 @@
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6" ng-click="cancelFile($index)" class="remove" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6||file.status == 4" ng-click="cancelFile($index)" class="remove" />
 							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
 							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>
