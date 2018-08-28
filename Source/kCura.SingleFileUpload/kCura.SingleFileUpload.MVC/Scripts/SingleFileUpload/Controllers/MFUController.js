@@ -55,19 +55,21 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
-        if ((vm.files.length + files.length) > 20) {
-            vm.status = 2;
-            msgLabel.className = "msgDetails";
-            msgLabel.innerHTML = "<div class='error' title='You can upload up to 20 files.'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>You can upload up to 20 files.</span></div></div>";
-        }
-        else {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var found = vm.files.find(function (element) {
-                    return element.file.name == file.name;
-                });
-                if (!found) {
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var found = vm.files.find(function (element) {
+                var result = false;
+                if (element.file.name == file.name) {
+                    element.status = 4;
+                    result = true;
+                }
+                return result;
+            });
+            if (!found) {
+                if (vm.files.length < 20) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
+                } else {
+                    break;
                 }
             }
         }
@@ -86,22 +88,28 @@ var MFUController = function ($scope, $http, $compile) {
     function HandleDragOver(event) {
         stopPropagation(event);
         $scope.$apply(function () {
-            vm.status = 4;
+            if (vm.files.length === 0) {
+                vm.status = 4;
+            }
             msgLabel.className = "message";
             msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
+            getdH().style.borderColor = "rgb(28, 84, 171)";
         });
     }
     function HandleDragLeave(event) {
         stopPropagation(event);
         $scope.$apply(function () {
-            vm.status = 0;
+            if (vm.files.length === 0) {
+                vm.status = 0;
+            }
+            getdH().style.borderColor = "#c3d2e7";
         });
 
     }
 
     function HandleDnDFileSelect(event) {
         stopPropagation(event);
-
+        getdH().style.borderColor = "#c3d2e7";
         $scope.$apply(function () {
             files = event.dataTransfer.files;
             var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
@@ -109,12 +117,6 @@ var MFUController = function ($scope, $http, $compile) {
             if (!item.isDirectory) {
                 Addfiles(files);
                 vm.status = 0;
-            }
-            else {
-                vm.status = 2;
-                var message = "Multiple file upload is not supported.";
-                msgLabel.className = "msgDetails";
-                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
             }
         });
     }
@@ -135,6 +137,8 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function UploadFiles() {
+        msgLabel.className = "message";
+        msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
         cleanFiles();
         vm.totalFiles = vm.files.length;
         if (vm.totalFiles > 0) {
@@ -271,24 +275,20 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function Cancel() {
-        if (vm.status == 0) {
-            Close();
+        var filesDontRemove = [];
+        for (var i = 0; i < vm.files.length; i++) {
+            var file = vm.files[i];
+            if (vm.status == 1 && !(file.status == 0 || file.status == 4)) {
+                filesDontRemove.push(file)
+            }
         }
-        else {
-            window.parent.location.reload();
-        }
+        vm.files = filesDontRemove;
+        vm.totalFiles = vm.files.length;
+        vm.status = 0;
     }
 
     function Close() {
-
-        var modalCls = $('.modal-container', window.parent.document).find(".dynamic-content-modal-close")[0];
-
-        if (modalCls != null) {
-            $(modalCls).click();
-        }
-        else {
-            window.parent.$('#uploadInfoDiv').dialog('close');
-        }
+        window.parent.location.reload();
     }
     function getFolder() {
         var id = '-1';

@@ -5,5 +5,6 @@
     var SFUAPP = angular.module('sfuapp', []);
     SFUAPP.controller("sfuctrl", SFUController);
     SFUAPP.controller('mfuctrl', MFUController);
+    SFUAPP.directive('dropOnMe', dropOnMe);
 
 }());
