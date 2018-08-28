@@ -291,7 +291,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
         public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
-            Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID);
+            Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
             {
                 CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
@@ -311,12 +311,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 if (!fromDocumentViewer)
                 {
                     replacedDocument.ParentArtifact = new DTOs.Artifact(defineFolder(folderID));
-                    await ChangeFolder(folderID, docID);
+                    await ChangeFolderAsync(folderID, docID);
                 }
             }
 
             updateNative(documentInfo, docID);
-            Tuple<string, string> importResult = await ImportDocument(documentInfo, webApiUrl, workspaceID, folderID, docID);
+            Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID, docID);
             CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
@@ -490,7 +490,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             return isDataGrid;
 
         }
-        public async Task<DataTable> GetDocumentDataTable(string identifierName)
+        public async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
         {
             DataTable DocumentsDataTable = new DataTable();
 
@@ -623,7 +623,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 WinEDDS.Config.ConfigSettings.Add(key, value);
             }
         }
-        private async Task<Tuple<string, string>> ImportDocument(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
+        private async Task<Tuple<string, string>> ImportDocumentAsync(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
         {
             try
             {
@@ -656,7 +656,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     importJob.Settings.DestinationFolderArtifactID = folderId;
                 }
 
-                var IdentityField = await GetDocumentIdentifier();
+                var IdentityField = await GetDocumentIdentifierAsync();
 
                 importJob.Settings.SelectedIdentifierFieldName = IdentityField.Name;
                 importJob.Settings.NativeFilePathSourceFieldName = "Native File";
@@ -665,7 +665,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 // Specify the ArtifactID of the document identifier field, such as a control number.
                 importJob.Settings.IdentityFieldId = IdentityField.ArtifactId;
 
-                DataTable dtDocument = await GetDocumentDataTable(IdentityField.Name);
+                DataTable dtDocument = await GetDocumentDataTableAsync(IdentityField.Name);
 
                 // upper case extension and remove period
                 var extension = Path.GetExtension(documentInfo.FileName).ToUpper().Remove(0, 1);
@@ -716,7 +716,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             return new Tuple<string, string>(string.Empty, documentInfo.TempFileLocation);
         }
-        private async Task ChangeFolder(int folderID, int docID)
+        private async Task ChangeFolderAsync(int folderID, int docID)
         {
             using (Services.Document.IDocumentManager docManager = _Repository.CreateProxy<Services.Document.IDocumentManager>())
             {
@@ -787,7 +787,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }, 300);
             }
         }
-        private async Task<DocumentIdentifierField> GetDocumentIdentifier()
+        private async Task<DocumentIdentifierField> GetDocumentIdentifierAsync()
         {
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>())
