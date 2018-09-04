@@ -66,7 +66,8 @@ var MFUController = function ($scope, $http, $compile) {
                 return result;
             });
             if (!found) {
-                if (vm.files.length < 20) {
+                if (vm.files.length < 100) {
+                if (vm.files.length < 100) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 } else {
                     break;
