@@ -55,9 +55,10 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
+        var focusindex = undefined;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            var found = vm.files.find(function (element) {
+            var found = vm.files.findIndex(function (element) {
                 var result = false;
                 if (element.file.name == file.name) {
                     element.status = 4;
@@ -65,13 +66,20 @@ var MFUController = function ($scope, $http, $compile) {
                 }
                 return result;
             });
-            if (!found) {
+            if (found === -1) {
                 if (vm.files.length < 100) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 } else {
                     break;
                 }
+            } else {
+                focusindex = found;
             }
+        }
+        if (focusindex) {
+            setTimeout(function () {
+                window.location.hash = '#file' + focusindex;
+            }, 100)
         }
         vm.totalFiles = vm.files.length;
     }
