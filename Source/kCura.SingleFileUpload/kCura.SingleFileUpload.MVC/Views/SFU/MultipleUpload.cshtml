@@ -81,7 +81,7 @@
 				<div class="button_actions" ng-if="files.length>0">
 					<div class="buttonsZone">
 						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
-						<button class="btnPrimary" disabled ng-if="status == 1">Uploading</button>
+						<button class="btnPrimary" disabled ng-if="status == 1">Upload</button>
 						<button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
 						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
 					</div>
