@@ -35,6 +35,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.timelapse;
     vm.startTime;
     vm.totalFiles = 0;
+    vm.maxfiles = 20;
     var idCheckTimeout;
 
     function getdH() {
@@ -67,7 +68,7 @@ var MFUController = function ($scope, $http, $compile) {
                 return result;
             });
             if (found === -1) {
-                if (vm.files.length < 100) {
+                if (vm.files.length < vm.maxfiles) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 } else {
                     break;
