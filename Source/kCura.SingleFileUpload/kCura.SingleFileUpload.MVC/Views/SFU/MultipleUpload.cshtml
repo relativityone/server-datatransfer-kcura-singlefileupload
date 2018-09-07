@@ -67,8 +67,8 @@
 								</div>
 								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
+									<span ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry"> Retry</span>
 								</div>
-								<div ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry">Retry</div>
 							</div>
 						</div>
 						<div class="fileIcon">
