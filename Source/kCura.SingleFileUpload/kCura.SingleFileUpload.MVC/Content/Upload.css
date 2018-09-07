@@ -442,7 +442,7 @@ button {
 
 .uploading {
 	text-align: left;
-	font-size: 14px;
+	font-size: 12px;
 	margin-left: 35px;
 	margin-top: 15px;
 	margin-right: 35px;
@@ -454,6 +454,8 @@ button {
 		padding: 3px;
 		position: absolute;
 		padding-left: 5px;
+		font-size: 14px;
+		margin-top: 5px;
 	}
 
 	.uploading .progressBar {
@@ -463,6 +465,7 @@ button {
 		border-radius: 4px;
 		padding: 4px;
 		display: inline-block;
+		margin-top: 5px;
 	}
 
 		.uploading .progressBar #progressBar {
@@ -474,7 +477,7 @@ button {
 		}
 
 	.uploading .border {
-		padding-bottom: 27px;
+		padding-bottom: 21px;
 		border-bottom: 2px solid #ddd;
 		width: 46%;
 		margin-left: 27%;
