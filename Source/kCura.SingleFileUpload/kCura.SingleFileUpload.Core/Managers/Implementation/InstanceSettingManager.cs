@@ -17,13 +17,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		private InstanceSettingManager()
 		{
 		}
-		public async Task<int> GetMaxFIlesInstanceSettingAsync()
+		public async Task<int> GetMaxFilesInstanceSettingAsync()
 		{
+			int result = 0;
 			try
 			{
 				var condition = $"'Name' IN ['{Constants.MAX_FILES_TO_UPLOAD}']";
 				var resultList = await GetInstanceSettingsByCondition(condition);
-				int result = 0;
 				int.TryParse(resultList.FirstOrDefault().Value, out result);
 				if (result < 1)
 				{
@@ -33,15 +33,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					result = 100;
 				}
-				return result;
 			}
 			catch (Exception ex)
 			{
 				LogError(ex);
-				return 20;
+				result = 20;
 			}
+			return result;
 		}
-		public async Task CreateMaxFIlesInstanceSettingAsync()
+		public async Task CreateMaxFilesInstanceSettingAsync()
 		{
 			var instanceSetting = new InstanceSetting()
 			{

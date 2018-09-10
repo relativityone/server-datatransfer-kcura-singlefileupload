@@ -79,7 +79,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 await ToggleManager.Instance.SetCheckUploadMassivesync(true);
             }
             await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false);
-			await InstanceSettingManager.Instance.CreateMaxFIlesInstanceSettingAsync();
+			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
 		}
     }
 

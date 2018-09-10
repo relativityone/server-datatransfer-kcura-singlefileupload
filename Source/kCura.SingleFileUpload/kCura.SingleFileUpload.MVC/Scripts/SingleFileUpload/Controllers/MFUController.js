@@ -120,14 +120,16 @@ var MFUController = function ($scope, $http, $compile) {
         stopPropagation(event);
         getdH().style.borderColor = "#c3d2e7";
         $scope.$apply(function () {
-            if (vm.files.length < vm.maxFiles) {
-                files = event.dataTransfer.files;
-                var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
-                if (!item.isDirectory) {
-                    Addfiles(files);
-                };
-            };
-            vm.status = 0;
+            if (vm.status != 1) {
+                if (vm.files.length < vm.maxFiles) {
+                    files = event.dataTransfer.files;
+                    var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
+                    if (!item.isDirectory) {
+                        Addfiles(files);
+                    }
+                }
+                vm.status = 0;
+            }
         });
     }
     function SimulateFileClick(force) {
@@ -162,6 +164,9 @@ var MFUController = function ($scope, $http, $compile) {
         }
         else {
             vm.status = 0;
+        }
+        if (!vm.files.length) {
+            ChangeModalHeight(335);
         }
     }
 
@@ -303,7 +308,11 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function Close() {
-        window.parent.location.reload();
+        if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
+            window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href)
+        } else {
+            window.parent.location.reload()
+        }
     }
     function getFolder() {
         var id = '-1';

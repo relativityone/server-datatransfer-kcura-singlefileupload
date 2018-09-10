@@ -4,7 +4,7 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
 	public interface IInstanceSettingManager
 	{
-		Task<int> GetMaxFIlesInstanceSettingAsync();
-		Task CreateMaxFIlesInstanceSettingAsync();
+		Task<int> GetMaxFilesInstanceSettingAsync();
+		Task CreateMaxFilesInstanceSettingAsync();
 	}
 }
