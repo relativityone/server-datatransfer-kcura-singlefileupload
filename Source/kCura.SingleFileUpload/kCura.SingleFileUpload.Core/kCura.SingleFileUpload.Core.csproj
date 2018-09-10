@@ -240,6 +240,7 @@
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
     <Compile Include="Managers\Implementation\PermissionsManager.cs" />
+    <Compile Include="Managers\Implementation\InstanceSettingManager.cs" />
     <Compile Include="Managers\Implementation\ToggleManager.cs" />
     <Compile Include="Managers\Implementation\TelemetryManager.cs" />
     <Compile Include="Managers\IProcessingManager.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="Managers\IDocumentManager.cs" />
     <Compile Include="Managers\ISearchExportManager.cs" />
     <Compile Include="Managers\IPermissionsManager.cs" />
+    <Compile Include="Managers\IInstanceSettingManager.cs" />
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
     <Compile Include="SQL\Queries.Designer.cs">

@@ -14,7 +14,6 @@ var MFUController = function ($scope, $http, $compile) {
     vm.cancel = Cancel;
     vm.close = Close;
     vm.status = 0;
-    vm.showMessage = true;
     vm.errorID = errorID;
     vm.newImage = NewImage;
     vm.hasRedactions = HasRedactions;
@@ -35,6 +34,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.timelapse;
     vm.startTime;
     vm.totalFiles = 0;
+    vm.maxFiles = MaxFilesToUpload;
     var idCheckTimeout;
 
     function getdH() {
@@ -55,9 +55,11 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
+        ChangeModalHeight(520);
+        var focusindex = undefined;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            var found = vm.files.find(function (element) {
+            var found = vm.files.findIndex(function (element) {
                 var result = false;
                 if (element.file.name == file.name) {
                     element.status = 4;
@@ -65,13 +67,20 @@ var MFUController = function ($scope, $http, $compile) {
                 }
                 return result;
             });
-            if (!found) {
-                if (vm.files.length < 100) {
+            if (found === -1) {
+                if (vm.files.length < vm.maxFiles) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 } else {
                     break;
                 }
+            } else {
+                focusindex = found;
             }
+        }
+        if (focusindex) {
+            setTimeout(function () {
+                window.location.hash = '#file' + focusindex;
+            }, 100)
         }
         vm.totalFiles = vm.files.length;
     }
@@ -111,11 +120,14 @@ var MFUController = function ($scope, $http, $compile) {
         stopPropagation(event);
         getdH().style.borderColor = "#c3d2e7";
         $scope.$apply(function () {
-            files = event.dataTransfer.files;
-            var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
-
-            if (!item.isDirectory) {
-                Addfiles(files);
+            if (vm.status != 1) {
+                if (vm.files.length < vm.maxFiles) {
+                    files = event.dataTransfer.files;
+                    var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
+                    if (!item.isDirectory) {
+                        Addfiles(files);
+                    }
+                }
                 vm.status = 0;
             }
         });
@@ -124,8 +136,10 @@ var MFUController = function ($scope, $http, $compile) {
         vm.status = 0;
         msgLabel.className = "message";
         msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
-        document.getElementById('file').value = "";
-        document.getElementById('file').click();
+        if (vm.files.length < vm.maxFiles) {
+            document.getElementById('file').value = "";
+            document.getElementById('file').click();
+        }
     }
     function isJson(str) {
         try {
@@ -150,6 +164,9 @@ var MFUController = function ($scope, $http, $compile) {
         }
         else {
             vm.status = 0;
+        }
+        if (!vm.files.length) {
+            ChangeModalHeight(335);
         }
     }
 
@@ -284,11 +301,18 @@ var MFUController = function ($scope, $http, $compile) {
         }
         vm.files = filesDontRemove;
         vm.totalFiles = vm.files.length;
-        vm.status = 0;
+        if (!vm.files.length) {
+            vm.status = 0;
+            ChangeModalHeight(335);
+        }
     }
 
     function Close() {
-        window.parent.location.reload();
+        if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
+            window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href)
+        } else {
+            window.parent.location.reload()
+        }
     }
     function getFolder() {
         var id = '-1';
@@ -346,6 +370,13 @@ var MFUController = function ($scope, $http, $compile) {
     function CancelFile(index) {
         vm.files.splice(index, 1);
         vm.totalFiles = vm.files.length;
+        if (!vm.files.length) {
+            vm.status = 0;
+            ChangeModalHeight(335);
+        }
+    }
+    function ChangeModalHeight(height) {
+        window.frameElement.parentElement.style.height = height + "px";
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];
