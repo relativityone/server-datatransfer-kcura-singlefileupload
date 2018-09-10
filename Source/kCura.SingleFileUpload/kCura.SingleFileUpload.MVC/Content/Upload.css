@@ -156,6 +156,7 @@ button {
 		background: linear-gradient(#007FC6, #0063ae);
 		color: #ffffff;
 	}
+
 	.btnPrimary:disabled {
 		Color: #707070 !important;
 		border: 1px solid #B2B2B2 !important;
@@ -187,7 +188,6 @@ button {
 	}
 
 .status_img {
-	margin-top: 15px;
 	margin-bottom: 10px;
 	pointer-events: none;
 }
@@ -485,9 +485,9 @@ button {
 	text-align: left;
 	font-size: 12px;
 	margin-left: 15px;
-	margin-top: 13px;
+	margin-top: 14px;
 	margin-right: 15px;
-	margin-bottom: 13px;
+	margin-bottom: 14px;
 	background-color: #ffe27e;
 	padding: 20px;
 }
@@ -497,11 +497,13 @@ button {
 		margin-left: 5px;
 		margin-right: 5px;
 	}
+
 	.warning-message .warning-div {
 		display: inline-block;
 	}
+
 		.warning-message .warning-div .warning-bold {
-			font-weight:bold !important;
+			font-weight: bold !important;
 		}
 
 .infoMessage {
@@ -509,3 +511,29 @@ button {
 	color: #707070;
 	padding-top: 6px;
 }
+
+.successUpload {
+	margin: 15px;
+	border: 2px dashed #27c562;
+	border-radius: 3px;
+	user-select: none;
+	cursor: pointer;
+	background-color: #e9f9ef;
+}
+	.successUpload .success {
+		font-weight: bold;
+		font-size: 15px;
+		padding-top: 12px;
+	}
+
+	.successUpload .message {
+		font-size: 12px;
+		padding-top: 5px;
+		padding-bottom: 12px;
+		font-weight: normal;
+	}
+
+		.successUpload .message > span {
+			color: rgb(27, 84, 149);
+			font-weight: normal;
+		}
