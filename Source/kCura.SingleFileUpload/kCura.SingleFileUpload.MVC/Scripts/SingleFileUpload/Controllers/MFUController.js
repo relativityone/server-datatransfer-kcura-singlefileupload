@@ -34,7 +34,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.timelapse;
     vm.startTime;
     vm.totalFiles = 0;
-    vm.maxFiles = 20;
+    vm.maxFiles = MaxFilesToUpload;
     var idCheckTimeout;
 
     function getdH() {
@@ -119,23 +119,25 @@ var MFUController = function ($scope, $http, $compile) {
     function HandleDnDFileSelect(event) {
         stopPropagation(event);
         getdH().style.borderColor = "#c3d2e7";
-        if (vm.files.length < vm.maxFiles) {
-            $scope.$apply(function () {
+        $scope.$apply(function () {
+            if (vm.files.length < vm.maxFiles) {
                 files = event.dataTransfer.files;
                 var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
                 if (!item.isDirectory) {
                     Addfiles(files);
-                    vm.status = 0;
-                }
-            });
-        }
+                };
+            };
+            vm.status = 0;
+        });
     }
     function SimulateFileClick(force) {
         vm.status = 0;
         msgLabel.className = "message";
         msgLabel.innerHTML = "Drop your files here or <span> browse for files.</span>";
-        document.getElementById('file').value = "";
-        document.getElementById('file').click();
+        if (vm.files.length < vm.maxFiles) {
+            document.getElementById('file').value = "";
+            document.getElementById('file').click();
+        }
     }
     function isJson(str) {
         try {

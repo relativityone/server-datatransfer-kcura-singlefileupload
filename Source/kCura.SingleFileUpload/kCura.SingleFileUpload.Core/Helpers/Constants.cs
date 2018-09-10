@@ -31,5 +31,6 @@ namespace kCura.SingleFileUpload.Core.Helpers
         public const string TAPI_FORCE_BCP_HTTP_CLIENT = "TapiForceBcpHttpClient";
 
         public const string ADD_DOCUMENT_CUSTOM_PERMISSION = "New Document";
-    }
+		public const string MAX_FILES_TO_UPLOAD = "SFUMaxFilesToUpload";
+	}
 }

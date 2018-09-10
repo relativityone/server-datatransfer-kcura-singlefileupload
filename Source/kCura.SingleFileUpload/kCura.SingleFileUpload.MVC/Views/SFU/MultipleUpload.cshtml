@@ -52,7 +52,7 @@
 			</div>
 			<div class="border"></div>
 		</div>
-		<div ng-show="status != 1 && files.length >= maxFiles" class="warning-message">
+		<div ng-show="(status != 1&&status != 3) && files.length >= maxFiles" class="warning-message">
 			<div class="warning-icon">
 				<img src="~/Content/Images/warning-6-24.png" width="25" />
 			</div>
