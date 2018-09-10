@@ -23,7 +23,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				var condition = $"'Name' IN ['{Constants.MAX_FILES_TO_UPLOAD}']";
 				var resultList = await GetInstanceSettingsByCondition(condition);
-				int.TryParse(resultList.FirstOrDefault().Value, out int result);
+				int result = 0;
+				int.TryParse(resultList.FirstOrDefault().Value, out result);
 				if (result < 1)
 				{
 					result = 1;
