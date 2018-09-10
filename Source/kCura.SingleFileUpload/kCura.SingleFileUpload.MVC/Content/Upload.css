@@ -179,7 +179,6 @@ button {
 	pointer-events: none;
 	font-size: 15px;
 	font-weight: bold;
-	min-height: 40px;
 }
 
 	.message > span {
@@ -188,6 +187,7 @@ button {
 	}
 
 .status_img {
+	margin-top: 15px;
 	margin-bottom: 10px;
 	pointer-events: none;
 }
@@ -342,8 +342,8 @@ button {
 
 .fileList {
 	overflow-y: scroll;
-	height: 140px;
-	max-height: 140px;
+	height: 325px;
+	max-height: 325px;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 13px;
@@ -503,3 +503,9 @@ button {
 		.warning-message .warning-div .warning-bold {
 			font-weight:bold !important;
 		}
+
+.infoMessage {
+	font-size: 12px;
+	color: #707070;
+	padding-top: 6px;
+}

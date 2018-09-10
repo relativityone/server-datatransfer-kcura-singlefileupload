@@ -14,7 +14,6 @@ var MFUController = function ($scope, $http, $compile) {
     vm.cancel = Cancel;
     vm.close = Close;
     vm.status = 0;
-    vm.showMessage = true;
     vm.errorID = errorID;
     vm.newImage = NewImage;
     vm.hasRedactions = HasRedactions;
@@ -35,7 +34,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.timelapse;
     vm.startTime;
     vm.totalFiles = 0;
-    vm.maxfiles = 20;
+    vm.maxFiles = 20;
     var idCheckTimeout;
 
     function getdH() {
@@ -56,6 +55,7 @@ var MFUController = function ($scope, $http, $compile) {
 
     function Addfiles(files) {
         cleanFiles();
+        ChangeModalHeight(520);
         var focusindex = undefined;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
@@ -68,7 +68,7 @@ var MFUController = function ($scope, $http, $compile) {
                 return result;
             });
             if (found === -1) {
-                if (vm.files.length < vm.maxfiles) {
+                if (vm.files.length < vm.maxFiles) {
                     vm.files.push({ controlNumberText: file.name, file: file, status: 0, errorMessage: "" });
                 } else {
                     break;
@@ -119,15 +119,16 @@ var MFUController = function ($scope, $http, $compile) {
     function HandleDnDFileSelect(event) {
         stopPropagation(event);
         getdH().style.borderColor = "#c3d2e7";
-        $scope.$apply(function () {
-            files = event.dataTransfer.files;
-            var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
-
-            if (!item.isDirectory) {
-                Addfiles(files);
-                vm.status = 0;
-            }
-        });
+        if (vm.files.length < vm.maxFiles) {
+            $scope.$apply(function () {
+                files = event.dataTransfer.files;
+                var item = browser == "msie" ? {} : event.dataTransfer.items[0].webkitGetAsEntry();
+                if (!item.isDirectory) {
+                    Addfiles(files);
+                    vm.status = 0;
+                }
+            });
+        }
     }
     function SimulateFileClick(force) {
         vm.status = 0;
@@ -293,7 +294,10 @@ var MFUController = function ($scope, $http, $compile) {
         }
         vm.files = filesDontRemove;
         vm.totalFiles = vm.files.length;
-        vm.status = 0;
+        if (!vm.files.length) {
+            vm.status = 0;
+            ChangeModalHeight(335);
+        }
     }
 
     function Close() {
@@ -355,6 +359,13 @@ var MFUController = function ($scope, $http, $compile) {
     function CancelFile(index) {
         vm.files.splice(index, 1);
         vm.totalFiles = vm.files.length;
+        if (!vm.files.length) {
+            vm.status = 0;
+            ChangeModalHeight(335);
+        }
+    }
+    function ChangeModalHeight(height) {
+        window.frameElement.parentElement.style.height = height + "px";
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];
