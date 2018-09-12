@@ -11,7 +11,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         Task SetCheckSFUFieldsAsync(bool enabled);
         Task<bool> GetValidateSFUCustomPermissionsAsync();
         Task SetValidateSFUCustomPermissionsAsync(bool enabled);
-        Task<bool> GetCheckUploadMassivesync();
-        Task SetCheckUploadMassivesync(bool enabled);
+        Task<bool> GetCheckUploadMassiveAsync();
+        Task SetCheckUploadMassiveAsync(bool enabled);
     }
 }

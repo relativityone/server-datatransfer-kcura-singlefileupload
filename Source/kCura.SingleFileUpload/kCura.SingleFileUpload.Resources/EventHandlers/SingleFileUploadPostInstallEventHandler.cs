@@ -74,9 +74,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             {
                 await ToggleManager.Instance.SetCheckSFUFieldsAsync(false);
             }
-            if (!await ToggleManager.Instance.GetCheckUploadMassivesync())
+            if (!await ToggleManager.Instance.GetCheckUploadMassiveAsync())
             {
-                await ToggleManager.Instance.SetCheckUploadMassivesync(true);
+                await ToggleManager.Instance.SetCheckUploadMassiveAsync(true);
             }
             await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false);
 			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
