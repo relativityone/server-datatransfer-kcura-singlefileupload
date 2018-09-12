@@ -136,7 +136,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									if (validateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
-										response.Message = "This file is not supported.";
+										response.Message = "This file type is unsupported";
 										return resultStr;
 									}
 									if (!string.IsNullOrEmpty(controlNumberText))
@@ -163,7 +163,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								else
 								{
 									response.Success = false;
-									response.Message = "The Control Number you selected is being used in another document, please select a different one.";
+									response.Message = "The Control Number you selected is already in use. Try again.";
 									return resultStr;
 								}
 							}
@@ -184,7 +184,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										if (validateFile(transientMetadata.TempFileLocation))
 										{
 											response.Success = false;
-											response.Message = "This file is not supported.";
+											response.Message = "This file type is unsupported";
 											return resultStr;
 										}
 										FileInformation imageInfo = fileInfo;
@@ -229,7 +229,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										if (validateFile(transientMetadata.TempFileLocation))
 										{
 											response.Success = false;
-											response.Message = "This file is not supported.";
+											response.Message = "This file type is unsupported";
 											return resultStr;
 										}
 										await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);

@@ -45,7 +45,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task CreateMaxFilesInstanceSettingAsync()
 		{
-			if (!await ExistMaxFilesInstanceSettingAsync())
+			var existInstanceSetting = await ExistMaxFilesInstanceSettingAsync();
+			if (!existInstanceSetting)
 			{
 				var instanceSetting = new InstanceSetting()
 				{
