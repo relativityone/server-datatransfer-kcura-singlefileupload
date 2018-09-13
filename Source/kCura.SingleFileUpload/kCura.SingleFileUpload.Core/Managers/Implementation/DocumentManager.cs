@@ -304,7 +304,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
             {
-                await CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
+                await CreateMetricsAsync(documentInfo, Constants.BUCKET_DocumentsUploaded);
                 return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
             }
             return new Response() { Result = importResult.Item1, Success = false };
@@ -327,7 +327,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             updateNative(documentInfo, docID);
             Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID, docID);
-            await CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
+            await CreateMetricsAsync(documentInfo, Constants.BUCKET_DocumentsUploaded);
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
         public bool ValidateDocImages(int docArtifactId)
@@ -559,7 +559,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             var location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
             return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
         }
-        public async Task CreateMetrics(ExportedMetadata documentInfo, string bucket)
+        public async Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket)
         {
             if (!string.IsNullOrEmpty(bucket))
             {
