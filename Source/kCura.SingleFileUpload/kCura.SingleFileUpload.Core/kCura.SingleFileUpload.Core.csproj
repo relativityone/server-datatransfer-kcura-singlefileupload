@@ -1081,6 +1081,7 @@
     <Content Include="oi\webview\oit.navbar.min.js" />
     <Content Include="oi\webview\oit.statusbar.css" />
     <Content Include="oi\webview\oit.statusbar.min.js" />
+    <Content Include="SQL\Queries\RemovePageInteractionEvenHandlerFromDocumentObject.sql" />
     <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
     <Content Include="SQL\Queries\GetFieldItem.sql" />
