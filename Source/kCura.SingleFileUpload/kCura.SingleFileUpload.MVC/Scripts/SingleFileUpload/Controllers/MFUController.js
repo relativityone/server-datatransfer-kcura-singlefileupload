@@ -260,6 +260,9 @@ var MFUController = function ($scope, $http, $compile) {
         }
         else {
             var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
+            if (result.Message === "The Control Number you selected is already in use. Try again.") {
+                status = 5;
+            }
             if (removeDigest) {
                 file.status = status;
             }
