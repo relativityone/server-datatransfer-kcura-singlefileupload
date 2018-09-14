@@ -29,5 +29,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         void WriteFile(byte[] file, FileInformation document);
         string GetRepositoryLocation();
         FileIDData GetNativeTypeByFilename(string fileName);
-    }
+		void RemovePageInteractionEvenHandlerFromDocumentObject();
+
+	}
 }

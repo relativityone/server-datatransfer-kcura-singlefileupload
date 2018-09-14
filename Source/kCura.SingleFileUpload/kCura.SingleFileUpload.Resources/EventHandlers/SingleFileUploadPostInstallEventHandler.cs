@@ -48,7 +48,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 RepositoryHelper.ConfigureRepository(Helper);
                 disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
                 DocumentRepository.SetCreateInstanceSettings();
-                ExecuteTelemetryAsync().Wait();
+				DocumentRepository.RemovePageInteractionEvenHandlerFromDocumentObject();
+
+				ExecuteTelemetryAsync().Wait();
                 response.Success = true;
             }
             catch (Exception e)
