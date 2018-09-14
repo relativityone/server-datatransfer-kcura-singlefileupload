@@ -476,7 +476,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 CreateWorkspaceFieldSettings();
             }
         }
-        public async Task<bool> ValidateFileTypes(string extension)
+		public void RemovePageInteractionEvenHandlerFromDocumentObject()
+		{
+			Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
+		}
+		public async Task<bool> ValidateFileTypes(string extension)
         {
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))
