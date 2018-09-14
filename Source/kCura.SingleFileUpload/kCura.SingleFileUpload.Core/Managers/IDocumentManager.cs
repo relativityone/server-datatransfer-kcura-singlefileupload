@@ -6,12 +6,12 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
     public interface IDocumentManager : IManager
     {
-        Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
-        Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0);
+        Task<Response> SaveSingleDocumentAsync(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
+        Task ReplaceSingleDocumentAsync(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0);
         int GetDocByName(string docName);
         void SetCreateInstanceSettings();
         Task<bool> ValidateFileTypes(string extension);
-        Task<bool> IsDataGridEnabled(int workspaceID);
+        Task<bool> IsDataGridEnabledAsync(int workspaceID);
         bool ValidateDocImages(int docArtifactId);
         bool ValidateDocNative(int docArtifactId);
         string GetDocumentControlNumber(int docArtifactId);
