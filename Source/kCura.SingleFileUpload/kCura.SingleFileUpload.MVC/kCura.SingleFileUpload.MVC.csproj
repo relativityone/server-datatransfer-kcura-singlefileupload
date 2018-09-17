@@ -127,8 +127,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.4.1.56, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2018.7.0.494, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.7.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -1234,6 +1234,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\..\packages\kCura.9.6.104.144\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.104.144\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.4.1\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.252.1\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.252.1\build\Relativity.ImportExport.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
 </Project>
