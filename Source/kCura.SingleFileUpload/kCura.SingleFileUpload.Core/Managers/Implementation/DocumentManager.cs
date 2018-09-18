@@ -304,7 +304,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
             {
-                CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
+                await CreateMetricsAsync(documentInfo, Constants.BUCKET_DocumentsUploaded);
                 return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
             }
             return new Response() { Result = importResult.Item1, Success = false };
@@ -327,7 +327,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
             updateNative(documentInfo, docID);
             Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID, docID);
-            CreateMetrics(documentInfo, Constants.BUCKET_DocumentsUploaded);
+            await CreateMetricsAsync(documentInfo, Constants.BUCKET_DocumentsUploaded);
             UpdateDocumentLastModificationFields(docID, userID, false);
         }
         public bool ValidateDocImages(int docArtifactId)
@@ -559,16 +559,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             var location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID, new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
             return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
         }
-        public void CreateMetrics(ExportedMetadata documentInfo, string bucket)
+        public async Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket)
         {
             if (!string.IsNullOrEmpty(bucket))
             {
                 ITelemetryManager telManager = new TelemetryManager();
-                telManager.LogCountAsync(bucket, 1L);
-                telManager.LogCountAsync(Helpers.Constants.BUCKET_TotalSizeDocumentUploaded, documentInfo.Native.LongLength);
-                //Create File tipe metric
-                telManager.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), $"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
-                telManager.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), 1L);
+                await telManager.LogCountAsync(bucket, 1L);
+				await telManager.LogCountAsync(Helpers.Constants.BUCKET_TotalSizeDocumentUploaded, documentInfo.Native.LongLength);
+				//Create File tipe metric
+				await telManager.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), $"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
+				await telManager.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FileType, Path.GetExtension(documentInfo.FileName)), 1L);
             }
         }
         public string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
@@ -639,14 +639,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 forceTapiSettings();
                 string value = getBearerToken(webApiUrl);
-                if (webApiUrl.Contains("/Relativity/"))
-                {
-                    webApiUrl = webApiUrl.Replace("/Relativity/", "/RelativityWebAPI/");
-                }
-                else
-                {
-                    webApiUrl = webApiUrl.Replace("/Relativity", "/RelativityWebAPI");
-                }
+                webApiUrl = webApiUrl.Replace("/Relativity", "/RelativityWebAPI");                
                 ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
                 var importJob = iapi.NewNativeDocumentImportJob();
 

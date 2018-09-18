@@ -523,13 +523,15 @@ button {
 	.successUpload .success {
 		font-weight: bold;
 		font-size: 15px;
-		padding-top: 12px;
+		padding-top: 13px;
+		display: flex;
+		justify-content: center;
 	}
 
 	.successUpload .message {
 		font-size: 12px;
 		padding-top: 5px;
-		padding-bottom: 12px;
+		padding-bottom: 13px;
 		font-weight: normal;
 	}
 

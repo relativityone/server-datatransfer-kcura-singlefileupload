@@ -18,7 +18,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         int GetDocumentArtifactIdByControlNumber(string controlNumber);
         string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
         void UpdateHasImages(int dArtifactId);
-        void CreateMetrics(ExportedMetadata documentInfo, string bucket = null);
+        Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket = null);
         FileInformation getFileByArtifactId(int docArtifactId);
         bool IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);

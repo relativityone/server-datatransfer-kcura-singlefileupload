@@ -31,6 +31,9 @@ namespace kCura.SingleFileUpload.Core.Helpers
         public const string TAPI_FORCE_BCP_HTTP_CLIENT = "TapiForceBcpHttpClient";
 
         public const string ADD_DOCUMENT_CUSTOM_PERMISSION = "New Document";
-		public const string MAX_FILES_TO_UPLOAD = "SFUMaxFilesToUpload";
+		public const string INSTANCE_SETTING_NAME = "SFUMaxFilesToUpload";
+		public const string INSTANCE_SETTING_SECTION = "SFU";
+		public const string INSTANCE_SETTING_VALUE = "20";
+		public const string INSTANCE_SETTING_DESCRIPTION = "Determines the maximum value of files to upload using Simple File Upload. Maximum value should be 100.";
 	}
 }

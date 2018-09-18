@@ -15,7 +15,7 @@
 			 ng-click="simulateFileClick()"
 			 class="successUpload">
 			<div class="success">
-				<img src="~/Content/Images/Success.png" width="16" /> 
+				<img src="~/Content/Images/Success.png" width="17" /> 
 				Your files have been uploaded.
 			</div>
 			<div class="message">
@@ -80,14 +80,14 @@
 									Warning:
 									<span class="confirm"> Duplicate file.</span>
 								</div>
-								<div ng-if="(file.status == 2 || file.status == 6)&&file.errorMessage" class="fileError">
+								<div ng-if="(file.status == 2 || file.status == 6|| file.status == 5)&&file.errorMessage" class="fileError">
 									Error: {{file.errorMessage}}
 									<span ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry"> Retry</span>
 								</div>
 							</div>
 						</div>
 						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6||file.status == 4" ng-click="cancelFile($index)" class="remove" />
+							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6||file.status == 4||file.status == 5" ng-click="cancelFile($index)" class="remove" />
 							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
 							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
 						</div>

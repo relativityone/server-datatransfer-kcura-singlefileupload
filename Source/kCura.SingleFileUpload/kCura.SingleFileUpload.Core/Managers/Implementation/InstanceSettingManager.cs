@@ -19,40 +19,61 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task<int> GetMaxFilesInstanceSettingAsync()
 		{
-			int result = 0;
+			int result = 20;
 			try
 			{
-				var condition = $"'Name' IN ['{Constants.MAX_FILES_TO_UPLOAD}']";
+				var condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
 				var resultList = await GetInstanceSettingsByCondition(condition);
-				int.TryParse(resultList.FirstOrDefault().Value, out result);
-				if (result < 1)
+				if (resultList.Any())
 				{
-					result = 1;
-				}
-				if (result > 100)
-				{
-					result = 100;
+					int.TryParse(resultList.FirstOrDefault().Value, out result);
+					if (result < 1)
+					{
+						result = 1;
+					}
+					else if (result > 100)
+					{
+						result = 100;
+					}
 				}
 			}
 			catch (Exception ex)
 			{
 				LogError(ex);
-				result = 20;
 			}
 			return result;
 		}
 		public async Task CreateMaxFilesInstanceSettingAsync()
 		{
-			var instanceSetting = new InstanceSetting()
+			var existInstanceSetting = await ExistMaxFilesInstanceSettingAsync();
+			if (!existInstanceSetting)
 			{
-				Name = Constants.MAX_FILES_TO_UPLOAD,
-				Section = "SFU",
-				ValueType = global::Relativity.Services.InstanceSetting.ValueType.Int32,
-				Value = "20",
-				InitialValue = "20",
-				Description = "Determines the maximum value of files to upload using Simple File Upload. Maximum value should be 100."
-			};
-			await CreateInstanceSettingAsync(instanceSetting);
+				var instanceSetting = new InstanceSetting()
+				{
+					Name = Constants.INSTANCE_SETTING_NAME,
+					Section = Constants.INSTANCE_SETTING_SECTION,
+					ValueType = global::Relativity.Services.InstanceSetting.ValueType.Int32,
+					Value = Constants.INSTANCE_SETTING_VALUE,
+					InitialValue = Constants.INSTANCE_SETTING_VALUE,
+					Description = Constants.INSTANCE_SETTING_DESCRIPTION
+				};
+				await CreateInstanceSettingAsync(instanceSetting);
+			}
+		}
+		private async Task<bool> ExistMaxFilesInstanceSettingAsync()
+		{
+			bool result = false;
+			try
+			{
+				var condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
+				var resultList = await GetInstanceSettingsByCondition(condition);
+				result = resultList.Any();
+			}
+			catch (Exception ex)
+			{
+				LogError(ex);
+			}
+			return result;
 		}
 
 		private async Task<IEnumerable<InstanceSetting>> GetInstanceSettingsByCondition(string condition)
@@ -81,16 +102,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		private async Task CreateInstanceSettingAsync(InstanceSetting instanceSetting)
 		{
-			try
+			using (var instanceSettingProxy = _Repository.CreateProxy<global::Relativity.Services.InstanceSetting.IInstanceSettingManager>(ExecutionIdentity.System))
 			{
-				using (var instanceSettingProxy = _Repository.CreateProxy<global::Relativity.Services.InstanceSetting.IInstanceSettingManager>(ExecutionIdentity.System))
-				{
-					await instanceSettingProxy.CreateSingleAsync(instanceSetting);
-				}
-			}
-			catch (Exception ex)
-			{
-				LogError(ex);
+				await instanceSettingProxy.CreateSingleAsync(instanceSetting);
 			}
 		}
 
