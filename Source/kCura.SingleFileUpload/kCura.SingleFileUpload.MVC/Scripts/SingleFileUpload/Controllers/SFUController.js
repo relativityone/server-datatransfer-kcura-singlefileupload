@@ -139,14 +139,8 @@
 
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status === 200) {
-                            eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                        }
-                        else {
-                            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.responseText + '"}';
-                        }
-                    }
+                    if (xhr.readyState == 4)
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
                 };
                 notifyUploadStarted();
                 checkUpload();
