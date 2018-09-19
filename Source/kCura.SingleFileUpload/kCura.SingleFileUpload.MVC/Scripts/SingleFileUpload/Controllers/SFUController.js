@@ -136,14 +136,8 @@
 
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status === 200) {
-                            eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                        }
-                        else {
-                            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.responseText + '"}';
-                        }
-                    }
+                    if (xhr.readyState == 4)
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
                 };
                 notifyUploadStarted();
                 checkUpload();
@@ -231,11 +225,26 @@
 
         }
 
+        function isJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (!!resultString) {
                 sessionStorage['____pushNo'] = '';
-                var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
+                var result;
+                resultString = resultString.replace(/\\/g, "\\\\");
+                if (isJson(resultString)) {
+                    result = JSON.parse(resultString);
+                }
+                else {
+                    result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
+                }
                 if (vm.errorID != 0 ||
                     GetDID() != -1 ||
                     !result.Success ||
