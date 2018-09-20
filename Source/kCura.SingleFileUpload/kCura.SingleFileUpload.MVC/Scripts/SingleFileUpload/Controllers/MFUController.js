@@ -6,6 +6,8 @@ var MFUController = function ($scope, $http, $compile) {
     var browser = checkBrowser();
     var msgLabel = document.getElementById("msg");
     var vm = $scope;
+    var controlNumberMessage = "The Control Number you selected is already in use.Try again.";
+    var sizeMessage = "You can't upload files greater than 2GB in size.";
     vm.simulateFileClick = SimulateFileClick;
     vm.handleDragOver = HandleDragOver;
     vm.handleDragLeave = HandleDragLeave;
@@ -194,7 +196,7 @@ var MFUController = function ($scope, $http, $compile) {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                    CompleteUpload();
+                    CompleteUpload(fileIndex, file, retry);
                 }
             };
             dialog.dialog("option", "closeOnEscape", false);
@@ -202,11 +204,13 @@ var MFUController = function ($scope, $http, $compile) {
             xhr.send(data);
         }
         else {
-            sessionStorage['____pushNo'] = '"Success":false,"Message":"You can\'t upload files greater than 2GB in size"}';
-            CompleteUpload();
+            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + sizeMessage +'"}';
+            setTimeout(function () {
+                CompleteUpload(fileIndex, file, retry)
+            }, 10);
         }
     }
-    function CompleteUpload() {
+    function CompleteUpload(fileIndex, file, retry) {
         var resultString = sessionStorage['____pushNo'] || '';
         sessionStorage['____pushNo'] = '';
         checkUpload(file, resultString);
@@ -269,7 +273,7 @@ var MFUController = function ($scope, $http, $compile) {
         }
         else {
             var status = result.Message.indexOf('permissions') == -1 ? 2 : 6;
-            if (result.Message === "The Control Number you selected is already in use. Try again.") {
+            if (result.Message === controlNumberMessage || result.Message === sizeMessage) {
                 status = 5;
             }
             if (removeDigest) {
