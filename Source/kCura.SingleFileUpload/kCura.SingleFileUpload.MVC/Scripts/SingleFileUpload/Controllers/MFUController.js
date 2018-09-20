@@ -189,24 +189,33 @@ var MFUController = function ($scope, $http, $compile) {
                 data.append('controlNumberText', file.controlNumberText);
             }
         }
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                var resultString = sessionStorage['____pushNo'] || '';
-                sessionStorage['____pushNo'] = '';
-                checkUpload(file, resultString);
-                if ((fileIndex < vm.totalFiles - 1) && !retry) {
-                    fileIndex++;
-                    UploadFile(fileIndex);
+        if (ValidateFileSize(file.file)) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    CompleteUpload();
                 }
-                vm.fileIndex++;
-                Uploading();
-            }
-        };
-        dialog.dialog("option", "closeOnEscape", false);
-        xhr.open('POST', form.action);
-        xhr.send(data);
+            };
+            dialog.dialog("option", "closeOnEscape", false);
+            xhr.open('POST', form.action);
+            xhr.send(data);
+        }
+        else {
+            sessionStorage['____pushNo'] = '"Success":false,"Message":"You can\'t upload files greater than 2GB in size"}';
+            CompleteUpload();
+        }
+    }
+    function CompleteUpload() {
+        var resultString = sessionStorage['____pushNo'] || '';
+        sessionStorage['____pushNo'] = '';
+        checkUpload(file, resultString);
+        if ((fileIndex < vm.totalFiles - 1) && !retry) {
+            fileIndex++;
+            UploadFile(fileIndex);
+        }
+        vm.fileIndex++;
+        Uploading();
     }
 
     function checkUpload(file, resultString) {
@@ -380,6 +389,11 @@ var MFUController = function ($scope, $http, $compile) {
     }
     function ChangeModalHeight(height) {
         window.frameElement.parentElement.style.height = height + "px";
+    }
+
+    function ValidateFileSize(file) {
+        var canUpload = file.size <= 2147483648;
+        return canUpload;
     }
 }
 MFUController.$inject = ['$scope', '$http', '$compile'];

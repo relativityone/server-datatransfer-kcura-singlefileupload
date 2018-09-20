@@ -64,12 +64,15 @@ var SFUController = function ($scope, $http, $compile) {
             document.getElementById('did').setAttribute('value', GetDID());
             document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
         }
-
-        var filesCount = document.getElementById("file").files.length;
-
-        document.getElementById('btiForm').submit();
-        notifyUploadStarted();
-
+        var files = document.getElementById("file").files;
+        var filesCount = files.length;
+        var file = files[0];
+        $scope.$apply(function () {
+            if (ValidateFileSize(file)) {
+                document.getElementById('btiForm').submit();
+                notifyUploadStarted();
+            }
+        });
     }
 
     function HandleDragOver(event) {
@@ -114,28 +117,29 @@ var SFUController = function ($scope, $http, $compile) {
     }
 
     function submitSimulatedForm() {
-        var form = document.getElementById('btiFormDD');
-        var data = new FormData(form);
-        data.append('file', bkpFile);
+        if (ValidateFileSize(bkpFile)) {
+            var form = document.getElementById('btiFormDD');
+            var data = new FormData(form);
+            data.append('file', bkpFile);
 
-        if (vm.errorID == 0) {
-            data.append('fid', getFolder());
-            data.append('fdv', document.getElementById('fdv').getAttribute('value'));
-            data.append('did', GetDID());
-            data.append('force', document.getElementById('force').getAttribute('value'));
-            data.append('controlNumberText', document.getElementById('controlNumberText').value);
+            if (vm.errorID == 0) {
+                data.append('fid', getFolder());
+                data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+                data.append('did', GetDID());
+                data.append('force', document.getElementById('force').getAttribute('value'));
+                data.append('controlNumberText', document.getElementById('controlNumberText').value);
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4)
+                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+            };
+            notifyUploadStarted();
+            checkUpload();
+            xhr.open('POST', form.action);
+            xhr.send(data);
         }
-
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4)
-                eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-        };
-        msgLabel.innerHTML = "Uploading";
-        notifyUploadStarted();
-        checkUpload();
-        xhr.open('POST', form.action);
-        xhr.send(data);
     }
 
     function SimulateFileClick(force, event) {
@@ -351,7 +355,7 @@ var SFUController = function ($scope, $http, $compile) {
                 vm.status = 1;
             });
             getdH().onclick = function () { };
-        //    getdH().ondrop = function () { };
+            //      getdH().ondrop = function () { };
             msgLabel.innerHTML = "Uploading";
             checkUpload();
         })
@@ -428,6 +432,15 @@ var SFUController = function ($scope, $http, $compile) {
         else {
             SubmitFrm();
         }
+    }
+
+    function ValidateFileSize(file) {
+        var canUpload = file.size <= 2147483648;
+        vm.status = 2;
+        var message = "You can't upload files greater than 2GB in size"
+        msgLabel.className = "msgDetails";
+        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+        return canUpload;
     }
 }
 
