@@ -20,7 +20,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			get
 			{
 				if (__repositorySearchManager == null)
+				{
 					__repositorySearchManager = new SearchExportManager();
+				}
+
 				return __repositorySearchManager;
 			}
 		}
@@ -31,7 +34,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			get
 			{
 				if (__repositoryProcessingManager == null)
+				{
 					__repositoryProcessingManager = new ProcessingManager();
+				}
+
 				return __repositoryProcessingManager;
 			}
 		}
@@ -42,7 +48,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			get
 			{
 				if (__repositoryAuditManager == null)
+				{
 					__repositoryAuditManager = new AuditManager(ConnectionHelper.Helper());
+				}
+
 				return __repositoryAuditManager;
 			}
 		}
@@ -123,7 +132,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					{
 						if (supported)
 						{
-							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
 							var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
 							var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 							if (!fdv)
@@ -145,7 +154,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									}
 									if (did == -1)
 									{
-										var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+										var resultUpload = await _RepositoryDocumentManager.SaveSingleDocumentAsync(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
 										if (resultUpload.Success)
 										{
 											resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
@@ -232,7 +241,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 											response.Message = "This file is not supported.";
 											return resultStr;
 										}
-										await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+										await _RepositoryDocumentManager.ReplaceSingleDocumentAsync(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
 										var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
 										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
@@ -291,7 +300,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				string resultStr = string.Empty;
 				var isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
 				var hasPermission = !isAdmin ? await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
-				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
 				if (hasPermission)
 				{
 					var error = _RepositoryProcessingManager.GetErrorInfo(errorID);

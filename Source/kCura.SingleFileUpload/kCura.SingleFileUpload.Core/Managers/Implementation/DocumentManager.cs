@@ -299,7 +299,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
         }
         public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
-        public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
+        public async Task<Response> SaveSingleDocumentAsync(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
         {
             Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
             if (string.IsNullOrEmpty(importResult.Item1))
@@ -309,7 +309,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             return new Response() { Result = importResult.Item1, Success = false };
         }
-        public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0)
+        public async Task ReplaceSingleDocumentAsync(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0)
         {
             if (!avoidControlNumber || !fromDocumentViewer)
             {
@@ -476,7 +476,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 CreateWorkspaceFieldSettings();
             }
         }
-        public async Task<bool> ValidateFileTypes(string extension)
+		public void RemovePageInteractionEvenHandlerFromDocumentObject()
+		{
+			Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
+		}
+		public async Task<bool> ValidateFileTypes(string extension)
         {
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))
@@ -488,7 +492,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             restricted.AddRange(new[] { "dll", "exe", "js" });
             return !restricted.Contains(extension.Replace(".", ""));
         }
-        public async Task<bool> IsDataGridEnabled(int workspaceID)
+        public async Task<bool> IsDataGridEnabledAsync(int workspaceID)
         {
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))

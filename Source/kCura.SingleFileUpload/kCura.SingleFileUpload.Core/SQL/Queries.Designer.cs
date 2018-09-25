@@ -411,7 +411,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///DECLARE @Section VARCHAR(100)= &apos;kCura.EDDS.Web&apos;;
         ///DECLARE @ArtifactID INT;
         ///
-        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND [rest of string was truncated]&quot;;.
+        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHER [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InsertFieldsInstanceSetting {
             get {
@@ -495,28 +495,33 @@ namespace kCura.SingleFileUpload.Core.SQL {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///UPDATE
-        ///	[EDDSDBO].[Document]
-        ///SET
-        ///	[RelativityImageCount] = 1
-        ///WHERE
-        ///	ArtifactID = @DocumentID
+        ///   Looks up a localized string similar to --Validation if the user belong of workspace group administrator
+        ///DECLARE @GroupAdminArtifactID INT
+        ///SELECT	@GroupAdminArtifactID = C.[WorkspaceAdminGroupID]
+        ///FROM	[eddsdbo].[Case] AS C WITH(NOLOCK)
+        ///WHERE	C.ArtifactID = @workspaceArtifactID
         ///
-        ///
-        ///DECLARE @HasImagesCodeType INT = ( SELECT TOP 1 F.CodeTypeID
-        ///								   FROM EDDSDBO.Field AS F WITH (NOLOCK)
-        ///								   INNER JOIN EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
-        ///								   ON AG.ArtifactID = F.ArtifactID
-        ///								   WHERE AG.ArtifactGuid = @HasImagesFieldGuid)
-        ///
-        ///DECLARE @HasImagesCodeYes INT = ( SELECT TOP 1 AG.ArtifactID
-        ///								       FROM EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
-        ///				 [rest of string was truncated]&quot;;.
+        ///--return true o false if is user administrator or his group is workspace group administrator
+        ///SELECT	CAST(CASE WHEN COUNT(G.ArtifactID) &gt; 0 THEN 1 ELSE 0 END AS BIT) AS HasPermission
+        ///FROM	EDDSDBO.[Group] AS G WITH(NOLOCK)
+        ///WHERE	G.ArtifactID IN (
+        ///			--User group
+        ///	 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string IsUserAdministrator {
             get {
                 return ResourceManager.GetString("IsUserAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE
+        ///FROM [EDDSDBO].[ActiveSyncs]
+        ///WHERE ClassName = &apos;kCura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler&apos;.
+        /// </summary>
+        internal static string RemovePageInteractionEvenHandlerFromDocumentObject {
+            get {
+                return ResourceManager.GetString("RemovePageInteractionEvenHandlerFromDocumentObject", resourceCulture);
             }
         }
         

@@ -48,7 +48,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 RepositoryHelper.ConfigureRepository(Helper);
                 disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
                 DocumentRepository.SetCreateInstanceSettings();
-                executeTelemetryAsync().Wait();
+								ExecuteTelemetryAsync().Wait();
                 response.Success = true;
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             return response;
         }
 
-        private async Task executeTelemetryAsync()
+        private async Task ExecuteTelemetryAsync()
         {
             if (!await ToggleManager.Instance.GetChangeFileNameAsync())
             {
