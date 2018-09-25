@@ -20,13 +20,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
         }
 
-		private string fieldName { get; set; }
-		private bool checkToRemove { get; set; }
+		private string FieldName { get; set; }
+		private bool CheckToRemove { get; set; }
 		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
         {
-            ExportedMetadata result = new Entities.ExportedMetadata();
-            result.FileName = fileName;
-            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
+			ExportedMetadata result = new Entities.ExportedMetadata
+			{
+				FileName = fileName
+			};
+			using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {
@@ -57,7 +59,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 while (reader.Read())
                 {
-                    processReader(reader, extractedTextBuilder, result.Fields);
+                    ProcessReader(reader, extractedTextBuilder, result.Fields);
                 }
             }
             result.ExtractedText = extractedTextBuilder.ToString();
@@ -89,7 +91,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
         
 
-        private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
+        private void ProcessReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {
             switch (reader.NodeType)
             {
@@ -97,30 +99,30 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     switch (reader.Name)
                     {
                         case "document":
-                            addToDictionary(fields, "Native Type", reader.GetAttribute("type"));
+                            AddToDictionary(fields, "Native Type", reader.GetAttribute("type"));
                             break;
 						case "target":
-							checkToRemove = true;
+							CheckToRemove = true;
 							break;
 						default:
                             if (reader.HasAttributes)
                             {
-                                fieldName = reader.GetAttribute("type");
+                                FieldName = reader.GetAttribute("type");
                             }
                             break;
 
                     }
-                    if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
+                    if (FieldName == "hyperlink" || FieldName == "body" || FieldName == "bookmark")
                     {
-                        fieldName = string.Empty;
+                        FieldName = string.Empty;
                     }
                     break;
                 case XmlNodeType.Text:
-                    if (string.IsNullOrEmpty(fieldName))
+                    if (string.IsNullOrEmpty(FieldName))
                     {
-						if (checkToRemove)
+						if (CheckToRemove)
 						{
-							checkToRemove = false;
+							CheckToRemove = false;
 						}
 						else
 						{
@@ -130,7 +132,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                     else
                     {
                         object value = null;
-                        switch (fieldName)
+                        switch (FieldName)
                         {
                             case "creation date":
                             case "revision date":
@@ -155,15 +157,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                                 value = reader.Value;
                                 break;
                         }
-                        addToDictionary(fields, fieldName, value);
-                        fieldName = null;
+                        AddToDictionary(fields, FieldName, value);
+                        FieldName = null;
                     }
                     break;
                 default:
                     break;
             }
         }
-        private void addToDictionary(IDictionary<string, object> dictionary, string key, object value)
+        private void AddToDictionary(IDictionary<string, object> dictionary, string key, object value)
         {
             if (dictionary.ContainsKey(key))
             {
