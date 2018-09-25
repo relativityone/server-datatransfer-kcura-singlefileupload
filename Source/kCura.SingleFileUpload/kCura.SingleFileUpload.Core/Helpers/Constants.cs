@@ -29,5 +29,7 @@ namespace kCura.SingleFileUpload.Core.Helpers
         public const string TAPI_FORCE_HTTP_CLIENT = "TapiForceHttpClient";
         public const string TAPI_FORCE_WEB_UPLOAD = "ForceWebUpload";
         public const string TAPI_FORCE_BCP_HTTP_CLIENT = "TapiForceBcpHttpClient";
+
+        public const string ADD_DOCUMENT_CUSTOM_PERMISSION = "New Document";
     }
 }

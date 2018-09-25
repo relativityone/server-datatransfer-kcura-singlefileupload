@@ -242,13 +242,13 @@
     </Compile>
     <Compile Include="Helpers\EncodingHelper.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />
-    <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
+    <Compile Include="Managers\Implementation\PermissionsManager.cs" />
     <Compile Include="Managers\Implementation\ToggleManager.cs" />
     <Compile Include="Managers\Implementation\TelemetryManager.cs" />
     <Compile Include="Managers\IProcessingManager.cs" />
@@ -259,6 +259,7 @@
     <Compile Include="Managers\Implementation\SearchExportManager.cs" />
     <Compile Include="Managers\IDocumentManager.cs" />
     <Compile Include="Managers\ISearchExportManager.cs" />
+    <Compile Include="Managers\IPermissionsManager.cs" />
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
     <Compile Include="SQL\Queries.Designer.cs">
@@ -1101,6 +1102,7 @@
     <Content Include="SQL\Queries\DeleteDocumentImages.sql" />
     <Content Include="SQL\Queries\GetFieldsInstanceSetting.sql" />
     <Content Include="SQL\Queries\InsertFieldsInstanceSetting.sql" />
+    <Content Include="SQL\Queries\IsUserAdministrator.sql" />
     <Content Include="SQL\Queries\UpdateHasImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
     <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />

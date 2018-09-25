@@ -37,6 +37,9 @@
         vm.focusControlNumber = function (value) {
             vm.focusControlNumberValue = value;
         }
+        vm.controlNumberSelected = function () {
+            msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
+        }
 
 
         sessionStorage['____pushNo'] = '';
@@ -114,7 +117,7 @@
                         vm.status = 2;
                         var message = "Multiple file upload is not supported.";
                         msgLabel.className = "msgDetails";
-                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
                     }
                 }
             });
@@ -217,14 +220,13 @@
                         Close();
                     }
                 }, function (error) {
-                    console.error(error);
-                    setTimeout(function () {
-                        window.parent.location.reload();
-                    }, 2000);
+                    vm.status = 2;
+                    var message = error.data.Message;
+                    msgLabel.className = "msgDetails";
+                    msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 });
 
         }
-
         function isJson(str) {
             try {
                 JSON.parse(str);
@@ -339,7 +341,6 @@
                         vm.status = status;
                     });
                     var message = result.Message;
-                    console.error("SFU: " + result.Message);
                     msgLabel.className = "msgDetails";
                     msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 }

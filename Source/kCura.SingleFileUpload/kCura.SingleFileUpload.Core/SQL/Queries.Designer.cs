@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace kCura.SingleFileUpload.Core.SQL
-{
-
-
+namespace kCura.SingleFileUpload.Core.SQL {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,7 +19,7 @@ namespace kCura.SingleFileUpload.Core.SQL
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Queries {
@@ -140,16 +140,21 @@ namespace kCura.SingleFileUpload.Core.SQL
         /// <summary>
         ///   Looks up a localized string similar to  DECLARE 
         ///	     @CNField VARCHAR(200)
+        ///
         /// SELECT 
-        ///	@CNField = REPLACE(DisplayName, &apos; &apos;, &apos;&apos;) 
+        ///	@CNField = AVM.ColumnName 
         /// FROM 
-        ///	EDDSDBO.Field 
+        ///	EDDSDBO.Field AS F WITH (NOLOCK)
+        ///INNER JOIN 
+        ///	EDDSDBO.ArtifactViewField AS AVM WITH (NOLOCK) 
+        ///	ON 
+        ///	F.ArtifactViewFieldID = AVM.ArtifactViewFieldID
         /// WHERE 
         ///	FieldArtifactTypeID = 10 
         ///	AND 
         ///	FieldCategoryID = 2
         ///
-        ///EXEC(&apos;SELECT ArtifactID FROM EDDSDBO.Document WHERE &apos;+@CNField+&apos;=&apos;&apos;&apos;+@ControlNumber+&apos;&apos;&apos;&apos;).
+        ///EXEC(&apos;SELECT ArtifactID FROM EDDSDBO.Document WITH (NOLOCK) WHERE &apos;+@CNField+&apos;=&apos;&apos;&apos;+@ControlNumber+&apos;&apos;&apos;&apos;).
         /// </summary>
         internal static string GetDocumentArtifactIdByControlNumber {
             get {
@@ -184,7 +189,7 @@ namespace kCura.SingleFileUpload.Core.SQL
         ///	  FROM [EDDSDBO].[AccessControlListPermission] AS AC WITH(NOLOCK)
         ///	  INNER JOIN [EDDSDBO].[Permission] AS P WITH(NOLOCK)
         ///	  ON P.[PermissionID] = AC.[PermissionID]
-        ///	  AND AC.[Permission [rest of string was truncated]&quot;;.
+        ///	  AND AC.[PermissionID] IN (SELECT [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetDocumentPermissions {
             get {
@@ -406,7 +411,7 @@ namespace kCura.SingleFileUpload.Core.SQL
         ///DECLARE @Section VARCHAR(100)= &apos;kCura.EDDS.Web&apos;;
         ///DECLARE @ArtifactID INT;
         ///
-        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHER [rest of string was truncated]&quot;;.
+        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InsertFieldsInstanceSetting {
             get {
@@ -415,7 +420,7 @@ namespace kCura.SingleFileUpload.Core.SQL
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IF EXISTS(SELECT TOP 1 1 FROM EDDSDBO.Settings WHERE [Name] = &apos;SFUFieldValues&apos;)
+        ///   Looks up a localized string similar to IF EXISTS(SELECT TOP 1 1 FROM EDDSDBO.Settings WITH (NOLOCK) WHERE [Name] = &apos;SFUFieldValues&apos;)
         ///BEGIN
         ///	UPDATE 
         ///		EDDSDBO.Settings 
@@ -466,7 +471,9 @@ namespace kCura.SingleFileUpload.Core.SQL
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @Value VARCHAR(MAX)= &apos;{
+        ///   Looks up a localized string similar to BEGIN TRAN
+        ///
+        ///DECLARE @Value VARCHAR(MAX)= &apos;{
         ///                &quot;url&quot;:  &quot;%ApplicationPath%/custompages/1738ceb6-9546-44a7-8b9b-e64c88e47320/sfu.html?%AppID%&quot;,
         ///                &quot;id&quot;: &quot;documentCreateModal&quot;,        
         ///                &quot;height&quot;: 440,
@@ -479,12 +486,37 @@ namespace kCura.SingleFileUpload.Core.SQL
         ///(
         ///    SELECT TOP 1 1
         ///    FROM eddsdbo.InstanceSetting WITH (nolock)
-        ///    WHERE name = @Name
-        ///          AND S [rest of string was truncated]&quot;;.
+        ///    WHERE name = @Name AN [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InsertInstanceSettings {
             get {
                 return ResourceManager.GetString("InsertInstanceSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///UPDATE
+        ///	[EDDSDBO].[Document]
+        ///SET
+        ///	[RelativityImageCount] = 1
+        ///WHERE
+        ///	ArtifactID = @DocumentID
+        ///
+        ///
+        ///DECLARE @HasImagesCodeType INT = ( SELECT TOP 1 F.CodeTypeID
+        ///								   FROM EDDSDBO.Field AS F WITH (NOLOCK)
+        ///								   INNER JOIN EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
+        ///								   ON AG.ArtifactID = F.ArtifactID
+        ///								   WHERE AG.ArtifactGuid = @HasImagesFieldGuid)
+        ///
+        ///DECLARE @HasImagesCodeYes INT = ( SELECT TOP 1 AG.ArtifactID
+        ///								       FROM EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
+        ///				 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string IsUserAdministrator {
+            get {
+                return ResourceManager.GetString("IsUserAdministrator", resourceCulture);
             }
         }
         
