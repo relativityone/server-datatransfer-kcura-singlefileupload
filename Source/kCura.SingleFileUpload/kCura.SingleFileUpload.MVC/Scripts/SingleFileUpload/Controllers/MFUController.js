@@ -47,8 +47,17 @@ var MFUController = function ($scope, $http, $compile) {
         var externalFrame = $($(window.parent.parent.document).find('#_externalPage')[0].contentDocument);
         externalFrame.find('.dynamic-content-modal-close').hide();
         externalFrame.find('.modal-context').click(function () {
-            externalFrame.find('dynamic-content-modal-wgt').hide();
-            location.replace(location.href.replace('sfu', 'sfu.html'));
+            switch (vm.status) {
+                case (1):
+                    externalFrame.find('dynamic-content-modal-wgt').show();
+                    break;
+                case (3):
+                    Close()
+                    break;
+                default:
+                    externalFrame.find('dynamic-content-modal-wgt').hide();
+                    location.replace(location.href.replace('sfu', 'sfu.html'));
+            }
         });
     }
     try {
@@ -299,7 +308,7 @@ var MFUController = function ($scope, $http, $compile) {
                 });
                 elem.style.width = '1%';
             }
-        }, 500);
+        }, 100);
     }
 
     function stopPropagation(event) {
