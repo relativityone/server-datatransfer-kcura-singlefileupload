@@ -436,10 +436,12 @@ var SFUController = function ($scope, $http, $compile) {
 
     function ValidateFileSize(file) {
         var canUpload = file.size <= 2147483648;
-        vm.status = 2;
-        var message = "You can't upload files greater than 2GB in size"
-        msgLabel.className = "msgDetails";
-        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+        if (!canUpload) {
+            vm.status = 2;
+            var message = "You can't upload files greater than 2GB in size"
+            msgLabel.className = "msgDetails";
+            msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div
+        }
         return canUpload;
     }
 }
