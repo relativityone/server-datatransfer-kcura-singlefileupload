@@ -67,12 +67,10 @@ var SFUController = function ($scope, $http, $compile) {
         var files = document.getElementById("file").files;
         var filesCount = files.length;
         var file = files[0];
-        $scope.$apply(function () {
-            if (ValidateFileSize(file)) {
-                document.getElementById('btiForm').submit();
-                notifyUploadStarted();
-            }
-        });
+        if (ValidateFileSize(file, browser != "msie")) {
+            document.getElementById('btiForm').submit();
+            notifyUploadStarted();
+        }
     }
 
     function HandleDragOver(event) {
@@ -434,10 +432,16 @@ var SFUController = function ($scope, $http, $compile) {
         }
     }
 
-    function ValidateFileSize(file) {
+    function ValidateFileSize(file,apply) {
         var canUpload = file.size <= 2147483648;
         if (!canUpload) {
-            vm.status = 2;
+            if (apply) {
+                $scope.$apply(function () {
+                    vm.status = 2;
+                });
+            } else {
+                vm.status = 2;
+            }
             var message = "You can't upload files greater than 2GB in size"
             msgLabel.className = "msgDetails";
             msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div";

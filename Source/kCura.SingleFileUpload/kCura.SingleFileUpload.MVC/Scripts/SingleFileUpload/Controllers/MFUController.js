@@ -70,10 +70,12 @@ var MFUController = function ($scope, $http, $compile) {
         var focusindex = undefined;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            var found = vm.files.findIndex(function (element) {
+            var found = -1;
+            vm.files.some(function (element,i) {
                 var result = false;
                 if (element.file.name == file.name) {
                     element.status = 4;
+                    found = i;
                     result = true;
                 }
                 return result;
@@ -102,9 +104,14 @@ var MFUController = function ($scope, $http, $compile) {
     }
     function SubmitFrm() {
         files = document.getElementById("file").files;
-        $scope.$apply(function () {
+        if (browser == "msie") {
             Addfiles(files);
-        });
+        }
+        else {
+            $scope.$apply(function () {
+                Addfiles(files);
+            });
+        }
     }
 
     function HandleDragOver(event) {
@@ -215,7 +222,7 @@ var MFUController = function ($scope, $http, $compile) {
             xhr.send(data);
         }
         else {
-            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + sizeMessage +'"}';
+            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + sizeMessage + '"}';
             setTimeout(function () {
                 CompleteUpload(fileIndex, file, retry)
             }, 10);
