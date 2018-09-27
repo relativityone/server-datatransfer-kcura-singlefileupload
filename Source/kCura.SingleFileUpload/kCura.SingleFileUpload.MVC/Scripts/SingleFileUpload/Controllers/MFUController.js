@@ -96,7 +96,9 @@ var MFUController = function ($scope, $http, $compile) {
         vm.totalFiles = vm.files.length;
     }
     function cleanFiles() {
-        vm.files = vm.files.filter(element => element.status != 3);
+        vm.files = vm.files.filter(function (element) {
+            return element.status != 3;
+        });
     }
     function SubmitFrm() {
         files = document.getElementById("file").files;
