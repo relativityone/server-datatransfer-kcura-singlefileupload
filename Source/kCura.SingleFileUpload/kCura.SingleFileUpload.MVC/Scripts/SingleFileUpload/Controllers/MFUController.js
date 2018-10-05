@@ -6,7 +6,7 @@ var MFUController = function ($scope, $http, $compile) {
     var browser = checkBrowser();
     var msgLabel = document.getElementById("msg");
     var vm = $scope;
-    var controlNumberMessage = "The Control Number you selected is already in use.Try again.";
+    var controlNumberMessage = "The Control Number you selected is already in use. Try again.";
     var sizeMessage = "You can't upload files greater than 2GB in size.";
     vm.simulateFileClick = SimulateFileClick;
     vm.handleDragOver = HandleDragOver;
@@ -47,8 +47,17 @@ var MFUController = function ($scope, $http, $compile) {
         var externalFrame = $($(window.parent.parent.document).find('#_externalPage')[0].contentDocument);
         externalFrame.find('.dynamic-content-modal-close').hide();
         externalFrame.find('.modal-context').click(function () {
-            externalFrame.find('dynamic-content-modal-wgt').hide();
-            location.replace(location.href.replace('sfu', 'sfu.html'));
+            switch (vm.status) {
+                case (1):
+                    externalFrame.find('dynamic-content-modal-wgt').show();
+                    break;
+                case (3):
+                    Close()
+                    break;
+                default:
+                    externalFrame.find('dynamic-content-modal-wgt').hide();
+                    location.replace(location.href.replace('sfu', 'sfu.html'));
+            }
         });
     }
     try {
@@ -61,10 +70,12 @@ var MFUController = function ($scope, $http, $compile) {
         var focusindex = undefined;
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
-            var found = vm.files.findIndex(function (element) {
+            var found = -1;
+            vm.files.some(function (element,i) {
                 var result = false;
                 if (element.file.name == file.name) {
                     element.status = 4;
+                    found = i;
                     result = true;
                 }
                 return result;
@@ -87,13 +98,20 @@ var MFUController = function ($scope, $http, $compile) {
         vm.totalFiles = vm.files.length;
     }
     function cleanFiles() {
-        vm.files = vm.files.filter(element => element.status != 3);
+        vm.files = vm.files.filter(function (element) {
+            return element.status != 3;
+        });
     }
     function SubmitFrm() {
         files = document.getElementById("file").files;
-        $scope.$apply(function () {
+        if (browser == "msie") {
             Addfiles(files);
-        });
+        }
+        else {
+            $scope.$apply(function () {
+                Addfiles(files);
+            });
+        }
     }
 
     function HandleDragOver(event) {
@@ -204,7 +222,7 @@ var MFUController = function ($scope, $http, $compile) {
             xhr.send(data);
         }
         else {
-            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + sizeMessage +'"}';
+            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + sizeMessage + '"}';
             setTimeout(function () {
                 CompleteUpload(fileIndex, file, retry)
             }, 10);
@@ -299,7 +317,7 @@ var MFUController = function ($scope, $http, $compile) {
                 });
                 elem.style.width = '1%';
             }
-        }, 500);
+        }, 100);
     }
 
     function stopPropagation(event) {

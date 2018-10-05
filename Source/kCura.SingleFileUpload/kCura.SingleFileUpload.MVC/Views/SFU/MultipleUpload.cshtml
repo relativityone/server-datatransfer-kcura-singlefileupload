@@ -27,7 +27,7 @@
 			 class="multiple-drop"
 			 ng-click="simulateFileClick()"
 			 ng-show="( status == 0 || status == 4 || status == 2 || status == 6 )&& files.length < maxFiles ">
-			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '15px' : '5px' }">
+			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '14px' : '5px' }">
 				<img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
 				<img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
 				<img ng-if="status == 4 && files.length==0" src="~/Content/Images/Upload_Hover.png" />
