@@ -137,9 +137,10 @@
 
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4)
+                    if (xhr.readyState == 4) {
                         eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                };
+                    }
+                }
                 notifyUploadStarted();
                 checkUpload();
                 xhr.open('POST', form.action);
@@ -360,7 +361,6 @@
                     vm.status = 1;
                 });
                 getdH().onclick = function () { };
-                //      getdH().ondrop = function () { };
                 msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
@@ -441,23 +441,29 @@
 
         function checkBrowser() {
             // Opera 8.0+
-            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
+            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
                 return "opera";
+            }
             // Firefox 1.0+
-            else if (typeof InstallTrigger !== 'undefined')
+            else if (typeof InstallTrigger !== 'undefined') {
                 return "firefox";
+            }
             // Safari 3.0+ "[object HTMLElementConstructor]" 
-            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
+            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
                 return "safari";
+            }
             // Internet Explorer 6-11
-            else if (false || !!document.documentMode)
+            else if (false || !!document.documentMode) {
                 return "msie";
+            }
             // Edge 20+
-            else if (!(false || !!document.documentMode) && !!window.StyleMedia)
+            else if (!(false || !!document.documentMode) && !!window.StyleMedia) {
                 return "edge";
+            }
             // Chrome 1+
-            else if (!!window.chrome && !!window.chrome.webstore)
+            else if (!!window.chrome && !!window.chrome.webstore) {
                 return "chrome";
+            }
 
             /*// Blink engine detection
             var isBlink = (isChrome || isOpera) && !!window.CSS;*/
