@@ -24,6 +24,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.tempDocId = 0;
     vm.optionalControlNumber = { text: '' };
     vm.focusControlNumberValue = false;
+    vm.uploaded = false;
     vm.focusControlNumber = function (value) {
         vm.focusControlNumberValue = value;
     }
@@ -55,8 +56,12 @@ var MFUController = function ($scope, $http, $compile) {
                     Close()
                     break;
                 default:
-                    externalFrame.find('dynamic-content-modal-wgt').hide();
-                    location.replace(location.href.replace('sfu', 'sfu.html'));
+                    if (vm.uploaded) {
+                        Close();
+                    } else {
+                        externalFrame.find('dynamic-content-modal-wgt').hide();
+                        location.replace(location.href.replace('sfu', 'sfu.html'));
+                    }
             }
         });
     }
@@ -314,6 +319,7 @@ var MFUController = function ($scope, $http, $compile) {
             if ((width) >= 100) {
                 $scope.$apply(function () {
                     vm.status = 3;
+                    vm.uploaded = true;
                 });
                 elem.style.width = '1%';
             }
