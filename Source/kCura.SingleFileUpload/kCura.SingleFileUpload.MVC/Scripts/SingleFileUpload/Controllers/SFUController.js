@@ -129,13 +129,21 @@ var SFUController = function ($scope, $http, $compile) {
             }
 
             var xhr = new XMLHttpRequest();
+            var csrf = window.top.GetCsrfTokenFromPage();
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4)
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    }
+                    else {
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
+                    }
+                }
             };
             notifyUploadStarted();
             checkUpload();
             xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRF-Header', csrf);
             xhr.send(data);
         }
     }
