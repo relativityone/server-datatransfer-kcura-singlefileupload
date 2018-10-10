@@ -75,8 +75,8 @@
             var filesCount = files.length;
             var file = files[0];
             if (ValidateFileSize(file, browser != "msie")) {
-                document.getElementById('btiForm').submit();
-                notifyUploadStarted();
+                var form = document.getElementById('btiForm');
+                SubmitFormData(form,file);
             }
         }
 
@@ -123,28 +123,39 @@
 
         function submitSimulatedForm() {
             if (ValidateFileSize(bkpFile)) {
-                var form = document.getElementById('btiFormDD');
-                var data = new FormData(form);
-                data.append('file', bkpFile);
-
-                if (vm.errorID == 0) {
-                    data.append('fid', getFolder());
-                    data.append('fdv', document.getElementById('fdv').getAttribute('value'));
-                    data.append('did', GetDID());
-                    data.append('force', document.getElementById('force').getAttribute('value'));
-                    data.append('controlNumberText', document.getElementById('controlNumberText').value);
-                }
-
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4)
-                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                };
-                notifyUploadStarted();
-                checkUpload();
-                xhr.open('POST', form.action);
-                xhr.send(data);
+                var form = document.getElementById('btiFormDD');                 
+                SubmitFormData(form, bkpFile, true);
             }
+        }
+        function SubmitFormData(form, file, addData) {
+            var data = new FormData(form);
+            data.append('file', bkpFile);
+
+            if (vm.errorID == 0 && addData) {
+                data.append('fid', getFolder());
+                data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+                data.append('did', GetDID());
+                data.append('force', document.getElementById('force').getAttribute('value'));
+                data.append('controlNumberText', document.getElementById('controlNumberText').value);
+            }   
+            var xhr = new XMLHttpRequest();
+            var csrf = window.top.GetCsrfTokenFromPage();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                        } else {
+                            sessionStorage['____pushNo'] = '{"Success":false,"Message":"Failed to import due to an unexpected error. Please contact your system administrator."}';
+                        }
+                    }
+                }
+            }
+            notifyUploadStarted();
+            checkUpload();
+            xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRF-Header', csrf);
+            xhr.send(data);
         }
 
         function SimulateFileClick(force, event) {
@@ -360,7 +371,6 @@
                     vm.status = 1;
                 });
                 getdH().onclick = function () { };
-                //      getdH().ondrop = function () { };
                 msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
@@ -441,23 +451,29 @@
 
         function checkBrowser() {
             // Opera 8.0+
-            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
+            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
                 return "opera";
+            }
             // Firefox 1.0+
-            else if (typeof InstallTrigger !== 'undefined')
+            else if (typeof InstallTrigger !== 'undefined') {
                 return "firefox";
+            }
             // Safari 3.0+ "[object HTMLElementConstructor]" 
-            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
+            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
                 return "safari";
+            }
             // Internet Explorer 6-11
-            else if (false || !!document.documentMode)
+            else if (false || !!document.documentMode) {
                 return "msie";
+            }
             // Edge 20+
-            else if (!(false || !!document.documentMode) && !!window.StyleMedia)
+            else if (!(false || !!document.documentMode) && !!window.StyleMedia) {
                 return "edge";
+            }
             // Chrome 1+
-            else if (!!window.chrome && !!window.chrome.webstore)
+            else if (!!window.chrome && !!window.chrome.webstore) {
                 return "chrome";
+            }
 
             /*// Blink engine detection
             var isBlink = (isChrome || isOpera) && !!window.CSS;*/
