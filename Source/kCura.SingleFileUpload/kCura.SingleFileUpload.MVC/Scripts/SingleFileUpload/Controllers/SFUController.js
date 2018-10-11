@@ -76,7 +76,7 @@
             var file = files[0];
             if (ValidateFileSize(file, browser != "msie")) {
                 var form = document.getElementById('btiForm');
-                SubmitFormData(form,file);
+                SubmitFormData(form, file);
             }
         }
 
@@ -123,7 +123,7 @@
 
         function submitSimulatedForm() {
             if (ValidateFileSize(bkpFile)) {
-                var form = document.getElementById('btiFormDD');                 
+                var form = document.getElementById('btiFormDD');
                 SubmitFormData(form, bkpFile, true);
             }
         }
@@ -137,17 +137,15 @@
                 data.append('did', GetDID());
                 data.append('force', document.getElementById('force').getAttribute('value'));
                 data.append('controlNumberText', document.getElementById('controlNumberText').value);
-            }   
+            }
             var xhr = new XMLHttpRequest();
             var csrf = window.top.GetCsrfTokenFromPage();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status == 200) {
-                            eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-                        } else {
-                            sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
-                        }
+                    if (xhr.status == 200) {
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    } else {
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
                     }
                 }
             }
