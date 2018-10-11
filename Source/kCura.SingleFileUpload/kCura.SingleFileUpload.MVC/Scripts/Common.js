@@ -14,7 +14,6 @@ function showLoading() {
 }   
 function AngularPostOfData($http, url, dataToSend) {
     var result = new promiseResult();
-    xhr.setRequestHeader('X-CSRF-Header', csrf);
     $http.post(location.pathname + url, dataToSend, { headers: { 'AppID': AppID, 'X-CSRF-Header': csrf } })
         .then(function (data) {
             if (!data.data.Success && !(typeof data.data === 'string'))
