@@ -121,7 +121,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						fileName = Path.GetFileName(fileName);
 					}
 					var fileExt = Path.GetExtension(fileName).ToLower();
-					var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+					var res = await _RepositoryDocumentManager.ValidateFileTypesAsync(fileExt);
 					var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
 					if (!res)
 					{
