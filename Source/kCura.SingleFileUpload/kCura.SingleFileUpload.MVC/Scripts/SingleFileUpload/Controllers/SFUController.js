@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-    .module('sfuapp', [])
-    .controller('sfuctrl', SFUController);
+        .module('sfuapp', [])
+        .controller('sfuctrl', SFUController);
 
     SFUController.$inject = ['$scope', '$http', '$compile'];
 
@@ -29,7 +29,7 @@
         vm.newImage = NewImage;
         vm.hasRedactions = HasRedactions;
         vm.hasNative = HasNative;
-        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ?(HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
+        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ? (HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
         vm.tempDocId = 0;
         vm.choiceType = { type: 'fileName' };
         vm.optionalControlNumber = { text: '' };
@@ -71,12 +71,13 @@
                 document.getElementById('did').setAttribute('value', GetDID());
                 document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
             }
-
-            var filesCount = document.getElementById("file").files.length;
-
-            document.getElementById('btiForm').submit();
-            notifyUploadStarted();
-
+            var files = document.getElementById("file").files;
+            var filesCount = files.length;
+            var file = files[0];
+            if (ValidateFileSize(file, browser != "msie")) {
+                var form = document.getElementById('btiForm');
+                SubmitFormData(form, file);
+            }
         }
 
         function HandleDragOver(event) {
@@ -121,27 +122,37 @@
         }
 
         function submitSimulatedForm() {
-            var form = document.getElementById('btiFormDD');
+            if (ValidateFileSize(bkpFile)) {
+                var form = document.getElementById('btiFormDD');
+                SubmitFormData(form, bkpFile, true);
+            }
+        }
+        function SubmitFormData(form, file, addData) {
             var data = new FormData(form);
             data.append('file', bkpFile);
 
-            if (vm.errorID == 0) {
+            if (vm.errorID == 0 && addData) {
                 data.append('fid', getFolder());
                 data.append('fdv', document.getElementById('fdv').getAttribute('value'));
                 data.append('did', GetDID());
                 data.append('force', document.getElementById('force').getAttribute('value'));
                 data.append('controlNumberText', document.getElementById('controlNumberText').value);
             }
-
             var xhr = new XMLHttpRequest();
+            var csrf = window.top.GetCsrfTokenFromPage();
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4)
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-            };
-            msgLabel.innerHTML = "Uploading";
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    } else {
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
+                    }
+                }
+            }
             notifyUploadStarted();
             checkUpload();
             xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRF-Header', csrf);
             xhr.send(data);
         }
 
@@ -268,14 +279,14 @@
                 AngularPostOfData($http, "/checkUploadStatus", {
                     documentName: resultString.Data
                 })
-                .done(function (result) {
-                    if (result.data != "-1") {
-                        manageResult(resultString, true);
-                    }
-                    else {
-                        checkUploadStatus(resultString);
-                    }
-                })
+                    .done(function (result) {
+                        if (result.data != "-1") {
+                            manageResult(resultString, true);
+                        }
+                        else {
+                            checkUploadStatus(resultString);
+                        }
+                    })
             }, 500);
         }
 
@@ -358,7 +369,6 @@
                     vm.status = 1;
                 });
                 getdH().onclick = function () { };
-               // getdH().ondrop = function () { };
                 msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
@@ -439,27 +449,48 @@
 
         function checkBrowser() {
             // Opera 8.0+
-            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
+            if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
                 return "opera";
-                // Firefox 1.0+
-            else if (typeof InstallTrigger !== 'undefined')
+            }
+            // Firefox 1.0+
+            else if (typeof InstallTrigger !== 'undefined') {
                 return "firefox";
-                // Safari 3.0+ "[object HTMLElementConstructor]" 
-            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
+            }
+            // Safari 3.0+ "[object HTMLElementConstructor]" 
+            else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
                 return "safari";
-                // Internet Explorer 6-11
-            else if (false || !!document.documentMode)
+            }
+            // Internet Explorer 6-11
+            else if (false || !!document.documentMode) {
                 return "msie";
-                // Edge 20+
-            else if (!(false || !!document.documentMode) && !!window.StyleMedia)
+            }
+            // Edge 20+
+            else if (!(false || !!document.documentMode) && !!window.StyleMedia) {
                 return "edge";
-                // Chrome 1+
-            else if (!!window.chrome && !!window.chrome.webstore)
+            }
+            // Chrome 1+
+            else if (!!window.chrome && !!window.chrome.webstore) {
                 return "chrome";
+            }
 
             /*// Blink engine detection
             var isBlink = (isChrome || isOpera) && !!window.CSS;*/
         }
-
+        function ValidateFileSize(file, apply) {
+            var canUpload = file.size <= 2147483648;
+            if (!canUpload) {
+                if (apply) {
+                    $scope.$apply(function () {
+                        vm.status = 2;
+                    });
+                } else {
+                    vm.status = 2;
+                }
+                var message = "You can't upload files greater than 2GB in size"
+                msgLabel.className = "msgDetails";
+                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div";
+            }
+            return canUpload;
+        }
     }
 })();
