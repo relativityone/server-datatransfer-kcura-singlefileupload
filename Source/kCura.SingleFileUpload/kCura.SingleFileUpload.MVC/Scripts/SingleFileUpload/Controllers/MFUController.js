@@ -216,14 +216,21 @@ var MFUController = function ($scope, $http, $compile) {
         }
         if (ValidateFileSize(file.file)) {
             var xhr = new XMLHttpRequest();
+            var csrf = window.top.GetCsrfTokenFromPage();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    if (xhr.status==200) {
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    }
+                    else {
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
+                    }
                     CompleteUpload(fileIndex, file, retry);
                 }
             };
             dialog.dialog("option", "closeOnEscape", false);
             xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRF-Header', csrf);
             xhr.send(data);
         }
         else {
