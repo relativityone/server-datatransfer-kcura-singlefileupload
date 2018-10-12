@@ -60,7 +60,7 @@
                     <input id="fileName" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="fileName">
                     <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
                     <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
-                    <label for="controlNumber" ng-click="$event.stopPropagation();">&nbsp;</label>
+                    <label for="controlNumber" ng-click="$event.stopPropagation(); controlNumberSelected();">&nbsp;</label>
                     <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" />
                 </div>
             </div>
@@ -77,8 +77,8 @@
         <div class="button_actions"
              ng-if="status == 5 || status == 2 || status == 6">
             <div class="buttonsZone">
-                <button ng-show="status == 5" class="btnPrimary" ng-click="forceUpload()">Replace Document</button>
-                <button ng-show="status == 2" class="btnPrimary" ng-click="simulateFileClick(true)">{{changeImage ? 'Upload New Image' : 'Upload New Document'}} </button>
+                <button ng-show="status == 5" class="btnPrimary" ng-click="forceUpload(); $event.stopPropagation(); $event.preventDefault();">Replace Document</button>
+                <button ng-show="status == 2" class="btnPrimary" ng-click="simulateFileClick(true); $event.stopPropagation(); $event.preventDefault();">{{changeImage ? 'Upload New Image' : 'Upload New Document'}} </button>
                 @*<button ng-click="cancel()">Cancel</button>*@
                 <button id="closeBtn" class="secondary-button" ng-click="close()">Close</button>
                 @*<button id="closeBtn" class="secondary-button">Close</button>*@

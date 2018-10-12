@@ -1,6 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
-using Relativity.API;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,7 +19,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 return instance.Value;
             }
         }
-        public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
+
+		private string fieldName { get; set; }
+		private bool checkToRemove { get; set; }
+		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
@@ -42,6 +44,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 }
             }
             result.Native = sourceFile;
+            
             return result;
         }
 
@@ -82,16 +85,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
             catch
             {
-
             }
-
         }
-
-
-
-        string fieldName;
-
-
+        
 
         private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
         {
@@ -103,7 +99,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         case "document":
                             addToDictionary(fields, "Native Type", reader.GetAttribute("type"));
                             break;
-                        default:
+						case "target":
+							checkToRemove = true;
+							break;
+						default:
                             if (reader.HasAttributes)
                             {
                                 fieldName = reader.GetAttribute("type");
@@ -119,8 +118,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 case XmlNodeType.Text:
                     if (string.IsNullOrEmpty(fieldName))
                     {
-                        etBuilder.AppendLine(reader.Value);
-                    }
+						if (checkToRemove)
+						{
+							checkToRemove = false;
+						}
+						else
+						{
+							etBuilder.AppendLine(reader.Value);
+						}
+					}
                     else
                     {
                         object value = null;

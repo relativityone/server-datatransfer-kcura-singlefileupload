@@ -242,13 +242,13 @@
     </Compile>
     <Compile Include="Helpers\EncodingHelper.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />
-    <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
+    <Compile Include="Managers\Implementation\PermissionsManager.cs" />
     <Compile Include="Managers\Implementation\ToggleManager.cs" />
     <Compile Include="Managers\Implementation\TelemetryManager.cs" />
     <Compile Include="Managers\IProcessingManager.cs" />
@@ -259,6 +259,7 @@
     <Compile Include="Managers\Implementation\SearchExportManager.cs" />
     <Compile Include="Managers\IDocumentManager.cs" />
     <Compile Include="Managers\ISearchExportManager.cs" />
+    <Compile Include="Managers\IPermissionsManager.cs" />
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
     <Compile Include="SQL\Queries.Designer.cs">
@@ -423,7 +424,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\oilink.exe" />
-    <Content Include="oi\unmanaged\oilink.jar" />
+    <Content Include="oi\unmanaged\oilink.jar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\osgd-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -442,26 +445,48 @@
     <Content Include="oi\unmanaged\sccanno-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccca-R1.dll" />
-    <Content Include="oi\unmanaged\sccch-R1.dll" />
-    <Content Include="oi\unmanaged\sccda-R1.dll" />
+    <Content Include="oi\unmanaged\sccca-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccch-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccda-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccdu-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccex-R1.dll" />
+    <Content Include="oi\unmanaged\sccex-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccexind-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccfa-R1.dll" />
-    <Content Include="oi\unmanaged\sccfi-R1.dll" />
-    <Content Include="oi\unmanaged\sccfmt-R1.dll" />
-    <Content Include="oi\unmanaged\sccfnt-R1.dll" />
-    <Content Include="oi\unmanaged\sccfut-R1.dll" />
+    <Content Include="oi\unmanaged\sccfa-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccfi-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccfmt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccfnt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccfut-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccimg-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccind-R1.dll" />
-    <Content Include="oi\unmanaged\scclo-R1.dll" />
+    <Content Include="oi\unmanaged\sccind-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\scclo-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccole-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -471,7 +496,9 @@
     <Content Include="oi\unmanaged\sccta-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccut-R1.dll" />
+    <Content Include="oi\unmanaged\sccut-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccvw-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1003,7 +1030,9 @@
     <Content Include="oi\unmanaged\vszip-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\wvcore-R1.dll" />
+    <Content Include="oi\unmanaged\wvcore-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\webview\collapseB.png" />
     <Content Include="oi\webview\collapseB_hover.png" />
     <Content Include="oi\webview\Collapse_Viewer.png" />
@@ -1073,6 +1102,7 @@
     <Content Include="SQL\Queries\DeleteDocumentImages.sql" />
     <Content Include="SQL\Queries\GetFieldsInstanceSetting.sql" />
     <Content Include="SQL\Queries\InsertFieldsInstanceSetting.sql" />
+    <Content Include="SQL\Queries\IsUserAdministrator.sql" />
     <Content Include="SQL\Queries\UpdateHasImages.sql" />
     <Content Include="SQL\Queries\DocumentHasRedactions.sql" />
     <Content Include="SQL\Queries\UpdateDocumentLastModificationFields.sql" />
@@ -1099,7 +1129,9 @@
     <None Include="oi\unmanaged\adinit.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="oi\unmanaged\cmmap000.bin" />
+    <None Include="oi\unmanaged\cmmap000.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="oi\unmanaged\compreg.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-    .module('sfuapp', [])
-    .controller('sfuctrl', SFUController);
+        .module('sfuapp', [])
+        .controller('sfuctrl', SFUController);
 
     SFUController.$inject = ['$scope', '$http', '$compile'];
 
@@ -29,13 +29,16 @@
         vm.newImage = NewImage;
         vm.hasRedactions = HasRedactions;
         vm.hasNative = HasNative;
-        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ?(HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
+        vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ? (HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
         vm.tempDocId = 0;
         vm.choiceType = { type: 'fileName' };
         vm.optionalControlNumber = { text: '' };
         vm.focusControlNumberValue = false;
         vm.focusControlNumber = function (value) {
             vm.focusControlNumberValue = value;
+        }
+        vm.controlNumberSelected = function () {
+            msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
         }
 
 
@@ -68,12 +71,13 @@
                 document.getElementById('did').setAttribute('value', GetDID());
                 document.getElementById('controlNumberText').setAttribute('value', vm.optionalControlNumber.text);
             }
-
-            var filesCount = document.getElementById("file").files.length;
-
-            document.getElementById('btiForm').submit();
-            notifyUploadStarted();
-
+            var files = document.getElementById("file").files;
+            var filesCount = files.length;
+            var file = files[0];
+            if (ValidateFileSize(file, browser != "msie")) {
+                document.getElementById('btiForm').submit();
+                notifyUploadStarted();
+            }
         }
 
         function HandleDragOver(event) {
@@ -111,34 +115,36 @@
                         vm.status = 2;
                         var message = "Multiple file upload is not supported.";
                         msgLabel.className = "msgDetails";
-                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
+                        msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>" + message + "</span></div></div>";
                     }
                 }
             });
         }
 
         function submitSimulatedForm() {
-            var form = document.getElementById('btiFormDD');
-            var data = new FormData(form);
-            data.append('file', bkpFile);
+            if (ValidateFileSize(bkpFile)) {
+                var form = document.getElementById('btiFormDD');
+                var data = new FormData(form);
+                data.append('file', bkpFile);
 
-            if (vm.errorID == 0) {
-                data.append('fid', getFolder());
-                data.append('fdv', document.getElementById('fdv').getAttribute('value'));
-                data.append('did', GetDID());
-                data.append('force', document.getElementById('force').getAttribute('value'));
-                data.append('controlNumberText', document.getElementById('controlNumberText').value);
+                if (vm.errorID == 0) {
+                    data.append('fid', getFolder());
+                    data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+                    data.append('did', GetDID());
+                    data.append('force', document.getElementById('force').getAttribute('value'));
+                    data.append('controlNumberText', document.getElementById('controlNumberText').value);
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4)
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                };
+                notifyUploadStarted();
+                checkUpload();
+                xhr.open('POST', form.action);
+                xhr.send(data);
             }
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4)
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-            };
-            notifyUploadStarted();
-            checkUpload();
-            xhr.open('POST', form.action);
-            xhr.send(data);
         }
 
         function SimulateFileClick(force, event) {
@@ -212,19 +218,33 @@
                         Close();
                     }
                 }, function (error) {
-                    console.error(error);
-                    setTimeout(function () {
-                        window.parent.location.reload();
-                    }, 2000);
+                    vm.status = 2;
+                    var message = error.data.Message;
+                    msgLabel.className = "msgDetails";
+                    msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 });
 
         }
-
+        function isJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
         function checkUpload() {
             var resultString = sessionStorage['____pushNo'] || '';
             if (!!resultString) {
                 sessionStorage['____pushNo'] = '';
-                var result = JSON.parse(resultString.replace(/\\/g, "\\\\"));
+                var result;
+                resultString = resultString.replace(/\\/g, "\\\\");
+                if (isJson(resultString)) {
+                    result = JSON.parse(resultString);
+                }
+                else {
+                    result = { Success: false, Message: "Failed to import due to an unexpected error. Please contact your system administrator." };
+                }
                 if (vm.errorID != 0 ||
                     GetDID() != -1 ||
                     !result.Success ||
@@ -250,14 +270,14 @@
                 AngularPostOfData($http, "/checkUploadStatus", {
                     documentName: resultString.Data
                 })
-                .done(function (result) {
-                    if (result.data != "-1") {
-                        manageResult(resultString, true);
-                    }
-                    else {
-                        checkUploadStatus(resultString);
-                    }
-                })
+                    .done(function (result) {
+                        if (result.data != "-1") {
+                            manageResult(resultString, true);
+                        }
+                        else {
+                            checkUploadStatus(resultString);
+                        }
+                    })
             }, 500);
         }
 
@@ -319,7 +339,6 @@
                         vm.status = status;
                     });
                     var message = result.Message;
-                    console.error("SFU: " + result.Message);
                     msgLabel.className = "msgDetails";
                     msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div>";
                 }
@@ -341,7 +360,7 @@
                     vm.status = 1;
                 });
                 getdH().onclick = function () { };
-          //      getdH().ondrop = function () { };
+                //      getdH().ondrop = function () { };
                 msgLabel.innerHTML = "Uploading";
                 checkUpload();
             })
@@ -424,25 +443,40 @@
             // Opera 8.0+
             if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0)
                 return "opera";
-                // Firefox 1.0+
+            // Firefox 1.0+
             else if (typeof InstallTrigger !== 'undefined')
                 return "firefox";
-                // Safari 3.0+ "[object HTMLElementConstructor]" 
+            // Safari 3.0+ "[object HTMLElementConstructor]" 
             else if (/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification))
                 return "safari";
-                // Internet Explorer 6-11
+            // Internet Explorer 6-11
             else if (false || !!document.documentMode)
                 return "msie";
-                // Edge 20+
+            // Edge 20+
             else if (!(false || !!document.documentMode) && !!window.StyleMedia)
                 return "edge";
-                // Chrome 1+
+            // Chrome 1+
             else if (!!window.chrome && !!window.chrome.webstore)
                 return "chrome";
 
             /*// Blink engine detection
             var isBlink = (isChrome || isOpera) && !!window.CSS;*/
         }
-
+        function ValidateFileSize(file, apply) {
+            var canUpload = file.size <= 2147483648;
+            if (!canUpload) {
+                if (apply) {
+                    $scope.$apply(function () {
+                        vm.status = 2;
+                    });
+                } else {
+                    vm.status = 2;
+                }
+                var message = "You can't upload files greater than 2GB in size"
+                msgLabel.className = "msgDetails";
+                msgLabel.innerHTML = "<div class='error' title='" + message + "'><div><img src='/Relativity/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Content/Images/Error_Icon.png' /><span>Error: " + message + "</span></div></div";
+            }
+            return canUpload;
+        }
     }
 })();
