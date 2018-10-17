@@ -223,7 +223,7 @@ var MFUController = function ($scope, $http, $compile) {
                         eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
                     }
                     else {
-                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"' + xhr.statusText + '"}';
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"Failed to import due to an unexpected error. Please contact your system administrator."}';
                     }
                     CompleteUpload(fileIndex, file, retry);
                 }
