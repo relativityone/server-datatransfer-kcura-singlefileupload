@@ -1,4 +1,5 @@
 ﻿using kCura.EventHandler;
+using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
@@ -23,7 +24,8 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 {
                     PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, 10);
                 }
-                response.Success = true;
+				DocumentRepository.RemovePageInteractionEvenHandlerFromDocumentObject();
+				response.Success = true;
             }
             catch (Exception e)
             {
@@ -37,7 +39,18 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
             }
             return response;
         }
+		IDocumentManager DocumentRepository
+		{
+			get
+			{
+				if (_repository == null)
+				{
+					_repository = new DocumentManager();
+				}
+				return _repository;
+			}
+		}
+		IDocumentManager _repository;
 
-
-    }
+	}
 }
