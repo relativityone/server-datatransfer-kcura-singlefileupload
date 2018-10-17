@@ -188,5 +188,18 @@ namespace kCura.SingleFileUpload.MVC.Controllers
             _RepositoryDocumentManager.LogError(e);
             return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
         }
-    }
+		protected override void OnAuthorization(AuthorizationContext filterContext)
+		{
+			try
+			{
+				if (Request.HttpMethod == "POST")
+					ConnectionHelper.Helper().GetCSRFManager().CheckCSRF();
+			}
+			catch (Exception)
+			{
+				filterContext.Result = new HttpUnauthorizedResult();
+			}
+			base.OnAuthorization(filterContext);
+		}
+	}
 }
