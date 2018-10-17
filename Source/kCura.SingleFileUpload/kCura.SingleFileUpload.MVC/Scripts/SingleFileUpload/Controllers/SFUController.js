@@ -68,8 +68,8 @@ var SFUController = function ($scope, $http, $compile) {
         var filesCount = files.length;
         var file = files[0];
         if (ValidateFileSize(file, browser != "msie")) {
-            document.getElementById('btiForm').submit();
-            notifyUploadStarted();
+            var form = document.getElementById('btiForm');
+            SubmitFormData(form, file);
         }
     }
 
@@ -117,27 +117,37 @@ var SFUController = function ($scope, $http, $compile) {
     function submitSimulatedForm() {
         if (ValidateFileSize(bkpFile)) {
             var form = document.getElementById('btiFormDD');
-            var data = new FormData(form);
-            data.append('file', bkpFile);
-
-            if (vm.errorID == 0) {
-                data.append('fid', getFolder());
-                data.append('fdv', document.getElementById('fdv').getAttribute('value'));
-                data.append('did', GetDID());
-                data.append('force', document.getElementById('force').getAttribute('value'));
-                data.append('controlNumberText', document.getElementById('controlNumberText').value);
-            }
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4)
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
-            };
-            notifyUploadStarted();
-            checkUpload();
-            xhr.open('POST', form.action);
-            xhr.send(data);
+            SubmitFormData(form, bkpFile, true);
         }
+    }
+    function SubmitFormData(form, file, addData) {
+        var data = new FormData(form);
+        data.append('file', bkpFile);
+        if (vm.errorID == 0 && addData) {
+            data.append('fid', getFolder());
+            data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+            data.append('did', GetDID());
+            data.append('force', document.getElementById('force').getAttribute('value'));
+            data.append('controlNumberText', document.getElementById('controlNumberText').value);
+        }
+
+        var xhr = new XMLHttpRequest();
+        var csrf = window.top.GetCsrfTokenFromPage();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                }
+                else {
+                    sessionStorage['____pushNo'] = '{"Success":false,"Message":"Failed to import due to an unexpected error. Please contact your system administrator."}';
+                }
+            }
+        };
+        notifyUploadStarted();
+        checkUpload();
+        xhr.open('POST', form.action);
+        xhr.setRequestHeader('X-CSRF-Header', csrf);
+        xhr.send(data);
     }
 
     function SimulateFileClick(force, event) {

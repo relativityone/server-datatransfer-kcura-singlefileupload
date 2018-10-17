@@ -24,6 +24,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.tempDocId = 0;
     vm.optionalControlNumber = { text: '' };
     vm.focusControlNumberValue = false;
+    vm.uploaded = false;
     vm.focusControlNumber = function (value) {
         vm.focusControlNumberValue = value;
     }
@@ -55,8 +56,12 @@ var MFUController = function ($scope, $http, $compile) {
                     Close()
                     break;
                 default:
-                    externalFrame.find('dynamic-content-modal-wgt').hide();
-                    location.replace(location.href.replace('sfu', 'sfu.html'));
+                    if (vm.uploaded) {
+                        Close();
+                    } else {
+                        externalFrame.find('dynamic-content-modal-wgt').hide();
+                        location.replace(location.href.replace('sfu', 'sfu.html'));
+                    }
             }
         });
     }
@@ -211,14 +216,21 @@ var MFUController = function ($scope, $http, $compile) {
         }
         if (ValidateFileSize(file.file)) {
             var xhr = new XMLHttpRequest();
+            var csrf = window.top.GetCsrfTokenFromPage();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
-                    eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    if (xhr.status==200) {
+                        eval(xhr.responseText.replace('<script>', '').replace('</script>', ''));
+                    }
+                    else {
+                        sessionStorage['____pushNo'] = '{"Success":false,"Message":"Failed to import due to an unexpected error. Please contact your system administrator."}';
+                    }
                     CompleteUpload(fileIndex, file, retry);
                 }
             };
             dialog.dialog("option", "closeOnEscape", false);
             xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRF-Header', csrf);
             xhr.send(data);
         }
         else {
@@ -314,6 +326,7 @@ var MFUController = function ($scope, $http, $compile) {
             if ((width) >= 100) {
                 $scope.$apply(function () {
                     vm.status = 3;
+                    vm.uploaded = true;
                 });
                 elem.style.width = '1%';
             }
