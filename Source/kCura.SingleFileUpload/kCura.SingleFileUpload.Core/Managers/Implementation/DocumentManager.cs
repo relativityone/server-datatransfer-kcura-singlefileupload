@@ -478,7 +478,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 		public void RemovePageInteractionEvenHandlerFromDocumentObject()
 		{
-			Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
+			Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
 		}
 		public async Task<bool> ValidateFileTypes(string extension)
         {
