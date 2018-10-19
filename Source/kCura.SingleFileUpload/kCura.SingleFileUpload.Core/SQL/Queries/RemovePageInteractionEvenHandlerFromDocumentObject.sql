@@ -2,9 +2,12 @@
 						   FROM [EDDSDBO].[ActiveSyncs] WITH (NOLOCK)
 						   WHERE ClassName = 'kCura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler')
 
-DELETE
-FROM [EDDSDBO].[ApplicationEventHandler]
-WHERE EventHandlerArtifactID = @EHArtictID
+IF OBJECT_ID(N'EDDSDBO.ApplicationEventHandler') IS NOT NULL
+BEGIN
+	DELETE
+	FROM [EDDSDBO].[ApplicationEventHandler]
+	WHERE EventHandlerArtifactID = @EHArtictID
+END
 
 DELETE
 FROM [EDDSDBO].[ActiveSyncs]
