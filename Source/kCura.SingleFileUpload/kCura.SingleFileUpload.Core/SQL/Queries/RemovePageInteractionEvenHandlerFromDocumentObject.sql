@@ -1,6 +1,6 @@
 ﻿DECLARE @EHArtictID INT = (SELECT TOP 1 ArtifactID
 							FROM [EDDSDBO].[ActiveSyncs] WITH (NOLOCK)
-							WHERE ClassName ='Kcura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler')
+							WHERE ClassName ='kCura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler')
 
 DELETE
 FROM [EDDSDBO].[ApplicationEventHandler]
