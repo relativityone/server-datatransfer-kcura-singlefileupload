@@ -43,3 +43,7 @@ function promiseResult() {
         return self;
     }
 }
+function validateCharacter(event) {
+    var key = event.key;
+    return !(key === ">" || key === "<");
+}

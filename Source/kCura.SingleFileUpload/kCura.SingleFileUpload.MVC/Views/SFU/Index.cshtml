@@ -61,7 +61,8 @@
                     <label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
                     <input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
                     <label for="controlNumber" ng-click="$event.stopPropagation(); controlNumberSelected();">&nbsp;</label>
-                    <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" />
+                    <input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" 
+						   ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" onkeypress="return validateCharacter(event)"  />
                 </div>
             </div>
         }
