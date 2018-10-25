@@ -71,3 +71,7 @@ function checkBrowser() {
     /*// Blink engine detection
     var isBlink = (isChrome || isOpera) && !!window.CSS;*/
 }
+function validateCharacter(event) {
+    var key = event.key;
+    return !(key === ">" || key === "<");
+}
