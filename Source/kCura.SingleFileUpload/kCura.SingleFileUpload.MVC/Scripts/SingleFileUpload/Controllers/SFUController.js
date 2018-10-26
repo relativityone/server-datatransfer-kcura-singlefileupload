@@ -198,6 +198,7 @@ var SFUController = function ($scope, $http, $compile) {
 
     function updateImageDocument(fileLocation) {
 
+        var _uiOriginationId = '78F64BA0-669A-4E4B-B108-6DA81E69DAE3';
         $http.post("/Relativity.Rest/api/Relativity.Imaging.Services.Interfaces.IImagingModule/Imaging Job Service/ImageDocumentAsync",
             {
                 "imageDocumentJob": {
@@ -205,7 +206,8 @@ var SFUController = function ($scope, $http, $compile) {
                     "DocumentId": GetDID(),
                     "ProfileId": ProfileArtifact,
                     "AlternateNativeLocation": fileLocation,
-                    "RemoveAlternateNativeAfterImaging": true
+                    "RemoveAlternateNativeAfterImaging": true,
+                    "OriginationId": _uiOriginationId
                 }
             },
             {
