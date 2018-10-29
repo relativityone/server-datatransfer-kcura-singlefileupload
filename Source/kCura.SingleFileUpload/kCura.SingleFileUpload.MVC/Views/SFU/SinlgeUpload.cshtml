@@ -50,7 +50,7 @@
 					<input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
 					<label for="controlNumber" ng-click="$event.stopPropagation(); controlNumberSelected();">&nbsp;</label>
 					<input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" 
-						   ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" onkeypress="return validateCharacter(event)"/>
+						   ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" ng-change="optionalControlNumber.text=validateCharacter(optionalControlNumber.text)" />
 
 				</div>
 			</div>
