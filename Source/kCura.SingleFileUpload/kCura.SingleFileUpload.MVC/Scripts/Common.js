@@ -43,7 +43,7 @@ function promiseResult() {
         return self;
     }
 }
-function validateCharacter(event) {
-    var key = event.key;
-    return !(key === ">" || key === "<");
+function validateCharacter(text) {
+    text = text.replace(/</g, "").replace(/>/g, "");
+    return text;
 }

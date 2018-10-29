@@ -34,6 +34,7 @@
         vm.choiceType = { type: 'fileName' };
         vm.optionalControlNumber = { text: '' };
         vm.focusControlNumberValue = false;
+        vm.validateCharacter = validateCharacter;
         vm.focusControlNumber = function (value) {
             vm.focusControlNumberValue = value;
         }
