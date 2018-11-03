@@ -43,3 +43,7 @@ function promiseResult() {
         return self;
     }
 }
+function validateCharacter(text) {
+    text = text.replace(/</g, "").replace(/>/g, "");
+    return text;
+}
