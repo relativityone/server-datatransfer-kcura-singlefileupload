@@ -27,6 +27,7 @@ var SFUController = function ($scope, $http, $compile) {
     vm.choiceType = { type: 'fileName' };
     vm.optionalControlNumber = { text: '' };
     vm.focusControlNumberValue = false;
+    vm.validateCharacter = validateCharacter;
     vm.focusControlNumber = function (value) {
         vm.focusControlNumberValue = value;
     }
@@ -270,6 +271,7 @@ var SFUController = function ($scope, $http, $compile) {
 
     function checkUploadStatus(resultString) {
         setTimeout(function () {
+            resultString.Data = resultString.Data.replace(/\/39\//g, "'").replace(/\/34\//g, '"');
             AngularPostOfData($http, "/checkUploadStatus", {
                 documentName: resultString.Data
             })
