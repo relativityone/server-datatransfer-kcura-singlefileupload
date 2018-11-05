@@ -57,7 +57,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.ChangeImage = image.ToString().ToLower();
 			ViewBag.NewImage = newImage.ToString().ToLower();
 			ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
-			ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
 			ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
 			ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
 			ViewBag.ProfileID = profileID;
