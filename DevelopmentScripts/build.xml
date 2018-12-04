@@ -69,7 +69,7 @@
         </Extensions>
         <XPath>TreatWarningsAsErrors</XPath>
         <RuleType>Equals</RuleType>
-        <Value>true</Value>
+        <Value>false</Value>
         <ErrorMessage>Project does not treat all warnings as errors. Please turn this option on.</ErrorMessage>
       </Rule>
       <Rule name="NugetRestore">
