@@ -69,7 +69,7 @@
         </Extensions>
         <XPath>TreatWarningsAsErrors</XPath>
         <RuleType>Equals</RuleType>
-        <Value>false</Value>
+        <Value>False</Value>
         <ErrorMessage>Project does not treat all warnings as errors. Please turn this option on.</ErrorMessage>
       </Rule>
       <Rule name="NugetRestore">
@@ -81,7 +81,10 @@
         <RuleType>NotExists</RuleType>
         <ErrorMessage>Do NOT restore nuget packages at project level, do this in the solution!</ErrorMessage>
       </Rule>
-    </Rules> 
+    </Rules>
+	<IgnoreRules>
+        <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+    </IgnoreRules>
   </BuildHelper>
   <TestRunner>
     <DLLs>
