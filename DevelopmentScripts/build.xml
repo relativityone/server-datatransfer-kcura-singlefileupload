@@ -2,13 +2,31 @@
   <BuildHelper> 
     <Projects> 
       <Build> 
-<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
+	<Platforms>
+		<Platform>AnyCPU</Platform>
+	</Platforms>	
+	<IgnoreRules>
+        <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+    </IgnoreRules>
+</Project> 
 <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.MVC\kCura.SingleFileUpload.MVC.csproj">
 	<Platforms>
 		<Platform>AnyCPU</Platform>
 	</Platforms>
-	<Publish>RAPBuilder.pubxml</Publish></Project> 
-<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.csproj"><Platforms><Platform>AnyCPU</Platform></Platforms></Project> 
+	<Publish>RAPBuilder.pubxml</Publish>	
+	<IgnoreRules>
+        <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+    </IgnoreRules>
+</Project> 
+<Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.csproj">
+	<Platforms>
+		<Platform>AnyCPU</Platform>
+	</Platforms>	
+	<IgnoreRules>
+        <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+    </IgnoreRules>
+</Project> 
       </Build> 
       <Ignore /> 
     </Projects> 
@@ -82,9 +100,6 @@
         <ErrorMessage>Do NOT restore nuget packages at project level, do this in the solution!</ErrorMessage>
       </Rule>
     </Rules>
-	<IgnoreRules>
-        <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
-    </IgnoreRules>
   </BuildHelper>
   <TestRunner>
     <DLLs>
