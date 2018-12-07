@@ -66,9 +66,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
         private async Task ExecuteTelemetryAsync()
         {
-            if (!await ToggleManager.Instance.GetChangeFileNameAsync())
+            if (await ToggleManager.Instance.GetChangeFileNameAsync())
             {
-                await ToggleManager.Instance.SetChangeFileNameAsync(true);
+                await ToggleManager.Instance.SetChangeFileNameAsync(false);
             }
             if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
             {

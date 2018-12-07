@@ -8,6 +8,7 @@ var MFUController = function ($scope, $http, $compile) {
     var vm = $scope;
     var controlNumberMessage = "The Control Number you selected is already in use. Try again.";
     var sizeMessage = "You can't upload files greater than 2GB in size.";
+    vm.validateCharacter = validateCharacter;
     vm.simulateFileClick = SimulateFileClick;
     vm.handleDragOver = HandleDragOver;
     vm.handleDragLeave = HandleDragLeave;
@@ -276,6 +277,7 @@ var MFUController = function ($scope, $http, $compile) {
 
     function checkUploadStatus(file, resultString) {
         setTimeout(function () {
+            resultString.Data = resultString.Data.replace(/\/39\//g, "'").replace(/\/34\//g, '"');
             AngularPostOfData($http, "/checkUploadStatus", {
                 documentName: resultString.Data
             })

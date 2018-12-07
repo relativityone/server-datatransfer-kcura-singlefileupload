@@ -71,7 +71,7 @@
 							{{$index+1}}. Control Number:
 						</div>
 						<div class="input">
-							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.status=0" />
+							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.status=0; file.controlNumberText= validateCharacter(file.controlNumberText)" />
 							<div class="inputMessage">
 								<div ng-if="(file.file.name != file.controlNumberText)&&(file.status==1||file.status==0)" class="fileName">
 									{{file.file.name}}

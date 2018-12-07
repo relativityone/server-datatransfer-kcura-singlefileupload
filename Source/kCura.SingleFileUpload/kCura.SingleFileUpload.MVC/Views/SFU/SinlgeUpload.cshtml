@@ -37,7 +37,7 @@
 			<span> click to select a file.</span>
 		</span>
 
-		@if (ViewBag.ToggleEnableFileName && ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
+		@if (ViewBag.ChangeImage == "false" && ViewBag.DocID <= 0)
 		{
 			<div ng-if="errorID == 0">
 				<hr />
@@ -49,7 +49,9 @@
 					<label for="fileName" ng-click="$event.stopPropagation();optionalControlNumber.text='';">File Name</label><br />
 					<input id="controlNumber" type="radio" ng-model="choiceType.type" name="rdChoiceType" value="text">
 					<label for="controlNumber" ng-click="$event.stopPropagation(); controlNumberSelected();">&nbsp;</label>
-					<input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" />
+					<input type="text" onfocus="angular.element(this).scope().focusControlNumber(true);" onblur="angular.element(this).scope().focusControlNumber(false);" 
+						   ng-model="optionalControlNumber.text" name="txtControlNumber" ng-disabled="choiceType.type == 'fileName'" ng-change="optionalControlNumber.text=validateCharacter(optionalControlNumber.text)" />
+
 				</div>
 			</div>
 		}

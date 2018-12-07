@@ -57,7 +57,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.ChangeImage = image.ToString().ToLower();
 			ViewBag.NewImage = newImage.ToString().ToLower();
 			ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(docId).ToString().ToLower();
-			ViewBag.ToggleEnableFileName = await ToggleManager.Instance.GetChangeFileNameAsync();
 			ViewBag.HasImages = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(docId).ToString().ToLower();
 			ViewBag.HasNative = docId == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(docId).ToString().ToLower();
 			ViewBag.ProfileID = profileID;
@@ -268,6 +267,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			});
 			Response.Clear();
 			Response.ClearContent();
+			result.Data = result.Data.Replace("'", "/39/").Replace("\"", "/34/");
 			Response.Write($"<script>sessionStorage['____pushNo'] = '{Newtonsoft.Json.JsonConvert.SerializeObject(result).Replace("'", "\"")}'</script>");
 			Response.End();
 		}

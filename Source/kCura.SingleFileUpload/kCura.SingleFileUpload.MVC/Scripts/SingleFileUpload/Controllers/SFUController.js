@@ -27,6 +27,7 @@ var SFUController = function ($scope, $http, $compile) {
     vm.choiceType = { type: 'fileName' };
     vm.optionalControlNumber = { text: '' };
     vm.focusControlNumberValue = false;
+    vm.validateCharacter = validateCharacter;
     vm.focusControlNumber = function (value) {
         vm.focusControlNumberValue = value;
     }
@@ -198,6 +199,7 @@ var SFUController = function ($scope, $http, $compile) {
 
     function updateImageDocument(fileLocation) {
 
+        var _uiOriginationId = '78F64BA0-669A-4E4B-B108-6DA81E69DAE3';
         $http.post("/Relativity.Rest/api/Relativity.Imaging.Services.Interfaces.IImagingModule/Imaging Job Service/ImageDocumentAsync",
             {
                 "imageDocumentJob": {
@@ -205,7 +207,8 @@ var SFUController = function ($scope, $http, $compile) {
                     "DocumentId": GetDID(),
                     "ProfileId": ProfileArtifact,
                     "AlternateNativeLocation": fileLocation,
-                    "RemoveAlternateNativeAfterImaging": true
+                    "RemoveAlternateNativeAfterImaging": true,
+                    "OriginationId": _uiOriginationId
                 }
             },
             {
@@ -270,6 +273,7 @@ var SFUController = function ($scope, $http, $compile) {
 
     function checkUploadStatus(resultString) {
         setTimeout(function () {
+            resultString.Data = resultString.Data.replace(/\/39\//g, "'").replace(/\/34\//g, '"');
             AngularPostOfData($http, "/checkUploadStatus", {
                 documentName: resultString.Data
             })
