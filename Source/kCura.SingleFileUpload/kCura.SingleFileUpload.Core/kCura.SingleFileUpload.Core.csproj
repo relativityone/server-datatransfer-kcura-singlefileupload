@@ -126,8 +126,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.7.0.494, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.7.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2018.9.0.578, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -269,6 +269,14 @@
     <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
+    <Content Include="oi\docs\fileids_values_strs.txt" />
+    <Content Include="oi\unmanaged\android.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\bloomberg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\debmp-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -380,6 +388,9 @@
     <Content Include="oi\unmanaged\imdsf2-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="oi\unmanaged\imessage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\imfmv2-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -414,6 +425,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\isgdi32-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\mms.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\ocemul-R1.dll">
@@ -499,6 +513,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\sccvw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\skype.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\slack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sms.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\twitter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\vsacad-R1.dll">
@@ -1147,6 +1173,9 @@
     <None Include="oi\unmanaged\oit_font_metrics.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="oi\unmanaged\RSMFTemplate.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
@@ -1154,16 +1183,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="oi\webview\oit.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.7.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.7.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\kCura.10.1.0.2\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.1.0.2\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\build\kCura.OutsideIn.FI.Win32.targets')" />
 </Project>
