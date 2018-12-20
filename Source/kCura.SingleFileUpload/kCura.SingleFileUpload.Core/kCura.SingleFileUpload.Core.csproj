@@ -1185,7 +1185,6 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
