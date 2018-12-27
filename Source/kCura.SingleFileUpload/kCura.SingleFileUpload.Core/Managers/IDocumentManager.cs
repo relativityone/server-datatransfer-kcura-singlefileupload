@@ -11,7 +11,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         int GetDocByName(string docName);
         void SetCreateInstanceSettings();
         Task<bool> ValidateFileTypes(string extension);
-        Task<bool> IsDataGridEnabled(int workspaceID);
+        Task<bool> IsDataGridEnabledAsync(int workspaceID);
         bool ValidateDocImages(int docArtifactId);
         bool ValidateDocNative(int docArtifactId);
         string GetDocumentControlNumber(int docArtifactId);

@@ -120,7 +120,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					else
 					{
-						var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+						var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
 						var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
 						var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 						if (!fdv)
@@ -282,7 +282,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				string resultStr = string.Empty;
 				var isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
 				var hasPermission = !isAdmin ? await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
-				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
 				if (hasPermission)
 				{
 					var error = _RepositoryProcessingManager.GetErrorInfo(errorID);

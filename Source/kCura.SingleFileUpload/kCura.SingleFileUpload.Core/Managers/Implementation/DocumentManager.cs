@@ -216,7 +216,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             restricted.AddRange(new[] { "dll", "exe", "js" });
             return !restricted.Contains(extension.Replace(".", ""));
         }
-        public async Task<bool> IsDataGridEnabled(int workspaceID)
+        public async Task<bool> IsDataGridEnabledAsync(int workspaceID)
         {
             ObjectQueryResultSet results;
             using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))
