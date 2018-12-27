@@ -243,9 +243,9 @@ export interface OITPages
 	current(): number;
 	pageName( index?: number ): string|undefined;
 	count(): number;
-	moveTo( dest: any /*number|HTMLElement|Text|OITTextRange|OITCellRange|OITRectRange*/, callbackFn?: Function ): number;
-	moveToNext(): number;
-	moveToPrev(): number;
+	moveto( dest: any /*number|HTMLElement|Text|OITTextRange|OITCellRange|OITRectRange*/, callbackFn?: Function ): number;
+	movetoNext(): number;
+	movetoPrev(): number;
 	info( index: number ): OITPageInfo;
 	isDocumentText( acc: number, accend: number ): boolean;
 	addEventListener( name: string, fn: Function ): void;
