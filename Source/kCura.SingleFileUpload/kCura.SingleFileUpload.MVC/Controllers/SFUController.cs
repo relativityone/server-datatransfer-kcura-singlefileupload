@@ -112,7 +112,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					var fileExt = Path.GetExtension(fileName).ToLower();
 					var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-					var supported = _RepositoryDocumentManager.IsFileTypeSupported(fileExt);
 					if (!res)
 					{
 						response.Success = false;
@@ -120,15 +119,106 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					else
 					{
-						if (supported)
+						var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
+						var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
+						var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
+						if (!fdv)
 						{
-							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
-							var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
-							var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
-							if (!fdv)
+							did = docIDByName;
+							if (did == -1 || force)
 							{
-								did = docIDByName;
-								if (did == -1 || force)
+								var transientMetadata = getTransient(file, fileName);
+								transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+								if (validateFile(transientMetadata.TempFileLocation))
+								{
+									response.Success = false;
+									response.Message = "This file type is unsupported";
+									return resultStr;
+								}
+								if (!string.IsNullOrEmpty(controlNumberText))
+								{
+									transientMetadata.ControlNumber = controlNumberText;
+								}
+								if (did == -1)
+								{
+									var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+									if (resultUpload.Success)
+									{
+										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
+										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									}
+									else
+									{
+										response.Success = false;
+										response.Message = resultUpload.Result;
+										return resultStr;
+									}
+
+								}
+							}
+							else
+							{
+								response.Success = false;
+								response.Message = "The Control Number you selected is already in use. Try again.";
+								return resultStr;
+							}
+						}
+						else
+						{
+							if (img)
+							{
+								if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg") && !fileExt.Equals(".pdf"))
+								{
+									response.Success = false;
+									response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.";
+								}
+								else
+								{
+									FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
+									var transientMetadata = getTransient(file, fileName);
+									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									if (validateFile(transientMetadata.TempFileLocation))
+									{
+										response.Success = false;
+										response.Message = "This file type is unsupported";
+										return resultStr;
+									}
+									FileInformation imageInfo = fileInfo;
+
+									if (fileInfo == null)
+									{
+										imageInfo = new FileInformation();
+									}
+
+									var guidFileName = $"{Guid.NewGuid().ToString().ToLower()}{fileExt}";
+									var location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
+									if (!Directory.Exists(location))
+									{
+										Directory.CreateDirectory(location);
+									}
+
+									imageInfo.FileName = $"{guidFileName}";
+									imageInfo.FileSize = transientMetadata.Native.Length;
+									imageInfo.FileType = 1;
+									imageInfo.Order = 0;
+									imageInfo.FileLocation = string.Concat(location, guidFileName);
+									_RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
+
+									var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
+									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									response.Success = true;
+									response.Message = imageInfo.FileLocation;
+								}
+
+							}
+							else
+							{
+								if (did != docIDByName && docIDByName > 0)
+								{
+									response.Success = false;
+									response.Message = "A document with the same name already exists.";
+								}
+								else
 								{
 									var transientMetadata = getTransient(file, fileName);
 									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
@@ -138,122 +228,23 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										response.Message = "This file type is unsupported";
 										return resultStr;
 									}
-									if (!string.IsNullOrEmpty(controlNumberText))
-									{
-										transientMetadata.ControlNumber = controlNumberText;
-									}
-									if (did == -1)
-									{
-										var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-										if (resultUpload.Success)
-										{
-											resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-											_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-										}
-										else
-										{
-											response.Success = false;
-											response.Message = resultUpload.Result;
-											return resultStr;
-										}
-
-									}
-								}
-								else
-								{
-									response.Success = false;
-									response.Message = "The Control Number you selected is already in use. Try again.";
-									return resultStr;
-								}
-							}
-							else
-							{
-								if (img)
-								{
-									if (!fileExt.Equals(".tif") && !fileExt.Equals(".tiff") && !fileExt.Equals(".jpeg") && !fileExt.Equals(".jpg") && !fileExt.Equals(".pdf"))
-									{
-										response.Success = false;
-										response.Message = "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.";
-									}
-									else
-									{
-										FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
-										var transientMetadata = getTransient(file, fileName);
-										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-										if (validateFile(transientMetadata.TempFileLocation))
-										{
-											response.Success = false;
-											response.Message = "This file type is unsupported";
-											return resultStr;
-										}
-										FileInformation imageInfo = fileInfo;
-
-										if (fileInfo == null)
-										{
-											imageInfo = new FileInformation();
-										}
-
-										var guidFileName = $"{Guid.NewGuid().ToString().ToLower()}{fileExt}";
-										var location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
-										if (!Directory.Exists(location))
-										{
-											Directory.CreateDirectory(location);
-										}
-
-										imageInfo.FileName = $"{guidFileName}";
-										imageInfo.FileSize = transientMetadata.Native.Length;
-										imageInfo.FileType = 1;
-										imageInfo.Order = 0;
-										imageInfo.FileLocation = string.Concat(location, guidFileName);
-										_RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
-
-										var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-										response.Success = true;
-										response.Message = imageInfo.FileLocation;
-									}
-
-								}
-								else
-								{
-									if (did != docIDByName && docIDByName > 0)
-									{
-										response.Success = false;
-										response.Message = "A document with the same name already exists.";
-									}
-									else
-									{
-										var transientMetadata = getTransient(file, fileName);
-										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-										if (validateFile(transientMetadata.TempFileLocation))
-										{
-											response.Success = false;
-											response.Message = "This file type is unsupported";
-											return resultStr;
-										}
-										await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-										var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-									}
-								}
-							}
-							if (string.IsNullOrEmpty(resultStr))
-							{
-								if (response.Success && !img)
-								{
-									resultStr = $"AppID={WorkspaceID}&ArtifactID={did}";
-								}
-								else
-								{
-									resultStr = did.ToString();
+									await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+									var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
+									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 								}
 							}
 						}
-						else
+						if (string.IsNullOrEmpty(resultStr))
 						{
-							response.Success = false;
-							response.Message = img ? "Loaded file is not a supported format. Please select TIFF, JPEG or PDF File." : "This file type is not supported.";
+							if (response.Success && !img)
+							{
+								resultStr = $"AppID={WorkspaceID}&ArtifactID={did}";
+							}
+							else
+							{
+								resultStr = did.ToString();
+							}
 						}
 					}
 				}
@@ -291,7 +282,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				string resultStr = string.Empty;
 				var isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
 				var hasPermission = !isAdmin ? await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.ProcessingErrorObjectType, Core.Helpers.Constants.PermissionProcessingErrorUploadDownload) : true;
-				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+				var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
 				if (hasPermission)
 				{
 					var error = _RepositoryProcessingManager.GetErrorInfo(errorID);
