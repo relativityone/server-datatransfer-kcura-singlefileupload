@@ -1,5 +1,7 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
+using Relativity.API;
+using Relativity.OIFactory;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,11 +23,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 		private string fieldName { get; set; }
 		private bool checkToRemove { get; set; }
-		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
+		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, IHelper helper)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
+            using (OutsideIn.Exporter exporter = helper.BuildExporter())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {

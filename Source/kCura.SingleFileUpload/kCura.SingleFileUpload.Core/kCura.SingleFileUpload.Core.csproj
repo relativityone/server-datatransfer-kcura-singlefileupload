@@ -136,8 +136,8 @@
     <Reference Include="Relativity, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.2.9.12\lib\net462\Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.10.2.9.12\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.10.2.21.23\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
@@ -171,6 +171,9 @@
     </Reference>
     <Reference Include="Relativity.OAuth2Client.Interfaces, Version=1.0.27.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.0.27\lib\net462\Relativity.OAuth2Client.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.OIFactory, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.OIFactory.10.2.21.23\lib\net462\Relativity.OIFactory.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.SecretCatalog, Version=1.0.19.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.19\lib\Relativity.SecretCatalog.dll</HintPath>
