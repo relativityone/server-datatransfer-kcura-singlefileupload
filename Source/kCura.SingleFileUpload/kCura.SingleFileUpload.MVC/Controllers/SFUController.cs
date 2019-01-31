@@ -350,7 +350,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			try
 			{
 				_RepositorySearchManager.ConfigureOutsideIn();
-				transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native);
+				transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native, ConnectionHelper.Helper());
 			}
 			catch (Exception ex)
 			{
