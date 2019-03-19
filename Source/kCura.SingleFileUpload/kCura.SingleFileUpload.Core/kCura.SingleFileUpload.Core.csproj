@@ -126,8 +126,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.9.0.578, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2019.2.0.650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -287,12 +287,10 @@
     <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
-    <Content Include="oi\docs\fileids_values_strs.txt" />
-    <Content Include="oi\unmanaged\android.png">
+    <Content Include="oi\docs\fileids_values_only_sorted.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\bloomberg.png">
+    <Content Include="oi\docs\fileids_values_strs.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\debmp-R1.dll">
@@ -311,6 +309,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\dewp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\emojis64.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\excatest-R1.dll">
@@ -370,6 +371,9 @@
     <Content Include="oi\unmanaged\ibxwd2-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="oi\unmanaged\icons256.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\imcd32-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -406,9 +410,6 @@
     <Content Include="oi\unmanaged\imdsf2-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\imessage.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="oi\unmanaged\imfmv2-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -443,9 +444,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\isgdi32-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\mms.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\ocemul-R1.dll">
@@ -531,18 +529,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\sccvw-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\skype.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\slack.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\sms.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\unmanaged\twitter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\vsacad-R1.dll">
@@ -696,6 +682,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\vsiwop-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwop13-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\vsiwp-R1.dll">
@@ -1082,57 +1071,57 @@
     <Content Include="oi\unmanaged\wvcore-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\WebView\collapseB.png" />
-    <Content Include="oi\WebView\collapseB_hover.png" />
-    <Content Include="oi\WebView\Collapse_Viewer.png" />
-    <Content Include="oi\WebView\Collapse_Viewer_Hover.png" />
-    <Content Include="oi\WebView\Comments_large_Active.png" />
-    <Content Include="oi\WebView\Comments_large_Active_Multi.png" />
-    <Content Include="oi\WebView\Comments_large_Normal.png" />
-    <Content Include="oi\WebView\Comments_large_Normal_Multi.png" />
-    <Content Include="oi\WebView\Comments_Normal.png" />
-    <Content Include="oi\WebView\drag-handle.png" />
-    <Content Include="oi\WebView\Expand_Viewer.png" />
-    <Content Include="oi\WebView\Expand_Viewer_Hover.png" />
-    <Content Include="oi\WebView\ficons\calendar.png" />
-    <Content Include="oi\WebView\ficons\calendarEntry.png" />
-    <Content Include="oi\WebView\ficons\contact.png" />
-    <Content Include="oi\WebView\ficons\contactGroup.png" />
-    <Content Include="oi\WebView\ficons\doc.png" />
-    <Content Include="oi\WebView\ficons\doc_blue.png" />
-    <Content Include="oi\WebView\ficons\folder.png" />
-    <Content Include="oi\WebView\ficons\generic.png" />
-    <Content Include="oi\WebView\ficons\ie.png" />
-    <Content Include="oi\WebView\ficons\image.png" />
-    <Content Include="oi\WebView\ficons\journal.png" />
-    <Content Include="oi\WebView\ficons\msg.png" />
-    <Content Include="oi\WebView\ficons\note.png" />
-    <Content Include="oi\WebView\ficons\onenote.png" />
-    <Content Include="oi\WebView\ficons\pdf.png" />
-    <Content Include="oi\WebView\ficons\ppt.png" />
-    <Content Include="oi\WebView\ficons\ppt_blue.png" />
-    <Content Include="oi\WebView\ficons\project.png" />
-    <Content Include="oi\WebView\ficons\publisher.png" />
-    <Content Include="oi\WebView\ficons\task.png" />
-    <Content Include="oi\WebView\ficons\text.png" />
-    <Content Include="oi\WebView\ficons\transcript.png" />
-    <Content Include="oi\WebView\ficons\vector.png" />
-    <Content Include="oi\WebView\ficons\video.png" />
-    <Content Include="oi\WebView\ficons\vsd.png" />
-    <Content Include="oi\WebView\ficons\xls.png" />
-    <Content Include="oi\WebView\ficons\xls_blue.png" />
-    <Content Include="oi\WebView\ficons\zip.png" />
-    <Content Include="oi\WebView\HiddenSlide.png" />
-    <Content Include="oi\WebView\icon-comment-flag.png" />
-    <Content Include="oi\WebView\icons-navbar.png" />
-    <Content Include="oi\WebView\NoteIcon.png" />
-    <Content Include="oi\WebView\oit.css" />
-    <Content Include="oi\WebView\oit.js" />
-    <Content Include="oi\WebView\oit.loading.gif" />
-    <Content Include="oi\WebView\oit.navbar.css" />
-    <Content Include="oi\WebView\oit.navbar.min.js" />
-    <Content Include="oi\WebView\oit.statusbar.css" />
-    <Content Include="oi\WebView\oit.statusbar.min.js" />
+    <Content Include="oi\webview\collapseB.png" />
+    <Content Include="oi\webview\collapseB_hover.png" />
+    <Content Include="oi\webview\Collapse_Viewer.png" />
+    <Content Include="oi\webview\Collapse_Viewer_Hover.png" />
+    <Content Include="oi\webview\Comments_large_Active.png" />
+    <Content Include="oi\webview\Comments_large_Active_Multi.png" />
+    <Content Include="oi\webview\Comments_large_Normal.png" />
+    <Content Include="oi\webview\Comments_large_Normal_Multi.png" />
+    <Content Include="oi\webview\Comments_Normal.png" />
+    <Content Include="oi\webview\drag-handle.png" />
+    <Content Include="oi\webview\Expand_Viewer.png" />
+    <Content Include="oi\webview\Expand_Viewer_Hover.png" />
+    <Content Include="oi\webview\ficons\calendar.png" />
+    <Content Include="oi\webview\ficons\calendarEntry.png" />
+    <Content Include="oi\webview\ficons\contact.png" />
+    <Content Include="oi\webview\ficons\contactGroup.png" />
+    <Content Include="oi\webview\ficons\doc.png" />
+    <Content Include="oi\webview\ficons\doc_blue.png" />
+    <Content Include="oi\webview\ficons\folder.png" />
+    <Content Include="oi\webview\ficons\generic.png" />
+    <Content Include="oi\webview\ficons\ie.png" />
+    <Content Include="oi\webview\ficons\image.png" />
+    <Content Include="oi\webview\ficons\journal.png" />
+    <Content Include="oi\webview\ficons\msg.png" />
+    <Content Include="oi\webview\ficons\note.png" />
+    <Content Include="oi\webview\ficons\onenote.png" />
+    <Content Include="oi\webview\ficons\pdf.png" />
+    <Content Include="oi\webview\ficons\ppt.png" />
+    <Content Include="oi\webview\ficons\ppt_blue.png" />
+    <Content Include="oi\webview\ficons\project.png" />
+    <Content Include="oi\webview\ficons\publisher.png" />
+    <Content Include="oi\webview\ficons\task.png" />
+    <Content Include="oi\webview\ficons\text.png" />
+    <Content Include="oi\webview\ficons\transcript.png" />
+    <Content Include="oi\webview\ficons\vector.png" />
+    <Content Include="oi\webview\ficons\video.png" />
+    <Content Include="oi\webview\ficons\vsd.png" />
+    <Content Include="oi\webview\ficons\xls.png" />
+    <Content Include="oi\webview\ficons\xls_blue.png" />
+    <Content Include="oi\webview\ficons\zip.png" />
+    <Content Include="oi\webview\HiddenSlide.png" />
+    <Content Include="oi\webview\icon-comment-flag.png" />
+    <Content Include="oi\webview\icons-navbar.png" />
+    <Content Include="oi\webview\NoteIcon.png" />
+    <Content Include="oi\webview\oit.css" />
+    <Content Include="oi\webview\oit.js" />
+    <Content Include="oi\webview\oit.loading.gif" />
+    <Content Include="oi\webview\oit.navbar.css" />
+    <Content Include="oi\webview\oit.navbar.min.js" />
+    <Content Include="oi\webview\oit.statusbar.css" />
+    <Content Include="oi\webview\oit.statusbar.min.js" />
     <Content Include="SQL\Queries\RemovePageInteractionEvenHandlerFromDocumentObject.sql" />
     <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
@@ -1194,23 +1183,23 @@
     <None Include="oi\unmanaged\RSMFTemplate.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="oi\WebView\oit.css.map" />
-    <None Include="oi\WebView\oit.js.map" />
-    <None Include="oi\WebView\oit.navbar.js.map" />
-    <None Include="oi\WebView\oit.statusbar.js.map" />
+    <None Include="oi\webview\oit.css.map" />
+    <None Include="oi\webview\oit.js.map" />
+    <None Include="oi\webview\oit.navbar.js.map" />
+    <None Include="oi\webview\oit.statusbar.js.map" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="oi\WebView\oit.d.ts" />
+    <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.10.2.9.12\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.10.2.9.12\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.10.2.9.12\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.2.9.12\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
