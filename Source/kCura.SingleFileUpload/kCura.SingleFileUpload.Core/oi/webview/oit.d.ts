@@ -8,7 +8,7 @@ export interface OITValueMap   { [key: string]: any }
     rect = "rect"
 }*/
 
-export interface CellRange
+export interface OITCellRange
 	{
 	readonly type: string /*OITRangeType*/; /** The range type ("cell") */
 	page:     number; /** The 0-based page number containing the range */
@@ -26,7 +26,7 @@ export interface CellRange
 	pct = "pct"
 	}*/
 
-export interface RectRange
+export interface OITRectRange
 	{
 	readonly type: string /*OITRangeType*/; /** The range type ("rect") */
 	page:    number;
@@ -39,7 +39,7 @@ export interface RectRange
 	}
 
 
-export interface TextRange
+export interface OITTextRange
 	{
 	readonly type: string /*OITRangeType*/; /** The range type ("text") */
 	acc:    number;
@@ -204,29 +204,29 @@ export interface OITDocument
 	findAll( searchTerm: string, callbackFn: Function, caseSensitive?: boolean, mode?: string /*OITTextSearchMode*/ ): void;
 	getRawText( callbackFn: Function ): void;
 	highlight( searchTerm: string, style: string, callbackFn: Function, caseSensitive?: boolean, properties?: object, mode?: string /*OITTextSearchMode*/ ): void;
-	highlight( searchTerm: string, config: OITHighlightConfig );
-	select( range: any /*TextRange|CellRange|RectRange|Range|Selection*/, moveto?: boolean ): boolean;
+	highlight( searchTerm: string, config: OITHighlightConfig ): void;
+	select( range: any /*OITTextRange|OITCellRange|OITRectRange|Range|Selection*/, moveto?: boolean ): boolean;
 	selectionType(): string /*OITRangeType*/;
 	selectionMode( mode?: string /*OITRangeType*/ ): string /*OITRangeType*/;
 	selectionStyle( style?: string ): string;
-	selection(): TextRange|CellRange|RectRange|undefined;
-	textSelection(): TextRange|undefined;
-	cellSelection(): CellRange|undefined;
-	rectSelection(): RectRange|undefined;
+	selection(): OITTextRange|OITCellRange|OITRectRange|undefined;
+	textSelection(): OITTextRange|undefined;
+	cellSelection(): OITCellRange|undefined;
+	rectSelection(): OITRectRange|undefined;
 	getSelectedText(): string|undefined;
-	textRange( domRange: Range ): TextRange|TextRange[]|undefined;
-	textRange( domSelection: Selection ): TextRange|TextRange[]|undefined;
-	textRange( acc: number, accend: number ): TextRange;
-	textRange( cellRange: CellRange ): TextRange|TextRange[]|undefined;
-	cellRange( sheet: number, c1: number, r1: number, c2: number, r2: number ): CellRange;
-	cellRange( textRange: TextRange ): CellRange[];
-	rectRange( page: number, x1: number, y1: number, x2: number, y2: number, units: string /*RectRangeUnits*/ ): RectRange;
+	textRange( domRange: Range ): OITTextRange|OITTextRange[]|undefined;
+	textRange( domSelection: Selection ): OITTextRange|OITTextRange[]|undefined;
+	textRange( acc: number, accend: number ): OITTextRange;
+	textRange( cellRange: OITCellRange ): OITTextRange|OITTextRange[]|undefined;
+	cellRange( sheet: number, c1: number, r1: number, c2: number, r2: number ): OITCellRange;
+	cellRange( textRange: OITTextRange ): OITCellRange[];
+	rectRange( page: number, x1: number, y1: number, x2: number, y2: number, units: string /*RectRangeUnits*/ ): OITRectRange;
 	updateViewSize(): void;
 	addEventListener( name: string, fn: Function ): void;
 	removeEventListener( name: string, fn: Function ): void;
 	}
 
-export interface PageInfo
+export interface OITPageInfo
 	{
 	width:     number;   /** The width of the page, in pixels, at 100% zoom and 0 degrees rotation. Changing the zoom level or page rotation angle will not affect this value. */
 	height:    number;   /** The height of the page, in pixels, at 100% zoom and 0 degrees rotation. Changing the zoom level or page rotation angle will not affect this value. */
@@ -243,19 +243,20 @@ export interface OITPages
 	current(): number;
 	pageName( index?: number ): string|undefined;
 	count(): number;
-	moveTo( dest: any /*number|HTMLElement|Text|TextRange|CellRange|RectRange*/, callbackFn?: Function ): number;
+	moveTo( dest: any /*number|HTMLElement|Text|OITTextRange|OITCellRange|OITRectRange*/, callbackFn?: Function ): number;
 	moveToNext(): number;
 	moveToPrev(): number;
-	info( index: number ): PageInfo;
+	info( index: number ): OITPageInfo;
+	isDocumentText( acc: number, accend: number ): boolean;
 	addEventListener( name: string, fn: Function ): void;
 	removeEventListener( name: string, fn: Function ): void;
 	}
 
 export interface OITHighlights
 	{
-	add( style: string, range?: TextRange|CellRange|RectRange|Selection|Range, properties?: object, comment?: string ): number|number[]|undefined;
-	addMultiple( style: string, rangeList: TextRange[]|CellRange[]|RectRange[], properties?: object, options?: object ): number[];
-	redact( range?: TextRange|CellRange|RectRange, properties?: object, label?: string ): number|number[]|undefined;
+	add( style: string, range?: OITTextRange|OITCellRange|OITRectRange|Selection|Range, properties?: object, comment?: string ): number|number[]|undefined;
+	addMultiple( style: string, rangeList: (OITTextRange|OITRectRange|OITCellRange|Range|Selection)[], properties?: object, options?: object ): number[];
+	redact( range?: OITTextRange|OITCellRange|OITRectRange, properties?: object, label?: string ): number|number[]|undefined;
 	apply( highlights: string, filterFunction?: Function ): void;
 	remove( id?: number|number[] ): void;
 	clear( filterFunction?: Function ): void;
@@ -275,7 +276,7 @@ export interface OITHighlights
 	movetoNext( filterFn: Function ): void;
 	movetoPrev( filterFn: Function ): void;
 	type( id?: number ): string;
-	range( id?: number ): TextRange|CellRange|RectRange;
+	range( id?: number ): OITTextRange|OITCellRange|OITRectRange;
 	show( id?: number|number[] ): void;
 	show( filterFn: Function ): void;
 	hide( id?: number|number[] ): void;
@@ -297,8 +298,10 @@ export interface OITHyperlinks
 	removeEventListener( name: string, fn: Function ): void;
 	}
 
-declare var view:       OITView;
-declare var document:   OITDocument;
-declare var pages:      OITPages;
-declare var highlights: OITHighlights;
-declare var hyperlinks: OITHyperlinks;
+export interface OITModule {
+	view:       OITView;
+	document:   OITDocument;
+	pages:      OITPages;
+	highlights: OITHighlights;
+	hyperlinks: OITHyperlinks;
+	}
