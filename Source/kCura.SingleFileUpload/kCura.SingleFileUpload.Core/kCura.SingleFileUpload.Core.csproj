@@ -1136,7 +1136,9 @@
     <None Include="oi\unmanaged\adinit.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="oi\unmanaged\cmmap000.bin" />
+    <None Include="oi\unmanaged\cmmap000.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="oi\unmanaged\compreg.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
