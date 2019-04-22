@@ -117,8 +117,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.9.2.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2019.2.0.650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -281,12 +281,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fileupload.css" />
     <Content Include="Content\Images\Error_Icon.png" />
     <Content Include="Content\Images\loading.gif" />
@@ -367,12 +361,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Properties\PublishProfiles\192.168.0.231.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
@@ -434,10 +422,6 @@
     <Content Include="Scripts\angular\angular-touch.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
     <None Include="Properties\PublishProfiles\RelativityVm.pubxml" />
     <Content Include="Scripts\angular\errors.json" />
@@ -453,18 +437,6 @@
     <Content Include="Scripts\angular\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular\angular-aria.min.js.map" />
     <Content Include="Scripts\angular\angular-animate.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -478,6 +450,14 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -1255,6 +1235,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\SFU\SinlgeUpload.cshtml" />
     <Content Include="Views\SFU\MultipleUpload.cshtml" />
+    <Content Include="Scripts\version.json" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -1264,13 +1245,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
@@ -1285,10 +1267,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1339,6 +1321,6 @@
   </ProjectExtensions>
   <Import Project="..\..\packages\Relativity.ImportExport.10.2.9.12\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.10.2.9.12\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.10.2.9.12\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.2.9.12\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>

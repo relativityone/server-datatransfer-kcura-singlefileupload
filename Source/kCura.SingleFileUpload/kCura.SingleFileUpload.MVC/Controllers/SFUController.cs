@@ -5,6 +5,7 @@ using kCura.SingleFileUpload.Core.Managers.Implementation;
 using Relativity.CustomPages;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,39 +14,45 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 {
 	public class SFUController : BaseController
 	{
+		private IAuditManager __repositoryAuditManager;
+		private IProcessingManager __repositoryProcessingManager;
+		private ISearchExportManager __repositorySearchManager;
 
 		protected ISearchExportManager _RepositorySearchManager
 		{
 			get
 			{
 				if (__repositorySearchManager == null)
+				{
 					__repositorySearchManager = new SearchExportManager();
+				}
 				return __repositorySearchManager;
 			}
 		}
-		private ISearchExportManager __repositorySearchManager;
 
 		protected IProcessingManager _RepositoryProcessingManager
 		{
 			get
 			{
 				if (__repositoryProcessingManager == null)
+				{
 					__repositoryProcessingManager = new ProcessingManager();
+				}
 				return __repositoryProcessingManager;
 			}
 		}
-		private IProcessingManager __repositoryProcessingManager;
 
 		protected IAuditManager _RepositoryAuditManager
 		{
 			get
 			{
 				if (__repositoryAuditManager == null)
+				{
 					__repositoryAuditManager = new AuditManager(ConnectionHelper.Helper());
+				}
 				return __repositoryAuditManager;
 			}
 		}
-		private IAuditManager __repositoryAuditManager;
 
 
 		public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
@@ -66,22 +73,27 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		}
 
 		[HttpPost]
-		public async Task Upload(int fid = 0, int did = 0, bool fdv = false, bool force = false, bool img = false, bool newImage = false, string controlNumberText = null)
+		public async Task Upload(int fid = 0, int did = 0, bool fdv = false, 
+			bool force = false, bool img = false, 
+			bool newImage = false, string controlNumberText = null)
 		{
-			var result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
+			Models.ResponseWithElements<string> result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
 			{
-				var isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
+				bool isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
 				string resultStr = string.Empty;
 				try
 				{
 					if (!isAdmin)
 					{
-						var hasPermission = false;
+						bool hasPermission = false;
 						if (img)
 						{
-							var hasUploadPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
-							var hasAddPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
-							var hasdeletePermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
+							bool hasUploadPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID,
+								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
+							bool hasAddPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
+							bool hasdeletePermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
 							hasPermission = hasUploadPermission && hasAddPermission && hasdeletePermission;
 						}
 						else
@@ -92,7 +104,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 							}
 							else
 							{
-								hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION);
+								hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+									Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION);
 							}
 						}
 
@@ -104,14 +117,15 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						}
 					}
 
-					var file = Request.Files[0];
+					HttpPostedFileBase file = Request.Files[0];
 					string fileName = file.FileName;
 					if (fileName.Contains("\\"))
 					{
 						fileName = Path.GetFileName(fileName);
 					}
-					var fileExt = Path.GetExtension(fileName).ToLower();
-					var res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+					string fileExt = Path.GetExtension(fileName).ToLower();
+					bool res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+					
 					if (!res)
 					{
 						response.Success = false;
@@ -119,17 +133,18 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					else
 					{
-						var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
-						var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
-						var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
+						bool isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+						string documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
+						int docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 						if (!fdv)
 						{
 							did = docIDByName;
 							if (did == -1 || force)
 							{
-								var transientMetadata = getTransient(file, fileName);
+								ExportedMetadata transientMetadata = getTransient(file, fileName);
 								transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-								if (validateFile(transientMetadata.TempFileLocation))
+
+								if (ValidateFile(transientMetadata.TempFileLocation))
 								{
 									response.Success = false;
 									response.Message = "This file type is unsupported";
@@ -141,11 +156,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								if (did == -1)
 								{
-									var resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
+									Response resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, 
+										this.RelativityUserInfo.WorkspaceUserArtifactID);
 									if (resultUpload.Success)
 									{
 										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, 
+											this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									}
 									else
 									{
@@ -175,9 +192,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								else
 								{
 									FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
-									var transientMetadata = getTransient(file, fileName);
+									ExportedMetadata transientMetadata = getTransient(file, fileName);
 									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-									if (validateFile(transientMetadata.TempFileLocation))
+									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
@@ -190,8 +207,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										imageInfo = new FileInformation();
 									}
 
-									var guidFileName = $"{Guid.NewGuid().ToString().ToLower()}{fileExt}";
-									var location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
+									string guidFileName = $"{Guid.NewGuid().ToString().ToLower()}{fileExt}";
+									string location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
 									if (!Directory.Exists(location))
 									{
 										Directory.CreateDirectory(location);
@@ -204,7 +221,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									imageInfo.FileLocation = string.Concat(location, guidFileName);
 									_RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
 
-									var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
+									string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
 									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									response.Success = true;
 									response.Message = imageInfo.FileLocation;
@@ -220,16 +237,16 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								else
 								{
-									var transientMetadata = getTransient(file, fileName);
+									ExportedMetadata transientMetadata = getTransient(file, fileName);
 									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-									if (validateFile(transientMetadata.TempFileLocation))
+									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
 										return resultStr;
 									}
 									await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
-									var details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
+									string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
 									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 								}
@@ -368,10 +385,15 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			return url.ToString().ToLower().Replace("relativity.rest/api", "Relativity");
 		}
 
-		private bool validateFile(string tempFile)
+		private bool ValidateFile(string tempFile)
 		{
 			var fileType = _RepositoryDocumentManager.GetNativeTypeByFilename(tempFile);
-			return fileType.FileType == "EXE / DLL File";
+			int[] finder = new int[] 
+			{
+			1800, //"EXE / DLL File"
+			1101, //"Internet HTML"
+			};
+			return finder.Contains(fileType.FileID);
 		}
 	}
 }
