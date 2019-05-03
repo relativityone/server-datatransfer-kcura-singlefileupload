@@ -91,10 +91,4 @@
   <Import Project="..\..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.3.2\build\net45\MSTest.TestAdapter.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.10.0\build\NUnit.props'))" />
-  </Target>
 </Project>
