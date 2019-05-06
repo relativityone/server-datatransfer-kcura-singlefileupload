@@ -29,7 +29,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					"mail_organizer", "mail_to", "mail_from", "mail_attendees",
 					"mail_subject", "mail_conversation_topic", "mail_normalized_subject",
-					"mail_appointment_duration", "mail_reqattendee"
+					"mail_appointment_duration", "mail_reqattendee","mail_location","mail_dtstart", "mail_dtend","mail_importance"
 				};
 			}
 		}
