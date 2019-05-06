@@ -119,7 +119,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 							}
 							break;
 					}
-					if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
+					if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark"
+						|| (fieldName?.ToLower()?.Contains("mail") ?? false))
 					{
 						fieldName = string.Empty;
 					}
