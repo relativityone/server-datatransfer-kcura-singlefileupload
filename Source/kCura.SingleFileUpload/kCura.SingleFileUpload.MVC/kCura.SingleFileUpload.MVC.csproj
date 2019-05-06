@@ -117,8 +117,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.9.2.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2019.2.0.650, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -1324,6 +1324,6 @@
   </ProjectExtensions>
   <Import Project="..\..\packages\kCura.10.1.0.2\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.1.0.2\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
