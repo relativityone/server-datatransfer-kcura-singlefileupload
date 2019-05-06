@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -20,6 +21,19 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
         }
 		private string fieldName { get; set; }
+		private string[] AdditionalFields
+		{
+			get
+			{
+				return new string[]
+				{
+					"mail_organizer", "mail_to", "mail_from", "mail_attendees",
+					"mail_subject", "mail_conversation_topic", "mail_normalized_subject",
+					"mail_appointment_duration", "mail_reqattendee","mail_location","mail_dtstart", "mail_dtend","mail_importance",
+					"mail_client_submit_time"
+				};
+			}
+		}
 		private bool checkToRemove { get; set; }
 		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, Func<OutsideIn.Exporter> func)
         {
@@ -110,7 +124,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
                     }
                     if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark"
-						|| (fieldName?.ToLower()?.Contains("mail") ?? false))
+						|| AdditionalFields.Contains(fieldName?.ToLower() ?? string.Empty))
 					{
                         fieldName = string.Empty;
                     }
