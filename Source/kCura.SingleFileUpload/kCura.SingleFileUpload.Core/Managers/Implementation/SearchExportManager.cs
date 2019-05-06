@@ -21,11 +21,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 		private string fieldName { get; set; }
 		private bool checkToRemove { get; set; }
-		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
+		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, Func<OutsideIn.Exporter> func)
         {
             ExportedMetadata result = new Entities.ExportedMetadata();
             result.FileName = fileName;
-            using (OutsideIn.Exporter exporter = OutsideIn.OutsideIn.NewLocalExporter())
+            using (OutsideIn.Exporter exporter = func.Invoke())
             {
                 using (MemoryStream msMLS = new MemoryStream(sourceFile))
                 {
@@ -109,8 +109,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                             break;
 
                     }
-                    if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark")
-                    {
+                    if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark"
+						|| (fieldName?.ToLower()?.Contains("mail") ?? false))
+					{
                         fieldName = string.Empty;
                     }
                     break;
