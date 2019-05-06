@@ -20,7 +20,7 @@ namespace Relativity.SimpleFileUpload.Core.UnitTest
 		public void TestFile()
 		{
 			string executableLocation = TestContext.CurrentContext.TestDirectory;
-			string fileName = "CTRL0187228.msg";
+			string fileName = "CTRL0192154.msg";
 			string fileLocation = Path.Combine(executableLocation, "..\\", "..\\", "Resources", fileName);
 			using (FileStream fileStream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read))
 			{
