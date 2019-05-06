@@ -126,8 +126,8 @@
     <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2018.9.0.578, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2018.9.2.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -269,8 +269,12 @@
     <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
-    <Content Include="oi\docs\fileids_values_strs.txt" />
+    <Content Include="oi\docs\fileids_values_only_sorted.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\docs\fileids_values_strs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\android.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -436,7 +440,9 @@
     <Content Include="oi\unmanaged\oicomponents-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\oilink.exe" />
+    <Content Include="oi\unmanaged\oilink.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\oilink.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1158,24 +1164,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="oi\unmanaged\adinit.dat">
+    <Content Include="oi\unmanaged\adinit.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\cmmap000.bin">
+    </Content>
+    <Content Include="oi\unmanaged\cmmap000.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\compreg.bin">
+    </Content>
+    <Content Include="oi\unmanaged\compreg.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\oitnsf.id">
+    </Content>
+    <Content Include="oi\unmanaged\oitnsf.id">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\oit_font_metrics.db">
+    </Content>
+    <Content Include="oi\unmanaged\oit_font_metrics.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="oi\unmanaged\RSMFTemplate.docx">
+    </Content>
+    <Content Include="oi\unmanaged\RSMFTemplate.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
@@ -1193,6 +1199,6 @@
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.10.1.0.2\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.1.0.2\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.10.1.0.2\build\Relativity.ImportExport.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.0\build\kCura.OutsideIn.Full.Win64.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2018.9.2\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2018.9.2\build\kCura.OutsideIn.FI.Win32.targets')" />
 </Project>
