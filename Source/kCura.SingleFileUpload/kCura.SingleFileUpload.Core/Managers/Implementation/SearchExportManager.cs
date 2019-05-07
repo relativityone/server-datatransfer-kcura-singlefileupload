@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -19,7 +20,19 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 return instance.Value;
             }
         }
-
+		private string[] AdditionalFields
+		{
+			get
+			{
+				return new string[]
+				{
+					"mail_organizer", "mail_to", "mail_from", "mail_attendees",
+					"mail_subject", "mail_conversation_topic", "mail_normalized_subject",
+					"mail_appointment_duration", "mail_reqattendee","mail_location","mail_dtstart", "mail_dtend","mail_importance",
+					"mail_client_submit_time"
+				};
+			}
+		}
 		private string FieldName { get; set; }
 		private bool CheckToRemove { get; set; }
 		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile)
@@ -112,9 +125,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                             break;
 
                     }
-                    if (FieldName == "hyperlink" || FieldName == "body" || FieldName == "bookmark")
-                    {
-                        FieldName = string.Empty;
+					if (FieldName == "hyperlink" || FieldName == "body" || FieldName == "bookmark"
+						|| AdditionalFields.Contains(FieldName?.ToLower() ?? string.Empty))
+					{
+						FieldName = string.Empty;
                     }
                     break;
                 case XmlNodeType.Text:
