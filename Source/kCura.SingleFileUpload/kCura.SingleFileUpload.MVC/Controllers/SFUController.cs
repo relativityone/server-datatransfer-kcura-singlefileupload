@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Relativity.OIFactory;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
@@ -367,7 +368,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			try
 			{
 				_RepositorySearchManager.ConfigureOutsideIn();
-				transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native, ConnectionHelper.Helper());
+				transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native, () => ConnectionHelper.Helper().BuildExporter());
 			}
 			catch (Exception ex)
 			{

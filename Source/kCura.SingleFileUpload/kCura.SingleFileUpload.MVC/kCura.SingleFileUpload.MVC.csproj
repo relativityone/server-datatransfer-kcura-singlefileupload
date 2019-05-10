@@ -166,6 +166,9 @@
     <Reference Include="Relativity.OAuth2Client.Interfaces, Version=1.0.27.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.0.27\lib\net462\Relativity.OAuth2Client.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Relativity.OIFactory, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.OIFactory.10.2.21.23\lib\net462\Relativity.OIFactory.dll</HintPath>
+    </Reference>
     <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.589, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.589\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
