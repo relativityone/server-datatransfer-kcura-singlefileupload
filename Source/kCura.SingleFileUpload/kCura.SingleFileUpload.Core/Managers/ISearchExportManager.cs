@@ -1,4 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
+using System;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
