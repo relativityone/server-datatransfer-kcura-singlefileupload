@@ -366,7 +366,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             try
             {
                 forceTapiSettings();
-                string value = getBearerToken(webApiUrl);
+                string value = GetBearerToken();
                 webApiUrl = webApiUrl.Replace("/Relativity", "/RelativityWebAPI");                
                 ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
                 var importJob = iapi.NewNativeDocumentImportJob();
@@ -545,12 +545,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 Name = restricted.Fields[1].Value?.ToString(),
             };
         }
-        private string getBearerToken(string instanceUrl)
-        {
-            string token = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
-            return token;
-        }
-        private KeyValuePair<int, string> GetFieldinfo(string artifactGuid)
+		private string GetBearerToken()
+		{
+			string accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims?.FirstOrDefault(x => x.Type?.Equals("access_token") ?? false)?.Value ?? "";
+			if (string.IsNullOrEmpty(accessToken))
+			{
+				accessToken = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
+			}
+			return accessToken;
+		}
+		private KeyValuePair<int, string> GetFieldinfo(string artifactGuid)
         {
             KeyValuePair<int, string> fieldData = default(KeyValuePair<int, string>);
             System.Data.Common.DbDataReader reader = _Repository.CaseDBContext.ExecuteSqlStatementAsDbDataReader(Queries.GetFieldInfoByGuid, new[] { SqlHelper.CreateSqlParameter("@artifactGuid", artifactGuid) });
