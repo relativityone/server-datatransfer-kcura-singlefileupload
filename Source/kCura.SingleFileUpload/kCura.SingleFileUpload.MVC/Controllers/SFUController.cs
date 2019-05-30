@@ -394,7 +394,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			1800, //"EXE / DLL File"
 			1101, //"Internet HTML"
 			};
-			return finder.Contains(fileType.FileID);
+			return finder.Contains(fileType.Id);
 		}
 	}
 }
