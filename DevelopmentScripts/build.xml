@@ -119,10 +119,13 @@
         <Destination>Applications\kCura.SimpleFileUpload.rap</Destination>
         <ApplicationSchema>ApplicationsXML\SingleFileUpload.xml</ApplicationSchema>
         <Assemblies>
-          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.dll</Assembly>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\bin\kCura.SingleFileUpload.Resources.dll</Assembly>
         </Assemblies>
 		<Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\kCura.SingleFileUpload.Core.dll</Assembly>
+        </Assemblies>
+		<Assemblies>
+          <Assembly>Source\SolutionResources\NSerio.Relativity.dll</Assembly>
         </Assemblies>
         <ResourceFiles />
         <CustomPages>
