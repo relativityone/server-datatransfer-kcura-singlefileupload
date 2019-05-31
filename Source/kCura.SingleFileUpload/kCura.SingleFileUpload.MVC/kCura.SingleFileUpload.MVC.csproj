@@ -1316,12 +1316,5 @@
   <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets'))" />
-  </Target>
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
