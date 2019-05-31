@@ -3,13 +3,13 @@ using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using Relativity.CustomPages;
+using Relativity.OIFactory;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Relativity.OIFactory;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
@@ -74,8 +74,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		}
 
 		[HttpPost]
-		public async Task Upload(int fid = 0, int did = 0, bool fdv = false, 
-			bool force = false, bool img = false, 
+		public async Task Upload(int fid = 0, int did = 0, bool fdv = false,
+			bool force = false, bool img = false,
 			bool newImage = false, string controlNumberText = null)
 		{
 			Models.ResponseWithElements<string> result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
@@ -91,9 +91,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						{
 							bool hasUploadPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID,
 								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionReplaceImageUploadDownload);
-							bool hasAddPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+							bool hasAddPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID,
 								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionAddImage);
-							bool hasdeletePermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+							bool hasdeletePermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID,
 								Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.PermissionDeleteImage);
 							hasPermission = hasUploadPermission && hasAddPermission && hasdeletePermission;
 						}
@@ -105,7 +105,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 							}
 							else
 							{
-								hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID, 
+								hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(this.WorkspaceID,
 									Core.Helpers.Constants.DocumentObjectType, Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION);
 							}
 						}
@@ -126,7 +126,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					string fileExt = Path.GetExtension(fileName).ToLower();
 					bool res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
-					
+
 					if (!res)
 					{
 						response.Success = false;
@@ -157,12 +157,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								if (did == -1)
 								{
-									Response resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID, 
+									Response resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, fid, GetWebAPIURL(), WorkspaceID,
 										this.RelativityUserInfo.WorkspaceUserArtifactID);
 									if (resultUpload.Success)
 									{
 										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty, 
+										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Create, string.Empty,
 											this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									}
 									else
@@ -389,7 +389,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		private bool ValidateFile(string tempFile)
 		{
 			var fileType = _RepositoryDocumentManager.GetNativeTypeByFilename(tempFile);
-			int[] finder = new int[] 
+			int[] finder = new int[]
 			{
 			1800, //"EXE / DLL File"
 			1101, //"Internet HTML"

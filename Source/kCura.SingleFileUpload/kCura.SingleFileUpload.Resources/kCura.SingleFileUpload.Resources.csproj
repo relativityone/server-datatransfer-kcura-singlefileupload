@@ -131,7 +131,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
-ILMerge.exe /out:kCura.SingleFileUpload.Resources.dll bin\\kCura.SingleFileUpload.Resources.dll bin\kCura.SingleFileUpload.Core.dll ..\..\SolutionResources\NSerio.Relativity.dll /lib:bin\ /targetPlatform:v4</PostBuildEvent>
+ILMerge.exe /out:kCura.SingleFileUpload.Resources.dll bin\\kCura.SingleFileUpload.Resources.dll  ..\..\SolutionResources\NSerio.Relativity.dll /lib:bin\ /targetPlatform:v4</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\packages\kCura.10.2.9.12\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.2.9.12\build\kCura.targets')" />
 </Project>

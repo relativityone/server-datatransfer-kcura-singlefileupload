@@ -91,7 +91,7 @@
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="oi, Version=2019.2.2.13, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\lib\net40\oi.dll</HintPath>
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -100,8 +100,8 @@
     <Reference Include="Relativity, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.3.5.3\lib\net462\Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.10.2.21.23\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.10.3.57.9\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
@@ -139,8 +139,8 @@
     <Reference Include="Relativity.OAuth2Client.Interfaces, Version=1.0.27.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.0.27\lib\net462\Relativity.OAuth2Client.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.OIFactory, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OIFactory.10.2.21.23\lib\net462\Relativity.OIFactory.dll</HintPath>
+    <Reference Include="Relativity.OIFactory, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.OIFactory.10.3.57.9\lib\net462\Relativity.OIFactory.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.SecretCatalog, Version=1.0.19.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.19\lib\Relativity.SecretCatalog.dll</HintPath>
@@ -195,6 +195,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Interfaces.3.0.0\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -254,12 +257,8 @@
     <Compile Include="Toggles\Toggles.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="oi\docs\fileids_values_only_sorted.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="oi\docs\fileids_values_strs.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
+    <Content Include="oi\docs\fileids_values_strs.txt" />
     <Content Include="oi\unmanaged\debmp-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1165,8 +1164,15 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets" Condition="Exists('..\..\packages\Relativity.ImportExport.9.6.26.25\build\Relativity.ImportExport.targets')" />
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
