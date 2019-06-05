@@ -1,6 +1,6 @@
-﻿using kCura.OI.FileID;
-using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.SingleFileUpload.Core.Entities;
 using System.Threading.Tasks;
+using DataExchange = Relativity.DataExchange;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
@@ -28,7 +28,7 @@ namespace kCura.SingleFileUpload.Core.Managers
         void InsertImage(FileInformation image);
         void WriteFile(byte[] file, FileInformation document);
         string GetRepositoryLocation();
-        FileIDData GetNativeTypeByFilename(string fileName);
+		DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName);
 		void RemovePageInteractionEvenHandlerFromDocumentObject();
 	}
 }

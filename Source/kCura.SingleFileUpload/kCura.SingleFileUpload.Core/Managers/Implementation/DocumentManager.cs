@@ -1,5 +1,4 @@
-﻿using kCura.OI.FileID;
-using kCura.Relativity.DataReaderClient;
+﻿using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
@@ -18,6 +17,7 @@ using System.Threading.Tasks;
 using Client = kCura.Relativity.Client;
 using DTOs = kCura.Relativity.Client.DTOs;
 using Services = Relativity.Services;
+using DataExchange = Relativity.DataExchange;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -583,11 +583,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             File.WriteAllBytes(tmpFileName, fileBytes);
             return tmpFileName;
         }
-        public FileIDData GetNativeTypeByFilename(string fileName)
-        {
-            return Manager.Instance.GetFileIDDataByFilePath(fileName);
-        }
-        private void CreateWorkspaceFieldSettings()
+		public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
+		{
+			return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
+		}
+		private void CreateWorkspaceFieldSettings()
         {
 
             var fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
@@ -776,7 +776,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 SqlHelper.CreateSqlParameter("FN", Path.GetFileName(documentInfo.FileName)),
                 SqlHelper.CreateSqlParameter("LOC", newFileLocation),
                 SqlHelper.CreateSqlParameter("SZ", documentInfo.Native.LongLength),
-                SqlHelper.CreateSqlParameter("RNT", GetNativeTypeByFilename(newFileLocation).FileType)
+                SqlHelper.CreateSqlParameter("RNT", GetNativeTypeByFilename(newFileLocation).Description)
             }, 300);
         }
         private void updateMatchedField(ExportedMetadata documentInfo, int docID)
