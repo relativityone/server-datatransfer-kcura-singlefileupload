@@ -657,8 +657,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 importJob.OnComplete += ImportJob_OnComplete;
                 importJob.OnError += ImportJob_OnError;
                 importJob.OnFatalException += ImportJob_OnFatalException;
-
-                if (folderId != 0)
+				importJob.Settings.AuditLevel = EDDS.WebAPI.BulkImportManagerBase.ImportAuditLevel.NoAudit;
+				if (folderId != 0)
                 {
                     importJob.Settings.DestinationFolderArtifactID = folderId;
                 }
@@ -823,11 +823,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         }
 		private string GetBearerToken()
 		{
-			string accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims?.FirstOrDefault(x => x.Type?.Equals("access_token") ?? false)?.Value ?? "";
-			if (string.IsNullOrEmpty(accessToken))
-			{
-				accessToken = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
-			}
+			string accessToken = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
 			return accessToken;
 		}
 		private KeyValuePair<int, string> GetFieldinfo(string artifactGuid)
