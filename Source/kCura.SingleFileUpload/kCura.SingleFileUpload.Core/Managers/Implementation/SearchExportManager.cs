@@ -12,6 +12,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class SearchExportManager : BaseManager, ISearchExportManager
 	{
+		private const int _START_INDEX = 2;
+		private const int _SUBSTRING_LENGTH = 9;
 		private static readonly Lazy<ISearchExportManager> instance = new Lazy<ISearchExportManager>(() => new SearchExportManager());
 		public static ISearchExportManager Instance
 		{
@@ -70,7 +72,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				while (reader.Read())
 				{
-					processReader(reader, extractedTextBuilder, result.Fields);
+					ProcessReader(reader, extractedTextBuilder, result.Fields);
 				}
 			}
 			result.ExtractedText = extractedTextBuilder.ToString();
@@ -101,17 +103,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-			try
-			{
-				OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
-			}
-			catch
-			{
-			}
+			OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
 		}
 
 
-		private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
+		private void ProcessReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
 		{
 			switch (reader.NodeType)
 			{
@@ -119,7 +115,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					switch (reader.Name)
 					{
 						case "document":
-							addToDictionary(fields, "Native Type", reader.GetAttribute("type"));
+							AddToDictionary(fields, "Native Type", reader.GetAttribute("type"));
 							break;
 						case "target":
 							checkToRemove = true;
@@ -162,7 +158,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 								DateTime endValue = DateTime.MinValue;
 								if (!DateTime.TryParseExact(reader.Value, "M/d/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endValue))
 								{
-									string preValue = reader.Value.Substring(2, reader.Value.Length - 9);
+									string preValue = reader.Value.Substring(_START_INDEX, reader.Value.Length - _SUBSTRING_LENGTH);
 									if (!DateTime.TryParseExact(preValue, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endValue))
 									{
 										DateTime.TryParse(reader.Value, out endValue);
@@ -177,7 +173,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 								value = reader.Value;
 								break;
 						}
-						addToDictionary(fields, fieldName, value);
+						AddToDictionary(fields, fieldName, value);
 						fieldName = null;
 					}
 					break;
@@ -185,7 +181,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					break;
 			}
 		}
-		private void addToDictionary(IDictionary<string, object> dictionary, string key, object value)
+		private void AddToDictionary(IDictionary<string, object> dictionary, string key, object value)
 		{
 			if (dictionary.ContainsKey(key))
 			{
