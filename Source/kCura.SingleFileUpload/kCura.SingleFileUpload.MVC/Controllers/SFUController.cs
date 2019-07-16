@@ -138,7 +138,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					else
 					{
 						
-							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabledAsync(WorkspaceID);
+							var isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
 							var documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
 							var docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
 							if (!fdv)
@@ -148,7 +148,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								{
 									var transientMetadata = getTransient(file, fileName);
 									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-									if (validateFile(transientMetadata.TempFileLocation))
+									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
 										response.Message = "This file is not supported.";
@@ -194,7 +194,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
 										var transientMetadata = getTransient(file, fileName);
 										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-										if (validateFile(transientMetadata.TempFileLocation))
+										if (ValidateFile(transientMetadata.TempFileLocation))
 										{
 											response.Success = false;
 											response.Message = "This file is not supported.";
@@ -239,7 +239,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										var transientMetadata = getTransient(file, fileName);
 										transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
-										if (validateFile(transientMetadata.TempFileLocation))
+										if (ValidateFile(transientMetadata.TempFileLocation))
 										{
 											response.Success = false;
 											response.Message = "This file is not supported.";
