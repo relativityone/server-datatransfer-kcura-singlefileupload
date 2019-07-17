@@ -30,5 +30,6 @@ namespace kCura.SingleFileUpload.Core.Managers
         string GetRepositoryLocation();
 		DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName);
 		void RemovePageInteractionEvenHandlerFromDocumentObject();
+		void DeleteTempFile(string tempLocation);
 	}
 }

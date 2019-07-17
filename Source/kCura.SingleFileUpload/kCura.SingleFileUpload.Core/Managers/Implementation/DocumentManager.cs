@@ -869,7 +869,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             throw jobReport.FatalException;
         }
 
-        private void DeleteTempFile(string tempLocation)
+        public void DeleteTempFile(string tempLocation)
         {
             try
             {
