@@ -152,6 +152,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										response.Success = false;
 										response.Message = "This file is not supported.";
+										_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
 										return resultStr;
 									}
 									if (!string.IsNullOrEmpty(controlNumberText))
@@ -198,6 +199,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										{
 											response.Success = false;
 											response.Message = "This file is not supported.";
+											_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
 											return resultStr;
 										}
 										FileInformation imageInfo = fileInfo;
@@ -243,6 +245,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										{
 											response.Success = false;
 											response.Message = "This file is not supported.";
+											_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
 											return resultStr;
 										}
 										await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
