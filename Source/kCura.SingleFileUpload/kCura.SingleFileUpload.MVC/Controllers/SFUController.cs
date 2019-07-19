@@ -163,10 +163,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									if (resultUpload.Success)
 									{
 										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-										int newDocumentId = _RepositoryDocumentManager.GetDocByName(resultStr);
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, newDocumentId, AuditAction.Create, string.Empty, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, newDocumentId, AuditAction.Update_Import, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, newDocumentId, AuditAction.Native_Created, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									}
 									else
 									{
@@ -255,8 +251,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, did, true, docIDByName == did, isDataGrid, GetWebAPIURL(), WorkspaceID, this.RelativityUserInfo.WorkspaceUserArtifactID);
 									string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, did, "Document Replacement");
 									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Native_Deleted, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Native_Created, string.Empty, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 								}
 							}

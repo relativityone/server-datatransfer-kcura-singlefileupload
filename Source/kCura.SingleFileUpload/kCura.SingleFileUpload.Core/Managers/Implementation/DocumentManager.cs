@@ -657,7 +657,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 importJob.OnComplete += ImportJob_OnComplete;
                 importJob.OnError += ImportJob_OnError;
                 importJob.OnFatalException += ImportJob_OnFatalException;
-				importJob.Settings.AuditLevel = EDDS.WebAPI.BulkImportManagerBase.ImportAuditLevel.NoAudit;
+				importJob.Settings.DisableUserSecurityCheck = false;
 				if (folderId != 0)
                 {
                     importJob.Settings.DestinationFolderArtifactID = folderId;
