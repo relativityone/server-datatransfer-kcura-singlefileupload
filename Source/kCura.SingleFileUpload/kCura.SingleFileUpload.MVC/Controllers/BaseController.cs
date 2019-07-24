@@ -88,7 +88,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				if (match.Success)
 				{
 					string appIdAsString = match.Groups["AppID"].Value;
-					if (int.TryParse(appIdAsString, out int appId))
+					int appId;
+					if (int.TryParse(appIdAsString, out appId))
 					{
 						return appId;
 					}
