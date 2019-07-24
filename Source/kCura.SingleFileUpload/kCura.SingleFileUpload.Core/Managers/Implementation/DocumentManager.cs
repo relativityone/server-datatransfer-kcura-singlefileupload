@@ -674,6 +674,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				importJob.OnComplete += ImportJob_OnComplete;
 				importJob.OnError += ImportJob_OnError;
 				importJob.OnFatalException += ImportJob_OnFatalException;
+				importJob.Settings.DisableUserSecurityCheck = false;
+
 
 				if (folderId != 0)
 				{
@@ -900,7 +902,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			throw jobReport.FatalException;
 		}
 
-		private void DeleteTempFile(string tempLocation)
+		public void DeleteTempFile(string tempLocation)
 		{
 			try
 			{

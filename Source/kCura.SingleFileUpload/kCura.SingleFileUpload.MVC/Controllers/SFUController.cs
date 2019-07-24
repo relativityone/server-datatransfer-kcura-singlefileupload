@@ -186,6 +186,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								{
 									response.Success = false;
 									response.Message = "This file type is unsupported";
+									_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
 									return resultStr;
 								}
 								if (!string.IsNullOrEmpty(controlNumberText))
@@ -199,8 +200,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									if (resultUpload.Success)
 									{
 										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-										_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.Create, string.Empty,
-											this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									}
 									else
 									{
@@ -236,6 +235,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
+										_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
+										Directory.Delete(Path.GetDirectoryName(transientMetadata.TempFileLocation), true);
 										return resultStr;
 									}
 									FileInformation imageInfo = fileInfo;
@@ -281,6 +282,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
+										_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
 										return resultStr;
 									}
 									DocumentExtraInfo documentExtraInfo = new DocumentExtraInfo
