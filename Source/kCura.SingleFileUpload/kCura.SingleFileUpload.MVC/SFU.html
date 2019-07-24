@@ -8,7 +8,29 @@
             setTimeout(redirectToController);
         }
         function redirectToController() {
-            location.replace(location.href.replace('.html', ''));
+
+            var url_string = location.href.replace('.html', '');
+            var url = new URL(url_string);
+
+            var parameters = {
+                "fdv": url.searchParams.get("fdv"),
+                "image": url.searchParams.get("image"),
+                "newImage": url.searchParams.get("newImage"),
+                "docID": url.searchParams.get("docID"),
+                "profileID": url.searchParams.get("profileID"),
+                "errorFile": url.searchParams.get("errorFile")
+            }
+
+            if (!parameters.fdv) {
+
+                url_string = url_string.split('&')[0];
+            }
+            else {
+                url_string = url_string.split('&')[0] + "&parameters=" + JSON.stringify(parameters);
+            }
+
+            location.href = url_string;
+
         }
 
         function dialogChanges() {

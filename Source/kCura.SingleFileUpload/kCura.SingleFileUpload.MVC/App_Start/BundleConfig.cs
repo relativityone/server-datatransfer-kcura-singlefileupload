@@ -6,6 +6,8 @@ namespace kCura.SingleFileUpload.MVC
 {
     public class BundleConfig
     {
+
+        private static string _currentVersion;
         public static void RegisterBundles()
         {
             BundleTable.Bundles.Add(new ScriptBundle("~/js/resx").Include(
@@ -32,8 +34,6 @@ namespace kCura.SingleFileUpload.MVC
 #endif
             #endregion
         }
-
-        private static string _currentVersion;
         public static string CurrentVersion
         {
             get
