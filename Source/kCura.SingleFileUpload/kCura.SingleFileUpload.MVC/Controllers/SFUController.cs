@@ -143,7 +143,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 							if (did == -1 || force)
 							{
 								ExportedMetadata transientMetadata = getTransient(file, fileName);
-								transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+								transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 
 								if (ValidateFile(transientMetadata.TempFileLocation))
 								{
@@ -193,7 +193,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								{
 									FileInformation fileInfo = _RepositoryDocumentManager.getFileByArtifactId(did);
 									ExportedMetadata transientMetadata = getTransient(file, fileName);
-									transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
@@ -240,7 +240,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								else
 								{
 									ExportedMetadata transientMetadata = getTransient(file, fileName);
-									transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = _RepositoryDocumentManager.instanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
