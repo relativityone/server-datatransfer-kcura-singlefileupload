@@ -27,7 +27,31 @@
             <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
           </IgnoreRules>
         </Project>
-         <Project path="Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.Core.UnitTest\Relativity.SimpleFileUpload.Core.UnitTest.csproj">
+        <Project path="Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.Core.UnitTest\Relativity.SimpleFileUpload.Core.UnitTest.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.MVC.NUnit\kCura.SimpleFileUpload.MVC.NUnit.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.NUnit\kCura.SimpleFileUpload.Core.NUnit.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.Resources.NUnit\kCura.SimpleFileUpload.Resources.NUnit.csproj">
           <Platforms>
             <Platform>AnyCPU</Platform>
           </Platforms>
@@ -121,10 +145,10 @@
         <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\bin\kCura.SingleFileUpload.Resources.dll</Assembly>
         </Assemblies>
-		<Assemblies>
+        <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\kCura.SingleFileUpload.Core.dll</Assembly>
         </Assemblies>
-		<Assemblies>
+        <Assemblies>
           <Assembly>Source\SolutionResources\NSerio.Relativity.dll</Assembly>
         </Assemblies>
         <ResourceFiles />
