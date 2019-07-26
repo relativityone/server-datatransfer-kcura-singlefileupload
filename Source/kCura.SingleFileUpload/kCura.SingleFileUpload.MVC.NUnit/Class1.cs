@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace kCura.SimpleFileUpload.Resources.NUnit
+namespace kCura.SingleFileUpload.MVC.NUnit
 {
     public class Class1
     {

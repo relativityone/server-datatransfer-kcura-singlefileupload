@@ -35,7 +35,7 @@
             <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
           </IgnoreRules>
         </Project>
-        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.MVC.NUnit\kCura.SimpleFileUpload.MVC.NUnit.csproj">
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core.NUnit\kCura.SingleFileUpload.Core.NUnit.csproj">
           <Platforms>
             <Platform>AnyCPU</Platform>
           </Platforms>
@@ -43,7 +43,7 @@
             <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
           </IgnoreRules>
         </Project>
-        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.NUnit\kCura.SimpleFileUpload.Core.NUnit.csproj">
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.MVC.NUnit\kCura.SingleFileUpload.MVC.NUnit.csproj">
           <Platforms>
             <Platform>AnyCPU</Platform>
           </Platforms>
@@ -51,7 +51,7 @@
             <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
           </IgnoreRules>
         </Project>
-        <Project path="Source\kCura.SingleFileUpload\kCura.SimpleFileUpload.Resources.NUnit\kCura.SimpleFileUpload.Resources.NUnit.csproj">
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.NUnit\kCura.SingleFileUpload.Resources.NUnit.csproj">
           <Platforms>
             <Platform>AnyCPU</Platform>
           </Platforms>

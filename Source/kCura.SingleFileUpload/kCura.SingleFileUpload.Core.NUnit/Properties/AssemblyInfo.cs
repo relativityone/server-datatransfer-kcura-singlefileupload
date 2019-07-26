@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("kCura.SimpleFileUpload.Resources.NUnit")]
+[assembly: AssemblyTitle("kCura.SingleFileUpload.Core.NUnit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("kCura.SimpleFileUpload.Resources.NUnit")]
+[assembly: AssemblyProduct("kCura.SingleFileUpload.Core.NUnit")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bc4a84f4-e403-43bc-bb93-294898dbce64")]
+[assembly: Guid("90d8784b-ce66-4459-bcce-96df572f7287")]
 
 // Version information for an assembly consists of the following four values:
 //
