@@ -114,7 +114,7 @@
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
       <Project>{35649484-671a-407e-924e-1c1fbd850393}</Project>
-      <Name>%24safeprojectname%24.Core</Name>
+      <Name>kCura.SingleFileUpload.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

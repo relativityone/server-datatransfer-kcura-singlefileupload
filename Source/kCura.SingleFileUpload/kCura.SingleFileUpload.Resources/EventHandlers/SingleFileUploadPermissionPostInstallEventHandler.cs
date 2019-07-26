@@ -12,7 +12,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 	[EventHandler.CustomAttributes.RunOnce(false)]
 	public class SingleFileUploadPermissionPostInstallEventHandler : PostInstallEventHandler
 	{
-		private IDocumentManager _repository;
+		//private IDocumentManager _repository;
 		private const int _ARTIFACT_TYPE_ID = 10;
 		public override Response Execute()
 		{
@@ -26,7 +26,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 				{
 					PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _ARTIFACT_TYPE_ID);
 				}
-				DocumentRepository.RemovePageInteractionEvenHandlerFromDocumentObject();
+				DocumentManager.instance.RemovePageInteractionEvenHandlerFromDocumentObject();
 				response.Success = true;
 			}
 			catch (Exception e)
@@ -41,18 +41,5 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 			}
 			return response;
 		}
-
-		private IDocumentManager DocumentRepository
-		{
-			get
-			{
-				if (_repository == null)
-				{
-					_repository = new DocumentManager();
-				}
-				return _repository;
-			}
-		}
-
 	}
 }

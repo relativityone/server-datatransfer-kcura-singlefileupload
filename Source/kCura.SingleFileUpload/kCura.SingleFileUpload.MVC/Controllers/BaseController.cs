@@ -25,7 +25,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		 */
 
 		private CacheContextScope _scopeDictionary;
-		private IDocumentManager __repositoryDocumentManager;
+		//private IDocumentManager __repositoryDocumentManager;
 		private int _workspaceID;
 		private IUserInfo _relativityUserInfo;
 
@@ -64,18 +64,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 				}
 				return _workspaceID;
-			}
-		}
-
-		protected IDocumentManager _RepositoryDocumentManager
-		{
-			get
-			{
-				if (__repositoryDocumentManager == null)
-				{
-					__repositoryDocumentManager = new DocumentManager();
-				}
-				return __repositoryDocumentManager;
 			}
 		}
 
@@ -191,7 +179,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		private string LogException(Exception e)
 		{
 			string errorMessage = e.Message;
-			_RepositoryDocumentManager.LogError(e);
+			DocumentManager.instance.LogError(e);
 			return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
 		}
 		protected override void OnAuthorization(AuthorizationContext filterContext)

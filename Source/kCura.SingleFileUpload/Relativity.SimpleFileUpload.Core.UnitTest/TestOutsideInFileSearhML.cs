@@ -37,9 +37,6 @@ namespace Relativity.SimpleFileUpload.Core.UnitTest
 				Assert.IsTrue(!string.IsNullOrEmpty(transientMetadata.ExtractedText));
 				System.Console.Write(transientMetadata.ExtractedText);
 			}
-
-
-
 		}
 	}
 }

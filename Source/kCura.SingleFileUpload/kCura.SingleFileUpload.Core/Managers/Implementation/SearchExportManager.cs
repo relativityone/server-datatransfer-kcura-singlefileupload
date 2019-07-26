@@ -14,14 +14,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	{
 		private const int _START_INDEX = 2;
 		private const int _SUBSTRING_LENGTH = 9;
-		private static readonly Lazy<ISearchExportManager> instance = new Lazy<ISearchExportManager>(() => new SearchExportManager());
-		public static ISearchExportManager Instance
-		{
-			get
-			{
-				return instance.Value;
-			}
-		}
+		private static readonly Lazy<ISearchExportManager> _INSTANCE = new Lazy<ISearchExportManager>(() => new SearchExportManager());
+		public static ISearchExportManager instance => _INSTANCE.Value;
+
 		private string fieldName { get; set; }
 		private string[] AdditionalFields
 		{

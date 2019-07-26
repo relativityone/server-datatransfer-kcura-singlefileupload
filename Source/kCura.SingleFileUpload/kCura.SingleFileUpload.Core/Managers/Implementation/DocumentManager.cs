@@ -25,10 +25,21 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class DocumentManager : BaseManager, IDocumentManager
 	{
+
 		private FileType[] _viewerSupportedFileType;
 		private const int _FILED_ARTIFACT_TYPE = 14;
-		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
 		private readonly int _timeOutValue = 300;
+		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
+
+		private static readonly Lazy<IDocumentManager> _INSTANCE = new Lazy<IDocumentManager>(() => new DocumentManager());
+
+		public static IDocumentManager instance => _INSTANCE.Value;
+
+
+		private DocumentManager()
+		{
+
+		}
 
 		public FileType[] ViewerSupportedFileTypes
 		{
@@ -318,7 +329,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo)
 		{
-			if (!documentExtraInfo.AvoidControlNumber|| !documentExtraInfo.FromDocumentViewer)
+			if (!documentExtraInfo.AvoidControlNumber || !documentExtraInfo.FromDocumentViewer)
 			{
 				DTOs.Document replacedDocument = new DTOs.Document(documentExtraInfo.DocID);
 				if (!documentExtraInfo.AvoidControlNumber)

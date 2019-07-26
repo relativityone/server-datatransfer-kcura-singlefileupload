@@ -13,9 +13,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class TelemetryManager : BaseManager, ITelemetryManager
 	{
+
 		private Guid _workSpaceGuid;
 
 		private const string _NUMBER_OF_DOCUMENT_UPLOADED = "Number of documents uploaded";
+
+		private static readonly Lazy<ITelemetryManager> _INSTANCE = new Lazy<ITelemetryManager>(() => new TelemetryManager());
+
+		public static ITelemetryManager instance => _INSTANCE.Value;
 		public TelemetryManager()
 		{
 		}
