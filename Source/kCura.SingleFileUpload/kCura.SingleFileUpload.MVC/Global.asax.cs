@@ -1,8 +1,8 @@
-﻿using NSerio.Relativity;
-using Relativity.CustomPages;
+﻿using Relativity.CustomPages;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using NSerio.Relativity;
 
 namespace kCura.SingleFileUpload.MVC
 {
