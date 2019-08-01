@@ -462,7 +462,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					FileID = reader.GetInt32(reader.GetOrdinal("FileID")),
 					DocumentArtifactID = reader.GetInt32(reader.GetOrdinal("DocumentArtifactID")),
-					FileName = reader.GetString(reader.GetOrdinal("Fiilename")),
+					FileName = reader.GetString(reader.GetOrdinal("Filename")),
 					FileLocation = reader.GetString(reader.GetOrdinal("Location"))
 				};
 			}
