@@ -68,3 +68,4 @@ PDBs
 Applications/*.nuspec
 .vs/
 Source/kCura.SingleFileUpload/kCura.SingleFileUpload.Resources/kCura.SingleFileUpload.Resources.dll
+Source/.axoCover

@@ -6,25 +6,22 @@ using System.Web.Routing;
 
 namespace kCura.SingleFileUpload.MVC
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-    public class MvcApplication : System.Web.HttpApplication
-    {
+	// Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+	// visit http://go.microsoft.com/?LinkId=9394801
+	public class MvcApplication : System.Web.HttpApplication
+	{
 
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
+		protected void Application_Start()
+		{
+			AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            BundleConfig.RegisterBundles();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+			WebApiConfig.Register(GlobalConfiguration.Configuration);
+			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+			BundleConfig.RegisterBundles();
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
-            
-        }
+			RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
 
-
-      
-    }
+		}
+	}
 }

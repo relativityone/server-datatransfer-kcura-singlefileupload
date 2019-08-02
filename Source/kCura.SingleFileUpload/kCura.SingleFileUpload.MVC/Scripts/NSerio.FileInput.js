@@ -87,10 +87,7 @@ function submitSimulatedForm() {
     var form = document.getElementById('btiFormDD');
     var data = new FormData(form);
     data.append('file', bkpFile);
-    data.append('fid', getFolder());   
-    data.append('fdv', document.getElementById('fdv').getAttribute('value'));
-    data.append('did', GetDID());
-    data.append('force', document.getElementById('force').getAttribute('value'));
+    data.append('meta', { 'fid': getFolder(), 'fdv': document.getElementById('fdv').getAttribute('value'), 'did': GetDID(), 'force': document.getElementById('force').getAttribute('value') });   
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {

@@ -14,7 +14,12 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
     [System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
     public class SingleFileUploadPostInstallEventHandler : PostInstallEventHandler
     {
-        ITelemetryManager TelemetryRepository
+
+		private IDocumentManager _repository;
+
+		private ITelemetryManager _telemetryRepository;
+
+		private ITelemetryManager TelemetryRepository
         {
             get
             {
@@ -25,8 +30,8 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 return _telemetryRepository;
             }
         }
-        ITelemetryManager _telemetryRepository;
-        IDocumentManager DocumentRepository
+
+		private IDocumentManager DocumentRepository
         {
             get
             {
@@ -37,7 +42,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
                 return _repository;
             }
         }
-        IDocumentManager _repository;
 
         public override Response Execute()
         {

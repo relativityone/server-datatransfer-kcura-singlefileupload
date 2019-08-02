@@ -7,7 +7,7 @@ namespace kCura.SingleFileUpload.Core.Managers
     public interface IDocumentManager : IManager
     {
         Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
-        Task ReplaceSingleDocument(ExportedMetadata documentInfo, int docID, bool fromDocumentViewer, bool avoidControlNumber, bool isDataGrid, string webApiUrl, int workspaceID, int userID, int folderID = 0);
+        Task ReplaceSingleDocument(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo);
         int GetDocByName(string docName);
         void SetCreateInstanceSettings();
         Task<bool> ValidateFileTypes(string extension);
@@ -15,11 +15,10 @@ namespace kCura.SingleFileUpload.Core.Managers
         bool ValidateDocImages(int docArtifactId);
         bool ValidateDocNative(int docArtifactId);
         string GetDocumentControlNumber(int docArtifactId);
-        int GetDocumentArtifactIdByControlNumber(string controlNumber);
-        string instanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
+        string InstanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null);
         void UpdateHasImages(int dArtifactId);
         Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket = null);
-        FileInformation getFileByArtifactId(int docArtifactId);
+        FileInformation GetFileByArtifactId(int docArtifactId);
         bool IsFileTypeSupported(string fileExtension);
         bool ValidateHasRedactions(int docArtifactId);
         void DeleteRedactions(int docArtifactId);
