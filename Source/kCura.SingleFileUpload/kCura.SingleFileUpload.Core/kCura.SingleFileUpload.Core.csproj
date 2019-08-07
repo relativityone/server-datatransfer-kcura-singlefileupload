@@ -259,69 +259,193 @@
   <ItemGroup>
     <Content Include="oi\docs\fileids_values_only_sorted.txt" />
     <Content Include="oi\docs\fileids_values_strs.txt" />
-    <Content Include="oi\unmanaged\debmp-R1.dll" />
-    <Content Include="oi\unmanaged\dehex-R1.dll" />
-    <Content Include="oi\unmanaged\dess-R1.dll" />
-    <Content Include="oi\unmanaged\detree-R1.dll" />
-    <Content Include="oi\unmanaged\devect-R1.dll" />
-    <Content Include="oi\unmanaged\dewp-R1.dll" />
-    <Content Include="oi\unmanaged\emojis64.bmp" />
-    <Content Include="oi\unmanaged\excatest-R1.dll" />
-    <Content Include="oi\unmanaged\exedrm-R1.dll" />
-    <Content Include="oi\unmanaged\exgdsf-R1.dll" />
-    <Content Include="oi\unmanaged\exh5-R1.dll" />
-    <Content Include="oi\unmanaged\exhtml-R1.dll" />
-    <Content Include="oi\unmanaged\exihtml-R1.dll" />
-    <Content Include="oi\unmanaged\eximg-R1.dll" />
-    <Content Include="oi\unmanaged\exitext-R1.dll" />
-    <Content Include="oi\unmanaged\exixml-R1.dll" />
-    <Content Include="oi\unmanaged\expage-R1.dll" />
-    <Content Include="oi\unmanaged\expagelayout-R1.dll" />
-    <Content Include="oi\unmanaged\ibfpx2-R1.dll" />
-    <Content Include="oi\unmanaged\ibgp42-R1.dll" />
-    <Content Include="oi\unmanaged\ibjpg2-R1.dll" />
-    <Content Include="oi\unmanaged\ibpcd2-R1.dll" />
-    <Content Include="oi\unmanaged\ibpsd2-R1.dll" />
-    <Content Include="oi\unmanaged\ibxbm2-R1.dll" />
-    <Content Include="oi\unmanaged\ibxpm2-R1.dll" />
-    <Content Include="oi\unmanaged\ibxwd2-R1.dll" />
-    <Content Include="oi\unmanaged\icons256.bmp" />
-    <Content Include="oi\unmanaged\imcd32-R1.dll" />
-    <Content Include="oi\unmanaged\imcd42-R1.dll" />
-    <Content Include="oi\unmanaged\imcd52-R1.dll" />
-    <Content Include="oi\unmanaged\imcd62-R1.dll" />
-    <Content Include="oi\unmanaged\imcd72-R1.dll" />
-    <Content Include="oi\unmanaged\imcd82-R1.dll" />
-    <Content Include="oi\unmanaged\imcdr2-R1.dll" />
-    <Content Include="oi\unmanaged\imcm52-R1.dll" />
-    <Content Include="oi\unmanaged\imcm62-R1.dll" />
-    <Content Include="oi\unmanaged\imcm72-R1.dll" />
-    <Content Include="oi\unmanaged\imcmx2-R1.dll" />
-    <Content Include="oi\unmanaged\imdsf2-R1.dll" />
-    <Content Include="oi\unmanaged\imfmv2-R1.dll" />
-    <Content Include="oi\unmanaged\imgdf2-R1.dll" />
-    <Content Include="oi\unmanaged\imgem2-R1.dll" />
-    <Content Include="oi\unmanaged\imigs2-R1.dll" />
-    <Content Include="oi\unmanaged\immet2-R1.dll" />
-    <Content Include="oi\unmanaged\impif2-R1.dll" />
-    <Content Include="oi\unmanaged\impsi2-R1.dll" />
-    <Content Include="oi\unmanaged\impsz2-R1.dll" />
-    <Content Include="oi\unmanaged\imps_2-R1.dll" />
-    <Content Include="oi\unmanaged\imrnd2-R1.dll" />
-    <Content Include="oi\unmanaged\iphgw2-R1.dll" />
-    <Content Include="oi\unmanaged\isgdi32-R1.dll" />
-    <Content Include="oi\unmanaged\libde265.dll" />
-    <Content Include="oi\unmanaged\libheif.dll" />
-    <Content Include="oi\unmanaged\ocemul-R1.dll" />
-    <Content Include="oi\unmanaged\oicomponents-R1.dll" />
+    <Content Include="oi\unmanaged\debmp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\dehex-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\dess-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\detree-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\devect-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\dewp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\emojis64.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\excatest-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exedrm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exgdsf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exh5-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exhtml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exihtml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\eximg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exitext-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\exixml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\expage-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\expagelayout-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibfpx2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibgp42-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibjpg2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibpcd2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibpsd2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibxbm2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibxpm2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ibxwd2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\icons256.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd32-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd42-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd52-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd62-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd72-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcd82-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcdr2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcm52-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcm62-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcm72-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imcmx2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imdsf2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imfmv2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imgdf2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imgem2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imigs2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\immet2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\impif2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\impsi2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\impsz2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imps_2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\imrnd2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\iphgw2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\isgdi32-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\libde265.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\libheif.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ocemul-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\oicomponents-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\oilink.exe" />
-    <Content Include="oi\unmanaged\oilink.jar" />
-    <Content Include="oi\unmanaged\osgd-R1.dll" />
-    <Content Include="oi\unmanaged\ospdf-R1.dll" />
-    <Content Include="oi\unmanaged\oswebview-R1.dll" />
-    <Content Include="oi\unmanaged\oswin64-R1.dll" />
-    <Content Include="oi\unmanaged\outsidex-R1.ocx" />
-    <Content Include="oi\unmanaged\sccanno-R1.dll" />
+    <Content Include="oi\unmanaged\oilink.jar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\osgd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\ospdf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\oswebview-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\oswin64-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\outsidex-R1.ocx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccanno-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccca-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -331,11 +455,15 @@
     <Content Include="oi\unmanaged\sccda-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccdu-R1.dll" />
+    <Content Include="oi\unmanaged\sccdu-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccex-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccexind-R1.dll" />
+    <Content Include="oi\unmanaged\sccexind-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccfa-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -351,201 +479,573 @@
     <Content Include="oi\unmanaged\sccfut-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccimg-R1.dll" />
+    <Content Include="oi\unmanaged\sccimg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccind-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\scclo-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccole-R1.dll" />
-    <Content Include="oi\unmanaged\sccole2-R1.dll" />
-    <Content Include="oi\unmanaged\sccta-R1.dll" />
+    <Content Include="oi\unmanaged\sccole-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccole2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\sccta-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\sccut-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\sccvw-R1.dll" />
-    <Content Include="oi\unmanaged\vsacad-R1.dll" />
-    <Content Include="oi\unmanaged\vsacs-R1.dll" />
-    <Content Include="oi\unmanaged\vsami-R1.dll" />
-    <Content Include="oi\unmanaged\vsarc-R1.dll" />
-    <Content Include="oi\unmanaged\vsasf-R1.dll" />
-    <Content Include="oi\unmanaged\vsatm-R1.dll" />
-    <Content Include="oi\unmanaged\vsbdr-R1.dll" />
-    <Content Include="oi\unmanaged\vsbmp-R1.dll" />
-    <Content Include="oi\unmanaged\vscdb-R1.dll" />
-    <Content Include="oi\unmanaged\vscdrx-R1.dll" />
-    <Content Include="oi\unmanaged\vsceos-R1.dll" />
-    <Content Include="oi\unmanaged\vscgm-R1.dll" />
-    <Content Include="oi\unmanaged\vscwt-R1.dll" />
-    <Content Include="oi\unmanaged\vsdbs-R1.dll" />
-    <Content Include="oi\unmanaged\vsdez-R1.dll" />
-    <Content Include="oi\unmanaged\vsdif-R1.dll" />
-    <Content Include="oi\unmanaged\vsdrw-R1.dll" />
-    <Content Include="oi\unmanaged\vsdx-R1.dll" />
-    <Content Include="oi\unmanaged\vsdxf-R1.dll" />
-    <Content Include="oi\unmanaged\vsdxla-R1.dll" />
-    <Content Include="oi\unmanaged\vsdxlm-R1.dll" />
-    <Content Include="oi\unmanaged\vsemf-R1.dll" />
-    <Content Include="oi\unmanaged\vsen4-R1.dll" />
-    <Content Include="oi\unmanaged\vsens-R1.dll" />
-    <Content Include="oi\unmanaged\vsenw-R1.dll" />
-    <Content Include="oi\unmanaged\vseps-R1.dll" />
-    <Content Include="oi\unmanaged\vseshr-R1.dll" />
-    <Content Include="oi\unmanaged\vsexe2-R1.dll" />
-    <Content Include="oi\unmanaged\vsfax-R1.dll" />
-    <Content Include="oi\unmanaged\vsfcd-R1.dll" />
-    <Content Include="oi\unmanaged\vsfcs-R1.dll" />
-    <Content Include="oi\unmanaged\vsfft-R1.dll" />
-    <Content Include="oi\unmanaged\vsflw-R1.dll" />
-    <Content Include="oi\unmanaged\vsfwk-R1.dll" />
-    <Content Include="oi\unmanaged\vsgdsf-R1.dll" />
-    <Content Include="oi\unmanaged\vsgif-R1.dll" />
-    <Content Include="oi\unmanaged\vsgzip-R1.dll" />
-    <Content Include="oi\unmanaged\vsheic-R1.dll" />
-    <Content Include="oi\unmanaged\vshgs-R1.dll" />
-    <Content Include="oi\unmanaged\vshtml-R1.dll" />
-    <Content Include="oi\unmanaged\vshwp-R1.dll" />
-    <Content Include="oi\unmanaged\vshwp2-R1.dll" />
-    <Content Include="oi\unmanaged\vsich-R1.dll" />
-    <Content Include="oi\unmanaged\vsich6-R1.dll" />
-    <Content Include="oi\unmanaged\vsid3-R1.dll" />
-    <Content Include="oi\unmanaged\vsimg-R1.dll" />
-    <Content Include="oi\unmanaged\vsindd-R1.dll" />
-    <Content Include="oi\unmanaged\vsinx-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwok-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwok13-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwon-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwon13-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwop-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwop13-R1.dll" />
-    <Content Include="oi\unmanaged\vsiwp-R1.dll" />
-    <Content Include="oi\unmanaged\vsjbg2-R1.dll" />
-    <Content Include="oi\unmanaged\vsjp2-R1.dll" />
-    <Content Include="oi\unmanaged\vsjw-R1.dll" />
-    <Content Include="oi\unmanaged\vslef-R1.dll" />
-    <Content Include="oi\unmanaged\vsleg-R1.dll" />
-    <Content Include="oi\unmanaged\vslwp7-R1.dll" />
-    <Content Include="oi\unmanaged\vslzh-R1.dll" />
-    <Content Include="oi\unmanaged\vsm11-R1.dll" />
-    <Content Include="oi\unmanaged\vsmanu-R1.dll" />
-    <Content Include="oi\unmanaged\vsmbox-R1.dll" />
-    <Content Include="oi\unmanaged\vsmcw-R1.dll" />
-    <Content Include="oi\unmanaged\vsmdb-R1.dll" />
-    <Content Include="oi\unmanaged\vsmif-R1.dll" />
-    <Content Include="oi\unmanaged\vsmime-R1.dll" />
-    <Content Include="oi\unmanaged\vsmm-R1.dll" />
-    <Content Include="oi\unmanaged\vsmm4-R1.dll" />
-    <Content Include="oi\unmanaged\vsmmfn-R1.dll" />
-    <Content Include="oi\unmanaged\vsmp-R1.dll" />
-    <Content Include="oi\unmanaged\vsmpp-R1.dll" />
-    <Content Include="oi\unmanaged\vsmsg-R1.dll" />
-    <Content Include="oi\unmanaged\vsmsw-R1.dll" />
-    <Content Include="oi\unmanaged\vsmwkd-R1.dll" />
-    <Content Include="oi\unmanaged\vsmwks-R1.dll" />
-    <Content Include="oi\unmanaged\vsmwp2-R1.dll" />
-    <Content Include="oi\unmanaged\vsmwpf-R1.dll" />
-    <Content Include="oi\unmanaged\vsmwrk-R1.dll" />
-    <Content Include="oi\unmanaged\vsnsf-R1.dll" />
-    <Content Include="oi\unmanaged\vsolm-R1.dll" />
-    <Content Include="oi\unmanaged\vsone-R1.dll" />
-    <Content Include="oi\unmanaged\vsow-R1.dll" />
-    <Content Include="oi\unmanaged\vspbm-R1.dll" />
-    <Content Include="oi\unmanaged\vspcl-R1.dll" />
-    <Content Include="oi\unmanaged\vspcx-R1.dll" />
-    <Content Include="oi\unmanaged\vspdf-R1.dll" />
-    <Content Include="oi\unmanaged\vspdfi-R1.dll" />
-    <Content Include="oi\unmanaged\vspdx-R1.dll" />
-    <Content Include="oi\unmanaged\vspfs-R1.dll" />
-    <Content Include="oi\unmanaged\vspgl-R1.dll" />
-    <Content Include="oi\unmanaged\vspic-R1.dll" />
-    <Content Include="oi\unmanaged\vspict-R1.dll" />
-    <Content Include="oi\unmanaged\vspng-R1.dll" />
-    <Content Include="oi\unmanaged\vspntg-R1.dll" />
-    <Content Include="oi\unmanaged\vspp12-R1.dll" />
-    <Content Include="oi\unmanaged\vspp2-R1.dll" />
-    <Content Include="oi\unmanaged\vspp7-R1.dll" />
-    <Content Include="oi\unmanaged\vspp97-R1.dll" />
-    <Content Include="oi\unmanaged\vsppl-R1.dll" />
-    <Content Include="oi\unmanaged\vspsd-R1.dll" />
-    <Content Include="oi\unmanaged\vspsp6-R1.dll" />
-    <Content Include="oi\unmanaged\vspst-R1.dll" />
-    <Content Include="oi\unmanaged\vspstf-R1.dll" />
-    <Content Include="oi\unmanaged\vsptf-R1.dll" />
-    <Content Include="oi\unmanaged\vsqa-R1.dll" />
-    <Content Include="oi\unmanaged\vsqad-R1.dll" />
-    <Content Include="oi\unmanaged\vsqp6-R1.dll" />
-    <Content Include="oi\unmanaged\vsqp9-R1.dll" />
-    <Content Include="oi\unmanaged\vsqt-R1.dll" />
-    <Content Include="oi\unmanaged\vsrar-R1.dll" />
-    <Content Include="oi\unmanaged\vsras-R1.dll" />
-    <Content Include="oi\unmanaged\vsrbs-R1.dll" />
-    <Content Include="oi\unmanaged\vsrft-R1.dll" />
-    <Content Include="oi\unmanaged\vsrfx-R1.dll" />
-    <Content Include="oi\unmanaged\vsriff-R1.dll" />
-    <Content Include="oi\unmanaged\vsrpix-R1.dll" />
-    <Content Include="oi\unmanaged\vsrtf-R1.dll" />
-    <Content Include="oi\unmanaged\vssam-R1.dll" />
-    <Content Include="oi\unmanaged\vssc5-R1.dll" />
-    <Content Include="oi\unmanaged\vssdw-R1.dll" />
-    <Content Include="oi\unmanaged\vsshw3-R1.dll" />
-    <Content Include="oi\unmanaged\vssmd-R1.dll" />
-    <Content Include="oi\unmanaged\vssms-R1.dll" />
-    <Content Include="oi\unmanaged\vssmt-R1.dll" />
-    <Content Include="oi\unmanaged\vssnap-R1.dll" />
-    <Content Include="oi\unmanaged\vsso6-R1.dll" />
-    <Content Include="oi\unmanaged\vssoc-R1.dll" />
-    <Content Include="oi\unmanaged\vssoc6-R1.dll" />
-    <Content Include="oi\unmanaged\vssoi-R1.dll" />
-    <Content Include="oi\unmanaged\vssoi6-R1.dll" />
-    <Content Include="oi\unmanaged\vssow-R1.dll" />
-    <Content Include="oi\unmanaged\vsspt-R1.dll" />
-    <Content Include="oi\unmanaged\vsssml-R1.dll" />
-    <Content Include="oi\unmanaged\vsswf-R1.dll" />
-    <Content Include="oi\unmanaged\vstaz-R1.dll" />
-    <Content Include="oi\unmanaged\vstext-R1.dll" />
-    <Content Include="oi\unmanaged\vstga-R1.dll" />
-    <Content Include="oi\unmanaged\vstif6-R1.dll" />
-    <Content Include="oi\unmanaged\vstrn-R1.dll" />
-    <Content Include="oi\unmanaged\vstw-R1.dll" />
-    <Content Include="oi\unmanaged\vstxt-R1.dll" />
-    <Content Include="oi\unmanaged\vsvcrd-R1.dll" />
-    <Content Include="oi\unmanaged\vsviso-R1.dll" />
-    <Content Include="oi\unmanaged\vsvsdx-R1.dll" />
-    <Content Include="oi\unmanaged\vsvw3-R1.dll" />
-    <Content Include="oi\unmanaged\vsw12-R1.dll" />
-    <Content Include="oi\unmanaged\vsw6-R1.dll" />
-    <Content Include="oi\unmanaged\vsw97-R1.dll" />
-    <Content Include="oi\unmanaged\vswbmp-R1.dll" />
-    <Content Include="oi\unmanaged\vswg2-R1.dll" />
-    <Content Include="oi\unmanaged\vswk4-R1.dll" />
-    <Content Include="oi\unmanaged\vswk6-R1.dll" />
-    <Content Include="oi\unmanaged\vswks-R1.dll" />
-    <Content Include="oi\unmanaged\vswm-R1.dll" />
-    <Content Include="oi\unmanaged\vswmf-R1.dll" />
-    <Content Include="oi\unmanaged\vswml-R1.dll" />
-    <Content Include="oi\unmanaged\vsword-R1.dll" />
-    <Content Include="oi\unmanaged\vswork-R1.dll" />
-    <Content Include="oi\unmanaged\vswp5-R1.dll" />
-    <Content Include="oi\unmanaged\vswp6-R1.dll" />
-    <Content Include="oi\unmanaged\vswpf-R1.dll" />
-    <Content Include="oi\unmanaged\vswpg-R1.dll" />
-    <Content Include="oi\unmanaged\vswpg2-R1.dll" />
-    <Content Include="oi\unmanaged\vswpl-R1.dll" />
-    <Content Include="oi\unmanaged\vswpml-R1.dll" />
-    <Content Include="oi\unmanaged\vswpw-R1.dll" />
-    <Content Include="oi\unmanaged\vswrk9-R1.dll" />
-    <Content Include="oi\unmanaged\vsws-R1.dll" />
-    <Content Include="oi\unmanaged\vsws2-R1.dll" />
-    <Content Include="oi\unmanaged\vsxl12-R1.dll" />
-    <Content Include="oi\unmanaged\vsxl5-R1.dll" />
-    <Content Include="oi\unmanaged\vsxlsb-R1.dll" />
-    <Content Include="oi\unmanaged\vsxml-R1.dll" />
-    <Content Include="oi\unmanaged\vsxmp-R1.dll" />
-    <Content Include="oi\unmanaged\vsxps-R1.dll" />
-    <Content Include="oi\unmanaged\vsxy-R1.dll" />
-    <Content Include="oi\unmanaged\vsyim-R1.dll" />
-    <Content Include="oi\unmanaged\vszip-R1.dll" />
+    <Content Include="oi\unmanaged\sccvw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsacad-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsacs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsami-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsarc-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsasf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsatm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsbdr-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsbmp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vscdb-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vscdrx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsceos-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vscgm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vscwt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdbs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdez-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdif-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdrw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdxf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdxla-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsdxlm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsemf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsen4-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsens-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsenw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vseps-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vseshr-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsexe2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsfax-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsfcd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsfcs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsfft-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsflw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsfwk-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsgdsf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsgif-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsgzip-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsheic-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vshgs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vshtml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vshwp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vshwp2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsich-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsich6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsid3-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsimg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsindd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsinx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwok-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwok13-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwon-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwon13-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwop-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwop13-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsiwp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsjbg2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsjp2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsjw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vslef-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsleg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vslwp7-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vslzh-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsm11-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmanu-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmbox-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmcw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmdb-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmif-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmime-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmm4-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmmfn-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmpp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmsg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmsw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmwkd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmwks-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmwp2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmwpf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsmwrk-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsnsf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsolm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsone-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsow-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspbm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspcl-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspcx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspdf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspdfi-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspdx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspfs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspgl-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspic-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspict-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspng-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspntg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspp12-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspp2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspp7-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspp97-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsppl-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspsd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspsp6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspst-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vspstf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsptf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsqa-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsqad-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsqp6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsqp9-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsqt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrar-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsras-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrbs-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrft-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrfx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsriff-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrpix-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsrtf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssam-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssc5-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssdw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsshw3-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssmd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssms-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssmt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssnap-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsso6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssoc-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssoc6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssoi-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssoi6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vssow-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsspt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsssml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsswf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstaz-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstext-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstga-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstif6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstrn-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vstxt-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsvcrd-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsviso-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsvsdx-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsvw3-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsw12-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsw6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsw97-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswbmp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswg2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswk4-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswk6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswks-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswm-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswmf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsword-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswork-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswp5-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswp6-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpf-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpg-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpg2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpl-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswpw-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vswrk9-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsws-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsws2-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxl12-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxl5-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxlsb-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxml-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxmp-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxps-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsxy-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vsyim-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oi\unmanaged\vszip-R1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="oi\unmanaged\wvcore-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -643,12 +1143,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="oi\unmanaged\adinit.dat" />
-    <None Include="oi\unmanaged\cmmap000.bin" />
-    <None Include="oi\unmanaged\compreg.bin" />
-    <None Include="oi\unmanaged\oitnsf.id" />
-    <None Include="oi\unmanaged\oit_font_metrics.db" />
-    <None Include="oi\unmanaged\RSMFTemplate.docx" />
+    <None Include="oi\unmanaged\adinit.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="oi\unmanaged\cmmap000.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="oi\unmanaged\compreg.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="oi\unmanaged\oitnsf.id">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="oi\unmanaged\oit_font_metrics.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="oi\unmanaged\RSMFTemplate.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
