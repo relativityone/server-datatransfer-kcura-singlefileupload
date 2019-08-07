@@ -1,4 +1,4 @@
-﻿using Relativity.SingleFileUpload.Core.Toggles;
+﻿using kCura.SingleFileUpload.Core.Toggles;
 using Relativity.Toggles;
 using System;
 using System.Threading.Tasks;

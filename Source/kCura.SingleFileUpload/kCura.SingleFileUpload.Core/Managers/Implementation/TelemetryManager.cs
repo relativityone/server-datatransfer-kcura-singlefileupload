@@ -11,180 +11,191 @@ using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
-    public class TelemetryManager : BaseManager, ITelemetryManager
-    {
-        public TelemetryManager()
-        {
-        }
+	public class TelemetryManager : BaseManager, ITelemetryManager
+	{
+		private Guid _workSpaceGuid;
 
-        Guid workSpaceGuid
-        {
-            get
-            {
-                if (_workSpaceGuid == null || _workSpaceGuid == Guid.Parse("00000000-0000-0000-0000-000000000000"))
-                {
-                    _workSpaceGuid = new Guid(_Repository.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID, new SqlParameter[] { new SqlParameter("@artifactId", _Repository.WorkspaceID) }).ToString());
-                }
-                return _workSpaceGuid;
-            }
-        }
+		private const string _NUMBER_OF_DOCUMENT_UPLOADED = "Number of documents uploaded";
+		public TelemetryManager()
+		{
+		}
 
-        private Guid _workSpaceGuid;
+		private Guid WorkSpaceGuid
+		{
+			get
+			{
+				if (_workSpaceGuid == null || _workSpaceGuid == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+				{
+					_workSpaceGuid = new Guid(_Repository.MasterDBContext.ExecuteSqlStatementAsScalar(
+						Queries.GetWorkspaceGuidByArtifactID, new SqlParameter[] { new SqlParameter("@artifactId", _Repository.WorkspaceID) }).ToString());
+				}
+				return _workSpaceGuid;
+			}
+		}
 
-        public async Task LogCountAsync(string bucket, long count)
-        {
-            using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    await metricManger.LogCountAsync(bucket, workSpaceGuid, count);
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        await metricManger.LogCountAsync(bucket, workSpaceGuid, MetricTargets.SUM, count);
-                    }
-                    catch (Exception ex)
-                    {
-                        LogError(ex);
-                    }
-                }
-            }
-        }
-        public async Task LogGaugeAsync(string bucket, long count)
-        {
-            using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    await metricManger.LogGaugeAsync(bucket, workSpaceGuid, count);
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        await metricManger.LogGaugeAsync(bucket, workSpaceGuid, MetricTargets.SUM, count);
-                    }
-                    catch (Exception ex)
-                    {
-                        LogError(ex);
-                    }
-                }
-            }
-        }
-        public DurationLogger LogDuration(string bucket, string workflowId, long count)
-        {
-            using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
-            {
-                try
-                {
-                    //return metricManger.LogDuration(bucket, workSpaceGuid, MetricTargets.SUM);
-                    return metricManger.LogDuration(bucket, workSpaceGuid, workflowId);
-                }
-                catch (Exception ex)
-                {
-                    LogError(ex);
-                    return null;
-                }
-            }
-        }
+		public async Task LogCountAsync(string bucket, long count)
+		{
+			using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
+			{
+				try
+				{
+					await metricManger.LogCountAsync(bucket, WorkSpaceGuid, count);
+				}
+				catch (Exception)
+				{
+					try
+					{
+						await metricManger.LogCountAsync(bucket, WorkSpaceGuid, MetricTargets.SUM, count);
+					}
+					catch (Exception ex)
+					{
+						LogError(ex);
+					}
+				}
+			}
+		}
+		public async Task LogGaugeAsync(string bucket, long count)
+		{
+			using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
+			{
+				try
+				{
+					await metricManger.LogGaugeAsync(bucket, WorkSpaceGuid, count);
+				}
+				catch (Exception)
+				{
+					try
+					{
+						await metricManger.LogGaugeAsync(bucket, WorkSpaceGuid, MetricTargets.SUM, count);
+					}
+					catch (Exception ex)
+					{
+						LogError(ex);
+					}
+				}
+			}
+		}
+		public DurationLogger LogDuration(string bucket, string workflowId, long count)
+		{
+			using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
+			{
+				try
+				{
+					//return metricManger.LogDuration(bucket, workSpaceGuid, MetricTargets.SUM);
+					return metricManger.LogDuration(bucket, WorkSpaceGuid, workflowId);
+				}
+				catch (Exception ex)
+				{
+					LogError(ex);
+					return null;
+				}
+			}
+		}
 
-        public async Task CreateMetricsAsync()
-        {
-            try
-            {
-                using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
-                {
-                    var categories = await metricCollectionManager.GetCategoryTargetsAsync();
-                    var categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
-                    var sfuCategory = categoryTarget?.Category;
-                    if (string.IsNullOrEmpty(sfuCategory?.Name))
-                    {
-                        sfuCategory = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
-                        sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false);
-                        /// if no category target... re-set it
-                        categories = await metricCollectionManager.GetCategoryTargetsAsync();
-                        categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
+		public async Task CreateMetricsAsync()
+		{
+			try
+			{
+				using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
+				{
+					List<CategoryTarget> categories = await metricCollectionManager.GetCategoryTargetsAsync();
+					CategoryTarget categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
+					CategoryRef sfuCategory = categoryTarget?.Category;
 
-                    }
-                    var metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY);
-                    var numberOfDocsUploadedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DocumentsUploaded);
-                    var numberOfDocsReplacedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DocumentsReplaced);
-                    var numberOfDocsUploadedBytesMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_TotalSizeDocumentUploaded);
-                    List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>();
+					if (string.IsNullOrEmpty(sfuCategory?.Name))
+					{
+						sfuCategory = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
+						sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false);
+						/// if no category target... re-set it
+						categories = await metricCollectionManager.GetCategoryTargetsAsync();
+						categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
 
-                    if (string.IsNullOrEmpty(numberOfDocsUploadedMetric?.Name))
-                    {
-                        metricIdentifiers.Add(new MetricIdentifier
-                        {
-                            Categories = new List<CategoryRef> { sfuCategory },
-                            Name = Helpers.Constants.BUCKET_DocumentsUploaded,
-                            Description = "Number of documents uploaded"
-                        });
-                    }
-                    if (string.IsNullOrEmpty(numberOfDocsReplacedMetric?.Name))
-                    {
-                        metricIdentifiers.Add(new MetricIdentifier
-                        {
-                            Categories = new List<CategoryRef> { sfuCategory },
-                            Name = Helpers.Constants.BUCKET_DocumentsReplaced,
-                            Description = "Number of documents replaced"
-                        });
-                    }
-                    if (string.IsNullOrEmpty(numberOfDocsUploadedBytesMetric?.Name))
-                    {
-                        metricIdentifiers.Add(new MetricIdentifier
-                        {
-                            Categories = new List<CategoryRef> { sfuCategory },
-                            Name = Helpers.Constants.BUCKET_TotalSizeDocumentUploaded,
-                            Description = "Total size of documents uploaded in bytes"
-                        });
-                    }
+					}
 
-                    foreach (var metricIdentifier in metricIdentifiers)
-                    {
-                        await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false);
-                    }
+					List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>(),
+						metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY);
 
-                    if (!categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM])
-                    {
-                        categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;
-                        await metricCollectionManager.UpdateCategoryTargetSingleAsync(categoryTarget);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-                throw;
-            }
-        }
-        public async Task CreateMetricAsync(string bucket, string description)
-        {
-            try
-            {
-                using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
-                {
-                    Category category = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
-                    category.ID = await metricCollectionManager.CreateCategoryAsync(category, false);
+					MetricIdentifier numberOfDocsUploadedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DOCUMENTSUPLOADED),
+						numberOfDocsReplacedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DOCUMENTSREPLACED),
+						numberOfDocsUploadedBytesMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED);
 
-                    var metricId = new MetricIdentifier
-                    {
-                        Categories = new List<CategoryRef> { category },
-                        Name = bucket,
-                        Description = description
-                    };
+					if (string.IsNullOrEmpty(numberOfDocsUploadedMetric?.Name))
+					{
+						metricIdentifiers.Add(
+							new MetricIdentifier
+							{
+								Categories = new List<CategoryRef> { sfuCategory },
+								Name = Helpers.Constants.BUCKET_DOCUMENTSUPLOADED,
+								Description = _NUMBER_OF_DOCUMENT_UPLOADED,
+							}
+						);
+					}
+					if (string.IsNullOrEmpty(numberOfDocsReplacedMetric?.Name))
+					{
+						metricIdentifiers.Add(
+							new MetricIdentifier
+							{
+								Categories = new List<CategoryRef> { sfuCategory },
+								Name = Helpers.Constants.BUCKET_DOCUMENTSREPLACED,
+								Description = "Number of documents replaced"
+							}
+						);
+					}
+					if (string.IsNullOrEmpty(numberOfDocsUploadedBytesMetric?.Name))
+					{
+						metricIdentifiers.Add(
+							new MetricIdentifier
+							{
+								Categories = new List<CategoryRef> { sfuCategory },
+								Name = Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED,
+								Description = "Total size of documents uploaded in bytes"
+							}
+						);
+					}
 
-                    await metricCollectionManager.CreateMetricIdentifierAsync(metricId, false);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-            }
-        }
+					foreach (var metricIdentifier in metricIdentifiers)
+					{
+						await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false);
+					}
+
+					if (!categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM])
+					{
+						categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;
+						await metricCollectionManager.UpdateCategoryTargetSingleAsync(categoryTarget);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogError(ex);
+				throw;
+			}
+		}
+		public async Task CreateMetricAsync(string bucket, string description)
+		{
+			try
+			{
+				using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
+				{
+					Category category = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
+					category.ID = await metricCollectionManager.CreateCategoryAsync(category, false);
+
+					var metricId = new MetricIdentifier
+					{
+						Categories = new List<CategoryRef> { category },
+						Name = bucket,
+						Description = description
+					};
+
+					await metricCollectionManager.CreateMetricIdentifierAsync(metricId, false);
+				}
+			}
+			catch (Exception ex)
+			{
+				LogError(ex);
+			}
+		}
 
 
-    }
+	}
 }

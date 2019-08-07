@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -212,10 +212,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\DocumentExtraInfo.cs" />
     <Compile Include="Entities\DocumentIdentifierField.cs" />
     <Compile Include="Entities\Enumerations\AuditAction.cs" />
     <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
+    <Compile Include="Entities\Imaging.cs" />
     <Compile Include="Entities\ProcessingDocument.cs" />
     <Compile Include="Entities\Response.cs" />
     <Compile Include="Helpers\Constants.cs" />
@@ -225,7 +227,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DeployableFiles.resx</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\EncodingHelper.cs" />
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="..\..\..\Version\AssemblyInfo.cs">
@@ -254,7 +255,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Toggles\Toggles.cs" />
+    <Compile Include="Toggles\ChangeFileName.cs" />
+    <Compile Include="Toggles\CheckSFUFields.cs" />
+    <Compile Include="Toggles\UploadMassiveDocuments.cs" />
+    <Compile Include="Toggles\ValidateSFUCustomPermissions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="oi\docs\fileids_values_only_sorted.txt" />
@@ -1135,6 +1139,7 @@
     <EmbeddedResource Include="Helpers\DeployableFiles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DeployableFiles.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\Queries.resx">
       <Generator>ResXFileCodeGenerator</Generator>

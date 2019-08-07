@@ -12,6 +12,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	public class InstanceSettingManager : BaseManager, IInstanceSettingManager
 	{
 		private static Lazy<IInstanceSettingManager> _instance = new Lazy<IInstanceSettingManager>(() => new InstanceSettingManager());
+		private const int _MAX_FILES = 100;
+		private const int _MIN_FILES = 20;
 		public static IInstanceSettingManager Instance => _instance.Value;
 
 		private InstanceSettingManager()
@@ -19,11 +21,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task<int> GetMaxFilesInstanceSettingAsync()
 		{
-			int result = 20;
+			int result = _MIN_FILES;
 			try
 			{
-				var condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
-				var resultList = await GetInstanceSettingsByCondition(condition);
+				string condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
+				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByCondition(condition);
 				if (resultList.Any())
 				{
 					int.TryParse(resultList.FirstOrDefault().Value, out result);
@@ -31,9 +33,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					{
 						result = 1;
 					}
-					else if (result > 100)
+					else if (result > _MAX_FILES)
 					{
-						result = 100;
+						result = _MAX_FILES;
 					}
 				}
 			}
@@ -45,7 +47,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task CreateMaxFilesInstanceSettingAsync()
 		{
-			var existInstanceSetting = await ExistMaxFilesInstanceSettingAsync();
+			bool existInstanceSetting = await ExistMaxFilesInstanceSettingAsync();
 			if (!existInstanceSetting)
 			{
 				var instanceSetting = new InstanceSetting()
@@ -65,8 +67,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			bool result = false;
 			try
 			{
-				var condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
-				var resultList = await GetInstanceSettingsByCondition(condition);
+				string condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
+				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByCondition(condition);
 				result = resultList.Any();
 			}
 			catch (Exception ex)
@@ -84,7 +86,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					Condition = condition
 				};
-				var instanceSettingQueryResultSet = await instanceSettingProxy.QueryAsync(query);
+				InstanceSettingQueryResultSet instanceSettingQueryResultSet = await instanceSettingProxy.QueryAsync(query);
 				if (instanceSettingQueryResultSet.Success && instanceSettingQueryResultSet.Results.Any())
 				{
 					var list = new List<InstanceSetting>(instanceSettingQueryResultSet.Results.Count);
