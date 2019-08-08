@@ -1,11 +1,10 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
-using NUnit.Framework;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Relativity.Services.InstanceSetting;
 using System;
 using System.Collections.Generic;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Constants
+namespace kCura.SingleFileUpload.Core.Tests.Constants
 {
 	public static class TestsConstants
 	{

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.IO;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Helpers
+namespace kCura.SingleFileUpload.Core.Tests.Helpers
 {
 	public class FileHelper
 	{

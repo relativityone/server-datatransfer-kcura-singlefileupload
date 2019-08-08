@@ -1,12 +1,12 @@
 ﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.Toggles;
 using System;
 using System.Threading.Tasks;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Managers.Implementations
+namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
 	public class ToggleManagerTest : TestBase

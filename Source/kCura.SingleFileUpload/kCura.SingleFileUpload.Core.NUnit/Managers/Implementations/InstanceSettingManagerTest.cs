@@ -1,13 +1,13 @@
 ﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
-using kCura.SingleFileUpload.Core.NUnit.Constants;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Constants;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.InstanceSetting;
 using System.Threading.Tasks;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Managers.Implementations
+namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
 	class InstanceSettingManagerTest : TestBase

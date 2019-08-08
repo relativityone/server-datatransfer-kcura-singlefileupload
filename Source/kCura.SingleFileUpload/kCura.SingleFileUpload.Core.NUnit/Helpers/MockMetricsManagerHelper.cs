@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Helpers
+namespace kCura.SingleFileUpload.Core.Tests.Helpers
 {
 	public static class MockMetricsManagerHelper
 	{

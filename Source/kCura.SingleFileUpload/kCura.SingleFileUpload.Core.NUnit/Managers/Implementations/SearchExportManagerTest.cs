@@ -1,14 +1,14 @@
 ﻿using kCura.Relativity.Client;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
-using kCura.SingleFileUpload.Core.NUnit.Constants;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Constants;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using System.IO;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Managers.Implementations
+namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
 	public class SearchExportManagerTest : TestBase

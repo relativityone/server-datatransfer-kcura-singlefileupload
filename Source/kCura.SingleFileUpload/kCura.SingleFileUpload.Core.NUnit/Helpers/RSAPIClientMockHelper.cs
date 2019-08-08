@@ -3,7 +3,7 @@ using kCura.Relativity.Client.Repositories;
 using Moq;
 using System.Linq;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Helpers
+namespace kCura.SingleFileUpload.Core.Tests.Helpers
 {
 	public class RSAPIClientMockHelper
 	{

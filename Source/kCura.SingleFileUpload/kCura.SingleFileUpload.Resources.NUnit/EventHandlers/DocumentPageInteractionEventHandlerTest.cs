@@ -2,7 +2,7 @@
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using NUnit.Framework;
 
-namespace kCura.SingleFileUpload.Resources.NUnit
+namespace kCura.SingleFileUpload.Resources.Tests
 {
 	[TestFixture]
 	public class DocumentPageInteractionEventHandlerTest

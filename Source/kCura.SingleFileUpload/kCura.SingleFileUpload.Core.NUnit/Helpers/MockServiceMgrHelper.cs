@@ -3,7 +3,7 @@ using Relativity.API;
 using System;
 using System.Threading.Tasks;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Helpers
+namespace kCura.SingleFileUpload.Core.Tests.Helpers
 {
 	public static class MockServiceMgrHelper
 	{

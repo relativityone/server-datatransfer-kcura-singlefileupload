@@ -1,7 +1,7 @@
 ﻿using kCura.EventHandler;
 using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.NUnit.Constants;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Constants;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using Moq;
@@ -11,7 +11,7 @@ using Relativity.Services.InstanceSetting;
 using Relativity.Toggles;
 using System.Threading.Tasks;
 
-namespace kCura.SingleFileUpload.Resources.NUnit.EventHandlers
+namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 {
 	[TestFixture]
 	class SingleFileUploadPostInstallEventHandlerTest

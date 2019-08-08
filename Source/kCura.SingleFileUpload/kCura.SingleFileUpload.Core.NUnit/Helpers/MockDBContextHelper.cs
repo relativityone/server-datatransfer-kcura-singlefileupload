@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace kCura.SingleFileUpload.Core.NUnit.Helpers
+namespace kCura.SingleFileUpload.Core.Tests.Helpers
 {
 	public static class MockDBContextHelper
 	{

@@ -3,7 +3,7 @@ using NSerio.Relativity.Infrastructure;
 using NUnit.Framework;
 using Relativity.API;
 
-namespace kCura.SingleFileUpload.Core.NUnit
+namespace kCura.SingleFileUpload.Core.Tests
 {
 	public abstract class TestBase
 	{

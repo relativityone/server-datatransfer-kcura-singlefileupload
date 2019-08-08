@@ -1,13 +1,13 @@
 ﻿using kCura.EventHandler;
 using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.NUnit.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.Permission;
 
-namespace kCura.SingleFileUpload.Resources.NUnit.EventHandlers
+namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 {
 	[TestFixture]
 	public class SingleFileUploadPermissionPostInstallEventHandlerTest
