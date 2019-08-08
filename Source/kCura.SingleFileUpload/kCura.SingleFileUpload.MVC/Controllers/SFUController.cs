@@ -45,8 +45,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				imaging.Fdv = (bool)jObject["fdv"];
 				imaging.DocID = (int)jObject["docID"];
 				imaging.Image = (bool)jObject["image"];
-				imaging.NewImage = (bool)jObject["newImage"];
-				imaging.ProfileID = (int)jObject["profileID"];
+				imaging.NewImage = !string.IsNullOrEmpty(jObject["newImage"].ToString()) ? (bool)jObject["newImage"] : default(bool);
+				imaging.ProfileID = !string.IsNullOrEmpty(jObject["profileID"].ToString()) ? (int)jObject["profileID"] : default(int);
 				imaging.ErrorFile = jObject.Value<int?>("errorFile") ?? 0;
 			}
 
