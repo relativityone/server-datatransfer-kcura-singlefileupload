@@ -210,6 +210,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Version\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Entities\DocumentExtraInfo.cs" />
     <Compile Include="Entities\DocumentIdentifierField.cs" />
     <Compile Include="Entities\Enumerations\AuditAction.cs" />
@@ -227,9 +230,6 @@
     </Compile>
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
-    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
-      <Link>AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
     <Compile Include="Managers\Implementation\PermissionsManager.cs" />

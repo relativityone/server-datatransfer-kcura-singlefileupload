@@ -69,3 +69,16 @@ Applications/*.nuspec
 .vs/
 Source/kCura.SingleFileUpload/kCura.SingleFileUpload.Resources/kCura.SingleFileUpload.Resources.dll
 Source/.axoCover
+.vs/
+[b|B]in
+[o|O]bj
+packages
+Artifacts/
+buildtools/*
+!buildtools/packages.config
+FunctionalTestSettings
+FunctionalTest.runsettings
+*.dll
+*.jar
+*.exe
+*.bin

@@ -80,7 +80,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string directoryPath, filePath;
 
 			string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-			if (currentPath.Contains("NUnit"))
+			if (currentPath.Contains("Tests"))
 			{
 				directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
 			}

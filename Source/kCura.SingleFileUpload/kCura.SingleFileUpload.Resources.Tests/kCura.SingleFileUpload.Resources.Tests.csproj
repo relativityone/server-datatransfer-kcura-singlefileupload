@@ -110,7 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
+    <Compile Include="..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="EventHandlers\DocumentPageInteractionEventHandlerTest.cs" />
@@ -119,13 +119,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\kCura.SingleFileUpload.Core.NUnit\kCura.SingleFileUpload.Core.Tests.csproj">
+    <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">
       <Project>{90D8784B-CE66-4459-BCCE-96DF572F7287}</Project>
       <Name>kCura.SingleFileUpload.Core.Tests</Name>
     </ProjectReference>

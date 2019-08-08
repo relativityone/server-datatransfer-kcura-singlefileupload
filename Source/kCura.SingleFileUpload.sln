@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource Files", "Resource 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\kCura.SingleFileUpload.Resources.csproj", "{C239D038-B8B2-4588-84A5-10F1CA1DD41B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Core.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Core.NUnit\kCura.SingleFileUpload.Core.Tests.csproj", "{90D8784B-CE66-4459-BCCE-96DF572F7287}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Core.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj", "{90D8784B-CE66-4459-BCCE-96DF572F7287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.NUnit\kCura.SingleFileUpload.Resources.Tests.csproj", "{01220ACF-44BE-45E8-B294-8BB840880316}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.Tests\kCura.SingleFileUpload.Resources.Tests.csproj", "{01220ACF-44BE-45E8-B294-8BB840880316}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

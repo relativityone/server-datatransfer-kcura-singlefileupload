@@ -10,13 +10,13 @@
     </PropertyGroup>
     <ItemGroup Condition="'$(TemplateLanguage)' == 'CSharp'">
         <Compile Remove="Properties\AssemblyInfo.cs" />
-        <Compile Include="$(MSBuildThisFileDirectory)Version\AssemblyInfo.cs">
+        <Compile Include="$(MSBuildThisFileDirectory)Source\Version\AssemblyInfo.cs">
             <Link>AssemblyInfo.cs</Link>
         </Compile>
     </ItemGroup>
     <ItemGroup Condition="'$(TemplateLanguage)' == 'VisualBasic'">
         <Compile Remove="My Project\AssemblyInfo.vb" />
-        <Compile Include="$(MSBuildThisFileDirectory)Version\AssemblyInfo.vb">
+        <Compile Include="$(MSBuildThisFileDirectory)Source\Version\AssemblyInfo.vb">
             <Link>AssemblyInfo.vb</Link>
         </Compile>
     </ItemGroup>

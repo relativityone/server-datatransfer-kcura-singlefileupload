@@ -102,10 +102,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
-    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
+    <Compile Include="..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
     <Compile Include="EventHandlers\SingleFileUploadPermissionPostInstallEventHandler.cs" />
     <Compile Include="EventHandlers\SingleFileUploadPostInstallEventHandler.cs" />
   </ItemGroup>
