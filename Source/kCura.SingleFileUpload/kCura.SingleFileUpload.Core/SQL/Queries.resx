@@ -181,6 +181,9 @@
   <data name="GetWorkspaceNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\getworkspacenames.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="InsertAuditRecord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>queries\insertauditrecord.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="InsertFieldsInstanceSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>queries\insertfieldsinstancesetting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

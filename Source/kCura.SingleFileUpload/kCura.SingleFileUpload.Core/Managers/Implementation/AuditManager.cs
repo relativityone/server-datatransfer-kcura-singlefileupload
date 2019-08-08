@@ -1,6 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities.Enumerations;
-using NSerio.Relativity;
-using Relativity.API;
+using kCura.SingleFileUpload.Core.SQL;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +8,7 @@ using System.Management;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
-	public class AuditManager : IAuditManager
+	public class AuditManager : BaseManager, IAuditManager
 	{
 		private string _recordOrigination;
 
@@ -23,11 +22,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public void CreateAuditRecord(int workspaceId, int artifactID, AuditAction action, string details, int userID)
 		{
-			const String sql =
-				@"	INSERT INTO [EDDSDBO].[AuditRecord_PrimaryPartition] ([ArtifactID],[Action],[Details],[UserID],[TimeStamp],[RequestOrigination],[RecordOrigination])
-						VALUES (@ArtifactID, @Action, @Details, @UserID, @TimeStamp, @RequestOrigination, @RecordOrigination)
-						";
-
 			SqlParameter[] parameters =
 				{
 					new SqlParameter("@ArtifactID", SqlDbType.Int) {Value = artifactID},
@@ -38,8 +32,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					new SqlParameter("@RequestOrigination", SqlDbType.NVarChar) {Value = GetRequestOrigination()},
 					new SqlParameter("@RecordOrigination", SqlDbType.NVarChar) {Value = GetRecordOrigination()},
 				};
-
-			Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(sql, parameters);
+			_Repository.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertAuditRecord, parameters);
 		}
 
 		/// <summary>

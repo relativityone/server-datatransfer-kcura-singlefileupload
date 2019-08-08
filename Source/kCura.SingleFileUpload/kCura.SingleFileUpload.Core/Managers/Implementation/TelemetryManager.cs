@@ -31,8 +31,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				if (_workSpaceGuid == null || _workSpaceGuid == Guid.Parse("00000000-0000-0000-0000-000000000000"))
 				{
-					_workSpaceGuid = new Guid(_Repository.MasterDBContext.ExecuteSqlStatementAsScalar(
-						Queries.GetWorkspaceGuidByArtifactID, new SqlParameter[] { new SqlParameter("@artifactId", _Repository.WorkspaceID) }).ToString());
+					string workspaceWuid = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID,
+						new SqlParameter[]
+						{
+							new SqlParameter("@artifactId", _Repository.WorkspaceID)
+						}
+					).ToString();
+
+
+					_workSpaceGuid = new Guid(workspaceWuid);
 				}
 				return _workSpaceGuid;
 			}

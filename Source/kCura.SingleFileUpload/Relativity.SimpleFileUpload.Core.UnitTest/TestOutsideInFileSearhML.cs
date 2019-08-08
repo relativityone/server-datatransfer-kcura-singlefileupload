@@ -33,7 +33,7 @@ namespace Relativity.SimpleFileUpload.Core.UnitTest
 				ExportedMetadata transientMetadata = new ExportedMetadata();
 
 				searchExportManager.ConfigureOutsideIn();
-				transientMetadata = searchExportManager.ExportToSearchML(fileName, native, () => OutsideIn.OutsideIn.NewLocalExporter());
+				transientMetadata = searchExportManager.ExportToSearchML(fileName, native, OutsideIn.OutsideIn.NewLocalExporter());
 				Assert.IsTrue(!string.IsNullOrEmpty(transientMetadata.ExtractedText));
 				System.Console.Write(transientMetadata.ExtractedText);
 			}

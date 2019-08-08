@@ -63,8 +63,11 @@
     <Reference Include="oi, Version=2019.2.2.13, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\lib\net40\oi.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.10.2.21.23\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.10.3.57.9\lib\net462\Relativity.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.627\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Test.Helpers, Version=5.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.5.0.0.1\lib\Relativity.Test.Helpers.dll</HintPath>

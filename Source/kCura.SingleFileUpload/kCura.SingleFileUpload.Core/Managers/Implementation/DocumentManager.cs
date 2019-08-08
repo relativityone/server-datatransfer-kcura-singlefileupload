@@ -10,21 +10,22 @@ using Relativity.Services.ObjectQuery;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Client = kCura.Relativity.Client;
+using DataExchange = Relativity.DataExchange;
 using DTOs = kCura.Relativity.Client.DTOs;
 using Services = Relativity.Services;
-using DataExchange = Relativity.DataExchange;
-using System.Data.Common;
-using System.Data.SqlClient;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class DocumentManager : BaseManager, IDocumentManager
 	{
+
 		private FileType[] _viewerSupportedFileType;
 		private const int _FILED_ARTIFACT_TYPE = 14;
 		private readonly int _timeOutValue = 300;
@@ -40,7 +41,282 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		}
 
-		
+		public FileType[] ViewerSupportedFileTypes
+		{
+			get
+			{
+
+				if (_viewerSupportedFileType == null)
+				{
+					_viewerSupportedFileType = new FileType[]
+					{
+						new FileType() { TypeName = "7 Zip",TypeExtension= ".7z"},
+						new FileType() { TypeName = "AutoCAD Drawing",TypeExtension= ".dwg"},
+						new FileType() { TypeName = "Corel Presentations",TypeExtension= ".shw"},
+						new FileType() { TypeName = "Flexiondoc (XML)",TypeExtension= ".xml"},
+						new FileType() { TypeName = "Harvard Graphics",TypeExtension= ".cht"},
+						new FileType() { TypeName = "Microsoft Access",TypeExtension= ".accdb"},
+						new FileType() { TypeName = "Microsoft Access",TypeExtension= ".accdt"},
+						new FileType() { TypeName = "Microsoft OneNote File",TypeExtension= ".one"},
+						new FileType() { TypeName = "PKZip",TypeExtension= ".zip"},
+						new FileType() { TypeName = "Quattro Pro Win",TypeExtension= ".qpw"},
+						new FileType() { TypeName = "7z Self Extracting exe",TypeExtension= ".exe"},
+						new FileType() { TypeName = "LZA Self Extracting Compress",TypeExtension= ".lza"},
+						new FileType() { TypeName = "LZH Compress",TypeExtension= ".lzh"},
+						new FileType() { TypeName = "Microsoft Office Binder",TypeExtension= ".obd"},
+						new FileType() { TypeName = "Microsoft Cabinet (CAB)",TypeExtension= ".cab"},
+						new FileType() { TypeName = "RAR",TypeExtension= ".rar"},
+						new FileType() { TypeName = "Self-extracting .exe",TypeExtension= ".exe"},
+						new FileType() { TypeName = "UNIX Compress",TypeExtension= ".z"},
+						new FileType() { TypeName = "UNIX GZip",TypeExtension= ".gz"},
+						new FileType() { TypeName = "UNIX tar",TypeExtension= ".tar"},
+						new FileType() { TypeName = "Uuencode",TypeExtension= ".uue"},
+						new FileType() { TypeName = "Zip",TypeExtension= ".zip"},
+						new FileType() { TypeName = "DataEase",TypeExtension= ".dba"},
+						new FileType() { TypeName = "DBase",TypeExtension= ".dbf"},
+						new FileType() { TypeName = "First Choice DB",TypeExtension= ".fol"},
+						new FileType() { TypeName = "Microsoft Access (text only)",TypeExtension= ".accdb"},
+						new FileType() { TypeName = "Microsoft Access (text only)",TypeExtension= ".mdb"},
+						new FileType() { TypeName = "Microsoft Works DB for DOS",TypeExtension= ".wdb"},
+						new FileType() { TypeName = "Microsoft Works DB for Macintosh",TypeExtension= ".wdb"},
+						new FileType() { TypeName = "Microsoft Works DB for Windows",TypeExtension= ".wdb"},
+						new FileType() { TypeName = "Microsoft Works DB for DOS",TypeExtension= ".wdb"},
+						new FileType() { TypeName = "Paradox for DOS",TypeExtension= ".db"},
+						new FileType() { TypeName = "Paradox for Windows",TypeExtension= ".db"},
+						new FileType() { TypeName = "Q&A Database",TypeExtension= ".db"},
+						new FileType() { TypeName = "R:Base",TypeExtension= ".rb1"},
+						new FileType() { TypeName = "R:Base",TypeExtension= ".rb2,"},
+						new FileType() { TypeName = "R:Base",TypeExtension= ".rb3"},
+						new FileType() { TypeName = "Reflex",TypeExtension= ".rdx"},
+						new FileType() { TypeName = "SmartWare II DB",TypeExtension= ".db"},
+						new FileType() { TypeName = "Apple Mail Message (EMLX)",TypeExtension= ".emlx"},
+						new FileType() { TypeName = "EML with Digital Signature",TypeExtension= ".eml"},
+						new FileType() { TypeName = "IBM Lotus Notes Domino XML Language DXL",TypeExtension= ".xml"},
+						new FileType() { TypeName = "IBM Lotus Notes NSF (Win32, Win64, Linux x86-32 and Oracle Solaris 32-bit only with Notes Client or Domino Server)",TypeExtension= ".nsf."},
+						new FileType() { TypeName = "IBM Lotus Notes NSF (Win32, Win64, Linux x86-32 and Oracle Solaris 32-bit only with Notes Client or Domino Server)",TypeExtension= ".ntf"},
+						new FileType() { TypeName = "MBOX Mailbox",TypeExtension= ".mbox"},
+						new FileType() { TypeName = "Microsoft Outlook (MSG)",TypeExtension= ".msg"},
+						new FileType() { TypeName = "Microsoft Outlook (OST )",TypeExtension= ".ost"},
+						new FileType() { TypeName = "Microsoft Outlook (PST)",TypeExtension= ".pst"},
+						new FileType() { TypeName = "Microsoft Outlook Express (EML)",TypeExtension= ".eml"},
+						new FileType() { TypeName = "Microsoft Outlook Forms Template (OFT)",TypeExtension= ".oft"},
+						new FileType() { TypeName = "Microsoft Outlook PST (Mac)",TypeExtension= ".pst"},
+						new FileType() { TypeName = "MSG with Digital Signature",TypeExtension= ".msg"},
+						new FileType() { TypeName = "AVI (Metadata only)",TypeExtension= ".avi"},
+						new FileType() { TypeName = "Flash (text extraction only)",TypeExtension= ".swf"},
+						new FileType() { TypeName = "MP3 (ID3 metadata only)",TypeExtension= ".mp3"},
+						new FileType() { TypeName = "MPEG – 1 Audio layer 3 V ID3 v1 (Metadata only)",TypeExtension= ".mpg"},
+						new FileType() { TypeName = "MPEG – 1 Audio layer 3 V ID3 v2 (Metadata only)",TypeExtension= ".mpg"},
+						new FileType() { TypeName = "MPEG – 4 (Metadata only)",TypeExtension= ".mpg"},
+						new FileType() { TypeName = "MPEG – 7 (Metadata only)",TypeExtension= ".mpg"},
+						new FileType() { TypeName = "Quick Time (Metadata only)",TypeExtension= ".mpg"},
+						new FileType() { TypeName = "WAV (Metadata only)",TypeExtension= ".wav"},
+						new FileType() { TypeName = "Windows Media ASF (Metadata only)",TypeExtension= ".asf"},
+						new FileType() { TypeName = "Windows Media Audio WMA (Metadata only)",TypeExtension= ".wma"},
+						new FileType() { TypeName = "Windows Media DVR-MS (Metadata only)",TypeExtension= ".dvr-ms"},
+						new FileType() { TypeName = "Windows Media Video WMV (Metadata only)",TypeExtension= ".wmv"},
+						new FileType() { TypeName = "Microsoft OneNote (text only)",TypeExtension= ".one"},
+						new FileType() { TypeName = "Microsoft Project (sheet view only, Gantt Chart, Network Diagram, and graph not supported)",TypeExtension= ".mpp"},
+						new FileType() { TypeName = "Microsoft Windows DLL",TypeExtension= ".dll"},
+						new FileType() { TypeName = "Microsoft Windows Executable",TypeExtension= ".dll"},
+						new FileType() { TypeName = "Trillian Text Log File (via text filter)",TypeExtension= ".txt"},
+						new FileType() { TypeName = "vCalendar",TypeExtension= ".vcs"},
+						new FileType() { TypeName = "vCard",TypeExtension= ".vcf"},
+						new FileType() { TypeName = "Yahoo! Messenger",TypeExtension= ".yps"},
+						new FileType() { TypeName = "Apple iWork Keynote (MacOS, text and PDF preview)",TypeExtension= ".key"},
+						new FileType() { TypeName = "Apple iWork Keynote (MacOS, text and PDF preview)",TypeExtension= ".keynote"},
+						new FileType() { TypeName = "Harvard Graphics Presentation DOS",TypeExtension= ".prs"},
+						new FileType() { TypeName = "Lotus Freelance",TypeExtension= ".prz"},
+						new FileType() { TypeName = "Microsoft PowerPoint for Macintosh",TypeExtension= ".ppt"},
+						new FileType() { TypeName = "Microsoft PowerPoint for Windows",TypeExtension= ".ppt"},
+						new FileType() { TypeName = "Microsoft PowerPoint for Windows Slideshow",TypeExtension= ".ppt"},
+						new FileType() { TypeName = "Microsoft PowerPoint 2007/2008",TypeExtension= ".pptx"},
+						new FileType() { TypeName = "Microsoft PowerPoint 2007/2008 with macro",TypeExtension= ".pptm"},
+						new FileType() { TypeName = "Microsoft PowerPoint 2007/2008 template",TypeExtension= ".potx"},
+						new FileType() { TypeName = "Microsoft PowerPoint 2007/2008 template with macro",TypeExtension= ".potm"},
+						new FileType() { TypeName = "Microsoft PowerPoint for Windows Template",TypeExtension= ".pot"},
+						new FileType() { TypeName = "Novell Presentations",TypeExtension= ".shw"},
+						new FileType() { TypeName = "OpenOffice Impress",TypeExtension= ".sdd"},
+						new FileType() { TypeName = "Oracle Open Office Impress",TypeExtension= ".odp"},
+						new FileType() { TypeName = "StarOffice Impress",TypeExtension= ".sda"},
+						new FileType() { TypeName = "StarOffice Impress",TypeExtension= ".sdd"},
+						new FileType() { TypeName = "Adobe Photoshop",TypeExtension= ".psd"},
+						new FileType() { TypeName = "CALS Raster (GP4)",TypeExtension= ".cg4"},
+						new FileType() { TypeName = "CALS Raster (GP4)",TypeExtension= ".cal"},
+						new FileType() { TypeName = "Computer Graphics Metafile",TypeExtension= ".cgm"},
+						new FileType() { TypeName = "Encapsulated PostScript (EPS)",TypeExtension= ".eps"},
+						new FileType() { TypeName = "GEM Image (Bitmap)",TypeExtension= ".bmp"},
+						new FileType() { TypeName = "Graphics Interchange Format (GIF)",TypeExtension= ".gif"},
+						new FileType() { TypeName = "IBM Graphics Data Format (GDF)",TypeExtension= ".gdf"},
+						new FileType() { TypeName = "IBM Picture Interchange Format",TypeExtension= ".pif"},
+						new FileType() { TypeName = "JFIF (JPEG not in TIFF format)",TypeExtension= ".jfif"},
+						new FileType() { TypeName = "JPEG",TypeExtension= ".jpg"},
+						new FileType() { TypeName = "Kodak Flash Pix",TypeExtension= ".fpx"},
+						new FileType() { TypeName = "Kodak Photo CD",TypeExtension= ".pcd"},
+						new FileType() { TypeName = "Lotus PIC",TypeExtension= ".pic"},
+						new FileType() { TypeName = "Macintosh PICT",TypeExtension= ".bmp"},
+						new FileType() { TypeName = "Macintosh PICT2",TypeExtension= ".bmp"},
+						new FileType() { TypeName = "MacPaint",TypeExtension= ".pntg"},
+						new FileType() { TypeName = "Microsoft Windows Bitmap",TypeExtension= ".bmp"},
+						new FileType() { TypeName = "Microsoft Windows Icon",TypeExtension= ".ico"},
+						new FileType() { TypeName = "Paint Shop Pro (Win32 only)",TypeExtension= ".psp"},
+						new FileType() { TypeName = "PC Paintbrush (PCX)",TypeExtension= ".pcx"},
+						new FileType() { TypeName = "PC Paintbrush DCX (multi-page PCX)",TypeExtension= ".dcx"},
+						new FileType() { TypeName = "Portable Bitmap (PBM)",TypeExtension= ".pbm"},
+						new FileType() { TypeName = "Portable Graymap PGM",TypeExtension= ".pgm"},
+						new FileType() { TypeName = "Portable Network Graphics (PNG)",TypeExtension= ".png"},
+						new FileType() { TypeName = "Portable Pixmap (PPM)",TypeExtension= ".ppm"},
+						new FileType() { TypeName = "Progressive JPEG",TypeExtension= ".jpg"},
+						new FileType() { TypeName = "Progressive JPEG",TypeExtension= ".jpeg"},
+						new FileType() { TypeName = "Progressive JPEG",TypeExtension= ".jpe"},
+						new FileType() { TypeName = "Sun Raster",TypeExtension= ".srs"},
+						new FileType() { TypeName = "TIFF",TypeExtension= ".tif"},
+						new FileType() { TypeName = "TIFF",TypeExtension= ".tiff"},
+						new FileType() { TypeName = "TruVision TGA (Targa)",TypeExtension= ".tga"},
+						new FileType() { TypeName = "Word Perfect Graphics",TypeExtension= ".wpg"},
+						new FileType() { TypeName = "WordPerfect Graphics",TypeExtension= ".wpg"},
+						new FileType() { TypeName = "WordPerfect Graphics",TypeExtension= ".wpg2"},
+						new FileType() { TypeName = "X-Windows Bitmap",TypeExtension= ".xbm"},
+						new FileType() { TypeName = "X-Windows Dump",TypeExtension= ".xdm"},
+						new FileType() { TypeName = "X-Windows Pixmap",TypeExtension= ".xpm"},
+						new FileType() { TypeName = "Apple iWork Numbers (MacOS, text, and PDF preview)",TypeExtension= ".numbers"},
+						new FileType() { TypeName = "Lotus 1-2-3",TypeExtension= ".wk1"},
+						new FileType() { TypeName = "Lotus 1-2-3",TypeExtension= ".wk3"},
+						new FileType() { TypeName = "Lotus 1-2-3",TypeExtension= ".wk4"},
+						new FileType() { TypeName = "Lotus 1-2-3",TypeExtension= ".wks"},
+						new FileType() { TypeName = "Microsoft Excel",TypeExtension= ".xlsx"},
+						new FileType() { TypeName = "Microsoft Excel with macro",TypeExtension= ".xlsm"},
+						new FileType() { TypeName = "Microsoft Excel template",TypeExtension= ".xltx"},
+						new FileType() { TypeName = "Microsoft Excel template with macro",TypeExtension= ".xltm"},
+						new FileType() { TypeName = "Microsoft Excel",TypeExtension= ".xls"},
+						new FileType() { TypeName = "Microsoft Excel for Windows (.xlsb)",TypeExtension= ".xlsb"},
+						new FileType() { TypeName = "Microsoft Works SS for DOS",TypeExtension= ".wks"},
+						new FileType() { TypeName = "Microsoft Works SS for Macintosh",TypeExtension= ".wks"},
+						new FileType() { TypeName = "Microsoft Works SS for Windows",TypeExtension= ".wks"},
+						new FileType() { TypeName = "Multiplan",TypeExtension= ".sylk"},
+						new FileType() { TypeName = "Novell PerfectWorks Spreadsheet",TypeExtension= ".wpw"},
+						new FileType() { TypeName = "OpenOffice Calc",TypeExtension= ".sdc"},
+						new FileType() { TypeName = "Oracle Open Office Calc",TypeExtension= ".sdc"},
+						new FileType() { TypeName = "QuattroPro for DOS",TypeExtension= ".wb1"},
+						new FileType() { TypeName = "QuattroPro for Windows",TypeExtension= ".qpw"},
+						new FileType() { TypeName = "QuattroPro for Windows",TypeExtension= ".wb3"},
+						new FileType() { TypeName = "QuattroPro for Windows",TypeExtension= ".wb2"},
+						new FileType() { TypeName = "QuattroPro for Windows",TypeExtension= ".wb1"},
+						new FileType() { TypeName = "SmartWare II SS",TypeExtension= ".def"},
+						new FileType() { TypeName = "SmartWare Spreadsheet",TypeExtension= ".def"},
+						new FileType() { TypeName = "StarOffice Calc",TypeExtension= ".sdc"},
+						new FileType() { TypeName = "SuperCalc",TypeExtension= ".cal"},
+						new FileType() { TypeName = "Symphony",TypeExtension= ".wrk"},
+						new FileType() { TypeName = "ANSI Text",TypeExtension= ".ans"},
+						new FileType() { TypeName = "ASCII Text",TypeExtension= ".asc"},
+						new FileType() { TypeName = "HTML (CSS rendering not supported)",TypeExtension= ".html"},
+						new FileType() { TypeName = "Rich Text Format (RTF)",TypeExtension= ".rtf"},
+						new FileType() { TypeName = "Unicode Text",TypeExtension= ".txt"},
+						new FileType() { TypeName = "Wireless Markup Language",TypeExtension= ".wml"},
+						new FileType() { TypeName = "XML (text only)",TypeExtension= ".xml"},
+						new FileType() { TypeName = "Adobe PDF",TypeExtension= ".pdf"},
+						new FileType() { TypeName = "Ami Draw",TypeExtension= ".sdw"},
+						new FileType() { TypeName = "AutoCAD Drawing",TypeExtension= ".dwg"},
+						new FileType() { TypeName = "AutoShade Rendering",TypeExtension= ".rnd"},
+						new FileType() { TypeName = "Corel Draw",TypeExtension= ".cdr"},
+						new FileType() { TypeName = "Corel Draw Clipart",TypeExtension= ".cmx"},
+						new FileType() { TypeName = "Enhanced Metafile (EMF)",TypeExtension= ".emf"},
+						new FileType() { TypeName = "Escher Graphics",TypeExtension= ".egr"},
+						new FileType() { TypeName = "FrameMaker Graphics (FMV)",TypeExtension= ".fmv"},
+						new FileType() { TypeName = "Gem File (Vector)",TypeExtension= ".img"},
+						new FileType() { TypeName = "Harvard Graphics Chart DOS",TypeExtension= ".ch3"},
+						new FileType() { TypeName = "Harvard Graphics for Windows",TypeExtension= ".prs"},
+						new FileType() { TypeName = "HP Graphics Language",TypeExtension= ".hp"},
+						new FileType() { TypeName = "HP Graphics Language",TypeExtension= ".hpg"},
+						new FileType() { TypeName = "IGES Drawing",TypeExtension= ".iges"},
+						new FileType() { TypeName = "Micrografx Designer",TypeExtension= ".dsf"},
+						new FileType() { TypeName = "Micrografx Designer",TypeExtension= ".drw"},
+						new FileType() { TypeName = "Micrografx Draw",TypeExtension= ".drw"},
+						new FileType() { TypeName = "OpenOffice Draw",TypeExtension= ".sda"},
+						new FileType() { TypeName = "Oracle Open Office Draw",TypeExtension= ".sda"},
+						new FileType() { TypeName = "SVG (processed as XML, not rendered)",TypeExtension= ".xml"},
+						new FileType() { TypeName = "Microsoft Visio:",TypeExtension= ".vsd"},
+						new FileType() { TypeName = "Visio (Page Preview mode WMF/EMF)",TypeExtension= ".wmf"},
+						new FileType() { TypeName = "Visio (Page Preview mode WMF/EMF)",TypeExtension= ".emf"},
+						new FileType() { TypeName = "Windows Metafile",TypeExtension= ".vmf"},
+						new FileType() { TypeName = "Adobe FrameMaker (MIF only)",TypeExtension= ".mif"},
+						new FileType() { TypeName = "Adobe Illustrator Postscript",TypeExtension= ".eps"},
+						new FileType() { TypeName = "Ami Pro for OS2",TypeExtension= ".sam"},
+						new FileType() { TypeName = "Ami Pro for Windows",TypeExtension= ".sam"},
+						new FileType() { TypeName = "Apple iWork Pages (MacOS, text and PDF preview)",TypeExtension= ".pages"},
+						new FileType() { TypeName = "DEC DX",TypeExtension= ".dx"},
+						new FileType() { TypeName = "DEC DX Plus",TypeExtension= ".wpl"},
+						new FileType() { TypeName = "First Choice WP",TypeExtension= ".pfx"},
+						new FileType() { TypeName = "Hangul",TypeExtension= ".hwp"},
+						new FileType() { TypeName = "IBM DCA/FFT",TypeExtension= ".dca"},
+						new FileType() { TypeName = "IBM DCA/FFT",TypeExtension= ".fft"},
+						new FileType() { TypeName = "IBM DisplayWrite",TypeExtension= ".rft"},
+						new FileType() { TypeName = "IBM Writing Assistant",TypeExtension= ".iwa"},
+						new FileType() { TypeName = "Ichitaro",TypeExtension= ".jtd"},
+						new FileType() { TypeName = "JustWrite",TypeExtension= ".jw"},
+						new FileType() { TypeName = "Kingsoft WPS Writer",TypeExtension= ".wps"},
+						new FileType() { TypeName = "Legacy",TypeExtension= ".leg"},
+						new FileType() { TypeName = "Lotus Manuscript",TypeExtension= ".manu"},
+						new FileType() { TypeName = "Lotus WordPro (text only)",TypeExtension= ".lwp"},
+						new FileType() { TypeName = "Lotus WordPro (text only)",TypeExtension= ".mwp"},
+						new FileType() { TypeName = "MacWrite II",TypeExtension= ".mcw"},
+						new FileType() { TypeName = "Mass 11",TypeExtension= ".m11"},
+						new FileType() { TypeName = "Microsoft Word",TypeExtension= ".doc"},
+						new FileType() { TypeName = "Microsoft Word",TypeExtension= ".docx"},
+						new FileType() { TypeName = "Microsoft Word with macro",TypeExtension= ".docm"},
+						new FileType() { TypeName = "Microsoft Word template",TypeExtension= ".dotx"},
+						new FileType() { TypeName = "Microsoft Word template with macro",TypeExtension= ".dotm"},
+						new FileType() { TypeName = "Microsoft WordPad",TypeExtension= ".rtf"},
+						new FileType() { TypeName = "Microsoft Works WP for DOS",TypeExtension= ".wps"},
+						new FileType() { TypeName = "Microsoft Write for Windows",TypeExtension= ".wri"},
+						new FileType() { TypeName = "MultiMate",TypeExtension= ".dox"},
+						new FileType() { TypeName = "Navy DIF",TypeExtension= ".dif"},
+						new FileType() { TypeName = "Nota Bene",TypeExtension= ".nb"},
+						new FileType() { TypeName = "Novell PerfectWorks Word Processor",TypeExtension= ".wpw"},
+						new FileType() { TypeName = "OpenOffice Writer",TypeExtension= ".sdw"},
+						new FileType() { TypeName = "Oracle Open Office Writer",TypeExtension= ".sdw"},
+						new FileType() { TypeName = "PFS: Write",TypeExtension= ".pfs"},
+						new FileType() { TypeName = "Q&A Write",TypeExtension= ".jw"},
+						new FileType() { TypeName = "Samna Word IV",TypeExtension= ".sam"},
+						new FileType() { TypeName = "SmartWare II WP",TypeExtension= ".def"},
+						new FileType() { TypeName = "Sprint",TypeExtension= ".spr"},
+						new FileType() { TypeName = "StarOffice Writer",TypeExtension= ".sdw"},
+						new FileType() { TypeName = "Wang IWP",TypeExtension= ".iwp"},
+						new FileType() { TypeName = "WordPerfect for DOS",TypeExtension= ".wpd"},
+						new FileType() { TypeName = "Wordstar 2000 for DOS",TypeExtension= ".wsd"},
+						new FileType() { TypeName = "Wordstar for Windows",TypeExtension= ".ws1"},
+						new FileType() { TypeName = "XyWrite",TypeExtension= ".xy"},
+						new FileType() { TypeName = "Apache Office Calc (ODF 1.2)",TypeExtension= ".odp"},
+						new FileType() { TypeName = "Apache Office Draw (ODF 1.2)",TypeExtension= ".odg"},
+						new FileType() { TypeName = "Apache Office Impress (ODF 1.2)",TypeExtension= ".odp"},
+						new FileType() { TypeName = "Apache Office Writer (ODF 1.2)",TypeExtension= ".odt"},
+						new FileType() { TypeName = "Apple iWork Keynote File",TypeExtension= ".key"},
+						new FileType() { TypeName = "Apple iWork Keynote File Preview",TypeExtension= ".key"},
+						new FileType() { TypeName = "Apple iWork Keynote Numbers File",TypeExtension= ".key"},
+						new FileType() { TypeName = "Apple iWork Keynote Numbers File Preview",TypeExtension= ".key"},
+						new FileType() { TypeName = "Apple iWork Pages File",TypeExtension= ".pages"},
+						new FileType() { TypeName = "Apple iWork Pages File Preview",TypeExtension= ".pages"},
+						new FileType() { TypeName = "Libre Office Calc (ODF 1.2)",TypeExtension= ".odt"},
+						new FileType() { TypeName = "Libre Office Draw (ODF 1.2)",TypeExtension= ".odg"},
+						new FileType() { TypeName = "Libre Office Impress (ODF 1.2)",TypeExtension= ".odp"},
+						new FileType() { TypeName = "Libre Office Writer (ODF 1.2)",TypeExtension= ".odt"},
+						new FileType() { TypeName = "Office Calc (ODF 1.2)",TypeExtension= ".odt"},
+						new FileType() { TypeName = "Encoded mail messages",TypeExtension= ".mht"},
+						new FileType() { TypeName = "Adobe Illustrator XMP",TypeExtension= ".xmp"},
+						new FileType() { TypeName = "Adobe InDesign XMP",TypeExtension= ".xmp"},
+						new FileType() { TypeName = "Adobe InDesign Interchange XMP only",TypeExtension= ".xmp"},
+						new FileType() { TypeName = "Stencil",TypeExtension= ".vsd"},
+						new FileType() { TypeName = "Template",TypeExtension= ".vsd"},
+						new FileType() { TypeName = "Macro Enabled Drawing",TypeExtension= ".vsd"},
+						new FileType() { TypeName = "Macro Enabled Stencil",TypeExtension= ".vsd"},
+						new FileType() { TypeName = "Macro Enabled Template",TypeExtension= ".vsd"}
+					};
+				}
+
+				return _viewerSupportedFileType;
+			}
+		}
+		public bool IsFileTypeSupported(string fileExtension) => ViewerSupportedFileTypes.Any(x => x.TypeExtension.Equals(fileExtension.ToLower()));
 		public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
 		{
 			Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
@@ -226,7 +502,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public void RemovePageInteractionEvenHandlerFromDocumentObject()
 		{
-			Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
+			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
 		}
 		public async Task<bool> ValidateFileTypes(string extension)
 		{
@@ -252,7 +528,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return isDataGrid;
 
 		}
-		public async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
+		private async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
 		{
 			DataTable documentsDataTable = new DataTable();
 
@@ -308,23 +584,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public string GetRepositoryLocation()
 		{
-			string location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar<string>(Queries.GetRepoLocationByCaseID,
-				new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) });
+			string location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID,
+				new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) }).ToString();
 			return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
 		}
 		public async Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket)
 		{
 			if (!string.IsNullOrEmpty(bucket))
 			{
-				ITelemetryManager telManager = new TelemetryManager();
-				await telManager.LogCountAsync(bucket, 1L);
-				await telManager.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength);
+				await TelemetryManager.instance.LogCountAsync(bucket, 1L);
+				await TelemetryManager.instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength);
 				//Create File tipe metric
-				await telManager.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
+				await TelemetryManager.instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
 					Path.GetExtension(documentInfo.FileName)),
 					$"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
 
-				await telManager.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
+				await TelemetryManager.instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
 			}
 		}
 		public string InstanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)

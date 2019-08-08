@@ -88,9 +88,6 @@
     <Reference Include="NSerio.Relativity">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="NSerio.Relativity.ConfigurationManager">
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.ConfigurationManager.dll</HintPath>
-    </Reference>
     <Reference Include="oi, Version=2019.2.2.13, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\lib\net40\oi.dll</HintPath>
     </Reference>
@@ -1093,6 +1090,7 @@
     <Content Include="oi\webview\oit.navbar.min.js" />
     <Content Include="oi\webview\oit.statusbar.css" />
     <Content Include="oi\webview\oit.statusbar.min.js" />
+    <Content Include="SQL\Queries\InsertAuditRecord.sql" />
     <Content Include="SQL\Queries\RemovePageInteractionEvenHandlerFromDocumentObject.sql" />
     <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
@@ -1131,7 +1129,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\Queries.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
