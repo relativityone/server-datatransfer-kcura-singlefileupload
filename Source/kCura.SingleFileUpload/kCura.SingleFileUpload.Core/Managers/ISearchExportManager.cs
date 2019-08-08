@@ -1,13 +1,11 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
-using Relativity.API;
-using System;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
-    public interface ISearchExportManager: IManager
-    {
-        ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, Func<OutsideIn.Exporter> func);
-        ExportedMetadata ProcessSearchMLString(byte[] searchML, ExportedMetadata result = null);
-        void ConfigureOutsideIn();
-    }
+	public interface ISearchExportManager : IManager
+	{
+		ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, OutsideIn.Exporter oIExporter);
+		ExportedMetadata ProcessSearchMLString(byte[] searchML, ExportedMetadata result = null);
+		void ConfigureOutsideIn();
+	}
 }

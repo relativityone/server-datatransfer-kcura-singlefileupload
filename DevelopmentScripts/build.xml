@@ -27,7 +27,31 @@
             <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
           </IgnoreRules>
         </Project>
-         <Project path="Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.Core.UnitTest\Relativity.SimpleFileUpload.Core.UnitTest.csproj">
+        <Project path="Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.Core.UnitTest\Relativity.SimpleFileUpload.Core.UnitTest.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core.NUnit\kCura.SingleFileUpload.Core.NUnit.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.MVC.NUnit\kCura.SingleFileUpload.MVC.NUnit.csproj">
+          <Platforms>
+            <Platform>AnyCPU</Platform>
+          </Platforms>
+          <IgnoreRules>
+            <IgnoreRule>TreatWarningsAsErrors</IgnoreRule>
+          </IgnoreRules>
+        </Project>
+        <Project path="Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.NUnit\kCura.SingleFileUpload.Resources.NUnit.csproj">
           <Platforms>
             <Platform>AnyCPU</Platform>
           </Platforms>
@@ -121,10 +145,10 @@
         <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\bin\kCura.SingleFileUpload.Resources.dll</Assembly>
         </Assemblies>
-		<Assemblies>
+        <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\kCura.SingleFileUpload.Core.dll</Assembly>
         </Assemblies>
-		<Assemblies>
+        <Assemblies>
           <Assembly>Source\SolutionResources\NSerio.Relativity.dll</Assembly>
         </Assemblies>
         <ResourceFiles />

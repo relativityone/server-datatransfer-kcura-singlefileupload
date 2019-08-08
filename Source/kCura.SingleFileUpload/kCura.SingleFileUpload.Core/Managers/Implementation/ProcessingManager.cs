@@ -1,5 +1,6 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using Relativity.Services.ObjectQuery;
+using System;
 using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
@@ -8,6 +9,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	{
 		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
 		private readonly int _DATA_ITEM_RESULT = 2;
+
+		public static readonly Lazy<IProcessingManager> _INSTANCE = new Lazy<IProcessingManager>(() => new ProcessingManager());
+		public static IProcessingManager instance => _INSTANCE.Value;
 		public ProcessingDocument GetErrorInfo(int errorID)
 		{
 			int processingErrorObjectType = GetArtifactTypeByArtifactGuid(Helpers.Constants.PROCESSINGERROROBJECTTYPE);

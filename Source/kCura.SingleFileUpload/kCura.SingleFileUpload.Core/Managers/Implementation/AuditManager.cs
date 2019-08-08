@@ -1,5 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities.Enumerations;
-using Relativity.API;
+using kCura.SingleFileUpload.Core.SQL;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,24 +8,20 @@ using System.Management;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
-	public class AuditManager : IAuditManager
+	public class AuditManager : BaseManager, IAuditManager
 	{
 		private string _recordOrigination;
-		private readonly IHelper _helper;
 
-		public AuditManager(IHelper helper)
+		private static readonly Lazy<IAuditManager> _INSTANCE = new Lazy<IAuditManager>(() => new AuditManager());
+		public static IAuditManager instance => _INSTANCE.Value;
+
+		public AuditManager()
 		{
-			_helper = helper;
 		}
+
 
 		public void CreateAuditRecord(int workspaceId, int artifactID, AuditAction action, string details, int userID)
 		{
-			IDBContext context = _helper.GetDBContext(workspaceId);
-			const String sql =
-				@"	INSERT INTO [EDDSDBO].[AuditRecord_PrimaryPartition] ([ArtifactID],[Action],[Details],[UserID],[TimeStamp],[RequestOrigination],[RecordOrigination])
-						VALUES (@ArtifactID, @Action, @Details, @UserID, @TimeStamp, @RequestOrigination, @RecordOrigination)
-						";
-
 			SqlParameter[] parameters =
 				{
 					new SqlParameter("@ArtifactID", SqlDbType.Int) {Value = artifactID},
@@ -36,8 +32,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					new SqlParameter("@RequestOrigination", SqlDbType.NVarChar) {Value = GetRequestOrigination()},
 					new SqlParameter("@RecordOrigination", SqlDbType.NVarChar) {Value = GetRecordOrigination()},
 				};
-
-			context.ExecuteNonQuerySQLStatement(sql, parameters);
+			_Repository.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertAuditRecord, parameters);
 		}
 
 		/// <summary>

@@ -12,8 +12,6 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,7 +112,7 @@
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
       <Project>{35649484-671a-407e-924e-1c1fbd850393}</Project>
-      <Name>%24safeprojectname%24.Core</Name>
+      <Name>kCura.SingleFileUpload.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

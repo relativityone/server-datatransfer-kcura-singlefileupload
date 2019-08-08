@@ -22,7 +22,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Queries {
+    public class Queries {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("kCura.SingleFileUpload.Core.SQL.Queries", typeof(Queries).Assembly);
@@ -51,7 +51,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -68,7 +68,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///.
         /// </summary>
-        internal static string DeleteDocumentImages {
+        public static string DeleteDocumentImages {
             get {
                 return ResourceManager.GetString("DeleteDocumentImages", resourceCulture);
             }
@@ -89,7 +89,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///SET HasRedactions = 0
         ///WHERE Document = @DocumentID.
         /// </summary>
-        internal static string DeleteDocumentRedactions {
+        public static string DeleteDocumentRedactions {
             get {
                 return ResourceManager.GetString("DeleteDocumentRedactions", resourceCulture);
             }
@@ -104,7 +104,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         /// ON R.FileGuid = F.[Guid]
         /// WHERE D.ArtifactID = @DocumentID.
         /// </summary>
-        internal static string DocumentHasRedactions {
+        public static string DocumentHasRedactions {
             get {
                 return ResourceManager.GetString("DocumentHasRedactions", resourceCulture);
             }
@@ -119,7 +119,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///.
         /// </summary>
-        internal static string GetArtifactTypeByArtifactGuid {
+        public static string GetArtifactTypeByArtifactGuid {
             get {
                 return ResourceManager.GetString("GetArtifactTypeByArtifactGuid", resourceCulture);
             }
@@ -131,7 +131,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///INNER JOIN EDDSDBO.SystemArtifact AS SA WITH (NOLOCK) ON OC.ArtifactID = SA.ArtifactID
         ///WHERE SystemArtifactIdentifier = &apos;SystemOAuth2Client&apos;.
         /// </summary>
-        internal static string GetClientCredentials {
+        public static string GetClientCredentials {
             get {
                 return ResourceManager.GetString("GetClientCredentials", resourceCulture);
             }
@@ -156,7 +156,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///EXEC(&apos;SELECT ArtifactID FROM EDDSDBO.Document WITH (NOLOCK) WHERE &apos;+@CNField+&apos;=&apos;&apos;&apos;+@ControlNumber+&apos;&apos;&apos;&apos;).
         /// </summary>
-        internal static string GetDocumentArtifactIdByControlNumber {
+        public static string GetDocumentArtifactIdByControlNumber {
             get {
                 return ResourceManager.GetString("GetDocumentArtifactIdByControlNumber", resourceCulture);
             }
@@ -168,7 +168,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE F.FieldArtifactTypeID = 10
         ///AND F.FieldCategoryID = @CATEGORYID.
         /// </summary>
-        internal static string GetDocumentIdentifierField {
+        public static string GetDocumentIdentifierField {
             get {
                 return ResourceManager.GetString("GetDocumentIdentifierField", resourceCulture);
             }
@@ -189,9 +189,9 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	  FROM [EDDSDBO].[AccessControlListPermission] AS AC WITH(NOLOCK)
         ///	  INNER JOIN [EDDSDBO].[Permission] AS P WITH(NOLOCK)
         ///	  ON P.[PermissionID] = AC.[PermissionID]
-        ///	  AND AC.[PermissionID] IN (SELECT [rest of string was truncated]&quot;;.
+        ///	  AND AC.[Permission [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GetDocumentPermissions {
+        public static string GetDocumentPermissions {
             get {
                 return ResourceManager.GetString("GetDocumentPermissions", resourceCulture);
             }
@@ -213,7 +213,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///SELECT @FID AS FID.
         /// </summary>
-        internal static string GetDroppedFolder {
+        public static string GetDroppedFolder {
             get {
                 return ResourceManager.GetString("GetDroppedFolder", resourceCulture);
             }
@@ -226,7 +226,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///AND F.FieldTypeID = @Type
         ///AND F.DisplayName IN ({0}).
         /// </summary>
-        internal static string GetFieldIDByNameAndType {
+        public static string GetFieldIDByNameAndType {
             get {
                 return ResourceManager.GetString("GetFieldIDByNameAndType", resourceCulture);
             }
@@ -245,7 +245,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE
         ///	AF.ArtifactGuid = @artifactGuid.
         /// </summary>
-        internal static string GetFieldInfoByGuid {
+        public static string GetFieldInfoByGuid {
             get {
                 return ResourceManager.GetString("GetFieldInfoByGuid", resourceCulture);
             }
@@ -262,7 +262,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	AND
         ///	DisplayName LIKE &apos;{1}&apos;.
         /// </summary>
-        internal static string GetFieldItem {
+        public static string GetFieldItem {
             get {
                 return ResourceManager.GetString("GetFieldItem", resourceCulture);
             }
@@ -276,7 +276,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE
         ///	NAME = &apos;SFUDefaultFieldNames&apos;.
         /// </summary>
-        internal static string GetFieldsInstanceSetting {
+        public static string GetFieldsInstanceSetting {
             get {
                 return ResourceManager.GetString("GetFieldsInstanceSetting", resourceCulture);
             }
@@ -290,7 +290,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE 
         ///	[Name] = &apos;SFUFieldValues&apos;.
         /// </summary>
-        internal static string GetFieldsWorspaceSetting {
+        public static string GetFieldsWorspaceSetting {
             get {
                 return ResourceManager.GetString("GetFieldsWorspaceSetting", resourceCulture);
             }
@@ -309,7 +309,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	AND
         ///	[Type] = 0.
         /// </summary>
-        internal static string GetFileInfoByDocumentArtifactID {
+        public static string GetFileInfoByDocumentArtifactID {
             get {
                 return ResourceManager.GetString("GetFileInfoByDocumentArtifactID", resourceCulture);
             }
@@ -325,7 +325,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	AND
         ///	GU.UserArtifactID = @UserId.
         /// </summary>
-        internal static string GetIsSystemAdminUser {
+        public static string GetIsSystemAdminUser {
             get {
                 return ResourceManager.GetString("GetIsSystemAdminUser", resourceCulture);
             }
@@ -338,7 +338,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE F.FIELDARTIFACTTYPEID = 10
         ///AND DISPLAYNAME IN ({0}).
         /// </summary>
-        internal static string GetMatchedFields {
+        public static string GetMatchedFields {
             get {
                 return ResourceManager.GetString("GetMatchedFields", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///				inner join eddsdbo.ArtifactGuid AG on AG.ArtifactID = OT.ArtifactID
         ///				WHERE [ArtifactGuid] = @artifactGuid.
         /// </summary>
-        internal static string GetObjectTypeByGuid {
+        public static string GetObjectTypeByGuid {
             get {
                 return ResourceManager.GetString("GetObjectTypeByGuid", resourceCulture);
             }
@@ -362,7 +362,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///FROM EDDSDBO.EXTENDEDCASE AS EC WITH (NOLOCK)
         ///WHERE ARTIFACTID = @AID.
         /// </summary>
-        internal static string GetRepoLocationByCaseID {
+        public static string GetRepoLocationByCaseID {
             get {
                 return ResourceManager.GetString("GetRepoLocationByCaseID", resourceCulture);
             }
@@ -376,7 +376,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE
         ///	ArtifactID = @artifactId.
         /// </summary>
-        internal static string GetWorkspaceGuidByArtifactID {
+        public static string GetWorkspaceGuidByArtifactID {
             get {
                 return ResourceManager.GetString("GetWorkspaceGuidByArtifactID", resourceCulture);
             }
@@ -386,9 +386,21 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///   Looks up a localized string similar to SELECT ARTIFACTID, NAME
         ///FROM EDDSDBO.[CASE] WITH (NOLOCK) -- ALWAYS USE WITH (NOLOCK).
         /// </summary>
-        internal static string GetWorkspaceNames {
+        public static string GetWorkspaceNames {
             get {
                 return ResourceManager.GetString("GetWorkspaceNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [EDDSDBO].[AuditRecord_PrimaryPartition] 
+        ///	([ArtifactID],[Action],[Details],[UserID],[TimeStamp],[RequestOrigination],[RecordOrigination])
+        ///VALUES 
+        ///	(@ArtifactID, @Action, @Details, @UserID, @TimeStamp, @RequestOrigination, @RecordOrigination).
+        /// </summary>
+        public static string InsertAuditRecord {
+            get {
+                return ResourceManager.GetString("InsertAuditRecord", resourceCulture);
             }
         }
         
@@ -413,7 +425,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHER [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string InsertFieldsInstanceSetting {
+        public static string InsertFieldsInstanceSetting {
             get {
                 return ResourceManager.GetString("InsertFieldsInstanceSetting", resourceCulture);
             }
@@ -444,7 +456,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	)
         ///END	.
         /// </summary>
-        internal static string InsertFieldsWorspaceSetting {
+        public static string InsertFieldsWorspaceSetting {
             get {
                 return ResourceManager.GetString("InsertFieldsWorspaceSetting", resourceCulture);
             }
@@ -464,7 +476,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///      ,[Details])
         ///VALUES (NEWID(), @DocumentID, @FileName, @Order, @Type, -1, @DocIdentifier, @Location, 1, @Size, &apos;&apos;).
         /// </summary>
-        internal static string InsertImageInFileTable {
+        public static string InsertImageInFileTable {
             get {
                 return ResourceManager.GetString("InsertImageInFileTable", resourceCulture);
             }
@@ -488,7 +500,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///    FROM eddsdbo.InstanceSetting WITH (nolock)
         ///    WHERE name = @Name AN [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string InsertInstanceSettings {
+        public static string InsertInstanceSettings {
             get {
                 return ResourceManager.GetString("InsertInstanceSettings", resourceCulture);
             }
@@ -508,18 +520,29 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///			--User group
         ///	 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string IsUserAdministrator {
+        public static string IsUserAdministrator {
             get {
                 return ResourceManager.GetString("IsUserAdministrator", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DELETE
+        ///   Looks up a localized string similar to DECLARE @EHArtictID INT = (SELECT TOP 1 ArtifactID
+        ///							FROM [EDDSDBO].[ActiveSyncs] WITH (NOLOCK)
+        ///							WHERE ClassName =&apos;kCura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler&apos;)
+        ///
+        ///IF OBJECT_ID(N&apos;EDDSDBO.ApplicationEventHandler&apos;) IS NOT NULL
+        ///BEGIN
+        ///	DELETE
+        ///	FROM [EDDSDBO].[ApplicationEventHandler]
+        ///	WHERE EventHandlerArtifactID = @EHArtictID
+        ///END
+        ///
+        ///DELETE
         ///FROM [EDDSDBO].[ActiveSyncs]
-        ///WHERE ClassName = &apos;kCura.SingleFileUpload.Resources.EventHandlers.DocumentPageInteractionEventHandler&apos;.
+        ///WHERE ArtifactID = @EHArtictID.
         /// </summary>
-        internal static string RemovePageInteractionEvenHandlerFromDocumentObject {
+        public static string RemovePageInteractionEvenHandlerFromDocumentObject {
             get {
                 return ResourceManager.GetString("RemovePageInteractionEvenHandlerFromDocumentObject", resourceCulture);
             }
@@ -543,7 +566,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///WHERE 
         ///	ARTIFACTID = @AID.
         /// </summary>
-        internal static string ReplaceNativeFile {
+        public static string ReplaceNativeFile {
             get {
                 return ResourceManager.GetString("ReplaceNativeFile", resourceCulture);
             }
@@ -565,7 +588,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	WHERE ARTIFACTID = @DocumentID
         ///END.
         /// </summary>
-        internal static string UpdateDocumentLastModificationFields {
+        public static string UpdateDocumentLastModificationFields {
             get {
                 return ResourceManager.GetString("UpdateDocumentLastModificationFields", resourceCulture);
             }
@@ -591,7 +614,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///								       FROM EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
         ///				 [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string UpdateHasImages {
+        public static string UpdateHasImages {
             get {
                 return ResourceManager.GetString("UpdateHasImages", resourceCulture);
             }
