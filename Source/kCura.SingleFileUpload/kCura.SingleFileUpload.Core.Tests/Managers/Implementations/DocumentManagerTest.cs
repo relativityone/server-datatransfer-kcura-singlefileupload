@@ -16,6 +16,7 @@ using Relativity.Telemetry.Services.Metrics;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -280,8 +281,17 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public void InstanceFileTest()
 		{
+			bool assert = false;
 			string result = DocumentManager.instance.InstanceFile(TestsConstants._FILE_NAME, System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), true, TestsConstants._DOC_GUID.ToString());
-			Assert.IsTrue(result.Contains(TestsConstants._FILE_NAME));
+			string path = $"{Directory.GetCurrentDirectory()}\\{TestsConstants._DOC_GUID.ToString()}";
+
+			if (Directory.Exists(path))
+			{
+				Directory.Delete(path, true);
+				assert = true;
+			}
+
+			Assert.IsTrue(assert);
 		}
 	}
 }
