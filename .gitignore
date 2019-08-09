@@ -82,3 +82,5 @@ FunctionalTest.runsettings
 *.jar
 *.exe
 *.bin
+RV_*/
+temporary publish/

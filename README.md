@@ -1,7 +1,9 @@
-# RAP Repository Template
+# Simple File Upload
 
-This repository should serve as the template when migrating your project to RAP CD or creating a new project using RAP CD.
-Note: If you are going to start your project's repository using this template, you must replace the contents of this document with information specific to your project. For information on what your documentation should look like, refer to [this Einstein page](https://einstein.kcura.com/x/RglUB)
+## Overview
+
+This repository is related to the Single File Upload application.
+
 
 ## Build Tasks
 
@@ -13,8 +15,8 @@ For functional tests, point PowerShell to the root of this repository and provid
 
 ## Online Documentation
 
-For more information on RAP CD, [view the documentation in Einstein](https://einstein.kcura.com/x/hRkFCQ)
+[View the documentation in Einstein](https://einstein.kcura.com/display/DV/Single+File+Upload+Application+Considerations)
 
 ## Maintainers
 
-This repository is owned by the Tools Team. Please send any issues or feature requests to tools-support@relativity.com
+Marlon Sanguino marlon.sanguino@relativity.com
