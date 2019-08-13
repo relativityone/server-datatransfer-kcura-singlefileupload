@@ -464,8 +464,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		{
 			FileInformation fInformation = null;
 
-			DbDataReader reader = _Repository.CaseDBContext.ExecuteSqlStatementAsDbDataReader(
-				Queries.GetFileInfoByDocumentArtifactID, new[] { SqlHelper.CreateSqlParameter("@documentArtifactId", docArtifactId) });
+			DataTable dt = _Repository.CaseDBContext.ExecuteSqlStatementAsDataTable(
+				Queries.GetFileInfoByDocumentArtifactID, new[] { new SqlParameter("@documentArtifactId", docArtifactId) });
+			DbDataReader reader = dt.CreateDataReader();
 
 			if (reader.HasRows)
 			{
@@ -483,6 +484,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			return fInformation;
 		}
+
+		private object SqlParameter(string v, int docArtifactId)
+		{
+			throw new NotImplementedException();
+		}
+
 		public int GetDocByName(string docName)
 		{
 			DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>();
@@ -677,37 +684,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					WebServiceURL = webApiUrl.Replace("/Relativity", "/RelativityWebAPI")
 
 				};
-				IImportApiFactory importApiFactory = new ImportApiFactory();
-				ImportAPI iapi = (ExtendedImportAPI)importApiFactory.GetImportAPI(settings);
-
-				ImportBulkArtifactJob importJob = iapi.NewNativeDocumentImportJob();
-
-				importJob.Settings.CaseArtifactId = workspaceID;
-				importJob.Settings.ExtractedTextFieldContainsFilePath = false;
-				importJob.Settings.DisableExtractedTextEncodingCheck = true;
-				importJob.Settings.DisableExtractedTextFileLocationValidation = true;
-				importJob.Settings.DisableNativeLocationValidation = true;
-				importJob.Settings.DisableNativeValidation = false;
-				importJob.Settings.OverwriteMode = OverwriteModeEnum.AppendOverlay;
-				importJob.OnComplete += ImportJob_OnComplete;
-				importJob.OnError += ImportJob_OnError;
-				importJob.OnFatalException += ImportJob_OnFatalException;
-				importJob.Settings.DisableUserSecurityCheck = false;
-
-
-				if (folderId != 0)
-				{
-					importJob.Settings.DestinationFolderArtifactID = folderId;
-				}
-
+				IImportAPI iapi = ImportApiFactory.Instance.GetImportAPI(settings);
 				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync();
-
-				importJob.Settings.SelectedIdentifierFieldName = identityField.Name;
-				importJob.Settings.NativeFilePathSourceFieldName = "Native File";
-				importJob.Settings.NativeFileCopyMode = NativeFileCopyModeEnum.CopyFiles;
-				importJob.Settings.OverwriteMode = OverwriteModeEnum.AppendOverlay;
-				// Specify the ArtifactID of the document identifier field, such as a control number.
-				importJob.Settings.IdentityFieldId = identityField.ArtifactId;
 
 				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name);
 
@@ -747,8 +725,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					documentInfo.TempFileLocation);
 				}
 
-				importJob.SourceData.SourceData = dtDocument.CreateDataReader();
-
+				IDataReader docsDataReader = dtDocument.CreateDataReader();
+				IImportBulkArtifactJob importJob = ImportApiFactory.Instance.GetImportApiBulkArtifactJob(
+					iapi,
+					workspaceID,
+					ImportJob_OnComplete,
+					ImportJob_OnError,
+					ImportJob_OnFatalException,
+					folderId,
+					identityField,
+					docsDataReader);
 				importJob.Execute();
 			}
 			catch (Exception ex)

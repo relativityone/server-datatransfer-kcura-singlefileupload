@@ -1,5 +1,6 @@
 ﻿using kCura.Relativity.Client;
 using kCura.Relativity.Client.DTOs;
+using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Factories;
@@ -17,7 +18,6 @@ using Relativity.Services.ObjectQuery;
 using Relativity.Telemetry.Services.Metrics;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -115,19 +115,13 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Returns(mockLogFactory.Object);
 
 
-			DataTable dt = new DataTable();
-			dt.Columns.Add("FileID", typeof(int));
-			dt.Columns.Add("DocumentArtifactID", typeof(int));
-			dt.Columns.Add("FileName", typeof(string));
-			dt.Columns.Add("Location", typeof(string));
-			dt.Rows.Add(TestsConstants._DOC_FILE_ID, TestsConstants._DOC_ARTIFACT_ID, TestsConstants._FILE_NAME, TestsConstants._FILE_LOCATION);
+
 
 			mockingHelper
 				.MockIDBContextOnHelper()
-				.MockExecuteSqlStatementAsDbDataReaderWithSqlParametersArray(Queries.GetFileInfoByDocumentArtifactID, dt.CreateDataReader())
-				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._FILE_LOCATION)
+				.MockExecuteSqlStatementAsDataTableWithSqlParametersArray(Queries.GetFileInfoByDocumentArtifactID, TestsConstants._GetdataTable())
+				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._FILE_LOCATION_Temp)
 				.MockExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting, TestsConstants._JSON_RESULT)
-				.MockExecuteSqlStatementAsDataTable(Queries.GetFileInfoByDocumentArtifactID, dt)
 				.MockExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID, Guid.NewGuid().ToString());
 
 			Mock<IFileTypeIdentifier> mockFileTypeIdentifier = new Mock<IFileTypeIdentifier>();
@@ -169,7 +163,15 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Mock(TestsConstants._FILE_TYPE)
 				.Mock(true);
 
+			Mock<IImportAPI> mockingImportApi = new Mock<IImportAPI>();
+			mockingImportApi.DefaultValue = DefaultValue.Mock;
+			mockingImportApi.SetReturnsDefault(true);
 
+			Mock<IImportBulkArtifactJob> mockingImportBulkArtifactJob = new Mock<IImportBulkArtifactJob>();
+			mockingImportBulkArtifactJob.DefaultValue = DefaultValue.Mock;
+			mockingImportBulkArtifactJob.SetReturnsDefault(true);
+
+			ImportApiFactory.SetUpSingleton(mockingImportApi.Object, mockingImportBulkArtifactJob.Object);
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}
@@ -347,10 +349,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task ReplaceSingleDocumentTest()
 		{
-			mockingHelper
-				.MockIDBContextOnHelper()
-				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._FILE_LOCATION_UPDATE_NATIVE);
-
 			await DocumentManager.instance.ReplaceSingleDocument(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
 			Assert.IsTrue(true);
 		}

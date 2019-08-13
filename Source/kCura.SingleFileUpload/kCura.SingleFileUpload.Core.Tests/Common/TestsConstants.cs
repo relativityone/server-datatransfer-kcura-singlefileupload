@@ -3,6 +3,7 @@ using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Relativity.Services.InstanceSetting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace kCura.SingleFileUpload.Core.Tests.Constants
 {
@@ -18,6 +19,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _FILE_NAME = "CTRL0192153.xml";
 		public const string _WEB_API_URL = "https://test";
 		public static readonly string _FILE_LOCATION = FileHelper.GetFileLocation(_FILE_NAME);
+		public static readonly string _FILE_LOCATION_Temp = FileHelper.GetFileLocation(Guid.NewGuid().ToString());
 		public static readonly string _FILE_LOCATION_UPDATE_NATIVE = FileHelper.GetFileLocation("CTRL0192154.xml");
 		public const int _USER_ID = 777;
 		public const string _DOC_CONTROL_NUMBER = "CTRL0192153";
@@ -63,6 +65,18 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		{
 			FileName = _FILE_NAME
 		};
+
+		public static DataTable _GetdataTable()
+		{
+			DataTable dt = new DataTable();
+			dt.Columns.Add("FileID", typeof(int));
+			dt.Columns.Add("DocumentArtifactID", typeof(int));
+			dt.Columns.Add("FileName", typeof(string));
+			dt.Columns.Add("Location", typeof(string));
+			dt.Rows.Add(TestsConstants._DOC_FILE_ID, TestsConstants._DOC_ARTIFACT_ID, TestsConstants._FILE_NAME, TestsConstants._FILE_LOCATION);
+
+			return dt;
+		}
 
 	}
 }

@@ -38,14 +38,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 			return mockingDbContext;
 		}
 
-		public static Mock<IDBContext> MockExecuteSqlStatementAsDbDataReaderWithSqlParametersArray(this Mock<IDBContext> mockingDbContext, string sql, DbDataReader resultDataReader)
-		{
-			mockingDbContext
-				.Setup(p => p.ExecuteSqlStatementAsDbDataReader(sql, It.IsAny<SqlParameter[]>()))
-				.Returns(resultDataReader);
-
-			return mockingDbContext;
-		}
 
 		public static Mock<IDBContext> MockExecuteSqlStatementAsScalar(this Mock<IDBContext> mockingDbContext, string sql, object resultObject)
 		{
@@ -55,11 +47,28 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 
 			return mockingDbContext;
 		}
+		public static Mock<IDBContext> MockExecuteSqlStatementAsDbDataReaderWithSqlParametersArray(this Mock<IDBContext> mockingDbContext, string sql, DbDataReader resultDataReader)
+		{
+			mockingDbContext
+				.Setup(p => p.ExecuteSqlStatementAsDbDataReader(sql, It.IsAny<SqlParameter[]>()))
+				.Returns(resultDataReader);
+
+			return mockingDbContext;
+		}
 
 		public static Mock<IDBContext> MockExecuteSqlStatementAsDataTable(this Mock<IDBContext> mockingDbContext, string sql, DataTable resultObject)
 		{
 			mockingDbContext
 				.Setup(p => p.ExecuteSqlStatementAsDataTable(sql))
+				.Returns(resultObject);
+
+			return mockingDbContext;
+		}
+
+		public static Mock<IDBContext> MockExecuteSqlStatementAsDataTableWithSqlParametersArray(this Mock<IDBContext> mockingDbContext, string sql, DataTable resultObject)
+		{
+			mockingDbContext
+				.Setup(p => p.ExecuteSqlStatementAsDataTable(sql, It.IsAny<SqlParameter[]>()))
 				.Returns(resultObject);
 
 			return mockingDbContext;

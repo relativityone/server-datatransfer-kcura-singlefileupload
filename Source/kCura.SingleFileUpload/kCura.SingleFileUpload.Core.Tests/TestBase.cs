@@ -12,7 +12,7 @@ namespace kCura.SingleFileUpload.Core.Tests
 		protected internal void ConfigureSingletoneRepositoryScope(IHelper helper)
 		{
 			RepositoryHelper.ConfigureRepository(helper);
-			_cacheContextScope = RepositoryHelper.InitializeRepository();
+			_cacheContextScope = RepositoryHelper.InitializeRepository(); 
 		}
 
 		[OneTimeTearDown]
