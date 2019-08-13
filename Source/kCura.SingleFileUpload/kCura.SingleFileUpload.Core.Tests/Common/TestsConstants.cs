@@ -14,17 +14,19 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public static readonly Guid _DOC_GUID = Guid.NewGuid();
 		public const string _DOC_NAME = "docTestName";
 		public const string _FILE_TYPE = ".7z";
+		public const string _OI_FILE_TYPE_ = "Extensible Markup Language (XML)";
 		public const string _FILE_NAME = "CTRL0192153.xml";
 		public const string _WEB_API_URL = "https://test";
 		public static readonly string _FILE_LOCATION = FileHelper.GetFileLocation(_FILE_NAME);
+		public static readonly string _FILE_LOCATION_UPDATE_NATIVE = FileHelper.GetFileLocation("CTRL0192154.xml");
 		public const int _USER_ID = 777;
 		public const string _DOC_CONTROL_NUMBER = "CTRL0192153";
 		public const string _EXTRACTED_TEXT = "John\r\nDoe\r\n";
 
 		public static readonly ExportedMetadata _EXP_METADATA = new ExportedMetadata()
 		{
-			Native = new byte[2080],
-			FileName = "DocumentTestName.txt",
+			Native = System.IO.File.ReadAllBytes(_FILE_LOCATION),
+			FileName = "CTRL0192154.xml",
 		};
 
 		public static readonly DocumentExtraInfo _DOC_EXTRA_INFO = new DocumentExtraInfo()
@@ -61,5 +63,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		{
 			FileName = _FILE_NAME
 		};
+
 	}
 }

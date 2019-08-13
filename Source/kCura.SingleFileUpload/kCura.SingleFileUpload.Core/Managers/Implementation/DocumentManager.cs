@@ -1,6 +1,7 @@
 ﻿using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Factories;
 using kCura.SingleFileUpload.Core.Helpers;
 using kCura.SingleFileUpload.Core.SQL;
 using Newtonsoft.Json.Linq;
@@ -669,9 +670,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			try
 			{
 				ForceTapiSettings();
-				string value = GetBearerToken();
-				webApiUrl = webApiUrl.Replace("/Relativity", "/RelativityWebAPI");
-				ImportAPI iapi = new ExtendedImportAPI("XxX_BearerTokenCredentials_XxX", value, webApiUrl);
+				ImportSettings settings = new ImportSettings()
+				{
+					RelativityPassword = GetBearerToken(),
+					RelativityUsername = "XxX_BearerTokenCredentials_XxX",
+					WebServiceURL = webApiUrl.Replace("/Relativity", "/RelativityWebAPI")
+
+				};
+				IImportApiFactory importApiFactory = new ImportApiFactory();
+				ImportAPI iapi = (ExtendedImportAPI)importApiFactory.GetImportAPI(settings);
+
 				ImportBulkArtifactJob importJob = iapi.NewNativeDocumentImportJob();
 
 				importJob.Settings.CaseArtifactId = workspaceID;

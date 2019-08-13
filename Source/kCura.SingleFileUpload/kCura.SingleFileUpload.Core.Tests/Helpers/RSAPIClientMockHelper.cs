@@ -1,6 +1,7 @@
 ﻿using kCura.Relativity.Client;
 using kCura.Relativity.Client.Repositories;
 using Moq;
+using System;
 using System.Linq;
 
 namespace kCura.SingleFileUpload.Core.Tests.Helpers
@@ -10,6 +11,9 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 		public static Mock<IRSAPIClient> GetMockedHelper(int workspaceID = -1)
 		{
 			var helper = new Mock<IRSAPIClient>();
+			helper.DefaultValue = DefaultValue.Mock;
+			helper.SetReturnsDefault(true);
+			helper.SetReturnsDefault(GetResulSetMock());
 
 			///--- base helper
 			helper.Setup(p => p.APIOptions).Returns(new APIOptions(workspaceID));
@@ -17,6 +21,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 			///--- hack repogroup
 			var repoGroup = ForceRepositoryGroupMock(helper.Object);
 			helper.SetupGet(p => p.Repositories).Returns(repoGroup);
+
 
 			return helper;
 		}
@@ -28,6 +33,34 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 			var repoGroup = repositoryCtor.Invoke(new[] { helper }) as RepositoryGroup;
 
 			return repoGroup;
+		}
+
+		internal static ResultSet GetResulSetMock()
+		{
+			return new ResultSet()
+			{
+				Results = new System.Collections.Generic.List<Result>()
+				{
+					new Result()
+					{
+						MetaDataArtifact=  new Artifact()
+						{
+							ArtifactGuids =  new System.Collections.Generic.List<System.Guid>()
+							{
+								Guid.NewGuid()
+							}
+						},
+						WarningMessage =  new System.Collections.Generic.List<string>()
+						{
+							"Empty"
+						},
+						Success = true
+
+					}
+				},
+				ResultSetType = ResultSetType.Create,
+				Success = true,
+			};
 		}
 	}
 }

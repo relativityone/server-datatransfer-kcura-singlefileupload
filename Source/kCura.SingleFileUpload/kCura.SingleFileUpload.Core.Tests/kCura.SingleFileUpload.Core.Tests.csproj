@@ -70,6 +70,12 @@
     <Reference Include="Relativity.Kepler, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.1.0.1.627\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
+    <Reference Include="Relativity.Logging, Version=2018.11.8.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.2018.11.8\lib\net462\Relativity.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Logging.Interfaces, Version=2018.11.8.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.Interfaces.2018.11.8\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Relativity.SecretCatalog, Version=1.0.18.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.18\lib\Relativity.SecretCatalog.dll</HintPath>
     </Reference>

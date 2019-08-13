@@ -218,8 +218,11 @@
     <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
     <Compile Include="Entities\Imaging.cs" />
+    <Compile Include="Entities\ImportSettings.cs" />
     <Compile Include="Entities\ProcessingDocument.cs" />
     <Compile Include="Entities\Response.cs" />
+    <Compile Include="Factories\IImportApiFactory.cs" />
+    <Compile Include="Factories\ImportApiFactory.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Entities\ExportedMetadata.cs" />
     <Compile Include="Helpers\DeployableFiles.Designer.cs">

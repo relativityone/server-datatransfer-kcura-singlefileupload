@@ -98,7 +98,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-			OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+			if (OutsideIn.OutsideIn.InstallLocation == null)
+			{
+				OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+			}
 		}
 
 

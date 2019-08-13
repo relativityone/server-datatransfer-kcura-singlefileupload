@@ -1,6 +1,8 @@
 ﻿using kCura.Relativity.Client;
 using kCura.Relativity.Client.DTOs;
+using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Factories;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Constants;
@@ -28,11 +30,14 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 
 		private Mock<IHelper> mockingHelper;
+		private readonly string tempFilePath = FileHelper.GetTempDirectoryPath();
 
+		#region SetUp
 
 		[OneTimeSetUp]
 		public void Setup()
 		{
+
 
 			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
 
@@ -90,9 +95,24 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				});
 
 
+
 			mockingHelper = MockHelper
 				.GetMockingHelper<IHelper>();
 
+			Mock<IAPILog> mockApiLog = new Mock<IAPILog>();
+			mockApiLog.Setup(p => p.LogError(It.IsAny<string>()));
+			mockApiLog.Setup(p => p.ForContext<BaseManager>())
+				.Returns(mockApiLog.Object);
+
+			Mock<ILogFactory> mockLogFactory = new Mock<ILogFactory>();
+			ILogFactory logFactory = mockLogFactory.Object;
+
+
+			mockLogFactory.Setup(p => p.GetLogger())
+				.Returns(mockApiLog.Object);
+
+			mockingHelper.Setup(p => p.GetLoggerFactory())
+				.Returns(mockLogFactory.Object);
 
 
 			DataTable dt = new DataTable();
@@ -110,18 +130,21 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.MockExecuteSqlStatementAsDataTable(Queries.GetFileInfoByDocumentArtifactID, dt)
 				.MockExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID, Guid.NewGuid().ToString());
 
-			Mock<IFileTypeIdentifier> test = new Mock<IFileTypeIdentifier>();
+			Mock<IFileTypeIdentifier> mockFileTypeIdentifier = new Mock<IFileTypeIdentifier>();
 
-			Mock<IFileTypeInfo> testt = new Mock<IFileTypeInfo>();
+			Mock<IFileTypeInfo> mockFileTypeInfo = new Mock<IFileTypeInfo>();
 
-			testt.Setup(p => p.Description).Returns("Test");
+			mockFileTypeInfo.Setup(p => p.Description).Returns("Test");
 
-			test.Setup(p => p.Identify(It.IsAny<string>())).Returns(testt.Object);
+			mockFileTypeIdentifier.Setup(p => p.Identify(It.IsAny<string>())).Returns(mockFileTypeInfo.Object);
+
+			Mock<IProvideSystemTokens> mockingProvideSystemToken = new Mock<IProvideSystemTokens>();
+
+			mockingProvideSystemToken.Setup(p => p.GetLocalSystemToken()).Returns(Guid.NewGuid().ToString());
+
+			ExtensionPointServiceFinder.SystemTokenProvider = mockingProvideSystemToken.Object;
 
 
-			Mock<IProvideSystemTokens> systemtoken = new Mock<IProvideSystemTokens>();
-
-			systemtoken.Setup(p => p.GetLocalSystemToken()).Returns("HelloToken");
 
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
@@ -129,17 +152,44 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.MockService<IMetricsManager>()
 				.MockService<IInternalMetricsCollectionManager>()
 				.MockService<IDocumentManager>()
-				.MockService(test);
+				.MockService(mockFileTypeIdentifier)
+				;
 
 
+			Mock<IImportApiFactory> mockImportApi = new Mock<IImportApiFactory>();
+			Mock<IExtendedImportAPI> mockExtendedIApi = new Mock<IExtendedImportAPI>();
+
+			mockImportApi.Setup(p => p.GetImportAPI(It.IsAny<ImportSettings>())).Returns<ExtendedImportAPI>((rs) =>
+			{
+				return mockExtendedIApi.Object;
+
+			});
 
 			mockingServicesMgr.MockServiceInstance<IObjectQueryManager>()
 				.Mock(TestsConstants._FILE_TYPE)
 				.Mock(true);
 
+
+
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}
 
+		#endregion
+
+		#region TearDown
+		[OneTimeTearDown]
+		public void TearDown()
+		{
+
+
+			if (System.IO.File.Exists(tempFilePath))
+			{
+				string tempDirectory = Path.GetDirectoryName(tempFilePath);
+				Directory.Delete(tempDirectory, true);
+			}
+
+		}
+		#endregion
 
 		[Test]
 		public void IsFileTypeSupportedTest()
@@ -292,6 +342,40 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			}
 
 			Assert.IsTrue(assert);
+		}
+
+		[Test]
+		public async Task ReplaceSingleDocumentTest()
+		{
+			mockingHelper
+				.MockIDBContextOnHelper()
+				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._FILE_LOCATION_UPDATE_NATIVE);
+
+			await DocumentManager.instance.ReplaceSingleDocument(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
+			Assert.IsTrue(true);
+		}
+
+		[Test]
+		public void GetNativeTypeByFilenameTest()
+		{
+
+			var nativeType = DocumentManager.instance.GetNativeTypeByFilename(TestsConstants._FILE_LOCATION);
+			Assert.AreEqual(TestsConstants._OI_FILE_TYPE_, nativeType.Description);
+		}
+
+		[Test]
+		public void DeleteTempFileTest()
+		{
+			DocumentManager.instance.DeleteTempFile(tempFilePath);
+			Assert.IsTrue(true);
+		}
+
+		[Test]
+		public void DeleteTempFileTestWhenException()
+		{
+			string emptyPath = "";
+			DocumentManager.instance.DeleteTempFile(emptyPath);
+			Assert.IsTrue(true);
 		}
 	}
 }
