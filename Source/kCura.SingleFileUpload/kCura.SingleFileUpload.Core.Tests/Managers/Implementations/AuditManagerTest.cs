@@ -10,7 +10,7 @@ using Relativity.API;
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
-	public class AuditManagerTests : TestBase
+	public class AuditManagerTest : TestBase
 	{
 
 		[OneTimeSetUp]
