@@ -7,11 +7,11 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 	public class FileHelper
 	{
 		private static readonly string currentTestDirectory = TestContext.CurrentContext.TestDirectory;
-		private static readonly string path = Path.Combine(currentTestDirectory, "..\\", "..\\", "Resources\\TempTestFiles");
+		private static readonly string path = Path.Combine(currentTestDirectory, "..\\", "Resources\\TempTestFiles");
 
 		public static string GetFileLocation(string fileName)
 		{
-			string fileLocation = Path.Combine(currentTestDirectory, "..\\", "..\\", "Resources", fileName);
+			string fileLocation = Path.Combine(currentTestDirectory, "..\\", "Resources", fileName);
 			return fileLocation;
 		}
 
