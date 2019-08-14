@@ -10,8 +10,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 	{
 		public static Mock<IRSAPIClient> GetMockedHelper(int workspaceID = -1)
 		{
-			var helper = new Mock<IRSAPIClient>();
-			helper.DefaultValue = DefaultValue.Mock;
+			var helper = new Mock<IRSAPIClient>
+			{
+				DefaultValue = DefaultValue.Mock
+			};
 			helper.SetReturnsDefault(true);
 			helper.SetReturnsDefault(GetResulSetMock());
 

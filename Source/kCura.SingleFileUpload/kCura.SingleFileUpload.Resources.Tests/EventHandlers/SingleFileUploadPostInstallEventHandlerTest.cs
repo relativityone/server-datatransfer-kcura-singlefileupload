@@ -1,8 +1,8 @@
 ﻿using kCura.EventHandler;
 using kCura.Relativity.Client;
+using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
-using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using Moq;
 using NUnit.Framework;
@@ -26,8 +26,11 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 
 			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
 
-			Mock<IToggleProvider> mockToggleProvider = new Mock<IToggleProvider>();
-			mockToggleProvider.DefaultValue = DefaultValue.Mock;
+			Mock<IToggleProvider> mockToggleProvider = new Mock<IToggleProvider>
+			{
+				DefaultValue = DefaultValue.Mock
+			};
+
 			mockToggleProvider.SetReturnsDefault(MockHelper.FakeTask());
 			mockToggleProvider.SetReturnsDefault(Task.FromResult(true));
 			mockToggleProvider.SetReturnsDefault(1);

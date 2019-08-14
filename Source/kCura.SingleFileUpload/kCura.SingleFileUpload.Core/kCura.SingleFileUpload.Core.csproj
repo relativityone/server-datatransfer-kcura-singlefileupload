@@ -81,8 +81,8 @@
     <Reference Include="kCura.Vendor.Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.589\lib\net462\kCura.Vendor.Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NSerio.Relativity">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
@@ -218,6 +218,7 @@
     <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
     <Compile Include="Entities\Imaging.cs" />
+    <Compile Include="Entities\ImportJobSettings.cs" />
     <Compile Include="Entities\ImportSettings.cs" />
     <Compile Include="Entities\ProcessingDocument.cs" />
     <Compile Include="Entities\Response.cs" />

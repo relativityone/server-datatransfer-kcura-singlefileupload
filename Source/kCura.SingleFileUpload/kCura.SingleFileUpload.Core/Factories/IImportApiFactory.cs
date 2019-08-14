@@ -1,7 +1,6 @@
 ﻿using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
-using System.Data;
 
 namespace kCura.SingleFileUpload.Core.Factories
 {
@@ -11,12 +10,9 @@ namespace kCura.SingleFileUpload.Core.Factories
 
 		IImportBulkArtifactJob GetImportApiBulkArtifactJob(
 			IImportAPI importApi,
-			int workspaceID,
 			IImportNotifier.OnCompleteEventHandler importJobOnComplete,
 			ImportBulkArtifactJob.OnErrorEventHandler importJobOnError,
 			IImportNotifier.OnFatalExceptionEventHandler importJobOnFatal,
-			int folderId,
-			DocumentIdentifierField identityField,
-			IDataReader documentsDataReader);
+			ImportJobSettings importJobSettings);
 	}
 }

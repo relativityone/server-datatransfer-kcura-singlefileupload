@@ -23,7 +23,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 			{
 				RepositoryHelper.ConfigureRepository(Helper);
 				disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
-				DocumentManager.instance.SetCreateInstanceSettings();
+				DocumentManager.Instance.SetCreateInstanceSettings();
 				ExecuteTelemetryAsync().Wait();
 				response.Success = true;
 			}

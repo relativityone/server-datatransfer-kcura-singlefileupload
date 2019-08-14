@@ -44,35 +44,35 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task LogCountTest()
 		{
-			await TelemetryManager.instance.LogCountAsync(_BUCKET, 1);
+			await TelemetryManager.Instance.LogCountAsync(_BUCKET, 1);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public async Task LogGaugeTest()
 		{
-			await TelemetryManager.instance.LogGaugeAsync(_BUCKET, 1);
+			await TelemetryManager.Instance.LogGaugeAsync(_BUCKET, 1);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void LogDurationTest()
 		{
-			DurationLogger result = TelemetryManager.instance.LogDuration(_BUCKET, "", 1);
+			DurationLogger result = TelemetryManager.Instance.LogDuration(_BUCKET, "", 1);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public async Task CreateMetricsTest()
 		{
-			await TelemetryManager.instance.CreateMetricsAsync();
+			await TelemetryManager.Instance.CreateMetricsAsync();
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public async Task CreateMetricTest()
 		{
-			await TelemetryManager.instance.CreateMetricAsync(_BUCKET, "");
+			await TelemetryManager.Instance.CreateMetricAsync(_BUCKET, "");
 			Assert.IsTrue(true);
 		}
 

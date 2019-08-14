@@ -26,7 +26,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 				{
 					PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _ARTIFACT_TYPE_ID);
 				}
-				DocumentManager.instance.RemovePageInteractionEvenHandlerFromDocumentObject();
+				DocumentManager.Instance.RemovePageInteractionEvenHandlerFromDocumentObject();
 				response.Success = true;
 			}
 			catch (Exception e)
