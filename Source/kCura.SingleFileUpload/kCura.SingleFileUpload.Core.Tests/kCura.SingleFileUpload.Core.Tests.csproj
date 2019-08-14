@@ -132,7 +132,7 @@
     <Compile Include="Helpers\MockServiceMgrHelper.cs" />
     <Compile Include="Helpers\MoclObjectManagerHelper.cs" />
     <Compile Include="Helpers\RSAPIClientMockHelper.cs" />
-    <Compile Include="Managers\Implementations\AuditManagerTest.cs" />
+    <Compile Include="Managers\Implementations\AuditManagerTests.cs" />
     <Compile Include="Managers\Implementations\DocumentManagerTest.cs" />
     <Compile Include="Managers\Implementations\InstanceSettingManagerTest.cs" />
     <Compile Include="Managers\Implementations\PermissionsManagerTest.cs" />
