@@ -19,8 +19,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _FILE_NAME = "CTRL0192153.xml";
 		public const string _WEB_API_URL = "https://test";
 		public static readonly string _FILE_LOCATION = FileHelper.GetFileLocation(_FILE_NAME);
-		public static readonly string _FILE_LOCATION_Temp = FileHelper.GetFileLocation(Guid.NewGuid().ToString());
-		public static readonly string _FILE_LOCATION_UPDATE_NATIVE = FileHelper.GetFileLocation("CTRL0192154.xml");
+		public static readonly string _TEMP_FOLDER_LOCATION = FileHelper.GetTempFolderLocation();
 		public const int _USER_ID = 777;
 		public const string _DOC_CONTROL_NUMBER = "CTRL0192153";
 		public const string _EXTRACTED_TEXT = "John\r\nDoe\r\n";

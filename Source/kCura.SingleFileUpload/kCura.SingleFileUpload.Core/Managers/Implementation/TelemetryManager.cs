@@ -20,7 +20,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private static readonly Lazy<ITelemetryManager> _INSTANCE = new Lazy<ITelemetryManager>(() => new TelemetryManager());
 
-		public static ITelemetryManager instance => _INSTANCE.Value;
+		public static ITelemetryManager Instance => _INSTANCE.Value;
 		public TelemetryManager()
 		{
 		}

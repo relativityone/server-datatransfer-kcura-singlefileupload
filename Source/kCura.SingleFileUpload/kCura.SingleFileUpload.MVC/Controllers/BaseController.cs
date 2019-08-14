@@ -179,7 +179,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		private string LogException(Exception e)
 		{
 			string errorMessage = e.Message;
-			DocumentManager.instance.LogError(e);
+			DocumentManager.Instance.LogError(e);
 			return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
 		}
 		protected override void OnAuthorization(AuthorizationContext filterContext)

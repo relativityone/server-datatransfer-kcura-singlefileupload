@@ -30,7 +30,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 
 		private Mock<IHelper> mockingHelper;
-		private readonly string tempFilePath = FileHelper.GetTempDirectoryPath();
 
 		#region SetUp
 
@@ -120,7 +119,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			mockingHelper
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsDataTableWithSqlParametersArray(Queries.GetFileInfoByDocumentArtifactID, TestsConstants._GetdataTable())
-				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._FILE_LOCATION_Temp)
+				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._TEMP_FOLDER_LOCATION)
 				.MockExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting, TestsConstants._JSON_RESULT)
 				.MockExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID, Guid.NewGuid().ToString());
 
@@ -163,12 +162,16 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Mock(TestsConstants._FILE_TYPE)
 				.Mock(true);
 
-			Mock<IImportAPI> mockingImportApi = new Mock<IImportAPI>();
-			mockingImportApi.DefaultValue = DefaultValue.Mock;
+			Mock<IImportAPI> mockingImportApi = new Mock<IImportAPI>
+			{
+				DefaultValue = DefaultValue.Mock
+			};
 			mockingImportApi.SetReturnsDefault(true);
 
-			Mock<IImportBulkArtifactJob> mockingImportBulkArtifactJob = new Mock<IImportBulkArtifactJob>();
-			mockingImportBulkArtifactJob.DefaultValue = DefaultValue.Mock;
+			Mock<IImportBulkArtifactJob> mockingImportBulkArtifactJob = new Mock<IImportBulkArtifactJob>
+			{
+				DefaultValue = DefaultValue.Mock
+			};
 			mockingImportBulkArtifactJob.SetReturnsDefault(true);
 
 			ImportApiFactory.SetUpSingleton(mockingImportApi.Object, mockingImportBulkArtifactJob.Object);
@@ -178,66 +181,51 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 		#endregion
 
-		#region TearDown
-		[OneTimeTearDown]
-		public void TearDown()
-		{
-
-
-			if (System.IO.File.Exists(tempFilePath))
-			{
-				string tempDirectory = Path.GetDirectoryName(tempFilePath);
-				Directory.Delete(tempDirectory, true);
-			}
-
-		}
-		#endregion
-
 		[Test]
 		public void IsFileTypeSupportedTest()
 		{
-			bool result = DocumentManager.instance.IsFileTypeSupported(TestsConstants._FILE_TYPE);
+			bool result = DocumentManager.Instance.IsFileTypeSupported(TestsConstants._FILE_TYPE);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public void ValidateDocImagesTest()
 		{
-			bool result = DocumentManager.instance.ValidateDocImages(TestsConstants._DOC_ARTIFACT_ID);
+			bool result = DocumentManager.Instance.ValidateDocImages(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public void ValidateDocNativeTest()
 		{
-			bool result = DocumentManager.instance.ValidateDocNative(TestsConstants._DOC_ARTIFACT_ID);
+			bool result = DocumentManager.Instance.ValidateDocNative(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(result);
 		}
 		[Test]
 		public void GetDocumentControlNumberTest()
 		{
-			string result = DocumentManager.instance.GetDocumentControlNumber(TestsConstants._DOC_ARTIFACT_ID);
+			string result = DocumentManager.Instance.GetDocumentControlNumber(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.AreEqual(TestsConstants._DOC_CONTROL_NUMBER, result);
 		}
 
 		[Test]
 		public void ValidateHasRedactionsTest()
 		{
-			bool result = DocumentManager.instance.ValidateHasRedactions(TestsConstants._DOC_ARTIFACT_ID);
+			bool result = DocumentManager.Instance.ValidateHasRedactions(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public void UpdateDocumentLastModificationFieldsTest()
 		{
-			DocumentManager.instance.UpdateDocumentLastModificationFields(TestsConstants._DOC_ARTIFACT_ID, TestsConstants._USER_ID, true);
+			DocumentManager.Instance.UpdateDocumentLastModificationFields(TestsConstants._DOC_ARTIFACT_ID, TestsConstants._USER_ID, true);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void GetFileByArtifactIdTest()
 		{
-			FileInformation result = DocumentManager.instance.GetFileByArtifactId(TestsConstants._DOC_ARTIFACT_ID);
+			FileInformation result = DocumentManager.Instance.GetFileByArtifactId(TestsConstants._DOC_ARTIFACT_ID);
 
 			Assert.AreEqual(TestsConstants._DOC_ARTIFACT_ID, result.DocumentArtifactID, "document id is not the same");
 			Assert.AreEqual(TestsConstants._DOC_FILE_ID, result.FileID, "file id is not the same");
@@ -246,28 +234,28 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public void DeleteRedactionsTest()
 		{
-			DocumentManager.instance.DeleteRedactions(TestsConstants._DOC_ARTIFACT_ID);
+			DocumentManager.Instance.DeleteRedactions(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void DeleteExistingImagesTest()
 		{
-			DocumentManager.instance.DeleteExistingImages(TestsConstants._DOC_ARTIFACT_ID);
+			DocumentManager.Instance.DeleteExistingImages(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void InsertImageTest()
 		{
-			DocumentManager.instance.InsertImage(new FileInformation());
+			DocumentManager.Instance.InsertImage(new FileInformation());
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void UpdateHasImagesTest()
 		{
-			DocumentManager.instance.UpdateHasImages(TestsConstants._DOC_ARTIFACT_ID);
+			DocumentManager.Instance.UpdateHasImages(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(true);
 		}
 
@@ -275,7 +263,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[TestCase("It'll return empty", -1)]
 		public void GetDocByNameTest(string docName, int expectedArtifactID)
 		{
-			int result = DocumentManager.instance.GetDocByName(docName);
+			int result = DocumentManager.Instance.GetDocByName(docName);
 			Assert.AreEqual(result, expectedArtifactID);
 
 		}
@@ -283,14 +271,14 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public void SetCreateInstanceSettingsTest()
 		{
-			DocumentManager.instance.SetCreateInstanceSettings();
+			DocumentManager.Instance.SetCreateInstanceSettings();
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void RemovePageInteractionEvenHandlerFromDocumentObjectTest()
 		{
-			DocumentManager.instance.RemovePageInteractionEvenHandlerFromDocumentObject();
+			DocumentManager.Instance.RemovePageInteractionEvenHandlerFromDocumentObject();
 			Assert.IsTrue(true);
 
 		}
@@ -298,35 +286,35 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task ValidateFileTypesTestAsync()
 		{
-			bool result = await DocumentManager.instance.ValidateFileTypes(TestsConstants._FILE_TYPE);
+			bool result = await DocumentManager.Instance.ValidateFileTypes(TestsConstants._FILE_TYPE);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public async Task IsDataGridEnabledTestAsync()
 		{
-			bool result = await DocumentManager.instance.IsDataGridEnabled(-1);
+			bool result = await DocumentManager.Instance.IsDataGridEnabled(-1);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public void GetRepositoryLocationTest()
 		{
-			string result = DocumentManager.instance.GetRepositoryLocation();
-			Assert.AreEqual(!TestsConstants._FILE_LOCATION.EndsWith("\\") ? string.Concat(TestsConstants._FILE_LOCATION, "\\") : TestsConstants._FILE_LOCATION, result);
+			string result = DocumentManager.Instance.GetRepositoryLocation();
+			Assert.IsTrue(result.Contains("TempTestFiles"));
 		}
 
 		[Test]
 		public async Task CreatedMetricsTestAsync()
 		{
-			await DocumentManager.instance.CreateMetricsAsync(TestsConstants._EXP_METADATA, Core.Helpers.Constants.BUCKET_DOCUMENTSUPLOADED);
+			await DocumentManager.Instance.CreateMetricsAsync(TestsConstants._EXP_METADATA, Core.Helpers.Constants.BUCKET_DOCUMENTSUPLOADED);
 			Assert.IsTrue(true);
 		}
 
 		[Test]
 		public void WriteFileTest()
 		{
-			DocumentManager.instance.WriteFile(System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), new FileInformation { FileLocation = TestsConstants._FILE_LOCATION });
+			DocumentManager.Instance.WriteFile(System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), new FileInformation { FileLocation = TestsConstants._FILE_LOCATION });
 			Assert.IsTrue(true);
 		}
 
@@ -334,7 +322,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		public void InstanceFileTest()
 		{
 			bool assert = false;
-			string result = DocumentManager.instance.InstanceFile(TestsConstants._FILE_NAME, System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), true, TestsConstants._DOC_GUID.ToString());
+			string result = DocumentManager.Instance.InstanceFile(TestsConstants._FILE_NAME, System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), true, TestsConstants._DOC_GUID.ToString());
 			string path = $"{Directory.GetCurrentDirectory()}\\{TestsConstants._DOC_GUID.ToString()}";
 
 			if (Directory.Exists(path))
@@ -349,7 +337,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task ReplaceSingleDocumentTest()
 		{
-			await DocumentManager.instance.ReplaceSingleDocument(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
+			await DocumentManager.Instance.ReplaceSingleDocument(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
 			Assert.IsTrue(true);
 		}
 
@@ -357,14 +345,14 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		public void GetNativeTypeByFilenameTest()
 		{
 
-			var nativeType = DocumentManager.instance.GetNativeTypeByFilename(TestsConstants._FILE_LOCATION);
+			var nativeType = DocumentManager.Instance.GetNativeTypeByFilename(TestsConstants._FILE_LOCATION);
 			Assert.AreEqual(TestsConstants._OI_FILE_TYPE_, nativeType.Description);
 		}
 
 		[Test]
 		public void DeleteTempFileTest()
 		{
-			DocumentManager.instance.DeleteTempFile(tempFilePath);
+			DocumentManager.Instance.DeleteTempFile(FileHelper.GetTempFolderLocation());
 			Assert.IsTrue(true);
 		}
 
@@ -372,7 +360,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		public void DeleteTempFileTestWhenException()
 		{
 			string emptyPath = "";
-			DocumentManager.instance.DeleteTempFile(emptyPath);
+			DocumentManager.Instance.DeleteTempFile(emptyPath);
 			Assert.IsTrue(true);
 		}
 	}

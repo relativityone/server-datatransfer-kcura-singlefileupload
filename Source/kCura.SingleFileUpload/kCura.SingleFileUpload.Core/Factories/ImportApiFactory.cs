@@ -2,7 +2,6 @@
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using System;
-using System.Data;
 
 namespace kCura.SingleFileUpload.Core.Factories
 {
@@ -49,18 +48,16 @@ namespace kCura.SingleFileUpload.Core.Factories
 
 		public IImportBulkArtifactJob GetImportApiBulkArtifactJob(
 			IImportAPI importApi,
-			int workspaceID,
 			IImportNotifier.OnCompleteEventHandler importJobOnComplete,
 			ImportBulkArtifactJob.OnErrorEventHandler importJobOnError,
 			IImportNotifier.OnFatalExceptionEventHandler importJobOnFatal,
-			int folderId,
-			DocumentIdentifierField identityField,
-			IDataReader documentsDataReader)
+			ImportJobSettings importJobSettings)
 		{
 			IImportBulkArtifactJob importBulkArtifactJob;
 			if (_importBulkArtifactJobInstance == null)
 			{
-				importBulkArtifactJob = ProvisionLegitImportBulkArtifactJob(importApi, workspaceID, importJobOnComplete, importJobOnError, importJobOnFatal, folderId, identityField, documentsDataReader);
+				importBulkArtifactJob = ProvisionLegitImportBulkArtifactJob(importApi,
+					importJobOnComplete, importJobOnError, importJobOnFatal, importJobSettings);
 			}
 			else
 			{
@@ -72,16 +69,13 @@ namespace kCura.SingleFileUpload.Core.Factories
 		}
 
 		private ImportBulkArtifactJob ProvisionLegitImportBulkArtifactJob(IImportAPI importApi,
-			int workspaceID,
 			IImportNotifier.OnCompleteEventHandler importJobOnComplete,
 			ImportBulkArtifactJob.OnErrorEventHandler importJobOnError,
 			IImportNotifier.OnFatalExceptionEventHandler importJobOnFatal,
-			int folderId,
-			DocumentIdentifierField identityField,
-			IDataReader documentsDataReader)
+			ImportJobSettings importJobSettings)
 		{
 			ImportBulkArtifactJob importJob = importApi.NewNativeDocumentImportJob();
-			importJob.Settings.CaseArtifactId = workspaceID;
+			importJob.Settings.CaseArtifactId = importJobSettings.WorkspaceID;
 			importJob.Settings.ExtractedTextFieldContainsFilePath = false;
 			importJob.Settings.DisableExtractedTextEncodingCheck = true;
 			importJob.Settings.DisableExtractedTextFileLocationValidation = true;
@@ -94,18 +88,18 @@ namespace kCura.SingleFileUpload.Core.Factories
 			importJob.Settings.DisableUserSecurityCheck = false;
 
 
-			if (folderId != 0)
+			if (importJobSettings.FolderId != 0)
 			{
-				importJob.Settings.DestinationFolderArtifactID = folderId;
+				importJob.Settings.DestinationFolderArtifactID = importJobSettings.FolderId;
 			}
 
-			importJob.Settings.SelectedIdentifierFieldName = identityField.Name;
+			importJob.Settings.SelectedIdentifierFieldName = importJobSettings.IdentityField.Name;
 			importJob.Settings.NativeFilePathSourceFieldName = "Native File";
 			importJob.Settings.NativeFileCopyMode = NativeFileCopyModeEnum.CopyFiles;
 			importJob.Settings.OverwriteMode = OverwriteModeEnum.AppendOverlay;
 			// Specify the ArtifactID of the document identifier field, such as a control number.
-			importJob.Settings.IdentityFieldId = identityField.ArtifactId;
-			importJob.SourceData.SourceData = documentsDataReader;
+			importJob.Settings.IdentityFieldId = importJobSettings.IdentityField.ArtifactId;
+			importJob.SourceData.SourceData = importJobSettings.DocumentsDataReader;
 
 			return importJob;
 		}

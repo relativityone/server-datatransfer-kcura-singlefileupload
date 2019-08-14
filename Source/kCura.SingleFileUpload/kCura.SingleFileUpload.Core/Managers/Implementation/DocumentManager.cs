@@ -34,7 +34,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private static readonly Lazy<IDocumentManager> _INSTANCE = new Lazy<IDocumentManager>(() => new DocumentManager());
 
-		public static IDocumentManager instance => _INSTANCE.Value;
+		public static IDocumentManager Instance => _INSTANCE.Value;
 
 
 		private DocumentManager()
@@ -492,9 +492,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public int GetDocByName(string docName)
 		{
-			DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>();
-			qDocs.Condition = new Client.TextCondition(DTOs.DocumentFieldNames.TextIdentifier, Relativity.Client.TextConditionEnum.EqualTo, docName);
-			qDocs.Fields = DTOs.FieldValue.NoFields;
+			DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>
+			{
+				Condition = new Client.TextCondition(DTOs.DocumentFieldNames.TextIdentifier, Client.TextConditionEnum.EqualTo, docName),
+				Fields = DTOs.FieldValue.NoFields
+			};
 			return _Repository.RSAPIClient.Repositories.Document.Query(qDocs, 1).Results.FirstOrDefault()?.Artifact?.ArtifactID ?? -1;
 		}
 		public void SetCreateInstanceSettings()
@@ -600,14 +602,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		{
 			if (!string.IsNullOrEmpty(bucket))
 			{
-				await TelemetryManager.instance.LogCountAsync(bucket, 1L);
-				await TelemetryManager.instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength);
+				await TelemetryManager.Instance.LogCountAsync(bucket, 1L);
+				await TelemetryManager.Instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength);
 				//Create File tipe metric
-				await TelemetryManager.instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
+				await TelemetryManager.Instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
 					Path.GetExtension(documentInfo.FileName)),
 					$"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
 
-				await TelemetryManager.instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
+				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
 			}
 		}
 		public string InstanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
@@ -724,17 +726,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					fileSize,
 					documentInfo.TempFileLocation);
 				}
+				ImportJobSettings importJobSettings = new ImportJobSettings()
+				{
+					WorkspaceID = workspaceID,
+					FolderId = folderId,
+					IdentityField = identityField,
+					DocumentsDataReader = dtDocument.CreateDataReader()
+				};
 
-				IDataReader docsDataReader = dtDocument.CreateDataReader();
 				IImportBulkArtifactJob importJob = ImportApiFactory.Instance.GetImportApiBulkArtifactJob(
 					iapi,
-					workspaceID,
 					ImportJob_OnComplete,
 					ImportJob_OnError,
 					ImportJob_OnFatalException,
-					folderId,
-					identityField,
-					docsDataReader);
+					importJobSettings);
 				importJob.Execute();
 			}
 			catch (Exception ex)
@@ -761,31 +766,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				);
 			}
 		}
-		private int GetFieldIDByNameAndType(Client.FieldType type, params string[] fNames)
-		{
-			int id = 0;
-			if (fNames.Length > 0)
-			{
-				id = _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(string.Format(Queries.GetFieldIDByNameAndType,
-					string.Join(",", fNames.Select(p => $"'{p}'"))), SqlHelper.CreateSqlParameter("Type", (int)type));
-			}
-			return id;
-		}
-		private void AddFieldToNewDocument(ExportedMetadata documentInfo, DTOs.Document newDocument, string fieldName, Client.FieldType type, params string[] possibleMatch)
-		{
-			if (documentInfo.Fields.ContainsKey(fieldName))
-			{
-				int fid = GetFieldIDByNameAndType(type, possibleMatch);
-				if (fid > 0)
-				{
-					newDocument.Fields.Add(new DTOs.FieldValue(fid, documentInfo.Fields[fieldName], false));
-				}
-			}
-		}
-		private int GetDocumentFieldByCategory(Client.FieldCategory category)
-		{
-			return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDocumentIdentifierField, SqlHelper.CreateSqlParameter("CATEGORYID", (int)category));
-		}
 		private int DefineFolder(int id)
 		{
 			return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDroppedFolder, SqlHelper.CreateSqlParameter("SupID", id));
@@ -810,23 +790,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 			, _timeOutValue);
 		}
-		private void UpdateMatchedField(ExportedMetadata documentInfo, int docID)
-		{
-			string[] matched = _Repository.CaseDBContext.ExecuteSqlStatementAsDataTable(string.Format(Queries.GetMatchedFields,
-				"'File Name','Document Extension','File Size'")).Rows.Cast<DataRow>().Select(p => p[0] as string).ToArray();
-			if (matched.Length > 0)
-			{
-				string setString = string.Join(",", matched.Select(p => $"{p} = @{p}"));
-				_Repository.CaseDBContext.ExecuteNonQuerySQLStatement($"UPDATE EDDSDBO.[Document] SET { setString } WHERE ArtifactID = @AID", new[]
-				{
-					SqlHelper.CreateSqlParameter("AID", docID),
-					SqlHelper.CreateSqlParameter("FileName", Path.GetFileName(documentInfo.FileName)),
-					SqlHelper.CreateSqlParameter("FileSize", documentInfo.Native.LongLength),
-					SqlHelper.CreateSqlParameter("DocumentExtension", Path.GetExtension(documentInfo.FileName))
-				}
-				, _timeOutValue);
-			}
-		}
+
 		private async Task<DocumentIdentifierField> GetDocumentIdentifierAsync()
 		{
 			ObjectQueryResultSet results;
@@ -863,34 +827,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 			return accessToken;
 		}
-		private KeyValuePair<int, string> GetFieldinfo(string artifactGuid)
-		{
-			KeyValuePair<int, string> fieldData = default(KeyValuePair<int, string>);
-			System.Data.Common.DbDataReader reader = _Repository.CaseDBContext.ExecuteSqlStatementAsDbDataReader(Queries.GetFieldInfoByGuid, new[] { SqlHelper.CreateSqlParameter("@artifactGuid", artifactGuid) });
 
-			if (reader.HasRows)
-			{
-				reader.Read();
-				fieldData = new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1));
-			}
-
-			reader.Close();
-			return fieldData;
-		}
-		private Tuple<string, string> GetClientCredentials()
-		{
-			Tuple<string, string> clientData = default(Tuple<string, string>);
-			System.Data.Common.DbDataReader reader = _Repository.MasterDBContext.ExecuteSqlStatementAsDbDataReader(Queries.GetClientCredentials);
-
-			if (reader.HasRows)
-			{
-				reader.Read();
-				clientData = new Tuple<string, string>(reader.GetString(0), reader.GetString(1));
-			}
-
-			reader.Close();
-			return clientData;
-		}
 		private void ImportJob_OnError(System.Collections.IDictionary row)
 		{
 			LogError(new FileLoadException(row["Message"].ToString()));
