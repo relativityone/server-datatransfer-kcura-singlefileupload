@@ -12,8 +12,6 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,7 +34,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -104,17 +102,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
-    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
+    <Compile Include="..\..\Version\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="EventHandlers\DocumentPageInteractionEventHandler.cs" />
     <Compile Include="EventHandlers\SingleFileUploadPermissionPostInstallEventHandler.cs" />
     <Compile Include="EventHandlers\SingleFileUploadPostInstallEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
       <Project>{35649484-671a-407e-924e-1c1fbd850393}</Project>
-      <Name>%24safeprojectname%24.Core</Name>
+      <Name>kCura.SingleFileUpload.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

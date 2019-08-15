@@ -9,21 +9,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 	public class DocumentPageInteractionEventHandler : PageInteractionEventHandler
 	{
 
-		private IDocumentManager _repository;
-		private IDocumentManager Repository
-		{
-			get
-			{
-				if (_repository == null)
-				{
-					_repository = new DocumentManager();
-				}
-				return _repository;
-			}
-		}
-
-
-
 		public override Response PopulateScriptBlocks()
 		{
 			return new Response { Success = true };

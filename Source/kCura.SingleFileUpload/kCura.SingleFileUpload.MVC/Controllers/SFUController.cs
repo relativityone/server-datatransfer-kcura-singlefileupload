@@ -19,52 +19,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 {
 	public class SFUController : BaseController
 	{
-		private IAuditManager __repositoryAuditManager;
-		private IProcessingManager __repositoryProcessingManager;
-		private ISearchExportManager __repositorySearchManager;
 
 		private int[] _finder = new int[]
-			{
-			1800, //"EXE / DLL File"
-			1101, //"Internet HTML"
-			};
-
-		protected ISearchExportManager _RepositorySearchManager
 		{
-			get
-			{
-				if (__repositorySearchManager == null)
-				{
-					__repositorySearchManager = new SearchExportManager();
-				}
-				return __repositorySearchManager;
-			}
-		}
-
-		protected IProcessingManager _RepositoryProcessingManager
-		{
-			get
-			{
-				if (__repositoryProcessingManager == null)
-				{
-					__repositoryProcessingManager = new ProcessingManager();
-				}
-				return __repositoryProcessingManager;
-			}
-		}
-
-		protected IAuditManager _RepositoryAuditManager
-		{
-			get
-			{
-				if (__repositoryAuditManager == null)
-				{
-					__repositoryAuditManager = new AuditManager(ConnectionHelper.Helper());
-				}
-				return __repositoryAuditManager;
-			}
-		}
-
+		1800, //"EXE / DLL File"
+		1101, //"Internet HTML"
+		};
 
 		public async Task<ActionResult> Index(string parameters = "")
 		{
@@ -96,9 +56,9 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.DocID = imaging.DocID;
 			ViewBag.ChangeImage = imaging.Image.ToString().ToLower();
 			ViewBag.NewImage = imaging.NewImage.ToString().ToLower();
-			ViewBag.HasRedactions = _RepositoryDocumentManager.ValidateHasRedactions(imaging.DocID).ToString().ToLower();
-			ViewBag.HasImages = imaging.DocID == 0 ? "false" : _RepositoryDocumentManager.ValidateDocImages(imaging.DocID).ToString().ToLower();
-			ViewBag.HasNative = imaging.DocID == 0 ? "false" : _RepositoryDocumentManager.ValidateDocNative(imaging.DocID).ToString().ToLower();
+			ViewBag.HasRedactions = DocumentManager.Instance.ValidateHasRedactions(imaging.DocID).ToString().ToLower();
+			ViewBag.HasImages = imaging.DocID == 0 ? "false" : DocumentManager.Instance.ValidateDocImages(imaging.DocID).ToString().ToLower();
+			ViewBag.HasNative = imaging.DocID == 0 ? "false" : DocumentManager.Instance.ValidateDocNative(imaging.DocID).ToString().ToLower();
 			ViewBag.ProfileID = imaging.ProfileID;
 			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassiveAsync();
 			ViewBag.MaxFilesToUpload = await InstanceSettingManager.Instance.GetMaxFilesInstanceSettingAsync();
@@ -162,7 +122,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						fileName = Path.GetFileName(fileName);
 					}
 					string fileExt = Path.GetExtension(fileName).ToLower();
-					bool res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+					bool res = await DocumentManager.Instance.ValidateFileTypes(fileExt);
 
 					if (!res)
 					{
@@ -171,22 +131,22 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 					else
 					{
-						bool isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+						bool isDataGrid = await DocumentManager.Instance.IsDataGridEnabled(WorkspaceID);
 						string documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
-						int docIDByName = _RepositoryDocumentManager.GetDocByName(documentName);
+						int docIDByName = DocumentManager.Instance.GetDocByName(documentName);
 						if (!meta.fdv)
 						{
 							meta.did = docIDByName;
 							if (meta.did == -1 || meta.force)
 							{
 								ExportedMetadata transientMetadata = GetTransient(file, fileName);
-								transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+								transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 
 								if (ValidateFile(transientMetadata.TempFileLocation))
 								{
 									response.Success = false;
 									response.Message = "This file type is unsupported";
-									_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
+									DocumentManager.Instance.DeleteTempFile(transientMetadata.TempFileLocation);
 									return resultStr;
 								}
 								if (!string.IsNullOrEmpty(controlNumberText))
@@ -195,7 +155,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								if (meta.did == -1)
 								{
-									Response resultUpload = await _RepositoryDocumentManager.SaveSingleDocument(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
+									Response resultUpload = await DocumentManager.Instance.SaveSingleDocument(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
 										this.RelativityUserInfo.WorkspaceUserArtifactID);
 									if (resultUpload.Success)
 									{
@@ -228,14 +188,14 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								else
 								{
-									FileInformation fileInfo = _RepositoryDocumentManager.GetFileByArtifactId(meta.did);
+									FileInformation fileInfo = DocumentManager.Instance.GetFileByArtifactId(meta.did);
 									ExportedMetadata transientMetadata = GetTransient(file, fileName);
-									transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
-										_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
+										DocumentManager.Instance.DeleteTempFile(transientMetadata.TempFileLocation);
 										Directory.Delete(Path.GetDirectoryName(transientMetadata.TempFileLocation), true);
 										return resultStr;
 									}
@@ -247,7 +207,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									}
 
 									string guidFileName = $"{Guid.NewGuid().ToString().ToLower()}{fileExt}";
-									string location = $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
+									string location = $@"{DocumentManager.Instance.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp\";
 									if (!Directory.Exists(location))
 									{
 										Directory.CreateDirectory(location);
@@ -258,10 +218,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 									imageInfo.FileType = 1;
 									imageInfo.Order = 0;
 									imageInfo.FileLocation = string.Concat(location, guidFileName);
-									_RepositoryDocumentManager.WriteFile(transientMetadata.Native, imageInfo);
+									DocumentManager.Instance.WriteFile(transientMetadata.Native, imageInfo);
 
-									string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
-									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									string details = AuditManager.instance.GenerateAuditDetailsForFileUpload(imageInfo.FileLocation, imageInfo.FileID, "Images Replaced");
+									AuditManager.instance.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									response.Success = true;
 									response.Message = imageInfo.FileLocation;
 								}
@@ -277,12 +237,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								else
 								{
 									ExportedMetadata transientMetadata = GetTransient(file, fileName);
-									transientMetadata.TempFileLocation = _RepositoryDocumentManager.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
 										response.Message = "This file type is unsupported";
-										_RepositoryDocumentManager.DeleteTempFile(transientMetadata.TempFileLocation);
+										DocumentManager.Instance.DeleteTempFile(transientMetadata.TempFileLocation);
 										return resultStr;
 									}
 									DocumentExtraInfo documentExtraInfo = new DocumentExtraInfo
@@ -298,10 +258,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
 									};
 
-									await _RepositoryDocumentManager.ReplaceSingleDocument(transientMetadata, documentExtraInfo);
-									string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(string.Empty, meta.did, "Document Replacement");
-									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
-									_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									await DocumentManager.Instance.ReplaceSingleDocument(transientMetadata, documentExtraInfo);
+									string details = AuditManager.instance.GenerateAuditDetailsForFileUpload(string.Empty, meta.did, "Document Replacement");
+									AuditManager.instance.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.Update, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
+									AuditManager.instance.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 								}
 							}
 						}
@@ -337,10 +297,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		[HttpPost]
 		public int CheckUploadStatus(string documentName)
 		{
-			int documentID = _RepositoryDocumentManager.GetDocByName(documentName);
+			int documentID = DocumentManager.Instance.GetDocByName(documentName);
 			if (documentID != -1)
 			{
-				_RepositoryDocumentManager.UpdateDocumentLastModificationFields(documentID, RelativityUserInfo.WorkspaceUserArtifactID, true);
+				DocumentManager.Instance.UpdateDocumentLastModificationFields(documentID, RelativityUserInfo.WorkspaceUserArtifactID, true);
 			}
 			return documentID;
 		}
@@ -354,10 +314,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				bool isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
 				bool hasPermission = !isAdmin ? await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType(
 					this.WorkspaceID, Core.Helpers.Constants.PROCESSINGERROROBJECTTYPE, Core.Helpers.Constants.PERMISSIONPROCESSINGERRORUPLOADDOWNLOAD) : true;
-				bool isDataGrid = await _RepositoryDocumentManager.IsDataGridEnabled(WorkspaceID);
+				bool isDataGrid = await DocumentManager.Instance.IsDataGridEnabled(WorkspaceID);
 				if (hasPermission)
 				{
-					ProcessingDocument error = _RepositoryProcessingManager.GetErrorInfo(errorID);
+					ProcessingDocument error = ProcessingManager.instance.GetErrorInfo(errorID);
 					HttpPostedFileBase file = Request.Files[0];
 					string fileName = file.FileName;
 
@@ -368,10 +328,10 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						return resultStr;
 					}
 					ExportedMetadata transientMetadata = GetTransient(file, fileName);
-					_RepositoryProcessingManager.ReplaceFile(transientMetadata.Native, error);
+					ProcessingManager.instance.ReplaceFile(transientMetadata.Native, error);
 
-					string details = _RepositoryAuditManager.GenerateAuditDetailsForFileUpload(error.DocumentFileLocation, 0, "Processing Error File Replacement");
-					_RepositoryAuditManager.CreateAuditRecord(WorkspaceID, error.ErrorID, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
+					string details = AuditManager.instance.GenerateAuditDetailsForFileUpload(error.DocumentFileLocation, 0, "Processing Error File Replacement");
+					AuditManager.instance.CreateAuditRecord(WorkspaceID, error.ErrorID, AuditAction.File_Upload, details, this.RelativityUserInfo.AuditWorkspaceUserArtifactID);
 					return resultStr;
 				}
 				else
@@ -395,7 +355,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			{
 				string resultStr = string.Empty;
 				response.Success = true;
-				resultStr = _RepositoryDocumentManager.ValidateDocImages(tArtifactId).ToString();
+				resultStr = DocumentManager.Instance.ValidateDocImages(tArtifactId).ToString();
 				return resultStr;
 			}
 			);
@@ -409,7 +369,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ResponseWithElements<string> result = HandleResponse<string>((response) =>
 			{
 				response.Success = true;
-				return $@"{_RepositoryDocumentManager.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp";
+				return $@"{DocumentManager.Instance.GetRepositoryLocation()}EDDS{WorkspaceID}\Temp";
 			}
 			);
 
@@ -424,12 +384,12 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			stream.Read(native, 0, checked((int)stream.Length));
 			try
 			{
-				_RepositorySearchManager.ConfigureOutsideIn();
-				transientMetadata = _RepositorySearchManager.ExportToSearchML(fileName, native, () => ConnectionHelper.Helper().BuildExporter());
+				SearchExportManager.instance.ConfigureOutsideIn();
+				transientMetadata = SearchExportManager.instance.ExportToSearchML(fileName, native, ConnectionHelper.Helper().BuildExporter());
 			}
 			catch (Exception ex)
 			{
-				_RepositoryDocumentManager.LogError(ex);
+				DocumentManager.Instance.LogError(ex);
 				transientMetadata.Native = native;
 				transientMetadata.FileName = fileName;
 				transientMetadata.ExtractedText = string.Empty;
@@ -445,7 +405,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
 		private bool ValidateFile(string tempFile)
 		{
-			IFileTypeInfo fileType = _RepositoryDocumentManager.GetNativeTypeByFilename(tempFile);
+			IFileTypeInfo fileType = DocumentManager.Instance.GetNativeTypeByFilename(tempFile);
 
 			return _finder.Contains(fileType.Id);
 		}

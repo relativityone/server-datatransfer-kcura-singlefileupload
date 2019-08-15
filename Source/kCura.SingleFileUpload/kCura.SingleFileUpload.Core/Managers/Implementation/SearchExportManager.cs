@@ -14,14 +14,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	{
 		private const int _START_INDEX = 2;
 		private const int _SUBSTRING_LENGTH = 9;
-		private static readonly Lazy<ISearchExportManager> instance = new Lazy<ISearchExportManager>(() => new SearchExportManager());
-		public static ISearchExportManager Instance
-		{
-			get
-			{
-				return instance.Value;
-			}
-		}
+		private static readonly Lazy<ISearchExportManager> _INSTANCE = new Lazy<ISearchExportManager>(() => new SearchExportManager());
+		public static ISearchExportManager instance => _INSTANCE.Value;
+
 		private string fieldName { get; set; }
 		private string[] AdditionalFields
 		{
@@ -37,23 +32,23 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 		}
 		private bool checkToRemove { get; set; }
-		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, Func<OutsideIn.Exporter> func)
+		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, OutsideIn.Exporter oIExporter)
 		{
 			ExportedMetadata result = new Entities.ExportedMetadata();
 			result.FileName = fileName;
-			using (OutsideIn.Exporter exporter = func.Invoke())
+			using (oIExporter)
 			{
 				using (MemoryStream msMLS = new MemoryStream(sourceFile))
 				{
 					using (MemoryStream msML = new MemoryStream())
 					{
 
-						exporter.SetPerformExtendedFI(true);
-						int timeZoneOffset = exporter.GetTimeZoneOffset();
-						exporter.SetSourceFile(msMLS);
-						exporter.SetDestinationFile(msML);
-						exporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
-						exporter.Export();
+						oIExporter.SetPerformExtendedFI(true);
+						int timeZoneOffset = oIExporter.GetTimeZoneOffset();
+						oIExporter.SetSourceFile(msMLS);
+						oIExporter.SetDestinationFile(msML);
+						oIExporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
+						oIExporter.Export();
 						ProcessSearchMLString(msML.ToArray(), result);
 					}
 				}
@@ -85,7 +80,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string directoryPath, filePath;
 
 			string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-			if (currentPath.Contains("UnitTest"))
+			if (currentPath.Contains("Tests"))
 			{
 				directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
 			}
@@ -103,7 +98,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-			OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+			if (OutsideIn.OutsideIn.InstallLocation == null)
+			{
+				OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+			}
 		}
 
 

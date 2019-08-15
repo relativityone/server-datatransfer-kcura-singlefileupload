@@ -12,8 +12,6 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +35,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -83,11 +81,10 @@
     <Reference Include="kCura.Vendor.Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.589\lib\net462\kCura.Vendor.Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NSerio.Relativity">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
     <Reference Include="oi, Version=2019.3.0.728, Culture=neutral, processorArchitecture=MSIL">
@@ -212,14 +209,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Version\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Entities\DocumentExtraInfo.cs" />
     <Compile Include="Entities\DocumentIdentifierField.cs" />
     <Compile Include="Entities\Enumerations\AuditAction.cs" />
     <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
     <Compile Include="Entities\Imaging.cs" />
+    <Compile Include="Entities\ImportJobSettings.cs" />
+    <Compile Include="Entities\ImportSettings.cs" />
     <Compile Include="Entities\ProcessingDocument.cs" />
     <Compile Include="Entities\Response.cs" />
+    <Compile Include="Factories\IImportApiFactory.cs" />
+    <Compile Include="Factories\ImportApiFactory.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Entities\ExportedMetadata.cs" />
     <Compile Include="Helpers\DeployableFiles.Designer.cs">
@@ -229,9 +233,6 @@
     </Compile>
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
-    <Compile Include="..\..\..\Version\AssemblyInfo.cs">
-      <Link>AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="Managers\IAuditManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
     <Compile Include="Managers\Implementation\PermissionsManager.cs" />
@@ -1104,6 +1105,7 @@
     <Content Include="oi\webview\oit.navbar.min.js" />
     <Content Include="oi\webview\oit.statusbar.css" />
     <Content Include="oi\webview\oit.statusbar.min.js" />
+    <Content Include="SQL\Queries\InsertAuditRecord.sql" />
     <Content Include="SQL\Queries\RemovePageInteractionEvenHandlerFromDocumentObject.sql" />
     <Content Include="SQL\Queries\GetDocumentArtifactIdByControlNumber.sql" />
     <Content Include="SQL\Queries\GetDocumentPermissions.sql" />
@@ -1142,12 +1144,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\Queries.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="oi\unmanaged\adinit.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1170,7 +1174,9 @@
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
     <None Include="oi\webview\oit.statusbar.js.map" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
