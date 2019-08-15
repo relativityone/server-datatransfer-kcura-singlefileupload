@@ -1,11 +1,11 @@
-﻿using kCura.SingleFileUpload.Core.Helpers;
-using Relativity.API;
-using Relativity.Services;
-using Relativity.Services.InstanceSetting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using kCura.SingleFileUpload.Core.Helpers;
+using Relativity.API;
+using Relativity.Services;
+using Relativity.Services.InstanceSetting;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -60,6 +60,27 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				await CreateInstanceSettingAsync(instanceSetting);
 			}
 		}
+
+		public async Task<IEnumerable<string>> GetRestrictedExtensionsAsync(IHelper helper)
+		{
+			List<string> restrictedExtensions = new List<string>();
+			try
+			{
+				string restrictedFileTypes = await helper.GetInstanceSettingBundle().GetStringAsync(Constants.RESTRICTED_TYPES_SETTING_SECTION, Constants.RESTRICTED_TYPES_SETTING_NAME);
+
+				if (!string.IsNullOrEmpty(restrictedFileTypes))
+				{
+					restrictedExtensions.AddRange(restrictedFileTypes.ToLower()
+						.Split(Constants.RESTRICTED_TYPES_SEPARATOR));
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+			return restrictedExtensions.Distinct();
+		}
+
 		private async Task<bool> ExistMaxFilesInstanceSettingAsync()
 		{
 			bool result = false;

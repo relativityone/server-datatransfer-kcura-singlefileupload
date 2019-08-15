@@ -1,15 +1,17 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
-using kCura.SingleFileUpload.Core.Entities.Enumerations;
-using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
-using Relativity.CustomPages;
-using Relativity.OIFactory;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Entities.Enumerations;
+using kCura.SingleFileUpload.Core.Managers;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
+using Relativity.API;
+using Relativity.CustomPages;
+using Relativity.DataExchange.Io;
+using Relativity.OIFactory;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
@@ -54,6 +56,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				return __repositoryAuditManager;
 			}
 		}
+
+		protected IHelper Helper => ConnectionHelper.Helper();
 
 
 		public async Task<ActionResult> Index(bool fdv = false, int errorFile = 0, int docId = 0, bool image = false, bool newImage = false, int profileID = 0)
@@ -125,7 +129,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						fileName = Path.GetFileName(fileName);
 					}
 					string fileExt = Path.GetExtension(fileName).ToLower();
-					bool res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt);
+					bool res = await _RepositoryDocumentManager.ValidateFileTypes(fileExt, Helper);
 
 					if (!res)
 					{
@@ -390,13 +394,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
 		private bool ValidateFile(string tempFile)
 		{
-			var fileType = _RepositoryDocumentManager.GetNativeTypeByFilename(tempFile);
-			int[] finder = new int[]
-			{
-			1800, //"EXE / DLL File"
-			1101, //"Internet HTML"
-			};
-			return finder.Contains(fileType.Id);
+			IFileTypeInfo fileType = _RepositoryDocumentManager.GetNativeTypeByFilename(tempFile);
+			return Core.Helpers.Constants.RESTRICTED_CONTENT_TYPES.Contains(fileType.Id);
 		}
 	}
 }

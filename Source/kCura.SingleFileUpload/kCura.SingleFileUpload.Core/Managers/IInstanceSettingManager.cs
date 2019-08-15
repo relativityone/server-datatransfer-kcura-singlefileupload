@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Relativity.API;
 
 namespace kCura.SingleFileUpload.Core.Managers
 {
@@ -6,5 +8,6 @@ namespace kCura.SingleFileUpload.Core.Managers
 	{
 		Task<int> GetMaxFilesInstanceSettingAsync();
 		Task CreateMaxFilesInstanceSettingAsync();
+		Task<IEnumerable<string>> GetRestrictedExtensionsAsync(IHelper helper);
 	}
 }
