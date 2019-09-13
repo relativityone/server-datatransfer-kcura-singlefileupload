@@ -32,8 +32,9 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public void ExportToSearchMLTest()
 		{
-			ExportedMetadata result = SearchExportManager.instance.ExportToSearchML(TestsConstants._FILE_NAME, new byte[1080], OutsideIn.OutsideIn.NewLocalExporter());
-			Assert.AreEqual(result.FileName, TestsConstants._FILE_NAME);
+			string fileName = TestsConstants._FILE_NAME;
+			ExportedMetadata result = SearchExportManager.instance.ExportToSearchML(fileName, File.ReadAllBytes(FileHelper.GetFileLocation(fileName)), OutsideIn.OutsideIn.NewLocalExporter());
+			Assert.AreEqual(result.FileName, fileName);
 		}
 
 		[Test]
