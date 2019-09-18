@@ -14,13 +14,13 @@ using Relativity.API;
 using Relativity.DataExchange.Io;
 using Relativity.Services.Document;
 using Relativity.Services.InternalMetricsCollection;
-using Relativity.Services.ObjectQuery;
 using Relativity.Telemetry.Services.Metrics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Relativity.Services.Objects;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
@@ -158,7 +158,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			});
 
-			mockingServicesMgr.MockServiceInstance<IObjectQueryManager>()
+			mockingServicesMgr.MockServiceInstance<IObjectManager>()
 				.Mock(TestsConstants._FILE_TYPE)
 				.Mock(true);
 

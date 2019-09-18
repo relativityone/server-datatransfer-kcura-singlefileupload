@@ -6,7 +6,7 @@ using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
-using Relativity.Services.ObjectQuery;
+using Relativity.Services.Objects;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
@@ -33,7 +33,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
 
-			var objectQueryManager = new Mock<IObjectQueryManager>();
+			var objectManager = new Mock<IObjectManager>();
 
 
 
@@ -45,7 +45,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
 				.MockService(rsapi)
-				.MockService(objectQueryManager.Mock("test"));
+				.MockService(objectManager.Mock("test"));
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}

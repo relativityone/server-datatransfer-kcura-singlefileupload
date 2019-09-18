@@ -135,7 +135,7 @@
     <Compile Include="Helpers\MockHelper.cs" />
     <Compile Include="Helpers\MockMetricsManagerHelper.cs" />
     <Compile Include="Helpers\MockServiceMgrHelper.cs" />
-    <Compile Include="Helpers\MoclObjectManagerHelper.cs" />
+    <Compile Include="Helpers\MockObjectManagerHelper.cs" />
     <Compile Include="Helpers\RSAPIClientMockHelper.cs" />
     <Compile Include="Managers\Implementations\AuditManagerTest.cs" />
     <Compile Include="Managers\Implementations\DocumentManagerTest.cs" />
