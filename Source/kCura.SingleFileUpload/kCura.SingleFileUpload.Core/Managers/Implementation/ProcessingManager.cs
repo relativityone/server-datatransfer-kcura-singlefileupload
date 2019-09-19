@@ -1,50 +1,48 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
-using Relativity.Services.ObjectQuery;
+using Relativity.Services.Objects;
 using System;
-using System.Threading.Tasks;
+using Relativity.Services.Objects.DataContracts;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class ProcessingManager : BaseManager, IProcessingManager
 	{
-		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
 		private readonly int _DATA_ITEM_RESULT = 2;
 
 		public static readonly Lazy<IProcessingManager> _INSTANCE = new Lazy<IProcessingManager>(() => new ProcessingManager());
 		public static IProcessingManager instance => _INSTANCE.Value;
 		public ProcessingDocument GetErrorInfo(int errorID)
 		{
-			int processingErrorObjectType = GetArtifactTypeByArtifactGuid(Helpers.Constants.PROCESSINGERROROBJECTTYPE);
-			ObjectQueryResultSet results;
-			using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>())
+			var processingErrorObjectType = GetArtifactTypeByArtifactGuid(Helpers.Constants.PROCESSINGERROROBJECTTYPE);
+			QueryResult results;
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
 			{
-				Query query = new Query
+				QueryRequest query = new QueryRequest
 				{
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = processingErrorObjectType },
 					Fields = new[]
 					{
-					"Document file location",
-					"Source location",
-					"Relativity Document Identifier"
-					}
-					,
-					IncludeIdWindow = false,
-					TruncateTextFields = true,
+						new FieldRef() { Name = "Document file location" },
+						new FieldRef() { Name = "Source location" },
+						new FieldRef() { Name = "Relativity Document Identifier" }
+					},
+					IncludeIDWindow = false,
 					Condition = $"'ArtifactID' IN [{errorID}]"
 				};
-				results = Task.Run(() => _objectQueryManager.QueryAsync(WorkspaceID, processingErrorObjectType, query, 1, int.MaxValue, _INCLUDE_PERMISSIONS, string.Empty)).Result;
+				results = objectManager.QueryAsync(WorkspaceID, query, 1, 10).ConfigureAwait(false).GetAwaiter().GetResult();
 			}
 			return new ProcessingDocument()
 			{
-				DocumentFileLocation = results.Data.DataResults[0].Fields[0].Value.ToString(),
-				SourceLocation = results.Data.DataResults[0].Fields[1].Value?.ToString(),
-				DocumentIdentifier = results.Data.DataResults[0].Fields[_DATA_ITEM_RESULT].Value?.ToString(),
+				DocumentFileLocation = results.Objects[0].FieldValues[0].Value.ToString(),
+				SourceLocation = results.Objects[0].FieldValues[1].Value?.ToString(),
+				DocumentIdentifier = results.Objects[0].FieldValues[_DATA_ITEM_RESULT].Value?.ToString(),
 				ErrorID = errorID
 			};
 		}
+
 		public void ReplaceFile(byte[] file, ProcessingDocument document)
 		{
 			System.IO.File.WriteAllBytes(document.DocumentFileLocation, file);
 		}
-
 	}
 }

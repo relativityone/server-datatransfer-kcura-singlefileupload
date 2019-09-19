@@ -7,7 +7,6 @@ using kCura.SingleFileUpload.Core.SQL;
 using Newtonsoft.Json.Linq;
 using NSerio.Relativity;
 using Relativity.API;
-using Relativity.Services.ObjectQuery;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +16,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Relativity.Services.Objects;
+using Relativity.Services.Objects.DataContracts;
 using Client = kCura.Relativity.Client;
 using DataExchange = Relativity.DataExchange;
 using DTOs = kCura.Relativity.Client.DTOs;
@@ -516,29 +517,42 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public async Task<bool> ValidateFileTypes(string extension)
 		{
-			ObjectQueryResultSet results;
-			using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))
+			QueryResult results;
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>(ExecutionIdentity.System))
 			{
-				Query query = new Query { Fields = new[] { "Value", "Section" }, IncludeIdWindow = false, TruncateTextFields = true, Condition = $"'Name' IN ['RestrictedNativeFileTypes']" };
-				results = await _objectQueryManager.QueryAsync(-1, (int)Client.ArtifactType.InstanceSetting, query, 1, int.MaxValue, _INCLUDE_PERMISSIONS, string.Empty);
+				QueryRequest query = new QueryRequest
+				{
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.InstanceSetting },
+					Fields = new[] { new FieldRef() { Name = "Value" } },
+					IncludeIDWindow = false,
+					Condition = "'Name' IN ['RestrictedNativeFileTypes']"
+				};
+				results = await objectManager.QueryAsync(-1, query, 1, 10);
 			}
-			List<string> restricted = results.Data.DataResults[0].Fields[0].Value.ToString().Split(';').Select(x => x.ToLower()).ToList();
+			var restricted = results.Objects[0].FieldValues[0].Value.ToString().Split(';').Select(x => x.ToLower()).ToList();
 			restricted.AddRange(new[] { "dll", "exe", "js" });
 			return !restricted.Contains(extension.Replace(".", ""));
 		}
+
 		public async Task<bool> IsDataGridEnabled(int workspaceID)
 		{
-			ObjectQueryResultSet results;
-			using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>(ExecutionIdentity.System))
+			QueryResult results;
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>(ExecutionIdentity.System))
 			{
-				Query query = new Query { Fields = new[] { DTOs.WorkspaceFieldNames.EnableDataGrid }, IncludeIdWindow = false, TruncateTextFields = true, Condition = $"'ArtifactID' IN [{workspaceID}]" };
-				results = await _objectQueryManager.QueryAsync(-1, (int)Client.ArtifactType.Case, query, 1, int.MaxValue, _INCLUDE_PERMISSIONS, string.Empty);
+				QueryRequest query = new QueryRequest
+				{
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.Case },
+					Fields = new[] { new FieldRef() { Name = DTOs.WorkspaceFieldNames.EnableDataGrid } },
+					IncludeIDWindow = false,
+					Condition = $"'ArtifactID' IN [{workspaceID}]"
+				};
+				results = await objectManager.QueryAsync(-1, query, 1, 10);
 			}
-			var isDataGrid = (bool)results.Data.DataResults[0].Fields[0].Value;
+			var isDataGrid = (bool)results.Objects[0].FieldValues[0].Value;
 			return isDataGrid;
-
 		}
-		private async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
+
+		public async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
 		{
 			DataTable documentsDataTable = new DataTable();
 
@@ -793,31 +807,32 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private async Task<DocumentIdentifierField> GetDocumentIdentifierAsync()
 		{
-			ObjectQueryResultSet results;
-			using (IObjectQueryManager _objectQueryManager = _Repository.CreateProxy<IObjectQueryManager>())
+			QueryResult results;
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
 			{
-				Query query = new Query()
+				QueryRequest query = new QueryRequest()
 				{
-					Condition = $"'FieldCategoryID' == 2 AND 'FieldArtifactTypeID' == 10",
-					Fields = new string[] { "ArtifactID", "DisplayName" },
-					IncludeIdWindow = false,
-					RelationalField = null,
-					SampleParameters = null,
-					SearchProviderCondition = null,
-					Sorts = new string[] { },
-					TruncateTextFields = false
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.Field },
+					Condition = $"'FieldCategoryID' == { (int)Client.FieldCategory.Identifier } AND 'FieldArtifactTypeID' == { (int)Client.ArtifactType.Document }",
+					Fields = new[]
+					{
+						new FieldRef() {Name = "ArtifactID"},
+						new FieldRef() {Name = "DisplayName"}
+					},
+					IncludeIDWindow = false,
 				};
-				results = await _objectQueryManager.QueryAsync(Repository.Instance.WorkspaceID, _FILED_ARTIFACT_TYPE, query, 1, int.MaxValue, _INCLUDE_PERMISSIONS, string.Empty);
+				results = await objectManager.QueryAsync(Repository.Instance.WorkspaceID, query, 1, 10);
 			}
 
-			QueryDataItemResult restricted = results.Data.DataResults[0];
+			var restricted = results.Objects[0];
 
 			return new DocumentIdentifierField()
 			{
-				ArtifactId = Convert.ToInt32(restricted.Fields[0].Value),
-				Name = restricted.Fields[1].Value?.ToString(),
+				ArtifactId = Convert.ToInt32(restricted.FieldValues[0].Value),
+				Name = restricted.FieldValues[1].Value?.ToString(),
 			};
 		}
+
 		private string GetBearerToken()
 		{
 			string accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims?.FirstOrDefault(x => x.Type?.Equals("access_token") ?? false)?.Value ?? "";
