@@ -10,15 +10,14 @@
         function redirectToController() {
 
             var url_string = location.href.replace('.html', '');
-            var url = new URL(url_string);
 
             var parameters = {
-                "fdv": url.searchParams.get("fdv"),
-                "image": url.searchParams.get("image"),
-                "newImage": url.searchParams.get("newImage"),
-                "docID": url.searchParams.get("docID"),
-                "profileID": url.searchParams.get("profileID"),
-                "errorFile": url.searchParams.get("errorFile")
+                "fdv": getQueryString(url_string, "fdv"),
+                "image": getQueryString(url_string, "image"),
+                "newImage": getQueryString(url_string, "newImage"),
+                "docID": getQueryString(url_string, "docID"),
+                "profileID": getQueryString(url_string, "profileID"),
+                "errorFile": getQueryString(url_string, "errorFile")
             }
 
             if (!parameters.fdv) {
@@ -34,9 +33,9 @@
         }
 
         function dialogChanges() {
-            var externalFrame = $($(window.parent.parent.document).find('#_externalPage'));
+            var externalFrame = window.parent.$(window.parent.$(window.parent.parent.document).find('#_externalPage'));
             if (externalFrame.length > 0)
-                $(externalFrame[0].contentDocument).find('.dynamic-content-modal-close').hide();
+                window.parent.$(externalFrame[0].contentDocument).find('.dynamic-content-modal-close').hide();
             go();
         }
 
@@ -44,6 +43,22 @@
             dialogChanges();
         } catch (e) {
             go();
+        }
+
+        function getQueryString(url, parameter) {
+            var key = false, res = {}, itm = null;
+            var qs = url.substring(1);
+            if (arguments.length > 0 && arguments[0].length > 1)
+                key = arguments[0];
+            var pattern = /([^&=]+)=([^&]*)/g;
+            while (itm = pattern.exec(qs)) {
+                if (key !== false && decodeURIComponent(itm[1]) === key)
+                    return decodeURIComponent(itm[2]);
+                else if (key === false)
+                    res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+            }
+
+            return key === false ? res : null;
         }
 
     </script>
