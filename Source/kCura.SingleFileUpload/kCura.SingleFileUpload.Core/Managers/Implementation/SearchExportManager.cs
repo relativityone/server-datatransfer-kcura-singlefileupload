@@ -1,10 +1,7 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -20,21 +17,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				return instance.Value;
 			}
 		}
-		private string fieldName { get; set; }
-		private string[] AdditionalFields
-		{
-			get
-			{
-				return new string[]
-				{
-					"mail_organizer", "mail_to", "mail_from", "mail_attendees",
-					"mail_subject", "mail_conversation_topic", "mail_normalized_subject",
-					"mail_appointment_duration", "mail_reqattendee","mail_location","mail_dtstart", "mail_dtend","mail_importance",
-					"mail_client_submit_time"
-				};
-			}
-		}
-		private bool checkToRemove { get; set; }
+		private bool checkToIgnoreValue { get; set; }
 		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, Func<OutsideIn.Exporter> func)
 		{
 			ExportedMetadata result = new Entities.ExportedMetadata();
@@ -70,7 +53,46 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				while (reader.Read())
 				{
-					processReader(reader, extractedTextBuilder, result.Fields);
+					if (reader.Name == "doc_content")
+					{
+						XmlReader docChild = reader.ReadSubtree();
+
+						while (docChild.Read())
+						{
+							if (docChild.Name == "target" && docChild.NodeType == XmlNodeType.Element)
+							{
+								checkToIgnoreValue = true;
+							}
+							string displayName = docChild.GetAttribute("display_name");
+							if (docChild.NodeType == XmlNodeType.Element && !string.IsNullOrEmpty(displayName))
+							{
+								XmlReader child = docChild.ReadSubtree();
+
+								while (child.Read())
+								{
+									if (child.NodeType == XmlNodeType.Text)
+									{
+										extractedTextBuilder.AppendLine($" {displayName} {child.Value}");
+									}
+								}
+							}
+							else
+							{
+								if (docChild.NodeType == XmlNodeType.Text)
+								{
+									if (checkToIgnoreValue)
+									{
+										checkToIgnoreValue = false;
+									}
+									else
+									{
+										extractedTextBuilder.AppendLine(docChild.Value);
+									}
+								}
+							}
+						}
+
+					}
 				}
 			}
 			result.ExtractedText = extractedTextBuilder.ToString();
@@ -107,93 +129,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 			catch
 			{
-			}
-		}
-
-
-		private void processReader(XmlReader reader, StringBuilder etBuilder, Dictionary<string, object> fields)
-		{
-			switch (reader.NodeType)
-			{
-				case XmlNodeType.Element:
-					switch (reader.Name)
-					{
-						case "document":
-							addToDictionary(fields, "Native Type", reader.GetAttribute("type"));
-							break;
-						case "target":
-							checkToRemove = true;
-							break;
-						default:
-							if (reader.HasAttributes)
-							{
-								fieldName = reader.GetAttribute("type");
-							}
-							break;
-					}
-					if (fieldName == "hyperlink" || fieldName == "body" || fieldName == "bookmark"
-						|| AdditionalFields.Contains(fieldName?.ToLower() ?? string.Empty))
-					{
-						fieldName = string.Empty;
-					}
-					break;
-				case XmlNodeType.Text:
-					if (string.IsNullOrEmpty(fieldName))
-					{
-						if (checkToRemove)
-						{
-							checkToRemove = false;
-						}
-						else
-						{
-							etBuilder.AppendLine(reader.Value);
-						}
-					}
-					else
-					{
-						object value = null;
-						switch (fieldName)
-						{
-							case "creation date":
-							case "revision date":
-							case "Last Saved Date":
-							case "DTTM Created":
-							case "DTTM Revised":
-								DateTime endValue = DateTime.MinValue;
-								if (!DateTime.TryParseExact(reader.Value, "M/d/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endValue))
-								{
-									string preValue = reader.Value.Substring(2, reader.Value.Length - 9);
-									if (!DateTime.TryParseExact(preValue, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endValue))
-									{
-										DateTime.TryParse(reader.Value, out endValue);
-									}
-								}
-								if (endValue > DateTime.MinValue)
-								{
-									value = endValue;
-								}
-								break;
-							default:
-								value = reader.Value;
-								break;
-						}
-						addToDictionary(fields, fieldName, value);
-						fieldName = null;
-					}
-					break;
-				default:
-					break;
-			}
-		}
-		private void addToDictionary(IDictionary<string, object> dictionary, string key, object value)
-		{
-			if (dictionary.ContainsKey(key))
-			{
-				dictionary[key] = value;
-			}
-			else
-			{
-				dictionary.Add(key, value);
 			}
 		}
 	}
