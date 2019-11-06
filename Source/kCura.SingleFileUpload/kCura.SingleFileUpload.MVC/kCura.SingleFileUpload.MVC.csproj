@@ -94,8 +94,8 @@
     <Reference Include="Relativity, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.3.5.3\lib\net462\Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.10.3.57.9\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=12.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.12.0.0\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
@@ -133,8 +133,8 @@
     <Reference Include="Relativity.OAuth2Client.Interfaces, Version=1.0.27.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.0.27\lib\net462\Relativity.OAuth2Client.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.OIFactory, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OIFactory.10.3.57.9\lib\net462\Relativity.OIFactory.dll</HintPath>
+    <Reference Include="Relativity.OIFactory, Version=11.0.125.50, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.OIFactory.11.0.125.50\lib\net462\Relativity.OIFactory.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.627\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
@@ -166,6 +166,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Data.SqlClient.4.6.0\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
