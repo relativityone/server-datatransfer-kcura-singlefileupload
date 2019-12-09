@@ -117,10 +117,17 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-			if (OutsideIn.OutsideIn.InstallLocation == null)
-			{
-				OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
-			}
+            if (OutsideIn.OutsideIn.InstallLocation == null)
+            {
+                try
+                {
+                    OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+                }
+                catch (Exception ex)
+                {
+                    DocumentManager.Instance.LogError(ex, false);
+                }
+            }
 		}
 	}
 }
