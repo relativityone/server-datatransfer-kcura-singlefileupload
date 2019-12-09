@@ -89,8 +89,8 @@
     <Reference Include="NSerio.Relativity">
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2019.4.1.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2019.5.0.900, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -1160,7 +1160,9 @@
     <None Include="oi\unmanaged\adinit.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="oi\unmanaged\cmmap000.bin" />
+    <None Include="oi\unmanaged\cmmap000.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="oi\unmanaged\compreg.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1184,7 +1186,6 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
@@ -1193,13 +1194,13 @@
   <Import Project="..\..\packages\kCura.9.6.25.48\build\kCura.targets" Condition="Exists('..\..\packages\kCura.9.6.25.48\build\kCura.targets')" />
   <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
