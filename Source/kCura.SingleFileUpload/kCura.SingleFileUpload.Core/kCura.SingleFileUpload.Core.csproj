@@ -269,9 +269,7 @@
   <ItemGroup>
     <Content Include="oi\docs\fileids_values_only_sorted.txt" />
     <Content Include="oi\docs\fileids_values_strs.txt" />
-    <Content Include="oi\unmanaged\audio.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\audio.bmp" />
     <Content Include="oi\unmanaged\debmp-R1.dll" />
     <Content Include="oi\unmanaged\dehex-R1.dll" />
     <Content Include="oi\unmanaged\dess-R1.dll" />
@@ -436,9 +434,7 @@
     <Content Include="oi\unmanaged\vsmwpf-R1.dll" />
     <Content Include="oi\unmanaged\vsmwrk-R1.dll" />
     <Content Include="oi\unmanaged\vsnsf-R1.dll" />
-    <Content Include="oi\unmanaged\vsogg-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\vsogg-R1.dll" />
     <Content Include="oi\unmanaged\vsolm-R1.dll" />
     <Content Include="oi\unmanaged\vsone-R1.dll" />
     <Content Include="oi\unmanaged\vsow-R1.dll" />
@@ -637,12 +633,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="oi\unmanaged\adinit.dat" />
-    <None Include="oi\unmanaged\cmmap000.bin" />
-    <None Include="oi\unmanaged\compreg.bin" />
-    <None Include="oi\unmanaged\oitnsf.id" />
-    <None Include="oi\unmanaged\oit_font_metrics.db" />
-    <None Include="oi\unmanaged\RSMFTemplate.docx" />
+    <Content Include="oi\unmanaged\adinit.dat" />
+    <Content Include="oi\unmanaged\cmmap000.bin" />
+    <Content Include="oi\unmanaged\compreg.bin" />
+    <Content Include="oi\unmanaged\oitnsf.id" />
+    <Content Include="oi\unmanaged\oit_font_metrics.db" />
+    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
