@@ -104,11 +104,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
             }
-            else
-            {
-                directoryPath = Path.Combine(currentPath, "bin", "oi", "unmanaged");
-            }
-
             filePath = Path.Combine(directoryPath, "oilink.exe");
             if (!File.Exists(filePath))
 			{
