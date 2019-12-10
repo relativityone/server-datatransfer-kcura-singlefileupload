@@ -5,7 +5,7 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
     public interface IManager
     {
-        void LogError(Exception e, bool insertAsRelativityError = true);
+        void LogError(Exception e);
         int WorkspaceID { get; set; }
         Repository _Repository { get; }
 

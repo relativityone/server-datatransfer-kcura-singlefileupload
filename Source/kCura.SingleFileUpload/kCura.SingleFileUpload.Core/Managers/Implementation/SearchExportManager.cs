@@ -1,5 +1,6 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
+using OutsideIn;
 using System;
 using System.IO;
 using System.Text;
@@ -18,8 +19,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		{
 			ExportedMetadata result = new Entities.ExportedMetadata();
 			result.FileName = fileName;
-			using (oIExporter)
-			{
 				using (MemoryStream msMLS = new MemoryStream(sourceFile))
 				{
 					using (MemoryStream msML = new MemoryStream())
@@ -34,7 +33,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 						ProcessSearchMLString(msML.ToArray(), result);
 					}
 				}
-			}
 			result.Native = sourceFile;
 
 			return result;
@@ -99,18 +97,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string directoryPath, filePath;
 
 			string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-			if (currentPath.Contains("Tests"))
-			{
-				directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
-			}
-			else
-			{
-				directoryPath = Path.Combine(currentPath, "bin", "oi", "unmanaged");
-			}
-
-			filePath = Path.Combine(directoryPath, "oilink.exe");
-
-			if (!File.Exists(filePath))
+            if (currentPath.Contains("Tests"))
+            {
+                directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
+            }
+            else
+            {
+                directoryPath = Path.Combine(currentPath, "bin", "oi", "unmanaged");
+            }
+            filePath = Path.Combine(directoryPath, "oilink.exe");
+            if (!File.Exists(filePath))
 			{
 				using (var outStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
 				{
@@ -123,9 +119,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                 {
                     OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
                 }
-                catch (Exception ex)
+                catch (OutsideInException ex)
                 {
-                    DocumentManager.Instance.LogError(ex, false);
+                    // There are cases (at least during functional testing) when Outside In may have already been loaded
+                    // and will throw a benign exception when you set its install
+                    // location. Currently the message is the only way to identify this particular exception.
+                    if (ex.Message != "The location has already been set.")
+                    {
+                        throw;
+                    }
                 }
             }
 		}

@@ -280,7 +280,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				}
 				catch (Exception ex)
 				{
-					response.Success = false;
+                    DocumentManager.Instance.LogError(ex);
+                    response.Success = false;
 					response.Message = ex.Message;
 				}
 
@@ -384,7 +385,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			stream.Read(native, 0, checked((int)stream.Length));
 			try
 			{
-				SearchExportManager.instance.ConfigureOutsideIn();
+                SearchExportManager.instance.ConfigureOutsideIn();
 				transientMetadata = SearchExportManager.instance.ExportToSearchML(fileName, native, ConnectionHelper.Helper().BuildExporter());
 			}
 			catch (Exception ex)
@@ -393,6 +394,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				transientMetadata.Native = native;
 				transientMetadata.FileName = fileName;
 				transientMetadata.ExtractedText = string.Empty;
+                throw;
 			}
 			return transientMetadata;
 		}
@@ -406,7 +408,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		private bool ValidateFile(string tempFile)
 		{
 			IFileTypeInfo fileType = DocumentManager.Instance.GetNativeTypeByFilename(tempFile);
-
 			return _finder.Contains(fileType.Id);
 		}
 	}

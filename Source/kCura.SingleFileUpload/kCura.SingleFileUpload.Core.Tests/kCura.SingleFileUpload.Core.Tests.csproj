@@ -62,8 +62,8 @@
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2019.4.1.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2019.5.0.900, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Relativity, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.2.9.12\lib\net462\Relativity.dll</HintPath>
@@ -151,12 +151,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="oi\unmanaged\adinit.dat" />
-    <None Include="oi\unmanaged\cmmap000.bin" />
-    <None Include="oi\unmanaged\compreg.bin" />
-    <None Include="oi\unmanaged\oitnsf.id" />
-    <None Include="oi\unmanaged\oit_font_metrics.db" />
-    <None Include="oi\unmanaged\RSMFTemplate.docx" />
+    <Content Include="oi\unmanaged\adinit.dat" />
+    <Content Include="oi\unmanaged\cmmap000.bin" />
+    <Content Include="oi\unmanaged\compreg.bin" />
+    <Content Include="oi\unmanaged\oitnsf.id" />
+    <Content Include="oi\unmanaged\oit_font_metrics.db" />
+    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
@@ -515,9 +515,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\NunitXml.TestLogger.2.1.41\build\net45\NUnitXml.TestLogger.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NunitXml.TestLogger.2.1.41\build\net45\NUnitXml.TestLogger.props'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.4.1\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.4.1\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>

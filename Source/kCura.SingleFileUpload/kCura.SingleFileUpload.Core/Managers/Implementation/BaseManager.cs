@@ -39,22 +39,19 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			);
 		}
 
-		public void LogError(Exception e, bool insertAsRelativityError = true)
+		public void LogError(Exception e)
 		{
-            if (insertAsRelativityError)
+            var error = new DTOs.Error
             {
-                var error = new DTOs.Error
-                {
-                    FullError = e.ToString(),
-                    Message = EventLogHelper.GetRecursiveExceptionMsg(e),
-                    Server = Environment.MachineName,
-                    Source = "WEB - Single File Upload",
-                    SendNotification = false,
-                    Workspace = new DTOs.Workspace(-1),
-                    URL = string.Empty
-                };
-                Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
-            }
+                FullError = e.ToString(),
+                Message = EventLogHelper.GetRecursiveExceptionMsg(e),
+                Server = Environment.MachineName,
+                Source = "WEB - Single File Upload",
+                SendNotification = false,
+                Workspace = new DTOs.Workspace(-1),
+                URL = string.Empty
+            };
+            Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
 			Repository.Instance.GetLogFactory().GetLogger().ForContext<DocumentManager>().LogError(e, "Something occurred in Single File Upload {@message}", e.Message);
 		}
 	}
