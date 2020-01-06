@@ -634,11 +634,23 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			File.WriteAllBytes(tmpFileName, fileBytes);
 			return tmpFileName;
 		}
-		public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
-		{
-			return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
-		}
-		private void CreateWorkspaceFieldSettings()
+        public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
+        {
+            try
+            {
+                return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
+            }
+            catch (Exception ex)
+            {
+                if (!ex.Message.Contains("cannot be identified because an Outside In error '0' occurred."))
+                {
+                    throw;
+                }
+                return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
+            }
+
+        }
+        private void CreateWorkspaceFieldSettings()
 		{
 
 			string fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
