@@ -155,8 +155,18 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								}
 								if (meta.did == -1)
 								{
-									Response resultUpload = await DocumentManager.Instance.SaveSingleDocument(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
-										this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    Response resultUpload = new Response();
+                                    try
+                                    {
+                                         resultUpload = await DocumentManager.Instance.SaveSingleDocument(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
+                                       this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        resultUpload = await DocumentManager.Instance.SaveSingleDocument(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
+                                                                               this.RelativityUserInfo.WorkspaceUserArtifactID);
+                                    }
+                                   
 									if (resultUpload.Success)
 									{
 										resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
