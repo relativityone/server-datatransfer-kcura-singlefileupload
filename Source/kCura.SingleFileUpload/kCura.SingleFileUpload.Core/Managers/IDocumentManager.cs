@@ -6,8 +6,6 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
 	public interface IDocumentManager : IManager
 	{
-
-		bool IsFileTypeSupported(string fileExtension);
 		Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID);
 		Task ReplaceSingleDocument(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo);
 		int GetDocByName(string docName);
