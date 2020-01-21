@@ -365,7 +365,7 @@ var MFUController = function ($scope, $http, $compile) {
     }
     function getFolder() {
         var id = '-1';
-        var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'];
+        var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'] || window.parent.frames['_ListPage'] || window.parent.parent.frames['_ListPage'];
         if (wN) {
             var $out = wN.window.$;
             if ($out('.browser-folder.browser-icon-active', wN.document).length)
