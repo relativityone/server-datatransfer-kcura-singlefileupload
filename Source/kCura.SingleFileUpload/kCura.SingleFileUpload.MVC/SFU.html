@@ -20,14 +20,7 @@
                 "errorFile": getQueryString(url_string, "errorFile")
             }
 
-            if (!parameters.fdv) {
-
-                url_string = url_string.split('&')[0];
-            }
-            else {
-                url_string = url_string.split('&')[0] + "&parameters=" + JSON.stringify(parameters);
-            }
-
+            url_string = url_string.split('&')[0] + "&parameters=" + JSON.stringify(parameters);
             location.href = url_string;
 
         }
