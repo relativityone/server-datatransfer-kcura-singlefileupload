@@ -28,7 +28,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	public class DocumentManager : BaseManager, IDocumentManager
 	{
 
-		private FileType[] _viewerSupportedFileType;
 		private const int _FILED_ARTIFACT_TYPE = 14;
 		private readonly int _timeOutValue = 300;
 		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
