@@ -181,13 +181,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 		#endregion
 
-		[Test]
-		public void IsFileTypeSupportedTest()
-		{
-			bool result = DocumentManager.Instance.IsFileTypeSupported(TestsConstants._FILE_TYPE);
-			Assert.IsTrue(result);
-		}
-
+		
 		[Test]
 		public void ValidateDocImagesTest()
 		{
