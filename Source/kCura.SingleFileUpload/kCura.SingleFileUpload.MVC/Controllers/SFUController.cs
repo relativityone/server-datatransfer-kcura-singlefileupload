@@ -42,13 +42,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			else
 			{
 				JObject jObject = JObject.Parse(parameters);
-				imaging.Fdv = (bool)jObject["fdv"];
-				imaging.DocID = (int)jObject["docID"];
-				imaging.Image = (bool)jObject["image"];
-				imaging.NewImage = !string.IsNullOrEmpty(jObject["newImage"].ToString()) ? (bool)jObject["newImage"] : default(bool);
+                imaging.Fdv = !string.IsNullOrEmpty(jObject["fdv"].ToString()) ? (bool)jObject["fdv"] : default(bool);
+                imaging.DocID = !string.IsNullOrEmpty(jObject["docID"].ToString()) ? (int)jObject["docID"] : default(int);
+                imaging.Image = !string.IsNullOrEmpty(jObject["image"].ToString()) ? (bool)jObject["image"] : default(bool);
+                imaging.NewImage = !string.IsNullOrEmpty(jObject["newImage"].ToString()) ? (bool)jObject["newImage"] : default(bool);
 				imaging.ProfileID = !string.IsNullOrEmpty(jObject["profileID"].ToString()) ? (int)jObject["profileID"] : default(int);
-				imaging.ErrorFile = jObject.Value<int?>("errorFile") ?? 0;
-			}
+                imaging.ErrorFile = !string.IsNullOrEmpty(jObject["errorFile"].ToString()) ? (int)jObject["errorFile"] : default(int);
+            }
 
 			ViewBag.AppID = WorkspaceID;
 			ViewBag.FDV = imaging.Fdv.ToString().ToLower();
