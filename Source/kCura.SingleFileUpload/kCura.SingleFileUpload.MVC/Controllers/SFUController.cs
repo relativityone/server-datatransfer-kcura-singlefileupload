@@ -1,12 +1,11 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
-using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
 using Newtonsoft.Json.Linq;
+using Relativity.API;
 using Relativity.CustomPages;
 using Relativity.DataExchange.Io;
-using Relativity.OIFactory;
 using System;
 using System.IO;
 using System.Linq;
@@ -19,6 +18,16 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 {
 	public class SFUController : BaseController
 	{
+		public SFUController() :
+			this(ConnectionHelper.Helper())
+		{
+
+		}
+
+		public SFUController(ICPHelper helper) : base(helper)
+		{
+
+		}
 
 		private int[] _finder = new int[]
 		{
@@ -42,8 +51,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			else
 			{
 				JObject jObject = JObject.Parse(parameters);
-				imaging.Fdv = !string.IsNullOrEmpty(jObject["fdv"].ToString()) ? (bool)jObject["fdv"] : default(bool); 
-				imaging.DocID = !string.IsNullOrEmpty(jObject["docID"].ToString()) ? (int)jObject["docID"] : default(int); 
+				imaging.Fdv = !string.IsNullOrEmpty(jObject["fdv"].ToString()) ? (bool)jObject["fdv"] : default(bool);
+				imaging.DocID = !string.IsNullOrEmpty(jObject["docID"].ToString()) ? (int)jObject["docID"] : default(int);
 				imaging.Image = !string.IsNullOrEmpty(jObject["image"].ToString()) ? (bool)jObject["image"] : default(bool);
 				imaging.NewImage = !string.IsNullOrEmpty(jObject["newImage"].ToString()) ? (bool)jObject["newImage"] : default(bool);
 				imaging.ProfileID = !string.IsNullOrEmpty(jObject["profileID"].ToString()) ? (int)jObject["profileID"] : default(int);
@@ -115,7 +124,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 						}
 					}
 
-					HttpPostedFileBase file = Request.Files[0];
+					HttpPostedFileBase file = Request.Files.Get(0);
 					string fileName = file.FileName;
 					if (fileName.Contains("\\"))
 					{
@@ -280,8 +289,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				}
 				catch (Exception ex)
 				{
-                    DocumentManager.Instance.LogError(ex);
-                    response.Success = false;
+					DocumentManager.Instance.LogError(ex);
+					response.Success = false;
 					response.Message = ex.Message;
 				}
 
@@ -385,8 +394,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			stream.Read(native, 0, checked((int)stream.Length));
 			try
 			{
-                SearchExportManager.instance.ConfigureOutsideIn();
-				transientMetadata = SearchExportManager.instance.ExportToSearchML(fileName, native, ConnectionHelper.Helper().BuildExporter());
+				SearchExportManager.instance.ConfigureOutsideIn();
+				transientMetadata = SearchExportManager.instance.ExportToSearchML(fileName, native, Helper);
 			}
 			catch (Exception ex)
 			{
@@ -394,7 +403,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				transientMetadata.Native = native;
 				transientMetadata.FileName = fileName;
 				transientMetadata.ExtractedText = string.Empty;
-                throw;
+				throw;
 			}
 			return transientMetadata;
 		}

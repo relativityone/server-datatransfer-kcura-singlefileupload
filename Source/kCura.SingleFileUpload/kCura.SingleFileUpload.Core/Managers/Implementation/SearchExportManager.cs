@@ -1,6 +1,7 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
-using OutsideIn;
+using Relativity.API;
+using Relativity.OIFactory;
 using System;
 using System.IO;
 using System.Text;
@@ -15,24 +16,25 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		private static readonly Lazy<ISearchExportManager> _INSTANCE = new Lazy<ISearchExportManager>(() => new SearchExportManager());
 		public static ISearchExportManager instance => _INSTANCE.Value;
 		private bool checkToIgnoreValue { get; set; }
-		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, OutsideIn.Exporter oIExporter)
+		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, ICPHelper helper)
 		{
+			OutsideIn.Exporter oIExporter = helper.BuildExporter();
 			ExportedMetadata result = new Entities.ExportedMetadata();
 			result.FileName = fileName;
-				using (MemoryStream msMLS = new MemoryStream(sourceFile))
+			using (MemoryStream msMLS = new MemoryStream(sourceFile))
+			{
+				using (MemoryStream msML = new MemoryStream())
 				{
-					using (MemoryStream msML = new MemoryStream())
-					{
 
-						oIExporter.SetPerformExtendedFI(true);
-						int timeZoneOffset = oIExporter.GetTimeZoneOffset();
-						oIExporter.SetSourceFile(msMLS);
-						oIExporter.SetDestinationFile(msML);
-						oIExporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
-						oIExporter.Export();
-						ProcessSearchMLString(msML.ToArray(), result);
-					}
+					oIExporter.SetPerformExtendedFI(true);
+					int timeZoneOffset = oIExporter.GetTimeZoneOffset();
+					oIExporter.SetSourceFile(msMLS);
+					oIExporter.SetDestinationFile(msML);
+					oIExporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
+					oIExporter.Export();
+					ProcessSearchMLString(msML.ToArray(), result);
 				}
+			}
 			result.Native = sourceFile;
 
 			return result;
@@ -97,39 +99,39 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string directoryPath, filePath;
 
 			string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-            if (currentPath.Contains("Tests"))
-            {
-                directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
-            }
-            else
-            {
-                directoryPath = Path.Combine(currentPath, "bin", "oi", "unmanaged");
-            }
-            filePath = Path.Combine(directoryPath, "oilink.exe");
-            if (!File.Exists(filePath))
+			if (currentPath.Contains("Tests"))
+			{
+				directoryPath = Path.Combine(currentPath, "oi", "unmanaged");
+			}
+			else
+			{
+				directoryPath = Path.Combine(currentPath, "bin", "oi", "unmanaged");
+			}
+			filePath = Path.Combine(directoryPath, "oilink.exe");
+			if (!File.Exists(filePath))
 			{
 				using (var outStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
 				{
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-            if (OutsideIn.OutsideIn.InstallLocation == null)
-            {
-                try
-                {
-                    OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
-                }
-                catch (OutsideInException ex)
-                {
-                    // There are cases (at least during functional testing) when Outside In may have already been loaded
-                    // and will throw a benign exception when you set its install
-                    // location. Currently the message is the only way to identify this particular exception.
-                    if (ex.Message != "The location has already been set.")
-                    {
-                        throw;
-                    }
-                }
-            }
+			if (OutsideIn.OutsideIn.InstallLocation == null)
+			{
+				try
+				{
+					OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+				}
+				catch (Exception ex)
+				{
+					// There are cases (at least during functional testing) when Outside In may have already been loaded
+					// and will throw a benign exception when you set its install
+					// location. Currently the message is the only way to identify this particular exception.
+					if (ex.Message != "The location has already been set.")
+					{
+						throw;
+					}
+				}
+			}
 		}
 	}
 }
