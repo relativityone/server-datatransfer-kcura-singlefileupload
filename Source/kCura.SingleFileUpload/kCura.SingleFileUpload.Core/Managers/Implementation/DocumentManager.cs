@@ -7,6 +7,8 @@ using kCura.SingleFileUpload.Core.SQL;
 using Newtonsoft.Json.Linq;
 using NSerio.Relativity;
 using Relativity.API;
+using Relativity.Services.Objects;
+using Relativity.Services.Objects.DataContracts;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,8 +18,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Relativity.Services.Objects;
-using Relativity.Services.Objects.DataContracts;
 using Client = kCura.Relativity.Client;
 using DataExchange = Relativity.DataExchange;
 using DTOs = kCura.Relativity.Client.DTOs;
@@ -358,20 +358,20 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		}
 		public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
 		{
-            try
-            {
-                return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
-            }
-            catch (Exception ex)
-            {
-                if (!ex.Message.Contains("cannot be identified because an Outside In error '0' occurred."))
-                {
-                    throw;
-                }
-                return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
-            }
+			try
+			{
+				return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
+			}
+			catch (Exception ex)
+			{
+				if (!ex.Message.Contains("cannot be identified because an Outside In error '0' occurred."))
+				{
+					throw;
+				}
+				return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
+			}
 
-        }
+		}
 		private void CreateWorkspaceFieldSettings()
 		{
 
@@ -427,13 +427,29 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			try
 			{
 				ForceTapiSettings();
-				ImportSettings settings = new ImportSettings()
-				{
-					RelativityPassword = GetBearerToken(),
-					RelativityUsername = "XxX_BearerTokenCredentials_XxX",
-					WebServiceURL = webApiUrl.Replace("/Relativity", "/RelativityWebAPI")
 
-				};
+				ImportSettings settings;
+				string webapiUrl = "/RelativityWebAPI";
+				string currentPath = AppDomain.CurrentDomain.BaseDirectory;
+				if (currentPath.Contains("Tests"))
+				{
+					settings = new ImportSettings()
+					{
+						RelativityPassword = "Test1234!",
+						RelativityUsername = "relativity.admin@kcura.com",
+						WebServiceURL = webApiUrl.Replace("/relativity.services", webapiUrl)
+					};
+				}
+				else
+				{
+					settings = new ImportSettings()
+					{
+						RelativityPassword = GetBearerToken(),
+						RelativityUsername = "XxX_BearerTokenCredentials_XxX",
+						WebServiceURL = webApiUrl.Replace("/Relativity", webapiUrl)
+					};
+				}
+
 				IImportAPI iapi = ImportApiFactory.Instance.GetImportAPI(settings);
 				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync();
 

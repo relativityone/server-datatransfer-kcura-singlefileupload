@@ -410,7 +410,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
 		private string GetWebAPIURL()
 		{
-			string url = ConnectionHelper.Helper().GetServicesManager().GetRESTServiceUrl().ToString();
+			string url = Helper.GetServicesManager().GetRESTServiceUrl().ToString();
 			return url.ToString().ToLower().Replace("relativity.rest/api", "Relativity");
 		}
 
