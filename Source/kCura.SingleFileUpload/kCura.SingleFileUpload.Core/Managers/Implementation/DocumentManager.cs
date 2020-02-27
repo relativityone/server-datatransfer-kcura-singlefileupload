@@ -429,7 +429,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				ForceTapiSettings();
 
 				ImportSettings settings;
-				string webapiUrl = "/RelativityWebAPI";
+				string webApiEndpoint = "/RelativityWebAPI";
 				string currentPath = AppDomain.CurrentDomain.BaseDirectory;
 				if (currentPath.Contains("Tests"))
 				{
@@ -437,7 +437,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					{
 						RelativityPassword = "Test1234!",
 						RelativityUsername = "relativity.admin@kcura.com",
-						WebServiceURL = webApiUrl.Replace("/relativity.services", webapiUrl)
+						WebServiceURL = webApiUrl.Replace("/relativity.services", webApiEndpoint)
 					};
 				}
 				else
@@ -446,7 +446,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					{
 						RelativityPassword = GetBearerToken(),
 						RelativityUsername = "XxX_BearerTokenCredentials_XxX",
-						WebServiceURL = webApiUrl.Replace("/Relativity", webapiUrl)
+						WebServiceURL = webApiUrl.Replace("/Relativity", webApiEndpoint)
 					};
 				}
 
