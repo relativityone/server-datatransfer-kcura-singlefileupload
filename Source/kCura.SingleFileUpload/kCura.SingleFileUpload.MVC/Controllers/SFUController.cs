@@ -394,7 +394,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				transientMetadata.Native = native;
 				transientMetadata.FileName = fileName;
 				transientMetadata.ExtractedText = string.Empty;
-                throw;
 			}
 			return transientMetadata;
 		}
