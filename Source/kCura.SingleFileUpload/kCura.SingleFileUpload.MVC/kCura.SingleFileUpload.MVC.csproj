@@ -486,7 +486,6 @@
     <Content Include="oi\unmanaged\libheif.dll" />
     <Content Include="oi\unmanaged\ocemul-R1.dll" />
     <Content Include="oi\unmanaged\oicomponents-R1.dll" />
-    <Content Include="oi\unmanaged\oilink.exe" />
     <Content Include="oi\unmanaged\oilink.jar" />
     <Content Include="oi\unmanaged\osgd-R1.dll" />
     <Content Include="oi\unmanaged\ospdf-R1.dll" />
