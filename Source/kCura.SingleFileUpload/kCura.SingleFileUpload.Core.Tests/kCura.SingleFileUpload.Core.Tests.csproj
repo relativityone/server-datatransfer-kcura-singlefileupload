@@ -151,12 +151,12 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="oi\unmanaged\adinit.dat" />
-    <None Include="oi\unmanaged\cmmap000.bin" />
-    <None Include="oi\unmanaged\compreg.bin" />
-    <None Include="oi\unmanaged\oitnsf.id" />
-    <None Include="oi\unmanaged\oit_font_metrics.db" />
-    <None Include="oi\unmanaged\RSMFTemplate.docx" />
+    <Content Include="oi\unmanaged\adinit.dat" />
+    <Content Include="oi\unmanaged\cmmap000.bin" />
+    <Content Include="oi\unmanaged\compreg.bin" />
+    <Content Include="oi\unmanaged\oitnsf.id" />
+    <Content Include="oi\unmanaged\oit_font_metrics.db" />
+    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
