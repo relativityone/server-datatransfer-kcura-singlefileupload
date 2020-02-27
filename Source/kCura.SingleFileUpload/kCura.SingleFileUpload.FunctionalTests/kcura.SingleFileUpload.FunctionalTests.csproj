@@ -264,6 +264,7 @@
   <ItemGroup>
     <Compile Include="Helper\CustomPageHelper.cs" />
     <Compile Include="Controller\SFUControllerTest.cs" />
+    <Compile Include="Helper\HelperSettings.cs" />
     <Compile Include="StartUpFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

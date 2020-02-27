@@ -1,5 +1,5 @@
-﻿using kCura.NUnit.Integration;
-using Moq;
+﻿using Moq;
+using NUnit.Framework;
 using Relativity.API;
 using Relativity.Test.Helpers;
 using Relativity.Test.Helpers.Authentication;
@@ -12,7 +12,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Helper
 		int caseID;
 		IAuthenticationMgr authenticationMgr;
 		IUserInfo userInfo;
-		public TestCustomPageHelper(int caseID) : base(SharedTestVariables.ADMIN_USERNAME, SharedTestVariables.DEFAULT_PASSWORD)
+		public TestCustomPageHelper(int caseID) : base(TestContext.Parameters["AdminUsername"], TestContext.Parameters["AdminPassword"])
 		{
 			this.caseID = caseID;
 			this.userInfo = new UserInfo()

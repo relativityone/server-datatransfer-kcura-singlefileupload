@@ -1,5 +1,4 @@
 ﻿using kcura.SingleFileUpload.FunctionalTests.Helper;
-using kCura.NUnit.Integration;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.MVC.Controllers;
 using kCura.SingleFileUpload.MVC.Models;
@@ -9,10 +8,8 @@ using NUnit.Framework;
 using Relativity.API;
 using Relativity.Test.Helpers.SharedTestHelpers;
 using Relativity.Testing.Identification;
-using System;
 using System.Collections.Specialized;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -42,21 +39,19 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 		public void SetUpController()
 		{
 			SetUpMocks();
-			ICPHelper fakeHelper = SetUpCPHelper();
-			string credentialsString = string.Format("{0}:{1}", SharedTestVariables.ADMIN_USERNAME, SharedTestVariables.DEFAULT_PASSWORD);
-			string credentialsB64 = Convert.ToBase64String(Encoding.ASCII.GetBytes(credentialsString));
-			string authorizationHeaderValue = string.Format("Basic {0}", credentialsB64);
+			HelperSettings settings = new HelperSettings();
+			ICPHelper fakeHelper = SetUpCPHelper(settings);
 			RepositoryHelper.ConfigureRepository(fakeHelper);
 			RepositoryHelper.InitializeRepository(TestWorkspaceID);
 			Controller = new SFUController(fakeHelper);
 			Controller.ControllerContext = new ControllerContext(MoqContext.Object, new RouteData(), Controller);
 			Controller.Request.Params.Add("AppID", TestWorkspaceID.ToString());
-			Controller.Request.Headers.Add("Authorization", authorizationHeaderValue);
+			Controller.Request.Headers.Add("Authorization", settings.RelAdminAuthToken);
 		}
 
-		public ICPHelper SetUpCPHelper()
+		public ICPHelper SetUpCPHelper(HelperSettings settings)
 		{
-			ConfigurationHelper.SetupConfiguration(new AppConfigSettings());
+			ConfigurationHelper.SetupConfiguration(settings);
 			return new TestCustomPageHelper(TestWorkspaceID);
 		}
 		private void SetUpMocks()
@@ -86,6 +81,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 				responseUpload = response;
 			});
 			MetaUploadFile metaData = new MetaUploadFile { fdv = false };
+
 			await Controller.Upload(metaData);
 			Assert.AreEqual(expectedResponse, responseUpload);
 		}
