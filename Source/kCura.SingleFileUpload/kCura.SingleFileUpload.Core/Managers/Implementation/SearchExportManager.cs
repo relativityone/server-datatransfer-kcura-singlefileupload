@@ -1,5 +1,6 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Helpers;
+using OutsideIn;
 using Relativity.API;
 using Relativity.OIFactory;
 using System;
@@ -121,7 +122,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
 				}
-				catch (Exception ex)
+				catch (OutsideInException ex)
 				{
 					// There are cases (at least during functional testing) when Outside In may have already been loaded
 					// and will throw a benign exception when you set its install
