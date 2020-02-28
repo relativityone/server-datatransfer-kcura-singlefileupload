@@ -403,6 +403,11 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				transientMetadata.Native = native;
 				transientMetadata.FileName = fileName;
 				transientMetadata.ExtractedText = string.Empty;
+				string currentPath = AppDomain.CurrentDomain.BaseDirectory;
+				if (currentPath.Contains("Tests"))
+				{
+					throw;
+				}
 			}
 			return transientMetadata;
 		}
