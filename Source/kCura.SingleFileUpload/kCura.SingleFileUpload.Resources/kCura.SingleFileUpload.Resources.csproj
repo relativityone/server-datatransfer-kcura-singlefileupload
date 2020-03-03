@@ -81,14 +81,14 @@
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Kepler, Version=1.0.1.589, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.589\lib\net462\Relativity.Kepler.dll</HintPath>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.627\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Logging.Interfaces, Version=2018.11.5.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Logging.Interfaces.2018.11.5\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.589, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.589\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.627\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=2018.12.2.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.2018.12.2\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
@@ -116,7 +116,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ILMerge.exe" />
     <None Include="packages.config" />
   </ItemGroup>

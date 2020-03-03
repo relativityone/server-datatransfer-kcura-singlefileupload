@@ -1,10 +1,8 @@
-﻿using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
+﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
 using Relativity.API;
-using Relativity.CustomPages;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -18,7 +16,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 	/// </summary>
 	public class BaseController : Controller
 	{
-
 		/*
 		 If you have different specific definitions like repos or classes and are traverse for the 
 		 application please add here... plase, avoid repeated code
@@ -94,11 +91,19 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			{
 				if (_relativityUserInfo == null)
 				{
-					_relativityUserInfo = ConnectionHelper.Helper().GetAuthenticationManager().UserInfo;
+					_relativityUserInfo = Helper.GetAuthenticationManager().UserInfo;
 				}
 				return _relativityUserInfo;
 			}
 		}
+
+		public ICPHelper Helper { get; }
+
+		public BaseController(ICPHelper customPageHelper)
+		{
+			Helper = customPageHelper;
+		}
+
 		protected override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			_scopeDictionary = RepositoryHelper.InitializeRepository(WorkspaceID);
@@ -188,7 +193,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			{
 				if (Request.HttpMethod == "POST")
 				{
-					ConnectionHelper.Helper().GetCSRFManager().CheckCSRF();
+					Helper.GetCSRFManager().CheckCSRF();
 				}
 			}
 			catch (Exception)
