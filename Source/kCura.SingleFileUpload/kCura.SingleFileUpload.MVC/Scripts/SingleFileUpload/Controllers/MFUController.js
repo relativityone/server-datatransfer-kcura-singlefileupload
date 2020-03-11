@@ -68,7 +68,9 @@ var MFUController = function ($scope, $http, $compile) {
     }
     try {
         dialogChanges();
-    } catch (e) { }
+    } catch (e) {
+        console.warn("Exception caught in dialogChanges()");
+    }
 
     function Addfiles(files) {
         cleanFiles();
