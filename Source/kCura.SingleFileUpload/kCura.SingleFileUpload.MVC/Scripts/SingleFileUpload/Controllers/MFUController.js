@@ -376,7 +376,7 @@ var MFUController = function ($scope, $http, $compile) {
         var wN;
         possibleElements.forEach((element) => {
             if (!!element && !wN) {
-                wN = element.contentWindow || element.window;
+                wN = element.window || element.contentWindow;
             }
         });
 
