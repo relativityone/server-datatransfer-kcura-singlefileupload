@@ -47,7 +47,7 @@ var SFUController = function ($scope, $http, $compile) {
     }
 
     function dialogChanges() {
-        var externalFrame = $($(window.parent.parent.document).find('#_externalPage')[0].contentDocument);
+        var externalFrame = $($(window.parent.parent.document).find('#_externalPage,#_ListPage')[0].contentDocument);
         externalFrame.find('.dynamic-content-modal-close').hide();
         externalFrame.find('.modal-context').click(function () {
             externalFrame.find('dynamic-content-modal-wgt').hide();
