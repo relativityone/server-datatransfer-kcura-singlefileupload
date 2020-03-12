@@ -46,7 +46,7 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function dialogChanges() {
-        var externalFrame = $($(window.parent.parent.document).find('#_externalPage')[0].contentDocument);
+        var externalFrame = $($(window.parent.parent.document).find('#_externalPage,#_ListPage')[0].contentDocument);
         externalFrame.find('.dynamic-content-modal-close').hide();
         externalFrame.find('.modal-context').click(function () {
             switch (vm.status) {
@@ -68,7 +68,9 @@ var MFUController = function ($scope, $http, $compile) {
     }
     try {
         dialogChanges();
-    } catch (e) { }
+    } catch (e) {
+        console.warn("Exception caught in dialogChanges()");
+    }
 
     function Addfiles(files) {
         cleanFiles();
@@ -365,7 +367,21 @@ var MFUController = function ($scope, $http, $compile) {
     }
     function getFolder() {
         var id = '-1';
-        var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'] || window.parent.frames['_ListPage'] || window.parent.parent.frames['_ListPage'];
+        var possibleElements = [
+            window.parent.frames['externalPage'],
+            window.parent.parent.frames['externalPage'],
+            window.parent.frames['_ListPage'],
+            window.parent.parent.frames['_ListPage'],
+            window.parent.frames['ListPage'],
+            window.parent.parent.frames['ListPage']
+        ];
+        var wN;
+        possibleElements.forEach((element) => {
+            if (!!element && !wN) {
+                wN = element.window || element.contentWindow;
+            }
+        });
+
         if (wN) {
             var $out = wN.window.$;
             if ($out('.browser-folder.browser-icon-active', wN.document).length)

@@ -13,6 +13,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	[TestFixture]
 	public class SearchExportManagerTest : TestBase
 	{
+		Mock<ICPHelper> mockingHelper;
 
 		[OneTimeSetUp]
 
@@ -20,7 +21,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		{
 			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
 
-			Mock<ICPHelper> mockingHelper = MockHelper.GetMockingHelper<ICPHelper>();
+			mockingHelper = MockHelper.GetMockingHelper<ICPHelper>();
 
 			mockingHelper
 				.MockIServiceMgr();
@@ -33,7 +34,9 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		public void ExportToSearchMLTest()
 		{
 			string fileName = TestsConstants._FILE_NAME;
-			ExportedMetadata result = SearchExportManager.instance.ExportToSearchML(fileName, File.ReadAllBytes(FileHelper.GetFileLocation(fileName)), OutsideIn.OutsideIn.NewLocalExporter());
+			Mock<IInstanceSettingsBundle> MockInstanceSettingsBundle = new Mock<IInstanceSettingsBundle>();
+			mockingHelper.Setup(x => x.GetInstanceSettingBundle()).Returns(MockInstanceSettingsBundle.Object);
+			ExportedMetadata result = SearchExportManager.instance.ExportToSearchML(fileName, File.ReadAllBytes(FileHelper.GetFileLocation(fileName)), mockingHelper.Object);
 			Assert.AreEqual(result.FileName, fileName);
 		}
 
