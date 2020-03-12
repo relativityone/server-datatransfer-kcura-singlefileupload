@@ -367,7 +367,21 @@ var MFUController = function ($scope, $http, $compile) {
     }
     function getFolder() {
         var id = '-1';
-        var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'] || window.parent.frames['_ListPage'] || window.parent.parent.frames['_ListPage'];
+        var possibleElements = [
+            window.parent.frames['externalPage'],
+            window.parent.parent.frames['externalPage'],
+            window.parent.frames['_ListPage'],
+            window.parent.parent.frames['_ListPage'],
+            window.parent.frames['ListPage'],
+            window.parent.parent.frames['ListPage']
+        ];
+        var wN;
+        possibleElements.forEach((element) => {
+            if (!!element && !wN) {
+                wN = element.window || element.contentWindow;
+            }
+        });
+
         if (wN) {
             var $out = wN.window.$;
             if ($out('.browser-folder.browser-icon-active', wN.document).length)
