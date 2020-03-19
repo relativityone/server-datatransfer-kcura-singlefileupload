@@ -376,7 +376,7 @@ var MFUController = function ($scope, $http, $compile) {
             window.parent.parent.frames['ListPage']
         ];
         var wN;
-        possibleElements.forEach((element) => {
+        possibleElements.forEach(function(element){
             if (!!element && !wN) {
                 wN = element.window || element.contentWindow;
             }
