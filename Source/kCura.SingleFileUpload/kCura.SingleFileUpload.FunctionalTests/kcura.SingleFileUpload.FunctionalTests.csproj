@@ -133,8 +133,8 @@
     <Reference Include="Relativity.DataTransfer.MessageService, Version=10.2.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.DataTransfer.MessageService.10.2.0\lib\Relativity.DataTransfer.MessageService.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Kepler, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.10.3.170.1\lib\net462\Relativity.Kepler.dll</HintPath>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.1.0.1.627\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Logging, Version=2018.11.8.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Logging.2018.11.8\lib\net462\Relativity.Logging.dll</HintPath>
@@ -175,8 +175,8 @@
     <Reference Include="Relativity.Services.Layout.Interfaces, Version=1.1.46.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Services.Layout.Interfaces.1.1.46\lib\Relativity.Services.Layout.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.10.3.170.1\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.627, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Kepler.Client.1.0.1.627\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=9.4.159.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.9.4.159\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>

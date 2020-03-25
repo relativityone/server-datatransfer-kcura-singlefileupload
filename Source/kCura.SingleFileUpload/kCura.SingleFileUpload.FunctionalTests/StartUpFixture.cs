@@ -1,9 +1,9 @@
-﻿using kCura.NUnit.Integration;
+﻿using System;
+using kCura.NUnit.Integration;
 using kCura.Relativity.Client;
 using NUnit.Framework;
 using Platform.Keywords.RSAPI;
 using Relativity.Services.ServiceProxy;
-using System;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
