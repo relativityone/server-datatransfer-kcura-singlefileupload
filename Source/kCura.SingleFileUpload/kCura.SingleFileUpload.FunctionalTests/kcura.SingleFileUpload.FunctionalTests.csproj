@@ -636,8 +636,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
