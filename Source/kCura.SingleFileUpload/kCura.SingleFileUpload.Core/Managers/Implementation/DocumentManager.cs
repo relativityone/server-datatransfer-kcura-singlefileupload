@@ -70,7 +70,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			UpdateNative(documentInfo, documentExtraInfo.DocID);
 			Tuple<string, string> importResult = await ImportDocumentAsync(
 				documentInfo, documentExtraInfo.WebApiUrl, documentExtraInfo.WorkspaceID, documentExtraInfo.FolderID, documentExtraInfo.DocID);
-			await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSUPLOADED);
+			await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSREPLACED);
 			UpdateDocumentLastModificationFields(documentExtraInfo.DocID, documentExtraInfo.UserID, false);
 		}
 		public bool ValidateDocImages(int docArtifactId)
