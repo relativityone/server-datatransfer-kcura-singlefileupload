@@ -225,7 +225,6 @@
     <Compile Include="Entities\DocumentExtraInfo.cs" />
     <Compile Include="Entities\DocumentIdentifierField.cs" />
     <Compile Include="Entities\Enumerations\AuditAction.cs" />
-    <Compile Include="Entities\FileType.cs" />
     <Compile Include="Entities\FileInformation.cs" />
     <Compile Include="Entities\Imaging.cs" />
     <Compile Include="Entities\ImportJobSettings.cs" />
@@ -557,7 +556,7 @@
     <Content Include="oi\unmanaged\vscgm-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-	<Content Include="oi\unmanaged\vscsv-R1.dll">
+    <Content Include="oi\unmanaged\vscsv-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="oi\unmanaged\vscwt-R1.dll">
@@ -1165,6 +1164,7 @@
     <EmbeddedResource Include="SQL\Queries.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

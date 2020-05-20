@@ -17,6 +17,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 		{
 			TestWorkspaceID = CreateWorkspace();
 		}
+
 		public int CreateWorkspace()
 		{
 			int ID = 0;
@@ -32,6 +33,5 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			}
 			return ID;
 		}
-
 	}
 }

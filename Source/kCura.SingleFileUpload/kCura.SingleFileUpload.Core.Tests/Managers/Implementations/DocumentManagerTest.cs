@@ -27,8 +27,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	[TestFixture]
 	public class DocumentManagerTest : TestBase
 	{
-
-
 		private Mock<IHelper> mockingHelper;
 
 		#region SetUp
@@ -36,8 +34,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[OneTimeSetUp]
 		public void Setup()
 		{
-
-
 			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
 
 			rsapi.Setup(p => p.Read(It.IsAny<APIOptions>(), It.IsAny<List<ArtifactRequest>>()))
@@ -104,17 +100,12 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Returns(mockApiLog.Object);
 
 			Mock<ILogFactory> mockLogFactory = new Mock<ILogFactory>();
-			ILogFactory logFactory = mockLogFactory.Object;
-
 
 			mockLogFactory.Setup(p => p.GetLogger())
 				.Returns(mockApiLog.Object);
 
 			mockingHelper.Setup(p => p.GetLoggerFactory())
 				.Returns(mockLogFactory.Object);
-
-
-
 
 			mockingHelper
 				.MockIDBContextOnHelper()
@@ -280,14 +271,14 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task ValidateFileTypesTestAsync()
 		{
-			bool result = await DocumentManager.Instance.ValidateFileTypes(TestsConstants._FILE_TYPE);
+			bool result = await DocumentManager.Instance.ValidateFileTypesAsync(TestsConstants._FILE_TYPE);
 			Assert.IsTrue(result);
 		}
 
 		[Test]
 		public async Task IsDataGridEnabledTestAsync()
 		{
-			bool result = await DocumentManager.Instance.IsDataGridEnabled(-1);
+			bool result = await DocumentManager.Instance.IsDataGridEnabledAsync(-1);
 			Assert.IsTrue(result);
 		}
 
@@ -331,7 +322,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task ReplaceSingleDocumentTest()
 		{
-			await DocumentManager.Instance.ReplaceSingleDocument(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
+			await DocumentManager.Instance.ReplaceSingleDocumentAsync(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
 			Assert.IsTrue(true);
 		}
 

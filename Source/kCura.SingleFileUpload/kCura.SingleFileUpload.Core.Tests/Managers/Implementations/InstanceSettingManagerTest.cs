@@ -16,10 +16,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[OneTimeSetUp]
 		public void Setup()
 		{
-			Mock<IHelper> mockingHelper;
-			mockingHelper = MockHelper
-					.GetMockingHelper<IHelper>();
-
+			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
 			Mock<IInstanceSettingManager> mockInstanceSettingManager = new Mock<IInstanceSettingManager>();
 
 			mockInstanceSettingManager

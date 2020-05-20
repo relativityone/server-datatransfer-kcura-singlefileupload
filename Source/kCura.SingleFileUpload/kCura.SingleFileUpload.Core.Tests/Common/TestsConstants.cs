@@ -38,8 +38,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 			FolderID = _DOC_FILE_ID,
 			WebApiUrl = _WEB_API_URL,
 		};
-
-
+		
 		public static readonly string _JSON_RESULT = @"{""fileExtension"":{ ""value"":""File %Extension"",""default"":""File Extension""},
 						""fileName"":{ ""value"":""File % Name"",""default"":""File Name""},
 						""fileSize"":{ ""value"":""File % Size"",""default"":""File Size""}}";
@@ -60,11 +59,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 						}
 		};
 
-		public static readonly ExportedMetadata _exportedMetadata = new ExportedMetadata
-		{
-			FileName = _FILE_NAME
-		};
-
 		public static DataTable _GetdataTable()
 		{
 			DataTable dt = new DataTable();
@@ -76,6 +70,5 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 
 			return dt;
 		}
-
 	}
 }

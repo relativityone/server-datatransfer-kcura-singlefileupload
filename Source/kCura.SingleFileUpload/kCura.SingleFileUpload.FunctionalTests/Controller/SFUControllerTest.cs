@@ -23,6 +23,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 	class SFUControllerTest
 	{
 		internal int TestWorkspaceID { get; private set; }
+
 		internal Mock<HttpContextBase> MoqContext;
 		Mock<HttpRequestBase> MoqRequest;
 		Mock<HttpResponseBase> MoqResponse;
@@ -36,6 +37,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			TestWorkspaceID = StartUpFixture.TestWorkspaceID;
 			SetUpController();
 		}
+
 		public void SetUpController()
 		{
 			SetUpMocks();
@@ -54,6 +56,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			ConfigurationHelper.SetupConfiguration(settings);
 			return new TestCustomPageHelper(TestWorkspaceID);
 		}
+
 		private void SetUpMocks()
 		{
 			MoqContext = new Mock<HttpContextBase>();
@@ -82,10 +85,8 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			});
 			MetaUploadFile metaData = new MetaUploadFile { fdv = false };
 
-			await Controller.Upload(metaData);
+			await Controller.Upload(metaData).ConfigureAwait(false);
 			Assert.AreEqual(expectedResponse, responseUpload);
 		}
-
-
 	}
 }

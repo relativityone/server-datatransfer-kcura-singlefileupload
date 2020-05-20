@@ -11,9 +11,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public static readonly Lazy<IProcessingManager> _INSTANCE = new Lazy<IProcessingManager>(() => new ProcessingManager());
 		public static IProcessingManager instance => _INSTANCE.Value;
+
 		public ProcessingDocument GetErrorInfo(int errorID)
 		{
-			var processingErrorObjectType = GetArtifactTypeByArtifactGuid(Helpers.Constants.PROCESSINGERROROBJECTTYPE);
+			int processingErrorObjectType = GetArtifactTypeByArtifactGuid(Helpers.Constants.PROCESSINGERROROBJECTTYPE);
 			QueryResult results;
 			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
 			{

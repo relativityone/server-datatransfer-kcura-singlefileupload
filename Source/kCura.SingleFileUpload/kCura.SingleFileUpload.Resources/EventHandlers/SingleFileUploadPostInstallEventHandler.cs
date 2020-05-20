@@ -1,5 +1,4 @@
 ﻿using kCura.EventHandler;
-using kCura.SingleFileUpload.Core.Managers;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
@@ -22,9 +21,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 			try
 			{
 				RepositoryHelper.ConfigureRepository(Helper);
-				disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
+				disposableContext = RepositoryHelper.InitializeRepository(Helper.GetActiveCaseID());
 				DocumentManager.Instance.SetCreateInstanceSettings();
-				ExecuteTelemetryAsync().Wait();
+				ExecuteTelemetryAsync().GetAwaiter().GetResult();
 				response.Success = true;
 			}
 			catch (Exception e)
@@ -42,20 +41,23 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
 		private async Task ExecuteTelemetryAsync()
 		{
-			if (await ToggleManager.Instance.GetChangeFileNameAsync())
+			if (await ToggleManager.Instance.GetChangeFileNameAsync().ConfigureAwait(false))
 			{
-				await ToggleManager.Instance.SetChangeFileNameAsync(false);
+				await ToggleManager.Instance.SetChangeFileNameAsync(false).ConfigureAwait(false);
 			}
-			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
+
+			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
 			{
-				await ToggleManager.Instance.SetCheckSFUFieldsAsync(false);
+				await ToggleManager.Instance.SetCheckSFUFieldsAsync(false).ConfigureAwait(false);
 			}
-			if (!await ToggleManager.Instance.GetCheckUploadMassiveAsync())
+
+			if (!await ToggleManager.Instance.GetCheckUploadMassiveAsync().ConfigureAwait(false))
 			{
-				await ToggleManager.Instance.SetCheckUploadMassiveAsync(true);
+				await ToggleManager.Instance.SetCheckUploadMassiveAsync(true).ConfigureAwait(false);
 			}
-			await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false);
-			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
+
+			await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false).ConfigureAwait(false);
+			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync().ConfigureAwait(false);
 		}
 	}
 

@@ -12,11 +12,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class SearchExportManager : BaseManager, ISearchExportManager
 	{
-		private const int _START_INDEX = 2;
-		private const int _SUBSTRING_LENGTH = 9;
+		private bool _checkToIgnoreValue;
+
 		private static readonly Lazy<ISearchExportManager> _INSTANCE = new Lazy<ISearchExportManager>(() => new SearchExportManager());
 		public static ISearchExportManager instance => _INSTANCE.Value;
-		private bool checkToIgnoreValue { get; set; }
+
 		public ExportedMetadata ExportToSearchML(string fileName, byte[] sourceFile, ICPHelper helper)
 		{
 			OutsideIn.Exporter oIExporter = helper.BuildExporter();
@@ -26,9 +26,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				using (MemoryStream msML = new MemoryStream())
 				{
-
 					oIExporter.SetPerformExtendedFI(true);
-					int timeZoneOffset = oIExporter.GetTimeZoneOffset();
 					oIExporter.SetSourceFile(msMLS);
 					oIExporter.SetDestinationFile(msML);
 					oIExporter.SetDestinationFormat(OutsideIn.FileFormat.FI_SEARCHML_LATEST);
@@ -40,6 +38,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			return result;
 		}
+
 		public ExportedMetadata ProcessSearchMLString(byte[] searchML, ExportedMetadata result = null)
 		{
 			result = result ?? new ExportedMetadata();
@@ -57,7 +56,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 						{
 							if (docChild.Name == "target" && docChild.NodeType == XmlNodeType.Element)
 							{
-								checkToIgnoreValue = true;
+								_checkToIgnoreValue = true;
 							}
 							string displayName = docChild.GetAttribute("display_name");
 							if (docChild.NodeType == XmlNodeType.Element && !string.IsNullOrEmpty(displayName))
@@ -76,9 +75,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 							{
 								if (docChild.NodeType == XmlNodeType.Text)
 								{
-									if (checkToIgnoreValue)
+									if (_checkToIgnoreValue)
 									{
-										checkToIgnoreValue = false;
+										_checkToIgnoreValue = false;
 									}
 									else
 									{
@@ -95,6 +94,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			return result;
 		}
+
 		public void ConfigureOutsideIn()
 		{
 			string directoryPath, filePath;

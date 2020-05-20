@@ -5,50 +5,22 @@ namespace kcura.SingleFileUpload.FunctionalTests.Helper
 {
 	class HelperSettings : AppConfigSettings
 	{
-		public override string RsapiServerAddress
-		{
-			get { return RelativityInstanceAddress; }
-		}
+		public override string RsapiServerAddress => RelativityInstanceAddress;
 
-		public override string RestServerAddress
-		{
-			get { return RelativityInstanceAddress; }
-		}
+		public override string RestServerAddress => RelativityInstanceAddress;
 
-		public override string RelativityInstanceAddress
-		{
-			get { return TestContext.Parameters["RelativityHostAddress"]; }
-		}
+		public override string RelativityInstanceAddress => TestContext.Parameters["RelativityHostAddress"];
 
-		public override string AdminUserName
-		{
-			get { return TestContext.Parameters["AdminUsername"]; }
-		}
+		public override string AdminUserName => TestContext.Parameters["AdminUsername"];
 
-		public override string AdminPassword
-		{
-			get { return TestContext.Parameters["AdminPassword"]; }
-		}
+		public override string AdminPassword => TestContext.Parameters["AdminPassword"];
 
-		public override string SqlServerAddress
-		{
-			get { return TestContext.Parameters["SqlServer"]; }
-		}
+		public override string SqlServerAddress => TestContext.Parameters["SqlServer"];
 
-		public override string SqlUserName
-		{
-			get { return TestContext.Parameters["SqlUsername"]; }
-		}
+		public override string SqlUserName => TestContext.Parameters["SqlUsername"];
 
-		public override string SqlPassword
-		{
-			get { return TestContext.Parameters["SqlPassword"]; }
-		}
+		public override string SqlPassword => TestContext.Parameters["SqlPassword"];
 
-		public override string ServerBindingType
-		{
-			get { return TestContext.Parameters["ServerBindingType"]; }
-		}
-
+		public override string ServerBindingType => TestContext.Parameters["ServerBindingType"];
 	}
 }

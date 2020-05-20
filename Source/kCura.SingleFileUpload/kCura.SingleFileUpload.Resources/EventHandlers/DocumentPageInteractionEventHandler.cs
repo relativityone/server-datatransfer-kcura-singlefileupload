@@ -1,6 +1,4 @@
 ﻿using kCura.EventHandler;
-using kCura.SingleFileUpload.Core.Managers;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -8,7 +6,6 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 	[System.Runtime.InteropServices.Guid("FC7DA2FE-200A-44EA-A3F5-BFBF6C306143")]
 	public class DocumentPageInteractionEventHandler : PageInteractionEventHandler
 	{
-
 		public override Response PopulateScriptBlocks()
 		{
 			return new Response { Success = true };

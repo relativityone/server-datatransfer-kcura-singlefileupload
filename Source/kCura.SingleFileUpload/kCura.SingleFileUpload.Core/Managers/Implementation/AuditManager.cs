@@ -15,11 +15,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		private static readonly Lazy<IAuditManager> _INSTANCE = new Lazy<IAuditManager>(() => new AuditManager());
 		public static IAuditManager instance => _INSTANCE.Value;
 
-		public AuditManager()
-		{
-		}
-
-
 		public void CreateAuditRecord(int workspaceId, int artifactID, AuditAction action, string details, int userID)
 		{
 			SqlParameter[] parameters =
@@ -43,7 +38,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		/// <param name="message">A message indicating the operation being performed, for example "Replacing Image File" or "Replacing Processing Error File"</param>
 		///  Please make the message useful and something an administrator will understand.
 		/// <returns> the details to use in CreateAuditRecord</returns>
-		public string GenerateAuditDetailsForFileUpload(string filePath, Int32 fileId, string message)
+		public string GenerateAuditDetailsForFileUpload(string filePath, int fileId, string message)
 		{
 			System.IO.StringWriter stringWriter = new StringWriter();
 			System.Xml.XmlTextWriter xmlWriter = new System.Xml.XmlTextWriter(stringWriter);
@@ -68,14 +63,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return string.Format("<auditElement><RequestOrigination><IP>{0}</IP><Prefix /><Page>{1}</Page></RequestOrigination></auditElement>", "ip", "SFU");
 		}
 
-
-		private string GetRequestOrigination2()
-		{
-			var values = new System.Collections.Hashtable();
-			values.Add("Agent", "");
-			values.Add("ProcessorID", "");
-			return kCura.Utility.XmlHelper.GenerateAuditElement("RequestOrigination", values);
-		}
 
 		private string GetRecordOrigination()
 		{

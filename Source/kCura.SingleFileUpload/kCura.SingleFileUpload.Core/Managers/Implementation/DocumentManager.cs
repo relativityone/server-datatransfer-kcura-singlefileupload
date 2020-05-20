@@ -27,31 +27,29 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class DocumentManager : BaseManager, IDocumentManager
 	{
-
-		private const int _FILED_ARTIFACT_TYPE = 14;
 		private readonly int _timeOutValue = 300;
-		private readonly int[] _INCLUDE_PERMISSIONS = new int[] { 1, 2, 3, 4, 5, 6 };
 
 		private static readonly Lazy<IDocumentManager> _INSTANCE = new Lazy<IDocumentManager>(() => new DocumentManager());
 
 		public static IDocumentManager Instance => _INSTANCE.Value;
 
-
 		private DocumentManager()
 		{
 
 		}
-		public async Task<Response> SaveSingleDocument(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
+
+		public async Task<Response> SaveSingleDocumentAsync(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
 		{
-			Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID);
+			Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID).ConfigureAwait(false);
 			if (string.IsNullOrEmpty(importResult.Item1))
 			{
-				await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSUPLOADED);
+				await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSUPLOADED).ConfigureAwait(false);
 				return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
 			}
 			return new Response() { Result = importResult.Item1, Success = false };
 		}
-		public async Task ReplaceSingleDocument(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo)
+
+		public async Task ReplaceSingleDocumentAsync(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo)
 		{
 			if (!documentExtraInfo.AvoidControlNumber || !documentExtraInfo.FromDocumentViewer)
 			{
@@ -63,16 +61,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				if (!documentExtraInfo.FromDocumentViewer)
 				{
 					replacedDocument.ParentArtifact = new DTOs.Artifact(DefineFolder(documentExtraInfo.FolderID));
-					await ChangeFolderAsync(documentExtraInfo.FolderID, documentExtraInfo.DocID);
+					await ChangeFolderAsync(documentExtraInfo.FolderID, documentExtraInfo.DocID).ConfigureAwait(false);
 				}
 			}
 
 			UpdateNative(documentInfo, documentExtraInfo.DocID);
-			Tuple<string, string> importResult = await ImportDocumentAsync(
-				documentInfo, documentExtraInfo.WebApiUrl, documentExtraInfo.WorkspaceID, documentExtraInfo.FolderID, documentExtraInfo.DocID);
-			await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSREPLACED);
+			await ImportDocumentAsync(documentInfo, documentExtraInfo.WebApiUrl, documentExtraInfo.WorkspaceID, documentExtraInfo.FolderID, documentExtraInfo.DocID).ConfigureAwait(false);
+			await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSREPLACED).ConfigureAwait(false);
 			UpdateDocumentLastModificationFields(documentExtraInfo.DocID, documentExtraInfo.UserID, false);
 		}
+
 		public bool ValidateDocImages(int docArtifactId)
 		{
 			bool result = false;
@@ -88,6 +86,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			return result;
 		}
+
 		public bool ValidateDocNative(int docArtifactId)
 		{
 			bool result = false;
@@ -103,6 +102,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			return result;
 		}
+
 		public string GetDocumentControlNumber(int docArtifactId)
 		{
 			string result = null;
@@ -128,6 +128,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				 }
 			) > 0;
 		}
+
 		public void UpdateDocumentLastModificationFields(int docArtifactId, int userID, bool isNew)
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateDocumentLastModificationFields,
@@ -139,6 +140,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				 }
 			);
 		}
+
 		public void DeleteRedactions(int docArtifactId)
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentRedactions,
@@ -148,6 +150,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				 }
 			);
 		}
+
 		public void DeleteExistingImages(int dArtifactId)
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.DeleteDocumentImages,
@@ -157,6 +160,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			);
 		}
+
 		public void InsertImage(FileInformation image)
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.InsertImageInFileTable,
@@ -172,6 +176,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			);
 		}
+
 		public void UpdateHasImages(int dArtifactId)
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.UpdateHasImages,
@@ -183,6 +188,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			);
 		}
+
 		public FileInformation GetFileByArtifactId(int docArtifactId)
 		{
 			FileInformation fInformation = null;
@@ -208,11 +214,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return fInformation;
 		}
 
-		private object SqlParameter(string v, int docArtifactId)
-		{
-			throw new NotImplementedException();
-		}
-
 		public int GetDocByName(string docName)
 		{
 			DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>
@@ -222,6 +223,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			};
 			return _Repository.RSAPIClient.Repositories.Document.Query(qDocs, 1).Results.FirstOrDefault()?.Artifact?.ArtifactID ?? -1;
 		}
+
 		public void SetCreateInstanceSettings()
 		{
 			Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertInstanceSettings);
@@ -233,11 +235,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				CreateWorkspaceFieldSettings();
 			}
 		}
+
 		public void RemovePageInteractionEvenHandlerFromDocumentObject()
 		{
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.RemovePageInteractionEvenHandlerFromDocumentObject);
 		}
-		public async Task<bool> ValidateFileTypes(string extension)
+
+		public async Task<bool> ValidateFileTypesAsync(string extension)
 		{
 			QueryResult results;
 			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>(ExecutionIdentity.System))
@@ -249,14 +253,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					IncludeIDWindow = false,
 					Condition = "'Name' IN ['RestrictedNativeFileTypes']"
 				};
-				results = await objectManager.QueryAsync(-1, query, 1, 10);
+				results = await objectManager.QueryAsync(-1, query, 1, 10).ConfigureAwait(false);
 			}
-			var restricted = results.Objects[0].FieldValues[0].Value.ToString().Split(';').Select(x => x.ToLower()).ToList();
+			List<string> restricted = results.Objects[0].FieldValues[0].Value.ToString().Split(';').Select(x => x.ToLower()).ToList();
 			restricted.AddRange(new[] { "dll", "exe", "js" });
 			return !restricted.Contains(extension.Replace(".", ""));
 		}
 
-		public async Task<bool> IsDataGridEnabled(int workspaceID)
+		public async Task<bool> IsDataGridEnabledAsync(int workspaceID)
 		{
 			QueryResult results;
 			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>(ExecutionIdentity.System))
@@ -268,7 +272,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					IncludeIDWindow = false,
 					Condition = $"'ArtifactID' IN [{workspaceID}]"
 				};
-				results = await objectManager.QueryAsync(-1, query, 1, 10);
+				results = await objectManager.QueryAsync(-1, query, 1, 10).ConfigureAwait(false);
 			}
 			var isDataGrid = (bool)results.Objects[0].FieldValues[0].Value;
 			return isDataGrid;
@@ -282,7 +286,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			documentsDataTable.Columns.Add("Extracted Text", typeof(string));
 
 
-			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
+			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
 			{
 				object wsResult = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting);
 				JObject wsFields = null;
@@ -324,30 +328,35 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			documentsDataTable.Columns.Add("Native File", typeof(string));
 			return documentsDataTable;
 		}
+
 		public void WriteFile(byte[] file, FileInformation document)
 		{
 			File.WriteAllBytes(document.FileLocation, file);
 		}
+
 		public string GetRepositoryLocation()
 		{
 			string location = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID,
 				new[] { SqlHelper.CreateSqlParameter("AID", _Repository.WorkspaceID) }).ToString();
 			return !location.EndsWith("\\") ? string.Concat(location, "\\") : location;
 		}
+
 		public async Task CreateMetricsAsync(ExportedMetadata documentInfo, string bucket)
 		{
 			if (!string.IsNullOrEmpty(bucket))
 			{
-				await TelemetryManager.Instance.LogCountAsync(bucket, 1L);
-				await TelemetryManager.Instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength);
+				await TelemetryManager.Instance.LogCountAsync(bucket, 1L).ConfigureAwait(false);
+				await TelemetryManager.Instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength).ConfigureAwait(false);
+
 				//Create File tipe metric
 				await TelemetryManager.Instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
-					Path.GetExtension(documentInfo.FileName)),
-					$"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded");
+						Path.GetExtension(documentInfo.FileName)),
+					$"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded").ConfigureAwait(false);
 
-				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
+				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L).ConfigureAwait(false);
 			}
 		}
+
 		public string InstanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
 		{
 			string folder = Path.Combine(baseRepo ?? Path.GetTempPath(), $"RV_{Guid.NewGuid()}");
@@ -356,6 +365,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			File.WriteAllBytes(tmpFileName, fileBytes);
 			return tmpFileName;
 		}
+
 		public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
 		{
 			try
@@ -370,11 +380,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 				return DataExchange.Io.FileTypeIdentifierService.Instance.Identify(fileName);
 			}
-
 		}
+
 		private void CreateWorkspaceFieldSettings()
 		{
-
 			string fieldNames = Repository.Instance.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting).ToString();
 
 			if (!string.IsNullOrEmpty(fieldNames))
@@ -405,12 +414,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				Repository.Instance.CaseDBContext.ExecuteNonQuerySQLStatement(string.Format(Queries.InsertFieldsWorspaceSetting, wsFields.ToString()));
 			}
 		}
+
 		private void ForceTapiSettings()
 		{
 			SetWinEDDSSetting(Constants.TAPI_FORCE_WEB_UPLOAD);
 			SetWinEDDSSetting(Constants.TAPI_FORCE_HTTP_CLIENT);
 			SetWinEDDSSetting(Constants.TAPI_FORCE_BCP_HTTP_CLIENT);
 		}
+
 		private void SetWinEDDSSetting(string key, string value = "True")
 		{
 			if (WinEDDS.Config.ConfigSettings.Contains(key))
@@ -422,6 +433,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				WinEDDS.Config.ConfigSettings.Add(key, value);
 			}
 		}
+
 		private async Task<Tuple<string, string>> ImportDocumentAsync(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
 		{
 			try
@@ -451,9 +463,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 
 				IImportAPI iapi = ImportApiFactory.Instance.GetImportAPI(settings);
-				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync();
+				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync().ConfigureAwait(false);
 
-				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name);
+				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name).ConfigureAwait(false);
 
 				// upper case extension and remove period
 				string extension = Path.GetExtension(documentInfo.FileName).ToUpper().Remove(0, 1),
@@ -463,7 +475,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				decimal fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
 
 				// Add file to load
-				if (await ToggleManager.Instance.GetCheckSFUFieldsAsync())
+				if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
 				{
 
 					dtDocument.Rows.Add(
@@ -517,6 +529,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 			return new Tuple<string, string>(string.Empty, documentInfo.TempFileLocation);
 		}
+
 		private async Task ChangeFolderAsync(int folderID, int docID)
 		{
 			using (Services.Document.IDocumentManager docManager = _Repository.CreateProxy<Services.Document.IDocumentManager>())
@@ -527,13 +540,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					{
 						new Services.Document.DocumentRef(docID)
 					}
-				);
+				).ConfigureAwait(false);
 			}
 		}
+
 		private int DefineFolder(int id)
 		{
 			return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDroppedFolder, SqlHelper.CreateSqlParameter("SupID", id));
 		}
+
 		private void UpdateNative(ExportedMetadata documentInfo, int docID)
 		{
 			FileInformation file = GetFileByArtifactId(docID);
@@ -571,10 +586,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					},
 					IncludeIDWindow = false,
 				};
-				results = await objectManager.QueryAsync(Repository.Instance.WorkspaceID, query, 1, 10);
+				results = await objectManager.QueryAsync(Repository.Instance.WorkspaceID, query, 1, 10).ConfigureAwait(false);
 			}
 
-			var restricted = results.Objects[0];
+			RelativityObject restricted = results.Objects[0];
 
 			return new DocumentIdentifierField()
 			{
@@ -598,10 +613,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			LogError(new FileLoadException(row["Message"].ToString()));
 			throw new FileLoadException(row["Message"].ToString().Split('.')[1].Trim());
 		}
+
 		private void ImportJob_OnComplete(JobReport jobReport)
 		{
 			Repository.Instance.GetLogFactory().GetLogger().LogInformation($"SFU: Document upload succes: {jobReport.TotalRows} row(s) created.");
 		}
+
 		private void ImportJob_OnFatalException(JobReport jobReport)
 		{
 			LogError(jobReport.FatalException);
@@ -622,8 +639,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				LogError(ex);
 			}
-
 		}
-
 	}
 }

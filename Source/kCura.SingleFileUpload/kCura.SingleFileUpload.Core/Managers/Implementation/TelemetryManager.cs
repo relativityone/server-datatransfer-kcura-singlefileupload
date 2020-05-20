@@ -13,7 +13,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class TelemetryManager : BaseManager, ITelemetryManager
 	{
-
 		private Guid _workSpaceGuid;
 
 		private const string _NUMBER_OF_DOCUMENT_UPLOADED = "Number of documents uploaded";
@@ -21,15 +20,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		private static readonly Lazy<ITelemetryManager> _INSTANCE = new Lazy<ITelemetryManager>(() => new TelemetryManager());
 
 		public static ITelemetryManager Instance => _INSTANCE.Value;
-		public TelemetryManager()
-		{
-		}
 
 		private Guid WorkSpaceGuid
 		{
 			get
 			{
-				if (_workSpaceGuid == null || _workSpaceGuid == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+				if (_workSpaceGuid == Guid.Parse("00000000-0000-0000-0000-000000000000"))
 				{
 					string workspaceWuid = _Repository.MasterDBContext.ExecuteSqlStatementAsScalar(Queries.GetWorkspaceGuidByArtifactID,
 						new SqlParameter[]
@@ -37,8 +33,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 							new SqlParameter("@artifactId", _Repository.WorkspaceID)
 						}
 					).ToString();
-
-
+					
 					_workSpaceGuid = new Guid(workspaceWuid);
 				}
 				return _workSpaceGuid;
@@ -66,6 +61,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			}
 		}
+
 		public async Task LogGaugeAsync(string bucket, long count)
 		{
 			using (dynamic metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
@@ -87,6 +83,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			}
 		}
+
 		public DurationLogger LogDuration(string bucket, string workflowId, long count)
 		{
 			using (var metricManger = _Repository.CreateProxy<IMetricsManager>(ExecutionIdentity.CurrentUser))
@@ -110,22 +107,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
 				{
-					List<CategoryTarget> categories = await metricCollectionManager.GetCategoryTargetsAsync();
+					List<CategoryTarget> categories = await metricCollectionManager.GetCategoryTargetsAsync().ConfigureAwait(false);
 					CategoryTarget categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
 					CategoryRef sfuCategory = categoryTarget?.Category;
 
 					if (string.IsNullOrEmpty(sfuCategory?.Name))
 					{
 						sfuCategory = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
-						sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false);
-						/// if no category target... re-set it
-						categories = await metricCollectionManager.GetCategoryTargetsAsync();
-						categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
+						sfuCategory.ID = await metricCollectionManager.CreateCategoryAsync((Category)sfuCategory, false).ConfigureAwait(false);
 
+						// if no category target... re-set it
+						categories = await metricCollectionManager.GetCategoryTargetsAsync().ConfigureAwait(false);
+						categoryTarget = categories.FirstOrDefault(x => x.Category.Name == Helpers.Constants.METRICS_CATEGORY);
 					}
 
 					List<MetricIdentifier> metricIdentifiers = new List<MetricIdentifier>(),
-						metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY);
+						metrics = await metricCollectionManager.GetMetricIdentifiersByCategoryNameAsync(Helpers.Constants.METRICS_CATEGORY).ConfigureAwait(false);
 
 					MetricIdentifier numberOfDocsUploadedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DOCUMENTSUPLOADED),
 						numberOfDocsReplacedMetric = metrics.FirstOrDefault(x => x.Name == Helpers.Constants.BUCKET_DOCUMENTSREPLACED),
@@ -167,13 +164,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 					foreach (var metricIdentifier in metricIdentifiers)
 					{
-						await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false);
+						await metricCollectionManager.CreateMetricIdentifierAsync(metricIdentifier, false).ConfigureAwait(false);
 					}
 
 					if (!categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM])
 					{
 						categoryTarget.IsCategoryMetricTargetEnabled[CategoryMetricTarget.SUM] = true;
-						await metricCollectionManager.UpdateCategoryTargetSingleAsync(categoryTarget);
+						await metricCollectionManager.UpdateCategoryTargetSingleAsync(categoryTarget).ConfigureAwait(false);
 					}
 				}
 			}
@@ -183,6 +180,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				throw;
 			}
 		}
+
 		public async Task CreateMetricAsync(string bucket, string description)
 		{
 			try
@@ -190,7 +188,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				using (var metricCollectionManager = _Repository.CreateProxy<IInternalMetricsCollectionManager>(ExecutionIdentity.System))
 				{
 					Category category = new Category { Name = Helpers.Constants.METRICS_CATEGORY };
-					category.ID = await metricCollectionManager.CreateCategoryAsync(category, false);
+					category.ID = await metricCollectionManager.CreateCategoryAsync(category, false).ConfigureAwait(false);
 
 					var metricId = new MetricIdentifier
 					{
@@ -199,7 +197,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 						Description = description
 					};
 
-					await metricCollectionManager.CreateMetricIdentifierAsync(metricId, false);
+					await metricCollectionManager.CreateMetricIdentifierAsync(metricId, false).ConfigureAwait(false);
 				}
 			}
 			catch (Exception ex)
@@ -207,7 +205,5 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				LogError(ex);
 			}
 		}
-
-
 	}
 }

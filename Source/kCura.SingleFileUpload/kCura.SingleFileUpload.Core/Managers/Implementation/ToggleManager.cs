@@ -16,45 +16,43 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
         public async Task<bool> GetChangeFileNameAsync()
         {
-            bool result = await ToggleProvider.Current.IsEnabledAsync<ChangeFileName>();
+            bool result = await ToggleProvider.Current.IsEnabledAsync<ChangeFileName>().ConfigureAwait(false);
             return result;
         }
 
-        public async Task SetChangeFileNameAsync(bool enabled)
+        public Task SetChangeFileNameAsync(bool enabled)
         {
-            await ToggleProvider.Current.SetAsync<ChangeFileName>(enabled);
+	        return ToggleProvider.Current.SetAsync<ChangeFileName>(enabled);
         }
 
-        public async Task<bool> GetCheckSFUFieldsAsync()
+        public Task<bool> GetCheckSFUFieldsAsync()
         {
-            bool result = await ToggleProvider.Current.IsEnabledAsync<CheckSFUFields>();
-            return result;
+            return ToggleProvider.Current.IsEnabledAsync<CheckSFUFields>();
         }
 
-        public async Task SetCheckSFUFieldsAsync(bool enabled)
+        public Task SetCheckSFUFieldsAsync(bool enabled)
         {
-            await ToggleProvider.Current.SetAsync<CheckSFUFields>(enabled);
+	        return ToggleProvider.Current.SetAsync<CheckSFUFields>(enabled);
         }
 
-        public async Task<bool> GetValidateSFUCustomPermissionsAsync()
+        public Task<bool> GetValidateSFUCustomPermissionsAsync()
         {
-            bool result = await ToggleProvider.Current.IsEnabledAsync<ValidateSFUCustomPermissions>();
-            return result;
+	        return ToggleProvider.Current.IsEnabledAsync<ValidateSFUCustomPermissions>();
         }
 
-        public async Task SetValidateSFUCustomPermissionsAsync(bool enabled)
+        public Task SetValidateSFUCustomPermissionsAsync(bool enabled)
         {
-            await ToggleProvider.Current.SetAsync<ValidateSFUCustomPermissions>(enabled);
+	        return ToggleProvider.Current.SetAsync<ValidateSFUCustomPermissions>(enabled);
         }
 
-        public async Task<bool> GetCheckUploadMassiveAsync()
+        public Task<bool> GetCheckUploadMassiveAsync()
         {
-            bool result = await ToggleProvider.Current.IsEnabledAsync<UploadMassiveDocuments>();
-            return result;
+            return ToggleProvider.Current.IsEnabledAsync<UploadMassiveDocuments>();
         }
-        public async Task SetCheckUploadMassiveAsync(bool enabled)
+
+        public Task SetCheckUploadMassiveAsync(bool enabled)
         {
-            await ToggleProvider.Current.SetAsync<UploadMassiveDocuments>(enabled);
+	        return ToggleProvider.Current.SetAsync<UploadMassiveDocuments>(enabled);
         }
     }
 }

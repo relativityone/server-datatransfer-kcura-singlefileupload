@@ -23,7 +23,6 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		[SetUp]
 		public void Setup()
 		{
-
 			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
 
 			Mock<IToggleProvider> mockToggleProvider = new Mock<IToggleProvider>
@@ -47,8 +46,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 			mockingHelper
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting, TestsConstants._JSON_RESULT);
-
-
+			
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
 				.MockService(rsapi)

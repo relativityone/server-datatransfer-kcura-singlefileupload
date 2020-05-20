@@ -19,13 +19,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		private InstanceSettingManager()
 		{
 		}
+
 		public async Task<int> GetMaxFilesInstanceSettingAsync()
 		{
 			int result = _MIN_FILES;
 			try
 			{
 				string condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
-				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByCondition(condition);
+				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByConditionAsync(condition).ConfigureAwait(false);
 				if (resultList.Any())
 				{
 					int.TryParse(resultList.FirstOrDefault().Value, out result);
@@ -45,9 +46,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 			return result;
 		}
+
 		public async Task CreateMaxFilesInstanceSettingAsync()
 		{
-			bool existInstanceSetting = await ExistMaxFilesInstanceSettingAsync();
+			bool existInstanceSetting = await ExistMaxFilesInstanceSettingAsync().ConfigureAwait(false);
 			if (!existInstanceSetting)
 			{
 				var instanceSetting = new InstanceSetting()
@@ -59,16 +61,17 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					InitialValue = Constants.INSTANCE_SETTING_VALUE,
 					Description = Constants.INSTANCE_SETTING_DESCRIPTION
 				};
-				await CreateInstanceSettingAsync(instanceSetting);
+				await CreateInstanceSettingAsync(instanceSetting).ConfigureAwait(false);
 			}
 		}
+
 		private async Task<bool> ExistMaxFilesInstanceSettingAsync()
 		{
 			bool result = false;
 			try
 			{
 				string condition = $"'Name' IN ['{Constants.INSTANCE_SETTING_NAME}']";
-				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByCondition(condition);
+				IEnumerable<InstanceSetting> resultList = await GetInstanceSettingsByConditionAsync(condition).ConfigureAwait(false);
 				result = resultList.Any();
 			}
 			catch (Exception ex)
@@ -78,7 +81,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return result;
 		}
 
-		private async Task<IEnumerable<InstanceSetting>> GetInstanceSettingsByCondition(string condition)
+		private async Task<IEnumerable<InstanceSetting>> GetInstanceSettingsByConditionAsync(string condition)
 		{
 			using (var instanceSettingProxy = _Repository.CreateProxy<global::Relativity.Services.InstanceSetting.IInstanceSettingManager>(ExecutionIdentity.System))
 			{
@@ -86,7 +89,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				{
 					Condition = condition
 				};
-				InstanceSettingQueryResultSet instanceSettingQueryResultSet = await instanceSettingProxy.QueryAsync(query);
+				InstanceSettingQueryResultSet instanceSettingQueryResultSet = await instanceSettingProxy.QueryAsync(query).ConfigureAwait(false);
 				if (instanceSettingQueryResultSet.Success && instanceSettingQueryResultSet.Results.Any())
 				{
 					var list = new List<InstanceSetting>(instanceSettingQueryResultSet.Results.Count);
@@ -102,11 +105,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			}
 		}
+
 		private async Task CreateInstanceSettingAsync(InstanceSetting instanceSetting)
 		{
 			using (var instanceSettingProxy = _Repository.CreateProxy<global::Relativity.Services.InstanceSetting.IInstanceSettingManager>(ExecutionIdentity.System))
 			{
-				await instanceSettingProxy.CreateSingleAsync(instanceSetting);
+				await instanceSettingProxy.CreateSingleAsync(instanceSetting).ConfigureAwait(false);
 			}
 		}
 
