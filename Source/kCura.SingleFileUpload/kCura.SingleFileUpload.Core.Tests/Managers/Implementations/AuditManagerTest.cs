@@ -16,14 +16,8 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[OneTimeSetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-			Mock<IHelper> mockingHelper;
-			mockingHelper = MockHelper
-					.GetMockingHelper<IHelper>();
-
-			mockingHelper
-				.MockIDBContextOnHelper();
-
+			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
+			mockingHelper.MockIDBContextOnHelper();
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}
 
@@ -44,8 +38,5 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			Assert.IsTrue(result.Contains(fileId.ToString()));
 			Assert.IsTrue(result.Contains(message));
 		}
-
-
-
 	}
 }

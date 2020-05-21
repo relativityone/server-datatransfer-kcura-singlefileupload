@@ -93,7 +93,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task CurrentUserHasPermissionToObjectTypeTest()
 		{
-			bool result = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectType
+			bool result = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectTypeAsync
 				(_WORKSPACE_ID, _OBJECT_GUID, _PERMISSION_NAME);
 			Assert.IsTrue(result);
 		}

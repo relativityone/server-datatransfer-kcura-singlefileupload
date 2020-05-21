@@ -8,7 +8,7 @@ namespace kCura.SingleFileUpload.Core.Managers
 		Task<bool> Permission_ReadSelectedSingleAsync(int workspaceId, int artifactTypeId, string permissionName);
 		bool IsUserAdministrator(int workspaceID, int userID);
 		bool Permission_Exist(string permissionName);
-		Task<bool> CurrentUserHasPermissionToObjectType(int workspaceId, string objectTypeGuid, string permissionName);
+		Task<bool> CurrentUserHasPermissionToObjectTypeAsync(int workspaceId, string objectTypeGuid, string permissionName);
 
 	}
 }

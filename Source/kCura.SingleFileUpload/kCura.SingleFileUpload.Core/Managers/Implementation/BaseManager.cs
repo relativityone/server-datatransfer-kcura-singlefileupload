@@ -8,26 +8,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public abstract class BaseManager : IManager
 	{
-		public Repository _Repository
-		{
-			get
-			{
-				return (Repository)Repository.Instance;
-			}
-		}
+		public Repository _Repository => (Repository)Repository.Instance;
 
 		public int WorkspaceID
 		{
-			get
-			{
-				return _Repository.WorkspaceID;
-			}
-			set
-			{
-				_Repository.WorkspaceID = value;
-			}
+			get => _Repository.WorkspaceID;
+			set => _Repository.WorkspaceID = value;
 		}
-		public int UserID { get; set; }
 
 		public int GetArtifactTypeByArtifactGuid(string guid)
 		{

@@ -22,14 +22,14 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		 */
 
 		private CacheContextScope _scopeDictionary;
-		//private IDocumentManager __repositoryDocumentManager;
 		private int _workspaceID;
 		private IUserInfo _relativityUserInfo;
+
+		private const string _APP_ID = "AppID";
 
 		/// <summary>
 		/// Current WorkspaceID
 		/// </summary>
-		private const string _APP_ID = "AppID";
 		protected int WorkspaceID
 		{
 			get
@@ -82,6 +82,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				return null;
 			}
 		}
+
 		/// <summary>
 		/// Current User logged in relativity info, please use it
 		/// </summary>
@@ -109,6 +110,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			_scopeDictionary = RepositoryHelper.InitializeRepository(WorkspaceID);
 			base.OnActionExecuting(filterContext);
 		}
+
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)
 		{
 			base.OnActionExecuted(filterContext);
@@ -136,12 +138,13 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			}
 			return response;
 		}
+
 		protected internal async Task<ResponseWithElements<T>> HandleResponseDynamicResponseAsync<T>(Func<ResponseWithElements<T>, Task<T>> lambda)
 		{
 			ResponseWithElements<T> response = new ResponseWithElements<T>();
 			try
 			{
-				response.Data = await lambda.Invoke(response);
+				response.Data = await lambda.Invoke(response).ConfigureAwait(false);
 				response.Success = true;
 			}
 			catch (Exception e)
@@ -151,42 +154,14 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			}
 			return response;
 		}
-		protected internal async Task<ResponseWithElements<T>> HandleResponseAsync<T>(Func<Task<T>> lambda)
-		{
-			ResponseWithElements<T> response = new ResponseWithElements<T>();
-			try
-			{
-				response.Data = await lambda.Invoke();
-				response.Success = true;
-			}
-			catch (Exception e)
-			{
-				response.Message = LogException(e);
-				response.Success = false;
-			}
-			return response;
-		}
-		protected internal async Task<Response> HandleResponseAsync(Func<Task> lambda)
-		{
-			Response response = new Response();
-			try
-			{
-				await lambda.Invoke();
-				response.Success = true;
-			}
-			catch (Exception e)
-			{
-				response.Message = LogException(e);
-				response.Success = false;
-			}
-			return response;
-		}
+
 		private string LogException(Exception e)
 		{
 			string errorMessage = e.Message;
 			DocumentManager.Instance.LogError(e);
 			return $"{errorMessage.Replace("Error:", string.Empty).Replace("\r\n", string.Empty).Replace("'", string.Empty)}";
 		}
+
 		protected override void OnAuthorization(AuthorizationContext filterContext)
 		{
 			try
