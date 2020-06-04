@@ -125,11 +125,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					}
 
 					HttpPostedFileBase file = Request.Files.Get(0);
-					string fileName = file.FileName;
-					if (fileName.Contains("\\"))
-					{
-						fileName = Path.GetFileName(fileName);
-					}
+					string fileName = Path.GetFileName(file.FileName);
 					string fileExt = Path.GetExtension(fileName).ToLower();
 					bool res = await DocumentManager.Instance.ValidateFileTypes(fileExt);
 
@@ -149,7 +145,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 							if (meta.did == -1 || meta.force)
 							{
 								ExportedMetadata transientMetadata = GetTransient(file, fileName);
-								transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+								transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.Native, fileExt);
 
 								if (ValidateFile(transientMetadata.TempFileLocation))
 								{
@@ -199,7 +195,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								{
 									FileInformation fileInfo = DocumentManager.Instance.GetFileByArtifactId(meta.did);
 									ExportedMetadata transientMetadata = GetTransient(file, fileName);
-									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.Native, fileExt);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
@@ -246,7 +242,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 								else
 								{
 									ExportedMetadata transientMetadata = GetTransient(file, fileName);
-									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.FileName, transientMetadata.Native, false);
+									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.Native, fileExt);
 									if (ValidateFile(transientMetadata.TempFileLocation))
 									{
 										response.Success = false;
