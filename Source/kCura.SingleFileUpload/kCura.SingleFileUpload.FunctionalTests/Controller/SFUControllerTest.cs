@@ -87,7 +87,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			IImportAPI importApi = new ExtendedImportAPI(
 				TestContext.Parameters["AdminUsername"],
 				TestContext.Parameters["AdminPassword"],
-				$"{TestContext.Parameters["RelativityHostAddress"]}/RelativityWebAPI");
+				$"https://{TestContext.Parameters["RelativityHostAddress"]}/RelativityWebAPI");
 
 			ImportApiFactory.SetUpSingleton(importApi, null);
 		}
