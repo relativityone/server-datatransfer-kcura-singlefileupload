@@ -84,8 +84,8 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 		private void SetUpImportApi()
 		{
 			IImportAPI importApi = new ExtendedImportAPI(
-				TestContext.Parameters["AdminUsername"],
-				TestContext.Parameters["AdminPassword"],
+				"relativity.admin@kcura.com", //TestContext.Parameters["AdminUsername"],
+				"Test1234!", //TestContext.Parameters["AdminPassword"],
 				TestContext.Parameters["RestServicesHostAddress"].Replace("/relativity.services", "/RelativityWebAPI"));
 
 			ImportApiFactory.SetUpSingleton(importApi, null);
