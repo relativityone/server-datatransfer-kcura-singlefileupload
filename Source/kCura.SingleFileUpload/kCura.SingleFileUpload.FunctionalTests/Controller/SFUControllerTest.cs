@@ -84,23 +84,12 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 
 		private void SetUpImportApi(ICPHelper helper)
 		{
-			string message = TestContext.Parameters["AdminUsername"]
-						   + $"|{TestContext.Parameters["AdminPassword"]}"
-						   + $"|{TestContext.Parameters["RestServicesHostAddress"]}"
-						   + $"|{TestContext.Parameters["RsapiServicesHostAddress"]}"
-						   + $"|{TestContext.Parameters["RelativityHostAddress"]}"
-						   + $"|{helper.GetServicesManager().GetRESTServiceUrl()}";
+			IImportAPI importApi = new ExtendedImportAPI(
+				TestContext.Parameters["AdminUsername"],
+				TestContext.Parameters["AdminPassword"],
+				$"{TestContext.Parameters["RelativityHostAddress"]}/RelativityWebAPI");
 
-			throw new Exception(message);
-
-			//IImportAPI importApi = new ExtendedImportAPI(
-			//	"relativity.admin@kcura.com", //TestContext.Parameters["AdminUsername"],
-			//	"Test1234!", //TestContext.Parameters["AdminPassword"],
-			//	TestContext.Parameters["RestServicesHostAddress"].Replace("/relativity.services", "/RelativityWebAPI"));
-
-
-
-			//ImportApiFactory.SetUpSingleton(importApi, null);
+			ImportApiFactory.SetUpSingleton(importApi, null);
 		}
 
 		[IdentifiedTest("26D369B2-B935-40D2-9F3E-B49BAD86C027")]
