@@ -307,7 +307,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		public void InstanceFileTest()
 		{
 			bool assert = false;
-			string result = DocumentManager.Instance.InstanceFile(TestsConstants._FILE_NAME, System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), true, TestsConstants._DOC_GUID.ToString());
+			string result = DocumentManager.Instance.InstanceFile(System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), null, TestsConstants._DOC_GUID.ToString());
 			string path = $"{Directory.GetCurrentDirectory()}\\{TestsConstants._DOC_GUID.ToString()}";
 
 			if (Directory.Exists(path))
