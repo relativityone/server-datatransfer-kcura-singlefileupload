@@ -1,4 +1,5 @@
-﻿using kcura.SingleFileUpload.FunctionalTests.Helper;
+﻿using System;
+using kcura.SingleFileUpload.FunctionalTests.Helper;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Factories;
 using kCura.SingleFileUpload.Core.Tests.Constants;
@@ -88,7 +89,9 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 				"Test1234!", //TestContext.Parameters["AdminPassword"],
 				TestContext.Parameters["RestServicesHostAddress"].Replace("/relativity.services", "/RelativityWebAPI"));
 
-			ImportApiFactory.SetUpSingleton(importApi, null);
+
+			throw new Exception($"{TestContext.Parameters["AdminUsername"]}|{TestContext.Parameters["AdminPassword"]}|{TestContext.Parameters["RestServicesHostAddress"]}|{TestContext.Parameters["RsapiServicesHostAddress"]}");
+			//ImportApiFactory.SetUpSingleton(importApi, null);
 		}
 
 		[IdentifiedTest("26D369B2-B935-40D2-9F3E-B49BAD86C027")]
