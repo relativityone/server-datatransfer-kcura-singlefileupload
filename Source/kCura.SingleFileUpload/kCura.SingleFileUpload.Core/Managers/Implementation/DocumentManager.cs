@@ -348,14 +348,26 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L);
 			}
 		}
-		public string InstanceFile(string fileName, byte[] fileBytes, bool isTemp, string baseRepo = null)
+
+		public string InstanceFile(byte[] fileBytes, string fileExt, string baseRepo = null)
+		{
+			string guidFileName = Guid.NewGuid() + (fileExt ?? String.Empty);
+
+			return InstanceFile(guidFileName, fileBytes, baseRepo);
+		}
+
+		private string InstanceFile(string fileName, byte[] fileBytes, string baseRepo = null)
 		{
 			string folder = Path.Combine(baseRepo ?? Path.GetTempPath(), $"RV_{Guid.NewGuid()}");
 			Directory.CreateDirectory(folder);
-			string tmpFileName = Path.Combine(folder, isTemp ? $"{Guid.NewGuid()}" + fileName : fileName);
+
+			string tmpFileName = Path.Combine(folder, fileName);
+
 			File.WriteAllBytes(tmpFileName, fileBytes);
+
 			return tmpFileName;
 		}
+
 		public DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName)
 		{
 			try
@@ -540,7 +552,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 			string workspaceRepo = GetRepositoryLocation();
 			string replaceGuid = Guid.NewGuid().ToString();
-			string newFileLocation = InstanceFile(replaceGuid, documentInfo.Native, false, workspaceRepo);
+			string newFileLocation = InstanceFile(replaceGuid, documentInfo.Native, workspaceRepo);
 
 			_Repository.CaseDBContext.ExecuteNonQuerySQLStatement(Queries.ReplaceNativeFile, new[]
 			{
