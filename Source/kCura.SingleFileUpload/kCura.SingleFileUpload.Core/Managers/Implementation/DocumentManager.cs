@@ -600,7 +600,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims?.FirstOrDefault(x => x.Type?.Equals("access_token") ?? false)?.Value ?? "";
 			if (string.IsNullOrEmpty(accessToken))
 			{
-				accessToken = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
+				accessToken = ExtensionPointServiceFinder.SystemTokenProvider?.GetLocalSystemToken();
 			}
 			return accessToken;
 		}
