@@ -450,29 +450,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				ForceTapiSettings();
 
-				ImportSettings settings;
 				string webApiEndpoint = "/RelativityWebAPI";
-				string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-				if (currentPath.Contains("Tests"))
-				{
-					settings = new ImportSettings()
-					{
-						RelativityPassword = "Test1234!",
-						RelativityUsername = "relativity.admin@kcura.com",
-						WebServiceURL = webApiUrl.Replace("/relativity.services", webApiEndpoint)
-					};
-				}
-				else
-				{
-					settings = new ImportSettings()
-					{
-						RelativityPassword = GetBearerToken(),
-						RelativityUsername = "XxX_BearerTokenCredentials_XxX",
-						WebServiceURL = webApiUrl.Replace("/Relativity", webApiEndpoint)
-					};
-				}
 
+				ImportSettings settings = new ImportSettings
+				{
+					RelativityPassword = GetBearerToken(),
+					RelativityUsername = "XxX_BearerTokenCredentials_XxX",
+					WebServiceURL = webApiUrl.Replace("/Relativity", webApiEndpoint)
+				};
 				IImportAPI iapi = ImportApiFactory.Instance.GetImportAPI(settings);
+
 				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync().ConfigureAwait(false);
 
 				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name).ConfigureAwait(false);
