@@ -45,10 +45,10 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 		{
 			SetUpMocks();
 
-			SetUpImportApi();
-
 			HelperSettings settings = new HelperSettings();
 			ICPHelper fakeHelper = SetUpCPHelper(settings);
+
+			SetUpImportApi(fakeHelper);
 
 			RepositoryHelper.ConfigureRepository(fakeHelper);
 			RepositoryHelper.InitializeRepository(TestWorkspaceID);
@@ -82,9 +82,16 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			MoqFiles.Setup(x => x.Get(It.IsAny<int>())).Returns(MoqFile.Object);
 		}
 
-		private void SetUpImportApi()
+		private void SetUpImportApi(ICPHelper helper)
 		{
-			throw new Exception($"{TestContext.Parameters["AdminUsername"]}|{TestContext.Parameters["AdminPassword"]}|{TestContext.Parameters["RestServicesHostAddress"]}|{TestContext.Parameters["RsapiServicesHostAddress"]}");
+			string message = TestContext.Parameters["AdminUsername"]
+						   + $"|{TestContext.Parameters["AdminPassword"]}"
+						   + $"|{TestContext.Parameters["RestServicesHostAddress"]}"
+						   + $"|{TestContext.Parameters["RsapiServicesHostAddress"]}"
+						   + $"|{TestContext.Parameters["RelativityHostAddress"]}"
+						   + $"|{helper.GetServicesManager().GetRESTServiceUrl()}";
+
+			throw new Exception(message);
 
 			//IImportAPI importApi = new ExtendedImportAPI(
 			//	"relativity.admin@kcura.com", //TestContext.Parameters["AdminUsername"],
@@ -92,7 +99,7 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			//	TestContext.Parameters["RestServicesHostAddress"].Replace("/relativity.services", "/RelativityWebAPI"));
 
 
-			
+
 			//ImportApiFactory.SetUpSingleton(importApi, null);
 		}
 
