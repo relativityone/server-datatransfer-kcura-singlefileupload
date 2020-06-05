@@ -450,29 +450,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				ForceTapiSettings();
 
-				ImportSettings settings;
-				string webApiEndpoint = "/RelativityWebAPI";
-				string currentPath = AppDomain.CurrentDomain.BaseDirectory;
-				if (currentPath.Contains("Tests"))
+				ImportSettings settings = new ImportSettings
 				{
-					settings = new ImportSettings()
-					{
-						RelativityPassword = "Test1234!",
-						RelativityUsername = "relativity.admin@kcura.com",
-						WebServiceURL = webApiUrl.Replace("/relativity.services", webApiEndpoint)
-					};
-				}
-				else
-				{
-					settings = new ImportSettings()
-					{
-						RelativityPassword = GetBearerToken(),
-						RelativityUsername = "XxX_BearerTokenCredentials_XxX",
-						WebServiceURL = webApiUrl.Replace("/Relativity", webApiEndpoint)
-					};
-				}
-
+					RelativityPassword = GetBearerToken(),
+					RelativityUsername = "XxX_BearerTokenCredentials_XxX",
+					WebServiceURL = webApiUrl.Replace("/Relativity", "/RelativityWebAPI")
+				};
 				IImportAPI iapi = ImportApiFactory.Instance.GetImportAPI(settings);
+
 				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync().ConfigureAwait(false);
 
 				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name).ConfigureAwait(false);
@@ -613,7 +598,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			string accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims?.FirstOrDefault(x => x.Type?.Equals("access_token") ?? false)?.Value ?? "";
 			if (string.IsNullOrEmpty(accessToken))
 			{
-				accessToken = ExtensionPointServiceFinder.SystemTokenProvider.GetLocalSystemToken();
+				accessToken = ExtensionPointServiceFinder.SystemTokenProvider?.GetLocalSystemToken();
 			}
 			return accessToken;
 		}
