@@ -1,4 +1,6 @@
 ﻿using kcura.SingleFileUpload.FunctionalTests.Helper;
+using kCura.Relativity.ImportAPI;
+using kCura.SingleFileUpload.Core.Factories;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.MVC.Controllers;
 using kCura.SingleFileUpload.MVC.Models;
@@ -36,13 +38,19 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			TestWorkspaceID = StartUpFixture.TestWorkspaceID;
 			SetUpController();
 		}
+
 		public void SetUpController()
 		{
 			SetUpMocks();
+
 			HelperSettings settings = new HelperSettings();
 			ICPHelper fakeHelper = SetUpCPHelper(settings);
+
+			SetUpImportApi();
+
 			RepositoryHelper.ConfigureRepository(fakeHelper);
 			RepositoryHelper.InitializeRepository(TestWorkspaceID);
+
 			Controller = new SFUController(fakeHelper);
 			Controller.ControllerContext = new ControllerContext(MoqContext.Object, new RouteData(), Controller);
 			Controller.Request.Params.Add("AppID", TestWorkspaceID.ToString());
@@ -54,6 +62,17 @@ namespace kcura.SingleFileUpload.FunctionalTests.Controller
 			ConfigurationHelper.SetupConfiguration(settings);
 			return new TestCustomPageHelper(TestWorkspaceID);
 		}
+
+		private void SetUpImportApi()
+		{
+			IImportAPI importApi = new ExtendedImportAPI(
+				TestContext.Parameters["AdminUsername"],
+				TestContext.Parameters["AdminPassword"],
+				$"https://{TestContext.Parameters["RelativityHostAddress"]}/RelativityWebAPI");
+
+			ImportApiFactory.SetUpSingleton(importApi, null);
+		}
+
 		private void SetUpMocks()
 		{
 			MoqContext = new Mock<HttpContextBase>();
