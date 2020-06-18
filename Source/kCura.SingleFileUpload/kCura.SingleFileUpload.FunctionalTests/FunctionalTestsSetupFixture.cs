@@ -1,9 +1,4 @@
-﻿using System;
-using kCura.NUnit.Integration;
-using kCura.Relativity.Client;
-using NUnit.Framework;
-using Platform.Keywords.RSAPI;
-using Relativity.Services.ServiceProxy;
+﻿using NUnit.Framework;
 using Relativity.SimpleFileUpload.Tests.Core;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;

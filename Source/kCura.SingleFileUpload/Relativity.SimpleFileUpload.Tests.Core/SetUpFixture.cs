@@ -5,7 +5,6 @@ using Relativity.Testing.Framework.Web;
 
 namespace Relativity.SimpleFileUpload.Tests.Core
 {
-	[SetUpFixture]
 	public class SetUpFixture
 	{
 		public SetUpFixture()
@@ -13,8 +12,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 			RelativityFacade.Instance.RelyOn<CoreComponent>();
 			RelativityFacade.Instance.RelyOn<ApiComponent>();
 			RelativityFacade.Instance.RelyOn<WebComponent>();
-
-			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath = @"C:\_Work\kcura.singlefileupload\buildtools\Relativity.Chromium.Portable\tools\chrome.exe";
 		}
 	}
 }

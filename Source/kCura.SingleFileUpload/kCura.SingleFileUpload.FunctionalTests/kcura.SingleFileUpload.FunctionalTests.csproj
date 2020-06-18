@@ -341,10 +341,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj">
-      <Project>{1969f7e9-5b83-4af2-857e-52b5e0bad102}</Project>
-      <Name>Relativity.SimpleFileUpload.Tests.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">
       <Project>{90D8784B-CE66-4459-BCCE-96DF572F7287}</Project>
       <Name>kCura.SingleFileUpload.Core.Tests</Name>
@@ -356,6 +352,10 @@
     <ProjectReference Include="..\kCura.SingleFileUpload.MVC\kCura.SingleFileUpload.MVC.csproj">
       <Project>{EBF7454E-22D8-408B-BA70-19357772D461}</Project>
       <Name>kCura.SingleFileUpload.MVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj">
+      <Project>{1969f7e9-5b83-4af2-857e-52b5e0bad102}</Project>
+      <Name>Relativity.SimpleFileUpload.Tests.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -702,8 +702,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.9.46\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.9.46\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.83.0.4103.3900\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.83.0.4103.3900\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.83.0.4103.3900\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.83.0.4103.3900\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" />
 </Project>
