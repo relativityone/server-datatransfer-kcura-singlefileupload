@@ -11,37 +11,34 @@ using Relativity.Testing.Framework.Api;
 namespace kcura.SingleFileUpload.FunctionalTests
 {
 	[SetUpFixture]
-	public class StartUpFixture
+	public class FunctionalTestsSetupFixture : SetUpFixture
 	{
 		public static int TestWorkspaceID;
 
 		[OneTimeSetUp]
 		public void OneTimeSetup()
 		{
-			RelativityFacade.Instance.RelyOn<CoreComponent>();
-			RelativityFacade.Instance.RelyOn<ApiComponent>();
-
+			if(TemplateWorkspaceExists())
+			{
+				return;
+			}
+			
 			int workspaceId = CreateTemplateWorkspace();
 
 			InstallSimpleFileUploadToWorkspace(workspaceId);
 		}
 
+		private bool TemplateWorkspaceExists()
+			=> RelativityFacade.Instance.Resolve<IWorkspaceService>().Get(Const.FUNCTIONAL_TEMPLATE_NAME) != null;
+
 		private int CreateTemplateWorkspace()
 		{
-			var workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
-
-			var templateWorkspace = workspaceService.Get(Const.FUNCTIONAL_TEMPLATE_NAME);
-			if (templateWorkspace == null)
+			Workspace newWorkspace = new Workspace()
 			{
-				Workspace newWorkspace = new Workspace()
-				{
-					Name = Const.FUNCTIONAL_TEMPLATE_NAME
-				};
+				Name = Const.FUNCTIONAL_TEMPLATE_NAME
+			};
 
-				return workspaceService.Create(newWorkspace).ArtifactID;
-			}
-
-			return templateWorkspace.ArtifactID;
+			return RelativityFacade.Instance.Resolve<IWorkspaceService>().Create(newWorkspace).ArtifactID;
 		}
 
 		private void InstallSimpleFileUploadToWorkspace(int workspaceId)

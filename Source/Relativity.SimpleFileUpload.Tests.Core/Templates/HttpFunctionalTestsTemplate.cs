@@ -1,10 +1,9 @@
-﻿using NUnit.Framework;
+﻿using Atata;
+using NUnit.Framework;
 using NUnit.Framework.Internal;
-using OpenQA.Selenium.Remote;
-using Relativity.SimpleFileUpload.Tests.Core.Driver;
-using Relativity.SimpleFileUpload.Tests.Core.Pages;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
+using Relativity.Testing.Framework.Web;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -30,9 +29,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 
 		public HttpFunctionalTestsTemplate(string workspaceName)
 		{
-			RelativityFacade.Instance.RelyOn<CoreComponent>();
-			RelativityFacade.Instance.RelyOn<ApiComponent>();
-
 			_workspaceName = workspaceName;
 
 			_workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
@@ -49,7 +45,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 
 			WorkspaceId = _workspaceService.Create(workspace).ArtifactID;
 
-			AuthenticateUser(SharedVariables.AdminUsername, SharedVariables.AdminPassword);
+			AuthenticateUser();
 		}
 
 		[OneTimeTearDown]
@@ -89,31 +85,22 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 			}
 		}
 
-		private void AuthenticateUser(string userName, string password)
+		private void AuthenticateUser()
 		{
-			RemoteWebDriver driver = DriverFactory.Create();
-			var loginPage = new LoginPage(driver);
-
-			if (loginPage.IsOnLoginPage())
-			{
-				loginPage.Login(userName, password);
-			}
-			else
-			{
-				new GeneralPage(driver).PassWelcomeScreen();
-			}
-
-			_userCookies = new CookieContainer();
+			Go.To<LoginPage>()
+				.EnterCredentials(
+					RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,
+					RelativityFacade.Instance.Config.RelativityInstance.AdminPassword)
+				.Login.Click();
 
 			CookieCollection cookieCollection = new CookieCollection();
-			foreach(var cookie in driver.Manage().Cookies.AllCookies)
+			foreach(var cookie in AtataContext.Current.Driver.Manage().Cookies.AllCookies)
 			{
 				cookieCollection.Add(new Cookie(cookie.Name, cookie.Value));
 			}
 
+			_userCookies = new CookieContainer();
 			_userCookies.Add(SharedVariables.RelativityFrontedUri, cookieCollection);
-
-			driver.Quit();
 		}
 	}
 }
