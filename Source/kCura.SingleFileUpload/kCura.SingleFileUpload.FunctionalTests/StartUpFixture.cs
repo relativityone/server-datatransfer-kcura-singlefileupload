@@ -48,12 +48,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 		{
 			var applicationService = RelativityFacade.Instance.Resolve<IRelativityApplicationService>();
 
-			var options = new LibraryApplicationInstallOptions()
-			{
-				IgnoreVersion = true
-			};
-
-			int appId = applicationService.InstallToLibrary(SharedVariables.LocalRAPFileLocation, options);
+			int appId = applicationService.InstallToLibrary(SharedVariables.LocalRAPFileLocation);
 
 			applicationService.InstallToWorkspace(workspaceId, appId);
 		}
