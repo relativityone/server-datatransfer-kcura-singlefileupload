@@ -89,6 +89,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		private void AuthenticateUser()
 		{
 			string chomePath = RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath;
+			string driverPath = RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeDriverDirectoryPath;
 
 			Go.To<LoginPage>()
 				.EnterCredentials(
