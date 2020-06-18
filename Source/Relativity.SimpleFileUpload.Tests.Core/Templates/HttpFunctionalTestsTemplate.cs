@@ -7,6 +7,7 @@ using Relativity.Testing.Framework.Web;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -87,6 +88,8 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 
 		private void AuthenticateUser()
 		{
+			string chomePath = RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath;
+
 			Go.To<LoginPage>()
 				.EnterCredentials(
 					RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,

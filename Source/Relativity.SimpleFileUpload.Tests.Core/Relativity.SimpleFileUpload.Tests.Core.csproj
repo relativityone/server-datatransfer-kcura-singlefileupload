@@ -91,12 +91,6 @@
     <Reference Include="Relativity.Testing.Framework.Web, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Relativity.Testing.Framework.Web.0.10.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
     </Reference>
-    <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="SemVer, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a89bb7dc6f7a145c, processorArchitecture=MSIL">
       <HintPath>..\packages\SemanticVersioning.1.2.2\lib\net45\SemVer.dll</HintPath>
     </Reference>

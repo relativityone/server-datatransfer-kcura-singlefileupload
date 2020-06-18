@@ -13,6 +13,8 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 			RelativityFacade.Instance.RelyOn<CoreComponent>();
 			RelativityFacade.Instance.RelyOn<ApiComponent>();
 			RelativityFacade.Instance.RelyOn<WebComponent>();
+
+			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath = @"C:\_Work\kcura.singlefileupload\buildtools\Relativity.Chromium.Portable\tools\chrome.exe";
 		}
 	}
 }
