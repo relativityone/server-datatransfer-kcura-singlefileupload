@@ -77,10 +77,10 @@
       <HintPath>..\packages\Relativity.Kepler.Client.2.4.0\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Testing.Framework, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.Testing.Framework.0.10.0-pre.14\lib\net462\Relativity.Testing.Framework.dll</HintPath>
+      <HintPath>..\packages\Relativity.Testing.Framework.0.10.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Testing.Framework.Api, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Relativity.Testing.Framework.Api.0.10.0-pre.14\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
+      <HintPath>..\packages\Relativity.Testing.Framework.Api.0.10.0\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
     </Reference>
     <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>

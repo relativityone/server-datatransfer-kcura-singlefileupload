@@ -1,12 +1,10 @@
 ﻿using FluentAssertions;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using NUnit.Framework;
-using Relativity.DataExchange.Export.VolumeManagerV2.Repository;
 using Relativity.SimpleFileUpload.Tests.Core.Templates;
 using Relativity.Testing.Identification;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace kcura.SingleFileUpload.FunctionalTests

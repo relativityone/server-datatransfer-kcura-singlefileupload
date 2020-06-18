@@ -13,18 +13,27 @@ using System.Web;
 
 namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 {
+	[TestFixture]
 	public class HttpFunctionalTestsTemplate
 	{
 		private readonly IWorkspaceService _workspaceService;
+
+		private readonly string _workspaceName;
 
 		private CookieContainer _userCookies;
 
 		public int WorkspaceId { get; private set; }
 
 		public HttpFunctionalTestsTemplate()
+		{ 
+		}
+
+		public HttpFunctionalTestsTemplate(string workspaceName)
 		{
 			RelativityFacade.Instance.RelyOn<CoreComponent>();
 			RelativityFacade.Instance.RelyOn<ApiComponent>();
+
+			_workspaceName = workspaceName;
 
 			_workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
 		}
@@ -34,7 +43,8 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		{
 			Workspace workspace = new Workspace()
 			{
-				Name = "SFU Test Workspace"
+				Name = _workspaceName,
+				TemplateWorkspace = new NamedArtifact { Name = Const.FUNCTIONAL_TEMPLATE_NAME }
 			};
 
 			WorkspaceId = _workspaceService.Create(workspace).ArtifactID;
@@ -102,6 +112,8 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 			}
 
 			_userCookies.Add(SharedVariables.RelativityFrontedUri, cookieCollection);
+
+			driver.Quit();
 		}
 	}
 }

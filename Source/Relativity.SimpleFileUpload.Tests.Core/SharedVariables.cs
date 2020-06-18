@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,6 +122,12 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 		#region Simple File Upload Settings
 
 		public static Uri SimpleFileUploadCustomPageUri = new Uri($"{RelativityFrontendUrlValue}/custompages/{Const.CustomPage.Guid}/");
+
+		#endregion
+
+		#region RAP Settings
+
+		public static string LocalRAPFileLocation => Path.Combine(GetParamString("RAPDirectory"), "kCura.SimpleFileUpload.rap");
 
 		#endregion
 
