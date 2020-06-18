@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7BEEE9DC-9788-4533-B1CB-CF6E62D04258}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.Tests\kCura.SingleFileUpload.Resources.Tests.csproj", "{01220ACF-44BE-45E8-B294-8BB840880316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kcura.SingleFileUpload.FunctionalTests", "kCura.SingleFileUpload\kCura.SingleFileUpload.FunctionalTests\kcura.SingleFileUpload.FunctionalTests.csproj", "{900E02DF-20DD-4005-A949-043AF5BE1B8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relativity.SimpleFileUpload.Tests.Core", "Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj", "{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,14 @@ Global
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|x64.ActiveCfg = Release|Any CPU
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|x64.Build.0 = Release|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|x64.Build.0 = Debug|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|x64.ActiveCfg = Release|Any CPU
+		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

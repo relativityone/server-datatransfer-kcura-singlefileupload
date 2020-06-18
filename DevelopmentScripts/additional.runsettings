@@ -1,0 +1,29 @@
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="UI.BrowserPath" value="..\..\..\..\buildtools\Relativity.Chromium.Portable\tools\Chrome.exe"/>
+    <Parameter name="ui.testRepeatOnErrorCount" value="3" />
+    <Parameter name="ui.implicitWaitInSec" value="20" />
+    <Parameter name="ui.waitForAjaxCallsInSec" value="3" />
+    <Parameter name="ui.waitForPageInSec" value="180" />
+    <Parameter name="UI.TimeoutMultiplier" value="2.0" />
+    <Parameter name="UI.SkipUserCreation" value="true" />
+    <Parameter name="UI.Browser" value="chromium" />
+    <Parameter name="UI.BrowserWidth" value="1920" />
+    <Parameter name="UI.BrowserHeight" value="1400" />
+    <Parameter name="UI.Options.Arguments.Headless" value="true" />
+    <Parameter name="UI.DriverService.HideCommandPromptWindow" value="true" />
+    <Parameter name="UI.Options.AcceptInsecureCertificates" value="true" />
+
+    <Parameter name="UI.DriverService.LogPath" value="chromeLog.txt" />
+    <Parameter name="UI.Options.Arguments.DisableInfoBars" value="true" />
+    <Parameter name="UI.Options.Arguments.IgnoreCertificateErrors" value="true" />
+    <Parameter name="UI.Options.Arguments.NoSandbox" value="true" />
+
+    <Parameter name="UI.Options.AdditionalCapabilities.AcceptSslCertificates" value="true" />
+    <Parameter name="UI.Options.AdditionalCapabilities.AcceptInsecureCertificates" value="true" />
+
+    <Parameter name="UI.Options.ProfilePreference.CredentialsEnableService" value="false" />
+    <Parameter name="UI.Options.ProfilePreference.ProfilePasswordManagerEnabled" value="false" />
+
+  </TestRunParameters>
+</RunSettings>

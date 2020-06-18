@@ -26,10 +26,6 @@ param (
 
     [Parameter()]
     [String]
-    $RestServicesHostAddress,
-
-    [Parameter()]
-    [String]
     $RsapiServicesHostAddress,
 
     [Parameter()]
@@ -97,15 +93,10 @@ if($TestVMName)
     }
 }
 
-    if(-not $RestServicesHostAddress)
-    {
-        $PSBoundParameters['RestServicesHostAddress'] = "$($PSBoundParameters['ServerBindingType'])://$($PSBoundParameters['RelativityHostAddress'])/relativity.rest/api"
-    }
-
-    if(-not $RsapiServicesHostAddress)
-    {
-        $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['ServerBindingType'])://$($PSBoundParameters['RelativityHostAddress'])/relativity.services"
-    }
+	if(-not $RsapiServicesHostAddress)
+	{
+	    $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+	}
 
 if(-not $RAPDirectory)
 {
@@ -146,7 +137,7 @@ foreach($parameterKey in $PSBoundParameters.Keys)
 
 foreach($parameter in $testRunParameters.ChildNodes)
 {
-    Add-Content (Join-Path $PSScriptRoot ..\FunctionalTestSettings) "--params $($parameter.Name)=$($parameter.Value)"
+    Add-Content (Join-Path $PSScriptRoot ..\FunctionalTestSettings) "--params `"$($parameter.Name)=$($parameter.Value)`""
 }
 
 $runSettingsDocument.Save((Join-Path $PSScriptRoot ..\FunctionalTest.runsettings))
