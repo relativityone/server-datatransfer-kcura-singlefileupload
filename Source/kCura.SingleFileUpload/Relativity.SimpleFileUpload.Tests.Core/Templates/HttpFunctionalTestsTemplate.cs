@@ -59,8 +59,10 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		{
 			var handler = new HttpClientHandler() { CookieContainer = _userCookies};
 
-			var client = new HttpClient(handler);
-			client.BaseAddress = SharedVariables.SimpleFileUploadCustomPageUri;
+			var client = new HttpClient(handler)
+			{ 
+				BaseAddress = SharedVariables.SimpleFileUploadCustomPageUri
+			};
 
 			string XCSFRHeader = _userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"].Value;
 			client.DefaultRequestHeaders.Add("X-CSRF-Header", XCSFRHeader);
@@ -88,8 +90,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 
 		private void AuthenticateUser()
 		{
-			string location = Assembly.GetExecutingAssembly().Location;
-
 			Go.To<LoginPage>()
 				.EnterCredentials(
 					RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,

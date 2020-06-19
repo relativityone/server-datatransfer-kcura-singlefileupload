@@ -18,6 +18,12 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 
 		#endregion User Settings
 
+		#region UI Tests Settings
+
+		public static string ChromeBinaryLocation => GetParamString("ChromeBinaryLocation");
+
+		#endregion
+
 		#region Relativity Settings
 
 		/// <summary>
