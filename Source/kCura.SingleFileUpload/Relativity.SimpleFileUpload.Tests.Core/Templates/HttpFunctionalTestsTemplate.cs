@@ -53,6 +53,8 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		public virtual void OneTimeTearDown()
 		{
 			_workspaceService.Delete(WorkspaceId);
+
+			AtataContext.Current.Driver?.Quit();
 		}
 
 		public HttpClient GetUserHttpClient()
