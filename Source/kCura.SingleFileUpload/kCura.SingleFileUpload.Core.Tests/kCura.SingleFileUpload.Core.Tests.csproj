@@ -71,8 +71,8 @@
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2020.1.0.110, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2020.3.0.21, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
@@ -210,12 +210,15 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="oi\unmanaged\adinit.dat" />
-    <Content Include="oi\unmanaged\cmmap000.bin" />
+    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
+    <Content Include="oi\docs\fileids_values_strs.txt" />
+    <Content Include="oi\unmanaged\audio.bmp" />
     <Content Include="oi\unmanaged\compreg.bin" />
-    <Content Include="oi\unmanaged\oitnsf.id" />
-    <Content Include="oi\unmanaged\oit_font_metrics.db" />
-    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
+    <None Include="oi\unmanaged\adinit.dat" />
+    <None Include="oi\unmanaged\cmmap000.bin" />
+    <None Include="oi\unmanaged\oitnsf.id" />
+    <None Include="oi\unmanaged\oit_font_metrics.db" />
+    <None Include="oi\unmanaged\RSMFTemplate.docx" />
     <None Include="oi\webview\oit.css.map" />
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
@@ -237,9 +240,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
-    <Content Include="oi\docs\fileids_values_strs.txt" />
-    <Content Include="oi\unmanaged\audio.bmp" />
     <Content Include="oi\unmanaged\debmp-R1.dll" />
     <Content Include="oi\unmanaged\dehex-R1.dll" />
     <Content Include="oi\unmanaged\dess-R1.dll" />
@@ -334,6 +334,7 @@
     <Content Include="oi\unmanaged\vscdrx-R1.dll" />
     <Content Include="oi\unmanaged\vsceos-R1.dll" />
     <Content Include="oi\unmanaged\vscgm-R1.dll" />
+    <Content Include="oi\unmanaged\vscsv-R1.dll" />
     <Content Include="oi\unmanaged\vscwt-R1.dll" />
     <Content Include="oi\unmanaged\vsdbs-R1.dll" />
     <Content Include="oi\unmanaged\vsdez-R1.dll" />
@@ -575,11 +576,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\NunitXml.TestLogger.2.1.41\build\net45\NUnitXml.TestLogger.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NunitXml.TestLogger.2.1.41\build\net45\NUnitXml.TestLogger.props'))" />
     <Error Condition="!Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.12.0\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.10.10\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.10.10\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.10.10\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.10.10\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
