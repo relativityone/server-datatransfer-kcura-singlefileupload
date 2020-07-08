@@ -4,8 +4,12 @@ using NUnit.Framework;
 using Relativity.SimpleFileUpload.Tests.Core.Templates;
 using Relativity.Testing.Identification;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
+using Relativity.Testing.Framework;
+using Relativity.Testing.Framework.Api;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
@@ -35,5 +39,28 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			string actualContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 			actualContent.Should().Be(expectedContent);
 		}
+
+		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
+		public async Task ShouldProperlyExtractExtractedText_WhenUploadFileDOC()
+		{
+			// Arrange
+			string expectedExtractedText = "Sample Extracted Text LoremIpsum";
+			string fileName = "SampleDOC.doc";
+			
+			bool fdv = false;
+			bool img = false;
+			FileInfo file = new FileInfo(FileHelper.GetFileLocation(fileName));
+
+			// Act
+			var result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+
+			// Assert
+			result.StatusCode.Should().Be(HttpStatusCode.OK);
+			var client = RelativityFacade.Instance.Resolve<IDocumentService>();
+			var documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
+			string actualExtractedText = documentsInWorkspace.First(x => x.ControlNumber.Equals("SampleDocs")).ExtractedText;
+			actualExtractedText.Should().Be(expectedExtractedText);
+		}
+
 	}
 }
