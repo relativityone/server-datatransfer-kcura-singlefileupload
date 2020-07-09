@@ -11,12 +11,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 	{
 		public SetUpFixture()
 		{
-			RelativityFacade.Instance.RelyOn<CoreComponent>();
-			RelativityFacade.Instance.RelyOn<ApiComponent>();
-			RelativityFacade.Instance.RelyOn<WebComponent>();
-
-			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath = 
-				Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SharedVariables.ChromeBinaryLocation);
-	}
+		}
 	}
 }

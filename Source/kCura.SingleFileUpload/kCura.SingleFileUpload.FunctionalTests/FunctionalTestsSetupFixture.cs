@@ -1,19 +1,29 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using System.Reflection;
+using NUnit.Framework;
 using Relativity.SimpleFileUpload.Tests.Core;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
+using Relativity.Testing.Framework.Web;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
 	[SetUpFixture]
-	public class FunctionalTestsSetupFixture : SetUpFixture
+	public class FunctionalTestsSetupFixture
 	{
 		public static int TestWorkspaceID;
 
 		[OneTimeSetUp]
 		public void OneTimeSetup()
 		{
-			if(TemplateWorkspaceExists())
+			RelativityFacade.Instance.RelyOn<CoreComponent>();
+			RelativityFacade.Instance.RelyOn<ApiComponent>();
+			RelativityFacade.Instance.RelyOn<WebComponent>();
+
+			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath =
+				Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SharedVariables.ChromeBinaryLocation);
+
+			if (TemplateWorkspaceExists())
 			{
 				return;
 			}
