@@ -81,8 +81,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2019.5.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2020.3.0.21, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -368,77 +368,14 @@
     <Content Include="oi\docs\fileids_values_only_sorted.txt" />
     <Content Include="oi\docs\fileids_values_strs.txt" />
     <Content Include="oi\unmanaged\audio.bmp" />
-    <Content Include="oi\unmanaged\compreg.bin" />
-    <Content Include="oi\unmanaged\emojis64.bmp" />
-    <Content Include="oi\unmanaged\icons256.bmp" />
-    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
-    <Content Include="oi\webview\collapseB.png" />
-    <Content Include="oi\webview\collapseB_hover.png" />
-    <Content Include="oi\webview\Collapse_Viewer.png" />
-    <Content Include="oi\webview\Collapse_Viewer_Hover.png" />
-    <Content Include="oi\webview\Comments_large_Active.png" />
-    <Content Include="oi\webview\Comments_large_Active_Multi.png" />
-    <Content Include="oi\webview\Comments_large_Normal.png" />
-    <Content Include="oi\webview\Comments_large_Normal_Multi.png" />
-    <Content Include="oi\webview\Comments_Normal.png" />
-    <Content Include="oi\webview\drag-handle.png" />
-    <Content Include="oi\webview\Expand_Viewer.png" />
-    <Content Include="oi\webview\Expand_Viewer_Hover.png" />
-    <Content Include="oi\webview\ficons\calendar.png" />
-    <Content Include="oi\webview\ficons\calendarEntry.png" />
-    <Content Include="oi\webview\ficons\contact.png" />
-    <Content Include="oi\webview\ficons\contactGroup.png" />
-    <Content Include="oi\webview\ficons\doc.png" />
-    <Content Include="oi\webview\ficons\doc_blue.png" />
-    <Content Include="oi\webview\ficons\folder.png" />
-    <Content Include="oi\webview\ficons\generic.png" />
-    <Content Include="oi\webview\ficons\ie.png" />
-    <Content Include="oi\webview\ficons\image.png" />
-    <Content Include="oi\webview\ficons\journal.png" />
-    <Content Include="oi\webview\ficons\msg.png" />
-    <Content Include="oi\webview\ficons\note.png" />
-    <Content Include="oi\webview\ficons\onenote.png" />
-    <Content Include="oi\webview\ficons\pdf.png" />
-    <Content Include="oi\webview\ficons\ppt.png" />
-    <Content Include="oi\webview\ficons\ppt_blue.png" />
-    <Content Include="oi\webview\ficons\project.png" />
-    <Content Include="oi\webview\ficons\publisher.png" />
-    <Content Include="oi\webview\ficons\task.png" />
-    <Content Include="oi\webview\ficons\text.png" />
-    <Content Include="oi\webview\ficons\transcript.png" />
-    <Content Include="oi\webview\ficons\vector.png" />
-    <Content Include="oi\webview\ficons\video.png" />
-    <Content Include="oi\webview\ficons\vsd.png" />
-    <Content Include="oi\webview\ficons\xls.png" />
-    <Content Include="oi\webview\ficons\xls_blue.png" />
-    <Content Include="oi\webview\ficons\zip.png" />
-    <Content Include="oi\webview\HiddenSlide.png" />
-    <Content Include="oi\webview\icon-comment-flag.png" />
-    <Content Include="oi\webview\icons-navbar.png" />
-    <Content Include="oi\webview\NoteIcon.png" />
-    <Content Include="oi\webview\oit.css" />
-    <Content Include="oi\webview\oit.js" />
-    <Content Include="oi\webview\oit.loading.gif" />
-    <Content Include="oi\webview\oit.navbar.css" />
-    <Content Include="oi\webview\oit.navbar.min.js" />
-    <Content Include="oi\webview\oit.statusbar.css" />
-    <Content Include="oi\webview\oit.statusbar.js.map" />
-    <Content Include="oi\webview\oit.navbar.js.map" />
-    <Content Include="oi\webview\oit.js.map" />
-    <Content Include="oi\webview\oit.css.map" />
-    <Content Include="oi\unmanaged\oit_font_metrics.db" />
-    <Content Include="oi\unmanaged\oitnsf.id" />
     <Content Include="oi\unmanaged\cmmap000.bin" />
-    <Content Include="oi\unmanaged\adinit.dat" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
-    <Content Include="LICENSE.txt" />
     <Content Include="oi\unmanaged\debmp-R1.dll" />
     <Content Include="oi\unmanaged\dehex-R1.dll" />
     <Content Include="oi\unmanaged\dess-R1.dll" />
     <Content Include="oi\unmanaged\detree-R1.dll" />
     <Content Include="oi\unmanaged\devect-R1.dll" />
     <Content Include="oi\unmanaged\dewp-R1.dll" />
+    <Content Include="oi\unmanaged\emojis64.bmp" />
     <Content Include="oi\unmanaged\excatest-R1.dll" />
     <Content Include="oi\unmanaged\exedrm-R1.dll" />
     <Content Include="oi\unmanaged\exgdsf-R1.dll" />
@@ -458,6 +395,7 @@
     <Content Include="oi\unmanaged\ibxbm2-R1.dll" />
     <Content Include="oi\unmanaged\ibxpm2-R1.dll" />
     <Content Include="oi\unmanaged\ibxwd2-R1.dll" />
+    <Content Include="oi\unmanaged\icons256.bmp" />
     <Content Include="oi\unmanaged\imcd32-R1.dll" />
     <Content Include="oi\unmanaged\imcd42-R1.dll" />
     <Content Include="oi\unmanaged\imcd52-R1.dll" />
@@ -486,31 +424,18 @@
     <Content Include="oi\unmanaged\libheif.dll" />
     <Content Include="oi\unmanaged\ocemul-R1.dll" />
     <Content Include="oi\unmanaged\oicomponents-R1.dll" />
-    <Content Include="oi\unmanaged\oilink.jar" />
     <Content Include="oi\unmanaged\osgd-R1.dll" />
     <Content Include="oi\unmanaged\ospdf-R1.dll" />
     <Content Include="oi\unmanaged\oswebview-R1.dll" />
     <Content Include="oi\unmanaged\oswin64-R1.dll" />
     <Content Include="oi\unmanaged\outsidex-R1.ocx" />
     <Content Include="oi\unmanaged\sccanno-R1.dll" />
-    <Content Include="oi\unmanaged\sccca-R1.dll" />
-    <Content Include="oi\unmanaged\sccch-R1.dll" />
-    <Content Include="oi\unmanaged\sccda-R1.dll" />
     <Content Include="oi\unmanaged\sccdu-R1.dll" />
-    <Content Include="oi\unmanaged\sccex-R1.dll" />
     <Content Include="oi\unmanaged\sccexind-R1.dll" />
-    <Content Include="oi\unmanaged\sccfa-R1.dll" />
-    <Content Include="oi\unmanaged\sccfi-R1.dll" />
-    <Content Include="oi\unmanaged\sccfmt-R1.dll" />
-    <Content Include="oi\unmanaged\sccfnt-R1.dll" />
-    <Content Include="oi\unmanaged\sccfut-R1.dll" />
     <Content Include="oi\unmanaged\sccimg-R1.dll" />
-    <Content Include="oi\unmanaged\sccind-R1.dll" />
-    <Content Include="oi\unmanaged\scclo-R1.dll" />
     <Content Include="oi\unmanaged\sccole-R1.dll" />
     <Content Include="oi\unmanaged\sccole2-R1.dll" />
     <Content Include="oi\unmanaged\sccta-R1.dll" />
-    <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\sccvw-R1.dll" />
     <Content Include="oi\unmanaged\vsacad-R1.dll" />
     <Content Include="oi\unmanaged\vsacs-R1.dll" />
@@ -524,6 +449,7 @@
     <Content Include="oi\unmanaged\vscdrx-R1.dll" />
     <Content Include="oi\unmanaged\vsceos-R1.dll" />
     <Content Include="oi\unmanaged\vscgm-R1.dll" />
+    <Content Include="oi\unmanaged\vscsv-R1.dll" />
     <Content Include="oi\unmanaged\vscwt-R1.dll" />
     <Content Include="oi\unmanaged\vsdbs-R1.dll" />
     <Content Include="oi\unmanaged\vsdez-R1.dll" />
@@ -594,6 +520,7 @@
     <Content Include="oi\unmanaged\vsmwpf-R1.dll" />
     <Content Include="oi\unmanaged\vsmwrk-R1.dll" />
     <Content Include="oi\unmanaged\vsnsf-R1.dll" />
+    <Content Include="oi\unmanaged\vsogg-R1.dll" />
     <Content Include="oi\unmanaged\vsolm-R1.dll" />
     <Content Include="oi\unmanaged\vsone-R1.dll" />
     <Content Include="oi\unmanaged\vsow-R1.dll" />
@@ -693,6 +620,82 @@
     <Content Include="oi\unmanaged\vsxy-R1.dll" />
     <Content Include="oi\unmanaged\vsyim-R1.dll" />
     <Content Include="oi\unmanaged\vszip-R1.dll" />
+    <Content Include="oi\webview\collapseB.png" />
+    <Content Include="oi\webview\collapseB_hover.png" />
+    <Content Include="oi\webview\Collapse_Viewer.png" />
+    <Content Include="oi\webview\Collapse_Viewer_Hover.png" />
+    <Content Include="oi\webview\Comments_large_Active.png" />
+    <Content Include="oi\webview\Comments_large_Active_Multi.png" />
+    <Content Include="oi\webview\Comments_large_Normal.png" />
+    <Content Include="oi\webview\Comments_large_Normal_Multi.png" />
+    <Content Include="oi\webview\Comments_Normal.png" />
+    <Content Include="oi\webview\drag-handle.png" />
+    <Content Include="oi\webview\Expand_Viewer.png" />
+    <Content Include="oi\webview\Expand_Viewer_Hover.png" />
+    <Content Include="oi\webview\ficons\calendar.png" />
+    <Content Include="oi\webview\ficons\calendarEntry.png" />
+    <Content Include="oi\webview\ficons\contact.png" />
+    <Content Include="oi\webview\ficons\contactGroup.png" />
+    <Content Include="oi\webview\ficons\doc.png" />
+    <Content Include="oi\webview\ficons\doc_blue.png" />
+    <Content Include="oi\webview\ficons\folder.png" />
+    <Content Include="oi\webview\ficons\generic.png" />
+    <Content Include="oi\webview\ficons\ie.png" />
+    <Content Include="oi\webview\ficons\image.png" />
+    <Content Include="oi\webview\ficons\journal.png" />
+    <Content Include="oi\webview\ficons\msg.png" />
+    <Content Include="oi\webview\ficons\note.png" />
+    <Content Include="oi\webview\ficons\onenote.png" />
+    <Content Include="oi\webview\ficons\pdf.png" />
+    <Content Include="oi\webview\ficons\ppt.png" />
+    <Content Include="oi\webview\ficons\ppt_blue.png" />
+    <Content Include="oi\webview\ficons\project.png" />
+    <Content Include="oi\webview\ficons\publisher.png" />
+    <Content Include="oi\webview\ficons\task.png" />
+    <Content Include="oi\webview\ficons\text.png" />
+    <Content Include="oi\webview\ficons\transcript.png" />
+    <Content Include="oi\webview\ficons\vector.png" />
+    <Content Include="oi\webview\ficons\video.png" />
+    <Content Include="oi\webview\ficons\vsd.png" />
+    <Content Include="oi\webview\ficons\xls.png" />
+    <Content Include="oi\webview\ficons\xls_blue.png" />
+    <Content Include="oi\webview\ficons\zip.png" />
+    <Content Include="oi\webview\HiddenSlide.png" />
+    <Content Include="oi\webview\icon-comment-flag.png" />
+    <Content Include="oi\webview\icons-navbar.png" />
+    <Content Include="oi\webview\NoteIcon.png" />
+    <Content Include="oi\webview\oit.css" />
+    <Content Include="oi\webview\oit.js" />
+    <Content Include="oi\webview\oit.loading.gif" />
+    <Content Include="oi\webview\oit.navbar.css" />
+    <Content Include="oi\webview\oit.navbar.min.js" />
+    <Content Include="oi\webview\oit.statusbar.css" />
+    <Content Include="oi\webview\oit.statusbar.js.map" />
+    <Content Include="oi\webview\oit.navbar.js.map" />
+    <Content Include="oi\webview\oit.js.map" />
+    <Content Include="oi\webview\oit.css.map" />
+    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
+    <Content Include="oi\unmanaged\oit_font_metrics.db" />
+    <Content Include="oi\unmanaged\oitnsf.id" />
+    <Content Include="oi\unmanaged\compreg.bin" />
+    <Content Include="oi\unmanaged\adinit.dat" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="oi\unmanaged\oilink.exe" />
+    <Content Include="oi\unmanaged\oilink.jar" />
+    <Content Include="oi\unmanaged\sccca-R1.dll" />
+    <Content Include="oi\unmanaged\sccch-R1.dll" />
+    <Content Include="oi\unmanaged\sccda-R1.dll" />
+    <Content Include="oi\unmanaged\sccex-R1.dll" />
+    <Content Include="oi\unmanaged\sccfa-R1.dll" />
+    <Content Include="oi\unmanaged\sccfi-R1.dll" />
+    <Content Include="oi\unmanaged\sccfmt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfnt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfut-R1.dll" />
+    <Content Include="oi\unmanaged\sccind-R1.dll" />
+    <Content Include="oi\unmanaged\scclo-R1.dll" />
+    <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\wvcore-R1.dll" />
     <Content Include="oi\webview\oit.statusbar.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -838,13 +841,13 @@
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.2.0\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.5.1\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.5.1\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
