@@ -18,13 +18,16 @@ namespace kcura.SingleFileUpload.FunctionalTests
 	[TestFixture]
 	public class NativeFileUploadTests : HttpFunctionalTestsTemplate
 	{
-		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests)) { }
+		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
+		{
+		}
 
 		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
 		public async Task UploadNativeFile_GoldFlow()
 		{
 			// Arrange
-			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{TestsConstants._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+			string expectedContent =
+				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{TestsConstants._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
 
 			bool fdv = false;
 			bool img = false;
@@ -39,28 +42,5 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			string actualContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 			actualContent.Should().Be(expectedContent);
 		}
-
-		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
-		public async Task ShouldProperlyExtractExtractedText_WhenUploadFileDOC()
-		{
-			// Arrange
-			string expectedExtractedText = "Sample Extracted Text LoremIpsum";
-			string fileName = "SampleDOC.doc";
-			
-			bool fdv = false;
-			bool img = false;
-			FileInfo file = new FileInfo(FileHelper.GetFileLocation(fileName));
-
-			// Act
-			var result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
-
-			// Assert
-			result.StatusCode.Should().Be(HttpStatusCode.OK);
-			var client = RelativityFacade.Instance.Resolve<IDocumentService>();
-			var documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
-			string actualExtractedText = documentsInWorkspace.First(x => x.ControlNumber.Equals("SampleDocs")).ExtractedText;
-			actualExtractedText.Should().Be(expectedExtractedText);
-		}
-
 	}
 }

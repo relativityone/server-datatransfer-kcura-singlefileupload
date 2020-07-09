@@ -21,13 +21,14 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			RelativityFacade.Instance.RelyOn<WebComponent>();
 
 			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath =
-				Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SharedVariables.ChromeBinaryLocation);
+				Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+					SharedVariables.ChromeBinaryLocation);
 
 			if (TemplateWorkspaceExists())
 			{
 				return;
 			}
-			
+
 			int workspaceId = CreateTemplateWorkspace();
 
 			InstallSimpleFileUploadToWorkspace(workspaceId);

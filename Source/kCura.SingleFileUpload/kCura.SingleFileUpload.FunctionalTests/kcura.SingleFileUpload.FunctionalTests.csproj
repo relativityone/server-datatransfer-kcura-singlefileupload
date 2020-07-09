@@ -336,6 +336,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtractionsOfExtractedTextTests.cs" />
     <Compile Include="NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FunctionalTestsSetupFixture.cs" />
@@ -357,6 +358,11 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\SampleDOC.doc" />
+    <None Include="Resources\SampleMSG.msg" />
+    <None Include="Resources\SamplePDF.pdf" />
+    <None Include="Resources\SamplePPTX.pptx" />
+    <None Include="Resources\SampleXLSX.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">
@@ -702,6 +708,8 @@
     <Content Include="Resources\CTRL0192153.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\SampleGIF.gif" />
+    <Content Include="Resources\SamplePNG.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
