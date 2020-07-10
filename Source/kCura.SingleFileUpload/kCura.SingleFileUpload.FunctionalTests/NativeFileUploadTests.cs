@@ -4,12 +4,9 @@ using NUnit.Framework;
 using Relativity.SimpleFileUpload.Tests.Core.Templates;
 using Relativity.Testing.Identification;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using kCura.SingleFileUpload.Core.Tests.Helpers;
-using Relativity.Testing.Framework;
-using Relativity.Testing.Framework.Api;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
@@ -34,7 +31,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			FileInfo file = new FileInfo(TestsConstants._FILE_LOCATION);
 
 			// Act
-			var result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 
 			// Assert
 			result.StatusCode.Should().Be(HttpStatusCode.OK);

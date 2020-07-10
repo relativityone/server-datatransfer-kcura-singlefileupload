@@ -1,15 +1,16 @@
-﻿using FluentAssertions;
-using kCura.SingleFileUpload.Core.Tests.Constants;
-using NUnit.Framework;
-using Relativity.SimpleFileUpload.Tests.Core.Templates;
-using Relativity.Testing.Identification;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using FluentAssertions;
+using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
+using NUnit.Framework;
+using Relativity.SimpleFileUpload.Tests.Core.Templates;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
+using Relativity.Testing.Identification;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
@@ -52,7 +53,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			var result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 			result.StatusCode.Should().Be(HttpStatusCode.OK);
 			var client = RelativityFacade.Instance.Resolve<IDocumentService>();
-			var documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
+			IEnumerable<Document> documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
 
 			// Assert
 			string actualExtractedText = documentsInWorkspace
