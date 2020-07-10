@@ -554,9 +554,6 @@
     <Content Include="oi\unmanaged\vscgm-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\vscsv-R1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="oi\unmanaged\vscwt-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
