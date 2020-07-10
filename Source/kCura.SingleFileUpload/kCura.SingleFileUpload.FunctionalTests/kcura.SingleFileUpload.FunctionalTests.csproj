@@ -340,6 +340,7 @@
     <Compile Include="NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FunctionalTestsSetupFixture.cs" />
+    <Compile Include="TestCaseFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -710,6 +711,8 @@
     </Content>
     <Content Include="Resources\SampleGIF.gif" />
     <Content Include="Resources\SamplePNG.png" />
+    <Content Include="Resources\SampleTIF.tif" />
+    <Content Include="Resources\SampleTXT.txt" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
