@@ -449,7 +449,6 @@
     <Content Include="oi\unmanaged\vscdrx-R1.dll" />
     <Content Include="oi\unmanaged\vsceos-R1.dll" />
     <Content Include="oi\unmanaged\vscgm-R1.dll" />
-    <Content Include="oi\unmanaged\vscsv-R1.dll" />
     <Content Include="oi\unmanaged\vscwt-R1.dll" />
     <Content Include="oi\unmanaged\vsdbs-R1.dll" />
     <Content Include="oi\unmanaged\vsdez-R1.dll" />
