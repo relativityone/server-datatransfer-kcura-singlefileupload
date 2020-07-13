@@ -84,8 +84,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2020.1.0.110, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2020.3.0.21, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.3.1\lib\net45\Polly.dll</HintPath>
@@ -373,8 +373,8 @@
     <Content Include="oi\unmanaged\audio.bmp" />
     <Content Include="oi\unmanaged\compreg.bin" />
     <Content Include="oi\unmanaged\emojis64.bmp" />
+    <Content Include="oi\unmanaged\cmmap000.bin" />
     <Content Include="oi\unmanaged\icons256.bmp" />
-    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
     <Content Include="oi\webview\collapseB.png" />
     <Content Include="oi\webview\collapseB_hover.png" />
     <Content Include="oi\webview\Collapse_Viewer.png" />
@@ -429,9 +429,9 @@
     <Content Include="oi\webview\oit.navbar.js.map" />
     <Content Include="oi\webview\oit.js.map" />
     <Content Include="oi\webview\oit.css.map" />
+    <Content Include="oi\unmanaged\RSMFTemplate.docx" />
     <Content Include="oi\unmanaged\oit_font_metrics.db" />
     <Content Include="oi\unmanaged\oitnsf.id" />
-    <Content Include="oi\unmanaged\cmmap000.bin" />
     <Content Include="oi\unmanaged\adinit.dat" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\RAPBuilder.pubxml" />
@@ -843,11 +843,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.5\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.4.5\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.1.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.5\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.5\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.3.0\build\kCura.OutsideIn.FI.Win32.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.3.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
