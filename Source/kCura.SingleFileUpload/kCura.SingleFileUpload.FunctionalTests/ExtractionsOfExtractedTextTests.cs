@@ -60,29 +60,5 @@ namespace kcura.SingleFileUpload.FunctionalTests
 				.First(x => x.ControlNumber.Equals(Path.GetFileNameWithoutExtension(fileName))).ExtractedText;
 			actualExtractedText.Should().Be(expectedExtractedText);
 		}
-
-		[IdentifiedTestCase("B266EEFC-5B61-4D33-BEA2-50C8F8F0FE3D", "SamplePNG.png")]
-		[IdentifiedTestCase("B7B2CF57-B242-4DFD-B3DB-CF5478A1684D", "SampleGIF.gif")]
-		[IdentifiedTestCase("0A19A280-D46A-419B-A74C-961BCFFC4E71", "SampleTIF.tif")]
-		[Ignore("Not working")]
-		public async Task ShouldProperlyExtractExtractedText_FromImageFile(string fileName)
-		{
-			// Arrange
-			string expectedExtractedText = "Sample Extracted Text Lorem Ipsum\r\n";
-			bool fdv = false;
-			bool img = false;
-			FileInfo file = new FileInfo(FileHelper.GetFileLocation(fileName));
-
-			// Act
-			var result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
-
-			// Assert
-			result.StatusCode.Should().Be(HttpStatusCode.OK);
-			var client = RelativityFacade.Instance.Resolve<IDocumentService>();
-			var documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
-			string actualExtractedText = documentsInWorkspace
-				.First(x => x.ControlNumber.Equals(Path.GetFileNameWithoutExtension(fileName))).ExtractedText;
-			actualExtractedText.Should().Be(expectedExtractedText);
-		}
 	}
 }
