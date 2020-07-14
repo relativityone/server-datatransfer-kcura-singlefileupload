@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using Atata;
 using NUnit.Framework;
 using Relativity.SimpleFileUpload.Tests.Core;
 using Relativity.Testing.Framework;
@@ -34,6 +35,12 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			InstallSimpleFileUploadToWorkspace(workspaceId);
 		}
 
+		[OneTimeTearDown]
+		public virtual void OneTimeTearDown()
+		{
+			AtataContext.Current.Driver?.Quit();
+		}
+
 		private bool TemplateWorkspaceExists()
 			=> RelativityFacade.Instance.Resolve<IWorkspaceService>().Get(Const.FUNCTIONAL_TEMPLATE_NAME) != null;
 
@@ -46,6 +53,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 
 			return RelativityFacade.Instance.Resolve<IWorkspaceService>().Create(newWorkspace).ArtifactID;
 		}
+
 
 		private void InstallSimpleFileUploadToWorkspace(int workspaceId)
 		{
