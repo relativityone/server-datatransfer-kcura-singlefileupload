@@ -348,12 +348,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				await TelemetryManager.Instance.LogCountAsync(bucket, 1L).ConfigureAwait(false);
 				await TelemetryManager.Instance.LogCountAsync(Helpers.Constants.BUCKET_TOTALSIZEDOCUMENTUPLOADED, documentInfo.Native.LongLength).ConfigureAwait(false);
 
-				//Create File tipe metric
-				await TelemetryManager.Instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE,
-						Path.GetExtension(documentInfo.FileName)),
-					$"Number of {Path.GetExtension(documentInfo.FileName).Remove(0, 1)} uploaded").ConfigureAwait(false);
+				//Create File type metric
+				string fileExtension = Path.GetExtension(documentInfo.FileName).ToLower();
+				await TelemetryManager.Instance.CreateMetricAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, fileExtension),
+					$"Number of {fileExtension.Remove(0, 1)} uploaded").ConfigureAwait(false);
 
-				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, Path.GetExtension(documentInfo.FileName)), 1L).ConfigureAwait(false);
+				await TelemetryManager.Instance.LogCountAsync(string.Concat(Helpers.Constants.BUCKET_FILETYPE, fileExtension), 1L).ConfigureAwait(false);
 			}
 		}
 
