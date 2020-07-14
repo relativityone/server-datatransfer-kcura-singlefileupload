@@ -437,9 +437,7 @@
     <Content Include="oi\unmanaged\oicomponents-R1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="oi\unmanaged\oilink.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="oi\unmanaged\oilink.exe" />
     <Content Include="oi\unmanaged\oilink.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
