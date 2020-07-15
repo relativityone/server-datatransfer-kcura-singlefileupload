@@ -359,12 +359,9 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function Close() {
-        if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
-            window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href)
-        } else {
-            window.parent.location.reload()
-        }
+        window.parent.location.reload();
     }
+
     function getFolder() {
         var id = '-1';
         var possibleElements = [
