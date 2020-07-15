@@ -384,7 +384,9 @@ var MFUController = function ($scope, $http, $compile) {
 
         if (wN) {
             var $out = wN.window.$;
-            if ($out('.browser-folder.browser-icon-active', wN.document).length)
+            var isFolderIconSelectedOldUi = $out('.browser-folder.browser-icon-active', wN.document).length;
+            var isFolderIconSelectedNewUi = $out('icon[icon-name="icon-folder"]').hasClass('browser-icon-active');
+            if (isFolderIconSelectedOldUi || isFolderIconSelectedNewUi)
                 id = $out('.jstree-node[aria-selected=true]', wN.document).attr('id');
         }
         id = id || '-1';
