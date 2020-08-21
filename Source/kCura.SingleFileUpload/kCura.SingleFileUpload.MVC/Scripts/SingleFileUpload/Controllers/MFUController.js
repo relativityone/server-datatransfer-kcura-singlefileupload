@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 var MFUController = function ($scope, $http, $compile) {
     var dialog = window.parent.parent.$("#uploadInfoDiv");
@@ -12,7 +12,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.simulateFileClick = SimulateFileClick;
     vm.handleDragOver = HandleDragOver;
     vm.handleDragLeave = HandleDragLeave;
-    vm.handleDnDFileSelect = HandleDnDFileSelect
+    vm.handleDnDFileSelect = HandleDnDFileSelect;
     vm.submitFrm = SubmitFrm;
     vm.cancel = Cancel;
     vm.close = Close;
@@ -46,26 +46,41 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function dialogChanges() {
+        var navLayout = $($(window.parent.parent.parent.document).find('#nav_layout')[0]);
         var externalFrame = $($(window.parent.parent.document).find('#_externalPage,#_ListPage')[0].contentDocument);
         externalFrame.find('.dynamic-content-modal-close').hide();
-        externalFrame.find('.modal-context').click(function () {
+
+        var handleDialogChanges = function() {
             switch (vm.status) {
-                case (1):
-                    externalFrame.find('dynamic-content-modal-wgt').show();
-                    break;
-                case (3):
-                    Close()
-                    break;
-                default:
-                    if (vm.uploaded) {
-                        Close();
-                    } else {
-                        externalFrame.find('dynamic-content-modal-wgt').hide();
-                        location.replace(location.href.replace('sfu', 'sfu.html'));
-                    }
+            case (1):
+                externalFrame.find('dynamic-content-modal-wgt').show();
+                break;
+            case (3):
+                Close();
+                break;
+            default:
+                if (vm.uploaded) {
+                    Close();
+                } else {
+                    externalFrame.find('dynamic-content-modal-wgt').hide();
+                    location.replace(location.href.replace('sfu', 'sfu.html'));
+                }
             }
-        });
+        };
+
+        externalFrame.find('.modal-context').click(handleDialogChanges);
+        navLayout.click(handleDialogChanges);
+
+        var handleKeyUp = function (eventArgs) {
+            if (eventArgs.key === "Escape") {
+                handleDialogChanges();
+            }
+        };
+
+        $(document).keyup(handleKeyUp);
+        externalFrame.keyup(handleKeyUp);
     }
+
     try {
         dialogChanges();
     } catch (e) {
