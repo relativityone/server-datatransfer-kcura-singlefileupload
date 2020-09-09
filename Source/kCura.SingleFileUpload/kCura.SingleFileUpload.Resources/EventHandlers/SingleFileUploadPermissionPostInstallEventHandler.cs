@@ -24,9 +24,9 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
 				using (CacheContextScope disposableContext = RepositoryHelper.InitializeRepository(Helper.GetActiveCaseID()))
 				{
-					if (!PermissionsManager.Instance.Permission_Exist(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION))
+					if (!PermissionsManager.Instance.Permission_ExistAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION).GetAwaiter().GetResult())
 					{
-						PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _DOCUMENT_ARTIFACT_TYPE_ID);
+						PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _DOCUMENT_ARTIFACT_TYPE_ID).GetAwaiter().GetResult();
 					}
 
 					try

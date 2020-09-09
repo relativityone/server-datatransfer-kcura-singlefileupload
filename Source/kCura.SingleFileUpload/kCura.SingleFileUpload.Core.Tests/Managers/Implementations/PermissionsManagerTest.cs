@@ -114,9 +114,9 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void PermissionExistsTest()
+		public async Task PermissionExistsTest()
 		{
-			bool result = PermissionsManager.Instance.Permission_Exist(_PERMISSION_NAME);
+			bool result = await PermissionsManager.Instance.Permission_ExistAsync(_PERMISSION_NAME);
 			Assert.IsTrue(result);
 		}
 

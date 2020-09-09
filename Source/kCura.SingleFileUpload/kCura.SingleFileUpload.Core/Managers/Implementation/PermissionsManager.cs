@@ -14,6 +14,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	public class PermissionsManager : BaseManager, IPermissionsManager
 	{
 		private static Lazy<IPermissionsManager> _instance = new Lazy<IPermissionsManager>(() => new PermissionsManager());
+
 		public static IPermissionsManager Instance => _instance.Value;
 
 		private PermissionsManager()
@@ -32,13 +33,16 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			using (IPermissionManager proxy = _Repository.CreateProxy<IPermissionManager>(ExecutionIdentity.CurrentUser))
 			{
 				// Create a new permission to be added to the above RDO.
-				Permission newPermission = new Permission();
-				newPermission.Name = permissionName;
-				newPermission.ArtifactType.ID = artifactTypeId;
-				newPermission.PermissionType = PermissionType.Custom;
+				Permission newPermission = new Permission
+				{
+					Name = permissionName,
+					ArtifactType = {ID = artifactTypeId},
+					PermissionType = PermissionType.Custom
+				};
 
 				// Create the new permission.
-				await proxy.CreateSingleAsync(WorkspaceID, newPermission).ConfigureAwait(false);
+				await ExecuteWithServiceRetries(async () => await proxy.CreateSingleAsync(WorkspaceID, newPermission).ConfigureAwait(false)).ConfigureAwait(false);
+
 				return true;
 			}
 		}
@@ -69,7 +73,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return selected;
 		}
 
-		public bool Permission_Exist(string permissionName)
+		public async Task<bool> Permission_ExistAsync(string permissionName)
 		{
 			bool exist = false;
 			using (IPermissionManager proxy = _Repository.CreateProxy<IPermissionManager>(ExecutionIdentity.CurrentUser))
@@ -80,7 +84,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				string queryString = queryCondition.ToQueryString();
 				query.Condition = queryString;
 
-				PermissionQueryResultSet queryResultSet = proxy.QueryAsync(WorkspaceID, query).GetAwaiter().GetResult();
+				PermissionQueryResultSet queryResultSet = await ExecuteWithServiceRetries(async () => await proxy.QueryAsync(WorkspaceID, query).ConfigureAwait(false)).ConfigureAwait(false);
 
 				exist = (queryResultSet.Results.Count > 0) ? true : false;
 			}
