@@ -1,8 +1,9 @@
-﻿using kCura.EventHandler;
+﻿using System;
+using kCura.EventHandler;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using NSerio.Relativity;
 using NSerio.Relativity.Infrastructure;
-using System;
+
 
 namespace kCura.SingleFileUpload.Resources.EventHandlers
 {
@@ -11,21 +12,34 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 	[EventHandler.CustomAttributes.RunOnce(false)]
 	public class SingleFileUploadPermissionPostInstallEventHandler : PostInstallEventHandler
 	{
-		//private IDocumentManager _repository;
-		private const int _ARTIFACT_TYPE_ID = 10;
+		private const int _DOCUMENT_ARTIFACT_TYPE_ID = 10;
+
 		public override Response Execute()
 		{
 			var response = new Response();
-			CacheContextScope disposableContext = null;
+
 			try
 			{
 				RepositoryHelper.ConfigureRepository(Helper);
-				disposableContext = RepositoryHelper.InitializeRepository(this.Helper.GetActiveCaseID());
-				if (!PermissionsManager.Instance.Permission_Exist(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION))
+
+				using (CacheContextScope disposableContext = RepositoryHelper.InitializeRepository(Helper.GetActiveCaseID()))
 				{
-					PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _ARTIFACT_TYPE_ID);
+					if (!PermissionsManager.Instance.Permission_Exist(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION))
+					{
+						PermissionsManager.Instance.Permission_CreateSingleAsync(Core.Helpers.Constants.ADD_DOCUMENT_CUSTOM_PERMISSION, _DOCUMENT_ARTIFACT_TYPE_ID);
+					}
+
+					try
+					{
+						DocumentManager.Instance.RemovePageInteractionEvenHandlerFromDocumentObject();
+					}
+					catch (Exception ex)
+					{
+						Helper.GetLoggerFactory().GetLogger().ForContext<SingleFileUploadPermissionPostInstallEventHandler>()
+							.LogWarning(ex, $"An error occured while removing {nameof(DocumentPageInteractionEventHandler)}: {{0}}", ex.Message);
+					}
 				}
-				DocumentManager.Instance.RemovePageInteractionEvenHandlerFromDocumentObject();
+
 				response.Success = true;
 			}
 			catch (Exception e)
@@ -34,10 +48,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 				response.Message = e.Message;
 				response.Exception = e;
 			}
-			finally
-			{
-				disposableContext?.Dispose();
-			}
+
 			return response;
 		}
 	}
