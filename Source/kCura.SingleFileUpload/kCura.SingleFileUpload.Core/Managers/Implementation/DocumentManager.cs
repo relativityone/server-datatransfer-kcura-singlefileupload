@@ -227,6 +227,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		public void SetCreateInstanceSettings()
 		{
 			Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertInstanceSettings);
+
 			int isResult = Repository.Instance.MasterDBContext.ExecuteNonQuerySQLStatement(Queries.InsertFieldsInstanceSetting);
 
 			// Read Default fields configuration from instance setting
