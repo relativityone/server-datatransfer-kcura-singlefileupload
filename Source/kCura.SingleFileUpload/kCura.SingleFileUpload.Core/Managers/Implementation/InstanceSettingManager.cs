@@ -77,6 +77,11 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			catch (Exception ex)
 			{
 				LogError(ex);
+
+				// GetMaxFilesInstanceSettingAsync will return default value in case of exception or instance setting absence.
+				// Thanks to that we can return true in case of error.
+				// This will prevent errors coming from attempt to create the instance setting twice.
+				result = true;
 			}
 			return result;
 		}
