@@ -13,17 +13,20 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 	[System.Runtime.InteropServices.Guid("D94A421D-E7C8-433D-B325-E98998C846BA")]
 	public class SingleFileUploadPostInstallEventHandler : PostInstallEventHandler
 	{
-
 		public override Response Execute()
 		{
 			var response = new Response();
-			CacheContextScope disposableContext = null;
+
 			try
 			{
 				RepositoryHelper.ConfigureRepository(Helper);
-				disposableContext = RepositoryHelper.InitializeRepository(Helper.GetActiveCaseID());
-				DocumentManager.Instance.SetCreateInstanceSettings();
-				ExecuteTelemetryAsync().GetAwaiter().GetResult();
+				using (CacheContextScope disposableContext = RepositoryHelper.InitializeRepository(Helper.GetActiveCaseID()))
+				{
+					DocumentManager.Instance.SetCreateInstanceSettings();
+
+					ExecuteTelemetryAsync().GetAwaiter().GetResult();
+				}
+				
 				response.Success = true;
 			}
 			catch (Exception e)
@@ -32,14 +35,10 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 				response.Message = e.Message;
 				response.Exception = e;
 			}
-			finally
-			{
-				disposableContext?.Dispose();
-			}
 			return response;
 		}
 
-		private async Task ExecuteTelemetryAsync()
+		private static async Task ExecuteTelemetryAsync()
 		{
 			if (await ToggleManager.Instance.GetChangeFileNameAsync().ConfigureAwait(false))
 			{
@@ -57,6 +56,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 			}
 
 			await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false).ConfigureAwait(false);
+
 			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync().ConfigureAwait(false);
 		}
 	}
