@@ -40,8 +40,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Atata, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Atata.1.5.0\lib\net46\Atata.dll</HintPath>
+    <Reference Include="Atata, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Atata.1.6.0\lib\net46\Atata.dll</HintPath>
     </Reference>
     <Reference Include="Atata.WebDriverExtras, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Atata.WebDriverExtras.1.3.0\lib\net46\Atata.WebDriverExtras.dll</HintPath>
@@ -76,14 +76,17 @@
     <Reference Include="kCura, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.10.3.5.3\lib\net462\kCura.dll</HintPath>
     </Reference>
+    <Reference Include="kCura.EventHandler, Version=15.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.EventHandler.15.1.0\lib\net462\kCura.EventHandler.dll</HintPath>
+    </Reference>
     <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.Injection.10.3.5.3\lib\net462\kCura.Injection.dll</HintPath>
     </Reference>
     <Reference Include="kCura.NUnit.Integration, Version=9.3.395.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.NUnit.Integration.9.3.395.5\lib\net45\kCura.NUnit.Integration.dll</HintPath>
     </Reference>
-    <Reference Include="kCura.Relativity.Client, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Relativity.Client.13.1.0\lib\net462\kCura.Relativity.Client.dll</HintPath>
+    <Reference Include="kCura.Relativity.Client, Version=15.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.Relativity.Client.15.1.0\lib\net462\kCura.Relativity.Client.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=2.2.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MailKit.2.2.0\lib\net45\MailKit.dll</HintPath>
@@ -154,8 +157,8 @@
     <Reference Include="Relativity, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.2.9.12\lib\net462\Relativity.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.API, Version=12.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.12.0.0\lib\net462\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=15.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.API.15.1.0\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Authentication.Interfaces, Version=9.6.67.68, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.9.6.67.68\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
@@ -226,14 +229,14 @@
     <Reference Include="Relativity.Test.Helpers, Version=7.4.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.7.4.1.1\lib\net462\Relativity.Test.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.0.12.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.0.16.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Api, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.0.12.0\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.Api, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.0.16.0\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Web, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.0.12.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.Web, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.0.16.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Testing.Identification, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Testing.Identification.1.8.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
@@ -274,6 +277,7 @@
       <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
@@ -289,6 +293,7 @@
     <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -314,6 +319,7 @@
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
