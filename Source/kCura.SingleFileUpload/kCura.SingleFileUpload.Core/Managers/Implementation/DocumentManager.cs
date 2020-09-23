@@ -31,6 +31,15 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private static readonly Lazy<IDocumentManager> _INSTANCE = new Lazy<IDocumentManager>(() => new DocumentManager());
 
+		private struct ImportDocumentResult
+		{
+			public bool Success => String.IsNullOrEmpty(Error);
+
+			public string Error { get; set; }
+
+			public string TempFileLocation { get; set; }
+		}
+
 		public static IDocumentManager Instance => _INSTANCE.Value;
 
 		private DocumentManager()
@@ -40,13 +49,22 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public async Task<Response> SaveSingleDocumentAsync(ExportedMetadata documentInfo, int folderID, string webApiUrl, int workspaceID, int userID)
 		{
-			Tuple<string, string> importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID).ConfigureAwait(false);
-			if (string.IsNullOrEmpty(importResult.Item1))
+			Guid correlationId = TelemetryManager.Instance.LogImportDocumentBatchJobStarted(nameof(SaveSingleDocumentAsync));
+
+			ImportDocumentResult importResult = await ImportDocumentAsync(documentInfo, webApiUrl, workspaceID, folderID).ConfigureAwait(false);
+
+			if (importResult.Success)
 			{
+				TelemetryManager.Instance.LogImportDocumentBatchJobEnded(correlationId, nameof(SaveSingleDocumentAsync), TelemetryManager.DOCUMENT_BATCH_JOB_STATUS_COMPLETED);
+
 				await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSUPLOADED).ConfigureAwait(false);
-				return new Response() { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
+
+				return new Response { Result = Path.GetFileNameWithoutExtension(documentInfo.FileName), Success = true };
 			}
-			return new Response() { Result = importResult.Item1, Success = false };
+
+			TelemetryManager.Instance.LogImportDocumentBatchJobEnded(correlationId, nameof(SaveSingleDocumentAsync), TelemetryManager.DOCUMENT_BATCH_JOB_STATUS_FAILED);
+
+			return new Response { Result = importResult.Error, Success = false };
 		}
 
 		public async Task ReplaceSingleDocumentAsync(ExportedMetadata documentInfo, DocumentExtraInfo documentExtraInfo)
@@ -65,10 +83,24 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				}
 			}
 
+			Guid correlationId = TelemetryManager.Instance.LogImportDocumentBatchJobStarted(nameof(ReplaceSingleDocumentAsync));
+
 			UpdateNative(documentInfo, documentExtraInfo.DocID);
-			await ImportDocumentAsync(documentInfo, documentExtraInfo.WebApiUrl, documentExtraInfo.WorkspaceID, documentExtraInfo.FolderID, documentExtraInfo.DocID).ConfigureAwait(false);
-			await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSREPLACED).ConfigureAwait(false);
-			UpdateDocumentLastModificationFields(documentExtraInfo.DocID, documentExtraInfo.UserID, false);
+			ImportDocumentResult importResult = await ImportDocumentAsync(documentInfo, documentExtraInfo.WebApiUrl, documentExtraInfo.WorkspaceID, documentExtraInfo.FolderID, documentExtraInfo.DocID)
+				.ConfigureAwait(false);
+
+			if (importResult.Success)
+			{
+				UpdateDocumentLastModificationFields(documentExtraInfo.DocID, documentExtraInfo.UserID, false);
+
+				TelemetryManager.Instance.LogImportDocumentBatchJobEnded(correlationId, nameof(ReplaceSingleDocumentAsync), TelemetryManager.DOCUMENT_BATCH_JOB_STATUS_COMPLETED);
+
+				await CreateMetricsAsync(documentInfo, Constants.BUCKET_DOCUMENTSREPLACED).ConfigureAwait(false);
+			}
+			else
+			{
+				TelemetryManager.Instance.LogImportDocumentBatchJobEnded(correlationId, nameof(ReplaceSingleDocumentAsync), TelemetryManager.DOCUMENT_BATCH_JOB_STATUS_FAILED);
+			}
 		}
 
 		public bool ValidateDocImages(int docArtifactId)
@@ -445,7 +477,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 		}
 
-		private async Task<Tuple<string, string>> ImportDocumentAsync(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
+		private async Task<ImportDocumentResult> ImportDocumentAsync(ExportedMetadata documentInfo, string webApiUrl, int workspaceID, int folderId = 0, int? documentId = null)
 		{
 			try
 			{
@@ -517,13 +549,14 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			catch (Exception ex)
 			{
 				LogError(ex);
-				return new Tuple<string, string>(ex.Message, string.Empty);
+				return new ImportDocumentResult { Error = ex.Message };
 			}
 			finally
 			{
 				DeleteTempFile(documentInfo.TempFileLocation);
 			}
-			return new Tuple<string, string>(string.Empty, documentInfo.TempFileLocation);
+
+			return new ImportDocumentResult { TempFileLocation = documentInfo.TempFileLocation };
 		}
 
 		private async Task ChangeFolderAsync(int folderID, int docID)
