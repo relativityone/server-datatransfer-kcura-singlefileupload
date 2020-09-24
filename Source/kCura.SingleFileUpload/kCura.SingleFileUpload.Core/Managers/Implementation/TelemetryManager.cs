@@ -2,6 +2,7 @@
 using Relativity.API;
 using Relativity.Services.DataContracts.DTOs.MetricsCollection;
 using Relativity.Services.InternalMetricsCollection;
+using Relativity.Telemetry.APM;
 using Relativity.Telemetry.Services.Metrics;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,25 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private const string _NUMBER_OF_DOCUMENT_UPLOADED = "Number of documents uploaded";
 
+		private const string _JOB_START_TIME_STAMP = "JobStartTimeStamp";
+		private const string _JOB_END_TIME_STAMP = "JobEndTimeStamp";
+		private const string _JOB_STATUS = "JobStatus";
+		private const string _WORKSPACE_ID = "WorkspaceID";
+		private const string _WORKFLOW_NAME = "WorkflowName";
+		private const string _SFU_WORKFLOW_NAME = "SimpleFileUpload";
+		private const string _STAGE_NAME = "StageName";
+		private const string _OVERALL_STAGE = "Overall";
+		private const string _RECORD_NUMBER = "RecordNumber";
+		private const string _RECORD_TYPE = "RecordType";
+		private const string _RECORD_TYPE_DOCUMENTS = "Documents";
+		private const string _APM_CATEGORY = "APMCategory";
+		private const string _PERFORMANCE_BATCH_JOB_CATEGORY = "PerformanceBatchJob";
+
 		private static readonly Lazy<ITelemetryManager> _INSTANCE = new Lazy<ITelemetryManager>(() => new TelemetryManager());
+
+		public const string DOCUMENT_BATCH_JOB_STATUS_STARTED = "Started";
+		public const string DOCUMENT_BATCH_JOB_STATUS_COMPLETED = "Completed";
+		public const string DOCUMENT_BATCH_JOB_STATUS_FAILED = "Failed";
 
 		public static ITelemetryManager Instance => _INSTANCE.Value;
 
@@ -204,6 +223,48 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				LogError(ex);
 			}
+		}
+
+		public Guid LogImportDocumentBatchJobStarted(string operationName)
+		{
+			Guid correlationId = Guid.NewGuid();
+
+			Client.APMClient.GaugeOperation(name:
+				operationName, operation: 
+				() => 1, 
+				correlationID: correlationId.ToString(), 
+				unitOfMeasure: "Job", 
+				customData: GetImportDocumentBatchJobCustomData(_JOB_START_TIME_STAMP, DOCUMENT_BATCH_JOB_STATUS_STARTED))
+				.Write();
+
+			return correlationId;
+		}
+
+		public void LogImportDocumentBatchJobEnded(Guid correlationId, string operationName, string status)
+		{
+			Client.APMClient.GaugeOperation(name:
+					operationName, operation:
+					() => 1,
+					correlationID: correlationId.ToString(),
+					unitOfMeasure: "Job",
+					customData: GetImportDocumentBatchJobCustomData(_JOB_END_TIME_STAMP, status))
+				.Write();
+		}
+
+		private Dictionary<string, object> GetImportDocumentBatchJobCustomData(string jobTimeStampType, string status)
+		{
+			return new Dictionary<String, object>
+			{
+				{ jobTimeStampType, (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() },
+				{ _JOB_STATUS, status },
+				{ _WORKSPACE_ID, WorkspaceID },
+				{ _WORKFLOW_NAME, _SFU_WORKFLOW_NAME },
+				{ _STAGE_NAME, _OVERALL_STAGE },
+				// SFU is always sending one document at a time
+				{ _RECORD_NUMBER, 1 },
+				{ _RECORD_TYPE, _RECORD_TYPE_DOCUMENTS },
+				{ _APM_CATEGORY, _PERFORMANCE_BATCH_JOB_CATEGORY }
+			};
 		}
 	}
 }
