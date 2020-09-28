@@ -145,8 +145,8 @@
     <Reference Include="Platform.Keywords.RSAPI, Version=9.3.196.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Platform.Keywords.9.3.196.6\lib\net45\Platform.Keywords.RSAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Polly.7.2.1\lib\net461\Polly.dll</HintPath>
+    <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
     </Reference>
     <Reference Include="Relativity, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.10.2.9.12\lib\net462\Relativity.dll</HintPath>
