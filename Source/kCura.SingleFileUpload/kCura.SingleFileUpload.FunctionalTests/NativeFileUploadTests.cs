@@ -35,10 +35,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 
 			// Assert
-			result.StatusCode.Should().Be(HttpStatusCode.OK);
-
-			string actualContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-			actualContent.Should().Be(expectedContent);
+			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
 		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", TestsConstants._FILE_NAME_EXE)]
@@ -58,9 +55,14 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 
 			// Assert
-			result.StatusCode.Should().Be(HttpStatusCode.OK);
-			string actualContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-			actualContent.Should().Be(expectedContent);
+			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+		}
+
+		private async Task AssertResponseContentAsync(HttpResponseMessage response, string expected)
+		{
+			response.StatusCode.Should().Be(HttpStatusCode.OK);
+			string actualContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+			actualContent.Should().Be(expected);
 		}
 	}
 }
