@@ -721,7 +721,12 @@
     <Content Include="Resources\CTRL0192153.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\SampleDLL.dll" />
+    <Content Include="Resources\SampleEXE.exe" />
     <Content Include="Resources\SampleGIF.gif" />
+    <Content Include="Resources\SampleHTM.htm" />
+    <Content Include="Resources\SampleHTML.html" />
+    <Content Include="Resources\SampleJS.js" />
     <Content Include="Resources\SamplePNG.png" />
     <Content Include="Resources\SampleTIF.tif" />
     <Content Include="Resources\SampleTXT.txt" />

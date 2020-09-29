@@ -1,9 +1,11 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
-using kCura.SingleFileUpload.Core.Tests.Helpers;
-using Relativity.Services.InstanceSetting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using kCura.SingleFileUpload.Core.Entities;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
+using Relativity.Services;
+using Relativity.Services.InstanceSetting;
 
 namespace kCura.SingleFileUpload.Core.Tests.Constants
 {
@@ -23,6 +25,12 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _FILE_NAME_PPTX = "SamplePPTX.pptx";
 		public const string _FILE_NAME_PDF = "SamplePDF.pdf";
 		public const string _FILE_NAME_MSG = "SampleMSG.msg";
+		public const string _FILE_NAME_EXE = "SampleEXE.exe";
+		public const string _FILE_NAME_DLL = "SampleDLL.dll";
+		public const string _FILE_NAME_JS = "SampleJS.js";
+		public const string _FILE_NAME_HTM = "SampleHTM.htm";
+		public const string _FILE_NAME_HTML = "SampleHTML.html";
+
 		public const string _WEB_API_URL = "https://test";
 		public static readonly string _FILE_LOCATION = FileHelper.GetFileLocation(_FILE_NAME);
 		public static readonly string _TEMP_FOLDER_LOCATION = FileHelper.GetTempFolderLocation();
@@ -30,13 +38,13 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _DOC_CONTROL_NUMBER = "CTRL0192153";
 		public const string _EXTRACTED_TEXT = "John\r\nDoe\r\n";
 
-		public static readonly ExportedMetadata _EXP_METADATA = new ExportedMetadata()
+		public static readonly ExportedMetadata _EXP_METADATA = new ExportedMetadata
 		{
-			Native = System.IO.File.ReadAllBytes(_FILE_LOCATION),
+			Native = File.ReadAllBytes(_FILE_LOCATION),
 			FileName = "CTRL0192154.xml",
 		};
 
-		public static readonly DocumentExtraInfo _DOC_EXTRA_INFO = new DocumentExtraInfo()
+		public static readonly DocumentExtraInfo _DOC_EXTRA_INFO = new DocumentExtraInfo
 		{
 			AvoidControlNumber = false,
 			FromDocumentViewer = false,
@@ -49,12 +57,12 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 						""fileName"":{ ""value"":""File % Name"",""default"":""File Name""},
 						""fileSize"":{ ""value"":""File % Size"",""default"":""File Size""}}";
 
-		public static readonly InstanceSettingQueryResultSet _INSTANCE_SETTING_RESULT_SET = new InstanceSettingQueryResultSet()
+		public static readonly InstanceSettingQueryResultSet _INSTANCE_SETTING_RESULT_SET = new InstanceSettingQueryResultSet
 		{
 			Success = true,
-			Results = new List<global::Relativity.Services.Result<InstanceSetting>>
+			Results = new List<Result<InstanceSetting>>
 						{
-							new global::Relativity.Services.Result<InstanceSetting>
+							new Result<InstanceSetting>
 							{
 								Success = true,
 								Artifact = new InstanceSetting
@@ -72,7 +80,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 			dt.Columns.Add("DocumentArtifactID", typeof(int));
 			dt.Columns.Add("FileName", typeof(string));
 			dt.Columns.Add("Location", typeof(string));
-			dt.Rows.Add(TestsConstants._DOC_FILE_ID, TestsConstants._DOC_ARTIFACT_ID, TestsConstants._FILE_NAME, TestsConstants._FILE_LOCATION);
+			dt.Rows.Add(_DOC_FILE_ID, _DOC_ARTIFACT_ID, _FILE_NAME, _FILE_LOCATION);
 
 			return dt;
 		}
