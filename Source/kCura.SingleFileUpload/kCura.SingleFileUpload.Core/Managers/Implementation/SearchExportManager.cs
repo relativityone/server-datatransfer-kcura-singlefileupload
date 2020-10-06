@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Xml;
+using OutsideIn;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -123,12 +124,23 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					outStream.Write(DeployableFiles.oilink, 0, DeployableFiles.oilink.Length);
 				}
 			}
-			try
+
+			if (OutsideIn.OutsideIn.InstallLocation == null)
 			{
-				OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
-			}
-			catch
-			{
+				try
+				{
+					OutsideIn.OutsideIn.InstallLocation = new DirectoryInfo(directoryPath);
+				}
+				catch (OutsideInException ex)
+				{
+					// There are cases (at least during functional testing) when Outside In may have already been loaded
+					// and will throw a benign exception when you set its install
+					// location. Currently the message is the only way to identify this particular exception.
+					if (ex.Message != "The location has already been set.")
+					{
+						throw;
+					}
+				}
 			}
 		}
 	}
