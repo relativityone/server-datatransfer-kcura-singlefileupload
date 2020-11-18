@@ -20,17 +20,89 @@
       <Name>NSerio.Relativity.dll</Name>
       <Notes />
     </Assembly>
+    <Assembly>
+      <ArtifactId>5509069</ArtifactId>
+      <Keywords />
+      <Name>Newtonsoft.Json.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509070</ArtifactId>
+      <Keywords />
+      <Name>Polly.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509071</ArtifactId>
+      <Keywords />
+      <Name>Relativity.DataExchange.Client.SDK.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509072</ArtifactId>
+      <Keywords />
+      <Name>Relativity.DataTransfer.MessageService.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509073</ArtifactId>
+      <Keywords />
+      <Name>Relativity.OIFactory.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509074</ArtifactId>
+      <Keywords />
+      <Name>Relativity.Services.Layout.Interfaces.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509075</ArtifactId>
+      <Keywords />
+      <Name>Relativity.Telemetry.Services.Interface.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509076</ArtifactId>
+      <Keywords />
+      <Name>Relativity.Transfer.Client.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509077</ArtifactId>
+      <Keywords />
+      <Name>Renci.SshNet.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509078</ArtifactId>
+      <Keywords />
+      <Name>System.Reactive.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509079</ArtifactId>
+      <Keywords />
+      <Name>System.ValueTuple.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5509080</ArtifactId>
+      <Keywords />
+      <Name>ZetaLongPaths.dll</Name>
+      <Notes />
+    </Assembly>
   </Assemblies>
   <ResourceFiles />
   <ExternalTabs />
-  <ExtractionDate>2020-05-25T12:13:19.9089471Z</ExtractionDate>
+  <ExtractionDate>2020-11-18T13:28:06.9561085Z</ExtractionDate>
   <Guid>1738ceb6-9546-44a7-8b9b-e64c88e47320</Guid>
   <Name>Simple File Upload</Name>
   <Objects />
   <ParentTabs />
-  <RelativityVersion>11.2.128.19</RelativityVersion>
-  <Version>11.2.44.2</Version>
-  <SchemaVersion>11.2.44.0</SchemaVersion>
+  <RelativityVersion>16.0.30.0</RelativityVersion>
+  <Version>11.3.30.2</Version>
+  <SchemaVersion>11.2.80.0</SchemaVersion>
   <TabDisplay>false</TabDisplay>
   <OriginSignature>c38bc2b4-751e-4d46-843e-787f34d3f85d</OriginSignature>
   <MasterScripts />
@@ -42,10 +114,10 @@
       <ReadinessUrl />
       <Name>SingleFileUpload.Web</Name>
       <FileName>Web.zip</FileName>
-      <Size>87490480</Size>
+      <Size>91142849</Size>
       <Keywords />
       <Notes />
-      <Hash>AC-88-EA-39-70-99-C5-7B-93-A0-EC-C6-7A-4D-8D-12-17-52-8B-9A</Hash>
+      <Hash>2C-FD-96-35-87-02-62-76-C6-7F-CA-7A-45-A7-6F-37-80-43-AC-76</Hash>
     </CustomPage>
   </CustomPages>
   <AgentTypes />
@@ -60,7 +132,7 @@
       <ExecutionType>8</ExecutionType>
       <Order>20</Order>
       <AssemblyName>kCura.SingleFileUpload.Resources.dll</AssemblyName>
-      <ApplicationVersion>11.2.44.0</ApplicationVersion>
+      <ApplicationVersion>11.2.80.0</ApplicationVersion>
       <RunTarget>0</RunTarget>
     </InstallEventHandler>
     <InstallEventHandler>
@@ -72,7 +144,7 @@
       <ExecutionType>8</ExecutionType>
       <Order>30</Order>
       <AssemblyName>kCura.SingleFileUpload.Resources.dll</AssemblyName>
-      <ApplicationVersion>11.2.44.0</ApplicationVersion>
+      <ApplicationVersion>11.2.80.0</ApplicationVersion>
       <RunTarget>0</RunTarget>
     </InstallEventHandler>
   </InstallEventHandlers>
