@@ -13,6 +13,42 @@
         <Assemblies>
           <Assembly>Source\SolutionResources\NSerio.Relativity.dll</Assembly>
         </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Newtonsoft.Json.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Polly.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.DataExchange.Client.SDK.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.DataTransfer.MessageService.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.OIFactory.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.Services.Layout.Interfaces.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.Telemetry.Services.Interface.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.Transfer.Client.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Renci.SshNet.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\System.Reactive.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\System.ValueTuple.dll</Assembly>
+        </Assemblies>
+        <Assemblies>
+          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\ZetaLongPaths.dll</Assembly>
+        </Assemblies>
         <ResourceFiles />
         <CustomPages>
           <CustomPage guid="f864d687-5782-4f4f-82d4-e4327e10e3cf">temporary publish</CustomPage>
