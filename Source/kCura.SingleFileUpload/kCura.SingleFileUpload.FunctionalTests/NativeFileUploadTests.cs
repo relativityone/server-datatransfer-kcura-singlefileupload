@@ -1,18 +1,17 @@
-﻿using FluentAssertions;
-using kCura.SingleFileUpload.Core.Tests.Constants;
-using NUnit.Framework;
-using Relativity.SimpleFileUpload.Tests.Core.Templates;
-using Relativity.Testing.Identification;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using FluentAssertions;
+using Relativity.Testing.Identification;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
+using kCura.SingleFileUpload.Core.Tests.Constants;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
 	[TestFixture]
-	[TestExecution.CI]
+	[TestExecutionCategory.CI]
 	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{
 		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
@@ -56,7 +55,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
-		private async Task AssertResponseContentAsync(HttpResponseMessage response, string expected)
+		private static async Task AssertResponseContentAsync(HttpResponseMessage response, string expected)
 		{
 			response.StatusCode.Should().Be(HttpStatusCode.OK);
 			string actualContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

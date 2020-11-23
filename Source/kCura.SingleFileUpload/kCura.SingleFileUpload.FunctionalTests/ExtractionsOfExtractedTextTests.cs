@@ -14,7 +14,7 @@ using kCura.SingleFileUpload.Core.Tests.Constants;
 namespace kcura.SingleFileUpload.FunctionalTests
 {
 	[TestFixture]
-	[TestExecution.CI]
+	[TestExecutionCategory.CI]
 	public class ExtractionsOfExtractedTextTests : FunctionalTestsTemplate
 	{
 		const string ExpectedExtractedTextCommon = "Sample Extracted Text Lorem Ipsum\r\n";

@@ -238,9 +238,8 @@
     <Reference Include="Relativity.Testing.Framework.Web, Version=0.21.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Testing.Framework.Web.0.21.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Identification, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Identification.1.8.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Relativity.Testing.Identification, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Identification.3.5.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Transfer.Client, Version=7.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\relativity.transfer.client.7.2.7\lib\net462\Relativity.Transfer.Client.dll</HintPath>
