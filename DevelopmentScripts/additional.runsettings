@@ -1,6 +1,6 @@
 <RunSettings>
   <TestRunParameters>
-    <Parameter name="ChromeBinaryLocation" value="..\..\..\..\buildtools\Relativity.Chromium.Portable\tools\Chrome.exe"/>
+    <Parameter name="ChromeBinaryLocation" value="..\..\..\..\buildtools\Relativity.Chromium.Portable\tools"/>
     <Parameter name="PerformRelativityVersionCheck" value="false" />
   </TestRunParameters>
 </RunSettings>
