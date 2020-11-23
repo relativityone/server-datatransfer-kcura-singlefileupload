@@ -1,71 +1,49 @@
+﻿using Atata;
 using System;
-using Atata;
-using NUnit.Framework;
-using Relativity.Testing.Framework;
-using Relativity.Testing.Framework.Api;
-using Relativity.Testing.Framework.Web;
 using System.IO;
+using System.Web;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
+using NUnit.Framework;
+using Relativity.Testing.Framework;
+using Relativity.Testing.Framework.Web;
+using Relativity.SimpleFileUpload.Tests.Core;
+using Relativity.SimpleFileUpload.Tests.Core.Templates;
 
-namespace Relativity.SimpleFileUpload.Tests.Core.Templates
+namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[TestFixture]
-	public class HttpFunctionalTestsTemplate
+	public class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{
-		private readonly IWorkspaceService _workspaceService;
-
-		private readonly string _workspaceName;
-
 		private CookieContainer _userCookies;
 		private static readonly Object _synchronizationRoot = new Object();
 
-		public int WorkspaceId { get; private set; }
-
-		public HttpFunctionalTestsTemplate()
-		{
-		}
-
-		public HttpFunctionalTestsTemplate(string workspaceName)
-		{
-			_workspaceName = workspaceName;
-
-			_workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
-		}
+		public FunctionalTestsTemplate(string workspaceName)
+			: base(Const.FUNCTIONAL_WORKSPACE_PREFIX + workspaceName, Const.FUNCTIONAL_TEMPLATE_NAME)
+		{ }
 
 		[OneTimeSetUp]
-		public virtual void OneTimeSetUp()
+		public override void OneTimeSetUp()
 		{
-			Workspace workspace = new Workspace()
-			{
-				Name = _workspaceName,
-				TemplateWorkspace = new NamedArtifact {Name = Const.FUNCTIONAL_TEMPLATE_NAME}
-			};
-
-			WorkspaceId = _workspaceService.Create(workspace).ArtifactID;
+			base.OneTimeSetUp();
 
 			AuthenticateUser();
 		}
 
-		[OneTimeTearDown]
-		public virtual void OneTimeTearDown()
-		{
-			_workspaceService.Delete(WorkspaceId);
-		}
-
 		public HttpClient GetUserHttpClient()
 		{
-			var handler = new HttpClientHandler() {CookieContainer = _userCookies};
+			var handler = new HttpClientHandler { CookieContainer = _userCookies };
 
 			var client = new HttpClient(handler)
 			{
 				BaseAddress = SharedVariables.SimpleFileUploadCustomPageUri
 			};
 
-			string XCSFRHeader = _userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"].Value;
-			client.DefaultRequestHeaders.Add("X-CSRF-Header", XCSFRHeader);
+			if (_userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"] != null)
+			{
+				string XCSFRHeader = _userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"].Value;
+				client.DefaultRequestHeaders.Add("X-CSRF-Header", XCSFRHeader);
+			}
 
 			return client;
 		}

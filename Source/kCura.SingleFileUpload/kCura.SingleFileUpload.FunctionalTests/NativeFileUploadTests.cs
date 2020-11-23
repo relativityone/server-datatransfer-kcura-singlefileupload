@@ -11,14 +11,12 @@ using kCura.SingleFileUpload.Core.Tests.Helpers;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[Feature.DataTransfer.SingleFileUpload]
-	[Category("TestType.CI")]
 	[TestFixture]
-	public class NativeFileUploadTests : HttpFunctionalTestsTemplate
+	[TestExecution.CI]
+	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{
 		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
-		{
-		}
+		{ }
 
 		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
 		public async Task UploadNativeFile_GoldFlow()
