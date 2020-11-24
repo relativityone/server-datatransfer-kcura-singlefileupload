@@ -222,6 +222,10 @@
     <Compile Include="Web\LogoutPage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">
+      <Project>{90d8784b-ce66-4459-bcce-96df572f7287}</Project>
+      <Name>kCura.SingleFileUpload.Core.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj">
       <Project>{1969f7e9-5b83-4af2-857e-52b5e0bad102}</Project>
       <Name>Relativity.SimpleFileUpload.Tests.Core</Name>
@@ -250,6 +254,9 @@
     <Content Include="oi\unmanaged\scclo-R1.dll" />
     <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\wvcore-R1.dll" />
+    <Content Include="Resources\CTRL0192153.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
