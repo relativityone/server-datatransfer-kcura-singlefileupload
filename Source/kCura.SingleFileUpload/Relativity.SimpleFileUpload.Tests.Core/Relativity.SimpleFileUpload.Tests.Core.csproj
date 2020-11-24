@@ -223,6 +223,7 @@
   <ItemGroup>
     <Compile Include="Const.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.Custom.cs" />
     <Compile Include="SharedVariables.cs" />
     <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
     <Compile Include="Templates\SimpleFileUploadTestsTemplate.cs" />
@@ -251,6 +252,7 @@
     <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\wvcore-R1.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
