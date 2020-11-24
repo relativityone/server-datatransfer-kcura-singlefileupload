@@ -13,7 +13,7 @@ using Relativity.SimpleFileUpload.Tests.Core.Templates;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	public class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
+	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{
 		private CookieContainer _userCookies;
 		private static readonly Object _synchronizationRoot = new Object();
