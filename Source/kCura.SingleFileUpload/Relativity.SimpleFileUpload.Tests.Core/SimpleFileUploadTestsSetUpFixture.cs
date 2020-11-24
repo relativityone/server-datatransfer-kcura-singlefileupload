@@ -6,11 +6,12 @@ using Relativity.Testing.Framework.Web;
 
 namespace Relativity.SimpleFileUpload.Tests.Core
 {
-	public abstract class SimpleFileUploadTestsSetUpFixture
+	[SetUpFixture]
+	public class SimpleFileUploadTestsSetUpFixture
 	{
 		private readonly string _workspaceTemplateName;
 
-		protected SimpleFileUploadTestsSetUpFixture(string workspaceTemplateName)
+		public SimpleFileUploadTestsSetUpFixture(string workspaceTemplateName)
 		{
 			_workspaceTemplateName = workspaceTemplateName;
 		}

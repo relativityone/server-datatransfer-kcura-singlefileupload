@@ -1,9 +1,7 @@
-﻿using NUnit.Framework;
-using Relativity.SimpleFileUpload.Tests.Core;
+﻿using Relativity.SimpleFileUpload.Tests.Core;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[SetUpFixture]
 	public class FunctionalTestsSetupFixture : SimpleFileUploadTestsSetUpFixture
 	{
 		public FunctionalTestsSetupFixture()
