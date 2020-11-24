@@ -18,7 +18,7 @@ namespace kcura.SingleFileUpload.FunctionalTests
 		private CookieContainer _userCookies;
 		private static readonly Object _synchronizationRoot = new Object();
 
-		public FunctionalTestsTemplate(string workspaceName)
+		protected FunctionalTestsTemplate(string workspaceName)
 			: base(Const.FUNCTIONAL_WORKSPACE_PREFIX + workspaceName, Const.FUNCTIONAL_TEMPLATE_NAME)
 		{ }
 
