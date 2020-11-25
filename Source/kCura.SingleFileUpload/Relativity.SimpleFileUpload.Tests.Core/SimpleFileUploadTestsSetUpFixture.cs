@@ -1,5 +1,4 @@
-﻿using Atata;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
 using Relativity.Testing.Framework.Web;
@@ -7,6 +6,7 @@ using Relativity.Testing.Framework.Web;
 namespace Relativity.SimpleFileUpload.Tests.Core
 {
 	[SetUpFixture]
+	[NonParallelizable]
 	public abstract class SimpleFileUploadTestsSetUpFixture
 	{
 		private readonly string _workspaceTemplateName;
@@ -35,9 +35,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 
 		[OneTimeTearDown]
 		public virtual void OneTimeTearDown()
-		{
-			// AtataContext.Current?.Driver?.Quit();
-		}
+		{ }
 
 		private bool TemplateWorkspaceExists()
 			=> RelativityFacade.Instance.Resolve<IWorkspaceService>().Get(_workspaceTemplateName) != null;
