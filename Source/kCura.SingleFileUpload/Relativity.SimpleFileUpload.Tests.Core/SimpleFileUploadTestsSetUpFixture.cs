@@ -37,10 +37,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 			InstallSimpleFileUploadToWorkspace(workspaceId);
 		}
 
-		[OneTimeTearDown]
-		public virtual void OneTimeTearDown()
-		{ }
-
 		private bool TemplateWorkspaceExists()
 			=> RelativityFacade.Instance.Resolve<IWorkspaceService>().Get(_workspaceTemplateName) != null;
 

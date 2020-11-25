@@ -5,7 +5,7 @@ namespace Relativity.SimpleFileUpload.UiTests
 	public class UiTestsSetupFixture : SimpleFileUploadTestsSetUpFixture
 	{
 		public UiTestsSetupFixture()
-			: base(Const.UI_TEMPLATE_NAME, "sfuuiuser{0}@mail.com")
+			: base(Const.UI_TEMPLATE_NAME, Const.UI_STANDARD_ACCOUNT_EMAIL_FORMAT)
 		{ }
 	}
 }

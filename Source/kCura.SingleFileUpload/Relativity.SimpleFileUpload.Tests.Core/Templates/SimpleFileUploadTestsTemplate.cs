@@ -52,7 +52,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 
 			RetryPolicy loginAsStandardAccountPolicy = Policy
 				.Handle<HttpRequestException>(ex => ex.Message.Contains("The entered E-Mail Address is already associated with another user in the system."))
-				.Retry(10);
+				.Retry(3);
 
 			loginAsStandardAccountPolicy.Execute(() => LoginAsStandardAccount());
 		}
