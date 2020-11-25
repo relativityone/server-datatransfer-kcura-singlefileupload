@@ -9,10 +9,12 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 	public abstract class SimpleFileUploadTestsSetUpFixture
 	{
 		private readonly string _workspaceTemplateName;
+		private readonly string _standardAccountEmailFormat;
 
-		protected SimpleFileUploadTestsSetUpFixture(string workspaceTemplateName)
+		protected SimpleFileUploadTestsSetUpFixture(string workspaceTemplateName, string standardAccountEmailFormat)
 		{
 			_workspaceTemplateName = workspaceTemplateName;
+			_standardAccountEmailFormat = standardAccountEmailFormat;
 		}
 
 		[OneTimeSetUp]
@@ -21,6 +23,9 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 			RelativityFacade.Instance.RelyOn<CoreComponent>();
 			RelativityFacade.Instance.RelyOn<ApiComponent>();
 			RelativityFacade.Instance.RelyOn<WebComponent>();
+
+			RelativityFacade.Instance.Resolve<IAccountPoolService>().StandardAccountEmailFormat =
+				_standardAccountEmailFormat;
 
 			if (TemplateWorkspaceExists())
 			{
