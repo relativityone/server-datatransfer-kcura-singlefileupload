@@ -3,7 +3,6 @@ using System.Net;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using NUnit.Framework;
 using FluentAssertions;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
@@ -13,7 +12,6 @@ using kCura.SingleFileUpload.Core.Tests.Constants;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[TestFixture]
 	[TestExecutionCategory.CI]
 	public class ExtractionsOfExtractedTextTests : FunctionalTestsTemplate
 	{

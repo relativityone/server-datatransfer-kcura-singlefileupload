@@ -1,8 +1,11 @@
 ﻿using Atata;
+using Polly;
+using Polly.Retry;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
+using System.Net.Http;
 
 namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 {
@@ -48,7 +51,11 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		{
 			base.OnSetUpTest();
 
-			LoginAsStandardAccount();
+			RetryPolicy loginAsStandardAccountPolicy = Policy
+				.Handle<HttpRequestException>(ex => ex.Message.Contains("The entered E-Mail Address is already associated with another user in the system."))
+				.Retry(10);
+
+			loginAsStandardAccountPolicy.Execute(() => LoginAsStandardAccount());
 		}
 
 		private static void Login()

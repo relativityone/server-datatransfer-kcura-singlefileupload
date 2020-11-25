@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using FluentAssertions;
 using Relativity.Testing.Identification;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -10,7 +9,6 @@ using kCura.SingleFileUpload.Core.Tests.Constants;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[TestFixture]
 	[TestExecutionCategory.CI]
 	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{

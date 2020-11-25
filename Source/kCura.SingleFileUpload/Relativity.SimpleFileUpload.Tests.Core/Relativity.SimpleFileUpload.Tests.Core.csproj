@@ -227,7 +227,6 @@
     <Compile Include="SharedVariables.cs" />
     <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
     <Compile Include="Templates\SimpleFileUploadTestsTemplate.cs" />
-    <Compile Include="Web\LogoutPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
