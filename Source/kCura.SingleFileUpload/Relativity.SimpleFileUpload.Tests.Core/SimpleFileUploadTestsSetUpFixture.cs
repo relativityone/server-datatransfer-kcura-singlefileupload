@@ -36,7 +36,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 		[OneTimeTearDown]
 		public virtual void OneTimeTearDown()
 		{
-			AtataContext.Current?.Driver?.Quit();
+			// AtataContext.Current?.Driver?.Quit();
 		}
 
 		private bool TemplateWorkspaceExists()

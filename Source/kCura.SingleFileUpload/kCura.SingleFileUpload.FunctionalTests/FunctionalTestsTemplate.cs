@@ -16,34 +16,32 @@ namespace kcura.SingleFileUpload.FunctionalTests
 {
 	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{
-		private CookieContainer _userCookies = null;
-		private static readonly Object _synchronizationRoot = new Object();
-
 		protected FunctionalTestsTemplate(string workspaceName)
 			: base(Const.FUNCTIONAL_WORKSPACE_PREFIX + workspaceName, Const.FUNCTIONAL_TEMPLATE_NAME)
 		{ }
 
-		[OneTimeSetUp]
-		public override void OneTimeSetUp()
-		{
-			base.OneTimeSetUp();
-
-			AuthenticateUser();
-		}
-
 		public HttpClient GetUserHttpClient()
 		{
-			var handler = new HttpClientHandler { CookieContainer = _userCookies };
+			CookieCollection cookieCollection = new CookieCollection();
+			foreach (var cookie in AtataContext.Current.Driver.Manage().Cookies.AllCookies)
+			{
+				cookieCollection.Add(new Cookie(cookie.Name, cookie.Value));
+			}
+
+			CookieContainer userCookies = new CookieContainer();
+			userCookies.Add(SharedVariables.RelativityFrontedUri, cookieCollection);
+
+			var handler = new HttpClientHandler { CookieContainer = userCookies };
 
 			var client = new HttpClient(handler)
 			{
 				BaseAddress = SharedVariables.SimpleFileUploadCustomPageUri
 			};
 
-			if (_userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"] != null)
+			if (userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"] != null)
 			{
-				string XCSFRHeader = _userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"].Value;
-				client.DefaultRequestHeaders.Add("X-CSRF-Header", XCSFRHeader);
+				string xcsrfHeader = userCookies.GetCookies(SharedVariables.RelativityFrontedUri)["CSRFHolder"].Value;
+				client.DefaultRequestHeaders.Add("X-CSRF-Header", xcsrfHeader);
 			}
 
 			return client;
@@ -64,32 +62,6 @@ namespace kcura.SingleFileUpload.FunctionalTests
 				content.Add(stream, "file", file.Name);
 
 				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
-			}
-		}
-
-		private void AuthenticateUser()
-		{
-			lock (_synchronizationRoot)
-			{
-				if (_userCookies is null)
-				{
-					Go.To<LogoutPage>();
-
-					Go.To<LoginPage>()
-						.EnterCredentials(
-							RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,
-							RelativityFacade.Instance.Config.RelativityInstance.AdminPassword)
-						.Login.Click();
-				}
-
-				CookieCollection cookieCollection = new CookieCollection();
-				foreach (var cookie in AtataContext.Current.Driver.Manage().Cookies.AllCookies)
-				{
-					cookieCollection.Add(new Cookie(cookie.Name, cookie.Value));
-				}
-
-				_userCookies = new CookieContainer();
-				_userCookies.Add(SharedVariables.RelativityFrontedUri, cookieCollection);
 			}
 		}
 	}
