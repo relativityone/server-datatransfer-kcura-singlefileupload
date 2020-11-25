@@ -220,7 +220,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UiTestsSetupFixture.cs" />
     <Compile Include="UiTestsTemplate.cs" />
-    <Compile Include="Web\LogoutPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">

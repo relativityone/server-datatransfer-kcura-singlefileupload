@@ -9,13 +9,14 @@ using NUnit.Framework;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Web;
 using Relativity.SimpleFileUpload.Tests.Core;
+using Relativity.SimpleFileUpload.Tests.Core.Web;
 using Relativity.SimpleFileUpload.Tests.Core.Templates;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
 	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{
-		private CookieContainer _userCookies;
+		private CookieContainer _userCookies = null;
 		private static readonly Object _synchronizationRoot = new Object();
 
 		protected FunctionalTestsTemplate(string workspaceName)
@@ -70,8 +71,10 @@ namespace kcura.SingleFileUpload.FunctionalTests
 		{
 			lock (_synchronizationRoot)
 			{
-				if (AtataContext.Current is null)
+				if (_userCookies is null)
 				{
+					Go.To<LogoutPage>();
+
 					Go.To<LoginPage>()
 						.EnterCredentials(
 							RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,

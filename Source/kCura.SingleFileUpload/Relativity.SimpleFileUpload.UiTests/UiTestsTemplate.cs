@@ -3,8 +3,9 @@ using NUnit.Framework;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Web;
 using Relativity.SimpleFileUpload.Tests.Core;
+using Relativity.SimpleFileUpload.Tests.Core.Web;
 using Relativity.SimpleFileUpload.Tests.Core.Templates;
-using Relativity.SimpleFileUpload.UiTests.Web;
+
 
 namespace Relativity.SimpleFileUpload.UiTests
 {
