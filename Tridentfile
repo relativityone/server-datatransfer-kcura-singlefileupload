@@ -2,4 +2,5 @@
 rapCD {
     slackChannel = "sfu_rapcd"
     sutTemplate = "aio-ninebark-eau"
+    relativityBranch = "develop"
 }
