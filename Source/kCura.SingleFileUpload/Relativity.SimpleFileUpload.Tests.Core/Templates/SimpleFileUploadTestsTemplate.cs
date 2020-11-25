@@ -1,5 +1,4 @@
-﻿using Atata;
-using Polly;
+﻿using Polly;
 using Polly.Retry;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
@@ -56,15 +55,6 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 				.Retry(10);
 
 			loginAsStandardAccountPolicy.Execute(() => LoginAsStandardAccount());
-		}
-
-		private static void Login()
-		{
-			Go.To<LoginPage>()
-				.EnterCredentials(
-					RelativityFacade.Instance.Config.RelativityInstance.AdminUsername,
-					RelativityFacade.Instance.Config.RelativityInstance.AdminPassword)
-				.Login.Click();
 		}
 	}
 }

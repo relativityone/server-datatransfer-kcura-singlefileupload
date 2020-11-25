@@ -6,7 +6,6 @@ using Relativity.Testing.Framework.Web;
 namespace Relativity.SimpleFileUpload.Tests.Core
 {
 	[SetUpFixture]
-	[NonParallelizable]
 	public abstract class SimpleFileUploadTestsSetUpFixture
 	{
 		private readonly string _workspaceTemplateName;
