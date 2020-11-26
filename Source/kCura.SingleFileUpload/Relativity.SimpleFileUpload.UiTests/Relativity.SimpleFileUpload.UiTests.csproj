@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <Import Project="..\..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}</ProjectGuid>
+    <ProjectGuid>{C9BE56CB-04F4-432D-91A6-1670D690707F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Relativity.SimpleFileUpload.Tests.Core</RootNamespace>
-    <AssemblyName>Relativity.SimpleFileUpload.Tests.Core</AssemblyName>
+    <RootNamespace>Relativity.SimpleFileUpload.UiTests</RootNamespace>
+    <AssemblyName>Relativity.SimpleFileUpload.UiTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -91,8 +92,8 @@
     <Reference Include="NUnitExtras.HierarchicalCategories, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitExtras.HierarchicalCategories.1.3.0\lib\net45\NUnitExtras.HierarchicalCategories.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2020.5.0.25, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2020.5.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2020.1.0.110, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
@@ -186,7 +187,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -202,9 +203,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -216,17 +214,22 @@
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Const.cs" />
+    <Compile Include="NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo.Custom.cs" />
-    <Compile Include="SharedVariables.cs" />
-    <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
-    <Compile Include="Templates\SimpleFileUploadTestsTemplate.cs" />
+    <Compile Include="UiTestsSetupFixture.cs" />
+    <Compile Include="UiTestsTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\kCura.SingleFileUpload.Core.Tests\kCura.SingleFileUpload.Core.Tests.csproj">
+      <Project>{90d8784b-ce66-4459-bcce-96df572f7287}</Project>
+      <Name>kCura.SingleFileUpload.Core.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj">
+      <Project>{1969f7e9-5b83-4af2-857e-52b5e0bad102}</Project>
+      <Name>Relativity.SimpleFileUpload.Tests.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -251,6 +254,9 @@
     <Content Include="oi\unmanaged\scclo-R1.dll" />
     <Content Include="oi\unmanaged\sccut-R1.dll" />
     <Content Include="oi\unmanaged\wvcore-R1.dll" />
+    <Content Include="Resources\CTRL0192153.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -258,10 +264,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.10.1\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.10.1\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.5.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.5.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
   </Target>
+  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.1.0\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.10.1\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.10.1\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.5.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.5.0\build\kCura.OutsideIn.FI.Win32.targets')" />
 </Project>

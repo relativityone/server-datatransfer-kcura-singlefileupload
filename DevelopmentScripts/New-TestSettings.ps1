@@ -103,6 +103,11 @@ if(-not $RAPDirectory)
     $PSBoundParameters['RAPDirectory'] = Join-Path $PSScriptRoot ..\Artifacts
 }
 
+$BuildToolsDir = Join-Path $PSScriptRoot ..\buildtools
+$ChromeBinaryDirectory = (Get-ChildItem -Recurse -Directory -Path $BuildToolsDir -Filter "Relativity.Chromium.Portable*").FullName
+$ChromeBinaryLocation = (Get-ChildItem -Recurse -Directory -Path $ChromeBinaryDirectory -Filter "tools*").FullName
+$PSBoundParameters['ChromeBinaryLocation'] = $ChromeBinaryLocation
+
 Remove-Item (Join-Path $PSScriptRoot ..\FunctionalTestSettings) -Force -ErrorAction SilentlyContinue
 Remove-Item (Join-Path $PSScriptRoot ..\FunctionalTest.runsettings) -Force -ErrorAction SilentlyContinue
 

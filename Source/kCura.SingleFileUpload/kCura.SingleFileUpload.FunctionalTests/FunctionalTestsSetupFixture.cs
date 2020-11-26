@@ -1,70 +1,11 @@
-﻿using System.IO;
-using System.Reflection;
-using Atata;
-using NUnit.Framework;
-using Relativity.SimpleFileUpload.Tests.Core;
-using Relativity.Testing.Framework;
-using Relativity.Testing.Framework.Api;
-using Relativity.Testing.Framework.Web;
+﻿using Relativity.SimpleFileUpload.Tests.Core;
 
 namespace kcura.SingleFileUpload.FunctionalTests
 {
-	[SetUpFixture]
-	public class FunctionalTestsSetupFixture
+	public class FunctionalTestsSetupFixture : SimpleFileUploadTestsSetUpFixture
 	{
-		public static int TestWorkspaceID;
-
-		[OneTimeSetUp]
-		public void OneTimeSetup()
-		{
-			RelativityFacade.Instance.RelyOn<CoreComponent>();
-			RelativityFacade.Instance.RelyOn<ApiComponent>();
-			RelativityFacade.Instance.RelyOn<WebComponent>();
-
-			RelativityFacade.Instance.GetComponent<WebComponent>().Configuration.ChromeBinaryFilePath =
-				Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-					SharedVariables.ChromeBinaryLocation);
-
-			if (TemplateWorkspaceExists())
-			{
-				return;
-			}
-
-			int workspaceId = CreateTemplateWorkspace();
-
-			InstallSimpleFileUploadToWorkspace(workspaceId);
-		}
-
-		[OneTimeTearDown]
-		public virtual void OneTimeTearDown()
-		{
-			AtataContext.Current.Driver?.Quit();
-		}
-
-		private bool TemplateWorkspaceExists()
-			=> RelativityFacade.Instance.Resolve<IWorkspaceService>().Get(Const.FUNCTIONAL_TEMPLATE_NAME) != null;
-
-		private int CreateTemplateWorkspace()
-		{
-			Workspace newWorkspace = new Workspace()
-			{
-				Name = Const.FUNCTIONAL_TEMPLATE_NAME
-			};
-
-			return RelativityFacade.Instance.Resolve<IWorkspaceService>().Create(newWorkspace).ArtifactID;
-		}
-
-
-		private void InstallSimpleFileUploadToWorkspace(int workspaceId)
-		{
-			var applicationService = RelativityFacade.Instance.Resolve<IRelativityApplicationService>();
-
-			int appId = applicationService.InstallToLibrary(SharedVariables.LocalRAPFileLocation, new LibraryApplicationInstallOptions
-			{
-				IgnoreVersion = true
-			});
-
-			applicationService.InstallToWorkspace(workspaceId, appId);
-		}
+		public FunctionalTestsSetupFixture()
+			: base(Const.FUNCTIONAL_TEMPLATE_NAME, Const.FUNCTIONAL_STANDARD_ACCOUNT_EMAIL_FORMAT)
+		{ }
 	}
 }
