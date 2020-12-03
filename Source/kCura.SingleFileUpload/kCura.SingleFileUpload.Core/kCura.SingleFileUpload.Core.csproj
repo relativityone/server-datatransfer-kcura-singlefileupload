@@ -88,9 +88,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSerio.Relativity">
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
-    </Reference>
     <Reference Include="oi, Version=2020.5.0.25, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.5.0\lib\net40\oi.dll</HintPath>
     </Reference>
@@ -268,6 +265,16 @@
     <Compile Include="Managers\IInstanceSettingManager.cs" />
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
+    <Compile Include="Relativity\Exceptions\QueryException.cs" />
+    <Compile Include="Relativity\Infrastructure\CacheContextScope.cs" />
+    <Compile Include="Relativity\Infrastructure\StandaloneCSRFManager.cs" />
+    <Compile Include="Relativity\Infrastructure\StandaloneUrlHelper.cs" />
+    <Compile Include="Relativity\Infrastructure\WorkspaceContext.cs" />
+    <Compile Include="Relativity\Infrastructure\WorkspaceContextProvider.cs" />
+    <Compile Include="Relativity\IRepository.cs" />
+    <Compile Include="Relativity\Repository.cs" />
+    <Compile Include="Relativity\RepositoryHelper.cs" />
+    <Compile Include="Relativity\Resources\DefaultResources.Designer.cs" />
     <Compile Include="SQL\Queries.Designer.cs">
       <DependentUpon>Queries.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1169,6 +1176,7 @@
       <LastGenOutput>DeployableFiles.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Relativity\Resources\DefaultResources.resx" />
     <EmbeddedResource Include="SQL\Queries.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>

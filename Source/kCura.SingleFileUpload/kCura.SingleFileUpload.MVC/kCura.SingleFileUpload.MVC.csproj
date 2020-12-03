@@ -80,10 +80,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSerio.Relativity, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
-    </Reference>
     <Reference Include="oi, Version=2020.5.0.25, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.5.0\lib\net40\oi.dll</HintPath>
     </Reference>
