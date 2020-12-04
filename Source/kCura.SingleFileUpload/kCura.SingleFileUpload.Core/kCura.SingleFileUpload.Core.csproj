@@ -265,7 +265,6 @@
     <Compile Include="Managers\IInstanceSettingManager.cs" />
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
-    <Compile Include="Relativity\Exceptions\QueryException.cs" />
     <Compile Include="Relativity\Infrastructure\CacheContextScope.cs" />
     <Compile Include="Relativity\Infrastructure\StandaloneCSRFManager.cs" />
     <Compile Include="Relativity\Infrastructure\StandaloneUrlHelper.cs" />

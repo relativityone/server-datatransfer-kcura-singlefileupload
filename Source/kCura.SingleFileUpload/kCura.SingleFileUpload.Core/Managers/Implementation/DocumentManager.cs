@@ -2,7 +2,6 @@
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Factories;
-using kCura.SingleFileUpload.Core.Helpers;
 using kCura.SingleFileUpload.Core.SQL;
 using Newtonsoft.Json.Linq;
 using NSerio.Relativity;
@@ -18,7 +17,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Relativity;
 using Client = kCura.Relativity.Client;
+using Constants = kCura.SingleFileUpload.Core.Helpers.Constants;
 using DataExchange = Relativity.DataExchange;
 using DTOs = kCura.Relativity.Client.DTOs;
 using Services = Relativity.Services;
@@ -105,50 +106,33 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public bool ValidateDocImages(int docArtifactId)
 		{
-			bool result = false;
+			string hasImagesFieldName = DTOs.DocumentFieldNames.HasImages;
+			RelativityObject document = GetDocumentByArtifactIdAsync(docArtifactId, new[] { hasImagesFieldName })
+				.GetAwaiter().GetResult();
 
-			DTOs.Document document = new DTOs.Document(docArtifactId);
-			document.Fields.Add(new DTOs.FieldValue(DTOs.DocumentFieldNames.HasImages));
-			DTOs.ResultSet<DTOs.Document> docResults = _Repository.RSAPIClient.Repositories.Document.Read(document);
-			if (docResults.Success)
-			{
-				DTOs.Document documentArtifact = docResults.Results.FirstOrDefault().Artifact;
-				result = documentArtifact.HasImages.Name.Equals("Yes");
-			}
-
-			return result;
+			FieldValuePair hasImagesFieldValuePair = document.FieldValues.Single(x => x.Field.Name == hasImagesFieldName);
+			Choice hasImagesValue = (Choice)hasImagesFieldValuePair.Value;
+			bool hasImages = hasImagesValue.Name == "Yes";
+			return hasImages;
 		}
 
 		public bool ValidateDocNative(int docArtifactId)
 		{
-			bool result = false;
+			string hasNativeFieldName = DTOs.DocumentFieldNames.HasNative;
+			RelativityObject document = GetDocumentByArtifactIdAsync(docArtifactId, new[] {hasNativeFieldName})
+				.GetAwaiter().GetResult();
 
-			DTOs.Document document = new DTOs.Document(docArtifactId);
-			document.Fields.Add(new DTOs.FieldValue(DTOs.DocumentFieldNames.HasNative));
-			DTOs.ResultSet<DTOs.Document> docResults = _Repository.RSAPIClient.Repositories.Document.Read(document);
-			if (docResults.Success)
-			{
-				DTOs.Document documentArtifact = docResults.Results.FirstOrDefault().Artifact;
-				result = documentArtifact.HasNative.Value;
-			}
-
-			return result;
+			FieldValuePair hasNativeFieldValuePair = document.FieldValues.Single(x => x.Field.Name == hasNativeFieldName);
+			bool hasNative = (bool)hasNativeFieldValuePair.Value;
+			return hasNative;
 		}
 
 		public string GetDocumentControlNumber(int docArtifactId)
 		{
-			string result = null;
+			RelativityObject document = GetDocumentByArtifactIdAsync(docArtifactId, Enumerable.Empty<string>())
+				.GetAwaiter().GetResult();
 
-			DTOs.Document document = new DTOs.Document(docArtifactId);
-			document.Fields.Add(new DTOs.FieldValue(new Guid(Helpers.Constants.CONTROL_NUMBER_FIELD)));
-			DTOs.ResultSet<DTOs.Document> docResults = _Repository.RSAPIClient.Repositories.Document.Read(document);
-			if (docResults.Success)
-			{
-				DTOs.Document documentArtifact = docResults.Results.FirstOrDefault().Artifact;
-				result = documentArtifact.Fields[0].Value.ToString();
-			}
-
-			return result;
+			return document.Name;
 		}
 
 		public bool ValidateHasRedactions(int docArtifactId)
@@ -248,12 +232,28 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public int GetDocByName(string docName)
 		{
-			DTOs.Query<DTOs.Document> qDocs = new DTOs.Query<DTOs.Document>
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
 			{
-				Condition = new Client.TextCondition(DTOs.DocumentFieldNames.TextIdentifier, Client.TextConditionEnum.EqualTo, docName),
-				Fields = DTOs.FieldValue.NoFields
-			};
-			return _Repository.RSAPIClient.Repositories.Document.Query(qDocs, 1).Results.FirstOrDefault()?.Artifact?.ArtifactID ?? -1;
+				QueryRequest queryRequest = new QueryRequest()
+				{
+					ObjectType = new ObjectTypeRef()
+					{
+						ArtifactTypeID = (int)ArtifactType.Document
+					},
+					Condition = $"'{Constants.CONTROL_NUMBER_FIELD}' == '{docName}'"
+				};
+
+				QueryResult queryResult = ExecuteWithServiceRetriesAsync(() =>
+						objectManager.QueryAsync(_Repository.WorkspaceID, queryRequest, start: 0, length: 1))
+					.GetAwaiter().GetResult();
+
+				if (queryResult.Objects.Any())
+				{
+					return queryResult.Objects.Single().ArtifactID;
+				}
+
+				return -1;
+			}
 		}
 
 		public void SetCreateInstanceSettings()
@@ -286,7 +286,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					IncludeIDWindow = false,
 					Condition = "'Name' IN ['RestrictedNativeFileTypes']"
 				};
-				results = await objectManager.QueryAsync(-1, query, 1, 10).ConfigureAwait(false);
+
+				results = await ExecuteWithServiceRetriesAsync(() => objectManager.QueryAsync(-1, query, 1, 10))
+					.ConfigureAwait(false);
 			}
 			List<string> restricted = results.Objects[0].FieldValues[0].Value.ToString().Split(';').Select(x => x.ToLower()).ToList();
 			restricted.AddRange(new[] { "dll", "exe", "js" });
@@ -305,7 +307,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					IncludeIDWindow = false,
 					Condition = $"'ArtifactID' IN [{workspaceID}]"
 				};
-				results = await objectManager.QueryAsync(-1, query, 1, 10).ConfigureAwait(false);
+
+				results = await ExecuteWithServiceRetriesAsync(() => objectManager.QueryAsync(-1, query, 1, 10))
+					.ConfigureAwait(false);
 			}
 			var isDataGrid = (bool)results.Objects[0].FieldValues[0].Value;
 			return isDataGrid;
@@ -563,13 +567,13 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		{
 			using (Services.Document.IDocumentManager docManager = _Repository.CreateProxy<Services.Document.IDocumentManager>())
 			{
-				await docManager.MoveDocumentsToFolderAsync(_Repository.WorkspaceID,
+				await ExecuteWithServiceRetriesAsync(() => docManager.MoveDocumentsToFolderAsync(_Repository.WorkspaceID,
 					new Services.Folder.FolderRef(folderID),
 					new List<Services.Document.DocumentRef>()
 					{
 						new Services.Document.DocumentRef(docID)
 					}
-				).ConfigureAwait(false);
+				)).ConfigureAwait(false);
 			}
 		}
 
@@ -615,7 +619,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					},
 					IncludeIDWindow = false,
 				};
-				results = await objectManager.QueryAsync(Repository.Instance.WorkspaceID, query, 1, 10).ConfigureAwait(false);
+
+				results = await ExecuteWithServiceRetriesAsync(() => objectManager.QueryAsync(Repository.Instance.WorkspaceID, query, 1, 10))
+					.ConfigureAwait(false);
 			}
 
 			RelativityObject restricted = results.Objects[0];
@@ -625,6 +631,36 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				ArtifactId = Convert.ToInt32(restricted.FieldValues[0].Value),
 				Name = restricted.FieldValues[1].Value?.ToString(),
 			};
+		}
+
+		private async Task<RelativityObject> GetDocumentByArtifactIdAsync(int artifactId, IEnumerable<string> fields)
+		{
+			using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
+			{
+				QueryRequest queryRequest = new QueryRequest()
+				{
+					ObjectType = new ObjectTypeRef()
+					{
+						ArtifactTypeID = (int)ArtifactType.Document
+					},
+					Condition = $"'ArtifactID' == {artifactId}",
+					Fields = fields.Select(fieldName => new FieldRef()
+					{
+						Name = fieldName
+					}),
+					IncludeNameInQueryResult = true
+				};
+				QueryResult queryResult = await ExecuteWithServiceRetriesAsync(() => 
+					objectManager.QueryAsync(Repository.Instance.WorkspaceID, queryRequest, start: 0, length: 1))
+					.ConfigureAwait(false);
+
+				if (!queryResult.Objects.Any())
+				{
+					throw new ApplicationException($"Cannot find document with artifact ID: {artifactId}");
+				}
+
+				return queryResult.Objects.Single();
+			}
 		}
 
 		private string GetBearerToken()

@@ -37,8 +37,7 @@ namespace NSerio.Relativity
 			set;
 		}
 
-		T CreateProxy<T>(ExecutionIdentity identity = 0)
-		where T : IDisposable;
+		T CreateProxy<T>(ExecutionIdentity identity = 0) where T : IDisposable;
 
 		ILogFactory GetLogFactory();
 	}

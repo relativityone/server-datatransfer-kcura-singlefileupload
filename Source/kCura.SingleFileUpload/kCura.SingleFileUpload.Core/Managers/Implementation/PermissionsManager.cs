@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.SQL;
+﻿using kCura.SingleFileUpload.Core.SQL;
 using Relativity.API;
 using Services = Relativity.Services;
 using Relativity.Services.Permission;
@@ -13,7 +12,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
 	public class PermissionsManager : BaseManager, IPermissionsManager
 	{
-		private static Lazy<IPermissionsManager> _instance = new Lazy<IPermissionsManager>(() => new PermissionsManager());
+		private static readonly Lazy<IPermissionsManager> _instance = new Lazy<IPermissionsManager>(() => new PermissionsManager());
 
 		public static IPermissionsManager Instance => _instance.Value;
 
@@ -41,7 +40,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				};
 
 				// Create the new permission.
-				await ExecuteWithServiceRetries(async () => await proxy.CreateSingleAsync(WorkspaceID, newPermission).ConfigureAwait(false)).ConfigureAwait(false);
+				await ExecuteWithServiceRetriesAsync(() => proxy.CreateSingleAsync(WorkspaceID, newPermission)).ConfigureAwait(false);
 
 				return true;
 			}
@@ -84,7 +83,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				string queryString = queryCondition.ToQueryString();
 				query.Condition = queryString;
 
-				PermissionQueryResultSet queryResultSet = await ExecuteWithServiceRetries(async () => await proxy.QueryAsync(WorkspaceID, query).ConfigureAwait(false)).ConfigureAwait(false);
+				PermissionQueryResultSet queryResultSet = await ExecuteWithServiceRetriesAsync(() => proxy.QueryAsync(WorkspaceID, query)).ConfigureAwait(false);
 
 				exist = (queryResultSet.Results.Count > 0) ? true : false;
 			}
