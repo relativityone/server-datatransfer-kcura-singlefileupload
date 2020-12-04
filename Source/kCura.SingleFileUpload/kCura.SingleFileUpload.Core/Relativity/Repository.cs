@@ -1,80 +1,45 @@
-using NSerio.Relativity.Infrastructure;
-using Relativity.API;
 using System;
+using kCura.SingleFileUpload.Core.Relativity.Infrastructure;
+using Relativity.API;
 
-namespace NSerio.Relativity
+namespace kCura.SingleFileUpload.Core.Relativity
 {
 	public class Repository : IRepository
 	{
-		private readonly static object _lock;
-
 		private static IRepository _instance;
-
-		public IDBContext CaseDBContext
-		{
-			get
-			{
-				return WorkspaceContextProvider.GetWorkspaceContext().CaseDBContext;
-			}
-		}
-
-		public IHelper Helper
-		{
-			get
-			{
-				return WorkspaceContextProvider.GetHelperResolver();
-			}
-		}
+		private static readonly object _lock;
 
 		public static IRepository Instance
 		{
 			get
 			{
-				if (Repository._instance == null)
+				if (_instance == null)
 				{
-					lock (Repository._lock)
+					lock (_lock)
 					{
-						if (Repository._instance == null)
+						if (_instance == null)
 						{
-							Repository._instance = new Repository();
+							_instance = new Repository();
 						}
 					}
 				}
-				return Repository._instance;
+				return _instance;
 			}
 		}
 
-		public IDBContext MasterDBContext
-		{
-			get
-			{
-				return WorkspaceContextProvider.GetMasterDBContext();
-			}
-		}
+		public IDBContext CaseDBContext => WorkspaceContextProvider.GetWorkspaceContext().CaseDBContext;
+
+		public IHelper Helper => WorkspaceContextProvider.GetHelperResolver();
+
+		public IDBContext MasterDBContext => WorkspaceContextProvider.GetMasterDBContext();
 
 		public int WorkspaceID
 		{
-			get
-			{
-				return WorkspaceContextProvider.GetCurrentWorkSpaceID();
-			}
-			set
-			{
-				WorkspaceContextProvider.SetCurrentWorkspaceID(value);
-			}
+			get => WorkspaceContextProvider.GetCurrentWorkSpaceID();
+			set => WorkspaceContextProvider.SetCurrentWorkspaceID(value);
 		}
 
-		static Repository()
-		{
-			Repository._lock = new object();
-		}
-
-		private Repository()
-		{
-		}
-
-		public T CreateProxy<T>(ExecutionIdentity identity = 0)
-		where T : IDisposable
+		public T CreateProxy<T>(ExecutionIdentity identity = 0) where T : IDisposable
 		{
 			return WorkspaceContextProvider.GetEndpointResolver().CreateProxy<T>(identity);
 		}
@@ -82,6 +47,15 @@ namespace NSerio.Relativity
 		public ILogFactory GetLogFactory()
 		{
 			return WorkspaceContextProvider.GetLogFactoryResolver();
+		}
+
+		static Repository()
+		{
+			_lock = new object();
+		}
+
+		private Repository()
+		{
 		}
 	}
 }

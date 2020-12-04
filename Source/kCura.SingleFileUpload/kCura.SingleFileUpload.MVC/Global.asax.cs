@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using NSerio.Relativity;
+using kCura.SingleFileUpload.Core.Relativity;
 
 namespace kCura.SingleFileUpload.MVC
 {
@@ -10,7 +10,6 @@ namespace kCura.SingleFileUpload.MVC
 	// visit http://go.microsoft.com/?LinkId=9394801
 	public class MvcApplication : System.Web.HttpApplication
 	{
-
 		protected void Application_Start()
 		{
 			AreaRegistration.RegisterAllAreas();
@@ -21,7 +20,6 @@ namespace kCura.SingleFileUpload.MVC
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
 			RepositoryHelper.ConfigureRepository(ConnectionHelper.Helper());
-
 		}
 	}
 }

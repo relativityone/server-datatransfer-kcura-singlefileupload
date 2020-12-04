@@ -1,7 +1,7 @@
-using Relativity.API;
 using System;
+using Relativity.API;
 
-namespace NSerio.Relativity
+namespace kCura.SingleFileUpload.Core.Relativity
 {
 	public interface IRepository
 	{

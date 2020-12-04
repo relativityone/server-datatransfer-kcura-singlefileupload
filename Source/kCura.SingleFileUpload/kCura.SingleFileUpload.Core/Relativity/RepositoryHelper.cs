@@ -1,8 +1,8 @@
-using NSerio.Relativity.Infrastructure;
-using Relativity.API;
 using System;
+using kCura.SingleFileUpload.Core.Relativity.Infrastructure;
+using Relativity.API;
 
-namespace NSerio.Relativity
+namespace kCura.SingleFileUpload.Core.Relativity
 {
 	public static class RepositoryHelper
 	{
@@ -15,7 +15,8 @@ namespace NSerio.Relativity
 		{
 			WorkspaceContextProvider.ConfigureSetCurrentWorkspaceIDFnc((int currentWorkspaceID) => CacheContextScope.SetData<int>("CurrentWorkspaceID", currentWorkspaceID, false));
 			WorkspaceContextProvider.ConfigureGetCurrentWorkspaceIDFnc(() => CacheContextScope.GetData<int>("CurrentWorkspaceID", false));
-			WorkspaceContextProvider.ConfigureWorkspaceContextFnc(() => {
+			WorkspaceContextProvider.ConfigureWorkspaceContextFnc(() =>
+			{
 				int currentWorkSpaceID = WorkspaceContextProvider.GetCurrentWorkSpaceID();
 				string str = string.Concat("WorkspaceContext", currentWorkSpaceID);
 				WorkspaceContext data = CacheContextScope.GetData<WorkspaceContext>(str, true);
@@ -26,7 +27,8 @@ namespace NSerio.Relativity
 				}
 				return data;
 			});
-			WorkspaceContextProvider.ConfigureMasterDbContextFnc(() => {
+			WorkspaceContextProvider.ConfigureMasterDbContextFnc(() =>
+			{
 				IDBContext data = CacheContextScope.GetData<IDBContext>("masterDBContext", true);
 				if (data == null)
 				{
@@ -35,7 +37,8 @@ namespace NSerio.Relativity
 				}
 				return data;
 			});
-			WorkspaceContextProvider.ConfigureEndpointResolverFnc(() => {
+			WorkspaceContextProvider.ConfigureEndpointResolverFnc(() =>
+			{
 				IServicesMgr data = CacheContextScope.GetData<IServicesMgr>("serviceManagerContext", true);
 				if (data == null)
 				{
@@ -44,7 +47,8 @@ namespace NSerio.Relativity
 				}
 				return data;
 			});
-			WorkspaceContextProvider.ConfigureLogFactoryResolverFnc(() => {
+			WorkspaceContextProvider.ConfigureLogFactoryResolverFnc(() =>
+			{
 				ILogFactory data = CacheContextScope.GetData<ILogFactory>("logFactoryContext", true);
 				if (data == null)
 				{

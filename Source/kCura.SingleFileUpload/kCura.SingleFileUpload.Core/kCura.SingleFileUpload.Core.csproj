@@ -266,14 +266,11 @@
     <Compile Include="Managers\IToggleManager.cs" />
     <Compile Include="Managers\ITelemetryManager.cs" />
     <Compile Include="Relativity\Infrastructure\CacheContextScope.cs" />
-    <Compile Include="Relativity\Infrastructure\StandaloneCSRFManager.cs" />
-    <Compile Include="Relativity\Infrastructure\StandaloneUrlHelper.cs" />
     <Compile Include="Relativity\Infrastructure\WorkspaceContext.cs" />
     <Compile Include="Relativity\Infrastructure\WorkspaceContextProvider.cs" />
     <Compile Include="Relativity\IRepository.cs" />
     <Compile Include="Relativity\Repository.cs" />
     <Compile Include="Relativity\RepositoryHelper.cs" />
-    <Compile Include="Relativity\Resources\DefaultResources.Designer.cs" />
     <Compile Include="SQL\Queries.Designer.cs">
       <DependentUpon>Queries.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1175,7 +1172,6 @@
       <LastGenOutput>DeployableFiles.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relativity\Resources\DefaultResources.resx" />
     <EmbeddedResource Include="SQL\Queries.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>

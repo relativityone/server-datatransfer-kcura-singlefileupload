@@ -1,7 +1,7 @@
-using Relativity.API;
 using System;
+using Relativity.API;
 
-namespace NSerio.Relativity.Infrastructure
+namespace kCura.SingleFileUpload.Core.Relativity.Infrastructure
 {
 	public static class WorkspaceContextProvider
 	{
@@ -21,72 +21,72 @@ namespace NSerio.Relativity.Infrastructure
 
 		public static void ConfigureEndpointResolverFnc(Func<IServicesMgr> fnc)
 		{
-			WorkspaceContextProvider._endpointResolverFnc = fnc;
+			_endpointResolverFnc = fnc;
 		}
 
 		public static void ConfigureGetCurrentWorkspaceIDFnc(Func<int> fnc)
 		{
-			WorkspaceContextProvider._getCurrentWorksapceIDFnc = fnc;
+			_getCurrentWorksapceIDFnc = fnc;
 		}
 
 		public static void ConfigureHelperResolverFnc(Func<IHelper> fnc)
 		{
-			WorkspaceContextProvider._helperResolverFnc = fnc;
+			_helperResolverFnc = fnc;
 		}
 
 		public static void ConfigureLogFactoryResolverFnc(Func<ILogFactory> fnc)
 		{
-			WorkspaceContextProvider._logFactoryResolverFnc = fnc;
+			_logFactoryResolverFnc = fnc;
 		}
 
 		public static void ConfigureMasterDbContextFnc(Func<IDBContext> fnc)
 		{
-			WorkspaceContextProvider._masterDbContextFnc = fnc;
+			_masterDbContextFnc = fnc;
 		}
 
 		public static void ConfigureSetCurrentWorkspaceIDFnc(Action<int> act)
 		{
-			WorkspaceContextProvider._setCurrentWorkspaceIDFnc = act;
+			_setCurrentWorkspaceIDFnc = act;
 		}
 
 		public static void ConfigureWorkspaceContextFnc(Func<WorkspaceContext> fnc)
 		{
-			WorkspaceContextProvider._workspaceContextFnc = fnc;
+			_workspaceContextFnc = fnc;
 		}
 
 		public static int GetCurrentWorkSpaceID()
 		{
-			return WorkspaceContextProvider._getCurrentWorksapceIDFnc();
+			return _getCurrentWorksapceIDFnc();
 		}
 
 		public static IServicesMgr GetEndpointResolver()
 		{
-			return WorkspaceContextProvider._endpointResolverFnc();
+			return _endpointResolverFnc();
 		}
 
 		public static IHelper GetHelperResolver()
 		{
-			return WorkspaceContextProvider._helperResolverFnc();
+			return _helperResolverFnc();
 		}
 
 		public static ILogFactory GetLogFactoryResolver()
 		{
-			return WorkspaceContextProvider._logFactoryResolverFnc();
+			return _logFactoryResolverFnc();
 		}
 
 		public static IDBContext GetMasterDBContext()
 		{
-			return WorkspaceContextProvider._masterDbContextFnc();
+			return _masterDbContextFnc();
 		}
 
 		public static WorkspaceContext GetWorkspaceContext()
 		{
-			return WorkspaceContextProvider._workspaceContextFnc();
+			return _workspaceContextFnc();
 		}
 
 		public static void SetCurrentWorkspaceID(int workspaceID)
 		{
-			WorkspaceContextProvider._setCurrentWorkspaceIDFnc(workspaceID);
+			_setCurrentWorkspaceIDFnc(workspaceID);
 		}
 	}
 }

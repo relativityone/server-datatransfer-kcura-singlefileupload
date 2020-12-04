@@ -1,7 +1,7 @@
 using System;
 using Relativity.API;
 
-namespace NSerio.Relativity.Infrastructure
+namespace kCura.SingleFileUpload.Core.Relativity.Infrastructure
 {
 	public sealed class WorkspaceContext : IDisposable
 	{

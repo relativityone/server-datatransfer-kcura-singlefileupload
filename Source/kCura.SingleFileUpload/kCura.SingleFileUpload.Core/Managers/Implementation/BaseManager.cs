@@ -1,5 +1,4 @@
 ﻿using kCura.SingleFileUpload.Core.Helpers;
-using NSerio.Relativity;
 using Polly;
 using Polly.Retry;
 using Relativity.Kepler.Exceptions;
@@ -7,6 +6,7 @@ using Relativity.Services.Exceptions;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using kCura.SingleFileUpload.Core.Relativity;
 using Relativity.Services.Error;
 using Relativity.Services.Workspace;
 
