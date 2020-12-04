@@ -1,6 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.Relativity.Client.DTOs;
-using kCura.Relativity.DataReaderClient;
+﻿using kCura.Relativity.DataReaderClient;
 using kCura.Relativity.ImportAPI;
 using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Factories;
@@ -20,79 +18,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Relativity.Services.Error;
 using Relativity.Services.Objects;
+using Relativity.Services.Objects.DataContracts;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
 	public class DocumentManagerTest : TestBase
 	{
-		private Mock<IHelper> mockingHelper;
+		private Mock<IHelper> _mockingHelper;
+		private Mock<IObjectManager> _objectManagerFake;
 
 		#region SetUp
 
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
-			rsapi.Setup(p => p.Read(It.IsAny<APIOptions>(), It.IsAny<List<ArtifactRequest>>()))
-				.Returns<APIOptions, List<ArtifactRequest>>((apiOptions, artifactRequests) =>
-				{
-					if (artifactRequests.All(p => p.ArtifactTypeID == (int)ArtifactType.Document))
-					{
-						return new ReadResultSet()
-						{
-							Success = true,
-							ReadResults = new List<ReadResult>
-							{
-								new ReadResult
-								{
-									Success = true,
-									Artifact = new Relativity.Client.Artifact
-									{
-										Fields = new List<Relativity.Client.Field>
-										{
-											(new Relativity.Client.Field(Guid.Empty, TestsConstants._DOC_CONTROL_NUMBER)),
-											(new Relativity.Client.Field(DocumentFieldNames.HasImages, new Relativity.Client.Choice(){ Name = "Yes" })),
-											(new Relativity.Client.Field(DocumentFieldNames.HasNative, true)),
-											(new Relativity.Client.Field(DocumentFieldNames.TextIdentifier, TestsConstants._DOC_NAME)),
-											(new Relativity.Client.Field("A Custom No Named and Sad Field", true))
-										}
-									}
-								}
-
-							}
-						};
-					}
-					else
-					{
-						throw new NotImplementedException(string.Format("Type {0} hasn't been mocked for RSAPI Repositories.", artifactRequests.FirstOrDefault()?.ArtifactTypeID));
-					}
-				});
-
-			rsapi.Setup(p => p.Query(It.IsAny<APIOptions>(), It.IsAny<Relativity.Client.Query>(), It.IsAny<int>()))
-				.Returns<APIOptions, Relativity.Client.Query, int>((apiOptions, query, index) =>
-				{
-					QueryResult queryResult = null;
-					if (query.ArtifactTypeID == (int)ArtifactType.Document)
-					{
-						queryResult = new QueryResult()
-						{
-							Success = true
-						};
-						if (query.Condition is TextCondition && ((TextCondition)query.Condition).Value == TestsConstants._DOC_NAME)
-						{
-							queryResult.QueryArtifacts.Add(new Relativity.Client.Artifact(apiOptions.WorkspaceID, (int)ArtifactType.Document, TestsConstants._DOC_ARTIFACT_ID));
-						}
-					}
-					return queryResult;
-				});
-
-
-
-			mockingHelper = MockHelper
-				.GetMockingHelper<IHelper>();
+			_mockingHelper = new Mock<IHelper>();
+			_objectManagerFake = PrepareObjectManager();
 
 			Mock<IAPILog> mockApiLog = new Mock<IAPILog>();
 			mockApiLog.Setup(p => p.LogError(It.IsAny<string>()));
@@ -104,10 +48,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			mockLogFactory.Setup(p => p.GetLogger())
 				.Returns(mockApiLog.Object);
 
-			mockingHelper.Setup(p => p.GetLoggerFactory())
+			_mockingHelper.Setup(p => p.GetLoggerFactory())
 				.Returns(mockLogFactory.Object);
 
-			mockingHelper
+			_mockingHelper
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsDataTableWithSqlParametersArray(Queries.GetFileInfoByDocumentArtifactID, TestsConstants._GetdataTable())
 				.MockExecuteSqlStatementAsScalar(Queries.GetRepoLocationByCaseID, TestsConstants._TEMP_FOLDER_LOCATION)
@@ -127,31 +71,22 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			mockingProvideSystemToken.Setup(p => p.GetLocalSystemToken()).Returns(Guid.NewGuid().ToString());
 
 			ExtensionPointServiceFinder.SystemTokenProvider = mockingProvideSystemToken.Object;
-
-
-
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			
+			Mock<IServicesMgr> mockingServicesMgr = _mockingHelper
 				.MockIServiceMgr()
-				.MockService(rsapi)
+				.MockService(_objectManagerFake)
+				.MockService<IErrorManager>()
 				.MockService<IMetricsManager>()
 				.MockService<IInternalMetricsCollectionManager>()
 				.MockService<IDocumentManager>()
 				.MockService(mockFileTypeIdentifier)
 				;
 
-
 			Mock<IImportApiFactory> mockImportApi = new Mock<IImportApiFactory>();
 			Mock<IExtendedImportAPI> mockExtendedIApi = new Mock<IExtendedImportAPI>();
 
-			mockImportApi.Setup(p => p.GetImportAPI(It.IsAny<ImportSettings>())).Returns<ExtendedImportAPI>((rs) =>
-			{
-				return mockExtendedIApi.Object;
-
-			});
-
-			mockingServicesMgr.MockServiceInstance<IObjectManager>()
-				.Mock(TestsConstants._FILE_TYPE)
-				.Mock(true);
+			mockImportApi.Setup(p => 
+				p.GetImportAPI(It.IsAny<ImportSettings>())).Returns<ExtendedImportAPI>((rs) => mockExtendedIApi.Object);
 
 			Mock<IImportAPI> mockingImportApi = new Mock<IImportAPI>
 			{
@@ -167,11 +102,52 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			ImportApiFactory.SetUpSingleton(mockingImportApi.Object, mockingImportBulkArtifactJob.Object);
 
-			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
+			ConfigureSingletoneRepositoryScope(_mockingHelper.Object);
+		}
+
+		Mock<IObjectManager> PrepareObjectManager()
+		{
+			Mock<IObjectManager> objectManagerFake = new Mock<IObjectManager>();
+
+			Dictionary<string, FieldValuePair> supportedFields = new Dictionary<string, FieldValuePair>();
+
+			void AddSupportedField(string fieldName, object value)
+			{
+				supportedFields.Add(fieldName, new FieldValuePair()
+				{
+					Field = new Field()
+					{
+						Name = fieldName
+					},
+					Value = value
+				});
+			}
+
+			AddSupportedField("Has Images", new Choice() { Name = "Yes" });
+			AddSupportedField("Has Native", true);
+			AddSupportedField("Enable Data Grid", true);
+			AddSupportedField("Value", TestsConstants._FILE_TYPE);
+
+			objectManagerFake
+				.Setup(x => x.QueryAsync(It.IsAny<int>(), It.IsAny<QueryRequest>(), It.IsAny<int>(), It.IsAny<int>()))
+				.ReturnsAsync((int workspaceID, QueryRequest request, int start, int length) =>
+					new QueryResult()
+					{
+						Objects = new List<RelativityObject>()
+						{
+							new RelativityObject()
+							{
+								ArtifactID = TestsConstants._DOC_ARTIFACT_ID,
+								Name = TestsConstants._DOC_CONTROL_NUMBER,
+								FieldValues = request.Fields.Select(field => supportedFields[field.Name]).ToList()
+							}
+						}
+					});
+
+			return objectManagerFake;
 		}
 
 		#endregion
-
 		
 		[Test]
 		public void ValidateDocImagesTest()
@@ -186,6 +162,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			bool result = DocumentManager.Instance.ValidateDocNative(TestsConstants._DOC_ARTIFACT_ID);
 			Assert.IsTrue(result);
 		}
+
 		[Test]
 		public void GetDocumentControlNumberTest()
 		{
@@ -244,13 +221,31 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			Assert.IsTrue(true);
 		}
 
-		[TestCase(TestsConstants._DOC_NAME, TestsConstants._DOC_ARTIFACT_ID)]
+		[TestCase(TestsConstants._DOC_CONTROL_NUMBER, TestsConstants._DOC_ARTIFACT_ID)]
 		[TestCase("It'll return empty", -1)]
 		public void GetDocByNameTest(string docName, int expectedArtifactID)
 		{
-			int result = DocumentManager.Instance.GetDocByName(docName);
-			Assert.AreEqual(result, expectedArtifactID);
+			//Arrange
+			_objectManagerFake
+				.Setup(x => x.QueryAsync(It.IsAny<int>(), It.IsAny<QueryRequest>(), It.IsAny<int>(), It.IsAny<int>()))
+				.ReturnsAsync((int workspaceID, QueryRequest request, int start, int length) =>
+				{
+					QueryResult queryResult = new QueryResult();
+					if (request.Condition.Contains(TestsConstants._DOC_CONTROL_NUMBER))
+					{
+						queryResult.Objects.Add(new RelativityObject()
+						{
+							ArtifactID = TestsConstants._DOC_ARTIFACT_ID
+						});
+					}
+					return queryResult;
+				});
 
+			// Act
+			int actualArtifactID = DocumentManager.Instance.GetDocByName(docName);
+
+			// Assert
+			Assert.AreEqual(expectedArtifactID, actualArtifactID);
 		}
 
 		[Test]
@@ -278,6 +273,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public async Task IsDataGridEnabledTestAsync()
 		{
+
 			bool result = await DocumentManager.Instance.IsDataGridEnabledAsync(-1);
 			Assert.IsTrue(result);
 		}

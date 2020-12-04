@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using Relativity;
 using Constants = kCura.SingleFileUpload.Core.Helpers.Constants;
 using DataExchange = Relativity.DataExchange;
+using FieldCategory = Relativity.Services.Objects.DataContracts.FieldCategory;
 using Services = Relativity.Services;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
@@ -70,14 +71,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 		{
 			if (!documentExtraInfo.AvoidControlNumber || !documentExtraInfo.FromDocumentViewer)
 			{
-				DTOs.Document replacedDocument = new DTOs.Document(documentExtraInfo.DocID);
-				if (!documentExtraInfo.AvoidControlNumber)
-				{
-					replacedDocument.TextIdentifier = Path.GetFileNameWithoutExtension(documentInfo.FileName);
-				}
 				if (!documentExtraInfo.FromDocumentViewer)
 				{
-					replacedDocument.ParentArtifact = new DTOs.Artifact(DefineFolder(documentExtraInfo.FolderID));
 					await ChangeFolderAsync(documentExtraInfo.FolderID, documentExtraInfo.DocID).ConfigureAwait(false);
 				}
 			}
@@ -104,7 +99,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public bool ValidateDocImages(int docArtifactId)
 		{
-			string hasImagesFieldName = DTOs.DocumentFieldNames.HasImages;
+			string hasImagesFieldName = "Has Images";
 			RelativityObject document = GetDocumentByArtifactIdAsync(docArtifactId, new[] { hasImagesFieldName })
 				.GetAwaiter().GetResult();
 
@@ -116,7 +111,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public bool ValidateDocNative(int docArtifactId)
 		{
-			string hasNativeFieldName = DTOs.DocumentFieldNames.HasNative;
+			string hasNativeFieldName = "Has Native";
 			RelativityObject document = GetDocumentByArtifactIdAsync(docArtifactId, new[] {hasNativeFieldName})
 				.GetAwaiter().GetResult();
 
@@ -279,7 +274,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				QueryRequest query = new QueryRequest
 				{
-					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.InstanceSetting },
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)ArtifactType.InstanceSetting },
 					Fields = new[] { new FieldRef() { Name = "Value" } },
 					IncludeIDWindow = false,
 					Condition = "'Name' IN ['RestrictedNativeFileTypes']"
@@ -300,8 +295,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				QueryRequest query = new QueryRequest
 				{
-					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.Case },
-					Fields = new[] { new FieldRef() { Name = DTOs.WorkspaceFieldNames.EnableDataGrid } },
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)ArtifactType.Case },
+					Fields = new[] { new FieldRef() { Name = "Enable Data Grid" } },
 					IncludeIDWindow = false,
 					Condition = $"'ArtifactID' IN [{workspaceID}]"
 				};
@@ -575,11 +570,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			}
 		}
 
-		private int DefineFolder(int id)
-		{
-			return _Repository.CaseDBContext.ExecuteSqlStatementAsScalar<int>(Queries.GetDroppedFolder, SqlHelper.CreateSqlParameter("SupID", id));
-		}
-
 		private void UpdateNative(ExportedMetadata documentInfo, int docID)
 		{
 			FileInformation file = GetFileByArtifactId(docID);
@@ -608,8 +598,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			{
 				QueryRequest query = new QueryRequest()
 				{
-					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)Client.ArtifactType.Field },
-					Condition = $"'FieldCategoryID' == { (int)Client.FieldCategory.Identifier } AND 'FieldArtifactTypeID' == { (int)Client.ArtifactType.Document }",
+					ObjectType = new ObjectTypeRef() { ArtifactTypeID = (int)ArtifactType.Field },
+					Condition = $"'FieldCategoryID' == { (int)FieldCategory.Identifier } AND 'FieldArtifactTypeID' == { (int)ArtifactType.Document }",
 					Fields = new[]
 					{
 						new FieldRef() {Name = "ArtifactID"},

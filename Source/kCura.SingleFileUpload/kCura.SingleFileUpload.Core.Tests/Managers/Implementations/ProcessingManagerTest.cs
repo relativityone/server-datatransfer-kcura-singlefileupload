@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -13,7 +12,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	[TestFixture]
 	public class ProcessingManagerTest : TestBase
 	{
-
 		private const int _ERROR_ID = 10;
 		private const int _ARTIFACT_ID = 100000;
 		private const string _FILE_NAME = "CTRL0192153.txt";
@@ -23,28 +21,21 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			DocumentIdentifier = "",
 			DocumentFileLocation = FileHelper.GetFileLocation(_FILE_NAME),
 			SourceLocation = ""
-
 		};
 
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
-			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
+			Mock<IHelper> mockingHelper = new Mock<IHelper>();
 
 			var objectManager = new Mock<IObjectManager>();
-
-
 
 			mockingHelper
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsScalar(Queries.GetArtifactTypeByArtifactGuid, _ARTIFACT_ID);
 
-
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
-				.MockService(rsapi)
 				.MockService(objectManager.Mock("test"));
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);

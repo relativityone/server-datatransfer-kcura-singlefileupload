@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
+﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
@@ -16,19 +15,15 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	public class PermissionsManagerTest : TestBase
 	{
 		private const int _WORKSPACE_ID = 10000;
-		private const int _ARTIFACT_ID = 100007;
 		private const int _ARTIFACT_TYPE_ID = 17;
 		private const int _USER_ID = 777;
 		private const string _OBJECT_GUID = "";
 		private const string _PERMISSION_NAME = "";
 
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
-			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
-
+			Mock<IHelper> mockingHelper = new Mock<IHelper>();
 
 			DataTable dt = new DataTable();
 			dt.Columns.Add("FileID", typeof(int));
@@ -39,8 +34,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsDbDataReaderWithSqlParametersArray(Queries.GetObjectTypeByGuid, dt.CreateDataReader())
 				.MockExecuteSqlStatementAsScalar(Queries.IsUserAdministrator, true);
-
-
+			
 			Mock<IPermissionManager> mockPermissionManager = new Mock<IPermissionManager>();
 
 			mockPermissionManager
@@ -53,7 +47,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
-				.MockService(rsapi)
 				.MockService(mockPermissionManager);
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);

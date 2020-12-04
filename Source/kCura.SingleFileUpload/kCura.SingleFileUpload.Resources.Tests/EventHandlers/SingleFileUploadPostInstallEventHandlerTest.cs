@@ -1,5 +1,4 @@
 ﻿using kCura.EventHandler;
-using kCura.Relativity.Client;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -18,19 +17,16 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 	{
 		private Mock<IEHHelper> mockingHelper;
 		private SingleFileUploadPostInstallEventHandler eventHandler;
-
-
+		
 		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
 			Mock<IToggleProvider> mockToggleProvider = new Mock<IToggleProvider>
 			{
 				DefaultValue = DefaultValue.Mock
 			};
 
-			mockToggleProvider.SetReturnsDefault(MockHelper.FakeTask());
+			mockToggleProvider.SetReturnsDefault(Task.CompletedTask);
 			mockToggleProvider.SetReturnsDefault(Task.FromResult(true));
 			mockToggleProvider.SetReturnsDefault(1);
 			ToggleProvider.Current = mockToggleProvider.Object;
@@ -41,7 +37,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 				.Setup(p => p.QueryAsync(It.IsAny<global::Relativity.Services.Query>()))
 				.Returns(Task.FromResult(TestsConstants._INSTANCE_SETTING_RESULT_SET));
 
-			mockingHelper = MockHelper.GetMockingHelper<IEHHelper>();
+			mockingHelper = new Mock<IEHHelper>();
 
 			mockingHelper
 				.MockIDBContextOnHelper()
@@ -49,13 +45,11 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 			
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
-				.MockService(rsapi)
 				.MockService(mockInstanceSettingManager);
 
 			eventHandler = new SingleFileUploadPostInstallEventHandler();
 		}
-
-
+		
 		[Test]
 		public void ExecuteTest()
 		{
@@ -69,7 +63,6 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		{
 			Response result = eventHandler.Execute();
 			Assert.IsFalse(result.Success);
-
 		}
 	}
 }

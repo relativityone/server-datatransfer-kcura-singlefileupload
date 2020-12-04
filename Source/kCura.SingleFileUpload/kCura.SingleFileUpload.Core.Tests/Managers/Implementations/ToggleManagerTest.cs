@@ -17,7 +17,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		{
 			Mock<IToggleProvider> toggleProvider = new Mock<IToggleProvider>();
 			toggleProvider.DefaultValue = DefaultValue.Mock;
-			toggleProvider.SetReturnsDefault(MockHelper.FakeTask());
+			toggleProvider.SetReturnsDefault(Task.CompletedTask);
 			toggleProvider.SetReturnsDefault(Task.FromResult(true));
 			toggleProvider.SetReturnsDefault(true);
 			ToggleProvider.Current = toggleProvider.Object;

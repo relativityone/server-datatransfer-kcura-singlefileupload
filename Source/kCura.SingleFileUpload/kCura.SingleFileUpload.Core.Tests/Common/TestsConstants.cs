@@ -15,7 +15,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const int _DOC_ARTIFACT_ID = 100000;
 		public const int _DOC_FILE_ID = 10;
 		public static readonly Guid _DOC_GUID = Guid.NewGuid();
-		public const string _DOC_NAME = "docTestName";
 		public const string _FILE_TYPE = ".7z";
 		public const string _OI_FILE_TYPE_ = "Extensible Markup Language (XML)";
 		public const string _FILE_NAME = "CTRL0192153.xml";

@@ -16,12 +16,11 @@ namespace kCura.SingleFileUpload.Core.Tests
 			_cacheContextScope = RepositoryHelper.InitializeRepository();
 		}
 
-		[OneTimeTearDown]
+		[TearDown]
 		public void Teardown()
 		{
 			_cacheContextScope?.Dispose();
 			FileHelper.DeleteTestTempFolder();
 		}
-
 	}
 }
