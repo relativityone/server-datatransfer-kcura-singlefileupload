@@ -1,4 +1,3 @@
-using kCura.Relativity.Client;
 using NSerio.Relativity.Infrastructure;
 using Relativity.API;
 using System;
@@ -50,22 +49,6 @@ namespace NSerio.Relativity
 			get
 			{
 				return WorkspaceContextProvider.GetMasterDBContext();
-			}
-		}
-
-		public IRSAPIClient RSAPIClient
-		{
-			get
-			{
-				return WorkspaceContextProvider.GetWorkspaceContext().RSAPIClient;
-			}
-		}
-
-		public IRSAPIClient RSAPISystem
-		{
-			get
-			{
-				return WorkspaceContextProvider.GetWorkspaceContext().RSAPISystem;
 			}
 		}
 

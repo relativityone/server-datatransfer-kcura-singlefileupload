@@ -1,4 +1,3 @@
-using kCura.Relativity.Client;
 using NSerio.Relativity.Infrastructure;
 using Relativity.API;
 using System;
@@ -9,17 +8,10 @@ namespace NSerio.Relativity
 	{
 		public static void ConfigureRepository(IHelper helper)
 		{
-			Func<IRSAPIClient> func = () => helper.GetServicesManager().CreateProxy<IRSAPIClient>(ExecutionIdentity.CurrentUser);
-			Func<IRSAPIClient> func1 = () => helper.GetServicesManager().CreateProxy<IRSAPIClient>(ExecutionIdentity.System);
-			IHelper helper1 = helper;
-			Func<int, IDBContext> func2 = new Func<int, IDBContext>(helper1.GetDBContext);
-			IHelper helper2 = helper;
-			Func<IServicesMgr> func3 = new Func<IServicesMgr>(helper2.GetServicesManager);
-			IHelper helper3 = helper;
-			RepositoryHelper.ConfigureRepository(func, func1, func2, func3, new Func<ILogFactory>(helper3.GetLoggerFactory), () => helper);
+			ConfigureRepository(helper.GetDBContext, helper.GetServicesManager, helper.GetLoggerFactory, () => helper);
 		}
 
-		public static void ConfigureRepository(Func<IRSAPIClient> getRSAPIClientForCurrentUser, Func<IRSAPIClient> getRSAPIClientForSystemUser, Func<int, IDBContext> getDBContext, Func<IServicesMgr> getEndpointResolver, Func<ILogFactory> getLogFactoryResolver, Func<IHelper> getHelperResolver)
+		public static void ConfigureRepository(Func<int, IDBContext> getDBContext, Func<IServicesMgr> getEndpointResolver, Func<ILogFactory> getLogFactoryResolver, Func<IHelper> getHelperResolver)
 		{
 			WorkspaceContextProvider.ConfigureSetCurrentWorkspaceIDFnc((int currentWorkspaceID) => CacheContextScope.SetData<int>("CurrentWorkspaceID", currentWorkspaceID, false));
 			WorkspaceContextProvider.ConfigureGetCurrentWorkspaceIDFnc(() => CacheContextScope.GetData<int>("CurrentWorkspaceID", false));
@@ -29,11 +21,7 @@ namespace NSerio.Relativity
 				WorkspaceContext data = CacheContextScope.GetData<WorkspaceContext>(str, true);
 				if (data == null)
 				{
-					IRSAPIClient rSAPIClient = getRSAPIClientForCurrentUser();
-					IRSAPIClient rSAPIClient1 = getRSAPIClientForSystemUser();
-					rSAPIClient.APIOptions.WorkspaceID =currentWorkSpaceID;
-					rSAPIClient1.APIOptions.WorkspaceID =currentWorkSpaceID;
-					data = new WorkspaceContext(currentWorkSpaceID, rSAPIClient, rSAPIClient1, getDBContext(currentWorkSpaceID));
+					data = new WorkspaceContext(getDBContext(currentWorkSpaceID));
 					CacheContextScope.SetData<WorkspaceContext>(str, data, true);
 				}
 				return data;

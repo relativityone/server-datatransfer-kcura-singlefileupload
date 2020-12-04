@@ -1,4 +1,3 @@
-using kCura.Relativity.Client;
 using Relativity.API;
 using System;
 
@@ -17,16 +16,6 @@ namespace NSerio.Relativity
 		}
 
 		IDBContext MasterDBContext
-		{
-			get;
-		}
-
-		IRSAPIClient RSAPIClient
-		{
-			get;
-		}
-
-		IRSAPIClient RSAPISystem
 		{
 			get;
 		}

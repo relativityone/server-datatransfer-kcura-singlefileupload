@@ -18,10 +18,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Relativity;
-using Client = kCura.Relativity.Client;
 using Constants = kCura.SingleFileUpload.Core.Helpers.Constants;
 using DataExchange = Relativity.DataExchange;
-using DTOs = kCura.Relativity.Client.DTOs;
 using Services = Relativity.Services;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
@@ -34,7 +32,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		private struct ImportDocumentResult
 		{
-			public bool Success => String.IsNullOrEmpty(Error);
+			public bool Success => string.IsNullOrEmpty(Error);
 
 			public string Error { get; set; }
 

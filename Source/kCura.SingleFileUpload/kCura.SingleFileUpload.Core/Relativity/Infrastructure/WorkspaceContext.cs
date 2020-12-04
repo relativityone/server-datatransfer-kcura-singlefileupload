@@ -1,7 +1,5 @@
-using kCura.Relativity.Client;
-using Relativity.API;
 using System;
-using System.Runtime.CompilerServices;
+using Relativity.API;
 
 namespace NSerio.Relativity.Infrastructure
 {
@@ -13,33 +11,15 @@ namespace NSerio.Relativity.Infrastructure
 			private set;
 		}
 
-		public IRSAPIClient RSAPIClient
+		public WorkspaceContext(IDBContext caseDBContext)
 		{
-			get;
-			private set;
-		}
-
-		public IRSAPIClient RSAPISystem
-		{
-			get;
-			private set;
-		}
-
-		public WorkspaceContext(int workspaceID, IRSAPIClient apiClient, IRSAPIClient apiSystem, IDBContext caseDBContext)
-		{
-			this.RSAPIClient = apiClient;
-			this.RSAPISystem = apiSystem;
-			this.CaseDBContext = caseDBContext;
+			CaseDBContext = caseDBContext;
 		}
 
 		public void Dispose()
 		{
-			this.RSAPIClient.Dispose();
-			this.RSAPIClient = null;
-			this.RSAPISystem.Dispose();
-			this.RSAPISystem = null;
-			this.CaseDBContext.ReleaseConnection();
-			this.CaseDBContext = null;
+			CaseDBContext.ReleaseConnection();
+			CaseDBContext = null;
 		}
 	}
 }
