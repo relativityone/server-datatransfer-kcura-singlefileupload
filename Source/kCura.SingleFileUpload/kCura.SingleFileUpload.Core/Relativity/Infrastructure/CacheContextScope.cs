@@ -106,7 +106,7 @@ namespace kCura.SingleFileUpload.Core.Relativity.Infrastructure
 		{
 			if (!_cache.ContainsKey(key))
 			{
-				return default;
+				return default(T);
 			}
 			return (T)_cache[key];
 		}
