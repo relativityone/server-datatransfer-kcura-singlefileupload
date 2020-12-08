@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.Managers.Implementation;
+﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
@@ -17,13 +16,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	{
 		private const string _BUCKET = "Test.Bucket";
 
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
-			Mock<IHelper> mockingHelper =
-				MockHelper.GetMockingHelper<IHelper>();
+			Mock<IHelper> mockingHelper = new Mock<IHelper>();
 
 			mockingHelper
 				.MockIDBContextOnHelper()
@@ -33,11 +29,9 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
 				.MockIServiceMgr()
-				.MockService(rsapi)
 				.MockService<IMetricsManager>()
 				.MockService(mockCategory.MockCreateCategory());
-
-
+			
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}
 

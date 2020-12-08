@@ -11,9 +11,6 @@
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\kCura.SingleFileUpload.Core.dll</Assembly>
         </Assemblies>
         <Assemblies>
-          <Assembly>Source\SolutionResources\NSerio.Relativity.dll</Assembly>
-        </Assemblies>
-        <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Newtonsoft.Json.dll</Assembly>
         </Assemblies>
         <Assemblies>

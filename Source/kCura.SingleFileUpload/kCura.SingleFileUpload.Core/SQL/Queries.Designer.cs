@@ -19,7 +19,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Queries {
@@ -189,33 +189,11 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///	  FROM [EDDSDBO].[AccessControlListPermission] AS AC WITH(NOLOCK)
         ///	  INNER JOIN [EDDSDBO].[Permission] AS P WITH(NOLOCK)
         ///	  ON P.[PermissionID] = AC.[PermissionID]
-        ///	  AND AC.[Permission [rest of string was truncated]&quot;;.
+        ///	  AND AC.[PermissionID] IN (SELECT [rest of string was truncated]&quot;;.
         /// </summary>
         public static string GetDocumentPermissions {
             get {
                 return ResourceManager.GetString("GetDocumentPermissions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DECLARE @FID INT = 0
-        ///
-        ///SELECT @FID = ArtifactID
-        ///FROM EDDSDBO.Folder AS F WITH (NOLOCK)
-        ///WHERE ArtifactID = @SupID
-        ///
-        ///IF @FID = 0
-        ///BEGIN
-        ///	SELECT TOP 1  @FID = ArtifactID
-        ///	FROM EDDSDBO.FOLDER AS F WITH (NOLOCK)
-        ///	ORDER BY ARTIFACTID ASC
-        ///END
-        ///
-        ///SELECT @FID AS FID.
-        /// </summary>
-        public static string GetDroppedFolder {
-            get {
-                return ResourceManager.GetString("GetDroppedFolder", resourceCulture);
             }
         }
         
@@ -423,7 +401,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///DECLARE @Section VARCHAR(100)= &apos;kCura.EDDS.Web&apos;;
         ///DECLARE @ArtifactID INT;
         ///
-        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHER [rest of string was truncated]&quot;;.
+        ///IF NOT EXISTS ( SELECT TOP 1 1 FROM eddsdbo.InstanceSetting WITH (nolock) WHERE name = @Name AND [rest of string was truncated]&quot;;.
         /// </summary>
         public static string InsertFieldsInstanceSetting {
             get {
@@ -498,7 +476,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///(
         ///    SELECT TOP 1 1
         ///    FROM eddsdbo.InstanceSetting WITH (nolock)
-        ///    WHERE name = @Name AN [rest of string was truncated]&quot;;.
+        ///    WHERE name = @Name AND Section = @Se [rest of string was truncated]&quot;;.
         /// </summary>
         public static string InsertInstanceSettings {
             get {
@@ -518,7 +496,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///FROM	EDDSDBO.[Group] AS G WITH(NOLOCK)
         ///WHERE	G.ArtifactID IN (
         ///			--User group
-        ///	 [rest of string was truncated]&quot;;.
+        ///			SELECT	GU [rest of string was truncated]&quot;;.
         /// </summary>
         public static string IsUserAdministrator {
             get {
@@ -612,7 +590,7 @@ namespace kCura.SingleFileUpload.Core.SQL {
         ///
         ///DECLARE @HasImagesCodeYes INT = ( SELECT TOP 1 AG.ArtifactID
         ///								       FROM EDDSDBO.ArtifactGuid AS AG WITH (NOLOCK)
-        ///				 [rest of string was truncated]&quot;;.
+        ///								       WHERE  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string UpdateHasImages {
             get {

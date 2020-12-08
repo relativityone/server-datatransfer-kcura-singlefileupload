@@ -12,11 +12,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	[TestFixture]
 	class InstanceSettingManagerTest : TestBase
 	{
-
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
+			Mock<IHelper> mockingHelper = new Mock<IHelper>();
 			Mock<IInstanceSettingManager> mockInstanceSettingManager = new Mock<IInstanceSettingManager>();
 
 			mockInstanceSettingManager
@@ -30,7 +29,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-
 		public async Task GetMaxFilesInstanceSettingTest()
 		{
 			int maxFiles = 5;
@@ -44,7 +42,5 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
 			Assert.IsTrue(true);
 		}
-
-
 	}
 }

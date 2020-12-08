@@ -1,13 +1,13 @@
 ﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
-using NSerio.Relativity;
-using NSerio.Relativity.Infrastructure;
 using Relativity.API;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using kCura.SingleFileUpload.Core.Relativity;
+using kCura.SingleFileUpload.Core.Relativity.Infrastructure;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {

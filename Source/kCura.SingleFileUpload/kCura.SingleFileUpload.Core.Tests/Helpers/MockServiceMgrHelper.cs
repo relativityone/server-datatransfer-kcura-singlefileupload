@@ -16,21 +16,18 @@ namespace kCura.SingleFileUpload.Core.Tests.Helpers
 				.Returns(() => mockingServiceManager.Object);
 			return mockingServiceManager;
 		}
-
-
+		
 		public static Mock<IManager> MockServiceInstance<IManager>(this Mock<IServicesMgr> mockingServiceManager)
 			where IManager : class, IDisposable
 		{
 			Mock<IManager> mockingManager = new Mock<IManager>();
 			mockingManager.DefaultValue = DefaultValue.Mock;
-			mockingManager.SetReturnsDefault(Task.FromResult(MockHelper.DEFAULT_ID));
+			mockingManager.SetReturnsDefault(Task.FromResult(MockDBContextHelper.DEFAULT_ID));
 			mockingManager.SetReturnsDefault(Task.CompletedTask);
-
 
 			mockingServiceManager.MockService(mockingManager);
 
 			return mockingManager;
-
 		}
 
 		public static Mock<IServicesMgr> MockService<IManager>(this Mock<IServicesMgr> mockingServiceManager, Mock<IManager> mockingManager = null)

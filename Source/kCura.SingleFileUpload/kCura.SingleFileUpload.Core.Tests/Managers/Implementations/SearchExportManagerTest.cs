@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.Entities;
+﻿using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -15,19 +14,15 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	{
 		Mock<ICPHelper> mockingHelper;
 
-		[OneTimeSetUp]
-
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IRSAPIClient> rsapi = RSAPIClientMockHelper.GetMockedHelper();
-
-			mockingHelper = MockHelper.GetMockingHelper<ICPHelper>();
+			mockingHelper = new Mock<ICPHelper>();
 
 			mockingHelper
 				.MockIServiceMgr();
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
-
 		}
 
 		[Test]
@@ -43,7 +38,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		[Test]
 		public void ProcessSearchMLStringTest()
 		{
-
 			byte[] native = File.ReadAllBytes(TestsConstants._FILE_LOCATION);
 			ExportedMetadata result = SearchExportManager.instance.ProcessSearchMLString(native);
 			Assert.AreEqual(result.ExtractedText, TestsConstants._EXTRACTED_TEXT);

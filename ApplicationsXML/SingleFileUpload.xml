@@ -15,12 +15,6 @@
       <Notes />
     </Assembly>
     <Assembly>
-      <ArtifactId>5320535</ArtifactId>
-      <Keywords />
-      <Name>NSerio.Relativity.dll</Name>
-      <Notes />
-    </Assembly>
-    <Assembly>
       <ArtifactId>5509069</ArtifactId>
       <Keywords />
       <Name>Newtonsoft.Json.dll</Name>
@@ -95,13 +89,13 @@
   </Assemblies>
   <ResourceFiles />
   <ExternalTabs />
-  <ExtractionDate>2020-11-18T13:28:06.9561085Z</ExtractionDate>
+  <ExtractionDate>2020-12-04T08:49:56.9395272Z</ExtractionDate>
   <Guid>1738ceb6-9546-44a7-8b9b-e64c88e47320</Guid>
   <Name>Simple File Upload</Name>
   <Objects />
   <ParentTabs />
   <RelativityVersion>16.0.30.0</RelativityVersion>
-  <Version>11.3.30.2</Version>
+  <Version>11.3.42.1</Version>
   <SchemaVersion>11.2.80.0</SchemaVersion>
   <TabDisplay>false</TabDisplay>
   <OriginSignature>c38bc2b4-751e-4d46-843e-787f34d3f85d</OriginSignature>
@@ -114,17 +108,17 @@
       <ReadinessUrl />
       <Name>SingleFileUpload.Web</Name>
       <FileName>Web.zip</FileName>
-      <Size>91142849</Size>
+      <Size>91246632</Size>
       <Keywords />
       <Notes />
-      <Hash>2C-FD-96-35-87-02-62-76-C6-7F-CA-7A-45-A7-6F-37-80-43-AC-76</Hash>
+      <Hash>FA-B5-19-3D-B5-FA-88-4B-B0-BB-CF-11-97-B7-DF-47-11-33-D2-8E</Hash>
     </CustomPage>
   </CustomPages>
   <AgentTypes />
   <IsRelativityApplication>true</IsRelativityApplication>
   <InstallEventHandlers>
     <InstallEventHandler>
-      <ArtifactId>1042198</ArtifactId>
+      <ArtifactId>1059185</ArtifactId>
       <AssemblyArtifactId>1016877</AssemblyArtifactId>
       <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPostInstallEventHandler</Name>
       <Guid>d94a421d-e7c8-433d-b325-e98998c846ba</Guid>
@@ -136,7 +130,7 @@
       <RunTarget>0</RunTarget>
     </InstallEventHandler>
     <InstallEventHandler>
-      <ArtifactId>1042199</ArtifactId>
+      <ArtifactId>1059186</ArtifactId>
       <AssemblyArtifactId>1016877</AssemblyArtifactId>
       <Name>kCura.SingleFileUpload.Resources.EventHandlers.SingleFileUploadPermissionPostInstallEventHandler</Name>
       <Guid>c4c61db8-4151-45a8-9885-c0a4a8a5c69c</Guid>

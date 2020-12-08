@@ -72,9 +72,6 @@
     <Reference Include="kCura.Vendor.Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Kepler.Service.1.0.1.589\lib\net462\kCura.Vendor.Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="NSerio.Relativity">
-      <HintPath>..\..\SolutionResources\NSerio.Relativity.dll</HintPath>
-    </Reference>
     <Reference Include="Relativity.API, Version=10.2.21.23, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.API.10.2.21.23\lib\net462\Relativity.API.dll</HintPath>
     </Reference>

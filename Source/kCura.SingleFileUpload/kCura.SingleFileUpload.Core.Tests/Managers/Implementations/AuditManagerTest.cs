@@ -1,5 +1,4 @@
-﻿using kCura.Relativity.Client;
-using kCura.SingleFileUpload.Core.Entities.Enumerations;
+﻿using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -12,11 +11,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 	[TestFixture]
 	public class AuditManagerTest : TestBase
 	{
-
-		[OneTimeSetUp]
+		[SetUp]
 		public void Setup()
 		{
-			Mock<IHelper> mockingHelper = MockHelper.GetMockingHelper<IHelper>();
+			Mock<IHelper> mockingHelper = new Mock<IHelper>();
 			mockingHelper.MockIDBContextOnHelper();
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}

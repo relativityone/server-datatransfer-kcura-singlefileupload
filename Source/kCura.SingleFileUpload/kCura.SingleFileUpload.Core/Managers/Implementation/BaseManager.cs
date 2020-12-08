@@ -1,5 +1,4 @@
 ﻿using kCura.SingleFileUpload.Core.Helpers;
-using NSerio.Relativity;
 using Polly;
 using Polly.Retry;
 using Relativity.Kepler.Exceptions;
@@ -7,7 +6,9 @@ using Relativity.Services.Exceptions;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using DTOs = kCura.Relativity.Client.DTOs;
+using kCura.SingleFileUpload.Core.Relativity;
+using Relativity.Services.Error;
+using Relativity.Services.Workspace;
 
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
@@ -39,21 +40,26 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 		public void LogError(Exception e)
 		{
-			var error = new DTOs.Error
+			var error = new Error
 			{
 				FullError = e.ToString(),
 				Message = EventLogHelper.GetRecursiveExceptionMsg(e),
 				Server = Environment.MachineName,
 				Source = "WEB - Single File Upload",
 				SendNotification = false,
-				Workspace = new DTOs.Workspace(-1),
+				Workspace = new WorkspaceRef(Repository.Instance.WorkspaceID),
 				URL = string.Empty
 			};
-			Repository.Instance.RSAPISystem.Repositories.Error.CreateSingle(error);
+
+			using (IErrorManager errorManager = Repository.Instance.CreateProxy<IErrorManager>())
+			{
+				ExecuteWithServiceRetriesAsync(() => errorManager.CreateSingleAsync(error)).GetAwaiter().GetResult();
+			}
+			
 			Repository.Instance.GetLogFactory().GetLogger().ForContext<DocumentManager>().LogError(e, "Something occurred in Single File Upload {0}", e.Message);
 		}
 
-		protected Task<TResult> ExecuteWithServiceRetries<TResult>(Func<Task<TResult>> action) 
+		protected Task<TResult> ExecuteWithServiceRetriesAsync<TResult>(Func<Task<TResult>> action) 
 		{
 			RetryPolicy httpErrorsPolicy = Policy
 				.Handle<ServiceNotFoundException>()                                             // Thrown when the service does not exist, the service isn't running yet or there are bad routing entries.

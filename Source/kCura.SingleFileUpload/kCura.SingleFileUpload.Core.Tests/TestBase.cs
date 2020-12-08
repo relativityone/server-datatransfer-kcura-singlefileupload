@@ -1,6 +1,6 @@
-﻿using kCura.SingleFileUpload.Core.Tests.Helpers;
-using NSerio.Relativity;
-using NSerio.Relativity.Infrastructure;
+﻿using kCura.SingleFileUpload.Core.Relativity;
+using kCura.SingleFileUpload.Core.Relativity.Infrastructure;
+using kCura.SingleFileUpload.Core.Tests.Helpers;
 using NUnit.Framework;
 using Relativity.API;
 
@@ -16,12 +16,11 @@ namespace kCura.SingleFileUpload.Core.Tests
 			_cacheContextScope = RepositoryHelper.InitializeRepository();
 		}
 
-		[OneTimeTearDown]
+		[TearDown]
 		public void Teardown()
 		{
 			_cacheContextScope?.Dispose();
 			FileHelper.DeleteTestTempFolder();
 		}
-
 	}
 }
