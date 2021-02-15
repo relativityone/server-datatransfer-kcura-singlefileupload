@@ -8,10 +8,13 @@ using NUnit.Framework;
 using Relativity.API;
 using System.IO;
 using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class SearchExportManagerTest : TestBase
 	{
 		Mock<ICPHelper> mockingHelper;
@@ -28,7 +31,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ExportToSearchMLTest()
+		public void ExportToSearchML_ShouldExport()
 		{
 			// Arrange
 			string fileName = TestsConstants._FILE_NAME;
@@ -43,7 +46,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ProcessSearchMLStringTest()
+		public void ProcessSearchMLString_ShouldReturnExpectedText()
 		{
 			// Arrange
 			byte[] native = File.ReadAllBytes(TestsConstants._FILE_LOCATION);
@@ -56,7 +59,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ConfigureOutsideInTest()
+		public void ConfigureOutsideIn_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => SearchExportManager.instance.ConfigureOutsideIn();

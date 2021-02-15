@@ -9,10 +9,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class PermissionsManagerTest : TestBase
 	{
 		private const int _WORKSPACE_ID = 10000;
@@ -54,7 +57,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task CurrentUserHasPermissionToObjectTypeTest()
+		public async Task CurrentUserHasPermissionToObjectTypeAsync_ShouldCheckPermissionsToObjectType()
 		{
 			// Act
 			bool result = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectTypeAsync
@@ -65,7 +68,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task PermissionCreateSingleTest()
+		public async Task PermissionCreateSingleAsync_ShouldCheckPermissionsToCreateSingleObject()
 		{
 			// Act
 			bool result = await PermissionsManager.Instance.Permission_CreateSingleAsync(_PERMISSION_NAME, _ARTIFACT_TYPE_ID);
@@ -75,7 +78,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task PermissionReadSelectedSingleTest()
+		public async Task PermissionReadSelectedSingleAsync__ShouldCheckPermissionsToReadSingleObject()
 		{
 			// Act
 			bool result = await PermissionsManager.Instance.Permission_ReadSelectedSingleAsync(_WORKSPACE_ID, _ARTIFACT_TYPE_ID, _PERMISSION_NAME);
@@ -85,7 +88,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task PermissionExistsTest()
+		public async Task PermissionExistsAsync_ShouldCheckPermissionExistence()
 		{
 			// Act
 			bool result = await PermissionsManager.Instance.Permission_ExistAsync(_PERMISSION_NAME);
@@ -95,7 +98,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void IsUserAdministratorTest()
+		public void IsUserAdministrator_ShouldCheckIfUserIsAdmin()
 		{
 			// Act
 			bool result = PermissionsManager.Instance.IsUserAdministrator(_WORKSPACE_ID, _USER_ID);

@@ -5,10 +5,13 @@ using Relativity.Toggles;
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class ToggleManagerTest : TestBase
 	{
 		[OneTimeSetUp]
@@ -23,7 +26,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetChangeFileNameTestAsync()
+		public async Task GetChangeFileNameAsync_ShouldReturnToggle()
 		{
 			// Act
 			bool result = await ToggleManager.Instance.GetChangeFileNameAsync();
@@ -33,7 +36,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void SetChangeFileNameTestAsync()
+		public void SetChangeFileNameAsync_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => ToggleManager.Instance.SetChangeFileNameAsync(true);
@@ -43,7 +46,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetCheckSFUFieldsTestAsync()
+		public async Task GetCheckSFUFieldsAsync_ShouldReturnToggle()
 		{
 			// Act
 			bool result = await ToggleManager.Instance.GetCheckSFUFieldsAsync();
@@ -53,7 +56,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void SetCheckSFUFieldsTestAsync()
+		public void SetCheckSFUFieldsAsync_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
@@ -63,7 +66,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetValidateSFUCustomPermissionsTestAsync()
+		public async Task GetValidateSFUCustomPermissionsAsync_ShouldReturnToggle()
 		{
 			// Act
 			bool result = await ToggleManager.Instance.GetValidateSFUCustomPermissionsAsync();
@@ -73,7 +76,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void SetValidateSFUCustomPermissionsTestAsync()
+		public void SetValidateSFUCustomPermissionsAsync_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(true);
@@ -83,7 +86,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetCheckUploadMassiveTestAsync()
+		public async Task GetCheckUploadMassiveAsync_ShouldReturnToggle()
 		{
 			// Act
 			bool result = await ToggleManager.Instance.GetCheckUploadMassiveAsync();
@@ -93,7 +96,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void SetCheckUploadMassiveTestAsync()
+		public void SetCheckUploadMassiveAsync_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => ToggleManager.Instance.SetCheckUploadMassiveAsync(true);

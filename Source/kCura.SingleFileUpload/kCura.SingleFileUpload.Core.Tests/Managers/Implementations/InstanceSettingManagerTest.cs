@@ -8,10 +8,13 @@ using Relativity.API;
 using Relativity.Services.InstanceSetting;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	class InstanceSettingManagerTest : TestBase
 	{
 		[SetUp]
@@ -32,7 +35,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetMaxFilesInstanceSettingTest()
+		public async Task GetMaxFilesInstanceSetting_ShouldReturnInstanceSettingValue()
 		{
 			// Arrange
 			const int maxFiles = 5;
@@ -45,7 +48,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void CreateMaxFilesInstanceSettingTest()
+		public void CreateMaxFilesInstanceSetting_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();

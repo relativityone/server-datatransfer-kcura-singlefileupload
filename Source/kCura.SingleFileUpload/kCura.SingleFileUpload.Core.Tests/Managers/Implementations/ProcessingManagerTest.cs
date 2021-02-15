@@ -8,10 +8,13 @@ using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.Objects;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class ProcessingManagerTest : TestBase
 	{
 		private const int _ERROR_ID = 10;
@@ -44,7 +47,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetErrorInfoTest()
+		public void GetErrorInfo_ShouldReturnErrorInfo()
 		{
 			// Act
 			ProcessingDocument result = ProcessingManager.instance.GetErrorInfo(_ERROR_ID);
@@ -54,7 +57,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ReplaceFile()
+		public void ReplaceFile_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => ProcessingManager.instance.ReplaceFile(new byte[1080], _processingDocument);

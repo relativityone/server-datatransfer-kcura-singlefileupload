@@ -22,10 +22,13 @@ using FluentAssertions;
 using Relativity.Services.Error;
 using Relativity.Services.Objects;
 using Relativity.Services.Objects.DataContracts;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class DocumentManagerTest : TestBase
 	{
 		private Mock<IHelper> _mockingHelper;
@@ -104,15 +107,17 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ValidateDocImagesTest()
+		public void ValidateDocImages_ShouldValidateImages()
 		{
 			// Act
 			bool result = DocumentManager.Instance.ValidateDocImages(TestsConstants._DOC_ARTIFACT_ID);
-			Assert.IsTrue(result);
+			
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		[Test]
-		public void ValidateDocNativeTest()
+		public void ValidateDocNative_ShouldValidateNatives()
 		{
 			// Act
 			bool result = DocumentManager.Instance.ValidateDocNative(TestsConstants._DOC_ARTIFACT_ID);
@@ -122,7 +127,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetDocumentControlNumberTest()
+		public void GetDocumentControlNumber_ShouldReturnExpectedControlNumber()
 		{
 			// Act
 			string result = DocumentManager.Instance.GetDocumentControlNumber(TestsConstants._DOC_ARTIFACT_ID);
@@ -132,7 +137,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ValidateHasRedactionsTest()
+		public void ValidateHasRedactions_ShouldValidateRedactionsExistence()
 		{
 			// Act
 			bool result = DocumentManager.Instance.ValidateHasRedactions(TestsConstants._DOC_ARTIFACT_ID);
@@ -142,7 +147,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void UpdateDocumentLastModificationFieldsTest()
+		public void UpdateDocumentLastModificationFields_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.UpdateDocumentLastModificationFields(TestsConstants._DOC_ARTIFACT_ID, TestsConstants._USER_ID, true);
@@ -152,7 +157,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetFileByArtifactIdTest()
+		public void GetFileByArtifactId_ShouldReturnDocumentArtifactIdAndFileId()
 		{
 			// Act
 			FileInformation result = DocumentManager.Instance.GetFileByArtifactId(TestsConstants._DOC_ARTIFACT_ID);
@@ -163,7 +168,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void DeleteRedactionsTest()
+		public void DeleteRedactions_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.DeleteRedactions(TestsConstants._DOC_ARTIFACT_ID);
@@ -173,7 +178,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void DeleteExistingImagesTest()
+		public void DeleteExistingImagesShouldRemoveExistingImagesFromDocument()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.DeleteExistingImages(TestsConstants._DOC_ARTIFACT_ID);
@@ -183,7 +188,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void InsertImageTest()
+		public void InsertImage_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.InsertImage(new FileInformation());
@@ -193,7 +198,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void UpdateHasImagesTest()
+		public void UpdateHasImages_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.UpdateHasImages(TestsConstants._DOC_ARTIFACT_ID);
@@ -204,7 +209,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 		[TestCase(TestsConstants._DOC_CONTROL_NUMBER, TestsConstants._DOC_ARTIFACT_ID)]
 		[TestCase("It'll return empty", -1)]
-		public void GetDocByNameTest(string docName, int expectedArtifactID)
+		public void GetDocByName_ShouldReturnDocArtifactId_OrMinusOneIfNotFound(string docName, int expectedArtifactID)
 		{
 			// Arrange
 			_objectManagerFake
@@ -226,11 +231,11 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			int actualArtifactID = DocumentManager.Instance.GetDocByName(docName);
 
 			// Assert
-			Assert.AreEqual(expectedArtifactID, actualArtifactID);
+			actualArtifactID.Should().Be(expectedArtifactID);
 		}
 
 		[Test]
-		public void SetCreateInstanceSettingsTest()
+		public void SetCreateInstanceSettings_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.SetCreateInstanceSettings();
@@ -240,7 +245,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void RemovePageInteractionEvenHandlerFromDocumentObjectTest()
+		public void RemovePageInteractionEvenHandlerFromDocumentObject_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.RemovePageInteractionEvenHandlerFromDocumentObject();
@@ -250,7 +255,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task ValidateFileTypesTestAsync()
+		public async Task ValidateFileTypesAsync_ShouldValidateFileType()
 		{
 			// Act
 			bool result = await DocumentManager.Instance.ValidateFileTypesAsync(TestsConstants._FILE_TYPE);
@@ -260,7 +265,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task IsDataGridEnabledTestAsync()
+		public async Task IsDataGridEnabled_ShouldCheckIfDataGridIsEnabled()
 		{
 			// Act
 			bool result = await DocumentManager.Instance.IsDataGridEnabledAsync(-1);
@@ -270,7 +275,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetRepositoryLocationTest()
+		public void GetRepositoryLocation_ShouldReturnRepositoryLocation()
 		{
 			// Act
 			string result = DocumentManager.Instance.GetRepositoryLocation();
@@ -280,7 +285,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void CreatedMetricsTestAsync()
+		public void CreateMetricsAsync_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.CreateMetricsAsync(TestsConstants._EXP_METADATA, Core.Helpers.Constants.BUCKET_DOCUMENTSUPLOADED);
@@ -290,7 +295,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void WriteFileTest()
+		public void WriteFile__ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.WriteFile(System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), new FileInformation { FileLocation = TestsConstants._FILE_LOCATION });
@@ -300,7 +305,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void InstanceFileTest()
+		public void InstanceFile_ShouldReturnExistingPath()
 		{
 			// Act
 			DocumentManager.Instance.InstanceFile(System.IO.File.ReadAllBytes(TestsConstants._FILE_LOCATION), null, TestsConstants._DOC_GUID.ToString());
@@ -314,7 +319,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void ReplaceSingleDocumentTest()
+		public void ReplaceSingleDocument_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.ReplaceSingleDocumentAsync(TestsConstants._EXP_METADATA, TestsConstants._DOC_EXTRA_INFO);
@@ -324,7 +329,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetNativeTypeByFilenameTest()
+		public void GetNativeTypeByFilename_ShouldReturnExpectedNativeType()
 		{
 			// Act
 			var nativeType = DocumentManager.Instance.GetNativeTypeByFilename(TestsConstants._FILE_LOCATION);
@@ -334,7 +339,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void DeleteTempFileTest()
+		public void DeleteTempFile_ShouldNotThrow()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.DeleteTempFile(FileHelper.GetTempFolderLocation());
@@ -344,7 +349,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void DeleteTempFileTestWhenException()
+		public void DeleteTempFile_ShouldNotThrow_WhenEmptyFileDeletion()
 		{
 			// Act
 			Action action = () => DocumentManager.Instance.DeleteTempFile("");

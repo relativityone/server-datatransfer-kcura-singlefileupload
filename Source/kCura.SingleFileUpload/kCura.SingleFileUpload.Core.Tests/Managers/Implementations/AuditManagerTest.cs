@@ -7,10 +7,13 @@ using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class AuditManagerTest : TestBase
 	{
 		[SetUp]
@@ -22,7 +25,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void CreateAuditRecordTest()
+		public void CreateAuditRecordTest_ShouldNotThrow()
 		{
 			// Arrange
 			string details = "TestDetails";
@@ -36,7 +39,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GenerateAuditDetailsForFileUploadTest()
+		public void GenerateAuditDetailsForFileUploadTest_ShouldContainCorrectArtifactIdAndMessage()
 		{
 			// Arrange
 			const int fileId = TestsConstants._DOC_ARTIFACT_ID;

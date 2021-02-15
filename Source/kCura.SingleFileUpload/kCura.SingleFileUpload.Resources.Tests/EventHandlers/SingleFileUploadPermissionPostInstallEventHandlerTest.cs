@@ -6,10 +6,13 @@ using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.Permission;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class SingleFileUploadPermissionPostInstallEventHandlerTest
 	{
 		private Mock<IEHHelper> mockingHelper;
@@ -31,7 +34,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		}
 
 		[Test]
-		public void ExecuteTest()
+		public void Execute_ShouldSuccesfullyExecuteHandler()
 		{
 			// Arrange
 			eventHandler.Helper = mockingHelper.Object;
@@ -44,7 +47,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		}
 
 		[Test]
-		public void ExecuteExceptionTest()
+		public void Execute_ShouldReturnFalse_WhenExceptionWasThrown()
 		{
 			// Act
 			Response result = eventHandler.Execute();
