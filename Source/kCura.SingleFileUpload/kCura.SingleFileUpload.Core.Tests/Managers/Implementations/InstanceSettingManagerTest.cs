@@ -1,4 +1,5 @@
-﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
+﻿using System;
+using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
@@ -6,6 +7,7 @@ using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.InstanceSetting;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
@@ -23,24 +25,33 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Returns(Task.FromResult(TestsConstants._INSTANCE_SETTING_RESULT_SET));
 
 			mockingHelper
-					.MockIServiceMgr()
-					.MockService(mockInstanceSettingManager);
+				.MockIServiceMgr()
+				.MockService(mockInstanceSettingManager);
+
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 		}
 
 		[Test]
 		public async Task GetMaxFilesInstanceSettingTest()
 		{
-			int maxFiles = 5;
+			// Arrange
+			const int maxFiles = 5;
+
+			// Act
 			int result = await InstanceSettingManager.Instance.GetMaxFilesInstanceSettingAsync();
-			Assert.AreEqual(maxFiles, result);
+			
+			// Assert
+			result.Should().Be(maxFiles);
 		}
 
 		[Test]
-		public async Task CreateMaxFilesInstanceSettingTest()
+		public void CreateMaxFilesInstanceSettingTest()
 		{
-			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync();
+			
+			// Assert
+			action.Should().NotThrow();
 		}
 	}
 }

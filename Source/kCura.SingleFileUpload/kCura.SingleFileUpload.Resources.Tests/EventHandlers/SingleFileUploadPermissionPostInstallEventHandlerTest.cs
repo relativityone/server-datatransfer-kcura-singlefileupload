@@ -1,4 +1,5 @@
-﻿using kCura.EventHandler;
+﻿using FluentAssertions;
+using kCura.EventHandler;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using Moq;
@@ -22,7 +23,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 			mockingHelper
 				.MockIDBContextOnHelper();
 			
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			mockingHelper
 				.MockIServiceMgr()
 				.MockService<IPermissionManager>();
 
@@ -32,16 +33,24 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		[Test]
 		public void ExecuteTest()
 		{
+			// Arrange
 			eventHandler.Helper = mockingHelper.Object;
+
+			// Act
 			Response result = eventHandler.Execute();
-			Assert.IsTrue(result.Success);
+
+			// Assert
+			result.Success.Should().BeTrue();
 		}
 
 		[Test]
 		public void ExecuteExceptionTest()
 		{
+			// Act
 			Response result = eventHandler.Execute();
-			Assert.IsFalse(result.Success);
+
+			// Assert
+			result.Success.Should().BeFalse();
 		}
 	}
 }

@@ -8,6 +8,7 @@ using Relativity.Services.Permission;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
@@ -45,11 +46,62 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.Setup(p => p.QueryAsync(It.IsAny<int>(), It.IsAny<global::Relativity.Services.Query>()))
 				.Returns(Task.FromResult(PermissionQueryResult()));
 
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			mockingHelper
 				.MockIServiceMgr()
 				.MockService(mockPermissionManager);
 
 			ConfigureSingletoneRepositoryScope(mockingHelper.Object);
+		}
+
+		[Test]
+		public async Task CurrentUserHasPermissionToObjectTypeTest()
+		{
+			// Act
+			bool result = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectTypeAsync
+				(_WORKSPACE_ID, _OBJECT_GUID, _PERMISSION_NAME);
+			
+			// Assert
+			result.Should().BeTrue();
+		}
+
+		[Test]
+		public async Task PermissionCreateSingleTest()
+		{
+			// Act
+			bool result = await PermissionsManager.Instance.Permission_CreateSingleAsync(_PERMISSION_NAME, _ARTIFACT_TYPE_ID);
+			
+			// Assert
+			result.Should().BeTrue();
+		}
+
+		[Test]
+		public async Task PermissionReadSelectedSingleTest()
+		{
+			// Act
+			bool result = await PermissionsManager.Instance.Permission_ReadSelectedSingleAsync(_WORKSPACE_ID, _ARTIFACT_TYPE_ID, _PERMISSION_NAME);
+			
+			// Assert
+			result.Should().BeTrue();
+		}
+
+		[Test]
+		public async Task PermissionExistsTest()
+		{
+			// Act
+			bool result = await PermissionsManager.Instance.Permission_ExistAsync(_PERMISSION_NAME);
+
+			// Assert
+			result.Should().BeTrue();
+		}
+
+		[Test]
+		public void IsUserAdministratorTest()
+		{
+			// Act
+			bool result = PermissionsManager.Instance.IsUserAdministrator(_WORKSPACE_ID, _USER_ID);
+			
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		private PermissionQueryResultSet PermissionQueryResult()
@@ -80,44 +132,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			};
 
 			return permissionValues;
-		}
-
-
-		[Test]
-		public async Task CurrentUserHasPermissionToObjectTypeTest()
-		{
-			bool result = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectTypeAsync
-				(_WORKSPACE_ID, _OBJECT_GUID, _PERMISSION_NAME);
-			Assert.IsTrue(result);
-		}
-
-		[Test]
-		public async Task PermissionCreateSingleTest()
-		{
-			bool result = await PermissionsManager.Instance.Permission_CreateSingleAsync(_PERMISSION_NAME, _ARTIFACT_TYPE_ID);
-			Assert.IsTrue(result);
-
-		}
-
-		[Test]
-		public async Task PermissionReadSelectedSingleTest()
-		{
-			bool result = await PermissionsManager.Instance.Permission_ReadSelectedSingleAsync(_WORKSPACE_ID, _ARTIFACT_TYPE_ID, _PERMISSION_NAME);
-			Assert.IsTrue(result);
-		}
-
-		[Test]
-		public async Task PermissionExistsTest()
-		{
-			bool result = await PermissionsManager.Instance.Permission_ExistAsync(_PERMISSION_NAME);
-			Assert.IsTrue(result);
-		}
-
-		[Test]
-		public void IsUserAdministratorTest()
-		{
-			bool result = PermissionsManager.Instance.IsUserAdministrator(_WORKSPACE_ID, _USER_ID);
-			Assert.IsTrue(result);
 		}
 	}
 }

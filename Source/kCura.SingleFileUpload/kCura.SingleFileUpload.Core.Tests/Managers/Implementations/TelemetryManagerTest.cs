@@ -7,7 +7,7 @@ using Relativity.API;
 using Relativity.Services.InternalMetricsCollection;
 using Relativity.Telemetry.Services.Metrics;
 using System;
-using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
@@ -27,7 +27,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			Mock<IInternalMetricsCollectionManager> mockCategory = new Mock<IInternalMetricsCollectionManager>();
 
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			mockingHelper
 				.MockIServiceMgr()
 				.MockService<IMetricsManager>()
 				.MockService(mockCategory.MockCreateCategory());
@@ -36,38 +36,53 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task LogCountTest()
+		public void LogCountTest()
 		{
-			await TelemetryManager.Instance.LogCountAsync(_BUCKET, 1);
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => TelemetryManager.Instance.LogCountAsync(_BUCKET, 1);
+			
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task LogGaugeTest()
+		public void LogGaugeTest()
 		{
-			await TelemetryManager.Instance.LogGaugeAsync(_BUCKET, 1);
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => TelemetryManager.Instance.LogGaugeAsync(_BUCKET, 1);
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
 		public void LogDurationTest()
 		{
-			DurationLogger result = TelemetryManager.Instance.LogDuration(_BUCKET, "", 1);
-			Assert.IsTrue(true);
+			// Act
+			Func<DurationLogger> action = () => TelemetryManager.Instance.LogDuration(_BUCKET, "", 1);
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task CreateMetricsTest()
+		public void CreateMetricsTest()
 		{
-			await TelemetryManager.Instance.CreateMetricsAsync();
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => TelemetryManager.Instance.CreateMetricsAsync();
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task CreateMetricTest()
+		public void CreateMetricTest()
 		{
-			await TelemetryManager.Instance.CreateMetricAsync(_BUCKET, "");
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => TelemetryManager.Instance.CreateMetricAsync(_BUCKET, "");
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 	}
