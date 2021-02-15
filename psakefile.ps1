@@ -38,12 +38,12 @@ Task Compile -Depends NugetRestore -Description "Compile code for this repo" {
 
 Task Test -Description "Run tests that don't require a deployed environment." {
     $LogPath = Join-Path $LogsDir "UnitTestResults.xml"
-    Invoke-Tests -WhereClause "namespace =~ Core.Tests || namespace =~ Resources.Tests" -OutputFile $LogPath -WithCoverage
+    Invoke-Tests -WhereClause "namespace !~ FunctionalTests" -OutputFile $LogPath -WithCoverage
 }
 
 Task FunctionalTest -Description "Run functional tests that require a deployed environment." {
     $LogPath = Join-Path $LogsDir "FunctionalTestResults.xml"
-    Invoke-Tests -WhereClause "namespace =~ FunctionalTests || namespace =~ UiTests" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
+    Invoke-Tests -WhereClause "namespace =~ FunctionalTests" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
 }
 
 Task Sign -Description "Sign all files" {

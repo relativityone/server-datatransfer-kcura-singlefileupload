@@ -1,13 +1,11 @@
-﻿using Atata;
-using System.IO;
-using System.Web;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Relativity.SimpleFileUpload.Tests.Core;
-using Relativity.SimpleFileUpload.Tests.Core.Templates;
+using System.Web;
+using Atata;
 
-namespace kcura.SingleFileUpload.FunctionalTests
+namespace kcura.SimpleFileUpload.FunctionalTests
 {
 	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{

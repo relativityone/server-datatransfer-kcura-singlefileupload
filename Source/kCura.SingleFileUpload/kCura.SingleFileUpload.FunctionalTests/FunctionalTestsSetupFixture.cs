@@ -1,6 +1,4 @@
-﻿using Relativity.SimpleFileUpload.Tests.Core;
-
-namespace kcura.SingleFileUpload.FunctionalTests
+﻿namespace kcura.SimpleFileUpload.FunctionalTests
 {
 	public class FunctionalTestsSetupFixture : SimpleFileUploadTestsSetUpFixture
 	{
