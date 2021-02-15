@@ -23,6 +23,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _FILE_NAME_XLSX = "SampleXLSX.xlsx";
 		public const string _FILE_NAME_PPTX = "SamplePPTX.pptx";
 		public const string _FILE_NAME_PDF = "SamplePDF.pdf";
+		public const string _FILE_NAME_PDF_INVALID_JS = "SamplePDF'.pdf";
 		public const string _FILE_NAME_MSG = "SampleMSG.msg";
 		public const string _FILE_NAME_EXE = "SampleEXE.exe";
 		public const string _FILE_NAME_DLL = "SampleDLL.dll";

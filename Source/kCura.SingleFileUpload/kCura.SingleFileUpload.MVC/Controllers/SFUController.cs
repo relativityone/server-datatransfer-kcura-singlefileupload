@@ -300,7 +300,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			).ConfigureAwait(false);
 			Response.Clear();
 			Response.ClearContent();
-			result.Data = result.Data.Replace("'", "/39/").Replace("\"", "/34/");
+			result.Data = HttpUtility.JavaScriptStringEncode(result.Data);
 			Response.Write($"<script>sessionStorage['____pushNo'] = '{Newtonsoft.Json.JsonConvert.SerializeObject(result).Replace("'", "\"")}'</script>");
 			Response.End();
 		}
