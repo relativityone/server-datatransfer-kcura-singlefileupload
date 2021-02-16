@@ -368,6 +368,7 @@
     </None>
     <None Include="Resources\SampleDOC.doc" />
     <None Include="Resources\SampleMSG.msg" />
+    <None Include="Resources\SamplePDF%27.pdf" />
     <None Include="Resources\SamplePDF.pdf" />
     <None Include="Resources\SamplePPTX.pptx" />
     <None Include="Resources\SampleXLSX.xlsx" />
