@@ -51,9 +51,27 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 			
 			// Act
 			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
+		}
+
+		[IdentifiedTest("0E88A8E6-6139-4C9C-9B2C-F9F0BEEBBD3D")]
+		public async Task Upload_ShouldEncodeFileName()
+		{
+			// Arrange
+			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"SamplePDF\\\\u0027\",\"Success\":true,\"Message\":null}}'</script>";
+			bool fdv = false;
+			bool img = false;
+			FileInfo file = new FileInfo(FileHelper.GetFileLocation(Const.File._FILE_NAME_PDF_INVALID_JS));
+
+			// Act
+			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+
+			// Assert
+			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
 		}
 
 		private static async Task AssertResponseContentAsync(HttpResponseMessage response, string expected)

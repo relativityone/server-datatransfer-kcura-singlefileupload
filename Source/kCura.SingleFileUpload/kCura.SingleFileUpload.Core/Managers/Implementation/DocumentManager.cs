@@ -233,7 +233,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					{
 						ArtifactTypeID = (int)ArtifactType.Document
 					},
-					Condition = $"'{Constants.CONTROL_NUMBER_FIELD}' == '{docName}'"
+					Condition = $"'{Constants.CONTROL_NUMBER_FIELD}' == \"{docName}\""
 				};
 
 				QueryResult queryResult = ExecuteWithServiceRetriesAsync(() =>
