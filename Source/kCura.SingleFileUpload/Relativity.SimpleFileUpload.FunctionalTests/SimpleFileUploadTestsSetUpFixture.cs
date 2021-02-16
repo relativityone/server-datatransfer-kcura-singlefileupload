@@ -6,15 +6,15 @@ using Relativity.Testing.Framework.Web;
 namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	[SetUpFixture]
-	public abstract class SimpleFileUploadTestsSetUpFixture
+	public class SimpleFileUploadTestsSetUpFixture
 	{
 		private readonly string _workspaceTemplateName;
 		private readonly string _standardAccountEmailFormat;
 
-		protected SimpleFileUploadTestsSetUpFixture(string workspaceTemplateName, string standardAccountEmailFormat)
+		public SimpleFileUploadTestsSetUpFixture()
 		{
-			_workspaceTemplateName = workspaceTemplateName;
-			_standardAccountEmailFormat = standardAccountEmailFormat;
+			_workspaceTemplateName = Const.FUNCTIONAL_TEMPLATE_NAME;
+			_standardAccountEmailFormat = Const.FUNCTIONAL_STANDARD_ACCOUNT_EMAIL_FORMAT;
 		}
 
 		[OneTimeSetUp]

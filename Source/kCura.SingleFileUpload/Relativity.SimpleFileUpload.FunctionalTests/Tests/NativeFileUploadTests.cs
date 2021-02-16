@@ -17,6 +17,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 		{ }
 
 		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
+		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public async Task UploadNativeFile_GoldFlow()
 		{
 			// Arrange
@@ -41,6 +42,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 		[IdentifiedTestCase("6cd2d2f6-d7fb-45e0-b8aa-d87f98dcdcc6", Const.File._FILE_NAME_JS)]
 		[IdentifiedTestCase("3f96dac2-27d7-4927-a2c6-142b8aff3b2d", Const.File._FILE_NAME_HTM)]
 		[IdentifiedTestCase("ddd08669-1a72-4e08-a15f-7d2a625fc77a", Const.File._FILE_NAME_HTML)]
+		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public async Task Upload_ShouldFail_WhenUploadingForbiddenFileType(string fileName)
 		{
 			// Arrange
@@ -50,15 +52,14 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 			FileInfo file = new FileInfo(FileHelper.GetFileLocation(fileName));
 			
 			// Act
-			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
 
 			// Assert
-			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
 		}
 
 		[IdentifiedTest("0E88A8E6-6139-4C9C-9B2C-F9F0BEEBBD3D")]
+		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public async Task Upload_ShouldEncodeFileName()
 		{
 			// Arrange

@@ -37,6 +37,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 			ExpectedExtractedTextPdf)]
 		[IdentifiedTestCase("3CB4C037-FD75-4F36-BAD7-A72DF66C74F6", Const.File._FILE_NAME_MSG,
 			ExpectedExtractedTextMsg)]
+		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public async Task ShouldProperlyExtractExtractedText_FromNativeFile(string fileName,
 			string expectedExtractedText)
 		{

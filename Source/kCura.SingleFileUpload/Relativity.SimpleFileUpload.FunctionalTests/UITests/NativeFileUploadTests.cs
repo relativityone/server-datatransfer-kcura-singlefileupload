@@ -17,6 +17,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.UITests
 		{ }
 
 		[IdentifiedTest("bf01c1a8-cf93-47e3-8c57-a2e77ea5725a")]
+		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public void UploadNativeFile_GoldFlow()
 		{
 			// Arrange

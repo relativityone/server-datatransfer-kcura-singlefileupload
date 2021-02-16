@@ -349,10 +349,8 @@
     <Compile Include="FunctionalTestsTemplate.cs" />
     <Compile Include="Tests\NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FunctionalTestsSetupFixture.cs" />
     <Compile Include="SharedVariables.cs" />
     <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
-    <Compile Include="UiTestsSetupFixture.cs" />
     <Compile Include="SimpleFileUploadTestsTemplate.cs" />
     <Compile Include="UiTestsTemplate.cs" />
     <Compile Include="UITests\NativeFileUploadTests.cs" />
@@ -390,6 +388,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SampleXLSX.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Verification.nunit">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
