@@ -3,7 +3,7 @@ using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
 using Relativity.Testing.Framework.Web;
 
-namespace kcura.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	[SetUpFixture]
 	public abstract class SimpleFileUploadTestsSetUpFixture

@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.Tests\kCura.SingleFileUpload.Resources.Tests.csproj", "{01220ACF-44BE-45E8-B294-8BB840880316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kcura.SimpleFileUpload.FunctionalTests", "kCura.SingleFileUpload\kCura.SimpleFileUpload.FunctionalTests\kcura.SimpleFileUpload.FunctionalTests.csproj", "{900E02DF-20DD-4005-A949-043AF5BE1B8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relativity.SimpleFileUpload.FunctionalTests", "kCura.SingleFileUpload\Relativity.SimpleFileUpload.FunctionalTests\Relativity.SimpleFileUpload.FunctionalTests.csproj", "{900E02DF-20DD-4005-A949-043AF5BE1B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

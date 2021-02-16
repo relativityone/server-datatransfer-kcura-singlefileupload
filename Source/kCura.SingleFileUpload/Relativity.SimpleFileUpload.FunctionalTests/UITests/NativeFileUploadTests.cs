@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using Atata;
-using kcura.SimpleFileUpload.FunctionalTests.Helpers;
+using Relativity.SimpleFileUpload.FunctionalTests.Helpers;
 using NUnit.Framework;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
 
-namespace kcura.SimpleFileUpload.FunctionalTests.UITests
+namespace Relativity.SimpleFileUpload.FunctionalTests.UITests
 {
 	[TestFixture]
 	[TestExecutionCategory.CI]

@@ -10,8 +10,8 @@
     <ProjectGuid>{900E02DF-20DD-4005-A949-043AF5BE1B8D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>kcura.SimpleFileUpload.FunctionalTests</RootNamespace>
-    <AssemblyName>kcura.SimpleFileUpload.FunctionalTests</AssemblyName>
+    <RootNamespace>Relativity.SimpleFileUpload.FunctionalTests</RootNamespace>
+    <AssemblyName>Relativity.SimpleFileUpload.FunctionalTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>

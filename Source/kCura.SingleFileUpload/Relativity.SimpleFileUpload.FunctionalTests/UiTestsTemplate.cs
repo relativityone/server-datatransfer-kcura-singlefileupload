@@ -1,4 +1,4 @@
-﻿namespace kcura.SimpleFileUpload.FunctionalTests
+﻿namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public abstract class UiTestsTemplate : SimpleFileUploadTestsTemplate
 	{

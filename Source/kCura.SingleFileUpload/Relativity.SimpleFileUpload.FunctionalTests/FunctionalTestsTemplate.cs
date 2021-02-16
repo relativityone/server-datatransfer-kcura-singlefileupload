@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Atata;
 
-namespace kcura.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{

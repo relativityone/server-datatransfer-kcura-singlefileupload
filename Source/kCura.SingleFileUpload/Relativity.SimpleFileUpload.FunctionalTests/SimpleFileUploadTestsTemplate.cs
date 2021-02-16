@@ -6,7 +6,7 @@ using Relativity.Testing.Framework.Api;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
 
-namespace kcura.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	[Feature.DataTransfer.SimpleFileUpload]
 	public abstract class SimpleFileUploadTestsTemplate : UITestFixture

@@ -3,11 +3,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
-using kcura.SimpleFileUpload.FunctionalTests.Helpers;
+using Relativity.SimpleFileUpload.FunctionalTests.Helpers;
 using NUnit.Framework;
 using Relativity.Testing.Identification;
 
-namespace kcura.SimpleFileUpload.FunctionalTests.Tests
+namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 {
 	[TestFixture]
 	[TestExecutionCategory.CI]

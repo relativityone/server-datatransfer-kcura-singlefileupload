@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
 
-namespace kcura.SimpleFileUpload.FunctionalTests.Helpers
+namespace Relativity.SimpleFileUpload.FunctionalTests.Helpers
 {
 	public static class FileHelper
 	{

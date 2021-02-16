@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace kcura.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public static class SharedVariables
 	{

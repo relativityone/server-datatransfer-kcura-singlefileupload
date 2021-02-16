@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace kcura.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public static class Const
 	{
