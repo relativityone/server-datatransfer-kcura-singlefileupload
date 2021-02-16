@@ -53,17 +53,15 @@ Task Sign -Description "Sign all files" {
 Task Package -Description "Package up the build artifacts" {
     $buildTools = Join-Path $PSScriptRoot "buildtools"
     $developmentScripts = Join-Path $PSScriptRoot "DevelopmentScripts"
-    $RAPBuilder = Join-Path $buildTools "kCura.RAPBuilder\lib\kCura.RAPBuilder.exe"
+    $RAPBuilder = Join-Path $buildTools "Relativity.RAPBuilder\tools\Relativity.RAPBuilder.exe"
     $BuildXML = Join-Path $developmentScripts "build.xml"
 
-    exec { & $NuGetEXE install "kCura.RAPBuilder" "-ExcludeVersion" -o $buildTools }
+    exec { & $NuGetEXE install "Relativity.RAPBuilder" "-ExcludeVersion" -o $buildTools }
 
     exec { & $RAPBuilder `
-        "/source:$PSScriptRoot" `
-        "/input:$BuildXML" `
-        "/version:$RAPVersion" `
-        "/servertype:local" `
-        "/sign:$false"
+        "--source" "$PSScriptRoot" `
+        "--input" "$BuildXML" `
+        "--version" "$RAPVersion"
     }
 
     Get-ChildItem -Path $ArtifactsDir -Filter *.nuspec |
