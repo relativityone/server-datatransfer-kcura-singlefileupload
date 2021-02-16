@@ -6,12 +6,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public static class SharedVariables
 	{
-		#region User Settings
-		public static string AdminUsername => GetParamString("AdminUsername");
-
-		public static string AdminPassword => GetParamString("AdminPassword");
-		#endregion User Settings
-
 		#region Relativity Settings
 		/// <summary>
 		/// Returns RelativityHostAddress value from config file
@@ -33,21 +27,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 		/// </summary>
 		public static Uri RelativityFrontedUri => new Uri(RelativityFrontendUrlValue);
 
-		/// <summary>
-		/// Returns RSAPI URL
-		/// </summary>
-		public static Uri RsapiUri => new Uri($"{ServerBindingType}://{RsapiServerAddress}/Relativity.Services/");
-
-		/// <summary>
-		/// Returns Relativity REST URL
-		/// </summary>
-		public static Uri RelativityRestUri => new Uri($"{RelativityBaseAdressUrlValue}/Relativity.Rest/api");
-
-		/// <summary>
-		/// Returns Relativity WebAPI URL
-		/// </summary>
-		public static string RelativityWebApiUrl => $"{RelativityBaseAdressUrlValue}/RelativityWebAPI/";
-
 		private static string ServerBindingType => GetParamString("ServerBindingType");
 
 		private static string RsapiServerAddress => GetParamString("RsapiServicesHostAddress");
@@ -62,12 +41,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 		#endregion
 
 		private static string GetParamString(string name) => GetRunSettingsParameter(name);
-
-		private static bool GetParamBool(string name) => bool.Parse(GetParamString(name));
-
-		private static int GetParamInt(string name) => int.Parse(GetParamString(name));
-
-		private static double GetParamDouble(string name) => double.Parse(GetParamString(name));
 
 		private static string GetRunSettingsParameter(string name)
 			=> TestContext.Parameters.Exists(name)
