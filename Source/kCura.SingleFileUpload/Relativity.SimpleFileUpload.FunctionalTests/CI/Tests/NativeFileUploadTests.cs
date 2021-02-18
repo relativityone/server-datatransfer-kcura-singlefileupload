@@ -44,7 +44,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 		public async Task Upload_ShouldFail_WhenUploadingForbiddenFileType(string fileName)
 		{
 			// Arrange
-			string expectedContent = "<script>sessionStorage['____pushNo'] = '{{\"Data\":\"\",\"Success\":true,\"Message\":\"This file type is not supported.\"}}'</script>";
+			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"\",\"Success\":true,\"Message\":\"This file type is not supported.\"}}'</script>";
 			bool fdv = false;
 			bool img = false;
 			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(fileName));
@@ -60,7 +60,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 		public async Task Upload_ShouldEncodeFileName()
 		{
 			// Arrange
-			string expectedContent = "<script>sessionStorage['____pushNo'] = '{{\"Data\":\"SamplePDF\\\\u0027\",\"Success\":true,\"Message\":null}}'</script>";
+			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"SamplePDF\\\\u0027\",\"Success\":true,\"Message\":null}}'</script>";
 			bool fdv = false;
 			bool img = false;
 			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF_INVALID_JS));
