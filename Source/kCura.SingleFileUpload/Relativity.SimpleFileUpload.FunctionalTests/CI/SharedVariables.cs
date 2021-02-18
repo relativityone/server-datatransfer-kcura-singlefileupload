@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 {
 	public static class SharedVariables
 	{
@@ -28,8 +28,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 		public static Uri RelativityFrontedUri => new Uri(RelativityFrontendUrlValue);
 
 		private static string ServerBindingType => GetParamString("ServerBindingType");
-
-		private static string RsapiServerAddress => GetParamString("RsapiServicesHostAddress");
 		#endregion Relativity Settings
 
 		#region Simple File Upload Settings

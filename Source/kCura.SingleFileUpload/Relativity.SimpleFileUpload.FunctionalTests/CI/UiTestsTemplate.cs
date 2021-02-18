@@ -1,4 +1,4 @@
-﻿namespace Relativity.SimpleFileUpload.FunctionalTests
+﻿namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 {
 	public abstract class UiTestsTemplate : SimpleFileUploadTestsTemplate
 	{

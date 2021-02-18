@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using NUnit.Framework;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests.Helpers
+namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 {
-	public static class FileHelper
+	public static class TestFileHelper
 	{
 		private const string _TEST_FILES_FOLDER = "Resources";
 

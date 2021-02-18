@@ -3,21 +3,20 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Relativity.SimpleFileUpload.FunctionalTests.Helpers;
 using NUnit.Framework;
+using Relativity.SimpleFileUpload.FunctionalTests.Common;
 using Relativity.Testing.Identification;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
+namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 {
 	[TestFixture]
-	[TestExecutionCategory.CI]
+	[TestExecutionCategory.CI, TestLevel.L3]
 	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{
 		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
 		{ }
 
-		[IdentifiedTest("A5391B33-7FC8-444F-BE17-77162434E714")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
+		[IdentifiedTest("a5391b33-7fc8-444f-be17-77162434e714")]
 		public async Task UploadNativeFile_GoldFlow()
 		{
 			// Arrange
@@ -27,7 +26,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 			bool fdv = false;
 			bool img = false;
 
-			string filePath = FileHelper.GetFileLocation(Const.File._FILE_NAME);
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
 			FileInfo file = new FileInfo(filePath);
 
 			// Act
@@ -42,14 +41,13 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 		[IdentifiedTestCase("6cd2d2f6-d7fb-45e0-b8aa-d87f98dcdcc6", Const.File._FILE_NAME_JS)]
 		[IdentifiedTestCase("3f96dac2-27d7-4927-a2c6-142b8aff3b2d", Const.File._FILE_NAME_HTM)]
 		[IdentifiedTestCase("ddd08669-1a72-4e08-a15f-7d2a625fc77a", Const.File._FILE_NAME_HTML)]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public async Task Upload_ShouldFail_WhenUploadingForbiddenFileType(string fileName)
 		{
 			// Arrange
-			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"\",\"Success\":true,\"Message\":\"This file type is not supported.\"}}'</script>";
+			string expectedContent = "<script>sessionStorage['____pushNo'] = '{{\"Data\":\"\",\"Success\":true,\"Message\":\"This file type is not supported.\"}}'</script>";
 			bool fdv = false;
 			bool img = false;
-			FileInfo file = new FileInfo(FileHelper.GetFileLocation(fileName));
+			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(fileName));
 			
 			// Act
 			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
@@ -58,15 +56,14 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Tests
 			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
 		}
 
-		[IdentifiedTest("0E88A8E6-6139-4C9C-9B2C-F9F0BEEBBD3D")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
+		[IdentifiedTest("0e88a8e6-6139-4c9c-9b2c-f9f0beebbd3d")]
 		public async Task Upload_ShouldEncodeFileName()
 		{
 			// Arrange
-			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"SamplePDF\\\\u0027\",\"Success\":true,\"Message\":null}}'</script>";
+			string expectedContent = "<script>sessionStorage['____pushNo'] = '{{\"Data\":\"SamplePDF\\\\u0027\",\"Success\":true,\"Message\":null}}'</script>";
 			bool fdv = false;
 			bool img = false;
-			FileInfo file = new FileInfo(FileHelper.GetFileLocation(Const.File._FILE_NAME_PDF_INVALID_JS));
+			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF_INVALID_JS));
 
 			// Act
 			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
