@@ -23,6 +23,12 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			RelativityFacade.Instance.RelyOn<WebComponent>();
 		}
 
+		[OneTimeTearDown]
+		public void TearDown()
+		{
+			AtataContext.Current?.Dispose();
+		}
+
 		[SetUp]
 		public void SetUp()
 		{
