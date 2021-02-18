@@ -26,7 +26,15 @@ param (
 
     [Parameter()]
     [String]
+    $RestServicesHostAddress,
+
+    [Parameter()]
+    [String]
     $RsapiServicesHostAddress,
+
+    [Parameter()]
+    [String]
+    $WebApiHostAddress,
 
     [Parameter()]
     [String]
@@ -93,10 +101,20 @@ if($TestVMName)
     }
 }
 
-	if(-not $RsapiServicesHostAddress)
-	{
-	    $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
-	}
+if(-not $RestServicesHostAddress)
+{
+    $PSBoundParameters['RestServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
+
+if(-not $RsapiServicesHostAddress)
+{
+    $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
+
+if (-not $WebApiHostAddress)
+{
+    $PSBoundParameters['WebApiHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
 
 if(-not $RAPDirectory)
 {

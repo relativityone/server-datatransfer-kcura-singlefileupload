@@ -38,12 +38,12 @@ Task Compile -Depends NugetRestore -Description "Compile code for this repo" {
 
 Task Test -Description "Run tests that don't require a deployed environment." {
     $LogPath = Join-Path $LogsDir "UnitTestResults.xml"
-    Invoke-Tests -WhereClause "namespace =~ Core.Tests || namespace =~ Resources.Tests" -OutputFile $LogPath -WithCoverage
+    Invoke-Tests -WhereClause "namespace !~ FunctionalTests" -OutputFile $LogPath -WithCoverage
 }
 
 Task FunctionalTest -Description "Run functional tests that require a deployed environment." {
     $LogPath = Join-Path $LogsDir "FunctionalTestResults.xml"
-    Invoke-Tests -WhereClause "namespace =~ FunctionalTests || namespace =~ UiTests" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
+    Invoke-Tests -WhereClause "namespace =~ FunctionalTests" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
 }
 
 Task Sign -Description "Sign all files" {
@@ -53,17 +53,15 @@ Task Sign -Description "Sign all files" {
 Task Package -Description "Package up the build artifacts" {
     $buildTools = Join-Path $PSScriptRoot "buildtools"
     $developmentScripts = Join-Path $PSScriptRoot "DevelopmentScripts"
-    $RAPBuilder = Join-Path $buildTools "kCura.RAPBuilder\lib\kCura.RAPBuilder.exe"
+    $RAPBuilder = Join-Path $buildTools "Relativity.RAPBuilder\tools\Relativity.RAPBuilder.exe"
     $BuildXML = Join-Path $developmentScripts "build.xml"
 
-    exec { & $NuGetEXE install "kCura.RAPBuilder" "-ExcludeVersion" -o $buildTools }
+    exec { & $NuGetEXE install "Relativity.RAPBuilder" "-ExcludeVersion" -o $buildTools }
 
     exec { & $RAPBuilder `
-        "/source:$PSScriptRoot" `
-        "/input:$BuildXML" `
-        "/version:$RAPVersion" `
-        "/servertype:local" `
-        "/sign:$false"
+        "--source" "$PSScriptRoot" `
+        "--input" "$BuildXML" `
+        "--version" "$RAPVersion"
     }
 
     Get-ChildItem -Path $ArtifactsDir -Filter *.nuspec |

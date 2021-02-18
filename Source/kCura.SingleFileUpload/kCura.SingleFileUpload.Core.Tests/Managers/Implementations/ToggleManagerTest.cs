@@ -1,17 +1,19 @@
 ﻿using kCura.SingleFileUpload.Core.Managers.Implementation;
-using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
 using Relativity.Toggles;
 using System;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class ToggleManagerTest : TestBase
 	{
-
 		[OneTimeSetUp]
 		public void Setup()
 		{
@@ -24,89 +26,83 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public async Task GetChangeFileNameTestAsync()
+		public async Task GetChangeFileNameAsync_ShouldReturnToggle()
 		{
+			// Act
 			bool result = await ToggleManager.Instance.GetChangeFileNameAsync();
-			Assert.IsTrue(result);
+
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		[Test]
-		public async Task SetChangeFileNameTestAsync()
+		public void SetChangeFileNameAsync_ShouldNotThrow()
 		{
-			try
-			{
-				await ToggleManager.Instance.SetChangeFileNameAsync(true);
-				Assert.IsTrue(true);
-			}
-			catch (Exception)
-			{
-				Assert.IsTrue(false);
-				throw;
-			}
+			// Act
+			Action action = () => ToggleManager.Instance.SetChangeFileNameAsync(true);
 
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task GetCheckSFUFieldsTestAsync()
+		public async Task GetCheckSFUFieldsAsync_ShouldReturnToggle()
 		{
+			// Act
 			bool result = await ToggleManager.Instance.GetCheckSFUFieldsAsync();
-			Assert.IsTrue(result);
+
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		[Test]
-		public async Task SetCheckSFUFieldsTestAsync()
+		public void SetCheckSFUFieldsAsync_ShouldNotThrow()
 		{
-			try
-			{
-				await ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
-				Assert.IsTrue(true);
-			}
-			catch (Exception)
-			{
-				Assert.IsTrue(false);
-			}
+			// Act
+			Action action = () => ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task GetValidateSFUCustomPermissionsTestAsync()
+		public async Task GetValidateSFUCustomPermissionsAsync_ShouldReturnToggle()
 		{
+			// Act
 			bool result = await ToggleManager.Instance.GetValidateSFUCustomPermissionsAsync();
-			Assert.IsTrue(result);
+
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		[Test]
-		public async Task SetValidateSFUCustomPermissionsTestAsync()
+		public void SetValidateSFUCustomPermissionsAsync_ShouldNotThrow()
 		{
-			try
-			{
-				await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(true);
-				Assert.IsTrue(true);
-			}
-			catch (Exception)
-			{
-				Assert.IsTrue(false);
-			}
+			// Act
+			Action action = () => ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(true);
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 		[Test]
-		public async Task GetCheckUploadMassiveTestAsync()
+		public async Task GetCheckUploadMassiveAsync_ShouldReturnToggle()
 		{
+			// Act
 			bool result = await ToggleManager.Instance.GetCheckUploadMassiveAsync();
-			Assert.IsTrue(result);
+
+			// Assert
+			result.Should().BeTrue();
 		}
 
 		[Test]
-		public async Task SetCheckUploadMassiveTestAsync()
+		public void SetCheckUploadMassiveAsync_ShouldNotThrow()
 		{
-			try
-			{
-				await ToggleManager.Instance.SetCheckUploadMassiveAsync(true);
-				Assert.IsTrue(true);
-			}
-			catch (Exception)
-			{
-				Assert.IsTrue(false);
-			}
+			// Act
+			Action action = () => ToggleManager.Instance.SetCheckUploadMassiveAsync(true);
+
+			// Assert
+			action.Should().NotThrow();
 		}
 
 
