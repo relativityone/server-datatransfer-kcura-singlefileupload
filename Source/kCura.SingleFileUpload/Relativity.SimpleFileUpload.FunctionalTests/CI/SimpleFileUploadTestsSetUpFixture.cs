@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Atata;
+using NUnit.Framework;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
 using Relativity.Testing.Framework.Web;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 {
 	[SetUpFixture]
 	public class SimpleFileUploadTestsSetUpFixture
@@ -35,6 +36,12 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 			int workspaceId = CreateTemplateWorkspace();
 
 			InstallSimpleFileUploadToWorkspace(workspaceId);
+		}
+
+		[OneTimeTearDown]
+		public void TearDown()
+		{
+			AtataContext.Current?.Dispose();
 		}
 
 		private bool TemplateWorkspaceExists()

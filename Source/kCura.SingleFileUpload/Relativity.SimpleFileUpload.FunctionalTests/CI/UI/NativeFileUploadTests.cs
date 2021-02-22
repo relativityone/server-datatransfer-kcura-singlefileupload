@@ -1,14 +1,14 @@
 ﻿using System.IO;
 using Atata;
-using Relativity.SimpleFileUpload.FunctionalTests.Helpers;
 using NUnit.Framework;
+using Relativity.SimpleFileUpload.FunctionalTests.Common;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests.UITests
+namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 {
 	[TestFixture]
-	[TestExecutionCategory.CI]
+	[TestExecutionCategory.CI, TestLevel.L3]
 	[TestType.UI, TestType.MainFlow]
 	public class NativeFileUploadTests : UiTestsTemplate
 	{
@@ -21,12 +21,11 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.UITests
 		public void UploadNativeFile_GoldFlow()
 		{
 			// Arrange
-			string filePath = Path.GetFullPath(FileHelper.GetFileLocation(Const.File._FILE_NAME));
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
 
 			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId);
 
 			// Act
-
 			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(filePath);
 
 			// Assert

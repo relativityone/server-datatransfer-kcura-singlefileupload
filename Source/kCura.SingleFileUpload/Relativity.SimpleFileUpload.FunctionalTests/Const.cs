@@ -15,6 +15,11 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 			public static readonly Guid Guid = new Guid("1738CEB6-9546-44A7-8B9B-E64C88E47320"); 
 		}
 
+		public class App
+		{
+			public const string _NAME = "SimpleFileUpload";
+		}
+
 		public class File
 		{
 			public const string _FILE_NAME = "CTRL0192153.xml";

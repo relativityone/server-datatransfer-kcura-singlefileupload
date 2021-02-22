@@ -52,11 +52,11 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Windsor.5.0.1\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="DbContextHelper, Version=5.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.DbContextHelper.5.0.0.1\lib\net462\DbContextHelper.dll</HintPath>
@@ -116,8 +116,8 @@
     <Reference Include="MimeKit, Version=2.2.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MimeKit.2.2.0\lib\net45\MimeKit.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.12.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Moq.4.12.0\lib\net45\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.5.3.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.5.3\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -225,14 +225,17 @@
     <Reference Include="Relativity.Test.Helpers, Version=7.4.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.7.4.1.1\lib\net462\Relativity.Test.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.0.22.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework, Version=0.27.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.0.27.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Api, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.0.22.0\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.Api, Version=0.27.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.0.27.0\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Web, Version=0.22.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.0.22.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.RingSetup, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.RingSetup.0.5.0\lib\net462\Relativity.Testing.Framework.RingSetup.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Testing.Framework.Web, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.0.26.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Testing.Identification, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Testing.Identification.3.5.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
@@ -343,17 +346,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD\UITests.cs" />
+    <Compile Include="CI\UI\NativeFileUploadTests.cs" />
     <Compile Include="Const.cs" />
-    <Compile Include="Helpers\FileHelper.cs" />
-    <Compile Include="Tests\ExtractionsOfExtractedTextTests.cs" />
-    <Compile Include="FunctionalTestsTemplate.cs" />
-    <Compile Include="Tests\NativeFileUploadTests.cs" />
+    <Compile Include="Common\TestFileHelper.cs" />
+    <Compile Include="CI\Tests\ExtractionsOfExtractedTextTests.cs" />
+    <Compile Include="CI\FunctionalTestsTemplate.cs" />
+    <Compile Include="CI\Tests\NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharedVariables.cs" />
-    <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
-    <Compile Include="SimpleFileUploadTestsTemplate.cs" />
-    <Compile Include="UiTestsTemplate.cs" />
-    <Compile Include="UITests\NativeFileUploadTests.cs" />
+    <Compile Include="CI\SharedVariables.cs" />
+    <Compile Include="CI\SimpleFileUploadTestsSetUpFixture.cs" />
+    <Compile Include="CI\SimpleFileUploadTestsTemplate.cs" />
+    <Compile Include="CI\UiTestsTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -444,10 +448,12 @@
     <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets'))" />
     <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.5.0\build\Relativity.Testing.Framework.RingSetup.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.Testing.Framework.RingSetup.0.5.0\build\Relativity.Testing.Framework.RingSetup.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\Relativity.Testing.Framework.RingSetup.0.5.0\build\Relativity.Testing.Framework.RingSetup.targets" Condition="Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.5.0\build\Relativity.Testing.Framework.RingSetup.targets')" />
 </Project>

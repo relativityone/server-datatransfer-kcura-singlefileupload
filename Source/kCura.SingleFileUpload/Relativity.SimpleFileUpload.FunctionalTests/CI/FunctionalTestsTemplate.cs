@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Atata;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests
+namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 {
 	public abstract class FunctionalTestsTemplate : SimpleFileUploadTestsTemplate
 	{
