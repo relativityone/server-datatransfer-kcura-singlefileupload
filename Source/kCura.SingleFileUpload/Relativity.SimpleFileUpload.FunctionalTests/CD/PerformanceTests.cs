@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -60,8 +59,10 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		[MaxTime(_MAX_PERFORMANCE_TEST_TIME_IN_MILLISECONDS)]
 		public async Task UploadNativeFile_PerformanceTest()
 		{
+			// Arrange
 			var uploadDurations = new List<double>();
 
+			// Act
 			for (int i = 0; i < _NUMBER_OF_ITERATIONS; ++i)
 			{
 				var testFile = PrepareTestFile();
@@ -111,7 +112,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 
-			await WaitForUploadCompletedAsync(controlNumber);
+			await WaitForUploadCompletedAsync(controlNumber).ConfigureAwait(false);
 		}
 
 		private static async Task AssertResponseContentAsync(HttpResponseMessage response, string expected)
@@ -126,20 +127,22 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			string uploadedDocArtifactId;
 			do
 			{
-				var response = await SimpleFileUploadHelper.CheckUplaodStatus(_client, _workspace.ArtifactID, expectedControlNumber)
+				var response = await SimpleFileUploadHelper.CheckUploadStatusAsync(_client, _workspace.ArtifactID, expectedControlNumber)
 					.ConfigureAwait(false);
 
 				uploadedDocArtifactId = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
+				await Task.Delay(100).ConfigureAwait(false);
+
 			} while (uploadedDocArtifactId == _NOT_EXISTING_ARTIFACT_ID);
 		}
 
-		private int GetMinimumSuccessfulUploads()
+		private static int GetMinimumSuccessfulUploads()
 		{
 			return (int) (_NUMBER_OF_ITERATIONS * (1 - _PCT_TOLERANCE_RATE));
 		}
 
-		private double GetReferenceBenchmark()
+		private static double GetReferenceBenchmark()
 		{
 			return _UPLOAD_FILE_BENCHMARK_IN_MILLISECONDS +
 			       _UPLOAD_FILE_BENCHMARK_IN_MILLISECONDS * _PCT_TOLERANCE_RATE;

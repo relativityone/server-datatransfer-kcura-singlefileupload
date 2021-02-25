@@ -26,13 +26,13 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			}
 		}
 
-		public static async Task<HttpResponseMessage> CheckUplaodStatus(HttpClient client, int workspaceId, string controlNumber)
+		public static Task<HttpResponseMessage> CheckUploadStatusAsync(HttpClient client, int workspaceId, string controlNumber)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["DocumentName"] = controlNumber;
 			
-			return await client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty)).ConfigureAwait(false);
+			return client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty));
 		}
 
 		public static HttpClient GetUserHttpClient()
