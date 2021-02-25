@@ -9,9 +9,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 {
 	public static class SimpleFileUploadHelper
 	{
-		private static HttpClient _client = GetUserHttpClient();
-
-		public static async Task<HttpResponseMessage> UploadFileAsync(int workspaceId, FileInfo file, bool fdv, bool img)
+		public static async Task<HttpResponseMessage> UploadFileAsync(HttpClient client, int workspaceId, FileInfo file, bool fdv, bool img)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
@@ -24,20 +22,20 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 				StreamContent stream = new StreamContent(fileStream);
 				content.Add(stream, "file", file.Name);
 
-				return await _client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
+				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
 			}
 		}
 
-		public static async Task<HttpResponseMessage> CheckUplaodStatus(int workspaceId, string controlNumber)
+		public static async Task<HttpResponseMessage> CheckUplaodStatus(HttpClient client, int workspaceId, string controlNumber)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["DocumentName"] = controlNumber;
 			
-			return await _client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty)).ConfigureAwait(false);
+			return await client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty)).ConfigureAwait(false);
 		}
 
-		private static HttpClient GetUserHttpClient()
+		public static HttpClient GetUserHttpClient()
 		{
 			CookieCollection cookieCollection = new CookieCollection();
 			foreach (var cookie in AtataContext.Current.Driver.Manage().Cookies.AllCookies)

@@ -47,7 +47,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			FileInfo file = new FileInfo(filePath);
 
 			// Act
-			var result = await SimpleFileUploadHelper.UploadFileAsync(WorkspaceId, file, fdv, img).ConfigureAwait(false);
+			var result = await SimpleFileUploadHelper.UploadFileAsync(Client, WorkspaceId, file, fdv, img).ConfigureAwait(false);
 			result.StatusCode.Should().Be(HttpStatusCode.OK);
 			var client = RelativityFacade.Instance.Resolve<IDocumentService>();
 			IEnumerable<Document> documentsInWorkspace = client.GetAll(WorkspaceId).ToList();
