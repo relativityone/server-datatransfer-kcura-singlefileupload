@@ -30,7 +30,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			FileInfo file = new FileInfo(filePath);
 
 			// Act
-			HttpResponseMessage result = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadFileAsync(Client, WorkspaceId, file, fdv, img).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(fileName));
 			
 			// Act
-			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+			HttpResponseMessage response = await SimpleFileUploadHelper.UploadFileAsync(Client, WorkspaceId, file, fdv, img).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
@@ -66,7 +66,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF_INVALID_JS));
 
 			// Act
-			HttpResponseMessage response = await UploadFileAsync(file, fdv, img).ConfigureAwait(false);
+			HttpResponseMessage response = await SimpleFileUploadHelper.UploadFileAsync(Client, WorkspaceId, file, fdv, img).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);

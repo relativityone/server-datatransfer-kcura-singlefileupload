@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace Relativity.SimpleFileUpload.FunctionalTests.CI
+namespace Relativity.SimpleFileUpload.FunctionalTests
 {
 	public static class SharedVariables
 	{
