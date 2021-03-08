@@ -38,15 +38,37 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 			documentListPage.Documents.Rows[x => x.ControlNumber == Path.GetFileNameWithoutExtension(Const.File._FILE_NAME)].Should.BeVisible();
 		}
 
-		[IdentifiedTestCase("41BFA0B7-8A21-4B48-BAD2-EA2822631A12", Const.File._FILE_NAME_PDF_XSS_JS)]
-		[IdentifiedTestCase("B6376FB7-2A6D-4374-BE45-DE0528F3D6E4", Const.File._FILE_NAME_PDF_XSS_HTML)]
-		public void UploadNativeFile_ShouldPreventXSS(string fileName)
+		[Test]
+		public void UploadNativeFile_ShouldPreventXSS_Js()
 		{
-			// Arrange 
+			// Arrange
+			string fileName = Const.File._FILE_NAME_PDF_XSS_JS;
+
+			// Act
+			UploadFile(fileName);
+
+			// Assert  
+			AssertXss();
+		}
+
+		[Test]
+		public void UploadNativeFile_ShouldPreventXSS_Html()
+		{
+			// Arrange
+			string fileName = Const.File._FILE_NAME_PDF_XSS_HTML;
+
+			// Act
+			UploadFile(fileName);
+			
+			// Assert  
+			AssertXss();
+		}
+
+		private void UploadFile(string fileName)
+		{
 			string fileLocation = Path.GetFullPath(TestFileHelper.GetFileLocation(fileName));
 			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId);
-
-			// Act 
+ 
 			documentListPage
 				.NewDocument
 				.ClickAndGo()
@@ -54,8 +76,10 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 				.Set(fileLocation)
 				.UploadButton
 				.Click();
+		}
 
-			// Assert 
+		private void AssertXss()
+		{
 			object scriptResult = AtataContext.Current.Driver.ExecuteScript("return window.relativityXSS === undefined");
 			scriptResult.Should().BeAssignableTo<bool>().Which.Should().BeTrue("XSS attack should not execute malicious code");
 
