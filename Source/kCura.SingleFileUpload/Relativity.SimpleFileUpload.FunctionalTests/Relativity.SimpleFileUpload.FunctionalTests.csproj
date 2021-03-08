@@ -346,15 +346,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD\PerformanceTests.cs" />
     <Compile Include="CD\UITests.cs" />
     <Compile Include="CI\UI\NativeFileUploadTests.cs" />
+    <Compile Include="Common\SimpleFileUploadHelper.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="Common\TestFileHelper.cs" />
     <Compile Include="CI\Tests\ExtractionsOfExtractedTextTests.cs" />
     <Compile Include="CI\FunctionalTestsTemplate.cs" />
     <Compile Include="CI\Tests\NativeFileUploadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CI\SharedVariables.cs" />
+    <Compile Include="SharedVariables.cs" />
     <Compile Include="CI\SimpleFileUploadTestsSetUpFixture.cs" />
     <Compile Include="CI\SimpleFileUploadTestsTemplate.cs" />
     <Compile Include="CI\UiTestsTemplate.cs" />
