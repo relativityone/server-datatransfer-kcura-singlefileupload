@@ -337,8 +337,8 @@
     <Reference Include="TestHelpersKepler.Services, Version=7.4.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.7.4.1.1\lib\net462\TestHelpersKepler.Services.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.WebDriver.4.0.0-beta1\lib\net46\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="ZetaLongPaths, Version=1.0.0.16, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
@@ -367,6 +367,12 @@
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\%24{constructor.constructor%28%27window.relativityXSS=true%27%29%28%29}%3b.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\%27%3bwindow.relativityXss=true%3b.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\SampleDOC.doc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
