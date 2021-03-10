@@ -1,6 +1,3 @@
-folder('SimpleFileUpload-Jobs') {
-}
-
 multibranchPipelineJob('SimpleFileUpload-Jobs/Nightly') {
     factory {
         workflowBranchProjectFactory {
