@@ -1,11 +1,7 @@
-folder('DataTransfer-Jobs') {
+folder('SimpleFileUpload-Jobs') {
 }
 
-folder('DataTransfer-Jobs/SimpleFileUpload') {
-}
-
-
-buildMonitorView('DataTransfer-Jobs/SimpleFileUpload/Monitor')
+buildMonitorView('SimpleFileUpload-Jobs/SimpleFileUpload/Monitor')
 {
 	description('All nighlty jobs')
 	recurse(true)

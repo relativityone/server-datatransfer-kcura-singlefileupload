@@ -1,10 +1,7 @@
-folder('DataTransfer-Jobs') {
+folder('SimpleFileUpload-Jobs') {
 }
 
-folder('DataTransfer-Jobs/SimpleFileUpload') {
-}
-
-multibranchPipelineJob('DataTransfer-Jobs/SimpleFileUpload/Nightly') {
+multibranchPipelineJob('SimpleFileUpload-Jobs/Nightly') {
     factory {
         workflowBranchProjectFactory {
             scriptPath('Trident/Jobs/Nightly.groovy')
