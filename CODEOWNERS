@@ -1,7 +1,6 @@
 
 CODEOWNERS.destination_branch_pattern develop
-CODEOWNERS.destination_branch_pattern release/*
-CODEOWNERS.destination_branch_pattern REL-516851-codeowners-file
+CODEOWNERS.destination_branch_pattern release-*
  
 CODEOWNERS.toplevel.create_pull_request_comment enable
  
