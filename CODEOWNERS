@@ -5,10 +5,10 @@ CODEOWNERS.destination_branch_pattern REL-516851-codeowners-file
  
 CODEOWNERS.toplevel.create_pull_request_comment enable
  
-@@@AdlerSieben                @TomaszPeczek @KamilBizon @ArturJaskiewicz @KrzysztofSkowronek @KamilMakarowski
+@@@AdlerSieben                @Tomasz.Peczek @Kamil.Bizon @Artur.Jaskiewicz @Krzysztof.Skowronek @Kamil.Makarowski
 
 *                             @@AdlerSieben
-CODEOWNERS                    @TomaszPeczek
+CODEOWNERS                    @Tomasz.Peczek
 
 # Help
 # GitHub Documentation: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
