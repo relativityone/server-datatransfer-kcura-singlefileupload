@@ -1,7 +1,7 @@
 folder('SimpleFileUpload-Jobs') {
 }
 
-buildMonitorView('SimpleFileUpload-Jobs/SimpleFileUpload/Monitor')
+buildMonitorView('SimpleFileUpload-Jobs/Monitor')
 {
 	description('All nighlty jobs')
 	recurse(true)
