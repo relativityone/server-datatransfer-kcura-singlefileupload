@@ -89,13 +89,13 @@
   </Assemblies>
   <ResourceFiles />
   <ExternalTabs />
-  <ExtractionDate>2021-03-15T11:23:22.2526474Z</ExtractionDate>
+  <ExtractionDate>2021-03-15T12:57:14.7432378Z</ExtractionDate>
   <Guid>1738ceb6-9546-44a7-8b9b-e64c88e47320</Guid>
   <Name>Simple File Upload</Name>
   <Objects />
   <ParentTabs />
   <RelativityVersion>16.0.30.0</RelativityVersion>
-  <Version>11.3.42.3</Version>
+  <Version>11.3.42.4</Version>
   <SchemaVersion>11.2.80.1</SchemaVersion>
   <TabDisplay>false</TabDisplay>
   <OriginSignature>5e8b02a8-6e33-4426-a0f0-3594d83725d0</OriginSignature>
@@ -105,7 +105,7 @@
     <CustomPage>
       <ArtifactID>5377455</ArtifactID>
       <Guid>f864d687-5782-4f4f-82d4-e4327e10e3cf</Guid>
-      <ReadinessUrl>%applicationPath%/CustomPages/1738ceb6-9546-44a7-8b9b-e64c88e47320/Home/HealthCheck</ReadinessUrl>
+      <ReadinessUrl>/Home/HealthCheck</ReadinessUrl>
       <Name>SingleFileUpload.Web</Name>
       <FileName>Web.zip</FileName>
       <Size>91246632</Size>
