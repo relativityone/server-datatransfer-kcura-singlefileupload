@@ -22,7 +22,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 	[TestType.Performance]
 	public class PerformanceTests : TestSetup
 	{
-		private const int _UPLOAD_FILE_BENCHMARK_IN_MILLISECONDS = 7 * 1000;
+		private const int _UPLOAD_FILE_BENCHMARK_IN_MILLISECONDS = 10 * 1000;
 		private const double _PCT_TOLERANCE_RATE = 0.05;
 
 		private const int _NUMBER_OF_ITERATIONS = 50;
