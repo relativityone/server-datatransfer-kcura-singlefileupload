@@ -1,14 +1,18 @@
-﻿using kCura.EventHandler;
+﻿using FluentAssertions;
+using kCura.EventHandler;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using kCura.SingleFileUpload.Resources.EventHandlers;
 using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.Permission;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class SingleFileUploadPermissionPostInstallEventHandlerTest
 	{
 		private Mock<IEHHelper> mockingHelper;
@@ -22,7 +26,7 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 			mockingHelper
 				.MockIDBContextOnHelper();
 			
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			mockingHelper
 				.MockIServiceMgr()
 				.MockService<IPermissionManager>();
 
@@ -30,18 +34,26 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 		}
 
 		[Test]
-		public void ExecuteTest()
+		public void Execute_ShouldSuccesfullyExecuteHandler()
 		{
+			// Arrange
 			eventHandler.Helper = mockingHelper.Object;
+
+			// Act
 			Response result = eventHandler.Execute();
-			Assert.IsTrue(result.Success);
+
+			// Assert
+			result.Success.Should().BeTrue();
 		}
 
 		[Test]
-		public void ExecuteExceptionTest()
+		public void Execute_ShouldReturnFalse_WhenExceptionWasThrown()
 		{
+			// Act
 			Response result = eventHandler.Execute();
-			Assert.IsFalse(result.Success);
+
+			// Assert
+			result.Success.Should().BeFalse();
 		}
 	}
 }

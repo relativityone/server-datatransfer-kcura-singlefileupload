@@ -19,11 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kCura.SingleFileUpload.Resources.Tests", "kCura.SingleFileUpload\kCura.SingleFileUpload.Resources.Tests\kCura.SingleFileUpload.Resources.Tests.csproj", "{01220ACF-44BE-45E8-B294-8BB840880316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kcura.SingleFileUpload.FunctionalTests", "kCura.SingleFileUpload\kCura.SingleFileUpload.FunctionalTests\kcura.SingleFileUpload.FunctionalTests.csproj", "{900E02DF-20DD-4005-A949-043AF5BE1B8D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relativity.SimpleFileUpload.Tests.Core", "kCura.SingleFileUpload\Relativity.SimpleFileUpload.Tests.Core\Relativity.SimpleFileUpload.Tests.Core.csproj", "{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relativity.SimpleFileUpload.UiTests", "kCura.SingleFileUpload\Relativity.SimpleFileUpload.UiTests\Relativity.SimpleFileUpload.UiTests.csproj", "{C9BE56CB-04F4-432D-91A6-1670D690707F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relativity.SimpleFileUpload.FunctionalTests", "kCura.SingleFileUpload\Relativity.SimpleFileUpload.FunctionalTests\Relativity.SimpleFileUpload.FunctionalTests.csproj", "{900E02DF-20DD-4005-A949-043AF5BE1B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,22 +77,6 @@ Global
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|x64.ActiveCfg = Release|Any CPU
 		{900E02DF-20DD-4005-A949-043AF5BE1B8D}.Release|x64.Build.0 = Release|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Debug|x64.Build.0 = Debug|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|x64.ActiveCfg = Release|Any CPU
-		{1969F7E9-5B83-4AF2-857E-52B5E0BAD102}.Release|x64.Build.0 = Release|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Debug|x64.Build.0 = Debug|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Release|x64.ActiveCfg = Release|Any CPU
-		{C9BE56CB-04F4-432D-91A6-1670D690707F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

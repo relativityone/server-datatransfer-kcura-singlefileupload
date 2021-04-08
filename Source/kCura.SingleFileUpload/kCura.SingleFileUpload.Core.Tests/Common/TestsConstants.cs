@@ -18,17 +18,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public const string _FILE_TYPE = ".7z";
 		public const string _OI_FILE_TYPE_ = "Extensible Markup Language (XML)";
 		public const string _FILE_NAME = "CTRL0192153.xml";
-		public const string _FILE_NAME_DOC = "SampleDOC.doc";
-		public const string _FILE_NAME_TXT = "SampleTXT.txt";
-		public const string _FILE_NAME_XLSX = "SampleXLSX.xlsx";
-		public const string _FILE_NAME_PPTX = "SamplePPTX.pptx";
-		public const string _FILE_NAME_PDF = "SamplePDF.pdf";
-		public const string _FILE_NAME_MSG = "SampleMSG.msg";
-		public const string _FILE_NAME_EXE = "SampleEXE.exe";
-		public const string _FILE_NAME_DLL = "SampleDLL.dll";
-		public const string _FILE_NAME_JS = "SampleJS.js";
-		public const string _FILE_NAME_HTM = "SampleHTM.htm";
-		public const string _FILE_NAME_HTML = "SampleHTML.html";
 
 		public const string _WEB_API_URL = "https://test";
 		public static readonly string _FILE_LOCATION = FileHelper.GetFileLocation(_FILE_NAME);

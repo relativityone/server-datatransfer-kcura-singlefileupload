@@ -1,4 +1,6 @@
-﻿using kCura.SingleFileUpload.Core.Entities;
+﻿using System;
+using FluentAssertions;
+using kCura.SingleFileUpload.Core.Entities;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.Core.SQL;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
@@ -6,10 +8,13 @@ using Moq;
 using NUnit.Framework;
 using Relativity.API;
 using Relativity.Services.Objects;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	public class ProcessingManagerTest : TestBase
 	{
 		private const int _ERROR_ID = 10;
@@ -34,7 +39,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsScalar(Queries.GetArtifactTypeByArtifactGuid, _ARTIFACT_ID);
 
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			mockingHelper
 				.MockIServiceMgr()
 				.MockService(objectManager.Mock("test"));
 
@@ -42,17 +47,23 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		}
 
 		[Test]
-		public void GetErrorInfoTest()
+		public void GetErrorInfo_ShouldReturnErrorInfo()
 		{
+			// Act
 			ProcessingDocument result = ProcessingManager.instance.GetErrorInfo(_ERROR_ID);
-			Assert.AreEqual(result.ErrorID, _ERROR_ID);
+			
+			// Assert
+			result.ErrorID.Should().Be(_ERROR_ID);
 		}
 
 		[Test]
-		public void ReplaceFile()
+		public void ReplaceFile_ShouldNotThrow()
 		{
-			ProcessingManager.instance.ReplaceFile(new byte[1080], _processingDocument);
-			Assert.IsTrue(true);
+			// Act
+			Action action = () => ProcessingManager.instance.ReplaceFile(new byte[1080], _processingDocument);
+			
+			// Assert
+			action.Should().NotThrow();
 		}
 	}
 }

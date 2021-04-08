@@ -9,14 +9,18 @@ using Relativity.API;
 using Relativity.Services.InstanceSetting;
 using Relativity.Toggles;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 {
 	[TestFixture]
+	[TestLevel.L0]
+	[TestExecutionCategory.CI]
 	class SingleFileUploadPostInstallEventHandlerTest
 	{
-		private Mock<IEHHelper> mockingHelper;
-		private SingleFileUploadPostInstallEventHandler eventHandler;
+		private Mock<IEHHelper> _mockingHelper;
+		private SingleFileUploadPostInstallEventHandler _eventHandler;
 		
 		[SetUp]
 		public void Setup()
@@ -37,32 +41,40 @@ namespace kCura.SingleFileUpload.Resources.Tests.EventHandlers
 				.Setup(p => p.QueryAsync(It.IsAny<global::Relativity.Services.Query>()))
 				.Returns(Task.FromResult(TestsConstants._INSTANCE_SETTING_RESULT_SET));
 
-			mockingHelper = new Mock<IEHHelper>();
+			_mockingHelper = new Mock<IEHHelper>();
 
-			mockingHelper
+			_mockingHelper
 				.MockIDBContextOnHelper()
 				.MockExecuteSqlStatementAsScalar(Queries.GetFieldsInstanceSetting, TestsConstants._JSON_RESULT);
 			
-			Mock<IServicesMgr> mockingServicesMgr = mockingHelper
+			_mockingHelper
 				.MockIServiceMgr()
 				.MockService(mockInstanceSettingManager);
 
-			eventHandler = new SingleFileUploadPostInstallEventHandler();
+			_eventHandler = new SingleFileUploadPostInstallEventHandler();
 		}
 		
 		[Test]
-		public void ExecuteTest()
+		public void Execute_ShouldSuccesfullyExecuteHandler()
 		{
-			eventHandler.Helper = mockingHelper.Object;
-			Response result = eventHandler.Execute();
-			Assert.IsTrue(result.Success);
+			// Arrange
+			_eventHandler.Helper = _mockingHelper.Object;
+
+			// Act
+			Response result = _eventHandler.Execute();
+
+			// Assert
+			result.Success.Should().BeTrue();
 		}
 
 		[Test]
-		public void ExecuteExceptionTest()
+		public void Execute_ShouldReturnFalse_WhenExceptionWasThrown()
 		{
-			Response result = eventHandler.Execute();
-			Assert.IsFalse(result.Success);
+			// Act
+			Response result = _eventHandler.Execute();
+
+			// Assert
+			result.Success.Should().BeFalse();
 		}
 	}
 }

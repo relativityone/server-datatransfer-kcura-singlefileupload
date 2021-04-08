@@ -26,7 +26,15 @@ param (
 
     [Parameter()]
     [String]
+    $RestServicesHostAddress,
+
+    [Parameter()]
+    [String]
     $RsapiServicesHostAddress,
+
+    [Parameter()]
+    [String]
+    $WebApiHostAddress,
 
     [Parameter()]
     [String]
@@ -93,20 +101,27 @@ if($TestVMName)
     }
 }
 
-	if(-not $RsapiServicesHostAddress)
-	{
-	    $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
-	}
+if(-not $RestServicesHostAddress)
+{
+    $PSBoundParameters['RestServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
+
+if(-not $RsapiServicesHostAddress)
+{
+    $PSBoundParameters['RsapiServicesHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
+
+if (-not $WebApiHostAddress)
+{
+    $PSBoundParameters['WebApiHostAddress'] = "$($PSBoundParameters['RelativityHostAddress'])"
+}
 
 if(-not $RAPDirectory)
 {
     $PSBoundParameters['RAPDirectory'] = Join-Path $PSScriptRoot ..\Artifacts
 }
 
-$BuildToolsDir = Join-Path $PSScriptRoot ..\buildtools
-$ChromeBinaryDirectory = (Get-ChildItem -Recurse -Directory -Path $BuildToolsDir -Filter "Relativity.Chromium.Portable*").FullName
-$ChromeBinaryLocation = (Get-ChildItem -Recurse -Directory -Path $ChromeBinaryDirectory -Filter "tools*").FullName
-$PSBoundParameters['ChromeBinaryLocation'] = $ChromeBinaryLocation
+$PSBoundParameters['ChromeBinaryLocation'] = Join-Path $PSScriptRoot ..\buildtools\Relativity.Chromium.Portable\tools
 
 Remove-Item (Join-Path $PSScriptRoot ..\FunctionalTestSettings) -Force -ErrorAction SilentlyContinue
 Remove-Item (Join-Path $PSScriptRoot ..\FunctionalTest.runsettings) -Force -ErrorAction SilentlyContinue

@@ -4,6 +4,7 @@
       <Application name="SimpleFileUpload" generatenuspec="true">
         <Destination>Artifacts\kCura.SimpleFileUpload.rap</Destination>
         <ApplicationSchema>ApplicationsXML\SingleFileUpload.xml</ApplicationSchema>
+        <TestDirectory>Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.FunctionalTests\bin\</TestDirectory>
         <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Resources\bin\kCura.SingleFileUpload.Resources.dll</Assembly>
         </Assemblies>
