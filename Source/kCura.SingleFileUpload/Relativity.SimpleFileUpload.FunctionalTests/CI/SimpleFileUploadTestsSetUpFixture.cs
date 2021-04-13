@@ -59,7 +59,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 
 		private static void InstallSimpleFileUploadToWorkspace(int workspaceId)
 		{
-			var applicationService = RelativityFacade.Instance.Resolve<IRelativityApplicationService>();
+			var applicationService = RelativityFacade.Instance.Resolve<ILibraryApplicationService>();
 
 			int appId = applicationService.InstallToLibrary(SharedVariables.LocalRAPFileLocation, new LibraryApplicationInstallOptions
 			{
