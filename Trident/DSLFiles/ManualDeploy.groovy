@@ -2,7 +2,7 @@
 // Choose a folder name that's meaningful and relevant to your repository
 // This folder must not conflict with another folder in Jenkins.
 folder('SimpleFileUpload-ManualDeploy') {
-    description('Folder containing all non-CD pipelines')
+    description('Folder containing manual deployment pipelines')
 }
   
 // Choose a job name that's meaningful and relevant to your use case. Ensure you place it in the folder you created above
