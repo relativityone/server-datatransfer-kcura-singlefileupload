@@ -2,7 +2,7 @@
   <RAPBuilder>
     <Applications>
       <Application name="SimpleFileUpload" generatenuspec="true">
-        <Destination>Artifacts\kCura.SimpleFileUpload.rap</Destination>
+        <Destination>Artifacts\SimpleFileUpload.rap</Destination>
         <ApplicationSchema>ApplicationsXML\SingleFileUpload.xml</ApplicationSchema>
         <TestDirectory>Source\kCura.SingleFileUpload\Relativity.SimpleFileUpload.FunctionalTests\bin\</TestDirectory>
         <Assemblies>
