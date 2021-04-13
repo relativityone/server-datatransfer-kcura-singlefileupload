@@ -35,7 +35,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 		#endregion
 
 		#region RAP Settings
-		public static string LocalRAPFileLocation => Path.Combine(GetParamString("RAPDirectory"), "kCura.SimpleFileUpload.rap");
+		public static string LocalRAPFileLocation => Path.Combine(GetParamString("RAPDirectory"), "SimpleFileUpload.rap");
 		#endregion
 
 		private static string GetParamString(string name) => GetRunSettingsParameter(name);
