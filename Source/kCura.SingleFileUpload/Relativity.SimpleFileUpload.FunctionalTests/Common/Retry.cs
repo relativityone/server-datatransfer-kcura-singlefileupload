@@ -6,7 +6,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 	public static class Retry
 	{
 		private const int _DEFAULT_RETRY_COUNT = 3;
-		private const int _DEFAULT_RETRY_INTERVAL_IN_SECONDS = 5;
+		private const int _DEFAULT_RETRY_INTERVAL_IN_SECONDS = 30;
 
 		public static TResult Do<TResult>(Func<TResult> action)
 		{
