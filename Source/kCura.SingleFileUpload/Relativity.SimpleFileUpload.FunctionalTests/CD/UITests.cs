@@ -42,12 +42,13 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		public void UploadNativeFile_GoldFlow()
 		{
 			// Arrange
-			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
+			FileInfo file = TestFileHelper.PrepareTestFile().File;
 
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(_workspace.ArtifactID);
+			DocumentListPage documentListPage = Being.On<DocumentListPage>(_workspace.ArtifactID)
+				.Documents.Should.BeVisible(); //This ensures the list has fully loaded
 
 			// Act
-			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(filePath);
+			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(file.FullName);
 
 			// Assert
 			documentListPage.Documents.Rows[x => x.ControlNumber == Path.GetFileNameWithoutExtension(Const.File._FILE_NAME)].Should.BeVisible();
