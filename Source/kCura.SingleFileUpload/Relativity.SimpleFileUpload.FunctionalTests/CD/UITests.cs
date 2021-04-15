@@ -44,8 +44,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			// Arrange
 			TestFile file = TestFileHelper.PrepareTestFile();
 
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(_workspace.ArtifactID)
-				.Documents.Should.BeVisible(); //This ensures the list has fully loaded
+			DocumentListPage documentListPage = Retry.Do(() => Being.On<DocumentListPage>(_workspace.ArtifactID));
 
 			// Act
 			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(file.File.FullName);
