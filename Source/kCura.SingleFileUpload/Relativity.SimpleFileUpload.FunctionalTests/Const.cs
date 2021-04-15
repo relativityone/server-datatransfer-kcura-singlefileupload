@@ -18,6 +18,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 		public class App
 		{
 			public const string _NAME = "SimpleFileUpload";
+			public const string _APP_GUID = "1738ceb6-9546-44a7-8b9b-e64c88e47320";
 		}
 
 		public class File

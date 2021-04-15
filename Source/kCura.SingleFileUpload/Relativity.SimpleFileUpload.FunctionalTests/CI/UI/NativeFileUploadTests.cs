@@ -16,8 +16,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 	[TestType.UI, TestType.MainFlow]
 	public class NativeFileUploadTests : UiTestsTemplate
 	{
-		private const string _SFU_GUID = "1738ceb6-9546-44a7-8b9b-e64c88e47320";
-
 		public NativeFileUploadTests()
 			: base(nameof(NativeFileUploadTests))
 		{ }
@@ -28,7 +26,8 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 			// Arrange
 			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
 
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId);
+			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId)
+				.Documents.Should.BeVisible(); //This ensures the list has fully loaded;
 
 			// Act
 			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(filePath);
@@ -66,8 +65,9 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 		private void UploadFile(string fileName)
 		{
 			string fileLocation = Path.GetFullPath(TestFileHelper.GetFileLocation(fileName));
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId);
- 
+			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId)
+				.Documents.Should.BeVisible(); //This ensures the list has fully loaded;
+
 			documentListPage
 				.NewDocument
 				.ClickAndGo()
@@ -87,7 +87,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 				.Logs
 				.GetLog(LogType.Browser)
 				.Where(x => x.Level == OpenQA.Selenium.LogLevel.Severe)
-				.Where(x => x.Message.Contains($"/{_SFU_GUID}/"))
+				.Where(x => x.Message.Contains($"/{Const.App._APP_GUID}/"))
 				.Select(x => x.Message));
 			errors.Should().BeNullOrWhiteSpace($"XSS attack should not cause JavaScript errors");
 		}

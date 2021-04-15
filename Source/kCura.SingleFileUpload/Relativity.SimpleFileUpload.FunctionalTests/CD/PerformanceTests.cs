@@ -65,7 +65,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			// Act
 			for (int i = 0; i < _NUMBER_OF_ITERATIONS; ++i)
 			{
-				var testFile = PrepareTestFile();
+				TestFile testFile = TestFileHelper.PrepareTestFile();
 				try
 				{
 					var stopwatch = Stopwatch.StartNew();
@@ -87,16 +87,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 			uploadDurations.Average().Should().BeLessOrEqualTo(GetReferenceBenchmark());
 		}
 		
-		private (string ControlNumber, FileInfo File) PrepareTestFile()
-		{
-			string controlNumber = Guid.NewGuid().ToString();
-			string filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, $"{controlNumber}.xml");
-
-			File.Copy(TestFileHelper.GetFileLocation(Const.File._FILE_NAME), filePath);
-
-			return (ControlNumber: controlNumber, File: new FileInfo(filePath));
-		}
-
 		private async Task UploadFileAsync(string controlNumber, FileInfo file)
 		{
 			// Arrange
