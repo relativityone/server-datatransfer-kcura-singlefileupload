@@ -26,8 +26,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 			// Arrange
 			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
 
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId)
-				.Documents.Should.BeVisible(); //This ensures the list has fully loaded;
+			DocumentListPage documentListPage = Retry.Do(() => Being.On<DocumentListPage>(WorkspaceId));
 
 			// Act
 			documentListPage = documentListPage.NewDocument.ClickAndGo().Upload(filePath);
@@ -65,10 +64,8 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
 		private void UploadFile(string fileName)
 		{
 			string fileLocation = Path.GetFullPath(TestFileHelper.GetFileLocation(fileName));
-			DocumentListPage documentListPage = Being.On<DocumentListPage>(WorkspaceId)
-				.Documents.Should.BeVisible(); //This ensures the list has fully loaded;
 
-			documentListPage
+			Retry.Do(() => Being.On<DocumentListPage>(WorkspaceId))
 				.NewDocument
 				.ClickAndGo()
 				.Document
