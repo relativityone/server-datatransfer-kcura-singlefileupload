@@ -12,7 +12,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 		{
 			var retryPolicy = Policy<TResult>
 				.Handle<Exception>()
-				.WaitAndRetryAsync(_DEFAULT_RETRY_COUNT, i => TimeSpan.FromSeconds(_DEFAULT_RETRY_INTERVAL_IN_SECONDS));
+				.WaitAndRetry(_DEFAULT_RETRY_COUNT, i => TimeSpan.FromSeconds(_DEFAULT_RETRY_INTERVAL_IN_SECONDS));
 
 			return retryPolicy.Execute(action);
 		}
