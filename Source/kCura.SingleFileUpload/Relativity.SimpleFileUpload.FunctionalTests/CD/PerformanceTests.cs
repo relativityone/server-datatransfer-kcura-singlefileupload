@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -59,16 +60,21 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 				try
 				{
 					var stopwatch = Stopwatch.StartNew();
-					
+
 					await UploadFileAsync(testFile.ControlNumber, testFile.File).ConfigureAwait(false);
 
 					uploadDurations.Add(stopwatch.Elapsed.TotalMilliseconds);
-
-					await Task.Delay(_DELAY_BETWEEN_UPLOADS_IN_MILLISECONDS).ConfigureAwait(false);
+				}
+				catch (Exception ex)
+				{
+					string msg = $"[#{i}] Test case failed with following error - {ex.Message}.";
+					Console.WriteLine(msg);
 				}
 				finally
 				{
 					File.Delete(testFile.File.FullName);
+
+					await Task.Delay(_DELAY_BETWEEN_UPLOADS_IN_MILLISECONDS).ConfigureAwait(false);
 				}
 			}
 
