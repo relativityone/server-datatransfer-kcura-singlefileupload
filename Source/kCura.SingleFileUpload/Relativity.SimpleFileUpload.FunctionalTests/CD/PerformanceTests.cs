@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,8 +9,6 @@ using Atata;
 using FluentAssertions;
 using NUnit.Framework;
 using Relativity.SimpleFileUpload.FunctionalTests.Common;
-using Relativity.Testing.Framework;
-using Relativity.Testing.Framework.RingSetup;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
 
@@ -20,7 +17,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 	[IdentifiedTestFixture("4aaaf027-c073-4aa7-8e1a-213e357ccf10", Description = "SimpleFileUpload Performance Verification Tests")]
 	[TestExecutionCategory.CD, TestLevel.L3]
 	[TestType.Performance]
-	public class PerformanceTests : TestSetup
+	public class PerformanceTests : TestsBase
 	{
 		private const int _UPLOAD_FILE_BENCHMARK_IN_MILLISECONDS = 10 * 1000;
 		private const double _PCT_TOLERANCE_RATE = 0.05;
@@ -33,25 +30,18 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 
 		private HttpClient _client;
 
-		public PerformanceTests() : base($"{Const.App._NAME}-{nameof(PerformanceTests)}", desiredNumberOfDocuments: 0)
+		public PerformanceTests() : base($"{Const.App._NAME}-{nameof(PerformanceTests)}")
 		{ }
 
-		[OneTimeSetUp]
-		public void OneTimeSetup()
+		public override void OneTimeSetUp()
 		{
-			RelativityFacade.Instance.RelyOn<WebComponent>();
+			base.OneTimeSetUp();
 
 			Go.To<LoginPage>()
 				.EnterCredentials(_user.Email, _user.Password)
 				.Login.Click();
 
 			_client = SimpleFileUploadHelper.GetUserHttpClient();
-		}
-
-		[OneTimeTearDown]
-		public void TearDown()
-		{
-			AtataContext.Current?.Dispose();
 		}
 
 		[IdentifiedTest("883f9722-733c-4a5b-b892-05aa0d5af4d3")]

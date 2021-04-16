@@ -346,6 +346,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD\TestsBase.cs" />
     <Compile Include="CD\PerformanceTests.cs" />
     <Compile Include="CD\UITests.cs" />
     <Compile Include="CI\Tests\HealthCheckTests.cs" />
