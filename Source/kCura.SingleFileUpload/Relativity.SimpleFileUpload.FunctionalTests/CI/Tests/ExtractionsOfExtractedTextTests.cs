@@ -7,7 +7,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using Relativity.SimpleFileUpload.FunctionalTests.Common;
 using Relativity.Testing.Framework;
-using Relativity.Testing.Framework.Api;
+using Relativity.Testing.Framework.Api.Services;
+using Relativity.Testing.Framework.Models;
 using Relativity.Testing.Identification;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests

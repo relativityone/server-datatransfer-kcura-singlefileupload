@@ -6,7 +6,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Relativity.SimpleFileUpload.FunctionalTests.Common;
-using Relativity.Testing.Framework.Web;
+using Relativity.Testing.Framework.Web.Components;
+using Relativity.Testing.Framework.Web.Navigation;
 using Relativity.Testing.Identification;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.CI.UI
