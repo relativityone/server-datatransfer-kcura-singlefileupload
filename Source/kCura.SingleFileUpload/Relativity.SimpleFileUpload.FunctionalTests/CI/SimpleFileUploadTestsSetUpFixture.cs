@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api;
+using Relativity.Testing.Framework.Api.Services;
+using Relativity.Testing.Framework.Models;
 using Relativity.Testing.Framework.Web;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.CI
