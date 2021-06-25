@@ -8,5 +8,6 @@
 		public int DocID { get; set; }
 		public int? ProfileID { get; set; }
 		public int ErrorFile { get; set; }
+		public bool? Fri { get; set; }
 	}
 }
