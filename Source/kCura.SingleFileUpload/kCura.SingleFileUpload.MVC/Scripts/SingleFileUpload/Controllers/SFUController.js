@@ -22,7 +22,7 @@ var SFUController = function ($scope, $http, $compile) {
     vm.newImage = NewImage;
     vm.hasRedactions = HasRedactions;
     vm.hasNative = HasNative;
-    vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV ? (HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
+    vm.title = errorID == 0 ? (ChangeImage ? (NewImage || !HasImages ? "Upload Image" : "Replace Image") : FDV || FRI ? (HasNative ? "Replace Document" : "Upload Document") : "New Document") : "Processing Document";
     vm.tempDocId = 0;
     vm.choiceType = { type: 'fileName' };
     vm.optionalControlNumber = { text: '' };
@@ -34,6 +34,9 @@ var SFUController = function ($scope, $http, $compile) {
     vm.controlNumberSelected = function () {
         msgLabel.innerHTML = "Please type a Control Number before dropping or selecting your file.</span>";
     }
+    vm.fri = FRI;
+    vm.fdv = FDV;
+    vm.docID = docID
 
 
     sessionStorage['____pushNo'] = '';
@@ -128,7 +131,8 @@ var SFUController = function ($scope, $http, $compile) {
         data.append('file', bkpFile);
         if (vm.errorID == 0 && addData) {
             data.append('fid', getFolder());
-            data.append('fdv', document.getElementById('fdv').getAttribute('value'));
+            data.append('fdv', vm.fdv);
+            data.append('fri', vm.fri);
             data.append('did', GetDID());
             data.append('force', document.getElementById('force').getAttribute('value'));
             data.append('controlNumberText', document.getElementById('controlNumberText').value);
@@ -220,9 +224,16 @@ var SFUController = function ($scope, $http, $compile) {
             })
             .then(function (data) {
 
-                var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
                 if (data) {
-                    window.top.documentViewer.WaitForImaging();
+                    if (vm.fri === true) {
+                        var reviewInterface = $(window.parent.parent.window)[0].ReviewInterface;
+                        if (vm.newImage === true || vm.changeImage === true) {
+                            reviewInterface.review.fileService.imaging.newImageAdded();
+                        }
+                    }
+                    else {
+                        window.top.documentViewer.WaitForImaging();
+					}
                     Close();
                 }
             }, function (error) {
@@ -301,26 +312,36 @@ var SFUController = function ($scope, $http, $compile) {
             var footerHtml = !vm.changeImage ? "Document uploaded successfully!" : (vm.newImage ? "Document image uploaded succesfully!" : "Document image replaced succesfully!");
             msgLabel.className = "message";
             msgLabel.innerHTML = footerHtml;
+           
             var fnc = function () { window.parent.location.reload() };
-            var fncFluid = function () {
-                if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
-                    window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
-                } else {
-                    window.parent.location.reload()
-                }
-            }
+
             if (vm.errorID == 0) {
-                var fromDocumentViewer = document.getElementById('fdv').getAttribute('value') == 'true';
 
                 if (vm.changeImage) {
                     updateImageDocument(result.Message);
                 }
                 else {
-                    setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
+                    if (vm.fdv === true) {
+                        var fncFluid = function () {
+                            if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
+                                window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
+                            } else {
+                                window.parent.location.reload()
+                            }
+                        }
+                        setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
+                    }
+                    if (vm.fri === true) {
+                        var reviewInterface = $(window.parent.parent.window)[0].ReviewInterface;
+                        reviewInterface.review.fileService.native.newNativeFileAdded();
+                        Close();
+					}
                 }
             }
             else {
-                setTimeout(fnc, 3000);
+                if (vm.fdv === true) {
+                    setTimeout(fnc, 3000);
+                }
             }
         }
         else if (result.Message == 'R') {
@@ -356,8 +377,10 @@ var SFUController = function ($scope, $http, $compile) {
     function notifyUploadStarted() {
         if (vm.changeImage) {
             dialog_overlay.off("click");
+            if (vm.fri === false) {
             var documentViewer = $(window.parent.parent.window)[0].documentViewer;
-            documentViewer.SetViewer("Image");
+                documentViewer.SetViewer("Image");
+			}
             dialog.dialog("option", "closeOnEscape", false);
         }
         setTimeout(function () {
@@ -368,7 +391,6 @@ var SFUController = function ($scope, $http, $compile) {
                 vm.status = 1;
             });
             getdH().onclick = function () { };
-            //      getdH().ondrop = function () { };
             msgLabel.innerHTML = "Uploading";
             checkUpload();
         })
@@ -431,8 +453,12 @@ var SFUController = function ($scope, $http, $compile) {
     }
     function GetDID() {
         var did = -1;
-        if (document.getElementById('fdv') != null && document.getElementById('fdv').getAttribute('value') == 'true')
+        if (vm.fdv === true) {
             did = GetQueryStringValueByName(window.parent.location.search, "ArtifactID");
+		}
+        if (vm.fri === true) {
+            did = vm.docID;
+		}
         return did;
     }
     function ForceUpload() {
