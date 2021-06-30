@@ -38,8 +38,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests
 			public const string _FILE_NAME_HTML = "SampleHTML.html";
 
 			public const string _DOC_CONTROL_NUMBER = "CTRL0192153";
-			public const int _DOC_ID = 1000001;
-			public const int _PROFILE_ID = 1000002;
+			public const int _IMAGING_PROFILE_ARTIFACT_ID = 1000015;
 
 			public const string _FILE_NAME_PDF_XSS_JS = "';window.relativityXss=true;.pdf";
 			public const string _FILE_NAME_PDF_XSS_HTML = "${constructor.constructor('window.relativityXSS=true')()};.pdf";
