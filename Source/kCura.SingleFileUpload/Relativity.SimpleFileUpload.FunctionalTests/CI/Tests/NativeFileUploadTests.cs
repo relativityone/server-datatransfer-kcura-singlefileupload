@@ -13,10 +13,13 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 	[TestExecutionCategory.CI, TestLevel.L3]
 	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{
+		
+		public int DocumentId { get; private set; }
+
 		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
 		{ }
 
-		[IdentifiedTest("a5391b33-7fc8-444f-be17-77162434e714")]
+		[IdentifiedTest("a5391b33-7fc8-444f-be17-77162434e714"), Order(1)]
 		public async Task UploadNativeFile_GoldFlow()
 		{
 			// Arrange
@@ -34,26 +37,28 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+
+			DocumentId = await WaitForUploadCompletedAsync(Const.File._DOC_CONTROL_NUMBER);
 		}
 
-		[IdentifiedTest("7D80246E-B024-4DD2-A76A-9E6C852A35DC")]
+		[IdentifiedTest("7D80246E-B024-4DD2-A76A-9E6C852A35DC"), Order(2)]
 		public async Task ReplaceNativeFile_GoldFlow()
 		{
 			// Arrange
 			string expectedContent =
 				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
 
-			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
 			FileInfo file = new FileInfo(filePath);
 
 			// Act
-			HttpResponseMessage result = await SimpleFileUploadHelper.UploadNativeFromReviewInterfaceAsync(Client, WorkspaceId, Const.File._DOC_ID, file).ConfigureAwait(false);
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadNativeFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, file).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
-		[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true)]
+		[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true), Order(3)]
 		[IdentifiedTestCase("CA8270DA-9EFD-4853-A179-73B73A0A74FC", false)]
 		public async Task UploadImageFile_GoldFlow(bool replaceImage)
 		{
@@ -64,14 +69,16 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
 			FileInfo file = new FileInfo(filePath);
 
+			
+
 			// Act
-			HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, Const.File._DOC_ID, Const.File._PROFILE_ID, file, replaceImage).ConfigureAwait(false);
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, ImagingProfileId, file, replaceImage).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
-		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE)]
+		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE), Order(4)]
 		[IdentifiedTestCase("91f77dc1-b0e1-43dc-abcb-da82e8f1c385", Const.File._FILE_NAME_DLL)]
 		[IdentifiedTestCase("6cd2d2f6-d7fb-45e0-b8aa-d87f98dcdcc6", Const.File._FILE_NAME_JS)]
 		[IdentifiedTestCase("3f96dac2-27d7-4927-a2c6-142b8aff3b2d", Const.File._FILE_NAME_HTM)]
@@ -112,6 +119,23 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			response.StatusCode.Should().Be(HttpStatusCode.OK);
 			string actualContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 			actualContent.Should().Be(expected);
+		}
+
+		private async Task<int> WaitForUploadCompletedAsync(string expectedControlNumber)
+		{
+			string uploadedDocArtifactId;
+			do
+			{
+				var response = await SimpleFileUploadHelper.CheckUploadStatusAsync(Client, WorkspaceId, expectedControlNumber)
+					.ConfigureAwait(false);
+
+				uploadedDocArtifactId = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+				await Task.Delay(100).ConfigureAwait(false);
+
+			} while (uploadedDocArtifactId == "-1");
+
+			return System.Int32.Parse(uploadedDocArtifactId);
 		}
 	}
 }
