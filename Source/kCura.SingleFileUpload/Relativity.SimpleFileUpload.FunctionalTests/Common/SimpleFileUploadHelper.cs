@@ -14,7 +14,45 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["fdv"] = fdv.ToString();
-			query["img"] = img.ToString();
+			query["image"] = img.ToString();
+
+			using (var content = new MultipartFormDataContent())
+			using (var fileStream = File.OpenRead(file.FullName))
+			{
+				StreamContent stream = new StreamContent(fileStream);
+				content.Add(stream, "file", file.Name);
+
+				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
+			}
+		}
+
+		public static async Task<HttpResponseMessage> UploadNativeFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, FileInfo file)
+		{
+			var query = HttpUtility.ParseQueryString(string.Empty);
+			query["AppID"] = workspaceId.ToString();
+			query["docID"] = documentId.ToString();
+			query["image"] = false.ToString();
+			query["fri"] = true.ToString();
+
+			using (var content = new MultipartFormDataContent())
+			using (var fileStream = File.OpenRead(file.FullName))
+			{
+				StreamContent stream = new StreamContent(fileStream);
+				content.Add(stream, "file", file.Name);
+
+				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
+			}
+		}
+
+		public static async Task<HttpResponseMessage> UploadImageFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, int profileId, FileInfo file, bool newImage)
+		{
+			var query = HttpUtility.ParseQueryString(string.Empty);
+			query["AppID"] = workspaceId.ToString();
+			query["docID"] = documentId.ToString();
+			query["image"] = true.ToString();
+			query["fri"] = true.ToString();
+			query["newImage"] = newImage.ToString();
+			query["profileID"] = profileId.ToString();
 
 			using (var content = new MultipartFormDataContent())
 			using (var fileStream = File.OpenRead(file.FullName))

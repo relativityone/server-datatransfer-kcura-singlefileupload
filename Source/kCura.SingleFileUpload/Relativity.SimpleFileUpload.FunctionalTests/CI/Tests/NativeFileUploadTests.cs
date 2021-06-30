@@ -36,6 +36,41 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
+		[IdentifiedTest("7D80246E-B024-4DD2-A76A-9E6C852A35DC")]
+		public async Task ReplaceNativeFile_GoldFlow()
+		{
+			// Arrange
+			string expectedContent =
+				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
+			FileInfo file = new FileInfo(filePath);
+
+			// Act
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadNativeFromReviewInterfaceAsync(Client, WorkspaceId, Const.File._DOC_ID, file).ConfigureAwait(false);
+
+			// Assert
+			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+		}
+
+		[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true)]
+		[IdentifiedTestCase("CA8270DA-9EFD-4853-A179-73B73A0A74FC", false)]
+		public async Task UploadImageFile_GoldFlow(bool replaceImage)
+		{
+			// Arrange
+			string expectedContent =
+				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
+			FileInfo file = new FileInfo(filePath);
+
+			// Act
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, Const.File._DOC_ID, Const.File._PROFILE_ID, file, replaceImage).ConfigureAwait(false);
+
+			// Assert
+			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+		}
+
 		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE)]
 		[IdentifiedTestCase("91f77dc1-b0e1-43dc-abcb-da82e8f1c385", Const.File._FILE_NAME_DLL)]
 		[IdentifiedTestCase("6cd2d2f6-d7fb-45e0-b8aa-d87f98dcdcc6", Const.File._FILE_NAME_JS)]
