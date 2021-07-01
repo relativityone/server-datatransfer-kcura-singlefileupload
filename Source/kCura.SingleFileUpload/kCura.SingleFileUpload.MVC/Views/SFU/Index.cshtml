@@ -1,4 +1,4 @@
-﻿@if ((ViewBag.UploadMassiveDocuments == true) && !((ViewBag.FDV == "true") || (ViewBag.FRI == "false") || (ViewBag.ChangeImage == "false") || (ViewBag.ErrorID != 0)))
+﻿@if ((ViewBag.UploadMassiveDocuments == true) && !((ViewBag.FDV == "true") || (ViewBag.FRI == "true") || (ViewBag.ChangeImage == "true") || (ViewBag.ErrorID != 0)))
 {
 	@Html.Partial("MultipleUpload")
 }
