@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -143,7 +144,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			actualContent = actualContent.Replace("<script>sessionStorage['____pushNo'] = '", "").Replace("'</script>", "");
 			HttpResponse imagePath = JsonConvert.DeserializeObject<HttpResponse>(actualContent);
 
-			Assert.True(File.Exists(imagePath.Message));
+			Assert.True(Uri.TryCreate(imagePath.Message, UriKind.RelativeOrAbsolute, out Uri result));
 		}
 
 		private async Task<int> WaitForUploadCompletedAsync(string expectedControlNumber)
