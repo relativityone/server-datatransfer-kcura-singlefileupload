@@ -81,7 +81,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 		public async Task ReplaceImage_ShouldFail_WhenUploadingForbiddenFileType()
 		{
 			// Arrange
-			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"0\",\"Success\":true,\"Message\":\"Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.\"}}'</script>";
+			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{DocumentId}\",\"Success\":true,\"Message\":\"Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.\"}}'</script>";
 			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
 			FileInfo file = new FileInfo(filePath);
 
