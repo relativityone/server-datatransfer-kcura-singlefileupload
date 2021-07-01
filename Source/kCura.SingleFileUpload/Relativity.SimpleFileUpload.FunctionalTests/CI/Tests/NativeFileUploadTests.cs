@@ -58,25 +58,25 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
-		[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true), Order(3)]
-		[IdentifiedTestCase("CA8270DA-9EFD-4853-A179-73B73A0A74FC", false)]
-		public async Task UploadImageFile_GoldFlow(bool replaceImage)
-		{
-			// Arrange
-			string expectedContent =
-				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+		//[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true), Order(3)]
+		//[IdentifiedTestCase("CA8270DA-9EFD-4853-A179-73B73A0A74FC", false)]
+		//public async Task UploadImageFile_GoldFlow(bool replaceImage)
+		//{
+		//	// Arrange
+		//	string expectedContent =
+		//		$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
 
-			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
-			FileInfo file = new FileInfo(filePath);
+		//	string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
+		//	FileInfo file = new FileInfo(filePath);
 
 			
 
-			// Act
-			HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, ImagingProfileId, file, replaceImage).ConfigureAwait(false);
+		//	// Act
+		//	HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, ImagingProfileId, file, replaceImage).ConfigureAwait(false);
 
-			// Assert
-			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
-		}
+		//	// Assert
+		//	await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+		//}
 
 		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE), Order(4)]
 		[IdentifiedTestCase("91f77dc1-b0e1-43dc-abcb-da82e8f1c385", Const.File._FILE_NAME_DLL)]
