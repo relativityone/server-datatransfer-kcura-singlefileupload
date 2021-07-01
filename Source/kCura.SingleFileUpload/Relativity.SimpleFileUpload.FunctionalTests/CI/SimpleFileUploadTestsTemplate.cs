@@ -22,7 +22,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 		private readonly string _workspaceTemplateName;
 
 		private readonly IWorkspaceService _workspaceService;
-		private readonly IObjectManager _objectManager;
+		//private readonly IObjectManager _objectManager;
 
 		public int WorkspaceId { get; private set; }
 		public int ImagingProfileId { get; private set; }
@@ -33,7 +33,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 			_workspaceTemplateName = workspaceTemplateName;
 
 			_workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
-			_objectManager = RelativityFacade.Instance.Resolve<IObjectManager>();
+			//_objectManager = RelativityFacade.Instance.Resolve<IObjectManager>();
 		}
 
 		protected override void OnSetUpFixture()
