@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Atata;
+using Newtonsoft.Json;
 
 namespace Relativity.SimpleFileUpload.Tests.Core
 {
@@ -38,6 +39,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 				fri = true,
 				force = false,
 			};
+			query["meta"] = JsonConvert.SerializeObject(meta);
 			query["meta"] = meta.ToString();
 			query["AppID"] = workspaceId.ToString();
 			query["fdv"] = false.ToString();
