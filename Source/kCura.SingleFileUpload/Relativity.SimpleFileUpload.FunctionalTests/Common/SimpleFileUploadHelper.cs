@@ -14,7 +14,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["fdv"] = fdv.ToString();
-			query["image"] = img.ToString();
+			query["img"] = img.ToString();
 
 			using (var content = new MultipartFormDataContent())
 			using (var fileStream = File.OpenRead(file.FullName))
@@ -29,10 +29,19 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 		public static async Task<HttpResponseMessage> UploadNativeFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, FileInfo file)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
+
+			var meta = new
+			{
+				fid = -1,
+				did = documentId,
+				fdv = false,
+				fri = true,
+				force = false,
+			};
+			query["meta"] = meta.ToString();
 			query["AppID"] = workspaceId.ToString();
-			query["docID"] = documentId.ToString();
-			query["image"] = false.ToString();
-			query["fri"] = true.ToString();
+			query["fdv"] = false.ToString();
+			query["img"] = false.ToString();
 
 			using (var content = new MultipartFormDataContent())
 			using (var fileStream = File.OpenRead(file.FullName))
@@ -69,7 +78,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["DocumentName"] = controlNumber;
-			
+
 			return client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty));
 		}
 

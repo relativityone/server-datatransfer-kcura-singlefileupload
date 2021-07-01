@@ -70,14 +70,26 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 		{
 			using (var objectManagerProxy = RelativityFacade.Instance.Resolve<ApiComponent>().ServiceFactory.GetServiceProxy<IObjectManager>())
 			{
+
 				IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
 					new FieldRef() { Name = "ArtifactID" },
 				};
 
-				string condition = $"'Name' == 'Basic Default'";
+				string condition = $"'Name' == 'Imaging Profile'";
 
-				QueryRequest queryRequest = BuildQueryRequest(queryFields, Const.File._IMAGING_PROFILE_ARTIFACT_ID, condition);
-				var queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
+				QueryRequest queryRequest = BuildQueryRequest(queryFields, (int)ArtifactType.ObjectType, condition);
+				QueryResult queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
+
+				int objectTypeArtifactId = queryResult.Objects.FirstOrDefault().ArtifactID;
+
+				queryFields = new List<FieldRef>() {
+					new FieldRef() { Name = "ArtifactID" },
+				};
+
+				condition = $"'Name' == 'Basic Default'";
+
+				queryRequest = BuildQueryRequest(queryFields, objectTypeArtifactId, condition);
+				queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
 
 				return queryResult.Objects.FirstOrDefault().ArtifactID;
 			}
