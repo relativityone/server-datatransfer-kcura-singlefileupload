@@ -3,7 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Newtonsoft.Json;
 using NUnit.Framework;
+using Relativity.SimpleFileUpload.FunctionalTests.CI.Models;
 using Relativity.SimpleFileUpload.FunctionalTests.Common;
 using Relativity.Testing.Identification;
 
@@ -13,7 +15,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 	[TestExecutionCategory.CI, TestLevel.L3]
 	public class NativeFileUploadTests : FunctionalTestsTemplate
 	{
-		
+
 		public int DocumentId { get; private set; }
 
 		public NativeFileUploadTests() : base(nameof(NativeFileUploadTests))
@@ -46,39 +48,52 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 		{
 			// Arrange
 			string expectedContent =
-				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{DocumentId}\",\"Success\":true,\"Message\":null}}'</script>";
 
 			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
 			FileInfo file = new FileInfo(filePath);
 
 			// Act
-			HttpResponseMessage result = await SimpleFileUploadHelper.UploadNativeFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, file).ConfigureAwait(false);
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, file, false).ConfigureAwait(false);
 
 			// Assert
 			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
 		}
 
-		//[IdentifiedTestCase("F576705C-F74E-4190-B994-013AB429709E", true), Order(3)]
-		//[IdentifiedTestCase("CA8270DA-9EFD-4853-A179-73B73A0A74FC", false)]
-		//public async Task UploadImageFile_GoldFlow(bool replaceImage)
-		//{
-		//	// Arrange
-		//	string expectedContent =
-		//		$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{Const.File._DOC_CONTROL_NUMBER}\",\"Success\":true,\"Message\":null}}'</script>";
+		[IdentifiedTest("F576705C-F74E-4190-B994-013AB429709E"), Order(3)]
+		public async Task UploadImageFile_GoldFlow()
+		{
+			// Arrange
+			string expectedContent =
+				$"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"{DocumentId}\",\"Success\":true,\"Message\":null}}'</script>";
 
-		//	string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
-		//	FileInfo file = new FileInfo(filePath);
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME_PDF);
+			FileInfo file = new FileInfo(filePath);
 
-			
+			// Act
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, file, true).ConfigureAwait(false);
 
-		//	// Act
-		//	HttpResponseMessage result = await SimpleFileUploadHelper.UploadImageFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, ImagingProfileId, file, replaceImage).ConfigureAwait(false);
+			// Assert
+			await AssertResponseUploadImageAsync(result, expectedContent).ConfigureAwait(false);
+		}
 
-		//	// Assert
-		//	await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
-		//}
+		[IdentifiedTest("A16B4225-9CE2-4B10-88A3-2F319E016D90"), Order(4)]
+		public async Task ReplaceImage_ShouldFail_WhenUploadingForbiddenFileType()
+		{
+			// Arrange
+			string expectedContent = $"<script>sessionStorage['____pushNo'] = '{{\"Data\":\"0\",\"Success\":true,\"Message\":\"Loaded file is not a supported format. Please select TIFF, JPEG or PDF File.\"}}'</script>";
+			string filePath = TestFileHelper.GetFileLocation(Const.File._FILE_NAME);
+			FileInfo file = new FileInfo(filePath);
 
-		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE), Order(4)]
+			// Act
+			HttpResponseMessage result = await SimpleFileUploadHelper.UploadFromReviewInterfaceAsync(Client, WorkspaceId, DocumentId, file, true).ConfigureAwait(false);
+
+			// Assert
+			await AssertResponseContentAsync(result, expectedContent).ConfigureAwait(false);
+		}
+
+
+		[IdentifiedTestCase("5b85c4ff-b52b-4941-b17f-3bf3d084fb1d", Const.File._FILE_NAME_EXE), Order(5)]
 		[IdentifiedTestCase("91f77dc1-b0e1-43dc-abcb-da82e8f1c385", Const.File._FILE_NAME_DLL)]
 		[IdentifiedTestCase("6cd2d2f6-d7fb-45e0-b8aa-d87f98dcdcc6", Const.File._FILE_NAME_JS)]
 		[IdentifiedTestCase("3f96dac2-27d7-4927-a2c6-142b8aff3b2d", Const.File._FILE_NAME_HTM)]
@@ -90,7 +105,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			bool fdv = false;
 			bool img = false;
 			FileInfo file = new FileInfo(TestFileHelper.GetFileLocation(fileName));
-			
+
 			// Act
 			HttpResponseMessage response = await SimpleFileUploadHelper.UploadFileAsync(Client, WorkspaceId, file, fdv, img).ConfigureAwait(false);
 
@@ -98,7 +113,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			await AssertResponseContentAsync(response, expectedContent).ConfigureAwait(false);
 		}
 
-		[IdentifiedTest("0e88a8e6-6139-4c9c-9b2c-f9f0beebbd3d")]
+		[IdentifiedTest("0e88a8e6-6139-4c9c-9b2c-f9f0beebbd3d"), Order(6)]
 		public async Task Upload_ShouldEncodeFileName()
 		{
 			// Arrange
@@ -121,6 +136,16 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			actualContent.Should().Be(expected);
 		}
 
+		private static async Task AssertResponseUploadImageAsync(HttpResponseMessage response, string expected)
+		{
+			response.StatusCode.Should().Be(HttpStatusCode.OK);
+			string actualContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+			actualContent = actualContent.Replace("<script>sessionStorage['____pushNo'] = '", "").Replace("'</script>", "");
+			HttpResponse imagePath = JsonConvert.DeserializeObject<HttpResponse>(actualContent);
+
+			Assert.True(File.Exists(imagePath.Message));
+		}
+
 		private async Task<int> WaitForUploadCompletedAsync(string expectedControlNumber)
 		{
 			string uploadedDocArtifactId;
@@ -138,4 +163,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 			return System.Int32.Parse(uploadedDocArtifactId);
 		}
 	}
+
+	
 }

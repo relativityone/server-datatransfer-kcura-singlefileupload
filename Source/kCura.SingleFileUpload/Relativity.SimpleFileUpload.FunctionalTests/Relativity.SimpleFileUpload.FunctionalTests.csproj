@@ -374,6 +374,7 @@
     <Compile Include="CD\TestsBase.cs" />
     <Compile Include="CD\PerformanceTests.cs" />
     <Compile Include="CD\UITests.cs" />
+    <Compile Include="CI\Models\HttpResponse.cs" />
     <Compile Include="CI\Tests\HealthCheckTests.cs" />
     <Compile Include="CI\UI\NativeFileUploadTests.cs" />
     <Compile Include="Common\Retry.cs" />

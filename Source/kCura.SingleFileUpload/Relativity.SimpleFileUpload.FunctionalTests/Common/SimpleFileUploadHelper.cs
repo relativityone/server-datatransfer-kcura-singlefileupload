@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Atata;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 {
@@ -27,48 +29,23 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			}
 		}
 
-		public static async Task<HttpResponseMessage> UploadNativeFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, FileInfo file)
+		public static async Task<HttpResponseMessage> UploadFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, FileInfo file, bool img)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
 
-			var meta = new
-			{
-				fid = -1,
-				did = documentId,
-				fdv = false,
-				fri = true,
-				force = false,
-			};
-			query["meta"] = JsonConvert.SerializeObject(meta);
 			query["AppID"] = workspaceId.ToString();
-			query["fdv"] = false.ToString();
-			query["img"] = false.ToString();
+			query["img"] = img.ToString();
 
 			using (var content = new MultipartFormDataContent())
 			using (var fileStream = File.OpenRead(file.FullName))
 			{
 				StreamContent stream = new StreamContent(fileStream);
 				content.Add(stream, "file", file.Name);
-
-				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
-			}
-		}
-
-		public static async Task<HttpResponseMessage> UploadImageFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, int profileId, FileInfo file, bool newImage)
-		{
-			var query = HttpUtility.ParseQueryString(string.Empty);
-			query["AppID"] = workspaceId.ToString();
-			query["docID"] = documentId.ToString();
-			query["image"] = true.ToString();
-			query["fri"] = true.ToString();
-			query["newImage"] = newImage.ToString();
-			query["profileID"] = profileId.ToString();
-
-			using (var content = new MultipartFormDataContent())
-			using (var fileStream = File.OpenRead(file.FullName))
-			{
-				StreamContent stream = new StreamContent(fileStream);
-				content.Add(stream, "file", file.Name);
+				content.Add(new StringContent("-1"), String.Format("\"{0}\"", "fid"));
+				content.Add(new StringContent(documentId.ToString()), String.Format("\"{0}\"", "did"));
+				content.Add(new StringContent("false"), String.Format("\"{0}\"", "fdv"));
+				content.Add(new StringContent("true"), String.Format("\"{0}\"", "fri"));
+				content.Add(new StringContent("false"), String.Format("\"{0}\"", "force"));
 
 				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
 			}
