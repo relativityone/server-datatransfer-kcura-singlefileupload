@@ -21,6 +21,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		private readonly string _workspaceTemplateName;
 
 		private readonly IWorkspaceService _workspaceService;
+		private readonly IObjectManager _objectManager;
 
 		public int WorkspaceId { get; private set; }
 		public int ImagingProfileId { get; private set; }
@@ -31,6 +32,7 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 			_workspaceTemplateName = workspaceTemplateName;
 
 			_workspaceService = RelativityFacade.Instance.Resolve<IWorkspaceService>();
+			_objectManager = RelativityFacade.Instance.Resolve<IObjectManager>();
 		}
 
 		protected override void OnSetUpFixture()
@@ -69,26 +71,14 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 		{
 			using (var objectManagerProxy = RelativityFacade.Instance.Resolve<ApiComponent>().ServiceFactory.GetServiceProxy<IObjectManager>())
 			{
-
 				IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
 					new FieldRef() { Name = "ArtifactID" },
 				};
 
-				string condition = $"'Name' == 'Imaging Profile'";
+				string condition = $"'Name' == 'Basic Default'";
 
-				QueryRequest queryRequest = BuildQueryRequest(queryFields, (int)ArtifactType.ObjectType, condition);
-				QueryResult queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
-
-				int objectTypeArtifactId = queryResult.Objects.FirstOrDefault().ArtifactID;
-
-				queryFields = new List<FieldRef>() {
-					new FieldRef() { Name = "ArtifactID" },
-				};
-
-				condition = $"'Name' == 'Basic Default'";
-
-				queryRequest = BuildQueryRequest(queryFields, objectTypeArtifactId, condition);
-				queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
+				QueryRequest queryRequest = BuildQueryRequest(queryFields, Const.File._IMAGING_PROFILE_ARTIFACT_ID, condition);
+				var queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
 
 				return queryResult.Objects.FirstOrDefault().ArtifactID;
 			}
@@ -110,5 +100,43 @@ namespace Relativity.SimpleFileUpload.Tests.Core.Templates
 			};
 			return queryRequest;
 		}
+
+		//private async Task<int> GetDefaultProcessingProfileAsync(int workspaceId)
+		//{
+
+		//	IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
+		//			new FieldRef() { Name = "ArtifactID" },
+		//		};
+
+		//	string condition = $"'Name' == 'Imaging Profile'";
+
+		//	QueryRequest objTypeQueryRequest = BuildQueryRequest(queryFields, (int)ArtifactType.ObjectType, condition);
+		//	QueryResult objTypeQueryResult = await _objectManager.QueryAsync(workspaceId, objTypeQueryRequest, 0, 0);
+
+		//	int objectTypeArtifactId = objTypeQueryResult.Objects.FirstOrDefault().ArtifactID;
+
+		//	queryFields = new List<FieldRef>() {
+		//			new FieldRef() { Name = "ArtifactID" },
+		//		};
+
+		//	condition = $"'Name' == 'Basic Default'";
+
+		//	QueryRequest queryRequest = BuildQueryRequest(queryFields, objectTypeArtifactId, condition);
+		//	QueryResult queryResult = await _objectManager.QueryAsync(workspaceId, queryRequest, 0, 0);
+
+		//	return queryResult.Objects.FirstOrDefault().ArtifactID;
+		//}
+
+		//private QueryRequest BuildQueryRequest(IEnumerable<FieldRef> queryFields, int typeId, string condition)
+		//{
+		//	QueryRequest queryRequest = new QueryRequest()
+		//	{
+		//		ObjectType = new ObjectTypeRef() { ArtifactTypeID = typeId },
+		//		Condition = condition,
+		//		Fields = queryFields,
+		//		RelationalField = null
+		//	};
+		//	return queryRequest;
+		//}
 	}
 }
