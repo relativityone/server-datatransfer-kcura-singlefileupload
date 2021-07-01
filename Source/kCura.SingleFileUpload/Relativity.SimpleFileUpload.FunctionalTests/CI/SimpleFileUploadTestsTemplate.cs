@@ -70,28 +70,24 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 
 		private async Task<int> GetDefaultProcessingProfileAsync(int workspaceId)
 		{
-
-			IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
+			using (var objectManagerProxy = RelativityFacade.Instance.Resolve<ApiComponent>().ServiceFactory.GetServiceProxy<IObjectManager>())
+			{
+				IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
 					new FieldRef() { Name = "ArtifactID" },
 				};
 
-			string condition = $"'Name' == 'Imaging Profile'";
+				string condition = $"'Name' == 'Basic Default'";
 
-			QueryRequest objTypeQueryRequest = BuildQueryRequest(queryFields, (int)ArtifactType.ObjectType, condition);
-			QueryResult objTypeQueryResult = await _objectManager.QueryAsync(workspaceId, objTypeQueryRequest, 0, 0);
+				QueryRequest queryRequest = BuildQueryRequest(queryFields, Const.File._IMAGING_PROFILE_ARTIFACT_ID, condition);
+				var queryResult = await BuildQueryAsync(objectManagerProxy, workspaceId, queryRequest, 0, 0);
 
-			int objectTypeArtifactId = objTypeQueryResult.Objects.FirstOrDefault().ArtifactID;
+				return queryResult.Objects.FirstOrDefault().ArtifactID;
+			}
+		}
 
-			queryFields = new List<FieldRef>() {
-					new FieldRef() { Name = "ArtifactID" },
-				};
-
-			condition = $"'Name' == 'Basic Default'";
-
-			QueryRequest queryRequest = BuildQueryRequest(queryFields, objectTypeArtifactId, condition);
-			QueryResult queryResult = await _objectManager.QueryAsync(workspaceId, queryRequest, 0, 0);
-
-			return queryResult.Objects.FirstOrDefault().ArtifactID;
+		private Task<QueryResult> BuildQueryAsync(IObjectManager objectManagerProxy, int workspaceID, QueryRequest queryRequest, int start, int length)
+		{
+			return objectManagerProxy.QueryAsync(workspaceID, queryRequest, start, length);
 		}
 
 		private QueryRequest BuildQueryRequest(IEnumerable<FieldRef> queryFields, int typeId, string condition)
@@ -105,5 +101,43 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 			};
 			return queryRequest;
 		}
+
+		//private async Task<int> GetDefaultProcessingProfileAsync(int workspaceId)
+		//{
+
+		//	IEnumerable<FieldRef> queryFields = new List<FieldRef>() {
+		//			new FieldRef() { Name = "ArtifactID" },
+		//		};
+
+		//	string condition = $"'Name' == 'Imaging Profile'";
+
+		//	QueryRequest objTypeQueryRequest = BuildQueryRequest(queryFields, (int)ArtifactType.ObjectType, condition);
+		//	QueryResult objTypeQueryResult = await _objectManager.QueryAsync(workspaceId, objTypeQueryRequest, 0, 0);
+
+		//	int objectTypeArtifactId = objTypeQueryResult.Objects.FirstOrDefault().ArtifactID;
+
+		//	queryFields = new List<FieldRef>() {
+		//			new FieldRef() { Name = "ArtifactID" },
+		//		};
+
+		//	condition = $"'Name' == 'Basic Default'";
+
+		//	QueryRequest queryRequest = BuildQueryRequest(queryFields, objectTypeArtifactId, condition);
+		//	QueryResult queryResult = await _objectManager.QueryAsync(workspaceId, queryRequest, 0, 0);
+
+		//	return queryResult.Objects.FirstOrDefault().ArtifactID;
+		//}
+
+		//private QueryRequest BuildQueryRequest(IEnumerable<FieldRef> queryFields, int typeId, string condition)
+		//{
+		//	QueryRequest queryRequest = new QueryRequest()
+		//	{
+		//		ObjectType = new ObjectTypeRef() { ArtifactTypeID = typeId },
+		//		Condition = condition,
+		//		Fields = queryFields,
+		//		RelationalField = null
+		//	};
+		//	return queryRequest;
+		//}
 	}
 }
