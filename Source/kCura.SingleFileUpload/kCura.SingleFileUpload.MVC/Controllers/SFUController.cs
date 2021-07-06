@@ -115,8 +115,6 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		[HttpPost]
 		public async Task Upload(MetaUploadFile meta, bool img = false, string controlNumberText = null)
 		{
-			DocumentManager.Instance.LogError(new Exception(JsonConvert.SerializeObject(meta))); //Remove
-
 			ResponseWithElements<string> result = await HandleResponseDynamicResponseAsync<string>(async (response) =>
 				{
 					bool isAdmin = PermissionsManager.Instance.IsUserAdministrator(WorkspaceID, RelativityUserInfo.ArtifactID);
