@@ -14,7 +14,3 @@ For functional tests, point PowerShell to the root of this repository and provid
 ## Online Documentation
 
 [View the documentation in Einstein](https://einstein.kcura.com/display/DV/Single+File+Upload+Application+Considerations)
-
-## Maintainers
-
-Marlon Sanguino marlon.sanguino@relativity.com
