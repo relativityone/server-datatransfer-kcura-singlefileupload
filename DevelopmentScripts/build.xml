@@ -49,7 +49,7 @@
         </Assemblies>
         <ResourceFiles />
         <CustomPages>
-          <CustomPage guid="f864d687-5782-4f4f-82d4-e4327e10e3cf">temporary publish</CustomPage>
+          <CustomPage guid="f864d687-5782-4f4f-82d4-e4327e10e3cf">Source/temporary publish</CustomPage>
         </CustomPages>
       </Application>
     </Applications>
