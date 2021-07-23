@@ -226,8 +226,8 @@ var SFUController = function ($scope, $http, $compile) {
 
                 if (data) {
                     if (vm.fri === true) {
-                        var reviewInterface = $(window.parent.parent.window)[0].ReviewInterface;
                         if (vm.newImage === true || vm.changeImage === true) {
+                            var reviewInterface = window.top.ReviewInterface;
                             reviewInterface.review.fileService.imaging.newImageAdded();
                         }
                     }
@@ -323,19 +323,14 @@ var SFUController = function ($scope, $http, $compile) {
                 }
                 else {
                     if (vm.fdv === true) {
-                        var fncFluid = function () {
-                            if (!!window.top.relativity && !!window.top.relativity.redirectionHelper && typeof window.top.relativity.redirectionHelper.handleNavigateListPageRedirect === 'function') {
-                                window.top.relativity.redirectionHelper.handleNavigateListPageRedirect(window.top.location.href);
-                            } else {
-                                window.parent.location.reload()
-                            }
-                        }
-                        setTimeout(fromDocumentViewer ? fnc : fncFluid, fromDocumentViewer ? 2000 : 3000);
+                        setTimeout(fnc, 2000);
                     }
                     if (vm.fri === true) {
-                        var reviewInterface = $(window.parent.parent.window)[0].ReviewInterface;
-                        reviewInterface.review.fileService.native.newNativeFileAdded();
-                        Close();
+                        setTimeout(() => {
+                            var reviewInterface = window.top.ReviewInterface;
+                            reviewInterface.review.fileService.native.newNativeFileAdded();
+                            Close();
+                        }, 2000);
 					}
                 }
             }
