@@ -1,12 +1,10 @@
-﻿using System.Net.Http;
+﻿using Atata;
+using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using Atata;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 {

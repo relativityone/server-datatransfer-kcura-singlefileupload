@@ -371,9 +371,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD\Controls\DocumentActionsDropDown.cs" />
+    <Compile Include="CD\Controls\DocumentViewerPage.cs" />
+    <Compile Include="CD\Controls\ReviewInterfaceFramePage.cs" />
+    <Compile Include="CD\Controls\DocumentViewerImageProfileOptions.cs" />
     <Compile Include="CD\TestsBase.cs" />
     <Compile Include="CD\PerformanceTests.cs" />
     <Compile Include="CD\UITests.cs" />
+    <Compile Include="CD\Controls\UploadDocumentWindow.cs" />
     <Compile Include="CI\Models\HttpResponse.cs" />
     <Compile Include="CI\Tests\HealthCheckTests.cs" />
     <Compile Include="CI\UI\NativeFileUploadTests.cs" />
