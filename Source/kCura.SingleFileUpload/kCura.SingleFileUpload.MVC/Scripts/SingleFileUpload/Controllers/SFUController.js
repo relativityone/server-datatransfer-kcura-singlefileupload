@@ -227,14 +227,17 @@ var SFUController = function ($scope, $http, $compile) {
                 if (data) {
                     if (vm.fri === true) {
                         if (vm.newImage === true || vm.changeImage === true) {
-                            var reviewInterface = window.top.ReviewInterface;
-                            reviewInterface.review.fileService.imaging.newImageAdded();
+                            setTimeout(() => {
+                                var reviewInterface = window.top.ReviewInterface;
+                                reviewInterface.review.fileService.imaging.newImageAdded();
+                                Close();
+                            }, 2000);
                         }
                     }
                     else {
                         window.top.documentViewer.WaitForImaging();
+                        Close();
 					}
-                    Close();
                 }
             }, function (error) {
                 vm.status = 2;
