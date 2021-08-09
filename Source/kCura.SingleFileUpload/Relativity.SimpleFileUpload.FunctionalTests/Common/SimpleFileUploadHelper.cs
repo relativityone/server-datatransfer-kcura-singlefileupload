@@ -1,9 +1,10 @@
-﻿using System.Net.Http;
+﻿using Atata;
+using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using Atata;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 {
@@ -26,12 +27,34 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 			}
 		}
 
+		public static async Task<HttpResponseMessage> UploadFromReviewInterfaceAsync(HttpClient client, int workspaceId, int documentId, FileInfo file, bool img)
+		{
+			var query = HttpUtility.ParseQueryString(string.Empty);
+
+			query["AppID"] = workspaceId.ToString();
+			query["img"] = img.ToString();
+
+			using (var content = new MultipartFormDataContent())
+			using (var fileStream = File.OpenRead(file.FullName))
+			{
+				StreamContent stream = new StreamContent(fileStream);
+				content.Add(stream, "file", file.Name);
+				content.Add(new StringContent("-1"), String.Format("\"{0}\"", "fid"));
+				content.Add(new StringContent(documentId.ToString()), String.Format("\"{0}\"", "did"));
+				content.Add(new StringContent("false"), String.Format("\"{0}\"", "fdv"));
+				content.Add(new StringContent("true"), String.Format("\"{0}\"", "fri"));
+				content.Add(new StringContent("false"), String.Format("\"{0}\"", "force"));
+
+				return await client.PostAsync($"sfu/Upload?{query}", content).ConfigureAwait(false);
+			}
+		}
+
 		public static Task<HttpResponseMessage> CheckUploadStatusAsync(HttpClient client, int workspaceId, string controlNumber)
 		{
 			var query = HttpUtility.ParseQueryString(string.Empty);
 			query["AppID"] = workspaceId.ToString();
 			query["DocumentName"] = controlNumber;
-			
+
 			return client.PostAsync($"sfu/checkUploadStatus?{query}", new StringContent(string.Empty));
 		}
 

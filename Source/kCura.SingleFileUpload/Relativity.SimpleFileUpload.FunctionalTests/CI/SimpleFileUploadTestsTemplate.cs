@@ -1,11 +1,11 @@
-﻿using System.Net.Http;
-using Polly;
+﻿using Polly;
 using Polly.Retry;
 using Relativity.Testing.Framework;
 using Relativity.Testing.Framework.Api.Services;
 using Relativity.Testing.Framework.Models;
 using Relativity.Testing.Framework.Web;
 using Relativity.Testing.Identification;
+using System.Net.Http;
 
 namespace Relativity.SimpleFileUpload.FunctionalTests.CI
 {
