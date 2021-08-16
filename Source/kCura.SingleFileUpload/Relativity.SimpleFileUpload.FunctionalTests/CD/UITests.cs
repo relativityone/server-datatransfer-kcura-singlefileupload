@@ -88,7 +88,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		}
 
 		[IdentifiedTest("FB9B793F-FB72-4F92-A1F9-C6405D650B2E")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public void ReplaceNativeFile_FromDocumentViewer_GoldFlow()
 		{
 			// Arrange
@@ -148,7 +147,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		}
 
 		[IdentifiedTest("E88D3D1C-7497-4B77-A8F1-E5139F6290D0")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public void ReplaceImageFile_FromDocumentViewer_GoldFlow()
 		{
 			// Arrange
