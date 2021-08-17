@@ -2,6 +2,7 @@
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Relativity.API;
 using Relativity.CustomPages;
@@ -47,6 +48,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				imaging.Image = false;
 				imaging.NewImage = false;
 				imaging.ProfileID = 0;
+				imaging.Fri = false;
 			}
 			else
 			{
@@ -57,6 +59,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				imaging.NewImage = !string.IsNullOrEmpty(jObject["newImage"].ToString()) ? (bool)jObject["newImage"] : default(bool);
 				imaging.ProfileID = !string.IsNullOrEmpty(jObject["profileID"].ToString()) ? (int)jObject["profileID"] : default(int);
 				imaging.ErrorFile = !string.IsNullOrEmpty(jObject["errorFile"].ToString()) ? (int)jObject["errorFile"] : default(int);
+				imaging.Fri = !string.IsNullOrEmpty(jObject["fri"].ToString()) ? (bool?)jObject["fri"] : default(bool);
 			}
 
 			ViewBag.AppID = WorkspaceID;
@@ -71,10 +74,11 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.ProfileID = imaging.ProfileID;
 			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassiveAsync().ConfigureAwait(false);
 			ViewBag.MaxFilesToUpload = await InstanceSettingManager.Instance.GetMaxFilesInstanceSettingAsync().ConfigureAwait(false);
+			ViewBag.FRI = imaging.Fri.ToString().ToLower();
 			return View();
 		}
 
-		private async Task<bool> ValidatePermissionAsync(bool img, bool fdv)
+		private async Task<bool> ValidatePermissionAsync(bool img, bool fdv, bool fri)
 		{
 			bool hasPermission = false;
 
@@ -93,7 +97,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			}
 			else
 			{
-				if (fdv)
+				if (fdv || fri)
 				{
 					hasPermission = await PermissionsManager.Instance.CurrentUserHasPermissionToObjectTypeAsync(this.WorkspaceID,
 						Core.Helpers.Constants.DOCUMENTOBJECTTYPE, Core.Helpers.Constants.PERMISSIONREPLACEDOCUMENT).ConfigureAwait(false);
@@ -119,7 +123,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 					{
 						if (!isAdmin)
 						{
-							bool hasPermission = await ValidatePermissionAsync(img, meta.fdv).ConfigureAwait(false);
+							bool hasPermission = await ValidatePermissionAsync(img, meta.fdv, meta.fri).ConfigureAwait(false);
 
 							if (!hasPermission)
 							{
@@ -144,50 +148,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 							bool isDataGrid = await DocumentManager.Instance.IsDataGridEnabledAsync(WorkspaceID).ConfigureAwait(false);
 							string documentName = string.IsNullOrEmpty(controlNumberText) ? Path.GetFileNameWithoutExtension(fileName) : controlNumberText;
 							int docIDByName = DocumentManager.Instance.GetDocByName(documentName);
-							if (!meta.fdv)
-							{
-								meta.did = docIDByName;
-								if (meta.did == -1 || meta.force)
-								{
-									ExportedMetadata transientMetadata = GetTransient(file, fileName);
-									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.Native, fileExt);
-
-									if (ValidateFile(transientMetadata.TempFileLocation))
-									{
-										response.Success = false;
-										response.Message = "This file type is unsupported";
-										DocumentManager.Instance.DeleteTempFile(transientMetadata.TempFileLocation);
-										return resultStr;
-									}
-									if (!string.IsNullOrEmpty(controlNumberText))
-									{
-										transientMetadata.ControlNumber = controlNumberText;
-									}
-									if (meta.did == -1)
-									{
-										Response resultUpload = await DocumentManager.Instance.SaveSingleDocumentAsync(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
-											this.RelativityUserInfo.WorkspaceUserArtifactID).ConfigureAwait(false);
-										if (resultUpload.Success)
-										{
-											resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
-										}
-										else
-										{
-											response.Success = false;
-											response.Message = resultUpload.Result;
-											return resultStr;
-										}
-
-									}
-								}
-								else
-								{
-									response.Success = false;
-									response.Message = "The Control Number you selected is already in use. Try again.";
-									return resultStr;
-								}
-							}
-							else
+							if (meta.fdv || meta.fri)
 							{
 								if (img)
 								{
@@ -274,6 +235,50 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 										AuditManager.instance.CreateAuditRecord(WorkspaceID, meta.did, AuditAction.File_Upload, details, RelativityUserInfo.AuditWorkspaceUserArtifactID);
 									}
 								}
+							}
+							else
+							{
+								meta.did = docIDByName;
+								if (meta.did == -1 || meta.force)
+								{
+									ExportedMetadata transientMetadata = GetTransient(file, fileName);
+									transientMetadata.TempFileLocation = DocumentManager.Instance.InstanceFile(transientMetadata.Native, fileExt);
+
+									if (ValidateFile(transientMetadata.TempFileLocation))
+									{
+										response.Success = false;
+										response.Message = "This file type is unsupported";
+										DocumentManager.Instance.DeleteTempFile(transientMetadata.TempFileLocation);
+										return resultStr;
+									}
+									if (!string.IsNullOrEmpty(controlNumberText))
+									{
+										transientMetadata.ControlNumber = controlNumberText;
+									}
+									if (meta.did == -1)
+									{
+										Response resultUpload = await DocumentManager.Instance.SaveSingleDocumentAsync(transientMetadata, meta.fid, GetWebAPIURL(), WorkspaceID,
+											this.RelativityUserInfo.WorkspaceUserArtifactID).ConfigureAwait(false);
+										if (resultUpload.Success)
+										{
+											resultStr = string.IsNullOrEmpty(controlNumberText) ? resultUpload.Result : controlNumberText;
+										}
+										else
+										{
+											response.Success = false;
+											response.Message = resultUpload.Result;
+											return resultStr;
+										}
+
+									}
+								}
+								else
+								{
+									response.Success = false;
+									response.Message = "The Control Number you selected is already in use. Try again.";
+									return resultStr;
+								}
+
 							}
 							if (string.IsNullOrEmpty(resultStr))
 							{

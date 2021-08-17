@@ -27,5 +27,19 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.Common
 				File = new FileInfo(filePath)
 			};
 		}
+
+		public static TestFile PrepareTestFile(string filename)
+		{
+			string controlNumber = Guid.NewGuid().ToString();
+			string filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, $"{controlNumber}.{Path.GetExtension(filename)}");
+
+			File.Copy(GetFileLocation(filename), filePath);
+
+			return new TestFile
+			{
+				ControlNumber = controlNumber,
+				File = new FileInfo(filePath)
+			};
+		}
 	}
 }

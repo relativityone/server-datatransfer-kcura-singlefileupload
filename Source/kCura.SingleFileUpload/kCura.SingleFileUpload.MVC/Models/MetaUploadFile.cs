@@ -5,6 +5,7 @@
 		public int fid { get; set; }
 		public int did { get; set; }
 		public bool fdv { get; set; }
+		public bool fri { get; set; }
 		public bool force { get; set; }
 	}
 }
