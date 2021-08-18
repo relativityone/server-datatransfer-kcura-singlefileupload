@@ -57,7 +57,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		}
 
 		[IdentifiedTest("6750BD56-3BFA-4FF9-8322-E18FB335BF4A")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public void UploadNativeFile_FromDocumentViewer_GoldFlow()
 		{
 			// Arrange
@@ -116,7 +115,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 		}
 
 		[IdentifiedTest("2D2F126F-7E55-477C-BF65-35234C3A82A5")]
-		[TestExecutionCategory.RAPCD.Verification.Functional]
 		public void UploadImageFile_FromDocumentViewer_GoldFlow()
 		{
 			// Arrange
@@ -231,6 +229,4 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CD
 				FirstOrDefault().Name;
 		}
 	}
-
-
 }
