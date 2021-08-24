@@ -2,7 +2,6 @@
 using Moq;
 using NUnit.Framework;
 using Relativity.Toggles;
-using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Relativity.Testing.Identification;
@@ -25,27 +24,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			ToggleProvider.Current = toggleProvider.Object;
 		}
 
-		[Test]
-		public async Task GetChangeFileNameAsync_ShouldReturnToggle()
-		{
-			// Act
-			bool result = await ToggleManager.Instance.GetChangeFileNameAsync();
-
-			// Assert
-			result.Should().BeTrue();
-		}
-
-		[Test]
-		public void SetChangeFileNameAsync_ShouldNotThrow()
-		{
-			// Act
-			Action action = () => ToggleManager.Instance.SetChangeFileNameAsync(true);
-
-			// Assert
-			action.Should().NotThrow();
-		}
-
-		[Test]
+        [Test]
 		public async Task GetCheckSFUFieldsAsync_ShouldReturnToggle()
 		{
 			// Act
@@ -53,36 +32,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			// Assert
 			result.Should().BeTrue();
-		}
-
-		[Test]
-		public void SetCheckSFUFieldsAsync_ShouldNotThrow()
-		{
-			// Act
-			Action action = () => ToggleManager.Instance.SetCheckSFUFieldsAsync(true);
-
-			// Assert
-			action.Should().NotThrow();
-		}
-
-		[Test]
-		public async Task GetValidateSFUCustomPermissionsAsync_ShouldReturnToggle()
-		{
-			// Act
-			bool result = await ToggleManager.Instance.GetValidateSFUCustomPermissionsAsync();
-
-			// Assert
-			result.Should().BeTrue();
-		}
-
-		[Test]
-		public void SetValidateSFUCustomPermissionsAsync_ShouldNotThrow()
-		{
-			// Act
-			Action action = () => ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(true);
-
-			// Assert
-			action.Should().NotThrow();
 		}
 
 		[Test]
@@ -94,18 +43,5 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			// Assert
 			result.Should().BeTrue();
 		}
-
-		[Test]
-		public void SetCheckUploadMassiveAsync_ShouldNotThrow()
-		{
-			// Act
-			Action action = () => ToggleManager.Instance.SetCheckUploadMassiveAsync(true);
-
-			// Assert
-			action.Should().NotThrow();
-		}
-
-
-
 	}
 }
