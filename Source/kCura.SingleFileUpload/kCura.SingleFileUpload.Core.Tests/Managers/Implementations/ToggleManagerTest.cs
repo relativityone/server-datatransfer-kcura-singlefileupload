@@ -24,31 +24,11 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			ToggleProvider.Current = toggleProvider.Object;
 		}
 
-		[Test]
-		public async Task GetChangeFileNameAsync_ShouldReturnToggle()
-		{
-			// Act
-			bool result = await ToggleManager.Instance.GetChangeFileNameAsync();
-
-			// Assert
-			result.Should().BeTrue();
-		}
-
         [Test]
 		public async Task GetCheckSFUFieldsAsync_ShouldReturnToggle()
 		{
 			// Act
 			bool result = await ToggleManager.Instance.GetCheckSFUFieldsAsync();
-
-			// Assert
-			result.Should().BeTrue();
-		}
-
-        [Test]
-		public async Task GetValidateSFUCustomPermissionsAsync_ShouldReturnToggle()
-		{
-			// Act
-			bool result = await ToggleManager.Instance.GetValidateSFUCustomPermissionsAsync();
 
 			// Assert
 			result.Should().BeTrue();
