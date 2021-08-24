@@ -21,19 +21,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             return result;
         }
 
-        public Task SetChangeFileNameAsync(bool enabled)
-        {
-	        return ToggleProvider.Current.SetAsync<ChangeFileName>(enabled);
-        }
-
         public Task<bool> GetCheckSFUFieldsAsync()
         {
             return ToggleProvider.Current.IsEnabledAsync<CheckSFUFields>();
-        }
-
-        public Task SetCheckSFUFieldsAsync(bool enabled)
-        {
-	        return ToggleProvider.Current.SetAsync<CheckSFUFields>(enabled);
         }
 
         public Task<bool> GetValidateSFUCustomPermissionsAsync()
@@ -41,19 +31,9 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 	        return ToggleProvider.Current.IsEnabledAsync<ValidateSFUCustomPermissions>();
         }
 
-        public Task SetValidateSFUCustomPermissionsAsync(bool enabled)
-        {
-	        return ToggleProvider.Current.SetAsync<ValidateSFUCustomPermissions>(enabled);
-        }
-
         public Task<bool> GetCheckUploadMassiveAsync()
         {
             return ToggleProvider.Current.IsEnabledAsync<UploadMassiveDocuments>();
-        }
-
-        public Task SetCheckUploadMassiveAsync(bool enabled)
-        {
-	        return ToggleProvider.Current.SetAsync<UploadMassiveDocuments>(enabled);
         }
     }
 }

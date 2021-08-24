@@ -40,24 +40,7 @@ namespace kCura.SingleFileUpload.Resources.EventHandlers
 
 		private static async Task ExecuteTelemetryAsync()
 		{
-			if (await ToggleManager.Instance.GetChangeFileNameAsync().ConfigureAwait(false))
-			{
-				await ToggleManager.Instance.SetChangeFileNameAsync(false).ConfigureAwait(false);
-			}
-
-			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
-			{
-				await ToggleManager.Instance.SetCheckSFUFieldsAsync(false).ConfigureAwait(false);
-			}
-
-			if (!await ToggleManager.Instance.GetCheckUploadMassiveAsync().ConfigureAwait(false))
-			{
-				await ToggleManager.Instance.SetCheckUploadMassiveAsync(true).ConfigureAwait(false);
-			}
-
-			await ToggleManager.Instance.SetValidateSFUCustomPermissionsAsync(false).ConfigureAwait(false);
-
-			await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync().ConfigureAwait(false);
+            await InstanceSettingManager.Instance.CreateMaxFilesInstanceSettingAsync().ConfigureAwait(false);
 		}
 	}
 
