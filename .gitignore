@@ -84,3 +84,4 @@ FunctionalTest.runsettings
 RV_*/
 temporary publish/
 oi
+**/.idea/.**
