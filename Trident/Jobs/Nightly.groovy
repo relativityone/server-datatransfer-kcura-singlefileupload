@@ -2,7 +2,7 @@
 
 jobWithSut {
     slackChannel = "sfu_trident"
-    sutTemplate = "aio-ninebark-0"
+    sutTemplate = "aio-prairiesmoke-2"
 	relativityBranch = "develop"
     jobScript = "Trident/Scripts/nightly-job.ps1"
     cron = "0 3 * * *"

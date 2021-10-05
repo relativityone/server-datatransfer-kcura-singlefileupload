@@ -1,6 +1,5 @@
  @Library('ProjectMayhem@v1')_
 rapCD {
     slackChannel = "sfu_rapcd"
-    sutTemplate = "aio-ninebark-eau"
-    relativityBranch = "develop"
+    sutTemplate = "aio-prairiesmoke-2"
 }
