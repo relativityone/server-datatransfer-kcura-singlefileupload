@@ -368,11 +368,8 @@
     <Content Include="Content\Upload.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\opensans\opensans-bold-webfont.svg" />
-    <Content Include="fonts\opensans\opensans-light-demo.html" />
     <Content Include="fonts\opensans\opensans-light-webfont.svg" />
-    <Content Include="fonts\opensans\opensans-regular-demo.html" />
     <Content Include="fonts\opensans\opensans-regular-webfont.svg" />
-    <Content Include="fonts\opensans\opensans-semibold-demo.html" />
     <Content Include="fonts\opensans\opensans-semibold-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\opensans\opensans-bold-webfont.eot" />
