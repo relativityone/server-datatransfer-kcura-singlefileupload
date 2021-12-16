@@ -79,8 +79,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2021.11.0.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2021.12.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
@@ -97,8 +97,8 @@
     <Reference Include="Relativity.Core, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Core.10.2.9.12\lib\net462\Relativity.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.16.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.DataTransfer.Legacy.SDK, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.DataTransfer.Legacy.SDK.dll</HintPath>
@@ -1213,11 +1213,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" />
+  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>

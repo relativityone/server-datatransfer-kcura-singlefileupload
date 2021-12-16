@@ -85,8 +85,8 @@
     <Reference Include="MailKit, Version=2.2.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MailKit.2.2.0\lib\net45\MailKit.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.15.0.44797, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.2.15.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.17.0.146, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.ApplicationInsights.2.17.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -125,8 +125,8 @@
     <Reference Include="NUnitExtras.HierarchicalCategories, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitExtras.HierarchicalCategories.1.4.0\lib\net45\NUnitExtras.HierarchicalCategories.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2021.11.0.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2021.12.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Platform.Keywords.ADS, Version=9.3.196.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Platform.Keywords.9.3.196.6\lib\net45\Platform.Keywords.ADS.dll</HintPath>
@@ -155,8 +155,8 @@
     <Reference Include="Relativity.CustomPages, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.CustomPages.10.2.9.12\lib\net462\Relativity.CustomPages.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.30.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.16.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.DataTransfer.Legacy.SDK, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.DataTransfer.Legacy.SDK.dll</HintPath>
@@ -221,17 +221,17 @@
     <Reference Include="Relativity.Test.Helpers, Version=7.4.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.7.4.1.1\lib\net462\Relativity.Test.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.3.3.1\lib\net462\Relativity.Testing.Framework.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.7.1.0\lib\net462\Relativity.Testing.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Api, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.3.2.2\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.Api, Version=6.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Api.6.0.1\lib\net462\Relativity.Testing.Framework.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.RingSetup, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\lib\net462\Relativity.Testing.Framework.RingSetup.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.RingSetup, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.RingSetup.0.17.0\lib\net462\Relativity.Testing.Framework.RingSetup.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Testing.Framework.Web, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.1.0.1\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
+    <Reference Include="Relativity.Testing.Framework.Web, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Testing.Framework.Web.1.2.0\lib\net462\Relativity.Testing.Framework.Web.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Testing.Identification, Version=3.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Testing.Identification.3.12.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
@@ -267,8 +267,8 @@
     <Reference Include="System.Data.SqlClient, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Data.SqlClient.4.6.0\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
@@ -289,8 +289,8 @@
       <HintPath>..\..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
@@ -804,16 +804,16 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets'))" />
     <Error Condition="!Exists('..\..\packages\NUnit.3.13.2\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.13.2\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.17.0\build\Relativity.Testing.Framework.RingSetup.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.Testing.Framework.RingSetup.0.17.0\build\Relativity.Testing.Framework.RingSetup.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets" Condition="Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets')" />
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" />
+  <Import Project="..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" />
+  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\Relativity.Testing.Framework.RingSetup.0.17.0\build\Relativity.Testing.Framework.RingSetup.targets" Condition="Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.17.0\build\Relativity.Testing.Framework.RingSetup.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
