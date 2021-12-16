@@ -62,16 +62,10 @@
       <HintPath>..\..\packages\RelativityDev.DbContextHelper.5.0.0.1\lib\net462\DbContextHelper.dll</HintPath>
     </Reference>
     <Reference Include="FaspManager, Version=3.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\FaspManager.dll</HintPath>
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\FaspManager.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions, Version=5.10.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FluentAssertions.5.10.3\lib\net45\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="FreeImageNET, Version=3.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\lib\net462\FreeImageNET.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\lib\net462\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="kCura, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\kCura.10.3.5.3\lib\net462\kCura.dll</HintPath>
@@ -131,8 +125,8 @@
     <Reference Include="NUnitExtras.HierarchicalCategories, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnitExtras.HierarchicalCategories.1.4.0\lib\net45\NUnitExtras.HierarchicalCategories.dll</HintPath>
     </Reference>
-    <Reference Include="oi, Version=2020.7.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\lib\net40\oi.dll</HintPath>
+    <Reference Include="oi, Version=2021.11.0.21, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\lib\net40\oi.dll</HintPath>
     </Reference>
     <Reference Include="Platform.Keywords.ADS, Version=9.3.196.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Platform.Keywords.9.3.196.6\lib\net45\Platform.Keywords.ADS.dll</HintPath>
@@ -161,23 +155,26 @@
     <Reference Include="Relativity.CustomPages, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.CustomPages.10.2.9.12\lib\net462\Relativity.CustomPages.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.13.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.30.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.DataTransfer.Legacy.SDK, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.DataTransfer.Legacy.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.DataTransfer.MessageService, Version=10.2.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.DataTransfer.MessageService.10.2.0\lib\Relativity.DataTransfer.MessageService.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataTransfer.Nodes, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.DataTransfer.Nodes.dll</HintPath>
+    <Reference Include="Relativity.DataTransfer.Nodes, Version=12.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.DataTransfer.Nodes.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Kepler, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.2.9.2\lib\net462\Relativity.Kepler.dll</HintPath>
+    <Reference Include="Relativity.Kepler, Version=2.14.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Logging, Version=2018.11.8.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.2018.11.8\lib\net462\Relativity.Logging.dll</HintPath>
+    <Reference Include="Relativity.Logging, Version=2019.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.2019.5.1\lib\net462\Relativity.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Logging.Interfaces, Version=2018.11.8.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.Interfaces.2018.11.8\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Logging.Interfaces, Version=3000.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Logging.Interfaces.3000.0.1\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.OAuth2Client, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.OAuth2Client.1.5.2\lib\net462\Relativity.OAuth2Client.dll</HintPath>
@@ -197,11 +194,11 @@
     <Reference Include="Relativity.SecretCatalog, Version=1.0.18.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.18\lib\Relativity.SecretCatalog.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.DataContracts, Version=11.3.11.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Services.DataContracts.11.3.11.1\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
+    <Reference Include="Relativity.Services.DataContracts, Version=13.2.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.Interfaces, Version=11.3.11.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Services.Interfaces.11.3.11.1\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Services.Interfaces, Version=13.2.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Services.Interfaces.Private, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Services.Interfaces.Private.10.2.9.12\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
@@ -212,14 +209,14 @@
     <Reference Include="Relativity.Services.Layout.Interfaces, Version=1.1.46.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Services.Layout.Interfaces.1.1.46\lib\Relativity.Services.Layout.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Kepler.Client.2.9.2\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=2.14.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=3000.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.3000.0.0\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
+    <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=3003.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.3003.1.0\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Telemetry.Services.Interface, Version=3000.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.3000.0.0\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
+    <Reference Include="Relativity.Telemetry.Services.Interface, Version=3003.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.3003.0.2\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Test.Helpers, Version=7.4.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RelativityDev.RelativityTestHelpers.7.4.1.1\lib\net462\Relativity.Test.Helpers.dll</HintPath>
@@ -239,20 +236,20 @@
     <Reference Include="Relativity.Testing.Identification, Version=3.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Testing.Identification.3.12.0\lib\net462\Relativity.Testing.Identification.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client, Version=7.2.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.Transfer.Client.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client, Version=7.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.Transfer.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Aspera, Version=7.2.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.Transfer.Client.Aspera.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.Aspera, Version=7.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.Transfer.Client.Aspera.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Core, Version=7.2.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.Transfer.Client.Core.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.Core, Version=7.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.Transfer.Client.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.FileShare, Version=7.2.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.Transfer.Client.FileShare.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.FileShare, Version=7.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.Transfer.Client.FileShare.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Transfer.Client.Http, Version=7.2.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\relativity.transfer.client.7.2.26\lib\net462\Relativity.Transfer.Client.Http.dll</HintPath>
+    <Reference Include="Relativity.Transfer.Client.Http, Version=7.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.Transfer.Client.Http.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -396,6 +393,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Files\single_native.docx" />
+    <None Include="oi\unmanaged\adinit.dat" />
+    <None Include="oi\unmanaged\cmmap000.bin" />
+    <None Include="oi\unmanaged\compreg.bin" />
+    <None Include="oi\unmanaged\oitnsf.id" />
+    <None Include="oi\unmanaged\oit_font_metrics.db" />
+    <None Include="oi\unmanaged\RSMFTemplate.docx" />
+    <None Include="oi\webview\oit.css.map" />
+    <None Include="oi\webview\oit.js.map" />
+    <None Include="oi\webview\oit.navbar.js.map" />
+    <None Include="oi\webview\oit.statusbar.js.map" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -430,6 +437,325 @@
   <ItemGroup>
     <Content Include="Files\single_image.jpg" />
     <Content Include="Files\single_long_text.txt" />
+    <Content Include="oi\docs\fileids_values_only_sorted.txt" />
+    <Content Include="oi\docs\fileids_values_strs.txt" />
+    <Content Include="oi\unmanaged\audio.bmp" />
+    <Content Include="oi\unmanaged\debmp-R1.dll" />
+    <Content Include="oi\unmanaged\dehex-R1.dll" />
+    <Content Include="oi\unmanaged\dess-R1.dll" />
+    <Content Include="oi\unmanaged\detree-R1.dll" />
+    <Content Include="oi\unmanaged\devect-R1.dll" />
+    <Content Include="oi\unmanaged\dewp-R1.dll" />
+    <Content Include="oi\unmanaged\emojis64.bmp" />
+    <Content Include="oi\unmanaged\excatest-R1.dll" />
+    <Content Include="oi\unmanaged\exedrm-R1.dll" />
+    <Content Include="oi\unmanaged\exgdsf-R1.dll" />
+    <Content Include="oi\unmanaged\exh5-R1.dll" />
+    <Content Include="oi\unmanaged\exhtml-R1.dll" />
+    <Content Include="oi\unmanaged\exihtml-R1.dll" />
+    <Content Include="oi\unmanaged\eximg-R1.dll" />
+    <Content Include="oi\unmanaged\exitext-R1.dll" />
+    <Content Include="oi\unmanaged\exixml-R1.dll" />
+    <Content Include="oi\unmanaged\expage-R1.dll" />
+    <Content Include="oi\unmanaged\expagelayout-R1.dll" />
+    <Content Include="oi\unmanaged\ibfpx2-R1.dll" />
+    <Content Include="oi\unmanaged\ibgp42-R1.dll" />
+    <Content Include="oi\unmanaged\ibjpg2-R1.dll" />
+    <Content Include="oi\unmanaged\ibpcd2-R1.dll" />
+    <Content Include="oi\unmanaged\ibpsd2-R1.dll" />
+    <Content Include="oi\unmanaged\ibxbm2-R1.dll" />
+    <Content Include="oi\unmanaged\ibxpm2-R1.dll" />
+    <Content Include="oi\unmanaged\ibxwd2-R1.dll" />
+    <Content Include="oi\unmanaged\icons256.bmp" />
+    <Content Include="oi\unmanaged\imcd32-R1.dll" />
+    <Content Include="oi\unmanaged\imcd42-R1.dll" />
+    <Content Include="oi\unmanaged\imcd52-R1.dll" />
+    <Content Include="oi\unmanaged\imcd62-R1.dll" />
+    <Content Include="oi\unmanaged\imcd72-R1.dll" />
+    <Content Include="oi\unmanaged\imcd82-R1.dll" />
+    <Content Include="oi\unmanaged\imcdr2-R1.dll" />
+    <Content Include="oi\unmanaged\imcm52-R1.dll" />
+    <Content Include="oi\unmanaged\imcm62-R1.dll" />
+    <Content Include="oi\unmanaged\imcm72-R1.dll" />
+    <Content Include="oi\unmanaged\imcmx2-R1.dll" />
+    <Content Include="oi\unmanaged\imdsf2-R1.dll" />
+    <Content Include="oi\unmanaged\imfmv2-R1.dll" />
+    <Content Include="oi\unmanaged\imgdf2-R1.dll" />
+    <Content Include="oi\unmanaged\imgem2-R1.dll" />
+    <Content Include="oi\unmanaged\imigs2-R1.dll" />
+    <Content Include="oi\unmanaged\immet2-R1.dll" />
+    <Content Include="oi\unmanaged\impif2-R1.dll" />
+    <Content Include="oi\unmanaged\impsi2-R1.dll" />
+    <Content Include="oi\unmanaged\impsz2-R1.dll" />
+    <Content Include="oi\unmanaged\imps_2-R1.dll" />
+    <Content Include="oi\unmanaged\imrnd2-R1.dll" />
+    <Content Include="oi\unmanaged\iphgw2-R1.dll" />
+    <Content Include="oi\unmanaged\isgdi32-R1.dll" />
+    <Content Include="oi\unmanaged\libde265.dll" />
+    <Content Include="oi\unmanaged\libheif.dll" />
+    <Content Include="oi\unmanaged\ocemul-R1.dll" />
+    <Content Include="oi\unmanaged\oicomponents-R1.dll" />
+    <Content Include="oi\unmanaged\oilink.exe" />
+    <Content Include="oi\unmanaged\oilink.jar" />
+    <Content Include="oi\unmanaged\osgd-R1.dll" />
+    <Content Include="oi\unmanaged\ospdf-R1.dll" />
+    <Content Include="oi\unmanaged\oswebview-R1.dll" />
+    <Content Include="oi\unmanaged\oswin64-R1.dll" />
+    <Content Include="oi\unmanaged\sccanno-R1.dll" />
+    <Content Include="oi\unmanaged\sccca-R1.dll" />
+    <Content Include="oi\unmanaged\sccch-R1.dll" />
+    <Content Include="oi\unmanaged\sccda-R1.dll" />
+    <Content Include="oi\unmanaged\sccdu-R1.dll" />
+    <Content Include="oi\unmanaged\sccex-R1.dll" />
+    <Content Include="oi\unmanaged\sccexind-R1.dll" />
+    <Content Include="oi\unmanaged\sccfa-R1.dll" />
+    <Content Include="oi\unmanaged\sccfi-R1.dll" />
+    <Content Include="oi\unmanaged\sccfmt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfnt-R1.dll" />
+    <Content Include="oi\unmanaged\sccfut-R1.dll" />
+    <Content Include="oi\unmanaged\sccimg-R1.dll" />
+    <Content Include="oi\unmanaged\sccind-R1.dll" />
+    <Content Include="oi\unmanaged\scclo-R1.dll" />
+    <Content Include="oi\unmanaged\sccole-R1.dll" />
+    <Content Include="oi\unmanaged\sccole2-R1.dll" />
+    <Content Include="oi\unmanaged\sccta-R1.dll" />
+    <Content Include="oi\unmanaged\sccut-R1.dll" />
+    <Content Include="oi\unmanaged\sccvw-R1.dll" />
+    <Content Include="oi\unmanaged\vsacad-R1.dll" />
+    <Content Include="oi\unmanaged\vsacs-R1.dll" />
+    <Content Include="oi\unmanaged\vsami-R1.dll" />
+    <Content Include="oi\unmanaged\vsarc-R1.dll" />
+    <Content Include="oi\unmanaged\vsasf-R1.dll" />
+    <Content Include="oi\unmanaged\vsatm-R1.dll" />
+    <Content Include="oi\unmanaged\vsbdr-R1.dll" />
+    <Content Include="oi\unmanaged\vsbmp-R1.dll" />
+    <Content Include="oi\unmanaged\vscdb-R1.dll" />
+    <Content Include="oi\unmanaged\vscdrx-R1.dll" />
+    <Content Include="oi\unmanaged\vsceos-R1.dll" />
+    <Content Include="oi\unmanaged\vscgm-R1.dll" />
+    <Content Include="oi\unmanaged\vscsv-R1.dll" />
+    <Content Include="oi\unmanaged\vscwt-R1.dll" />
+    <Content Include="oi\unmanaged\vsdbs-R1.dll" />
+    <Content Include="oi\unmanaged\vsdez-R1.dll" />
+    <Content Include="oi\unmanaged\vsdif-R1.dll" />
+    <Content Include="oi\unmanaged\vsdrw-R1.dll" />
+    <Content Include="oi\unmanaged\vsdx-R1.dll" />
+    <Content Include="oi\unmanaged\vsdxf-R1.dll" />
+    <Content Include="oi\unmanaged\vsdxla-R1.dll" />
+    <Content Include="oi\unmanaged\vsdxlm-R1.dll" />
+    <Content Include="oi\unmanaged\vsemf-R1.dll" />
+    <Content Include="oi\unmanaged\vsen4-R1.dll" />
+    <Content Include="oi\unmanaged\vsens-R1.dll" />
+    <Content Include="oi\unmanaged\vsenw-R1.dll" />
+    <Content Include="oi\unmanaged\vseps-R1.dll" />
+    <Content Include="oi\unmanaged\vseshr-R1.dll" />
+    <Content Include="oi\unmanaged\vsexe2-R1.dll" />
+    <Content Include="oi\unmanaged\vsfax-R1.dll" />
+    <Content Include="oi\unmanaged\vsfcd-R1.dll" />
+    <Content Include="oi\unmanaged\vsfcs-R1.dll" />
+    <Content Include="oi\unmanaged\vsfft-R1.dll" />
+    <Content Include="oi\unmanaged\vsflw-R1.dll" />
+    <Content Include="oi\unmanaged\vsfwk-R1.dll" />
+    <Content Include="oi\unmanaged\vsgdsf-R1.dll" />
+    <Content Include="oi\unmanaged\vsgif-R1.dll" />
+    <Content Include="oi\unmanaged\vsgzip-R1.dll" />
+    <Content Include="oi\unmanaged\vsheic-R1.dll" />
+    <Content Include="oi\unmanaged\vshgs-R1.dll" />
+    <Content Include="oi\unmanaged\vshtml-R1.dll" />
+    <Content Include="oi\unmanaged\vshwp-R1.dll" />
+    <Content Include="oi\unmanaged\vshwp2-R1.dll" />
+    <Content Include="oi\unmanaged\vsich-R1.dll" />
+    <Content Include="oi\unmanaged\vsich6-R1.dll" />
+    <Content Include="oi\unmanaged\vsid3-R1.dll" />
+    <Content Include="oi\unmanaged\vsimg-R1.dll" />
+    <Content Include="oi\unmanaged\vsindd-R1.dll" />
+    <Content Include="oi\unmanaged\vsinx-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwok-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwok13-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwon-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwon13-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwop-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwop13-R1.dll" />
+    <Content Include="oi\unmanaged\vsiwp-R1.dll" />
+    <Content Include="oi\unmanaged\vsjbg2-R1.dll" />
+    <Content Include="oi\unmanaged\vsjp2-R1.dll" />
+    <Content Include="oi\unmanaged\vsjw-R1.dll" />
+    <Content Include="oi\unmanaged\vslef-R1.dll" />
+    <Content Include="oi\unmanaged\vsleg-R1.dll" />
+    <Content Include="oi\unmanaged\vslwp7-R1.dll" />
+    <Content Include="oi\unmanaged\vslzh-R1.dll" />
+    <Content Include="oi\unmanaged\vsm11-R1.dll" />
+    <Content Include="oi\unmanaged\vsmanu-R1.dll" />
+    <Content Include="oi\unmanaged\vsmbox-R1.dll" />
+    <Content Include="oi\unmanaged\vsmcw-R1.dll" />
+    <Content Include="oi\unmanaged\vsmdb-R1.dll" />
+    <Content Include="oi\unmanaged\vsmif-R1.dll" />
+    <Content Include="oi\unmanaged\vsmime-R1.dll" />
+    <Content Include="oi\unmanaged\vsmm-R1.dll" />
+    <Content Include="oi\unmanaged\vsmm4-R1.dll" />
+    <Content Include="oi\unmanaged\vsmmfn-R1.dll" />
+    <Content Include="oi\unmanaged\vsmp-R1.dll" />
+    <Content Include="oi\unmanaged\vsmpp-R1.dll" />
+    <Content Include="oi\unmanaged\vsmsg-R1.dll" />
+    <Content Include="oi\unmanaged\vsmsw-R1.dll" />
+    <Content Include="oi\unmanaged\vsmwkd-R1.dll" />
+    <Content Include="oi\unmanaged\vsmwks-R1.dll" />
+    <Content Include="oi\unmanaged\vsmwp2-R1.dll" />
+    <Content Include="oi\unmanaged\vsmwpf-R1.dll" />
+    <Content Include="oi\unmanaged\vsmwrk-R1.dll" />
+    <Content Include="oi\unmanaged\vsnsf-R1.dll" />
+    <Content Include="oi\unmanaged\vsogg-R1.dll" />
+    <Content Include="oi\unmanaged\vsolm-R1.dll" />
+    <Content Include="oi\unmanaged\vsone-R1.dll" />
+    <Content Include="oi\unmanaged\vsow-R1.dll" />
+    <Content Include="oi\unmanaged\vspbm-R1.dll" />
+    <Content Include="oi\unmanaged\vspcl-R1.dll" />
+    <Content Include="oi\unmanaged\vspcx-R1.dll" />
+    <Content Include="oi\unmanaged\vspdf-R1.dll" />
+    <Content Include="oi\unmanaged\vspdfi-R1.dll" />
+    <Content Include="oi\unmanaged\vspdx-R1.dll" />
+    <Content Include="oi\unmanaged\vspfs-R1.dll" />
+    <Content Include="oi\unmanaged\vspgl-R1.dll" />
+    <Content Include="oi\unmanaged\vspic-R1.dll" />
+    <Content Include="oi\unmanaged\vspict-R1.dll" />
+    <Content Include="oi\unmanaged\vspng-R1.dll" />
+    <Content Include="oi\unmanaged\vspntg-R1.dll" />
+    <Content Include="oi\unmanaged\vspp12-R1.dll" />
+    <Content Include="oi\unmanaged\vspp2-R1.dll" />
+    <Content Include="oi\unmanaged\vspp7-R1.dll" />
+    <Content Include="oi\unmanaged\vspp97-R1.dll" />
+    <Content Include="oi\unmanaged\vsppl-R1.dll" />
+    <Content Include="oi\unmanaged\vspsd-R1.dll" />
+    <Content Include="oi\unmanaged\vspsp6-R1.dll" />
+    <Content Include="oi\unmanaged\vspst-R1.dll" />
+    <Content Include="oi\unmanaged\vspstf-R1.dll" />
+    <Content Include="oi\unmanaged\vsptf-R1.dll" />
+    <Content Include="oi\unmanaged\vsqa-R1.dll" />
+    <Content Include="oi\unmanaged\vsqad-R1.dll" />
+    <Content Include="oi\unmanaged\vsqp6-R1.dll" />
+    <Content Include="oi\unmanaged\vsqp9-R1.dll" />
+    <Content Include="oi\unmanaged\vsqt-R1.dll" />
+    <Content Include="oi\unmanaged\vsrar-R1.dll" />
+    <Content Include="oi\unmanaged\vsras-R1.dll" />
+    <Content Include="oi\unmanaged\vsrbs-R1.dll" />
+    <Content Include="oi\unmanaged\vsrft-R1.dll" />
+    <Content Include="oi\unmanaged\vsrfx-R1.dll" />
+    <Content Include="oi\unmanaged\vsriff-R1.dll" />
+    <Content Include="oi\unmanaged\vsrpix-R1.dll" />
+    <Content Include="oi\unmanaged\vsrtf-R1.dll" />
+    <Content Include="oi\unmanaged\vssam-R1.dll" />
+    <Content Include="oi\unmanaged\vssc5-R1.dll" />
+    <Content Include="oi\unmanaged\vssdw-R1.dll" />
+    <Content Include="oi\unmanaged\vsshw3-R1.dll" />
+    <Content Include="oi\unmanaged\vssmd-R1.dll" />
+    <Content Include="oi\unmanaged\vssms-R1.dll" />
+    <Content Include="oi\unmanaged\vssmt-R1.dll" />
+    <Content Include="oi\unmanaged\vssnap-R1.dll" />
+    <Content Include="oi\unmanaged\vsso6-R1.dll" />
+    <Content Include="oi\unmanaged\vssoc-R1.dll" />
+    <Content Include="oi\unmanaged\vssoc6-R1.dll" />
+    <Content Include="oi\unmanaged\vssoi-R1.dll" />
+    <Content Include="oi\unmanaged\vssoi6-R1.dll" />
+    <Content Include="oi\unmanaged\vssow-R1.dll" />
+    <Content Include="oi\unmanaged\vsspt-R1.dll" />
+    <Content Include="oi\unmanaged\vsssml-R1.dll" />
+    <Content Include="oi\unmanaged\vsswf-R1.dll" />
+    <Content Include="oi\unmanaged\vstaz-R1.dll" />
+    <Content Include="oi\unmanaged\vstext-R1.dll" />
+    <Content Include="oi\unmanaged\vstga-R1.dll" />
+    <Content Include="oi\unmanaged\vstif6-R1.dll" />
+    <Content Include="oi\unmanaged\vstrn-R1.dll" />
+    <Content Include="oi\unmanaged\vstw-R1.dll" />
+    <Content Include="oi\unmanaged\vstxt-R1.dll" />
+    <Content Include="oi\unmanaged\vsvcrd-R1.dll" />
+    <Content Include="oi\unmanaged\vsviso-R1.dll" />
+    <Content Include="oi\unmanaged\vsvsdx-R1.dll" />
+    <Content Include="oi\unmanaged\vsvw3-R1.dll" />
+    <Content Include="oi\unmanaged\vsw12-R1.dll" />
+    <Content Include="oi\unmanaged\vsw6-R1.dll" />
+    <Content Include="oi\unmanaged\vsw97-R1.dll" />
+    <Content Include="oi\unmanaged\vswbmp-R1.dll" />
+    <Content Include="oi\unmanaged\vswg2-R1.dll" />
+    <Content Include="oi\unmanaged\vswk4-R1.dll" />
+    <Content Include="oi\unmanaged\vswk6-R1.dll" />
+    <Content Include="oi\unmanaged\vswks-R1.dll" />
+    <Content Include="oi\unmanaged\vswm-R1.dll" />
+    <Content Include="oi\unmanaged\vswmf-R1.dll" />
+    <Content Include="oi\unmanaged\vswml-R1.dll" />
+    <Content Include="oi\unmanaged\vsword-R1.dll" />
+    <Content Include="oi\unmanaged\vswork-R1.dll" />
+    <Content Include="oi\unmanaged\vswp5-R1.dll" />
+    <Content Include="oi\unmanaged\vswp6-R1.dll" />
+    <Content Include="oi\unmanaged\vswpf-R1.dll" />
+    <Content Include="oi\unmanaged\vswpg-R1.dll" />
+    <Content Include="oi\unmanaged\vswpg2-R1.dll" />
+    <Content Include="oi\unmanaged\vswpl-R1.dll" />
+    <Content Include="oi\unmanaged\vswpml-R1.dll" />
+    <Content Include="oi\unmanaged\vswpw-R1.dll" />
+    <Content Include="oi\unmanaged\vswrk9-R1.dll" />
+    <Content Include="oi\unmanaged\vsws-R1.dll" />
+    <Content Include="oi\unmanaged\vsws2-R1.dll" />
+    <Content Include="oi\unmanaged\vsxl12-R1.dll" />
+    <Content Include="oi\unmanaged\vsxl5-R1.dll" />
+    <Content Include="oi\unmanaged\vsxlsb-R1.dll" />
+    <Content Include="oi\unmanaged\vsxml-R1.dll" />
+    <Content Include="oi\unmanaged\vsxmp-R1.dll" />
+    <Content Include="oi\unmanaged\vsxps-R1.dll" />
+    <Content Include="oi\unmanaged\vsxy-R1.dll" />
+    <Content Include="oi\unmanaged\vsyim-R1.dll" />
+    <Content Include="oi\unmanaged\vszip-R1.dll" />
+    <Content Include="oi\unmanaged\wvcore-R1.dll" />
+    <Content Include="oi\webview\collapseB.png" />
+    <Content Include="oi\webview\collapseB_hover.png" />
+    <Content Include="oi\webview\Collapse_Viewer.png" />
+    <Content Include="oi\webview\Collapse_Viewer_Hover.png" />
+    <Content Include="oi\webview\Comments_large_Active.png" />
+    <Content Include="oi\webview\Comments_large_Active_Multi.png" />
+    <Content Include="oi\webview\Comments_large_Normal.png" />
+    <Content Include="oi\webview\Comments_large_Normal_Multi.png" />
+    <Content Include="oi\webview\Comments_Normal.png" />
+    <Content Include="oi\webview\drag-handle.png" />
+    <Content Include="oi\webview\Expand_Viewer.png" />
+    <Content Include="oi\webview\Expand_Viewer_Hover.png" />
+    <Content Include="oi\webview\ficons\calendar.png" />
+    <Content Include="oi\webview\ficons\calendarEntry.png" />
+    <Content Include="oi\webview\ficons\contact.png" />
+    <Content Include="oi\webview\ficons\contactGroup.png" />
+    <Content Include="oi\webview\ficons\doc.png" />
+    <Content Include="oi\webview\ficons\doc_blue.png" />
+    <Content Include="oi\webview\ficons\folder.png" />
+    <Content Include="oi\webview\ficons\generic.png" />
+    <Content Include="oi\webview\ficons\ie.png" />
+    <Content Include="oi\webview\ficons\image.png" />
+    <Content Include="oi\webview\ficons\journal.png" />
+    <Content Include="oi\webview\ficons\msg.png" />
+    <Content Include="oi\webview\ficons\note.png" />
+    <Content Include="oi\webview\ficons\onenote.png" />
+    <Content Include="oi\webview\ficons\pdf.png" />
+    <Content Include="oi\webview\ficons\ppt.png" />
+    <Content Include="oi\webview\ficons\ppt_blue.png" />
+    <Content Include="oi\webview\ficons\project.png" />
+    <Content Include="oi\webview\ficons\publisher.png" />
+    <Content Include="oi\webview\ficons\task.png" />
+    <Content Include="oi\webview\ficons\text.png" />
+    <Content Include="oi\webview\ficons\transcript.png" />
+    <Content Include="oi\webview\ficons\vector.png" />
+    <Content Include="oi\webview\ficons\video.png" />
+    <Content Include="oi\webview\ficons\vsd.png" />
+    <Content Include="oi\webview\ficons\xls.png" />
+    <Content Include="oi\webview\ficons\xls_blue.png" />
+    <Content Include="oi\webview\ficons\zip.png" />
+    <Content Include="oi\webview\HiddenSlide.png" />
+    <Content Include="oi\webview\icon-comment-flag.png" />
+    <Content Include="oi\webview\icons-navbar.png" />
+    <Content Include="oi\webview\NoteIcon.png" />
+    <Content Include="oi\webview\oit.css" />
+    <Content Include="oi\webview\oit.js" />
+    <Content Include="oi\webview\oit.loading.gif" />
+    <Content Include="oi\webview\oit.navbar.css" />
+    <Content Include="oi\webview\oit.navbar.min.js" />
+    <Content Include="oi\webview\oit.statusbar.css" />
+    <Content Include="oi\webview\oit.statusbar.min.js" />
     <Content Include="Resources\CTRL0192153.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -467,7 +793,9 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="oi\webview\oit.d.ts" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
@@ -476,16 +804,16 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets'))" />
     <Error Condition="!Exists('..\..\packages\NUnit.3.13.2\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.13.2\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.4.0\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.13.4\build\Relativity.DataExchange.Client.SDK.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets" Condition="Exists('..\..\packages\Relativity.Testing.Framework.RingSetup.0.10.0\build\Relativity.Testing.Framework.RingSetup.targets')" />
+  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.30\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.11.0\build\Relativity.OutsideIn.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.11.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
