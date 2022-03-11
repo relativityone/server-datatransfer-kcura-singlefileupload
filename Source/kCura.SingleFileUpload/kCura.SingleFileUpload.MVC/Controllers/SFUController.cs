@@ -2,7 +2,6 @@
 using kCura.SingleFileUpload.Core.Entities.Enumerations;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
 using kCura.SingleFileUpload.MVC.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Relativity.API;
 using Relativity.CustomPages;
@@ -17,8 +16,10 @@ using Response = kCura.SingleFileUpload.Core.Entities.Response;
 
 namespace kCura.SingleFileUpload.MVC.Controllers
 {
-	public class SFUController : BaseController
+    public class SFUController : BaseController
 	{
+		private readonly IAPILog _log;
+
 		private readonly int[] _finder = new int[]
 		{
 			1800, //"EXE / DLL File"
@@ -28,7 +29,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		public SFUController() :
 			this(ConnectionHelper.Helper())
 		{
-
+			_log = Helper.GetLoggerFactory().GetLogger();
 		}
 
 		public SFUController(ICPHelper helper) : base(helper)
@@ -38,6 +39,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 
 		public async Task<ActionResult> Index(string parameters = "")
 		{
+			_log.LogInformation("Start Index Action with {parameters}", parameters);
+
 			Imaging imaging = new Imaging();
 
 			if (string.IsNullOrEmpty(parameters))
@@ -62,6 +65,8 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 				imaging.Fri = !string.IsNullOrEmpty(jObject["fri"].ToString()) ? (bool?)jObject["fri"] : default(bool);
 			}
 
+			_log.LogInformation("Imaging value {@imaging}", imaging);
+
 			ViewBag.AppID = WorkspaceID;
 			ViewBag.FDV = imaging.Fdv.ToString().ToLower();
 			ViewBag.ErrorID = imaging.ErrorFile;
@@ -75,6 +80,25 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			ViewBag.UploadMassiveDocuments = await ToggleManager.Instance.GetCheckUploadMassiveAsync().ConfigureAwait(false);
 			ViewBag.MaxFilesToUpload = await InstanceSettingManager.Instance.GetMaxFilesInstanceSettingAsync().ConfigureAwait(false);
 			ViewBag.FRI = imaging.Fri.ToString().ToLower();
+
+			_log.LogInformation("ViewBag parameters: \n" +
+					"AppID - {appId} \n" +
+					"FDV - {fdv} \n" +
+					"ErrorID - {errorId} \n" +
+					"DocID - {docId} \n" +
+					"ChangeImage - {changeImage} \n" +
+					"NewImage - {newImage} \n" +
+					"HasRedactions - {hasRedactions} \n" +
+					"HasImages - {hasImages} \n" +
+					"HasNative - {hasNative} \n" +
+					"ProfileID - {profileId} \n" +
+					"UploadMassiveDocuments - {uploadMassiveDocuments} \n" +
+					"MaxFilesToUpload - {maxFilesToUpload} \n" +
+					"FRI - {fri} \n",
+				ViewBag.AppID, ViewBag.FDV, ViewBag.ErrorID, ViewBag.DocID, ViewBag.ChangeImage,
+				ViewBag.NewImage, ViewBag.HasRedactions, ViewBag.HasImages, ViewBag.HasNative,
+				ViewBag.ProfileID, ViewBag.UploadMassiveDocuments, ViewBag.MaxFilesToUpload, ViewBag.FRI);
+
 			return View();
 		}
 
