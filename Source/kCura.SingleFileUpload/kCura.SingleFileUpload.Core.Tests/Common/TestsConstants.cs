@@ -44,23 +44,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 		public static readonly string _JSON_RESULT = @"{""fileExtension"":{ ""value"":""File %Extension"",""default"":""File Extension""},
 						""fileName"":{ ""value"":""File % Name"",""default"":""File Name""},
 						""fileSize"":{ ""value"":""File % Size"",""default"":""File Size""}}";
-
-		public static readonly InstanceSettingQueryResultSet _INSTANCE_SETTING_RESULT_SET = new InstanceSettingQueryResultSet
-		{
-			Success = true,
-			Results = new List<Result<InstanceSetting>>
-						{
-							new Result<InstanceSetting>
-							{
-								Success = true,
-								Artifact = new InstanceSetting
-								{
-									Value = "5",
-								}
-							}
-						}
-		};
-
+		
 		public static DataTable _GetdataTable()
 		{
 			DataTable dt = new DataTable();
