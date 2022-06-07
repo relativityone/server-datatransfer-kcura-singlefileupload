@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using kCura.SingleFileUpload.Core.Managers.Implementation;
+using kCura.SingleFileUpload.Core.Tests.Constants;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using Moq;
 using NUnit.Framework;
@@ -28,21 +29,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
             mockInstanceSettingManager
                 .Setup(p => p.QueryAsync(It.IsAny<Query>()))
-                .Returns(Task.FromResult(new InstanceSettingQueryResultSet
-                {
-                    Success = true,
-                    Results = new List<Result<InstanceSetting>>
-                    {
-                        new Result<InstanceSetting>
-                        {
-                            Success = true,
-                            Artifact = new InstanceSetting
-                            {
-                                Value = _MAX_FILES.ToString()
-                            }
-                        }
-                    }
-                }));
+                .Returns(Task.FromResult(TestsConstants._INSTANCE_SETTING_RESULT_SET));
 
             mockingHelper
                 .MockIServiceMgr()

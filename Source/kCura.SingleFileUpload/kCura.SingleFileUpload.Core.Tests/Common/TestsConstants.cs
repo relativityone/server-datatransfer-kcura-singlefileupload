@@ -40,7 +40,23 @@ namespace kCura.SingleFileUpload.Core.Tests.Constants
 			FolderID = _DOC_FILE_ID,
 			WebApiUrl = _WEB_API_URL,
 		};
-		
+
+        public static readonly InstanceSettingQueryResultSet _INSTANCE_SETTING_RESULT_SET = new InstanceSettingQueryResultSet
+        {
+            Success = true,
+            Results = new List<Result<InstanceSetting>>
+            {
+                new Result<InstanceSetting>
+                {
+                    Success = true,
+                    Artifact = new InstanceSetting
+                    {
+                        Value = "5",
+                    }
+                }
+            }
+        };
+
 		public static readonly string _JSON_RESULT = @"{""fileExtension"":{ ""value"":""File %Extension"",""default"":""File Extension""},
 						""fileName"":{ ""value"":""File % Name"",""default"":""File Name""},
 						""fileSize"":{ ""value"":""File % Size"",""default"":""File Size""}}";
