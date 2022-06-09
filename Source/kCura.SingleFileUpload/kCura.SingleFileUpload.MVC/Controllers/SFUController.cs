@@ -137,6 +137,16 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		}
 
 		[HttpPost]
+		public async Task SendTriggerAsync(bool jobEndedWithErrors)
+        {
+			bool automatedWorkflowsInstalled = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync();
+			if (automatedWorkflowsInstalled)
+            {
+				await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(jobEndedWithErrors);
+			}				
+        }
+
+		[HttpPost]
 		public async Task Upload(MetaUploadFile meta, bool img = false, string controlNumberText = null)
 		{
 			ResponseWithElements<string> result = await HandleResponseDynamicResponseAsync<string>(async (response) =>

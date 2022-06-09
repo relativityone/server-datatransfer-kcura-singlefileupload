@@ -26,6 +26,7 @@ var MFUController = function ($scope, $http, $compile) {
     vm.optionalControlNumber = { text: '' };
     vm.focusControlNumberValue = false;
     vm.uploaded = false;
+    vm.itemsWithErrors = 0;
     vm.focusControlNumber = function (value) {
         vm.focusControlNumberValue = value;
     }
@@ -282,6 +283,8 @@ var MFUController = function ($scope, $http, $compile) {
             }
             if (vm.errorID != 0 || GetDID() != -1 || !result.Success || !!result.Message) {
                 manageResult(file, result);
+                vm.itemsWithErrors++;
+                console.log(vm.itemsWithErrors);
             }
             else {
                 checkUploadStatus(file, result);
@@ -346,9 +349,32 @@ var MFUController = function ($scope, $http, $compile) {
                     vm.status = 3;
                     vm.uploaded = true;
                 });
+                if (vm.uploaded) {
+                    if (vm.itemsWithErrors !== vm.totalFiles) {
+                        console.log("trigger should be sent");
+                        SendTrigger();
+                    }
+                }
                 elem.style.width = '1%';
             }
         }, 100);
+    }
+
+    function SendTrigger() {     
+        var form = document.getElementById('btiFormTrg');
+        var data = new FormData(form);
+
+        var xhr = new XMLHttpRequest();        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            }
+        }
+        xhr.open('POST', form.action);
+        console.log(form.action);
+        var csrf = window.top.GetCsrfTokenFromPage();
+        xhr.setRequestHeader('X-CSRF-Header', csrf);
+        xhr.send(data);
     }
 
     function stopPropagation(event) {
