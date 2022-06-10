@@ -141,8 +141,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
         {
             try
             {
-				bool automatedWorkflowsInstalled = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync();
-				await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(jobEndedWithErrors);
+				bool automatedWorkflowsInstalled = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync();				
 				if (automatedWorkflowsInstalled)
 				{
 					await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(jobEndedWithErrors);

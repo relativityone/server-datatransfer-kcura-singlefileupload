@@ -86,16 +86,28 @@
       <Name>ZetaLongPaths.dll</Name>
       <Notes />
     </Assembly>
+    <Assembly>
+      <ArtifactId>5537390</ArtifactId>
+      <Keywords />
+      <Name>Relativity.AutomatedWorkflows.Services.Interfaces.dll</Name>
+      <Notes />
+    </Assembly>
+    <Assembly>
+      <ArtifactId>5537391</ArtifactId>
+      <Keywords />
+      <Name>Relativity.AutomatedWorkflows.SDK.dll</Name>
+      <Notes />
+    </Assembly>
   </Assemblies>
   <ResourceFiles />
   <ExternalTabs />
-  <ExtractionDate>2021-03-25T07:36:06.5947222Z</ExtractionDate>
+  <ExtractionDate>2022-06-10T09:52:24.9420816Z</ExtractionDate>
   <Guid>1738ceb6-9546-44a7-8b9b-e64c88e47320</Guid>
   <Name>Simple File Upload</Name>
   <Objects />
   <ParentTabs />
   <RelativityVersion>16.0.30.0</RelativityVersion>
-  <Version>11.3.42.5</Version>
+  <Version>11.3.42.6</Version>
   <SchemaVersion>11.2.80.0</SchemaVersion>
   <TabDisplay>false</TabDisplay>
   <OriginSignature>c38bc2b4-751e-4d46-843e-787f34d3f85d</OriginSignature>
