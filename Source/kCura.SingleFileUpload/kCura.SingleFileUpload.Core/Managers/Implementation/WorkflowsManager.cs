@@ -28,7 +28,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public async Task SendAutomatedWorkflowsTriggerAsync(bool jobEndedWithErrors)
         {
             try
-            {                
+            {               
                 using (IAutomatedWorkflowsService workflowsService = _Repository.CreateProxy<IAutomatedWorkflowsService>())
                 {                    
                     SendTriggerBody body = new SendTriggerBody

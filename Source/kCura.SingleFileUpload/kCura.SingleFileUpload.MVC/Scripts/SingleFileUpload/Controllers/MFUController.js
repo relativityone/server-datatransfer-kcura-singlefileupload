@@ -350,8 +350,7 @@ var MFUController = function ($scope, $http, $compile) {
                     vm.uploaded = true;
                 });
                 if (vm.uploaded) {
-                    if (vm.itemsWithErrors !== vm.totalFiles) {
-                        console.log("trigger should be sent");
+                    if (vm.itemsWithErrors !== vm.totalFiles) {                        
                         SendTrigger();
                     }
                 }
@@ -365,11 +364,7 @@ var MFUController = function ($scope, $http, $compile) {
         var data = new FormData(form);
 
         var xhr = new XMLHttpRequest();        
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(xhr.responseText);
-            }
-        }
+       
         xhr.open('POST', form.action);
         console.log(form.action);
         var csrf = window.top.GetCsrfTokenFromPage();

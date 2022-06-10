@@ -139,11 +139,20 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 		[HttpPost]
 		public async Task SendTriggerAsync(bool jobEndedWithErrors)
         {
-			bool automatedWorkflowsInstalled = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync();
-			if (automatedWorkflowsInstalled)
+            try
             {
+				bool automatedWorkflowsInstalled = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync();
 				await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(jobEndedWithErrors);
-			}				
+				if (automatedWorkflowsInstalled)
+				{
+					await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(jobEndedWithErrors);
+				}
+			}
+			catch(Exception ex)
+            {
+				_log.LogError("Could not send trigger to Automated Workflows. Details {0}", ex.Message);
+            }
+				
         }
 
 		[HttpPost]
