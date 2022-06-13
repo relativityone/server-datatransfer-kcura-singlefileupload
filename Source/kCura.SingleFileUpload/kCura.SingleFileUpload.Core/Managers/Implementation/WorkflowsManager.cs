@@ -45,7 +45,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             }
         }
 
-        public async Task<bool> AutomatedWorkflowInstalledAsync()
+        public async Task<bool> IsAutomatedWorkflowInstalledAsync()
         {
             try
             {
@@ -65,7 +65,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         ObjectTypeResponse objectTypeMetadata = await objectTypeManager.ReadAsync(_Repository.WorkspaceID, relativityAppQueryResult.Objects[0].ArtifactID)
                             .ConfigureAwait(false);
 
-                        QueryResult automatedWorkflowsQueryResult = await objectManager.QueryAsync(_Repository.WorkspaceID, CreateRequest(objectTypeMetadata.ArtifactTypeID, _AUTOMATED_WORKFLOWS_APP_NAME), 0, 0)
+                        QueryResult automatedWorkflowsQueryResult = await objectManager.QueryAsync(_Repository.WorkspaceID, CreateRequest(objectTypeMetadata.ArtifactTypeID, _AUTOMATED_WORKFLOWS_APP_NAME), 0, 1)
                             .ConfigureAwait(false);
 
                         return automatedWorkflowsQueryResult.TotalCount > 0;

@@ -47,7 +47,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
             ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 
             //Act
-            bool result = await WorkflowsManager.Instance.AutomatedWorkflowInstalledAsync().ConfigureAwait(false);
+            bool result = await WorkflowsManager.Instance.IsAutomatedWorkflowInstalledAsync().ConfigureAwait(false);
 
             //Assert
             result.Should().Be(expectedResult);
