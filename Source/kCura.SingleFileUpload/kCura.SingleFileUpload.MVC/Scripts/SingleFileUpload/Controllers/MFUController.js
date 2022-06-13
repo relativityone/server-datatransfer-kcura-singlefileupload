@@ -363,8 +363,7 @@ var MFUController = function ($scope, $http, $compile) {
         var data = new FormData(form);
 
         var xhr = new XMLHttpRequest();      
-        xhr.open('POST', form.action);
-        console.log(form.action);
+        xhr.open('POST', form.action);       
         var csrf = window.top.GetCsrfTokenFromPage();
         xhr.setRequestHeader('X-CSRF-Header', csrf);
         xhr.send(data);

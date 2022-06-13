@@ -149,7 +149,7 @@ namespace kCura.SingleFileUpload.MVC.Controllers
 			}
 			catch(Exception ex)
             {			
-				_log.LogError(ex, "Could not send trigger to Automated Workflows. Details {0}", ex.Message);
+				_log.LogError(ex, "Could not send trigger to Automated Workflows.");
             }
 				
         }
