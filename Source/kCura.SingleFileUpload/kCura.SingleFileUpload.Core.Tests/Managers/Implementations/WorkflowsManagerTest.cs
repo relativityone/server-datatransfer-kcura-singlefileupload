@@ -6,6 +6,8 @@ using NUnit.Framework;
 using Relativity;
 using Relativity.API;
 using Relativity.AutomatedWorkflows.Services.Interfaces;
+using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Models.Triggers;
+using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Services;
 using Relativity.Services.Error;
 using Relativity.Services.Interfaces.ObjectType;
 using Relativity.Services.Interfaces.ObjectType.Models;
@@ -27,8 +29,12 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
     {
         private const string _RELATIVITY_APP_NAME = "Relativity Application";
         private const string _AUTOMATED_WORKFLOWS_APP_NAME = "Automated Workflows";
+        private const string _TRIGGER_ID = "relativity@on-new-documents-added";
+        private const string _TRIGGER_STATUS_COMPLETED = "completed";
+        private const string _TRIGGER_STATUS_COMPLETED_ERRORS = "completed-with-errors";
         private const int _RELATIVITY_APP_ARTIFACT_TYPE_ID = 123456;
-        private const int _RELATIVITY_OBJECT_ARTIFACT_ID = 654321;      
+        private const int _RELATIVITY_OBJECT_ARTIFACT_ID = 654321;
+        
 
         [TestCase(1, true)]
         [TestCase(0, false)]
@@ -36,8 +42,8 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
         {
             //Arrange
             Mock<IHelper> mockingHelper = new Mock<IHelper>();
-            Mock<IObjectManager> objectManagerFake = PrepareObjectManagerFake(automatedWorkflowsInstalledInstances);
-            Mock<IObjectTypeManager> objectTypeManagerFake = PrepareObjectTypeManagerFake();
+            Mock<IObjectManager> objectManagerFake = GetObjectManagerFake(automatedWorkflowsInstalledInstances);
+            Mock<IObjectTypeManager> objectTypeManagerFake = GetObjectTypeManagerFake();
             mockingHelper
                 .MockIServiceMgr()
                 .MockService(objectManagerFake)
@@ -52,27 +58,29 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
             result.Should().Be(expectedResult);
         }
 
-        [Test]
-        public async Task SendAutomatedWorkflowsTriggerAsync_ShouldRunOnce()
+        [TestCase(true, _TRIGGER_STATUS_COMPLETED_ERRORS)]
+        [TestCase(false, _TRIGGER_STATUS_COMPLETED)]
+        public async Task SendAutomatedWorkflowsTriggerAsync_ShouldCallSendTriggerAsyncMethod_WithCorrectState(bool uploadWithErrors, string expectedState)
         {
             //Arrange
             Mock<IHelper> mockingHelper = new Mock<IHelper>();
             Mock<IAutomatedWorkflowsService> automatedWorkflowsService = new Mock<IAutomatedWorkflowsService>();
+
             mockingHelper
                 .MockIServiceMgr()
-                .MockService(automatedWorkflowsService);                
-
+                .MockService(automatedWorkflowsService);            
             ConfigureSingletoneRepositoryScope(mockingHelper.Object);
 
             //Act
-            await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(true);
+            await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(uploadWithErrors).ConfigureAwait(false);
 
             //Assert
-
+            automatedWorkflowsService.Verify(x => x.SendTriggerAsync(It.IsAny<int>(), _TRIGGER_ID,
+                It.Is<SendTriggerBody>(tr => tr.State == expectedState)));
         }
 
 
-        private Mock<IObjectManager> PrepareObjectManagerFake(int automatedWorkflowsInstances)
+        private Mock<IObjectManager> GetObjectManagerFake(int automatedWorkflowsInstances)
         {
             Mock<IObjectManager> fakeObjectManager = new Mock<IObjectManager>();
 
@@ -107,7 +115,7 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
             return fakeObjectManager;
         }
 
-        private Mock<IObjectTypeManager> PrepareObjectTypeManagerFake()
+        private Mock<IObjectTypeManager> GetObjectTypeManagerFake()
         {
             Mock<IObjectTypeManager> fakeObjectTypeManager = new Mock<IObjectTypeManager>();
 
