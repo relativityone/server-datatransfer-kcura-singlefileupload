@@ -5,19 +5,14 @@ using Moq;
 using NUnit.Framework;
 using Relativity;
 using Relativity.API;
-using Relativity.AutomatedWorkflows.Services.Interfaces;
 using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Models.Triggers;
 using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Services;
-using Relativity.Services.Error;
 using Relativity.Services.Interfaces.ObjectType;
 using Relativity.Services.Interfaces.ObjectType.Models;
 using Relativity.Services.Objects;
 using Relativity.Services.Objects.DataContracts;
 using Relativity.Testing.Identification;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations

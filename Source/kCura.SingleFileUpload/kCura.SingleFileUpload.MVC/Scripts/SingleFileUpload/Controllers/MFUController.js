@@ -283,8 +283,7 @@ var MFUController = function ($scope, $http, $compile) {
             }
             if (vm.errorID != 0 || GetDID() != -1 || !result.Success || !!result.Message) {
                 manageResult(file, result);
-                vm.itemsWithErrors++;
-                console.log(vm.itemsWithErrors);
+                vm.itemsWithErrors++;               
             }
             else {
                 checkUploadStatus(file, result);
@@ -363,8 +362,7 @@ var MFUController = function ($scope, $http, $compile) {
         var form = document.getElementById('btiFormTrg');
         var data = new FormData(form);
 
-        var xhr = new XMLHttpRequest();        
-       
+        var xhr = new XMLHttpRequest();      
         xhr.open('POST', form.action);
         console.log(form.action);
         var csrf = window.top.GetCsrfTokenFromPage();
