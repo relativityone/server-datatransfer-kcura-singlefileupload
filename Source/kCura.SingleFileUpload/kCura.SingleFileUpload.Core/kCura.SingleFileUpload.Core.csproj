@@ -94,6 +94,12 @@
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.SDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.SDK.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.Services.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.Services.Interfaces.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.Services.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Relativity.Core, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Core.10.2.9.12\lib\net462\Relativity.Core.dll</HintPath>
     </Reference>
@@ -242,6 +248,8 @@
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="Managers\IAuditManager.cs" />
+    <Compile Include="Managers\Implementation\WorkflowsManager.cs" />
+    <Compile Include="Managers\IWorkflowsManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
     <Compile Include="Managers\Implementation\PermissionsManager.cs" />
     <Compile Include="Managers\Implementation\InstanceSettingManager.cs" />

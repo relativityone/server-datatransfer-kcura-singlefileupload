@@ -76,6 +76,12 @@
     <Reference Include="Relativity.API, Version=10.3.57.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.API.10.3.57.9\lib\net462\Relativity.API.dll</HintPath>
     </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.SDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.SDK.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.Services.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.Services.Interfaces.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.Services.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.16.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.16.10\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
     </Reference>
@@ -212,6 +218,7 @@
     <Compile Include="Managers\Implementations\SearchExportManagerTest.cs" />
     <Compile Include="Managers\Implementations\TelemetryManagerTest.cs" />
     <Compile Include="Managers\Implementations\ToggleManagerTest.cs" />
+    <Compile Include="Managers\Implementations\WorkflowsManagerTest.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
