@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -94,6 +94,12 @@
     <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.SDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.SDK.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.AutomatedWorkflows.Services.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.Services.Interfaces.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.Services.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Relativity.Core, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Core.10.2.9.12\lib\net462\Relativity.Core.dll</HintPath>
     </Reference>
@@ -109,8 +115,8 @@
     <Reference Include="Relativity.DataTransfer.Nodes, Version=12.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.6\lib\net462\Relativity.DataTransfer.Nodes.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Kepler, Version=2.14.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Kepler.dll</HintPath>
+    <Reference Include="Relativity.Kepler, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Kepler.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Logging, Version=2019.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Logging.2019.5.1\lib\net462\Relativity.Logging.dll</HintPath>
@@ -140,11 +146,11 @@
       <HintPath>..\..\packages\Relativity.SecretCatalog.1.0.19\lib\Relativity.SecretCatalog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Relativity.Services.DataContracts, Version=13.2.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
+    <Reference Include="Relativity.Services.DataContracts, Version=13.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.Interfaces, Version=13.2.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
+    <Reference Include="Relativity.Services.Interfaces, Version=13.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Services.Interfaces.Private, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Services.Interfaces.Private.10.2.9.12\lib\net462\Relativity.Services.Interfaces.Private.dll</HintPath>
@@ -155,8 +161,8 @@
     <Reference Include="Relativity.Services.Layout.Interfaces, Version=10.1.4.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Services.Layout.Interfaces.10.1.4\lib\Relativity.Services.Layout.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.Services.ServiceProxy, Version=2.14.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.1.171.20\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.Telemetry.APM, Version=2019.10.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Telemetry.APM.2019.10.1\lib\net462\Relativity.Telemetry.APM.dll</HintPath>
@@ -242,6 +248,8 @@
     <Compile Include="Helpers\EventLogHelper.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="Managers\IAuditManager.cs" />
+    <Compile Include="Managers\Implementation\WorkflowsManager.cs" />
+    <Compile Include="Managers\IWorkflowsManager.cs" />
     <Compile Include="Managers\Implementation\AuditManager.cs" />
     <Compile Include="Managers\Implementation\PermissionsManager.cs" />
     <Compile Include="Managers\Implementation\InstanceSettingManager.cs" />

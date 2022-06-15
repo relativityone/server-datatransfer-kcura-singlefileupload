@@ -2,120 +2,132 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div ng-controller="mfuctrl">
-	<iframe id="frmDnd"
-			name="frmDnd"
-			class="phantomFrame"></iframe>
-	<div class="dropZone"
-		 drop-on-me
-		 dropzone="">
-		<div class="header">
-			{{title}}
-		</div>
-		<div ng-show="status == 3"
-			 ng-click="simulateFileClick()"
-			 class="successUpload">
-			<div class="success">
-				<img src="~/Content/Images/Success.png" width="17" /> 
-				Your files have been uploaded.
-			</div>
-			<div class="message">
-				Drop more files or
-				<span> browse for files.</span>
-			</div>
-		</div>
-		<div id="dropHere"
-			 class="multiple-drop"
-			 ng-click="simulateFileClick()"
-			 ng-show="( status == 0 || status == 4 || status == 2 || status == 6 )&& files.length < maxFiles ">
-			<div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '14px' : '5px' }">
-				<img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
-				<img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
-				<img ng-if="status == 4 && files.length==0" src="~/Content/Images/Upload_Hover.png" />
-			</div>
-			<span id="msg" class="message">
-				Drop your files here or
-				<span> browse for files.</span>
-			</span>
-			<div class="infoMessage" ng-style="{'padding-bottom' : (files.length==0) ? '23px' : '15px' }">
-				Select up to {{maxFiles-files.length}} file<span ng-if="(maxFiles-files.length)>1">s</span>
-			</div>
-		</div>
-		<div ng-show="status==1" class="uploading">
-			<div>
-				Uploading ({{fileIndex}} of {{totalFiles}})
-			</div>
-			<div class="progressBar">
-				<div id="progressBar"></div>
-			</div>
-			<div class="time">
-				{{timelapse}}
-			</div>
-			<div class="border"></div>
-		</div>
-		<div ng-show="(status != 1&&status != 3) && files.length >= maxFiles" class="warning-message">
-			<div class="warning-icon">
-				<img src="~/Content/Images/warning-6-24.png" width="25" />
-			</div>
-			<div class="warning-div">
-				<div>
-					<span class="warning-bold">Warning:</span> You can only upload up to {{maxFiles}} files.
-				</div>
-				<div>Anything after {{maxFiles}} will not be uploaded.</div>
-			</div>
-		</div>
-		<div ng-if="files.length>0">
-			<div class="fileList">
-				<div ng-repeat="file in files track by $index">
-					<div class="contentFile" id="file{{$index}}">
-						<div class="label" ng-style="{'color' : (file.status == 2 || file.status == 6) ? '#d43e3d' : 'black' }">
-							{{$index+1}}. Control Number:
-						</div>
-						<div class="input">
-							<input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.status=0; file.controlNumberText= validateCharacter(file.controlNumberText)" />
-							<div class="inputMessage">
-								<div ng-if="(file.file.name != file.controlNumberText)&&(file.status==1||file.status==0)" class="fileName">
-									{{file.file.name}}
-								</div>
-								<div ng-if="file.status == 4" class="fileError">
-									Warning:
-									<span class="confirm"> Duplicate file.</span>
-								</div>
-								<div ng-if="(file.status == 2 || file.status == 6|| file.status == 5)&&file.errorMessage" class="fileError">
-									Error: {{file.errorMessage}}
-									<span ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry"> Retry</span>
-								</div>
-							</div>
-						</div>
-						<div class="fileIcon">
-							<img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6||file.status == 4||file.status == 5" ng-click="cancelFile($index)" class="remove" />
-							<img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
-							<img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
-						</div>
-					</div>
-				</div>
-				<div class="button_actions" ng-if="files.length>0">
-					<div class="buttonsZone">
-						<button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
-						<button class="btnPrimary" disabled ng-if="status == 1">Upload</button>
-						<button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
-						<button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<input type="file"
-		   id="file"
-		   name="file"
-		   class="form"
-		   onchange="angular.element(this).scope().submitFrm();"
-		   multiple />
-	<form id="btiFormDD"
-		  action="sfu/Upload?AppID=@ViewBag.AppID&fdv=@ViewBag.FDV&img=@ViewBag.ChangeImage"
-		  enctype="multipart/form-data"
-		  method="post"
-		  class="form"
-		  target="frmDnd"></form>
+    <iframe id="frmDnd"
+            name="frmDnd"
+            class="phantomFrame"></iframe>
+    <div class="dropZone"
+         drop-on-me
+         dropzone="">
+        <div class="header">
+            {{title}}
+        </div>
+        <div ng-show="status == 3"
+             ng-click="simulateFileClick()"
+             class="successUpload">
+            <div class="success">
+                <img src="~/Content/Images/Success.png" width="17" />
+                Your files have been uploaded.
+            </div>
+            <div class="message">
+                Drop more files or
+                <span> browse for files.</span>
+            </div>
+        </div>
+        <div id="dropHere"
+             class="multiple-drop"
+             ng-click="simulateFileClick()"
+             ng-show="( status == 0 || status == 4 || status == 2 || status == 6 )&& files.length < maxFiles ">
+            <div class="status_img" ng-style="{'margin-top' : (files.length==0) ? '14px' : '5px' }">
+                <img ng-if="status == 0 && files.length==0" src="~/Content/Images/Upload.png" />
+                <img ng-if="(status == 2 || status == 6) && files.length==0" src="~/Content/Images/Fail.gif" />
+                <img ng-if="status == 4 && files.length==0" src="~/Content/Images/Upload_Hover.png" />
+            </div>
+            <span id="msg" class="message">
+                Drop your files here or
+                <span> browse for files.</span>
+            </span>
+            <div class="infoMessage" ng-style="{'padding-bottom' : (files.length==0) ? '23px' : '15px' }">
+                Select up to {{maxFiles-files.length}} file<span ng-if="(maxFiles-files.length)>1">s</span>
+            </div>
+        </div>
+        <div ng-show="status==1" class="uploading">
+            <div>
+                Uploading ({{fileIndex}} of {{totalFiles}})
+            </div>
+            <div class="progressBar">
+                <div id="progressBar"></div>
+            </div>
+            <div class="time">
+                {{timelapse}}
+            </div>
+            <div class="border"></div>
+        </div>
+        <div ng-show="(status != 1&&status != 3) && files.length >= maxFiles" class="warning-message">
+            <div class="warning-icon">
+                <img src="~/Content/Images/warning-6-24.png" width="25" />
+            </div>
+            <div class="warning-div">
+                <div>
+                    <span class="warning-bold">Warning:</span> You can only upload up to {{maxFiles}} files.
+                </div>
+                <div>Anything after {{maxFiles}} will not be uploaded.</div>
+            </div>
+        </div>
+        <div ng-if="files.length>0">
+            <div class="fileList">
+                <div ng-repeat="file in files track by $index">
+                    <div class="contentFile" id="file{{$index}}">
+                        <div class="label" ng-style="{'color' : (file.status == 2 || file.status == 6) ? '#d43e3d' : 'black' }">
+                            {{$index+1}}. Control Number:
+                        </div>
+                        <div class="input">
+                            <input type="text" ng-model="file.controlNumberText" ng-disabled="status==1 || file.status==3" ng-change="file.status=0; file.controlNumberText= validateCharacter(file.controlNumberText)" />
+                            <div class="inputMessage">
+                                <div ng-if="(file.file.name != file.controlNumberText)&&(file.status==1||file.status==0)" class="fileName">
+                                    {{file.file.name}}
+                                </div>
+                                <div ng-if="file.status == 4" class="fileError">
+                                    Warning:
+                                    <span class="confirm"> Duplicate file.</span>
+                                </div>
+                                <div ng-if="(file.status == 2 || file.status == 6|| file.status == 5)&&file.errorMessage" class="fileError">
+                                    Error: {{file.errorMessage}}
+                                    <span ng-if="(file.status == 2 || file.status == 6)&& status == 3" ng-click="uploadFile($index,true)" class="retry"> Retry</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fileIcon">
+                            <img src="~/Content/Images/delete.png" ng-if="file.status == 0||file.status == 2 || file.status == 6||file.status == 4||file.status == 5" ng-click="cancelFile($index)" class="remove" />
+                            <img src="~/Content/Images/loading.gif" ng-if="file.status == 1" width="16" />
+                            <img src="~/Content/Images/Success.png" ng-if="file.status == 3" width="16" />
+                        </div>
+                    </div>
+                </div>
+                <div class="button_actions" ng-if="files.length>0">
+                    <div class="buttonsZone">
+                        <button class="btnPrimary" ng-click="uploadFiles(); $event.stopPropagation(); $event.preventDefault();" ng-if="status != 1">Upload</button>
+                        <button class="btnPrimary" disabled ng-if="status == 1">Upload</button>
+                        <button id="closeBtn" class="secondary-button" ng-click="close()" ng-if="status == 3">Close</button>
+                        <button id="closeBtn" class="secondary-button" ng-click="cancel()" ng-if="status != 3">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="file"
+           id="file"
+           name="file"
+           class="form"
+           onchange="angular.element(this).scope().submitFrm();"
+           multiple />
+    <form id="btiFormDD"
+          action="sfu/Upload?AppID=@ViewBag.AppID&fdv=@ViewBag.FDV&img=@ViewBag.ChangeImage"
+          enctype="multipart/form-data"
+          method="post"
+          class="form"
+          target="frmDnd"></form>
+    <form id="btiFormTrg" ng-if="itemsWithErrors>0"
+          action="sfu/SendTriggerAsync?AppID=@ViewBag.AppID&jobEndedWithErrors=true"
+          enctype="multipart/form-data"
+          method="post"
+          class="form"
+          target="frmDnd"></form>
+    <form id="btiFormTrg" ng-if="itemsWithErrors==0"
+          action="sfu/SendTriggerAsync?AppID=@ViewBag.AppID&jobEndedWithErrors=false"
+          enctype="multipart/form-data"
+          method="post"
+          class="form"
+          target="frmDnd"></form>
 </div>
 <script>
 	if (window.frameElement != null) {
