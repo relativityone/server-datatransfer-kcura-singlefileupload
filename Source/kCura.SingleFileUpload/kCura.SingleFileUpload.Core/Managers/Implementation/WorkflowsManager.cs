@@ -1,4 +1,5 @@
-﻿using Relativity;
+﻿using kCura.SingleFileUpload.Core.Relativity;
+using Relativity;
 using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Models.Triggers;
 using Relativity.AutomatedWorkflows.Services.Interfaces.v1.Services;
 using Relativity.Services.Interfaces.ObjectType;
@@ -19,8 +20,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         private const string _TRIGGER_INPUT_ID = "type";
         private const string _TRIGGER_INPUT_VALUE = "sfu";
         private const string _TRIGGER_ID = "relativity@on-new-documents-added";
-        private const string _TRIGGER_STATUS_COMPLETED = "completed";
-        private const string _TRIGGER_STATUS_COMPLETED_ERRORS = "completed-with-errors";
+        private const string _TRIGGER_STATUS_COMPLETED = "complete";
+        private const string _TRIGGER_STATUS_COMPLETED_ERRORS = "complete-with-errors";
 
         private static readonly Lazy<IWorkflowsManager> _instance = new Lazy<IWorkflowsManager>(() => new WorkflowsManager());
         public static IWorkflowsManager Instance => _instance.Value;
@@ -28,7 +29,8 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         public async Task SendAutomatedWorkflowsTriggerAsync(bool jobEndedWithErrors)
         {
             try
-            {               
+            {
+                Repository.Instance.GetLogFactory().GetLogger().LogInformation("Entering SendAutomatedWorkflowsTriggerAsync. Job ended with errors: {0}", jobEndedWithErrors);
                 using (IAutomatedWorkflowsService workflowsService = _Repository.CreateProxy<IAutomatedWorkflowsService>())
                 {                    
                     SendTriggerBody body = new SendTriggerBody
@@ -36,7 +38,10 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
                         Inputs = new List<TriggerInput>() { new TriggerInput { ID = _TRIGGER_INPUT_ID, Value = _TRIGGER_INPUT_VALUE } },
                         State = jobEndedWithErrors ? _TRIGGER_STATUS_COMPLETED_ERRORS : _TRIGGER_STATUS_COMPLETED                        
                     };
+                    Repository.Instance.GetLogFactory().GetLogger().LogInformation("Trigger body content prepared. State: {0}", body.State);
+
                     await workflowsService.SendTriggerAsync(_Repository.WorkspaceID, _TRIGGER_ID, body).ConfigureAwait(false);
+                    Repository.Instance.GetLogFactory().GetLogger().LogInformation("Trigger sended. WorkspaceId: {0}, trigger id: {1}", _Repository.WorkspaceID, _TRIGGER_ID);
                 }                   
             }
             catch (Exception ex)
