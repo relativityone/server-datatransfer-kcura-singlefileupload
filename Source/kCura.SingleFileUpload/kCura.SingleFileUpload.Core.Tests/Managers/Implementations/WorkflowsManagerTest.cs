@@ -25,11 +25,11 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
         private const string _RELATIVITY_APP_NAME = "Relativity Application";
         private const string _AUTOMATED_WORKFLOWS_APP_NAME = "Automated Workflows";
         private const string _TRIGGER_ID = "relativity@on-new-documents-added";
-        private const string _TRIGGER_STATUS_COMPLETED = "completed";
-        private const string _TRIGGER_STATUS_COMPLETED_ERRORS = "completed-with-errors";
+        private const string _TRIGGER_STATUS_COMPLETED = "complete";
+        private const string _TRIGGER_STATUS_COMPLETED_ERRORS = "complete-with-errors";
         private const int _RELATIVITY_APP_ARTIFACT_TYPE_ID = 123456;
         private const int _RELATIVITY_OBJECT_ARTIFACT_ID = 654321;
-        
+
 
         [TestCase(1, true)]
         [TestCase(0, false)]
@@ -42,10 +42,10 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
             mockingHelper
                 .MockIServiceMgr()
                 .MockService(objectManagerFake)
-                .MockService(objectTypeManagerFake);               
+                .MockService(objectTypeManagerFake);
 
             ConfigureSingletoneRepositoryScope(mockingHelper.Object);
-
+          
             //Act
             bool result = await WorkflowsManager.Instance.IsAutomatedWorkflowInstalledAsync().ConfigureAwait(false);
 
@@ -63,8 +63,20 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
             mockingHelper
                 .MockIServiceMgr()
-                .MockService(automatedWorkflowsService);            
+                .MockService(automatedWorkflowsService);
             ConfigureSingletoneRepositoryScope(mockingHelper.Object);
+
+            Mock<IAPILog> mockApiLog = new Mock<IAPILog>();
+            mockApiLog.Setup(p => p.ForContext<WorkflowsManager>())
+                .Returns(mockApiLog.Object);
+
+            Mock<ILogFactory> mockLogFactory = new Mock<ILogFactory>();
+
+            mockLogFactory.Setup(p => p.GetLogger())
+                .Returns(mockApiLog.Object);
+
+            mockingHelper.Setup(p => p.GetLoggerFactory())
+                .Returns(mockLogFactory.Object);
 
             //Act
             await WorkflowsManager.Instance.SendAutomatedWorkflowsTriggerAsync(uploadWithErrors).ConfigureAwait(false);
