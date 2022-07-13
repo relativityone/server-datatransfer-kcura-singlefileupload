@@ -231,6 +231,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.Custom.cs" />
     <Compile Include="SharedVariables.cs" />
+    <Compile Include="SimpleFileUploadHelper.cs" />
     <Compile Include="SimpleFileUploadTestsSetUpFixture.cs" />
     <Compile Include="Templates\SimpleFileUploadTestsTemplate.cs" />
   </ItemGroup>

@@ -17,12 +17,11 @@
                 "newImage": getQueryString(url_string, "newImage"),
                 "docID": getQueryString(url_string, "docID"),
                 "profileID": getQueryString(url_string, "profileID"),
-                "errorFile": getQueryString(url_string, "errorFile")
+                "errorFile": getQueryString(url_string, "errorFile"),
+				"fri": getQueryString(url_string, "fri"),
             }
-
             url_string = url_string.split('&')[0] + "&parameters=" + JSON.stringify(parameters);
             location.href = url_string;
-
         }
 
         function dialogChanges() {

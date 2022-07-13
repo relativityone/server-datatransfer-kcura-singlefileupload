@@ -24,10 +24,10 @@ namespace Relativity.SimpleFileUpload.Tests.Core
 			RelativityFacade.Instance.RelyOn<ApiComponent>();
 			RelativityFacade.Instance.RelyOn<WebComponent>();
 
-			RelativityFacade.Instance.Resolve<IAccountPoolService>().StandardAccountEmailFormat =
-				_standardAccountEmailFormat;
+            RelativityFacade.Instance.Resolve<IAccountPoolService>().StandardAccountEmailFormat =
+                _standardAccountEmailFormat;
 
-			if (TemplateWorkspaceExists())
+            if (TemplateWorkspaceExists())
 			{
 				return;
 			}
