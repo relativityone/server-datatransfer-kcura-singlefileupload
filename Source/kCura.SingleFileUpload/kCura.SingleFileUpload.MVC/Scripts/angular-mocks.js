@@ -1,6 +1,11 @@
 /**
- * @license AngularJS v1.8.0
- * (c) 2010-2020 Google, Inc. http://angularjs.org
+ * @license XLTS for AngularJS v1.9.0
+ * (c) 2022 XLTS.dev All Rights Reserved. https://xlts.dev/angularjs
+ * License: Obtain a commercial license from XLTS.dev before using this software.
+ */
+/**
+ * @license AngularJS
+ * (c) 2010-2020 Google LLC. http://angularjs.org
  * License: MIT
  */
 (function(window, angular) {
@@ -951,7 +956,7 @@ angular.mock.TzDate.prototype = Date.prototype;
  * You need to require the `ngAnimateMock` module in your test suite for instance `beforeEach(module('ngAnimateMock'))`
  */
 angular.mock.animate = angular.module('ngAnimateMock', ['ng'])
-  .info({ angularVersion: '1.8.0' })
+  .info({ angularVersion: '1.9.0' })
 
   .config(['$provide', function($provide) {
 
@@ -2153,7 +2158,7 @@ function assertArgDefined(args, index, name) {
 }
 
 function stripQueryAndHash(url) {
-  return url.replace(/[?#].*$/, '');
+  return url.replace(/^([^?#]*)[?#].*$/, '$1');
 }
 
 function MockHttpExpectation(expectedMethod, expectedUrl, expectedData, expectedHeaders,
@@ -2543,13 +2548,23 @@ angular.mock.$RootElementProvider = function() {
  *                           the `bindToController` feature and simplify certain kinds of tests.
  * @return {Object} Instance of given controller.
  */
-function createControllerDecorator() {
+function createControllerDecorator(compileProvider) {
   angular.mock.$ControllerDecorator = ['$delegate', function($delegate) {
     return function(expression, locals, later, ident) {
       if (later && typeof later === 'object') {
+        var preAssignBindingsEnabled =
+            angular.isFunction(compileProvider.preAssignBindingsEnabled) && compileProvider.preAssignBindingsEnabled();
+
         var instantiate = $delegate(expression, locals, true, ident);
+        if (preAssignBindingsEnabled) {
+          angular.extend(instantiate.instance, later);
+        }
+
         var instance = instantiate();
-        angular.extend(instance, later);
+        if (!preAssignBindingsEnabled || instance !== instantiate.instance) {
+          angular.extend(instance, later);
+        }
+
         return instance;
       }
       return $delegate(expression, locals, later, ident);
@@ -2626,18 +2641,8 @@ angular.mock.$ComponentControllerProvider = ['$compileProvider',
  *
  * @installation
  *
- *  First, download the file:
- *  * [Google CDN](https://developers.google.com/speed/libraries/devguide#angularjs) e.g.
- *    `"//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-mocks.js"`
- *  * [NPM](https://www.npmjs.com/) e.g. `npm install angular-mocks@X.Y.Z`
- *  * [Yarn](https://yarnpkg.com) e.g. `yarn add angular-mocks@X.Y.Z`
- *  * [Bower](http://bower.io) e.g. `bower install angular-mocks#X.Y.Z`
- *  * [code.angularjs.org](https://code.angularjs.org/) (discouraged for production use)  e.g.
- *    `"//code.angularjs.org/X.Y.Z/angular-mocks.js"`
- *
- * where X.Y.Z is the AngularJS version you are running.
- *
- * Then, configure your test runner to load `angular-mocks.js` after `angular.js`.
+ * Once you have installed the `@xlts.dev/angular-mocks` package, configure your test runner to load
+ * `angular-mocks.js` after `angular.js`.
  * This example uses <a href="http://karma-runner.github.io/">Karma</a>:
  *
  * ```
@@ -2651,8 +2656,8 @@ angular.mock.$ComponentControllerProvider = ['$compileProvider',
  * });
  * ```
  *
- * Including the `angular-mocks.js` file automatically adds the `ngMock` module, so your tests
- *  are ready to go!
+ * Including the `angular-mocks.js` file automatically adds the `ngMock` module, so your tests are
+ * ready to go!
  */
 angular.module('ngMock', ['ng']).provider({
   $browser: angular.mock.$BrowserProvider,
@@ -2669,7 +2674,7 @@ angular.module('ngMock', ['ng']).provider({
   $provide.decorator('$rootScope', angular.mock.$RootScopeDecorator);
   $provide.decorator('$controller', createControllerDecorator($compileProvider));
   $provide.decorator('$httpBackend', angular.mock.$httpBackendDecorator);
-}]).info({ angularVersion: '1.8.0' });
+}]).info({ angularVersion: '1.9.0' });
 
 /**
  * @ngdoc module
@@ -2684,7 +2689,7 @@ angular.module('ngMock', ['ng']).provider({
  */
 angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
-}]).info({ angularVersion: '1.8.0' });
+}]).info({ angularVersion: '1.9.0' });
 
 /**
  * @ngdoc service
