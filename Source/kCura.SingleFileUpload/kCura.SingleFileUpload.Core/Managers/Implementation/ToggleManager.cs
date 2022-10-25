@@ -13,12 +13,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
         private ToggleManager()
         {
         }
-        
-        public Task<bool> GetCheckSFUFieldsAsync()
-        {
-            return ToggleProvider.Current.IsEnabledAsync<CheckSFUFields>();
-        }
-        
+
         public Task<bool> GetCheckUploadMassiveAsync()
         {
             return ToggleProvider.Current.IsEnabledAsync<UploadMassiveDocuments>();
