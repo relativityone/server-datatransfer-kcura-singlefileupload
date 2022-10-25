@@ -24,16 +24,6 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 			ToggleProvider.Current = toggleProvider.Object;
 		}
 
-        [Test]
-		public async Task GetCheckSFUFieldsAsync_ShouldReturnToggle()
-		{
-			// Act
-			bool result = await ToggleManager.Instance.GetCheckSFUFieldsAsync();
-
-			// Assert
-			result.Should().BeTrue();
-		}
-
 		[Test]
 		public async Task GetCheckUploadMassiveAsync_ShouldReturnToggle()
 		{
