@@ -4,8 +4,6 @@ namespace kCura.SingleFileUpload.Core.Managers
 {
     public interface IToggleManager
     {
-        Task<bool> GetCheckSFUFieldsAsync();
-
         Task<bool> GetCheckUploadMassiveAsync();
     }
 }

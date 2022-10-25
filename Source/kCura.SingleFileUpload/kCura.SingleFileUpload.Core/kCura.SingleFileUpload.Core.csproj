@@ -279,9 +279,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Toggles\ChangeFileName.cs" />
-    <Compile Include="Toggles\CheckSFUFields.cs" />
     <Compile Include="Toggles\UploadMassiveDocuments.cs" />
-    <Compile Include="Toggles\ValidateSFUCustomPermissions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="oi\docs\fileids_values_only_sorted.txt" />

@@ -308,53 +308,18 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 			return isDataGrid;
 		}
 
-		public async Task<DataTable> GetDocumentDataTableAsync(string identifierName)
+		public DataTable GetDocumentDataTable(string identifierName)
 		{
 			DataTable documentsDataTable = new DataTable();
-
 			documentsDataTable.Columns.Add(identifierName, typeof(string));
 			documentsDataTable.Columns.Add("Extracted Text", typeof(string));
-
-
-			if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
-			{
-				object wsResult = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting);
-				JObject wsFields = null;
-				if (wsResult != null)
-				{
-					wsFields = JObject.Parse(wsResult.ToString());
-				}
-				else
-				{
-					CreateWorkspaceFieldSettings();
-					wsResult = Repository.Instance.CaseDBContext.ExecuteSqlStatementAsScalar(Queries.GetFieldsWorspaceSetting);
-
-					if (wsResult != null)
-					{
-						wsFields = JObject.Parse(wsResult.ToString());
-					}
-					else
-					{
-						throw new MissingFieldException("Fields Settings does not exist.");
-					}
-				}
-
-				foreach (var wsItem in wsFields)
-				{
-					documentsDataTable.Columns.Add(wsItem.Value.ToString(), typeof(string));
-				}
-			}
-			else
-			{
-				documentsDataTable.Columns.Add("Document Extension", typeof(string));
-				documentsDataTable.Columns.Add("File Extension", typeof(string));
-				documentsDataTable.Columns.Add("FileExtension", typeof(string));
-				documentsDataTable.Columns.Add("File Name", typeof(string));
-				documentsDataTable.Columns.Add("FileName", typeof(string));
-				documentsDataTable.Columns.Add("File Size");
-				documentsDataTable.Columns.Add("FileSize");
-			}
-
+			documentsDataTable.Columns.Add("Document Extension", typeof(string));
+			documentsDataTable.Columns.Add("File Extension", typeof(string));
+			documentsDataTable.Columns.Add("FileExtension", typeof(string));
+			documentsDataTable.Columns.Add("File Name", typeof(string));
+			documentsDataTable.Columns.Add("FileName", typeof(string));
+			documentsDataTable.Columns.Add("File Size");
+			documentsDataTable.Columns.Add("FileSize");
 			documentsDataTable.Columns.Add("Native File", typeof(string));
 			return documentsDataTable;
 		}
@@ -490,7 +455,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 
 				DocumentIdentifierField identityField = await GetDocumentIdentifierAsync().ConfigureAwait(false);
 
-				DataTable dtDocument = await GetDocumentDataTableAsync(identityField.Name).ConfigureAwait(false);
+				DataTable dtDocument = GetDocumentDataTable(identityField.Name);
 
 				// upper case extension and remove period
 				string extension = Path.GetExtension(documentInfo.FileName).ToUpper().Remove(0, 1),
@@ -500,23 +465,12 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 				decimal fileSize = decimal.Parse(documentInfo.Native.LongLength.ToString());
 
 				// Add file to load
-				if (await ToggleManager.Instance.GetCheckSFUFieldsAsync().ConfigureAwait(false))
-				{
-
-					dtDocument.Rows.Add(
-					!string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber :
-						(documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
-					documentInfo.ExtractedText,
-					extension,
-					fullFileName,
-					fileSize,
-					documentInfo.TempFileLocation);
-				}
-				else
-				{
-					dtDocument.Rows.Add(
-					!string.IsNullOrEmpty(documentInfo.ControlNumber) ? documentInfo.ControlNumber :
-						(documentId.HasValue ? GetDocumentControlNumber(documentId.Value) : Path.GetFileNameWithoutExtension(documentInfo.FileName)),
+				dtDocument.Rows.Add(
+					!string.IsNullOrEmpty(documentInfo.ControlNumber)
+						? documentInfo.ControlNumber
+						: (documentId.HasValue
+							? GetDocumentControlNumber(documentId.Value)
+							: Path.GetFileNameWithoutExtension(documentInfo.FileName)),
 					documentInfo.ExtractedText,
 					extension,
 					extension,
@@ -526,7 +480,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					fileSize,
 					fileSize,
 					documentInfo.TempFileLocation);
-				}
+
 				ImportJobSettings importJobSettings = new ImportJobSettings()
 				{
 					WorkspaceID = workspaceID,
@@ -638,7 +592,7 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
 					}),
 					IncludeNameInQueryResult = true
 				};
-				QueryResult queryResult = await ExecuteWithServiceRetriesAsync(() => 
+				QueryResult queryResult = await ExecuteWithServiceRetriesAsync(() =>
 					objectManager.QueryAsync(Repository.Instance.WorkspaceID, queryRequest, start: 0, length: 1))
 					.ConfigureAwait(false);
 
