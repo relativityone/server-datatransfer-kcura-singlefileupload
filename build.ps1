@@ -69,7 +69,12 @@ Write-Progress "Importing required Powershell modules..."
 $ToolsDir = Join-Path $PSScriptRoot "buildtools"
 Import-Module (Join-Path $ToolsDir "psake\tools\psake\psake.psd1") -ErrorAction Stop
 Import-Module (Join-Path $ToolsDir "kCura.PSBuildTools\PSBuildTools.psd1") -ErrorAction Stop
-Install-Module VSSetup -Scope CurrentUser -Force
+
+if (!(Get-Module -Name VSSetup -ListAvailable))
+{
+	Install-Module VSSetup -Scope CurrentUser -Repository 'powershell-anthology' -Force
+}
+Import-Module VSSetup -Force
 
 $Params = @{
 	taskList = $TaskList

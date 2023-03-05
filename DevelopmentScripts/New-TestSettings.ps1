@@ -54,6 +54,8 @@ param (
     $AdditionalRunSettingsFilePath = ".\DevelopmentScripts\additional.runsettings"
 )
 
+#requires -RunAsAdministrator
+
 if($TestVMName)
 {
     $testvm = Get-TestVm | Where-Object { $_.BoxName -eq $TestVMName }
