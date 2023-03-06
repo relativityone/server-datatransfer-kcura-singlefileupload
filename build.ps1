@@ -71,6 +71,7 @@ Import-Module (Join-Path $ToolsDir "psake\tools\psake\psake.psd1") -ErrorAction 
 Import-Module (Join-Path $ToolsDir "kCura.PSBuildTools\PSBuildTools.psd1") -ErrorAction Stop
 Install-Module VSSetup -Scope CurrentUser -Force
 
+# use vswhere to find the latest version of msbuild.  See https://github.com/Microsoft/vswhere.
 [string] $programFilesx86 = ${Env:ProgramFiles(x86)}
 $vswhereExe = Join-Path $programFilesx86 "Microsoft Visual Studio\Installer\vswhere.exe"
 $msBuildPath = & $vswhereExe -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | select-object -first 1
