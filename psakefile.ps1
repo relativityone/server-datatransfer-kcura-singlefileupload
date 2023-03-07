@@ -16,11 +16,7 @@ Task Analyze -Description "Run build analysis" {
 }
 
 Task NugetRestore -Description "Restore the packages needed for this build" {
-    Write-Host "MsBuildPath=$MsBuildPath"
-    $MsBuildFolder = Split-Path -Path $MsBuildPath -Parent
-    Write-Host "MsBuildFolder=$MsBuildFolder"
-
-    exec { & $NugetExe @('restore', $Solution, '-MSBuildPath', $MsBuildFolder) }   
+    exec { & $NugetExe @('restore', $Solution) }   
 }
 
 Task Compile -Depends NugetRestore -Description "Compile code for this repo" {
@@ -28,9 +24,8 @@ Task Compile -Depends NugetRestore -Description "Compile code for this repo" {
     Initialize-Folder $LogsDir -Safe
 
     Write-Host "Running Rebuild on $Solution"
-    Write-Host "MsBuildPath=$MsBuildPath"
 
-    exec { & $MsBuildPath @($Solution,
+    exec { msbuild @($Solution,
         ("/target:Build"),
         ("/property:Configuration=$BuildConfig"),
         ("/consoleloggerparameters:Summary"),
