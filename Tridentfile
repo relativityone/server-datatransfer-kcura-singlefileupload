@@ -1,4 +1,4 @@
- @Library('ProjectMayhem@REL-819247-bld-pkgs')_
+ @Library('ProjectMayhem@vServer')_
 rapCD {
     slackChannel = "ci-sfu"
     sutTemplate = "aio-server2022-ga"
