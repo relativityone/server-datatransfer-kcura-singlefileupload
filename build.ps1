@@ -42,9 +42,6 @@ param(
 	[string]$Configuration = "Debug"
 	)
 
-# Necessary to load the local profile, but unnecessary for build agent.
-try { . $profile } catch { Write-Warning 'Profile not found.  Skipped loading.' }
-
 Set-StrictMode -Version 2.0
 
 $BaseDir = $PSScriptRoot
