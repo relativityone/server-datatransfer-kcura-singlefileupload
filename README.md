@@ -14,3 +14,15 @@ For functional tests, point PowerShell to the root of this repository and provid
 ## Online Documentation
 
 [View the documentation in Einstein](https://einstein.kcura.com/display/DV/Single+File+Upload+Application+Considerations)
+
+## History  
+
+The server-main branch was forked for Relativity Server by the Server Vertical.
+Tag: 12.3
+Branch: server-main
+
+## Maintainers
+Server-delta: Team working on code isolation
+
+The server- branches are in the process of being transitioned to the Server Vertical.
+#help-server-architecture, #team-server-delta
