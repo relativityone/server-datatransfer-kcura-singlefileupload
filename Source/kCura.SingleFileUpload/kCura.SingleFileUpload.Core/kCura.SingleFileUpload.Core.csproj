@@ -1220,10 +1220,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets'))" />
-    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" />
   <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>

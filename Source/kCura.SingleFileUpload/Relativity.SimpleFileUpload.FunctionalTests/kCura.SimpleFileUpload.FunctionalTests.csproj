@@ -162,8 +162,8 @@
     <Reference Include="Relativity.CustomPages, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.CustomPages.10.2.9.12\lib\net462\Relativity.CustomPages.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.94-dev, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.103, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.DataTransfer.MessageService, Version=10.2.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.DataTransfer.MessageService.10.2.0\lib\Relativity.DataTransfer.MessageService.dll</HintPath>
@@ -771,12 +771,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets'))" />
     <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.78.0.3904.10500\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2020.7.0\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2020.7.0\build\kCura.OutsideIn.Full.Win64.targets')" />
 </Project>
