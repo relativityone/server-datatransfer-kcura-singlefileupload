@@ -82,8 +82,8 @@
     <Reference Include="Relativity.AutomatedWorkflows.Services.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.AutomatedWorkflows.Services.Interfaces.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.Services.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.94.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
+    <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.DataTransfer.Legacy.SDK, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.DataTransfer.Legacy.SDK.dll</HintPath>
@@ -592,9 +592,9 @@
     <Error Condition="!Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit.3.12.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets'))" />
     <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets'))" />
   </Target>
   <Import Project="..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" />
   <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" />
-  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.94-dev\build\Relativity.DataExchange.Client.SDK.targets')" />
+  <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" />
 </Project>
