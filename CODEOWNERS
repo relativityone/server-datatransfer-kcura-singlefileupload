@@ -8,6 +8,7 @@ CODEOWNERS.toplevel.create_pull_request_comment enable
 
 *                             @@AdlerSieben
 CODEOWNERS                    @Tomasz.Peczek
+                              @shivaraj.k @amith.shet @ravi.konnur @sameer.khan @rajasekar.ravi @nishant.shetty @ashok.mahabaleshwar
 
 # Help
 # GitHub Documentation: https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
