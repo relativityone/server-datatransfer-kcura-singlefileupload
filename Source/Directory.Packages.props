@@ -7,12 +7,13 @@
 	<PropertyGroup>
         <Antlr>3.4.1.9004</Antlr>
         <Atata>1.6.0</Atata>
-		<AtataWebDriverExtras>0.1.109</AtataWebDriverExtras>
+		<AtataWebDriverExtras>1.3.0</AtataWebDriverExtras>
 		<BCryptOfficial>0.1.109</BCryptOfficial>
         <BouncyCastle>1.8.9</BouncyCastle>
 		<CSharpGuidelineAnalyzer>1.1.0.0</CSharpGuidelineAnalyzer>
 		<CastleWindsor>3.3.0</CastleWindsor>
-        <CastleCore>4.4.0</CastleCore>
+        <CastleCore>3.3.0</CastleCore>
+		<CastleDynamicProxy>1.0.0.16</CastleDynamicProxy>
 		<FluentAssertions>5.10.3</FluentAssertions>
         <FontAwesome>4.6.3</FontAwesome>
         <jQuery>3.5.1</jQuery>
@@ -47,7 +48,7 @@
         <Moq>4.12.0</Moq>
         <MailKit>2.2.0</MailKit>
 		<MimeKit>2.2.0</MimeKit>
-        <NewtonsoftJson>11.0.2</NewtonsoftJson>
+        <NewtonsoftJson>12.0.2</NewtonsoftJson>
 		<NuGetPowerTools>0.29</NuGetPowerTools>
         <NUnit>3.13.2</NUnit>
 		<NUnit3TestAdapter>3.13.0</NUnit3TestAdapter>
@@ -57,7 +58,7 @@
 		<Polly>5.7.0</Polly>
         <popperjs>1.14.0</popperjs>
 		<Relativity>10.3.5.3</Relativity>
-		<RelativityAPI>12.0.0</RelativityAPI>
+		<RelativityAPI>10.2.21.23</RelativityAPI>
 		<RelativityAuthenticationInterfaces>10.2.9.12</RelativityAuthenticationInterfaces>
 		<RelativityAutomatedWorkflowsSDK>0.11.0-pre.1</RelativityAutomatedWorkflowsSDK>
 		<RelativityAutomatedWorkflowsServicesInterfaces>0.11.0-pre.1</RelativityAutomatedWorkflowsServicesInterfaces>
@@ -113,7 +114,7 @@
 		<SystemReactive>4.1.5</SystemReactive>
 		<SystemReactiveInterfaces>3.0.0</SystemReactiveInterfaces>
 		<SystemValueTuple>4.5.0</SystemValueTuple>	
-		<SystemRuntimeCompilerServicesUnsafe>4.5.2</SystemRuntimeCompilerServicesUnsafe>
+		<SystemRuntimeCompilerServicesUnsafe>5.0.0</SystemRuntimeCompilerServicesUnsafe>
 		<SystemThreadingTasksExtensions>4.5.2</SystemThreadingTasksExtensions>
 	    <SystemNetHttp>4.3.4</SystemNetHttp>
 		<SystemReactiveCore>4.1.5</SystemReactiveCore>
@@ -124,6 +125,7 @@
 		<WebActivatorEx>2.0.3</WebActivatorEx>
 		<WebGrease>1.5.2</WebGrease>
         <ZetaLongPaths>1.0.0.16</ZetaLongPaths>
+		
 
 	</PropertyGroup>
 	<ItemGroup>
@@ -132,11 +134,12 @@
         <PackageVersion Include="Antlr" Version="$(Antlr)" />
         <PackageVersion Include="BCrypt-Official" Version="$(BCryptOfficial)" />
 		<PackageVersion Include="BouncyCastle" Version="$(BouncyCastle)" />
-		<PackageVersion Include="CastleWindsor" Version="$(CastleWindsor)" />
+		<PackageVersion Include="Castle.Windsor" Version="$(CastleWindsor)" />
 		<PackageVersion Include="CSharpGuidelineAnalyzer" Version="$(CSharpGuidelineAnalyzer)" />
-        <PackageVersion Include="Castle.Core" Version="$(CastleCore)" />
+        <PackageVersion Include="Castle.Core" Version="$(CastleCore)" />		
         <PackageVersion Include="FluentAssertions" Version="$(FluentAssertions)" />
         <PackageVersion Include="FontAwesome" Version="$(FontAwesome)" />
+		 <PackageVersion Include="jQuery" Version="$(jQuery)" />
         <PackageVersion Include="jQuery.BlockUI" Version="$(jQueryBlockUI)" />
 		<PackageVersion Include="jQuery.UI.Combined" Version="$(jQueryUICombined)" />
         <PackageVersion Include="kCura" Version="$(kCura)" />
@@ -167,6 +170,7 @@
         <PackageVersion Include="Microsoft.AspNet.WebApi.Core" Version="$(MicrosoftAspNetWebApiCore)" />
         <PackageVersion Include="MailKit" Version="$(MailKit)" />
         <PackageVersion Include="MimeKit" Version="$(MimeKit)" />
+		<PackageVersion Include="Moq" Version="$(Moq)" />
         <PackageVersion Include="Newtonsoft.Json" Version="$(NewtonsoftJson)" />
 		<PackageVersion Include="NuGetPowerTools" Version="$(NuGetPowerTools)" />
         <PackageVersion Include="NUnit" Version="$(NUnit)" />
@@ -236,7 +240,7 @@
 		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
 		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" />
 		<PackageVersion Include="Selenium.WebDriver" Version="$(SeleniumWebDriver)" />
-		<PackageVersion Include="Selenium.WebDriverChromeDriver" Version="$(SeleniumWebDriverChromeDriver)" />
+		<PackageVersion Include="Selenium.WebDriver.ChromeDriver" Version="$(SeleniumWebDriverChromeDriver)" />
 		<PackageVersion Include="SemanticVersioning" Version="$(SemanticVersioning)" />
 		<PackageVersion Include="System.Buffers" Version="$(SystemBuffers)" />
 		<PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="$(SystemDiagnosticsDiagnosticSource)" />

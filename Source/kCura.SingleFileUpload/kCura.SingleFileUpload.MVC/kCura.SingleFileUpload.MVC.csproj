@@ -20,8 +20,7 @@
     <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <!-- <WebGreaseLibPath>..\..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath> -->
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>  
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
     <Use64BitIISExpress />
@@ -52,217 +51,17 @@
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
   <ItemGroup>
-    <!-- <Reference Include="Antlr3.Runtime">
-      <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="FaspManager, Version=3.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\FaspManager.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="kCura, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.10.3.5.3\lib\net462\kCura.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.Injection.10.3.5.3\lib\net462\kCura.Injection.dll</HintPath>
-    </Reference> -->
     <Reference Include="Microsoft.CSharp" />
-    <!-- <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="oi, Version=2021.12.0.19, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\lib\net40\oi.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Polly, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Polly.5.7.0\lib\net45\Polly.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RazorGenerator.Mvc.2.4.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="Relativity, Version=10.3.5.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.10.3.5.3\lib\net462\Relativity.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.API, Version=12.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.API.12.0.0\lib\net462\Relativity.API.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Authentication.Interfaces, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Authentication.Interfaces.10.2.9.12\lib\net462\Relativity.Authentication.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.AutomatedWorkflows.SDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.SDK.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.SDK.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.AutomatedWorkflows.Services.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.AutomatedWorkflows.Services.Interfaces.0.11.0-pre.1\lib\net462\Relativity.AutomatedWorkflows.Services.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.CustomPages, Version=10.2.9.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.CustomPages.10.2.9.12\lib\net462\Relativity.CustomPages.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.DataExchange.Client.SDK, Version=1.15.103.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\lib\net462\Relativity.DataExchange.Client.SDK.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.DataTransfer.Legacy.SDK, Version=0.1.28.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.DataTransfer.Legacy.SDK.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.DataTransfer.MessageService, Version=10.2.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.DataTransfer.MessageService.10.2.0\lib\Relativity.DataTransfer.MessageService.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.DataTransfer.Nodes, Version=12.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.DataTransfer.Nodes.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Kepler, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Kepler.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Logging, Version=2019.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.2019.5.1\lib\net462\Relativity.Logging.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Logging.Interfaces, Version=3000.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Logging.Interfaces.3000.0.1\lib\net462\Relativity.Logging.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.OAuth2Client, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OAuth2Client.1.5.2\lib\net462\Relativity.OAuth2Client.dll</HintPath>
-    </Reference> -->
-    <Reference Include="Relativity.OAuth2Client.IdentityModel, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OAuth2Client.1.5.2\lib\net462\Relativity.OAuth2Client.IdentityModel.dll</HintPath>
-    </Reference>
-    <!-- <Reference Include="Relativity.OAuth2Client.IdentityModel.Interfaces, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.5.2\lib\net462\Relativity.OAuth2Client.IdentityModel.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.OAuth2Client.Implicit, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OAuth2Client.Implicit.1.5.2\lib\net462\Relativity.OAuth2Client.Implicit.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.OAuth2Client.Interfaces, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OAuth2Client.Interfaces.1.5.2\lib\net462\Relativity.OAuth2Client.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.OIFactory, Version=47.13.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.OIFactory.47.13.2\lib\net462\Relativity.OIFactory.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Services.DataContracts, Version=13.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.DataContracts.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Services.Interfaces, Version=13.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Services.ServiceProxy, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.ObjectManager.12.2.45.4\lib\net462\Relativity.Services.ServiceProxy.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Telemetry.APM, Version=2019.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.APM.2019.10.1\lib\net462\Relativity.Telemetry.APM.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Telemetry.DataContracts.Shared, Version=3003.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.DataContracts.Shared.3003.1.0\lib\net462\Relativity.Telemetry.DataContracts.Shared.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Telemetry.Services.Interface, Version=3003.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Telemetry.Services.Interface.3003.0.2\lib\net462\Relativity.Telemetry.Services.Interface.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Transfer.Client, Version=7.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.Transfer.Client.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Transfer.Client.Aspera, Version=7.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.Transfer.Client.Aspera.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Transfer.Client.Core, Version=7.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.Transfer.Client.Core.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Transfer.Client.FileShare, Version=7.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.Transfer.Client.FileShare.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Relativity.Transfer.Client.Http, Version=7.4.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Relativity.Transfer.Client.7.4.9\lib\net462\Relativity.Transfer.Client.Http.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="Renci.SshNet, Version=2016.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SSH.NET.2016.0.0\lib\net40\Renci.SshNet.dll</HintPath>
-    </Reference> -->
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <!-- <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference> -->
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
-    <!-- <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Reactive.4.1.5\lib\net46\System.Reactive.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Reactive.Core.4.1.5\lib\net46\System.Reactive.Core.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Reactive.Interfaces, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Reactive.Interfaces.4.1.5\lib\net46\System.Reactive.Interfaces.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Reactive.Linq.4.1.5\lib\net46\System.Reactive.Linq.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference> -->
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
-    <!-- <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference> -->
-    <!-- <Reference Include="System.Web.Optimization">
-      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference> -->
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference> 
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -272,27 +71,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <!-- <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference> -->
     <Reference Include="System.Xml.Linq" />
-    <!-- <Reference Include="WebActivatorEx">
-      <HintPath>..\..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference> -->
-    <!-- <Reference Include="WebGrease">
-      <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference> -->
     <Reference Include="WindowsBase" />
-    <!-- <Reference Include="ZetaLongPaths, Version=1.0.0.16, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ZetaLongPaths.1.0.0.16\lib\net40-full\ZetaLongPaths.dll</HintPath>
-    </Reference> -->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Version\AssemblyInfo.cs">
@@ -458,11 +238,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\kCura.SingleFileUpload.Core\kCura.SingleFileUpload.Core.csproj">
       <Project>{35649484-671a-407e-924e-1c1fbd850393}</Project>
       <Name>kCura.SingleFileUpload.Core</Name>
@@ -474,9 +249,6 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <!-- <ItemGroup>
-    <Analyzer Include="..\..\packages\CSharpGuidelineAnalyzer.1.1.0.0\analyzers\dotnet\cs\CSharpGuidelineAnalyzer.dll" />
-  </ItemGroup> -->
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
@@ -531,24 +303,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\..\packages\kCura.10.3.5.3\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.3.5.3\build\kCura.targets')" />
-  <Import Project="..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.FI.Win32.2019.2.2\build\kCura.OutsideIn.FI.Win32.targets')" />
-  <!-- <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2019.2.2\build\kCura.OutsideIn.Full.Win64.targets')" /> -->
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets'))" />
-    <!-- <Error Condition="!Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets'))" /> -->
-    <!-- <Error Condition="!Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets'))" /> -->
-  </Target>
-  <Import Project="..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets" Condition="Exists('..\..\packages\Relativity.OutsideIn.2021.12.0\build\Relativity.OutsideIn.targets')" />
-  <!-- <Import Project="..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets" Condition="Exists('..\..\packages\Relativity.DataExchange.Client.SDK.1.15.103\build\Relativity.DataExchange.Client.SDK.targets')" /> -->
-  <!-- <Import Project="..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets" Condition="Exists('..\..\packages\kCura.OutsideIn.Full.Win64.2021.12.0\build\kCura.OutsideIn.Full.Win64.targets')" /> -->
  <ItemGroup>
   <PackageReference Include="Antlr" />
   <PackageReference Include="BCrypt-Official"  />
   <PackageReference Include="CSharpGuidelineAnalyzer" />
+  <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
+  <NoWarn>NU1109</NoWarn>
+  </PackageReference>
   <PackageReference Include="FontAwesome" />
   <PackageReference Include="jQuery"  />
   <PackageReference Include="jQuery.BlockUI" />
@@ -615,5 +376,4 @@
   <PackageReference Include="WebGrease" />
   <PackageReference Include="ZetaLongPaths" />
 </ItemGroup> 
-
 </Project>
