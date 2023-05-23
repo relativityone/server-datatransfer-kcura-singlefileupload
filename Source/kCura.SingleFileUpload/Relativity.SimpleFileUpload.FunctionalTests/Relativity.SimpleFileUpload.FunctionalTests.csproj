@@ -494,99 +494,99 @@
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
-<ItemGroup>
-  <PackageReference Include="Atata" />
-  <PackageReference Include="Atata.WebDriverExtras"  />
-  <PackageReference Include="BCrypt-Official"  />
-  <PackageReference Include="BouncyCastle"  />
-  <PackageReference Include="Castle.Core" VersionOverride="3.3.0">
-  <NoWarn>NU1605,NU1608</NoWarn>
-  </PackageReference>
-  <PackageReference Include="Castle.Windsor"  />
-  <PackageReference Include="FluentAssertions" />
-  <PackageReference Include="kCura"  />
-  <PackageReference Include="kCura.EventHandler" VersionOverride="15.1.0">
-  <NoWarn>NU1605</NoWarn>
-  </PackageReference>
-  <PackageReference Include="kCura.Injection"  />
-  <PackageReference Include="kCura.NUnit.Integration"  />
-  <PackageReference Include="kCura.OutsideIn.Full.Win64"  />
-  <PackageReference Include="kCura.Relativity.Client"  />
-  <PackageReference Include="MailKit"  />
-  <PackageReference Include="Microsoft.ApplicationInsights" />
-  <PackageReference Include="Microsoft.AspNet.Mvc"  />
-  <PackageReference Include="Microsoft.AspNet.Razor"  />
-  <PackageReference Include="Microsoft.AspNet.WebPages" />
-  <PackageReference Include="Microsoft.Extensions.Configuration"  />
-  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions"  />
-  <PackageReference Include="Microsoft.Extensions.Configuration.Binder"  />
-  <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
-  <PackageReference Include="Microsoft.Extensions.Primitives" />
-  <PackageReference Include="Microsoft.Web.Infrastructure"  />
-  <PackageReference Include="MimeKit"  />
-  <PackageReference Include="Moq"  />
-  <PackageReference Include="Newtonsoft.Json"  VersionOverride="12.0.2">
-  <NoWarn>NU1605</NoWarn>
-  </PackageReference>
-  <PackageReference Include="NLog"  />
-  <PackageReference Include="NuGetPowerTools" />
-  <PackageReference Include="NUnit" />
-  <PackageReference Include="NUnit3TestAdapter"  />
-  <PackageReference Include="NUnitExtras.HierarchicalCategories" />
-  <PackageReference Include="Polly"  />
-  <PackageReference Include="Relativity" />
-  <PackageReference Include="Relativity.API" VersionOverride="15.1.0">
-  <NoWarn>NU1605</NoWarn>
-  </PackageReference>
-  <PackageReference Include="Relativity.Authentication.Interfaces"  />
-  <PackageReference Include="Relativity.CustomPages"  />
-  <PackageReference Include="Relativity.DataExchange.Client.SDK"  />
-  <PackageReference Include="Relativity.DataTransfer.MessageService"  />
-  <PackageReference Include="relativity.faspmanager"  />
-  <PackageReference Include="Relativity.Kepler" />
-  <PackageReference Include="Relativity.Kepler.Client"  />
-  <PackageReference Include="Relativity.Kepler.Client.SDK"  />
-  <PackageReference Include="Relativity.Logging"  />
-  <PackageReference Include="Relativity.Logging.Interfaces"  />
-  <PackageReference Include="Relativity.OAuth2Client"  />
-  <PackageReference Include="Relativity.OAuth2Client.Implicit"  />
-  <PackageReference Include="Relativity.OAuth2Client.Interfaces"  />
-  <PackageReference Include="Relativity.ObjectManager"  />
-  <PackageReference Include="Relativity.OutsideIn"  />
-  <PackageReference Include="Relativity.Platform.Keywords"  />
-  <PackageReference Include="Relativity.SecretCatalog"  />
-  <PackageReference Include="Relativity.Services.DataContracts"  />
-  <PackageReference Include="Relativity.Services.Interfaces"  />
-  <PackageReference Include="Relativity.Services.Interfaces.Private"  />
-  <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
-  <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
-  <PackageReference Include="Relativity.Telemetry.Services.Interface"  />
-  <PackageReference Include="Relativity.Testing.Framework"  />
-  <PackageReference Include="Relativity.Testing.Framework.Api"  />
-  <PackageReference Include="Relativity.Testing.Framework.RingSetup"  />
-  <PackageReference Include="Relativity.Testing.Framework.Web"  />
-  <PackageReference Include="Relativity.Testing.Identification"  />
-  <PackageReference Include="Relativity.Transfer.Client"  />
-  <PackageReference Include="RelativityDev.DbContextHelper"  />
-  <PackageReference Include="RelativityDev.RelativityTestHelpers"  />
-  <PackageReference Include="Selenium.WebDriver"  />
-  <PackageReference Include="Selenium.WebDriver.ChromeDriver"  />
-  <PackageReference Include="SemanticVersioning"  />
-  <PackageReference Include="SSH.NET" />
-  <PackageReference Include="System.Buffers" />
-  <PackageReference Include="System.Data.SqlClient"  />
-  <PackageReference Include="System.Diagnostics.DiagnosticSource"  />
-  <PackageReference Include="System.Memory"  />
-  <PackageReference Include="System.Net.Http"  />
-  <PackageReference Include="System.Numerics.Vectors"  />
-  <PackageReference Include="System.Reactive"  />
-  <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  />
-  <PackageReference Include="System.Security.Cryptography.Algorithms"  />
-  <PackageReference Include="System.Security.Cryptography.Encoding"  />
-  <PackageReference Include="System.Security.Cryptography.Primitives"  />
-  <PackageReference Include="System.Security.Cryptography.X509Certificates"  />
-  <PackageReference Include="System.Threading.Tasks.Extensions"  />
-  <PackageReference Include="System.ValueTuple"  />
-  <PackageReference Include="ZetaLongPaths" />
-</ItemGroup>  
+  <ItemGroup>
+    <PackageReference Include="Atata" />
+    <PackageReference Include="Atata.WebDriverExtras"  />
+    <PackageReference Include="BCrypt-Official"  />
+    <PackageReference Include="BouncyCastle"  />
+    <PackageReference Include="Castle.Core" VersionOverride="3.3.0">
+    <NoWarn>NU1605,NU1608</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Castle.Windsor"  />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="kCura"  />
+    <PackageReference Include="kCura.EventHandler" VersionOverride="15.1.0">
+    <NoWarn>NU1605</NoWarn>
+    </PackageReference>
+    <PackageReference Include="kCura.Injection"  />
+    <PackageReference Include="kCura.NUnit.Integration"  />
+    <PackageReference Include="kCura.OutsideIn.Full.Win64"  />
+    <PackageReference Include="kCura.Relativity.Client"  />
+    <PackageReference Include="MailKit"  />
+    <PackageReference Include="Microsoft.ApplicationInsights" />
+    <PackageReference Include="Microsoft.AspNet.Mvc"  />
+    <PackageReference Include="Microsoft.AspNet.Razor"  />
+    <PackageReference Include="Microsoft.AspNet.WebPages" />
+    <PackageReference Include="Microsoft.Extensions.Configuration"  />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions"  />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder"  />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" />
+    <PackageReference Include="Microsoft.Web.Infrastructure"  />
+    <PackageReference Include="MimeKit"  />
+    <PackageReference Include="Moq"  />
+    <PackageReference Include="Newtonsoft.Json"  VersionOverride="12.0.2">
+    <NoWarn>NU1605</NoWarn>
+    </PackageReference>
+    <PackageReference Include="NLog"  />
+    <PackageReference Include="NuGetPowerTools" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter"  />
+    <PackageReference Include="NUnitExtras.HierarchicalCategories" />
+    <PackageReference Include="Polly"  />
+    <PackageReference Include="Relativity" />
+    <PackageReference Include="Relativity.API" VersionOverride="15.1.0">
+    <NoWarn>NU1605</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Relativity.Authentication.Interfaces"  />
+    <PackageReference Include="Relativity.CustomPages"  />
+    <PackageReference Include="Relativity.DataExchange.Client.SDK"  />
+    <PackageReference Include="Relativity.DataTransfer.MessageService"  />
+    <PackageReference Include="relativity.faspmanager"  />
+    <PackageReference Include="Relativity.Kepler" />
+    <PackageReference Include="Relativity.Kepler.Client"  />
+    <PackageReference Include="Relativity.Kepler.Client.SDK"  />
+    <PackageReference Include="Relativity.Logging"  />
+    <PackageReference Include="Relativity.Logging.Interfaces"  />
+    <PackageReference Include="Relativity.OAuth2Client"  />
+    <PackageReference Include="Relativity.OAuth2Client.Implicit"  />
+    <PackageReference Include="Relativity.OAuth2Client.Interfaces"  />
+    <PackageReference Include="Relativity.ObjectManager"  />
+    <PackageReference Include="Relativity.OutsideIn"  />
+    <PackageReference Include="Relativity.Platform.Keywords"  />
+    <PackageReference Include="Relativity.SecretCatalog"  />
+    <PackageReference Include="Relativity.Services.DataContracts"  />
+    <PackageReference Include="Relativity.Services.Interfaces"  />
+    <PackageReference Include="Relativity.Services.Interfaces.Private"  />
+    <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
+    <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
+    <PackageReference Include="Relativity.Telemetry.Services.Interface"  />
+    <PackageReference Include="Relativity.Testing.Framework"  />
+    <PackageReference Include="Relativity.Testing.Framework.Api"  />
+    <PackageReference Include="Relativity.Testing.Framework.RingSetup"  />
+    <PackageReference Include="Relativity.Testing.Framework.Web"  />
+    <PackageReference Include="Relativity.Testing.Identification"  />
+    <PackageReference Include="Relativity.Transfer.Client"  />
+    <PackageReference Include="RelativityDev.DbContextHelper"  />
+    <PackageReference Include="RelativityDev.RelativityTestHelpers"  />
+    <PackageReference Include="Selenium.WebDriver"  />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver"  />
+    <PackageReference Include="SemanticVersioning"  />
+    <PackageReference Include="SSH.NET" />
+    <PackageReference Include="System.Buffers" />
+    <PackageReference Include="System.Data.SqlClient"  />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource"  />
+    <PackageReference Include="System.Memory"  />
+    <PackageReference Include="System.Net.Http"  />
+    <PackageReference Include="System.Numerics.Vectors"  />
+    <PackageReference Include="System.Reactive"  />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  />
+    <PackageReference Include="System.Security.Cryptography.Algorithms"  />
+    <PackageReference Include="System.Security.Cryptography.Encoding"  />
+    <PackageReference Include="System.Security.Cryptography.Primitives"  />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates"  />
+    <PackageReference Include="System.Threading.Tasks.Extensions"  />
+    <PackageReference Include="System.ValueTuple"  />
+    <PackageReference Include="ZetaLongPaths" />
+  </ItemGroup>  
 </Project>

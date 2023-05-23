@@ -1058,8 +1058,8 @@
   <ItemGroup> 
     <PackageReference Include="BCrypt-Official" />
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
-     <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-     <NoWarn>NU1605</NoWarn>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
+    <NoWarn>NU1605</NoWarn>
     </PackageReference>
     <PackageReference Include="kCura"  />
     <PackageReference Include="kCura.Apps.Common.Utils" />
@@ -1105,5 +1105,5 @@
     <PackageReference Include="System.Reactive.Interfaces"  />
     <PackageReference Include="System.ValueTuple" />
     <PackageReference Include="ZetaLongPaths" />
-</ItemGroup>
+  </ItemGroup>
 </Project>

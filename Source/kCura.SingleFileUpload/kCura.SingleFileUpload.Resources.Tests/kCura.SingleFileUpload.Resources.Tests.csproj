@@ -89,33 +89,33 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
       </Target>
-<ItemGroup>
-  <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-  <NoWarn>NU1605</NoWarn>
-  </PackageReference>
-  <PackageReference Include="FluentAssertions"  />
-  <PackageReference Include="kCura.EventHandler"  />
-  <PackageReference Include="Microsoft.CodeCoverage"  />
-  <PackageReference Include="Microsoft.NET.Test.Sdk"  />
-  <PackageReference Include="Moq"  />
-  <PackageReference Include="Newtonsoft.Json"  />
-  <PackageReference Include="NUnit"  />
-  <PackageReference Include="NUnit3TestAdapter"  />
-  <PackageReference Include="NUnitExtras.HierarchicalCategories"  />
-  <PackageReference Include="NunitXml.TestLogger" />
-  <PackageReference Include="Relativity" />
-  <PackageReference Include="Relativity.API"  />
-  <PackageReference Include="Relativity.Kepler"  />
-  <PackageReference Include="Relativity.SecretCatalog"  />
-  <PackageReference Include="Relativity.Services.DataContracts"  />
-  <PackageReference Include="Relativity.Services.Interfaces"  />
-  <PackageReference Include="Relativity.Services.Interfaces.Private"  />
-  <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
-  <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
-  <PackageReference Include="Relativity.Testing.Identification" />
-  <PackageReference Include="Relativity.Toggles"  />
-  <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  />
-  <PackageReference Include="System.Threading.Tasks.Extensions"  />
-  <PackageReference Include="System.ValueTuple"  />
+  <ItemGroup>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
+    <NoWarn>NU1605</NoWarn>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions"  />
+    <PackageReference Include="kCura.EventHandler"  />
+    <PackageReference Include="Microsoft.CodeCoverage"  />
+    <PackageReference Include="Microsoft.NET.Test.Sdk"  />
+    <PackageReference Include="Moq"  />
+    <PackageReference Include="Newtonsoft.Json"  />
+    <PackageReference Include="NUnit"  />
+    <PackageReference Include="NUnit3TestAdapter"  />
+    <PackageReference Include="NUnitExtras.HierarchicalCategories"  />
+    <PackageReference Include="NunitXml.TestLogger" />
+    <PackageReference Include="Relativity" />
+    <PackageReference Include="Relativity.API"  />
+    <PackageReference Include="Relativity.Kepler"  />
+    <PackageReference Include="Relativity.SecretCatalog"  />
+    <PackageReference Include="Relativity.Services.DataContracts"  />
+    <PackageReference Include="Relativity.Services.Interfaces"  />
+    <PackageReference Include="Relativity.Services.Interfaces.Private"  />
+    <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
+    <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
+    <PackageReference Include="Relativity.Testing.Identification" />
+    <PackageReference Include="Relativity.Toggles"  />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  />
+    <PackageReference Include="System.Threading.Tasks.Extensions"  />
+    <PackageReference Include="System.ValueTuple"  />
   </ItemGroup>
 </Project>
