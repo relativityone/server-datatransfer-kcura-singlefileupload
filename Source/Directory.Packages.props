@@ -124,9 +124,7 @@
 		<SystemSecurityCryptographyPrimitives>4.3.0</SystemSecurityCryptographyPrimitives>
 		<WebActivatorEx>2.0.3</WebActivatorEx>
 		<WebGrease>1.5.2</WebGrease>
-        <ZetaLongPaths>1.0.0.16</ZetaLongPaths>
-		
-
+        <ZetaLongPaths>1.0.0.16</ZetaLongPaths>	
 	</PropertyGroup>
 	<ItemGroup>
     	<PackageVersion Include="Atata" Version="$(Atata)" />

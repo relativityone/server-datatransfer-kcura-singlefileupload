@@ -494,7 +494,7 @@
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
- <ItemGroup>
+<ItemGroup>
   <PackageReference Include="Atata" />
   <PackageReference Include="Atata.WebDriverExtras"  />
   <PackageReference Include="BCrypt-Official"  />
@@ -588,5 +588,5 @@
   <PackageReference Include="System.Threading.Tasks.Extensions"  />
   <PackageReference Include="System.ValueTuple"  />
   <PackageReference Include="ZetaLongPaths" />
- </ItemGroup>  
+</ItemGroup>  
 </Project>

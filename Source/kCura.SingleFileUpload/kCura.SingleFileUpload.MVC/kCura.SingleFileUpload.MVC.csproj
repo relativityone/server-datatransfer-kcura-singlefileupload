@@ -303,7 +303,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
- <ItemGroup>
+<ItemGroup>
   <PackageReference Include="Antlr" />
   <PackageReference Include="BCrypt-Official"  />
   <PackageReference Include="CSharpGuidelineAnalyzer" />
