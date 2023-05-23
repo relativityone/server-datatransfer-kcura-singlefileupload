@@ -54,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -90,9 +87,7 @@
     </PropertyGroup>
       </Target>
   <ItemGroup>
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605"/>
     <PackageReference Include="FluentAssertions"  />
     <PackageReference Include="kCura.EventHandler"  />
     <PackageReference Include="Microsoft.CodeCoverage"  />

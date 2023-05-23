@@ -307,9 +307,7 @@
     <PackageReference Include="Antlr" />
     <PackageReference Include="BCrypt-Official"  />
     <PackageReference Include="CSharpGuidelineAnalyzer" />
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1109</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1109"/>
     <PackageReference Include="FontAwesome" />
     <PackageReference Include="jQuery"  />
     <PackageReference Include="jQuery.BlockUI" />

@@ -84,9 +84,6 @@
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
     <None Include="oi\webview\oit.statusbar.js.map" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -432,9 +429,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" /> 
   <ItemGroup>
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605" />
     <PackageReference Include="FluentAssertions"  />
     <PackageReference Include="kCura.Apps.Common.Utils"  />
     <PackageReference Include="kCura.OutsideIn.Full.Win64" />

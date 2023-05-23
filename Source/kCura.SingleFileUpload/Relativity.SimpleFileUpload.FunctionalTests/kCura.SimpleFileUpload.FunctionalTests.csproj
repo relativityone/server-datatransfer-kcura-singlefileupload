@@ -90,9 +90,6 @@
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
     <None Include="oi\webview\oit.statusbar.js.map" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Resources\SampleDOC.doc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -488,9 +485,7 @@
     <PackageReference Include="Atata.WebDriverExtras"  />
     <PackageReference Include="BCrypt-Official"  />
     <PackageReference Include="BouncyCastle"  />
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605"/>
     <PackageReference Include="Castle.Windsor"  />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="kCura"  />

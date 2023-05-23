@@ -1047,9 +1047,6 @@
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
     <None Include="oi\webview\oit.statusbar.js.map" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="oi\webview\oit.d.ts" />
@@ -1058,9 +1055,7 @@
   <ItemGroup> 
     <PackageReference Include="BCrypt-Official" />
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605" />
     <PackageReference Include="kCura"  />
     <PackageReference Include="kCura.Apps.Common.Utils" />
     <PackageReference Include="kCura.Injection" />

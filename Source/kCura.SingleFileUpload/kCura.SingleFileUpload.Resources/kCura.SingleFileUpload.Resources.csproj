@@ -80,8 +80,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ILMerge.exe" />
-    <None Include="packages.config" />
+    <None Include="ILMerge.exe" />    
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.txt" />
@@ -94,9 +93,7 @@
   <ItemGroup>
     <PackageReference Include="BCrypt-Official"  />
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
-    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
-    <NoWarn>NU1109</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1109" />
     <PackageReference Include="kCura" />
     <PackageReference Include="kCura.EventHandler"  />
     <PackageReference Include="kCura.Injection"  />

@@ -99,9 +99,6 @@
     <None Include="oi\webview\oit.js.map" />
     <None Include="oi\webview\oit.navbar.js.map" />
     <None Include="oi\webview\oit.statusbar.js.map" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Resources\%24{constructor.constructor%28%27window.relativityXSS=true%27%29%28%29}%3b.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -499,15 +496,11 @@
     <PackageReference Include="Atata.WebDriverExtras"  />
     <PackageReference Include="BCrypt-Official"  />
     <PackageReference Include="BouncyCastle"  />
-    <PackageReference Include="Castle.Core" VersionOverride="3.3.0">
-    <NoWarn>NU1605,NU1608</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Castle.Core" VersionOverride="3.3.0" NoWarn="NU1605,NU1608" />
     <PackageReference Include="Castle.Windsor"  />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="kCura"  />
-    <PackageReference Include="kCura.EventHandler" VersionOverride="15.1.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="kCura.EventHandler" VersionOverride="15.1.0" NoWarn="NU1605" />
     <PackageReference Include="kCura.Injection"  />
     <PackageReference Include="kCura.NUnit.Integration"  />
     <PackageReference Include="kCura.OutsideIn.Full.Win64"  />
@@ -525,9 +518,7 @@
     <PackageReference Include="Microsoft.Web.Infrastructure"  />
     <PackageReference Include="MimeKit"  />
     <PackageReference Include="Moq"  />
-    <PackageReference Include="Newtonsoft.Json"  VersionOverride="12.0.2">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json"  VersionOverride="12.0.2" NoWarn="NU1605" />
     <PackageReference Include="NLog"  />
     <PackageReference Include="NuGetPowerTools" />
     <PackageReference Include="NUnit" />
@@ -535,9 +526,7 @@
     <PackageReference Include="NUnitExtras.HierarchicalCategories" />
     <PackageReference Include="Polly"  />
     <PackageReference Include="Relativity" />
-    <PackageReference Include="Relativity.API" VersionOverride="15.1.0">
-    <NoWarn>NU1605</NoWarn>
-    </PackageReference>
+    <PackageReference Include="Relativity.API" VersionOverride="15.1.0" NoWarn="NU1605" />
     <PackageReference Include="Relativity.Authentication.Interfaces"  />
     <PackageReference Include="Relativity.CustomPages"  />
     <PackageReference Include="Relativity.DataExchange.Client.SDK"  />
