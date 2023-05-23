@@ -90,9 +90,7 @@
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
-  </PropertyGroup>
-  <Import Project="..\..\packages\kCura.10.2.9.12\build\kCura.targets" Condition="Exists('..\..\packages\kCura.10.2.9.12\build\kCura.targets')" />
-
+  </PropertyGroup> 
 <ItemGroup>
   <PackageReference Include="BCrypt-Official"  />
   <PackageReference Include="CSharpGuidelineAnalyzer"  />

@@ -525,7 +525,9 @@
   <PackageReference Include="Microsoft.Web.Infrastructure"  />
   <PackageReference Include="MimeKit"  />
   <PackageReference Include="Moq"  />
-  <PackageReference Include="Newtonsoft.Json"  />
+  <PackageReference Include="Newtonsoft.Json"  VersionOverride="12.0.2">
+  <NoWarn>NU1605</NoWarn>
+  </PackageReference>
   <PackageReference Include="NLog"  />
   <PackageReference Include="NuGetPowerTools" />
   <PackageReference Include="NUnit" />
@@ -586,6 +588,5 @@
   <PackageReference Include="System.Threading.Tasks.Extensions"  />
   <PackageReference Include="System.ValueTuple"  />
   <PackageReference Include="ZetaLongPaths" />
-  </ItemGroup>   
-
+ </ItemGroup>  
 </Project>

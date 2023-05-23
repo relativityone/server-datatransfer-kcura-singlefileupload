@@ -570,6 +570,6 @@
   <PackageReference Include="System.Security.Cryptography.X509Certificates"  />
   <PackageReference Include="System.Threading.Tasks.Extensions"  />
   <PackageReference Include="System.ValueTuple"  />
-  <PackageReference Include="ZetaLongPaths" />
-  </ItemGroup>
+  <PackageReference Include="ZetaLongPaths" />  
+ </ItemGroup>
 </Project>

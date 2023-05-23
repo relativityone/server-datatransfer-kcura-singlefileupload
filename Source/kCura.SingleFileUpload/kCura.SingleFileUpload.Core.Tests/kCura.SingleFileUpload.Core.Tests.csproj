@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-     <Reference Include="System" />
+    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />    
@@ -481,6 +481,5 @@
   <PackageReference Include="System.Threading.Tasks.Extensions"  />
   <PackageReference Include="System.ValueTuple"  />
   <PackageReference Include="ZetaLongPaths"  />
-</ItemGroup> 
-
+</ItemGroup>
 </Project>

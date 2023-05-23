@@ -48,7 +48,7 @@
         <Moq>4.12.0</Moq>
         <MailKit>2.2.0</MailKit>
 		<MimeKit>2.2.0</MimeKit>
-        <NewtonsoftJson>12.0.2</NewtonsoftJson>
+        <NewtonsoftJson>11.0.2</NewtonsoftJson>
 		<NuGetPowerTools>0.29</NuGetPowerTools>
         <NUnit>3.13.2</NUnit>
 		<NUnit3TestAdapter>3.13.0</NUnit3TestAdapter>
@@ -252,6 +252,5 @@
         <PackageVersion Include="WebActivatorEx" Version="$(WebActivatorEx)" />
 		<PackageVersion Include="WebGrease" Version="$(WebGrease)" />
         <PackageVersion Include="ZetaLongPaths" Version="$(ZetaLongPaths)" />
-
 	</ItemGroup>
 </Project>
