@@ -1055,7 +1055,7 @@
     <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <ItemGroup> 
+  <ItemGroup> 
     <PackageReference Include="BCrypt-Official" />
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
      <PackageReference Include="Castle.Core"  VersionOverride="4.4.0">
