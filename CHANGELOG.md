@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Converted nuget to central managed packages.
+- Converted nuget to centrally managed packages.
 - The Directory.Packages.Props file has been created and all references have been added.
 - In the csproj file reference tag was replaced with package reference tag.
 - Deleted the packages.config file.
