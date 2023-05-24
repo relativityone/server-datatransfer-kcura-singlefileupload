@@ -1,6 +1,6 @@
  @Library('ProjectMayhem@vServer')_
 rapCD {
-    slackChannel = "ci-sfu"
+    slackChannel = "ci-server-delta"
     sutTemplate = "aio-server2022-GA"
     relativityBranch = "release-12.3-sundrop-server"
 }
