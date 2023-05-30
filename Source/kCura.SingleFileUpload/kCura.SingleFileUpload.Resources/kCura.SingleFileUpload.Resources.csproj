@@ -91,7 +91,7 @@
     </PostBuildEvent>
   </PropertyGroup> 
   <ItemGroup>
-    <PackageReference Include="BCrypt-Official"  />
+    <!-- <PackageReference Include="BCrypt-Official"  /> -->
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
     <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1109" />
     <PackageReference Include="kCura" />
@@ -100,8 +100,8 @@
     <PackageReference Include="Relativity.API"  />
     <PackageReference Include="Relativity.Authentication.Interfaces"  />
     <PackageReference Include="Relativity.Kepler"  />
-    <PackageReference Include="Relativity.Kepler.Client"  />
-    <PackageReference Include="Relativity.Kepler.Service"  />
+    <!-- <PackageReference Include="Relativity.Kepler.Client"  />
+    <PackageReference Include="Relativity.Kepler.Service"  /> -->
     <PackageReference Include="Relativity.Logging.Interfaces"  />
     <PackageReference Include="Relativity.Telemetry.DataContracts.Shared" />
   </ItemGroup> 
