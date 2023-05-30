@@ -8,7 +8,7 @@
         <Antlr>3.4.1.9004</Antlr>
         <Atata>1.6.0</Atata>
 		<AtataWebDriverExtras>1.3.0</AtataWebDriverExtras>
-		<!-- <BCryptOfficial>0.1.109</BCryptOfficial> -->
+		<BCryptOfficial>0.1.109</BCryptOfficial>
         <BouncyCastle>1.8.9</BouncyCastle>
 		<CSharpGuidelineAnalyzer>1.1.0.0</CSharpGuidelineAnalyzer>
 		<CastleWindsor>3.3.0</CastleWindsor>
@@ -69,7 +69,7 @@
 		<RelativityKepler>2.15.0</RelativityKepler>
 		<RelativityKeplerClient>2.9.2</RelativityKeplerClient>
 		<RelativityKeplerClientSDK>2.15.0</RelativityKeplerClientSDK>
-		<RelativityKeplerService>1.0.1.589</RelativityKeplerService> 
+		<RelativityKeplerService>1.0.1.589</RelativityKeplerService>
 		<RelativityLogging>2019.5.1</RelativityLogging>
 		<RelativityLoggingInterfaces>3000.0.1</RelativityLoggingInterfaces>
 		<RelativityOAuth2Client>1.5.2</RelativityOAuth2Client>
@@ -102,26 +102,26 @@
 		<SeleniumWebDriver>4.0.0-beta1</SeleniumWebDriver>
 		<SeleniumWebDriverChromeDriver>78.0.3904.10500</SeleniumWebDriverChromeDriver>
 		<SemanticVersioning>1.2.2</SemanticVersioning>
-		<!-- <SystemBuffers>4.5.1</SystemBuffers> -->
-		<!-- <SystemDiagnosticsDiagnosticSource>5.0.0</SystemDiagnosticsDiagnosticSource> -->
-		<!-- <SystemMemory>4.5.4</SystemMemory> -->
-		<!-- <SystemNumericsVectors>4.5.0</SystemNumericsVectors> -->
-        <!-- <SystemSecurityCryptographyX509Certificates>4.3.0</SystemSecurityCryptographyX509Certificates> -->
-        <!-- <SystemReactiveCore>4.1.5</SystemReactiveCore>
-        <SystemReactiveLinq>4.1.5</SystemReactiveLinq> -->
+		<SystemBuffers>4.5.1</SystemBuffers>
+		<SystemDiagnosticsDiagnosticSource>5.0.0</SystemDiagnosticsDiagnosticSource>
+		<SystemMemory>4.5.4</SystemMemory>
+		<SystemNumericsVectors>4.5.0</SystemNumericsVectors>
+        <SystemSecurityCryptographyX509Certificates>4.3.0</SystemSecurityCryptographyX509Certificates>
+        <SystemReactiveCore>4.1.5</SystemReactiveCore>
+        <SystemReactiveLinq>4.1.5</SystemReactiveLinq>
 		<SSHNET>2016.0.0</SSHNET>
-		<!-- <SystemDataSqlClient>4.8.5</SystemDataSqlClient> -->
+		<SystemDataSqlClient>4.8.5</SystemDataSqlClient>
 		<SystemReactive>4.1.5</SystemReactive>
-		<!-- <SystemReactiveInterfaces>3.0.0</SystemReactiveInterfaces> -->
+		<SystemReactiveInterfaces>3.0.0</SystemReactiveInterfaces>
 		<SystemValueTuple>4.5.0</SystemValueTuple>	
-		<!-- <SystemRuntimeCompilerServicesUnsafe>5.0.0</SystemRuntimeCompilerServicesUnsafe> -->
-		<!-- <SystemThreadingTasksExtensions>4.5.2</SystemThreadingTasksExtensions> -->
-	    <!-- <SystemNetHttp>4.3.4</SystemNetHttp> -->
-		<!-- <SystemReactiveCore>4.1.5</SystemReactiveCore>
-		<SystemReactiveLinq>4.1.5</SystemReactiveLinq> -->
-		<!-- <SystemSecurityCryptographyAlgorithms>4.3.0</SystemSecurityCryptographyAlgorithms> -->
-		<!-- <SystemSecurityCryptographyEncoding>4.3.0</SystemSecurityCryptographyEncoding> -->
-		<!-- <SystemSecurityCryptographyPrimitives>4.3.0</SystemSecurityCryptographyPrimitives> -->
+		<SystemRuntimeCompilerServicesUnsafe>5.0.0</SystemRuntimeCompilerServicesUnsafe>
+		<SystemThreadingTasksExtensions>4.5.2</SystemThreadingTasksExtensions>
+	    <SystemNetHttp>4.3.4</SystemNetHttp>
+		<SystemReactiveCore>4.1.5</SystemReactiveCore>
+		<SystemReactiveLinq>4.1.5</SystemReactiveLinq>
+		<SystemSecurityCryptographyAlgorithms>4.3.0</SystemSecurityCryptographyAlgorithms>
+		<SystemSecurityCryptographyEncoding>4.3.0</SystemSecurityCryptographyEncoding>
+		<SystemSecurityCryptographyPrimitives>4.3.0</SystemSecurityCryptographyPrimitives>
 		<WebActivatorEx>2.0.3</WebActivatorEx>
 		<WebGrease>1.5.2</WebGrease>
         <ZetaLongPaths>1.0.0.16</ZetaLongPaths>	
@@ -130,14 +130,14 @@
     	<PackageVersion Include="Atata" Version="$(Atata)" />
 		<PackageVersion Include="Atata.WebDriverExtras" Version="$(AtataWebDriverExtras)" />
         <PackageVersion Include="Antlr" Version="$(Antlr)" />
-        <!-- <PackageVersion Include="BCrypt-Official" Version="$(BCryptOfficial)" /> -->
+        <PackageVersion Include="BCrypt-Official" Version="$(BCryptOfficial)" />
 		<PackageVersion Include="BouncyCastle" Version="$(BouncyCastle)" />
 		<PackageVersion Include="Castle.Windsor" Version="$(CastleWindsor)" />
 		<PackageVersion Include="CSharpGuidelineAnalyzer" Version="$(CSharpGuidelineAnalyzer)" />
         <PackageVersion Include="Castle.Core" Version="$(CastleCore)" />		
         <PackageVersion Include="FluentAssertions" Version="$(FluentAssertions)" />
         <PackageVersion Include="FontAwesome" Version="$(FontAwesome)" />
-		<PackageVersion Include="jQuery" Version="$(jQuery)" />
+		 <PackageVersion Include="jQuery" Version="$(jQuery)" />
         <PackageVersion Include="jQuery.BlockUI" Version="$(jQueryBlockUI)" />
 		<PackageVersion Include="jQuery.UI.Combined" Version="$(jQueryUICombined)" />
         <PackageVersion Include="kCura" Version="$(kCura)" />
@@ -148,13 +148,14 @@
 		<PackageVersion Include="kCura.NUnit.Integration" Version="$(kCuraNUnitIntegration)" />
 		<PackageVersion Include="kCura.Relativity.Client" Version="$(kCuraRelativityClient)" />
 		<PackageVersion Include="Microsoft.CodeCoverage" Version="$(MicrosoftCodeCoverage)" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdk)" /> 
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdk)" />
         <PackageVersion Include="Microsoft.AspNet.Mvc" Version="$(MicrosoftAspNetMvc)" />
 		<PackageVersion Include="Microsoft.AspNet.Mvc.FixedDisplayModes" Version="$(MicrosoftAspNetMvcFixedDisplayModes)" />
 		<PackageVersion Include="Microsoft.AspNet.Razor" Version="$(MicrosoftAspNetRazor)" />
 		<PackageVersion Include="Microsoft.AspNet.Web.Optimization" Version="$(MicrosoftAspNetWebOptimization)" />
 		<PackageVersion Include="Microsoft.AspNet.WebApi" Version="$(MicrosoftAspNetWebApi)" />
 		<PackageVersion Include="Microsoft.AspNet.WebApi.Client" Version="$(MicrosoftAspNetWebApiClient)" />
+		<PackageVersion Include="Microsoft.AspNet.WebApiCore" Version="$(MicrosoftAspNetWebApiCore)" />
 		<PackageVersion Include="Microsoft.AspNet.WebApi.WebHost" Version="$(MicrosoftAspNetWebApiWebHost)" />
 		<PackageVersion Include="Microsoft.AspNet.WebPages" Version="$(MicrosoftAspNetWebPages)" />
 		<PackageVersion Include="Microsoft.Web.Infrastructure" Version="$(MicrosoftWebInfrastructure)" />       
@@ -187,9 +188,9 @@
 		<PackageVersion Include="Relativity.DataTransfer.MessageService" Version="$(RelativityDataTransferMessageService)" />
 		<PackageVersion Include="relativity.faspmanager" Version="$(Relativityfaspmanager)" />
 		<PackageVersion Include="Relativity.Kepler" Version="$(RelativityKepler)" />
-		<!-- <PackageVersion Include="Relativity.Kepler.Client" Version="$(RelativityKeplerClient)" />
+		<PackageVersion Include="Relativity.Kepler.Client" Version="$(RelativityKeplerClient)" />
 		<PackageVersion Include="Relativity.Kepler.Client.SDK" Version="$(RelativityKeplerClientSDK)" />
-		<PackageVersion Include="Relativity.Kepler.Service" Version="$(RelativityKeplerService)" /> -->
+		<PackageVersion Include="Relativity.Kepler.Service" Version="$(RelativityKeplerService)" />
 		<PackageVersion Include="Relativity.Logging" Version="$(RelativityLogging)" />
 		<PackageVersion Include="Relativity.Logging.Interfaces" Version="$(RelativityLoggingInterfaces)"  />
 		<PackageVersion Include="Relativity.OAuth2Client" Version="$(RelativityOAuth2Client)" />
@@ -219,36 +220,35 @@
 		<PackageVersion Include="RelativityDev.DbContextHelper" Version="$(RelativityDevDbContextHelper)" />
 		<PackageVersion Include="RelativityDev.RelativityTestHelpers" Version="$(RelativityDevRelativityTestHelpers)" />
 		<PackageVersion Include="SSH.NET" Version="$(SSHNET)" />
+		<PackageVersion Include="System.Data.SqlClient" Version="$(SystemDataSqlClient)"  />
+		<PackageVersion Include="System.Reactive" Version="$(SystemReactive)"  />
+		<PackageVersion Include="System.Reactive.Interfaces" Version="$(SystemReactiveInterfaces)"  />
+		<PackageVersion Include="System.ValueTuple" Version="$(SystemValueTuple)"  />		
+		<PackageVersion Include="System.Runtime.CompilerServices.Unsafe" version="$(SystemRuntimeCompilerServicesUnsafe)" />
+        <PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" />
+		<PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" />
+		<PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
+		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
+		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
+		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" />
+		<PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" />
+		<PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" />
+		<PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
+		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
+		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
+		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" />
 		<PackageVersion Include="Selenium.WebDriver" Version="$(SeleniumWebDriver)" />
 		<PackageVersion Include="Selenium.WebDriver.ChromeDriver" Version="$(SeleniumWebDriverChromeDriver)" />
 		<PackageVersion Include="SemanticVersioning" Version="$(SemanticVersioning)" />
-		<PackageVersion Include="System.ValueTuple" Version="$(SystemValueTuple)"  />	
-		<PackageVersion Include="System.Reactive" Version="$(SystemReactive)"  />
-		<PackageVersion Include="WebActivatorEx" Version="$(WebActivatorEx)" />
+		<PackageVersion Include="System.Buffers" Version="$(SystemBuffers)" />
+		<PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="$(SystemDiagnosticsDiagnosticSource)" />
+		<PackageVersion Include="System.Memory" Version="$(SystemMemory)" />
+		<PackageVersion Include="System.Numerics.Vectors" Version="$(SystemNumericsVectors)" />
+		<PackageVersion Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensions)" />     
+        <PackageVersion Include="System.Reactive.Core" Version="$(SystemReactiveCore)" />
+        <PackageVersion Include="System.Reactive.Linq" Version="$(SystemReactiveLinq)" />
+        <PackageVersion Include="WebActivatorEx" Version="$(WebActivatorEx)" />
 		<PackageVersion Include="WebGrease" Version="$(WebGrease)" />
         <PackageVersion Include="ZetaLongPaths" Version="$(ZetaLongPaths)" />
-		<!-- <PackageVersion Include="System.Data.SqlClient" Version="$(SystemDataSqlClient)"  /> -->		
-		<!-- <PackageVersion Include="System.Reactive.Interfaces" Version="$(SystemReactiveInterfaces)"  /> -->			
-		<!-- <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" version="$(SystemRuntimeCompilerServicesUnsafe)" /> -->
-        <!-- <PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" /> -->
-		<!-- <PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" /> -->
-		<!-- <PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
-		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
-		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
-		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" /> -->
-		<!-- <PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" /> -->
-		<!-- <PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" /> -->
-		<!-- <PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
-		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
-		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
-		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" /> -->
-		<!-- <PackageVersion Include="System.Buffers" Version="$(SystemBuffers)" /> -->
-		<!-- <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="$(SystemDiagnosticsDiagnosticSource)" /> -->
-		<!-- <PackageVersion Include="System.Memory" Version="$(SystemMemory)" /> -->
-		<!-- <PackageVersion Include="System.Numerics.Vectors" Version="$(SystemNumericsVectors)" /> -->
-		<!-- <PackageVersion Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensions)" />      -->
-        <!-- <PackageVersion Include="System.Reactive.Core" Version="$(SystemReactiveCore)" />
-        <PackageVersion Include="System.Reactive.Linq" Version="$(SystemReactiveLinq)" /> -->
-
 	</ItemGroup>
 </Project>
