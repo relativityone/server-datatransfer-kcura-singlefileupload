@@ -501,9 +501,7 @@
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="kCura"  />
     <PackageReference Include="kCura.EventHandler" VersionOverride="15.1.0" NoWarn="NU1605" />
-    <PackageReference Include="kCura.Injection"  />
     <PackageReference Include="kCura.NUnit.Integration"  />
-    <PackageReference Include="kCura.OutsideIn.Full.Win64"  />
     <PackageReference Include="kCura.Relativity.Client"  />
     <PackageReference Include="MailKit"  />
     <PackageReference Include="Microsoft.ApplicationInsights" />
@@ -530,23 +528,13 @@
     <PackageReference Include="Relativity.Authentication.Interfaces"  />
     <PackageReference Include="Relativity.CustomPages"  />
     <PackageReference Include="Relativity.DataExchange.Client.SDK"  />
-    <PackageReference Include="Relativity.DataTransfer.MessageService"  />
-    <PackageReference Include="relativity.faspmanager"  />
     <PackageReference Include="Relativity.Kepler" />
-    <!-- <PackageReference Include="Relativity.Kepler.Client"  />
-    <PackageReference Include="Relativity.Kepler.Client.SDK"  /> -->
-    <!-- <PackageReference Include="Relativity.Logging"  /> -->
     <PackageReference Include="Relativity.Logging.Interfaces"  />
-    <!-- <PackageReference Include="Relativity.OAuth2Client"  />
-    <PackageReference Include="Relativity.OAuth2Client.Implicit"  /> -->
     <PackageReference Include="Relativity.OAuth2Client.Interfaces"  />
-    <PackageReference Include="Relativity.ObjectManager"  />
     <PackageReference Include="Relativity.OutsideIn"  />
     <PackageReference Include="Relativity.Platform.Keywords"  />
     <PackageReference Include="Relativity.SecretCatalog"  />
-    <!-- <PackageReference Include="Relativity.Services.DataContracts"  /> -->
     <PackageReference Include="Relativity.Services.Interfaces"  />
-    <PackageReference Include="Relativity.Services.Interfaces.Private"  />
     <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
     <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
     <PackageReference Include="Relativity.Telemetry.Services.Interface"  />
@@ -562,19 +550,7 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver"  />
     <PackageReference Include="SemanticVersioning"  />
     <PackageReference Include="SSH.NET" />
-    <!-- <PackageReference Include="System.Buffers" /> -->
-    <!-- <PackageReference Include="System.Data.SqlClient"  /> -->
-    <!-- <PackageReference Include="System.Diagnostics.DiagnosticSource"  /> -->
-    <!-- <PackageReference Include="System.Memory"  /> -->
-    <!-- <PackageReference Include="System.Net.Http"  />
-    <PackageReference Include="System.Numerics.Vectors"  /> -->
     <PackageReference Include="System.Reactive"  />
-    <!-- <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  /> -->
-    <!-- <PackageReference Include="System.Security.Cryptography.Algorithms"  />
-    <PackageReference Include="System.Security.Cryptography.Encoding"  />
-    <PackageReference Include="System.Security.Cryptography.Primitives"  />
-    <PackageReference Include="System.Security.Cryptography.X509Certificates"  /> -->
-    <!-- <PackageReference Include="System.Threading.Tasks.Extensions"  /> -->
     <PackageReference Include="System.ValueTuple"  />
     <PackageReference Include="ZetaLongPaths" />
   </ItemGroup>  

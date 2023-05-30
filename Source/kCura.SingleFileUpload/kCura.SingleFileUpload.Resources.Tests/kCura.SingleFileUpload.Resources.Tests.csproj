@@ -102,15 +102,12 @@
     <PackageReference Include="Relativity.API"  />
     <PackageReference Include="Relativity.Kepler"  />
     <PackageReference Include="Relativity.SecretCatalog"  />
-    <!-- <PackageReference Include="Relativity.Services.DataContracts"  /> -->
     <PackageReference Include="Relativity.Services.Interfaces"  />
     <PackageReference Include="Relativity.Services.Interfaces.Private"  />
     <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
     <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
     <PackageReference Include="Relativity.Testing.Identification" />
     <PackageReference Include="Relativity.Toggles"  />
-    <!-- <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  /> -->
-    <!-- <PackageReference Include="System.Threading.Tasks.Extensions"  /> -->
     <PackageReference Include="System.ValueTuple"  />
   </ItemGroup>
 </Project>

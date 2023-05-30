@@ -305,7 +305,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <PackageReference Include="Antlr" />
-    <!-- <PackageReference Include="BCrypt-Official"  /> -->
     <PackageReference Include="CSharpGuidelineAnalyzer" />
     <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1109"/>
     <PackageReference Include="FontAwesome" />
@@ -313,20 +312,14 @@
     <PackageReference Include="jQuery.BlockUI" />
     <PackageReference Include="jQuery.UI.Combined"  />
     <PackageReference Include="kCura"  />
-    <PackageReference Include="kCura.Injection" />
-    <PackageReference Include="kCura.OutsideIn.Full.Win64"  />
     <PackageReference Include="Microsoft.AspNet.Mvc"  />
     <PackageReference Include="Microsoft.AspNet.Mvc.FixedDisplayModes" />
-     <PackageReference Include="Microsoft.AspNet.Razor"  />
     <PackageReference Include="Microsoft.AspNet.Web.Optimization"  />
     <PackageReference Include="Microsoft.AspNet.WebApi"  />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client"  />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core"  />
-    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost"  />
-    <PackageReference Include="Microsoft.AspNet.WebPages"  />
     <PackageReference Include="Microsoft.Web.Infrastructure"  /> 
     <PackageReference Include="Newtonsoft.Json"  />
-    <PackageReference Include="NuGetPowerTools"  />
     <PackageReference Include="Polly"  />
     <PackageReference Include="popper.js"  />
     <PackageReference Include="RazorGenerator.Mvc"  />
@@ -338,37 +331,15 @@
     <PackageReference Include="Relativity.CustomPages"  />
     <PackageReference Include="Relativity.DataExchange.Client.SDK"  />
     <PackageReference Include="Relativity.DataTransfer.MessageService"  />
-    <PackageReference Include="relativity.faspmanager"  />
     <PackageReference Include="Relativity.Kepler"  />
-    <!-- <PackageReference Include="Relativity.Kepler.Client"  />
-    <PackageReference Include="Relativity.Kepler.Client.SDK"  /> -->
-    <!-- <PackageReference Include="Relativity.Logging"  /> -->
     <PackageReference Include="Relativity.Logging.Interfaces"  />
-    <!-- <PackageReference Include="Relativity.OAuth2Client"  />
-    <PackageReference Include="Relativity.OAuth2Client.Implicit"  /> -->
     <PackageReference Include="Relativity.OAuth2Client.Interfaces"  />
-    <PackageReference Include="Relativity.ObjectManager"  />
     <PackageReference Include="Relativity.OIFactory"  />
-    <PackageReference Include="Relativity.OutsideIn"  />
-    <!-- <PackageReference Include="Relativity.Services.DataContracts"  /> -->
     <PackageReference Include="Relativity.Services.Interfaces"  />
     <PackageReference Include="Relativity.Telemetry.APM" />
     <PackageReference Include="Relativity.Telemetry.DataContracts.Shared"  />
-    <PackageReference Include="Relativity.Telemetry.Services.Interface"  />
-    <PackageReference Include="Relativity.Transfer.Client" />
     <PackageReference Include="SSH.NET"  />
-    <!-- <PackageReference Include="System.Data.SqlClient"  /> -->
-    <!-- <PackageReference Include="System.Net.Http" /> -->
     <PackageReference Include="System.Reactive"  />
-    <!-- <PackageReference Include="System.Reactive.Core"  /> -->
-    <!-- <PackageReference Include="System.Reactive.Interfaces"  /> -->
-    <!-- <PackageReference Include="System.Reactive.Linq" /> -->
-    <!-- <PackageReference Include="System.Runtime.CompilerServices.Unsafe"  /> -->
-    <!-- <PackageReference Include="System.Security.Cryptography.Algorithms"  />
-    <PackageReference Include="System.Security.Cryptography.Encoding"  />
-    <PackageReference Include="System.Security.Cryptography.Primitives"  />
-    <PackageReference Include="System.Security.Cryptography.X509Certificates"  /> -->
-    <!-- <PackageReference Include="System.Threading.Tasks.Extensions"  /> -->
     <PackageReference Include="System.ValueTuple"  />
     <PackageReference Include="WebActivatorEx"  />
     <PackageReference Include="WebGrease" />
