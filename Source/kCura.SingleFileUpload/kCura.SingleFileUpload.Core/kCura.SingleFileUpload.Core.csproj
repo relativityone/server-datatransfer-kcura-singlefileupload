@@ -1053,7 +1053,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup> 
-    <PackageReference Include="BCrypt-Official" />
+    <!-- <PackageReference Include="BCrypt-Official" /> -->
     <PackageReference Include="CSharpGuidelineAnalyzer"  />
     <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605" />
     <PackageReference Include="kCura"  />
@@ -1073,19 +1073,19 @@
     <PackageReference Include="Relativity.DataTransfer.MessageService"  />
     <PackageReference Include="relativity.faspmanager"  />
     <PackageReference Include="Relativity.Kepler"  />
-    <PackageReference Include="Relativity.Kepler.Client"  />
+    <!-- <PackageReference Include="Relativity.Kepler.Client"  />
     <PackageReference Include="Relativity.Kepler.Client.SDK" />
-    <PackageReference Include="Relativity.Kepler.Service"  />
-    <PackageReference Include="Relativity.Logging" />
+    <PackageReference Include="Relativity.Kepler.Service"  /> -->
+    <!-- <PackageReference Include="Relativity.Logging" /> -->
     <PackageReference Include="Relativity.Logging.Interfaces"  />
-    <PackageReference Include="Relativity.OAuth2Client"  />
-    <PackageReference Include="Relativity.OAuth2Client.Implicit"  />
+    <!-- <PackageReference Include="Relativity.OAuth2Client"  />
+    <PackageReference Include="Relativity.OAuth2Client.Implicit"  /> -->
     <PackageReference Include="Relativity.OAuth2Client.Interfaces"  />
     <PackageReference Include="Relativity.ObjectManager"  />
     <PackageReference Include="Relativity.OIFactory"  />
     <PackageReference Include="Relativity.OutsideIn" />
     <PackageReference Include="Relativity.SecretCatalog"  />
-    <PackageReference Include="Relativity.Services.DataContracts"  />
+    <!-- <PackageReference Include="Relativity.Services.DataContracts"  /> -->
     <PackageReference Include="Relativity.Services.Interfaces"   />
     <PackageReference Include="Relativity.Services.Interfaces.Private"   />
     <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
@@ -1095,9 +1095,9 @@
     <PackageReference Include="Relativity.Toggles"  />
     <PackageReference Include="Relativity.Transfer.Client"  />
     <PackageReference Include="SSH.NET" />
-    <PackageReference Include="System.Data.SqlClient"   />
+    <!-- <PackageReference Include="System.Data.SqlClient"   /> -->
     <PackageReference Include="System.Reactive"   />
-    <PackageReference Include="System.Reactive.Interfaces"  />
+    <!-- <PackageReference Include="System.Reactive.Interfaces"  /> -->
     <PackageReference Include="System.ValueTuple" />
     <PackageReference Include="ZetaLongPaths" />
   </ItemGroup>
