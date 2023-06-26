@@ -215,7 +215,6 @@
     <Compile Include="Managers\Implementations\SearchExportManagerTest.cs" />
     <Compile Include="Managers\Implementations\TelemetryManagerTest.cs" />
     <Compile Include="Managers\Implementations\ToggleManagerTest.cs" />
-    <Compile Include="Managers\Implementations\WorkflowsManagerTest.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
