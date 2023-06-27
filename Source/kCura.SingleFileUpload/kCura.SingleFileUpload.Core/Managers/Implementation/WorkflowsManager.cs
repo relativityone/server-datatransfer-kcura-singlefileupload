@@ -16,9 +16,7 @@ using System.Threading.Tasks;
 namespace kCura.SingleFileUpload.Core.Managers.Implementation
 {
     public class WorkflowsManager : BaseManager, IWorkflowsManager
-    {
-        private const string _RELATIVITY_APP_NAME = "Relativity Application";
-        private const string _AUTOMATED_WORKFLOWS_APP_NAME = "Automated Workflows";
+    {        
         private const string _TRIGGER_INPUT_ID = "type";
         private const string _TRIGGER_INPUT_VALUE = "sfu";
         private const string _TRIGGER_ID = "relativity@on-new-documents-added";
