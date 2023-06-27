@@ -60,49 +60,6 @@ namespace kCura.SingleFileUpload.Core.Managers.Implementation
             {
                 LogError(ex);
             }
-        }
-
-        public async Task<bool> IsAutomatedWorkflowInstalledAsync()
-        {
-            try
-            {
-                using (IObjectManager objectManager = _Repository.CreateProxy<IObjectManager>())
-                {
-                    using (IObjectTypeManager objectTypeManager = _Repository.CreateProxy<IObjectTypeManager>())
-                    {
-                        QueryResult relativityAppQueryResult = await objectManager.QueryAsync(_Repository.WorkspaceID, CreateRequest((int)ArtifactType.ObjectType, _RELATIVITY_APP_NAME), 0, 1)
-                            .ConfigureAwait(false);
-
-                        if (relativityAppQueryResult.ResultCount == 0)
-                        {
-                            LogError(new Exception($"Could not find the {_RELATIVITY_APP_NAME} object type."));
-                            return false;
-                        }
-
-                        ObjectTypeResponse objectTypeMetadata = await objectTypeManager.ReadAsync(_Repository.WorkspaceID, relativityAppQueryResult.Objects[0].ArtifactID)
-                            .ConfigureAwait(false);
-
-                        QueryResult automatedWorkflowsQueryResult = await objectManager.QueryAsync(_Repository.WorkspaceID, CreateRequest(objectTypeMetadata.ArtifactTypeID, _AUTOMATED_WORKFLOWS_APP_NAME), 0, 1)
-                            .ConfigureAwait(false);
-
-                        return automatedWorkflowsQueryResult.TotalCount > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogError(ex);
-                return false;
-            }
-        }
-
-        private QueryRequest CreateRequest(int artifactTypeId, string appName)
-        {
-            return new QueryRequest
-            {
-                ObjectType = new ObjectTypeRef { ArtifactTypeID = artifactTypeId },
-                Condition = $"'Name' == '{appName}'"
-            };
-        }
+        }      
     }
 }
