@@ -87,12 +87,6 @@
       <Notes />
     </Assembly>
     <Assembly>
-      <ArtifactId>5537390</ArtifactId>
-      <Keywords />
-      <Name>Relativity.AutomatedWorkflows.Services.Interfaces.dll</Name>
-      <Notes />
-    </Assembly>
-    <Assembly>
       <ArtifactId>5537391</ArtifactId>
       <Keywords />
       <Name>Relativity.AutomatedWorkflows.SDK.dll</Name>
