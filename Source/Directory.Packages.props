@@ -7,7 +7,7 @@
 	<PropertyGroup>
         <Antlr>3.4.1.9004</Antlr>
         <Atata>1.6.0</Atata>
-		<AtataWebDriverExtras>1.3.0</AtataWebDriverExtras>
+		<AtataWebDriverExtras>1.4.0</AtataWebDriverExtras>
 		<BCryptOfficial>0.1.109</BCryptOfficial>
         <BouncyCastle>1.8.9</BouncyCastle>
 		<CSharpGuidelineAnalyzer>1.1.0.0</CSharpGuidelineAnalyzer>
@@ -91,10 +91,10 @@
         <RazorGeneratorMvc>2.4.2</RazorGeneratorMvc>
 		<RelativityCustomPages>10.2.9.12</RelativityCustomPages>
         <RelativityPlatformKeywords>9.3.196.6</RelativityPlatformKeywords>
-		<RelativityTestingFramework>7.1.0</RelativityTestingFramework>
-		<RelativityTestingFrameworkApi>6.0.1</RelativityTestingFrameworkApi>
-		<RelativityTestingFrameworkRingSetup>0.17.0</RelativityTestingFrameworkRingSetup>
-		<RelativityTestingFrameworkWeb>1.2.0</RelativityTestingFrameworkWeb>
+		<RelativityTestingFramework>10.3.0</RelativityTestingFramework>
+		<RelativityTestingFrameworkApi>10.3.0</RelativityTestingFrameworkApi>
+		<RelativityTestingFrameworkRingSetup>10.3.0</RelativityTestingFrameworkRingSetup>
+		<RelativityTestingFrameworkWeb>10.3.0</RelativityTestingFrameworkWeb>
 		<RelativityDevDbContextHelper>5.0.0.1</RelativityDevDbContextHelper>
 		<RelativityDevRelativityTestHelpers>7.4.1.1</RelativityDevRelativityTestHelpers>
         <RelativityServicesLayoutInterfaces>10.1.4</RelativityServicesLayoutInterfaces>
