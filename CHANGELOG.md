@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [12.6.0] - 07-17-2023
+
+### Changed
+
+- [REL-848356](https://jira.kcura.com/browse/REL-848356) - Revved IAPI Latest Package - Backported [REL-712106](https://jira.kcura.com/browse/REL-712106) ticket from Server 2022 release.
 
 ## [12.5.1] - 05-24-2023
 
