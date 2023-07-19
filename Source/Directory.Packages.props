@@ -22,7 +22,7 @@
 		<kCura>10.3.5.3</kCura>
 		<kCuraAppsCommonUtils>2.1.9</kCuraAppsCommonUtils>
 		<kCuraInjection> 10.3.5.3 </kCuraInjection>
-		<kCuraOutsideInFullWin64>2023.3.0</kCuraOutsideInFullWin64>
+		<kCuraOutsideInFullWin64>2023.4.0</kCuraOutsideInFullWin64>
         <kCuraEventHandler>10.2.9.12</kCuraEventHandler>
 		<kCuraNUnitIntegration>9.3.395.5</kCuraNUnitIntegration>
 		<kCuraRelativityClient>15.1.0</kCuraRelativityClient>
