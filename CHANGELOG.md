@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [12.8.1] - 08-15-2023
+ 
+### Changed
+
+- Updated latest IAPI pre package
+
 ## [12.8.0] - 07-31-2023
  
 ### Changed
