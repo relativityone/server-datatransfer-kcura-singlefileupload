@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [12.8.2] - 09-02-2023
+
+### Changed 
+- [REL-871666](https://jira.kcura.com/browse/REL-871666) - Improve Import API error message when Kepler and WebAPI endpoints are not found.
+
 ## [12.8.1] - 08-15-2023
  
 ### Changed

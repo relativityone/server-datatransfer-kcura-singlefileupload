@@ -63,7 +63,7 @@
 		<RelativityAutomatedWorkflowsSDK>0.11.0-pre.1</RelativityAutomatedWorkflowsSDK>
 		<RelativityAutomatedWorkflowsServicesInterfaces>0.11.0-pre.1</RelativityAutomatedWorkflowsServicesInterfaces>
 		<RelativityCore>10.2.9.12</RelativityCore>
-		<RelativityDataExchangeClientSDK>2.9.1</RelativityDataExchangeClientSDK>
+		<RelativityDataExchangeClientSDK>2.9.2</RelativityDataExchangeClientSDK>
 		<RelativityDataTransferMessageService>10.2.0</RelativityDataTransferMessageService>
 		<Relativityfaspmanager>3.7.2.0</Relativityfaspmanager>
 		<RelativityKepler>2.15.0</RelativityKepler>
