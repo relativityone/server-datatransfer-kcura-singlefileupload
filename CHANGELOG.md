@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [23012.8.3] - 09-08-2023
+
+### Changed
+
+- Bumped the application version to align with the Server 2023 application versioning strategy ADR.
+
 ## [23012.8.2] - 09-04-2023
 
 ### Changed
