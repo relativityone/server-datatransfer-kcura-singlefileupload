@@ -63,7 +63,7 @@
 		<RelativityAutomatedWorkflowsSDK>0.11.0-pre.1</RelativityAutomatedWorkflowsSDK>
 		<RelativityAutomatedWorkflowsServicesInterfaces>0.11.0-pre.1</RelativityAutomatedWorkflowsServicesInterfaces>
 		<RelativityCore>10.2.9.12</RelativityCore>
-		<RelativityDataExchangeClientSDK>2.9.2</RelativityDataExchangeClientSDK>
+		<RelativityDataExchangeClientSDK>2.9.3-pre.1</RelativityDataExchangeClientSDK>
 		<RelativityDataTransferMessageService>10.2.0</RelativityDataTransferMessageService>
 		<Relativityfaspmanager>3.7.2.0</Relativityfaspmanager>
 		<RelativityKepler>2.15.0</RelativityKepler>
@@ -87,7 +87,7 @@
 		<RelativityTelemetryDataContractsShared>3003.1.0</RelativityTelemetryDataContractsShared>
 		<RelativityTelemetryServicesInterface>3003.0.2</RelativityTelemetryServicesInterface>
 		<RelativityToggles>1.0.0.100</RelativityToggles>
-		<RelativityTransferClient>7.7.0</RelativityTransferClient>
+		<RelativityTransferClient>7.7.1-pre.1</RelativityTransferClient>
         <RazorGeneratorMvc>2.4.2</RazorGeneratorMvc>
 		<RelativityCustomPages>10.2.9.12</RelativityCustomPages>
         <RelativityPlatformKeywords>9.3.196.6</RelativityPlatformKeywords>
