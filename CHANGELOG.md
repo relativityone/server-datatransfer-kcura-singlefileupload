@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.0] - 10-16-2023
+
+### Changed
+ 
+- Prepared branch for the next official Relativity 2024 release.
+- Use the latest SUT release image.
+
 ## [23012.8.3] - 09-08-2023
 
 ### Changed
