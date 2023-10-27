@@ -9,6 +9,12 @@ All notable changes to this project will be documented in this file.
 - Prepared branch for the next official Relativity 2024 release.
 - Use the latest SUT release image.
 
+## [23012.8.1001] - 10-06-2023
+
+### Changed
+
+- [REL-866456](https://jira.kcura.com/browse/REL-866456) - Revved latest package for Relativity.DataTransfer.Legacy.SDK and Relativity.Transfer.Client
+
 ## [23012.8.3] - 09-08-2023
 
 ### Changed
