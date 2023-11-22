@@ -55,7 +55,7 @@ $ToolsConfig = Join-Path $ToolsDir "packages.config"
 
 Write-Host "Checking for NuGet in tools path..."
 if (-Not (Test-Path $NugetExe -Verbose:$VerbosePreference)) {
-	Write-Progress "Installing NuGet from $NugetUrl..."
+	Write-Host "Installing NuGet from $NugetUrl..."
 	Invoke-WebRequest $NugetUrl -OutFile $NugetExe -Verbose:$VerbosePreference -ErrorAction Stop
 }
 
