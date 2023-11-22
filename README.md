@@ -17,9 +17,9 @@ For functional tests, point PowerShell to the root of this repository and provid
 
 ## History  
 
-The server-main branch was migrated from https://git.kcura.com/projects/DTX/repos/kcura.singlefileupload/branches?base=server-main by the Server Data Transfer Team.
-Tag: 24000.0.0
-Branch: server-main
+The server-release-12.3-2023-patch1 branch was migrated from https://git.kcura.com/projects/DTX/repos/kcura.singlefileupload/branches?base=server-release-12.3-2023-patch1 by the Server Data Transfer Team.
+Tag: 23012.8.1001
+Branch: server-release-12.3-2023-patch1
 
 ## Maintainers
 
