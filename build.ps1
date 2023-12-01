@@ -93,6 +93,7 @@ $Params = @{
 	}
 	Verbose = $VerbosePreference
 	Debug = $DebugPreference
+	buildFile = (Join-Path $BaseDir "psakefile.ps1")
 }
 
 Try
