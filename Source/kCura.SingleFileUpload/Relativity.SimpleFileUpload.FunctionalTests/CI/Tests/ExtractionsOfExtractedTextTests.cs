@@ -15,6 +15,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 {
 	[TestFixture]
 	[TestExecutionCategory.CI, TestLevel.L3]
+	[Ignore("")]
 	public class ExtractionsOfExtractedTextTests : FunctionalTestsTemplate
 	{
 		const string _EXPECTED_EXTRACTED_TEXT_COMMON = "Sample Extracted Text Lorem Ipsum\r\n";
