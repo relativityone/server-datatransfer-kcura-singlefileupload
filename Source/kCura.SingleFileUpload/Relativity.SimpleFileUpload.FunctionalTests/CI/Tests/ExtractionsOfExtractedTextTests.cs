@@ -15,7 +15,6 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 {
 	[TestFixture]
 	[TestExecutionCategory.CI, TestLevel.L3]
-	[Ignore("")]
 	public class ExtractionsOfExtractedTextTests : FunctionalTestsTemplate
 	{
 		const string _EXPECTED_EXTRACTED_TEXT_COMMON = "Sample Extracted Text Lorem Ipsum\r\n";
@@ -28,7 +27,7 @@ namespace Relativity.SimpleFileUpload.FunctionalTests.CI.Tests
 		{ }
 
 		[IdentifiedTestCase("533C649E-B681-48F4-99A3-703CD45DD83D", Const.File._FILE_NAME_DOC,
-			_EXPECTED_EXTRACTED_TEXT_COMMON)]
+			_EXPECTED_EXTRACTED_TEXT_COMMON), Ignore("")]
 		[IdentifiedTestCase("7441218B-4AD6-4392-8110-9F7098BD4FD4", Const.File._FILE_NAME_TXT,
 			_EXPECTED_EXTRACTED_TEXT_COMMON)]
 		[IdentifiedTestCase("9739E405-148E-4800-8392-09ADDEDBCD69", Const.File._FILE_NAME_XLSX,
