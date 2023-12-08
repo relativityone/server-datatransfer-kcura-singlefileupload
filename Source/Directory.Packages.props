@@ -225,13 +225,12 @@
 		<PackageVersion Include="System.Reactive.Interfaces" Version="$(SystemReactiveInterfaces)"  />
 		<PackageVersion Include="System.ValueTuple" Version="$(SystemValueTuple)"  />		
 		<PackageVersion Include="System.Runtime.CompilerServices.Unsafe" version="$(SystemRuntimeCompilerServicesUnsafe)" />
-        <PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" />
+        <PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)"/>
 		<PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" />
 		<PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
 		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
 		<PackageVersion Include="System.Security.Cryptography.Primitives" Version="$(SystemSecurityCryptographyPrimitives)" />
 		<PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="$(SystemSecurityCryptographyX509Certificates)" />
-		<PackageVersion Include="System.Net.Http" Version="$(SystemNetHttp)" />
 		<PackageVersion Include="SystemReactiveLinq" Version="$(SystemReactiveLinq)" />
 		<PackageVersion Include="System.Security.Cryptography.Algorithms" Version="$(SystemSecurityCryptographyAlgorithms)" />
 		<PackageVersion Include="System.Security.Cryptography.Encoding" Version="$(SystemSecurityCryptographyEncoding)" />
