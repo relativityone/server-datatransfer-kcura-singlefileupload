@@ -17,6 +17,11 @@ For functional tests, point PowerShell to the root of this repository and provid
 
 ## History  
 
-The server-main branch was forked for Relativity Server by the Server Vertical.
-Tag: 12.3
-Branch: server-main
+The server-release-12.3-2023 branch was migrated from https://git.kcura.com/projects/DTX/repos/kcura.singlefileupload/browse?at=refs%2Fheads%2Fserver-release-12.3-2023 by the Server Data Transfer Team.
+Tag: 23012.8.3
+Branch: server-release-12.3-2023
+
+## Maintainers
+
+This repository is owned by the Server Data Transfer Team.
+#help-server-data-transfer
