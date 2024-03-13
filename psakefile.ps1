@@ -107,6 +107,13 @@ Task Help -Alias ? -Description "Display task information" {
     WriteDocumentation
 }
 
+Task NightlyTest -Alias Nightly -Description "Run nightly functional tests that require a deployed environment." {
+    $LogPath = Join-Path $LogsDir "NighlyTestResults.xml"
+    $ChromeBinaryDirectory = (Get-ChildItem -Recurse -Directory -Path $ToolsDir -Filter "Relativity.Chromium.Portable*").FullName
+    $ChromeBinaryLocation = (Get-ChildItem -Recurse -File -Include chrome.exe -Path $ChromeBinaryDirectory).DirectoryName
+    $ENV:ChromeBinaryLocation = $ChromeBinaryLocation
+    Invoke-Tests -WhereClause "namespace =~ FunctionalTests && cat == 'TestType.Nightly'" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
+}
 function Invoke-Tests
 {
     param (

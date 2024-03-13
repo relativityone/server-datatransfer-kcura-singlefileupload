@@ -1,0 +1,33 @@
+schedules:
+- cron: '0 0 * * 0'  # set your cron schedule as appropriate, this value is for the UTC time zone.
+  displayName: 'Functional Tests'
+  always: false   # only run if there are new commits since last green build
+  branches:
+    include:
+      - main
+
+variables:
+- name: unregister.opt-in
+  value: true
+
+resources:
+  repositories:
+    - repository: azdo_templates
+      type: github
+      name: relativityone/azdo-templates
+      endpoint: relativityone
+      ref: 'refs/heads/main'
+
+stages:
+- template: rapci-server.yml@azdo_templates  # Template reference
+  parameters:
+    RelativityBranch: ''
+    TemplateName: 'aio-server-2023-ga'
+    ExecuteNightlyTests: true
+    buildSteps:
+      - script: git config --system core.longpaths true 
+      - checkout: self 
+        clean: true  
+        submodules: true		
+        persistCredentials: true
+      - checkout: azdo_templates

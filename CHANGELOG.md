@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.2] - 12-Mar-2024
+
+### Changed
+ 
+- [REL-886791](https://jira.kcura.com/browse/REL-886791) Cloned repo from BitBucket to GitHub and created pipeline in AzDO.
+
 ## [24000.0.1] - 11-10-2023
 
 ### Changed
