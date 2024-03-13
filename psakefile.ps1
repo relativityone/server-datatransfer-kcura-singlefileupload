@@ -31,8 +31,8 @@ Task Compile -Depends NugetRestore -Description "Compile code for this repo" {
         ("/nodeReuse:False"),
         ("/maxcpucount"),
         ("/nologo"),
-        ("/fileloggerparameters1:LogFile=$LogFilePath"),
-        ("/fileloggerparameters2:errorsonly;LogFile=$ErrorLogFilePath"))
+        ("/fileloggerparameters1:LogFile=`"$LogFilePath`""),
+        ("/fileloggerparameters2:errorsonly;LogFile=`"$ErrorLogFilePath`""))
     }
 }
 
@@ -107,13 +107,6 @@ Task Help -Alias ? -Description "Display task information" {
     WriteDocumentation
 }
 
-Task NightlyTest -Alias Nightly -Description "Run nightly functional tests that require a deployed environment." {
-    $LogPath = Join-Path $LogsDir "NighlyTestResults.xml"
-    $ChromeBinaryDirectory = (Get-ChildItem -Recurse -Directory -Path $ToolsDir -Filter "Relativity.Chromium.Portable*").FullName
-    $ChromeBinaryLocation = (Get-ChildItem -Recurse -File -Include chrome.exe -Path $ChromeBinaryDirectory).DirectoryName
-    $ENV:ChromeBinaryLocation = $ChromeBinaryLocation
-    Invoke-Tests -WhereClause "namespace =~ FunctionalTests && cat == 'TestType.Nightly'" -OutputFile $LogPath -TestSettings (Join-Path $PSScriptRoot FunctionalTestSettings)
-}
 function Invoke-Tests
 {
     param (
@@ -137,14 +130,9 @@ function Invoke-Tests
         $ReportGenerator = Join-Path $BuildToolsDir "reportgenerator\tools\net47\ReportGenerator.exe"
         $CoveragePath = Join-Path $LogsDir "Coverage.xml"
 
-        $q = '"'
-        $openCoverFile = Join-Path $LogsDir 'OpenCover.xml'
-        $openCoverTargetArgs = "$Solution $q--where=$WhereClause$q --noheader --labels=On --skipnontestassemblies $q--result=$OutputFile$q $settings"
-        Write-host "OpenCoverTargetArgs: $openCoverTargetArgs"
-        exec { & $OpenCover -target:$NUnit -targetargs:"$openCoverTargetArgs" -register:user -filter:"+[RelativityServices*]* -[*Tests*]* -[*NUnit*]*" -hideskipped:All -output:"$openCoverFile" -returntargetcode }
-        write-host "Executing report generator"
-        exec { & $ReportGenerator -reports:"$openCoverFile" -targetdir:$LogsDir -reporttypes:Cobertura }
-        Move-Item $openCoverFile $CoveragePath -Force 
+        exec { & $OpenCover -target:$NUnit -targetargs:"$Solution --where=\`"$WhereClause\`" --noheader --labels=On --skipnontestassemblies --result=$OutputFile $settings" -register:user -filter:"+[kCura.SingleFileUpload*]* +[kCura.SingleFileUpload*]* -[*Tests*]* -[*NUnit*]*" -hideskipped:All -output:"$LogsDir\OpenCover.xml" }
+        exec { & $ReportGenerator -reports:"$LogsDir\OpenCover.xml" -targetdir:$LogsDir -reporttypes:Cobertura }
+        Move-Item (Join-Path $LogsDir Cobertura.xml) $CoveragePath -Force
     }
     else
     {
