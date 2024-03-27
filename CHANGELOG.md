@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.2] - 21-March-2024
+
+### Changed
+ 
+- [REL-925106](https://jira.kcura.com/browse/REL-925106) Verify Nightly pipeline jobs for SingleFileUpload migrated repo.
+
 ## [24000.0.1] - 11-10-2023
 
 ### Changed
