@@ -1,10 +1,10 @@
 schedules:
-- cron: '0 17 * * 1'  # Run Every Sunday at 7PM (12AM UTC).
+- cron: '0 0 * * 0'  # Run Every Sunday at 7PM (12AM UTC).
   displayName: 'SFU Functional Tests'
   always: false   # only run if there are new commits or changes
   branches:
     include:
-      - rel-925106-sfu-nightlypipeline
+      - main
 
 variables:
 - name: unregister.opt-in
