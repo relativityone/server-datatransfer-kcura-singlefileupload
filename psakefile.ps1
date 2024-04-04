@@ -131,11 +131,11 @@ function Invoke-Tests
     Initialize-Folder $LogsDir -Safe
     if($WithCoverage)
     {
-        $OpenCover = Join-Path $BuildToolsDir "opencover\tools\OpenCover.Console.exe"
-        $ReportGenerator = Join-Path $BuildToolsDir "reportgenerator\tools\net47\ReportGenerator.exe"
+        $OpenCover = Join-Path $BuildToolsDir "opencover.*\tools\OpenCover.Console.exe"
+        $ReportGenerator = Join-Path $BuildToolsDir "reportgenerator.*\tools\net47\ReportGenerator.exe"
         $CoveragePath = Join-Path $LogsDir "Coverage.xml"
 
-        exec { & $OpenCover -target:$NUnit -targetargs:"$Solution --where=\`"$WhereClause\`" --noheader --labels=On --skipnontestassemblies --result=$OutputFile $settings" -register:user -filter:"+[kCura.SingleFileUpload*]* +[kCura.SingleFileUpload*]* -[*Tests*]* -[*NUnit*]*" -hideskipped:All -output:"$LogsDir\OpenCover.xml" }
+        exec { & $OpenCover -target:$NUnit -targetargs:"$Solution --where=`"$WhereClause`" --noheader --labels=On --skipnontestassemblies --result=$OutputFile $settings" -register:user -filter:"+[kCura.SingleFileUpload*]* +[kCura.SingleFileUpload*]* -[*Tests*]* -[*NUnit*]*" -hideskipped:All -output:"$LogsDir\OpenCover.xml" -returntargetcode}
         exec { & $ReportGenerator -reports:"$LogsDir\OpenCover.xml" -targetdir:$LogsDir -reporttypes:Cobertura }
         Move-Item (Join-Path $LogsDir Cobertura.xml) $CoveragePath -Force
     }
@@ -147,6 +147,7 @@ function Invoke-Tests
             "--labels=On" `
             "--skipnontestassemblies" `
             "--result=$OutputFile" `
+            "--result=Artifacts\Logs\testexecutionparser.log;format=testexecutionparser"
             $settings
         }
     }
