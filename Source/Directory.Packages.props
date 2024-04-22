@@ -114,8 +114,8 @@
 		<SystemReactive>4.1.5</SystemReactive>
 		<SystemReactiveInterfaces>3.0.0</SystemReactiveInterfaces>
 		<SystemValueTuple>4.5.0</SystemValueTuple>	
-		<SystemRuntimeCompilerServicesUnsafe>5.0.0</SystemRuntimeCompilerServicesUnsafe>
-		<SystemThreadingTasksExtensions>4.5.2</SystemThreadingTasksExtensions>
+		<SystemRuntimeCompilerServicesUnsafe>6.0.0</SystemRuntimeCompilerServicesUnsafe>
+		<SystemThreadingTasksExtensions>4.5.4</SystemThreadingTasksExtensions>
 	    <SystemNetHttp>4.3.4</SystemNetHttp>
 		<SystemReactiveCore>4.1.5</SystemReactiveCore>
 		<SystemReactiveLinq>4.1.5</SystemReactiveLinq>
