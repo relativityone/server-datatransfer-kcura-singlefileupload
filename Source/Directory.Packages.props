@@ -187,8 +187,8 @@
 		<PackageVersion Include="Relativity.DataExchange.Client.SDK" Version="$(RelativityDataExchangeClientSDK)"/>
 		<PackageVersion Include="Relativity.DataTransfer.MessageService" Version="$(RelativityDataTransferMessageService)" />
 		<PackageVersion Include="relativity.faspmanager" Version="$(Relativityfaspmanager)" />
-		<PackageVersion Include="Relativity.Kepler" Version="$(RelativityKepler)" />
-		<PackageVersion Include="Relativity.Kepler.Client" Version="$(RelativityKeplerClient)" />
+		<PackageVersion Include="Relativity.Kepler" Version="[24000.0.3,)" />
+		<PackageVersion Include="Relativity.Kepler.Client" Version="[24000.0.3,)" />
 		<PackageVersion Include="Relativity.Kepler.Client.SDK" Version="$(RelativityKeplerClientSDK)" />
 		<PackageVersion Include="Relativity.Kepler.Service" Version="$(RelativityKeplerService)" />
 		<PackageVersion Include="Relativity.Logging" Version="$(RelativityLogging)" />
