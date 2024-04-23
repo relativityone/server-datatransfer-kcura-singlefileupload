@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.3] - 22-April-2024
+
+### Changed
+
+- [REL-931883](https://jira.kcura.com/browse/REL-931883) Update OTEL Dependencies and Verify Kepler Services.
+
 ## [24000.0.2] - 25-March-2024
 
 ### Changed
