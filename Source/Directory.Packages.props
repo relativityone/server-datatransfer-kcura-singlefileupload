@@ -66,8 +66,7 @@
 		<RelativityDataExchangeClientSDK>2.9.1001</RelativityDataExchangeClientSDK>
 		<RelativityDataTransferMessageService>10.2.0</RelativityDataTransferMessageService>
 		<Relativityfaspmanager>3.7.2.0</Relativityfaspmanager>
-		<RelativityKepler>2.15.0</RelativityKepler>
-		<RelativityKeplerClient>2.9.2</RelativityKeplerClient>
+		<RelativityKepler>[24000.0.3,)</RelativityKepler>
 		<RelativityKeplerClientSDK>2.15.0</RelativityKeplerClientSDK>
 		<RelativityKeplerService>1.0.1.589</RelativityKeplerService>
 		<RelativityLogging>2019.5.1</RelativityLogging>
@@ -187,8 +186,8 @@
 		<PackageVersion Include="Relativity.DataExchange.Client.SDK" Version="$(RelativityDataExchangeClientSDK)"/>
 		<PackageVersion Include="Relativity.DataTransfer.MessageService" Version="$(RelativityDataTransferMessageService)" />
 		<PackageVersion Include="relativity.faspmanager" Version="$(Relativityfaspmanager)" />
-		<PackageVersion Include="Relativity.Kepler" Version="[24000.0.3,)" />
-		<PackageVersion Include="Relativity.Kepler.Client" Version="[24000.0.3,)" />
+		<PackageVersion Include="Relativity.Kepler" Version="$(RelativityKepler)" />
+		<PackageVersion Include="Relativity.Kepler.Client" Version="$(RelativityKepler)" />
 		<PackageVersion Include="Relativity.Kepler.Client.SDK" Version="$(RelativityKeplerClientSDK)" />
 		<PackageVersion Include="Relativity.Kepler.Service" Version="$(RelativityKeplerService)" />
 		<PackageVersion Include="Relativity.Logging" Version="$(RelativityLogging)" />
