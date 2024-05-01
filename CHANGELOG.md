@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [23012.8.1003] - 01-APR-2024
+
+### Changed
+
+-Propagating patch1 changes to server release 2023
+- [REL-931516](https://jira.kcura.com/browse/REL-931516) Server 2023 Patch 2 - Update RAPCI repos to upgrade hopper with hotfix/patch.
+
 ## [23012.8.1002] - 11-22-2023
 
 ### Changed
