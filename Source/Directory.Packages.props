@@ -66,7 +66,7 @@
 		<RelativityDataExchangeClientSDK>2.9.1001</RelativityDataExchangeClientSDK>
 		<RelativityDataTransferMessageService>10.2.0</RelativityDataTransferMessageService>
 		<Relativityfaspmanager>3.7.2.0</Relativityfaspmanager>
-		<RelativityKepler>[5000.0.0,)</RelativityKepler>
+		<RelativityKepler>5000.0.0</RelativityKepler>
 		<RelativityKeplerClientSDK>2.15.0</RelativityKeplerClientSDK>
 		<RelativityKeplerService>1.0.1.589</RelativityKeplerService>
 		<RelativityLogging>2019.5.1</RelativityLogging>
