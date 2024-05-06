@@ -2,11 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [23012.8.1003] - 01-MAY-2024
+
+### Changed
+
+-Propagating patch1 changes to server release 2023
+- [REL-931516](https://jira.kcura.com/browse/REL-931516) Server 2023 Patch 2 - Update RAPCI repos to upgrade hopper with hotfix/patch.
+
+## [23012.8.1002] - 11-22-2023
+
+### Changed
+
+- [REL-886791](https://jira.kcura.com/browse/REL-886791) Cloned repo from BitBucket to GitHub and created pipeline in AzDO.
+
 ## [23012.8.4] - 11-22-2023
 
 ### Changed
 
 - [REL-886791](https://jira.kcura.com/browse/REL-886791) Cloned repo from BitBucket to GitHub and created pipeline in AzDO.
+
+## [23012.8.1001] - 10-06-2023
+
+### Changed
+
+- [REL-866456](https://jira.kcura.com/browse/REL-866456) - Revved latest package for Relativity.DataTransfer.Legacy.SDK and Relativity.Transfer.Client
 
 ## [23012.8.3] - 09-08-2023
 
