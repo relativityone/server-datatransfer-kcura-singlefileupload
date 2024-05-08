@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.5] - 08-May-2024
+
+### Changed
+
+- [REL-942148](https://jira.kcura.com/browse/REL-942148) - [Server 2024] RAP Schema Update.
+
 ## [24000.0.3] - 22-April-2024
 
 ### Changed
