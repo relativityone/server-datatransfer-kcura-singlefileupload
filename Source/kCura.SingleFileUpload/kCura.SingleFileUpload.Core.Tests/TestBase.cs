@@ -1,4 +1,5 @@
-﻿using kCura.SingleFileUpload.Core.Relativity;
+﻿using System;
+using kCura.SingleFileUpload.Core.Relativity;
 using kCura.SingleFileUpload.Core.Relativity.Infrastructure;
 using kCura.SingleFileUpload.Core.Tests.Helpers;
 using NUnit.Framework;
@@ -21,6 +22,7 @@ namespace kCura.SingleFileUpload.Core.Tests
 		{
 			_cacheContextScope?.Dispose();
 			FileHelper.DeleteTestTempFolder();
+			Console.WriteLine("hello");
 		}
 	}
 }
