@@ -1,4 +1,5 @@
 ﻿using kCura.SingleFileUpload.Core.Entities;
+using System.Data;
 using System.Threading.Tasks;
 using DataExchange = Relativity.DataExchange;
 
@@ -29,5 +30,6 @@ namespace kCura.SingleFileUpload.Core.Managers
 		DataExchange.Io.IFileTypeInfo GetNativeTypeByFilename(string fileName);
 		void RemovePageInteractionEvenHandlerFromDocumentObject();
 		void DeleteTempFile(string tempLocation);
+		DataTable GetDocumentDataTable(string identifierName);
 	}
 }

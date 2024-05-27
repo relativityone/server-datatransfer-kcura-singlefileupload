@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Relativity.API;
 using System.IO;
 using FluentAssertions;
+using OutsideIn;
 using Relativity.Testing.Identification;
 
 namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
@@ -35,14 +36,16 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 		{
 			// Arrange
 			string fileName = TestsConstants._FILE_NAME;
-			Mock<IInstanceSettingsBundle> MockInstanceSettingsBundle = new Mock<IInstanceSettingsBundle>();
-			mockingHelper.Setup(x => x.GetInstanceSettingBundle()).Returns(MockInstanceSettingsBundle.Object);
-			
-			// Act
-			ExportedMetadata result = SearchExportManager.instance.ExportToSearchML(fileName, File.ReadAllBytes(FileHelper.GetFileLocation(fileName)), mockingHelper.Object);
+			var mockInstanceSettingsBundle = new Mock<IInstanceSettingsBundle>();
+			mockingHelper.Setup(x => x.GetInstanceSettingBundle()).Returns(mockInstanceSettingsBundle.Object);
 
-			// Assert
-			result.FileName.Should().Be(fileName);
+			byte[] fileBytes = File.ReadAllBytes(FileHelper.GetFileLocation(fileName));
+
+			// Act & Assert
+			var exception = Assert.Throws<OutsideInException>(() =>
+				SearchExportManager.instance.ExportToSearchML(fileName, fileBytes, mockingHelper.Object));
+
+			Assert.That(exception.Message, Is.EqualTo("OI EXOpenExport failed - 4: no filter available for this file type [4]"));
 		}
 
 		[Test]

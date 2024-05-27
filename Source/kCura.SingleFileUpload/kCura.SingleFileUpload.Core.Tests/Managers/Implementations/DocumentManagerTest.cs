@@ -15,6 +15,7 @@ using Relativity.Services.InternalMetricsCollection;
 using Relativity.Telemetry.Services.Metrics;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -356,6 +357,29 @@ namespace kCura.SingleFileUpload.Core.Tests.Managers.Implementations
 
 			// Assert
 			action.Should().NotThrow();
+		}
+
+		[Test]
+		public void GetDocumentDataTable_ShouldReturnDataTableWithExpectedColumns()
+		{
+			// Arrange
+			string identifierName = "Identifier";
+
+			// Act
+			DataTable dataTable = DocumentManager.Instance.GetDocumentDataTable(identifierName);
+
+			// Assert
+			Assert.IsNotNull(dataTable);
+			Assert.AreEqual(10, dataTable.Columns.Count);
+			Assert.IsTrue(dataTable.Columns.Contains(identifierName));
+			Assert.IsTrue(dataTable.Columns.Contains("Extracted Text"));
+			Assert.IsTrue(dataTable.Columns.Contains("Document Extension"));
+			Assert.IsTrue(dataTable.Columns.Contains("File Extension"));
+			Assert.IsTrue(dataTable.Columns.Contains("FileExtension"));
+			Assert.IsTrue(dataTable.Columns.Contains("File Name"));
+			Assert.IsTrue(dataTable.Columns.Contains("FileName"));
+			Assert.IsTrue(dataTable.Columns.Contains("File Size"));
+			Assert.IsTrue(dataTable.Columns.Contains("FileSize"));
 		}
 
 		private Mock<IObjectManager> PrepareObjectManager()

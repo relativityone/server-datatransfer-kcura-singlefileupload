@@ -22,7 +22,6 @@ namespace kCura.SingleFileUpload.Core.Tests
 		{
 			_cacheContextScope?.Dispose();
 			FileHelper.DeleteTestTempFolder();
-			Console.WriteLine("hello");
 		}
 	}
 }

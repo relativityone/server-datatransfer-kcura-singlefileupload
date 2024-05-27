@@ -38,7 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />    
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +54,12 @@
       <Link>AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Common\TestsConstants.cs" />
+    <Compile Include="Entities\DocumentIdentifierFieldTest.cs" />
+    <Compile Include="Entities\ImagingTest.cs" />
+    <Compile Include="Entities\ImportJobSettingsTests.cs" />
+    <Compile Include="Entities\ResponseTest.cs" />
+    <Compile Include="Factories\ImportApiFactoryTests.cs" />
+    <Compile Include="Helpers\EventLogHelperTest.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\MockDBContextHelper.cs" />
     <Compile Include="Helpers\MockMetricsManagerHelper.cs" />
@@ -427,7 +433,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="oi\webview\oit.d.ts" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" /> 
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <PackageReference Include="Castle.Core"  VersionOverride="4.4.0" NoWarn="NU1605" />
     <PackageReference Include="FluentAssertions"  />
@@ -448,6 +454,7 @@
     <PackageReference Include="Relativity.Services.Interfaces.Private"  />
     <PackageReference Include="Relativity.Services.Layout.Interfaces"  />
     <PackageReference Include="Relativity.Testing.Identification"  />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Relativity.Toggles"  />
     <PackageReference Include="SSH.NET" />
     <PackageReference Include="System.Reactive"  />

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.6] - 27-May-2024
+
+### Changed
+
+- [REL-948521](https://jira.kcura.com/browse/REL-948521) - Increase the code coverage - SFU
+
 ## [24000.0.5] - 21-May-2024
 
 ### Changed
