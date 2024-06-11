@@ -71,9 +71,9 @@
 		<RelativityKeplerService>1.0.1.589</RelativityKeplerService>
 		<RelativityLogging>2019.5.1</RelativityLogging>
 		<RelativityLoggingInterfaces>3000.0.1</RelativityLoggingInterfaces>
-		<RelativityOAuth2Client>1.5.2</RelativityOAuth2Client>
-		<RelativityOAuth2ClientImplicit>1.5.2</RelativityOAuth2ClientImplicit>
-		<RelativityOAuth2ClientInterfaces>1.5.2</RelativityOAuth2ClientInterfaces>
+		<RelativityOAuth2Client>1.5.2002</RelativityOAuth2Client>
+		<RelativityOAuth2ClientImplicit>1.5.2002</RelativityOAuth2ClientImplicit>
+		<RelativityOAuth2ClientInterfaces>1.5.2002</RelativityOAuth2ClientInterfaces>
 		<RelativityObjectManager>12.2.45.4</RelativityObjectManager>
 		<RelativityOIFactory>47.13.2</RelativityOIFactory>
 		<RelativityOutsideIn>2023.4.0</RelativityOutsideIn>
