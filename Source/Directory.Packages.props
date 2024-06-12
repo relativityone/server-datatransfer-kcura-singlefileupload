@@ -76,7 +76,7 @@
 		<RelativityOAuth2ClientInterfaces>1.5.2002</RelativityOAuth2ClientInterfaces>
 		<RelativityObjectManager>12.2.45.4</RelativityObjectManager>
 		<RelativityOIFactory>47.13.2</RelativityOIFactory>
-		<RelativityOutsideIn>2023.4.0</RelativityOutsideIn>
+		<RelativityOutsideIn>2024.11.0</RelativityOutsideIn>
 		<RelativitySecretCatalog>1.0.19</RelativitySecretCatalog>
 		<RelativityServicesDataContracts>11.3.11.1</RelativityServicesDataContracts>
 		<RelativityServicesInterfaces>11.3.11.1</RelativityServicesInterfaces>
