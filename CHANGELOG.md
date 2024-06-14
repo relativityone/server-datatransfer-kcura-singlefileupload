@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.7] - 11-June-2024
+
+### Changed
+
+- [REL-944165](https://jira.kcura.com/browse/REL-944165)
+- Consumed oauth2 client into SFU
+- Revved latest IAPI that has unified RDC and SDK version
+- Revved latest relativity outsidein upgraded to match IAPI version
+
 ## [24000.0.6] - 27-May-2024
 
 ### Changed
