@@ -86,7 +86,7 @@
 		<RelativityTelemetryDataContractsShared>3003.1.0</RelativityTelemetryDataContractsShared>
 		<RelativityTelemetryServicesInterface>3003.0.2</RelativityTelemetryServicesInterface>
 		<RelativityToggles>1.0.0.100</RelativityToggles>
-		<RelativityTransferClient>8.0.2</RelativityTransferClient>
+		<RelativityTransferClient>24000.0.1-pre.3</RelativityTransferClient>
         <RazorGeneratorMvc>2.4.2</RazorGeneratorMvc>
 		<RelativityCustomPages>10.2.9.12</RelativityCustomPages>
         <RelativityPlatformKeywords>9.3.196.6</RelativityPlatformKeywords>
