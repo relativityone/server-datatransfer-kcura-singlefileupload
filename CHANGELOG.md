@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- [REL-973479](https://jira.kcura.com/browse/REL-973479) - Revved latest package for Relativity.DataTransfer.Legacy.SDK to 24000.0.2
+- [REL-973479](https://jira.kcura.com/browse/REL-973479) - Upgrade latest IAPI into SFU, Sync and RIP
+- Revved latest package for Relativity.DataTransfer.Legacy.SDK
+- Revved latest package for Relativity.Transfer.Client
 
 ## [24000.0.7] - 11-June-2024
 
