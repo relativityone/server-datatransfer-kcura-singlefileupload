@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.8] - 24-June-2024
+
+### Changed
+
+- [REL-973479](https://jira.kcura.com/browse/REL-973479) - Revved latest package for Relativity.DataTransfer.Legacy.SDK to 24000.0.2
+
 ## [24000.0.7] - 11-June-2024
 
 ### Changed
