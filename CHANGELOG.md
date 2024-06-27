@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.8] - 27-June-2024
+
+### Changed
+
+- [REL-931886](https://jira.kcura.com/browse/REL-931886) - Upload/Replace Image uses deprecated non-versioned API - Backported [REL-905669](https://jira.kcura.com/browse/REL-905669) ticket
+
 ## [24000.0.7] - 11-June-2024
 
 ### Changed
