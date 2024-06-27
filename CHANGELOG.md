@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - [REL-931886](https://jira.kcura.com/browse/REL-931886) - Upload/Replace Image uses deprecated non-versioned API - Backported [REL-905669](https://jira.kcura.com/browse/REL-905669) ticket
+- Backported [REL-790560](https://jira.kcura.com/browse/REL-790560) - Simple File upload placing documents into root folder in latest version
 
 ## [24000.0.7] - 11-June-2024
 
