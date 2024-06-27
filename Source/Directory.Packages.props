@@ -90,10 +90,10 @@
         <RazorGeneratorMvc>2.4.2</RazorGeneratorMvc>
 		<RelativityCustomPages>10.2.9.12</RelativityCustomPages>
         <RelativityPlatformKeywords>9.3.196.6</RelativityPlatformKeywords>
-		<RelativityTestingFramework>10.4.0-pre.3</RelativityTestingFramework>
-		<RelativityTestingFrameworkApi>10.4.0-pre.3</RelativityTestingFrameworkApi>
-		<RelativityTestingFrameworkRingSetup>10.4.0-pre.3</RelativityTestingFrameworkRingSetup>
-		<RelativityTestingFrameworkWeb>10.4.0-pre.3</RelativityTestingFrameworkWeb>
+		<RelativityTestingFramework>10.3.0</RelativityTestingFramework>
+		<RelativityTestingFrameworkApi>10.3.0</RelativityTestingFrameworkApi>
+		<RelativityTestingFrameworkRingSetup>10.3.0</RelativityTestingFrameworkRingSetup>
+		<RelativityTestingFrameworkWeb>10.3.0</RelativityTestingFrameworkWeb>
 		<RelativityDevDbContextHelper>5.0.0.1</RelativityDevDbContextHelper>
 		<RelativityDevRelativityTestHelpers>7.4.1.1</RelativityDevRelativityTestHelpers>
         <RelativityServicesLayoutInterfaces>10.1.4</RelativityServicesLayoutInterfaces>
