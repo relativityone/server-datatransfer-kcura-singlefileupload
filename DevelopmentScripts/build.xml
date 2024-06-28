@@ -44,10 +44,10 @@
         <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\ZetaLongPaths.dll</Assembly>
         </Assemblies>
-		    <Assemblies>
+		<Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.AutomatedWorkflows.Services.Interfaces.dll</Assembly>
         </Assemblies>
-		    <Assemblies>
+		<Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\Relativity.AutomatedWorkflows.SDK.dll</Assembly>
         </Assemblies>
         <ResourceFiles />
