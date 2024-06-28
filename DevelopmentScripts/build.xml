@@ -42,9 +42,6 @@
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\System.Reactive.dll</Assembly>
         </Assemblies>
         <Assemblies>
-          <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\System.ValueTuple.dll</Assembly>
-        </Assemblies>
-        <Assemblies>
           <Assembly>Source\kCura.SingleFileUpload\kCura.SingleFileUpload.Core\bin\ZetaLongPaths.dll</Assembly>
         </Assemblies>
 		 <Assemblies>
