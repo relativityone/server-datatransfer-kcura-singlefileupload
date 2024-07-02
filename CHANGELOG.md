@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [24000.0.9] - 28-June-2024
+
+### Changed
+
+- [REL-974405](https://jira.kcura.com/browse/REL-974405) - Removed OTEL assemblies from the SFU RAPs
+
 ## [24000.0.8] - 24-June-2024
 
 ### Changed
