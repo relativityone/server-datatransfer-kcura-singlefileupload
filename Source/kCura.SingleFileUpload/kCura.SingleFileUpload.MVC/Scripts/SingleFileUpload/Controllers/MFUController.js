@@ -395,6 +395,13 @@ var MFUController = function ($scope, $http, $compile) {
     }
 
     function getFolder() {
+        const mainWindow = window.parent.parent;
+        const mainSearch = mainWindow.location.search;
+        const searchParams = new URLSearchParams(mainSearch);
+        if (searchParams.has('SelectedFolderArtifactID')) {
+            return searchParams.get('SelectedFolderArtifactID');
+        }
+
         var id = '-1';
         var possibleElements = [
             window.parent.frames['externalPage'],
@@ -405,7 +412,7 @@ var MFUController = function ($scope, $http, $compile) {
             window.parent.parent.frames['ListPage']
         ];
         var wN;
-        possibleElements.forEach(function(element){
+        possibleElements.forEach(function (element) {
             if (!!element && !wN) {
                 wN = element.window || element.contentWindow;
             }
