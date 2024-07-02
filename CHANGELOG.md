@@ -2,12 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-## [24000.0.8] - 27-June-2024
+## [24000.0.10] - 29-June-2024
 
 ### Changed
 
 - [REL-931886](https://jira.kcura.com/browse/REL-931886) - Upload/Replace Image uses deprecated non-versioned API - Backported [REL-905669](https://jira.kcura.com/browse/REL-905669) ticket
 - Backported [REL-790560](https://jira.kcura.com/browse/REL-790560) - Simple File upload placing documents into root folder in latest version
+
+## [24000.0.9] - 28-June-2024
+
+### Changed
+
+- [REL-974405](https://jira.kcura.com/browse/REL-974405) - Removed OTEL assemblies from the SFU RAPs
+
+## [24000.0.8] - 24-June-2024
+
+### Changed
+
+- [REL-973479](https://jira.kcura.com/browse/REL-973479) - Upgrade latest IAPI into SFU, Sync and RIP
 
 ## [24000.0.7] - 11-June-2024
 

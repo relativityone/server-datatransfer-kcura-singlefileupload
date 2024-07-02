@@ -76,12 +76,6 @@
       <Notes />
     </Assembly>
     <Assembly>
-      <ArtifactId>5509079</ArtifactId>
-      <Keywords />
-      <Name>System.ValueTuple.dll</Name>
-      <Notes />
-    </Assembly>
-    <Assembly>
       <ArtifactId>5509080</ArtifactId>
       <Keywords />
       <Name>ZetaLongPaths.dll</Name>
