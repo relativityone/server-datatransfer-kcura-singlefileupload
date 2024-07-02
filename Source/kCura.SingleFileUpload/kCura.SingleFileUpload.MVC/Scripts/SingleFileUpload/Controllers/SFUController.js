@@ -206,16 +206,18 @@ var SFUController = function ($scope, $http, $compile) {
     function updateImageDocument(fileLocation) {
 
         var _uiOriginationId = '78F64BA0-669A-4E4B-B108-6DA81E69DAE3';
-        $http.post("/Relativity.Rest/api/Relativity.Imaging.Services.Interfaces.IImagingModule/Imaging Job Service/ImageDocumentAsync",
+        var endpoint = "/Relativity.Rest/api/relativity-imaging/v1/workspaces/" + AppID + "/documents/" + GetDID() + "/image";
+        var imageOnTheFlyRequest =
+        {
+            "ProfileID": ProfileArtifact,
+            "OriginationID": _uiOriginationId,
+            "AlternateNativeLocation": fileLocation,
+            "RemoveAlternateNativeAfterImaging": true
+        };
+
+        $http.post(endpoint,
             {
-                "imageDocumentJob": {
-                    "WorkspaceId": AppID,
-                    "DocumentId": GetDID(),
-                    "ProfileId": ProfileArtifact,
-                    "AlternateNativeLocation": fileLocation,
-                    "RemoveAlternateNativeAfterImaging": true,
-                    "OriginationId": _uiOriginationId
-                }
+                "imageOnTheFlyRequest": imageOnTheFlyRequest
             },
             {
                 headers: {
@@ -431,14 +433,21 @@ var SFUController = function ($scope, $http, $compile) {
     }
 
     function getFolder() {
+        const mainWindow = window.parent.parent;
+        const mainSearch = mainWindow.location.search;
+        const searchParams = new URLSearchParams(mainSearch);
+        if (searchParams.has('SelectedFolderArtifactID')) {
+            return searchParams.get('SelectedFolderArtifactID');
+        }
+
         var id = '-1';
         var wN = window.parent.frames['externalPage'] || window.parent.parent.frames['externalPage'];
         if (wN) {
-	        var $out = wN.window.$;
-	        var isFolderIconSelectedOldUi = $out('.browser-folder.browser-icon-active', wN.document).length;
-	        var isFolderIconSelectedNewUi = $out('icon[icon-name="icon-folder"]').hasClass('browser-icon-active');
-	        if (isFolderIconSelectedOldUi || isFolderIconSelectedNewUi)
-		        id = $out('.jstree-node[aria-selected=true]', wN.document).attr('id');
+	                  var $out = wN.window.$;
+            var isFolderIconSelectedOldUi = $out('.browser-folder.browser-icon-active', wN.document).length;
+            var isFolderIconSelectedNewUi = $out('icon[icon-name="icon-folder"]').hasClass('browser-icon-active');
+            if (isFolderIconSelectedOldUi || isFolderIconSelectedNewUi)
+                id = $out('.jstree-node[aria-selected=true]', wN.document).attr('id');
         }
         id = id || '-1';
         if (id.indexOf('_') > -1)
