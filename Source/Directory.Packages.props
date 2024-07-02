@@ -102,8 +102,8 @@
 		<SeleniumWebDriverChromeDriver>78.0.3904.10500</SeleniumWebDriverChromeDriver>
 		<SemanticVersioning>1.2.2</SemanticVersioning>
 		<SystemBuffers>4.5.1</SystemBuffers>
-		<SystemDiagnosticsDiagnosticSource>8.0.1</SystemDiagnosticsDiagnosticSource>
-		<SystemMemory>4.5.5</SystemMemory>
+		<SystemDiagnosticsDiagnosticSource>5.0.0</SystemDiagnosticsDiagnosticSource>
+		<SystemMemory>4.5.4</SystemMemory>
 		<SystemNumericsVectors>4.5.0</SystemNumericsVectors>
         <SystemSecurityCryptographyX509Certificates>4.3.0</SystemSecurityCryptographyX509Certificates>
         <SystemReactiveCore>4.1.5</SystemReactiveCore>
